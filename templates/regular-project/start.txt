@@ -1,0 +1,43 @@
+# Project Initialization Template
+
+## Problem Statement
+[Describe the problem this project aims to solve]
+
+## Project Type
+- [ ] Regular Project (application, tool, service)
+- [ ] Learning Project (tutorial, exercises, reference)
+
+## Scope
+[Define the scope and boundaries of this project]
+
+## Project Structure Preferences
+- [ ] Use hub-and-spoke documentation pattern
+- [ ] Include admin/ directory for project management
+- [ ] Feature-based planning under admin/planning/features/
+- [ ] Include fix/ directories under features for troubleshooting
+- [ ] Add research/ directory for decision-making
+
+## Version Control
+- [ ] Use Git Flow (main/develop/feature branches)
+- [ ] Use GitHub CLI for repo management
+- [ ] Granular CI workflows based on branch types
+- [ ] PR-based code changes (minimal diffs for rate limiting)
+
+## Tool Integrations
+- [ ] Sourcery AI for code review
+- [ ] Bugbot for bug detection
+- [ ] Dev-toolkit integration (cd ~/Projects/dev-toolkit)
+- [ ] Cursor IDE with AI rules (.cursor/rules/main.mdc)
+
+## CI/CD Preferences
+- [ ] Doc-heavy/chore branches can push directly to develop/main
+- [ ] Code changes require PRs
+- [ ] Automated testing on feature branches
+- [ ] External reviews on release branches
+
+## Additional Notes
+[Add any specific requirements, constraints, or additional context here]
+
+---
+*This template can be customized for each new project. Remove unused sections and add project-specific details.*
+
