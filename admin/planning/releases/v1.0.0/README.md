@@ -7,6 +7,27 @@
 
 ---
 
+## ⚠️ Special Note: Initial Release
+
+This is the v1.0.0 initial release, which differs from our typical release process:
+
+### Typical Release Process:
+1. Features developed and merged to `develop`
+2. Release branch created for release prep only
+3. Release branch contains: version updates, changelog, release notes
+4. Minimal changes between develop and release branch
+
+### This Release (v1.0.0):
+1. All features created on release branch (initial setup)
+2. No prior `develop` history to build from
+3. Release branch contains: all templates + release prep
+4. This is a special case for initial release
+
+### Future Releases (v1.1.0+):
+Will follow typical process - features to `develop` first, then release prep on release branch.
+
+---
+
 ## 🎯 Release Overview
 
 This is the first production release of dev-infra, providing a complete foundation for standardized project development. The release establishes the core template system, documentation, and automation tools that will serve as the foundation for all future development.

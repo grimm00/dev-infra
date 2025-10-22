@@ -1,6 +1,6 @@
 # Integration Guide
 
-**Purpose:** Guide for integrating dev-infra templates with external tools and projects  
+**Purpose:** Hub for dev-infra integration documentation  
 **Status:** ✅ Complete  
 **Last Updated:** 2025-01-27
 
@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-This guide provides comprehensive instructions for integrating dev-infra templates with external tools and projects, with a focus on dev-toolkit integration. It covers multiple integration approaches, implementation examples, and best practices.
+This is the main hub for dev-infra integration documentation. It provides quick access to all integration guides and approaches.
 
 ### What You'll Learn
 - Integration options and trade-offs
@@ -16,6 +16,19 @@ This guide provides comprehensive instructions for integrating dev-infra templat
 - Implementation examples for dev-toolkit
 - Update mechanisms and strategies
 - Troubleshooting common integration issues
+
+---
+
+## 📋 Quick Links
+
+### Integration Approaches
+- **[Version-Pinned Downloads](integration/version-pinned.md)** - Recommended approach for production use
+- **[Dev-Toolkit Integration](integration/dev-toolkit.md)** - Specific examples for dev-toolkit
+- **[Troubleshooting](integration/troubleshooting.md)** - Common issues and solutions
+
+### Getting Started
+- **[Integration Overview](integration/README.md)** - Complete integration guide
+- **[Quick Start](integration/README.md#quick-start)** - Get started quickly
 
 ---
 

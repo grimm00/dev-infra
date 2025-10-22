@@ -10,27 +10,27 @@
 
 ---
 
-## 🚀 Installation
+## 🚀 Quick Start
 
-### Option 1: Download Release (Recommended)
+### 1. Get Dev-Infra
+
+**Option A: Download Release (Recommended)**
 ```bash
 # Download specific version
 curl -L https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz | tar -xz
 cd dev-infra-1.0.0
 ```
 
-### Option 2: Clone Repository
+**Option B: Clone Repository**
 ```bash
 git clone https://github.com/grimm00/dev-infra.git
 cd dev-infra
 ```
 
-### Option 3: For Dev-Toolkit Integration
+**Option C: For Dev-Toolkit Integration**
 See [Integration Guide](docs/INTEGRATION.md) for version-pinned download approach.
 
-## 🎯 Quick Start
-
-Create a new project with consistent structure and best practices:
+### 2. Create Your Project
 
 ```bash
 # Generate new project
