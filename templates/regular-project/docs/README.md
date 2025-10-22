@@ -1,49 +1,30 @@
 # Documentation
 
-**Purpose:** User documentation hub  
-**Status:** ✅ Template  
-**Last Updated:** 2025-01-27
+**Purpose:** Project documentation and guides  
+**Status:** 🔴 Not Started  
+**Last Updated:** {{CURRENT_DATE}}
 
 ---
 
 ## 📋 Quick Links
 
-### User Guides
-- **[Setup Guide](guides/setup.md)** - Project setup and installation
-- **[API Documentation](guides/api.md)** - API reference and examples
-- **[Deployment Guide](guides/deployment.md)** - Deployment instructions
-- **[Contributing Guide](guides/contributing.md)** - How to contribute
-
-### Reference
-- **[Architecture](guides/architecture.md)** - System architecture overview
-- **[Configuration](guides/configuration.md)** - Configuration options
-- **[Troubleshooting](guides/troubleshooting.md)** - Common issues and solutions
+### Documentation Sections
+- **[API Documentation](api/README.md)** - API reference and examples
+- **[User Guide](user-guide/README.md)** - End-user documentation
+- **[Developer Guide](developer-guide/README.md)** - Development documentation
+- **[Deployment Guide](deployment/README.md)** - Deployment instructions
 
 ---
 
 ## 🎯 Overview
 
-The docs directory contains user-facing documentation, including setup guides, API documentation, deployment instructions, and troubleshooting guides.
+The docs directory contains comprehensive documentation for users, developers, and deployment.
 
 ### Documentation Types
-- **User Guides** - Step-by-step instructions
-- **API Documentation** - API reference and examples
-- **Architecture** - System design and components
-- **Troubleshooting** - Common issues and solutions
-
----
-
-## 🚀 Quick Start
-
-### For Users
-1. **[Setup Guide](guides/setup.md)** - Get started with the project
-2. **[API Documentation](guides/api.md)** - Learn how to use the API
-3. **[Deployment Guide](guides/deployment.md)** - Deploy to production
-
-### For Developers
-1. **[Architecture](guides/architecture.md)** - Understand the system
-2. **[Contributing Guide](guides/contributing.md)** - Contribute to the project
-3. **[Configuration](guides/configuration.md)** - Configure the system
+1. **API Documentation** - API reference and examples
+2. **User Guide** - End-user instructions
+3. **Developer Guide** - Development setup and guidelines
+4. **Deployment Guide** - Deployment and operations
 
 ---
 
@@ -51,37 +32,14 @@ The docs directory contains user-facing documentation, including setup guides, A
 
 ```
 docs/
-├── guides/             # User guides
-│   ├── setup.md
-│   ├── api.md
-│   ├── deployment.md
-│   ├── architecture.md
-│   ├── configuration.md
-│   └── troubleshooting.md
-├── api/               # API documentation
-│   ├── endpoints.md
-│   └── examples.md
-└── images/            # Documentation images
+├── api/             # API documentation
+├── user-guide/      # User documentation
+├── developer-guide/ # Developer documentation
+└── deployment/      # Deployment documentation
 ```
 
 ---
 
-## 📖 Documentation Standards
-
-### Writing Guidelines
-- Use clear, concise language
-- Include practical examples
-- Provide step-by-step instructions
-- Keep information current
-
-### Structure Guidelines
-- Follow hub-and-spoke pattern
-- Use consistent formatting
-- Include navigation links
-- Provide search capabilities
-
----
-
-**Last Updated:** 2025-01-27  
-**Status:** ✅ Template  
-**Next:** Create project-specific documentation
+**Last Updated:** {{CURRENT_DATE}}  
+**Status:** 🔴 Not Started  
+**Next:** [API Documentation](api/README.md)

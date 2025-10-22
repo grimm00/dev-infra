@@ -1,62 +1,30 @@
 # Backend
 
-**Purpose:** Backend application hub  
-**Status:** ✅ Template  
-**Last Updated:** 2025-01-27
+**Purpose:** Backend application logic and API  
+**Status:** 🔴 Not Started  
+**Last Updated:** {{CURRENT_DATE}}
 
 ---
 
 ## 📋 Quick Links
 
-### Core Components
-- **[Models](models/README.md)** - Data models and database schema
-- **[Routes](routes/README.md)** - API endpoints and route handlers
-- **[Services](services/README.md)** - Business logic and external integrations
-- **[Utils](utils/README.md)** - Utility functions and helpers
-
-### Development
-- **[Instance](instance/README.md)** - Database instance files
-- **[Tests](tests/README.md)** - Backend test suite
-- **[Migrations](migrations/README.md)** - Database migrations
+### Backend Components
+- **[API Routes](api/README.md)** - REST API endpoints
+- **[Database Models](models/README.md)** - Data models and schemas
+- **[Business Logic](services/README.md)** - Core application logic
+- **[Configuration](config/README.md)** - Environment and app config
 
 ---
 
 ## 🎯 Overview
 
-The backend directory contains the server-side application code, including API endpoints, business logic, data models, and database interactions.
+The backend directory contains all server-side application logic, including API endpoints, database models, business logic, and configuration.
 
-### Technology Stack
-- [Technology 1] - [Purpose]
-- [Technology 2] - [Purpose]
-- [Technology 3] - [Purpose]
-
----
-
-## 🚀 Quick Start
-
-### Setup
-```bash
-# Install dependencies
-[installation command]
-
-# Set up database
-[database setup command]
-
-# Start development server
-[development command]
-```
-
-### Development
-```bash
-# Run tests
-[test command]
-
-# Run linting
-[lint command]
-
-# Build for production
-[build command]
-```
+### Key Components
+1. **API Layer** - REST endpoints and request handling
+2. **Business Logic** - Core application functionality
+3. **Data Layer** - Database models and data access
+4. **Configuration** - Environment and application settings
 
 ---
 
@@ -64,17 +32,16 @@ The backend directory contains the server-side application code, including API e
 
 ```
 backend/
-├── models/              # Data models
-├── routes/              # API endpoints
-├── services/            # Business logic
-├── utils/               # Utility functions
-├── instance/            # Database files
-├── tests/               # Test suite
-└── migrations/          # Database migrations
+├── api/              # REST API endpoints
+├── models/           # Database models
+├── services/         # Business logic
+├── config/           # Configuration files
+├── instance/         # Instance-specific files
+└── utils/            # Utility functions
 ```
 
 ---
 
-**Last Updated:** 2025-01-27  
-**Status:** ✅ Template  
-**Next:** Customize for your technology stack
+**Last Updated:** {{CURRENT_DATE}}  
+**Status:** 🔴 Not Started  
+**Next:** [API Routes](api/README.md)

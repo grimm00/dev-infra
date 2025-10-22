@@ -1,62 +1,30 @@
 # Frontend
 
-**Purpose:** Frontend application hub  
-**Status:** ✅ Template  
-**Last Updated:** 2025-01-27
+**Purpose:** User interface and client-side application  
+**Status:** 🔴 Not Started  
+**Last Updated:** {{CURRENT_DATE}}
 
 ---
 
 ## 📋 Quick Links
 
-### Core Components
-- **[Components](src/components/README.md)** - React components
-- **[Pages](src/pages/README.md)** - Page-level components
-- **[Services](src/services/README.md)** - API service layer
-- **[Store](src/store/README.md)** - State management
-
-### Development
-- **[Tests](src/__tests__/README.md)** - Frontend test suite
-- **[Public](public/README.md)** - Static assets
-- **[Config](config/README.md)** - Configuration files
+### Frontend Components
+- **[Components](components/README.md)** - Reusable UI components
+- **[Pages](pages/README.md)** - Application pages and routes
+- **[Styles](styles/README.md)** - CSS and styling
+- **[Assets](assets/README.md)** - Images, fonts, and static files
 
 ---
 
 ## 🎯 Overview
 
-The frontend directory contains the client-side application code, including React components, state management, API integration, and user interface.
+The frontend directory contains all client-side application code, including user interface components, pages, styling, and static assets.
 
-### Technology Stack
-- [Technology 1] - [Purpose]
-- [Technology 2] - [Purpose]
-- [Technology 3] - [Purpose]
-
----
-
-## 🚀 Quick Start
-
-### Setup
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-```
-
-### Development
-```bash
-# Run tests
-npm test
-
-# Run linting
-npm run lint
-
-# Type checking
-npm run type-check
-```
+### Key Components
+1. **Components** - Reusable UI building blocks
+2. **Pages** - Application screens and routing
+3. **Styles** - CSS, themes, and styling
+4. **Assets** - Images, fonts, and static files
 
 ---
 
@@ -64,21 +32,15 @@ npm run type-check
 
 ```
 frontend/
-├── src/
-│   ├── components/      # React components
-│   ├── pages/          # Page components
-│   ├── services/       # API services
-│   ├── store/          # State management
-│   ├── types/          # TypeScript types
-│   ├── utils/          # Utility functions
-│   └── __tests__/      # Test suite
-├── public/             # Static assets
-├── config/             # Configuration
-└── dist/               # Build output
+├── components/       # Reusable UI components
+├── pages/           # Application pages
+├── styles/          # CSS and styling
+├── assets/          # Static assets
+└── utils/           # Utility functions
 ```
 
 ---
 
-**Last Updated:** 2025-01-27  
-**Status:** ✅ Template  
-**Next:** Customize for your technology stack
+**Last Updated:** {{CURRENT_DATE}}  
+**Status:** 🔴 Not Started  
+**Next:** [Components](components/README.md)

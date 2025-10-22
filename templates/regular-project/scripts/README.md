@@ -1,61 +1,30 @@
 # Scripts
 
-**Purpose:** Automation scripts hub  
-**Status:** ✅ Template  
-**Last Updated:** 2025-01-27
+**Purpose:** Automation and utility scripts  
+**Status:** 🔴 Not Started  
+**Last Updated:** {{CURRENT_DATE}}
 
 ---
 
 ## 📋 Quick Links
 
-### Core Scripts
-- **[Core](core/README.md)** - Essential operational scripts
-- **[Deployment](deployment/README.md)** - Deployment automation
-- **[Setup](setup/README.md)** - Environment setup scripts
-- **[Monitoring](monitoring/README.md)** - Status and monitoring
-
-### Utilities
-- **[Testing](testing/README.md)** - Test automation scripts
-- **[Utilities](utilities/README.md)** - Utility and cleanup scripts
+### Script Categories
+- **[Build Scripts](build/README.md)** - Build and compilation scripts
+- **[Deployment Scripts](deploy/README.md)** - Deployment automation
+- **[Database Scripts](database/README.md)** - Database management
+- **[Utility Scripts](utils/README.md)** - General utility scripts
 
 ---
 
 ## 🎯 Overview
 
-The scripts directory contains automation scripts for development, deployment, monitoring, and maintenance tasks.
+The scripts directory contains automation scripts for building, deploying, and maintaining the application.
 
-### Script Categories
-- **Core** - Essential operational scripts
-- **Deployment** - CI/CD and deployment automation
-- **Setup** - Environment and project setup
-- **Monitoring** - Status checks and monitoring
-- **Testing** - Test automation and validation
-- **Utilities** - Cleanup and maintenance scripts
-
----
-
-## 🚀 Quick Start
-
-### Running Scripts
-```bash
-# Make script executable
-chmod +x scripts/script-name.sh
-
-# Run script
-./scripts/script-name.sh
-
-# Run with parameters
-./scripts/script-name.sh --param value
-```
-
-### Development
-```bash
-# Test script locally
-./scripts/script-name.sh --dry-run
-
-# Debug script
-bash -x scripts/script-name.sh
-```
+### Script Types
+1. **Build Scripts** - Compilation and build automation
+2. **Deployment Scripts** - Deployment and release automation
+3. **Database Scripts** - Database setup and migration
+4. **Utility Scripts** - General maintenance and utilities
 
 ---
 
@@ -63,66 +32,14 @@ bash -x scripts/script-name.sh
 
 ```
 scripts/
-├── core/               # Essential scripts
-│   ├── health-check.sh
-│   └── startup.sh
-├── deployment/         # Deployment scripts
-│   ├── deploy.sh
-│   └── rollback.sh
-├── setup/             # Setup scripts
-│   ├── install.sh
-│   └── configure.sh
-├── monitoring/        # Monitoring scripts
-│   ├── status-check.sh
-│   └── alert.sh
-├── testing/           # Test scripts
-│   └── run-tests.sh
-└── utilities/         # Utility scripts
-    └── cleanup.sh
+├── build/           # Build automation
+├── deploy/          # Deployment scripts
+├── database/        # Database management
+└── utils/           # Utility scripts
 ```
 
 ---
 
-## 🛠️ Script Development
-
-### Best Practices
-- Use descriptive names
-- Include error handling
-- Provide clear output
-- Document parameters
-- Test thoroughly
-
-### Script Template
-```bash
-#!/bin/bash
-set -e
-
-# Script description
-# Usage: script-name.sh [options]
-
-# Default values
-DRY_RUN=false
-
-# Parse arguments
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --dry-run)
-            DRY_RUN=true
-            shift
-            ;;
-        *)
-            echo "Unknown option $1"
-            exit 1
-            ;;
-    esac
-done
-
-# Main script logic
-echo "Running script..."
-```
-
----
-
-**Last Updated:** 2025-01-27  
-**Status:** ✅ Template  
-**Next:** Add project-specific automation scripts
+**Last Updated:** {{CURRENT_DATE}}  
+**Status:** 🔴 Not Started  
+**Next:** [Build Scripts](build/README.md)
