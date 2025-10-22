@@ -1,0 +1,58 @@
+# Learning Project Docker ignore
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# Documentation (keep learning materials out of images)
+admin/
+reference/
+*.md
+LICENSE
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary exercise work
+scratch/
+work/
+my-solutions/
+exercise-output/
+exercise-results/
+
+# Development dependencies (unless needed for practice apps)
+node_modules/
+venv/
+env/
+__pycache__/
+
+# Keep practice apps if needed
+# Uncomment if practice apps should be in Docker images
+# !practice-apps/
+
+# Environment files
+.env
+.env.local
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp

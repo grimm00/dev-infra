@@ -1,0 +1,76 @@
+# Learning Project .gitignore
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Practice apps - Dependencies
+practice-apps/*/node_modules/
+practice-apps/*/venv/
+practice-apps/*/env/
+practice-apps/*/__pycache__/
+
+# Practice apps - Build outputs
+practice-apps/*/dist/
+practice-apps/*/build/
+practice-apps/*/coverage/
+
+# Practice apps - Databases
+practice-apps/*/*.db
+practice-apps/*/*.sqlite
+practice-apps/*/*.sqlite3
+
+# Temporary exercise work
+scratch/
+work/
+my-solutions/
+
+# Generated files from exercises
+exercise-output/
+exercise-results/
+
+# Certificates and keys (if learning about security)
+*.pem
+*.key
+*.cert
+*.crt
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Keep important template files
+!.gitkeep
+!stage*/
+!reference/
+!practice-apps/
+!admin/
+!*.md

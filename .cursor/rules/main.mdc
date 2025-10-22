@@ -1,0 +1,141 @@
+---
+description: Dev-Infra Template Repository Rules
+globs:
+alwaysApply: true
+---
+
+# Dev-Infra Template Repository Rules
+
+## Project Context
+
+This is a development infrastructure repository containing standardized project templates and best practices. It serves as a foundation for creating new projects with consistent structure, workflows, and documentation patterns.
+
+## Template Structure Requirements
+
+### Hub-and-Spoke Documentation
+
+- Every major directory MUST have a README.md hub file
+- Hub files serve as entry points with quick links to spoke documents
+- Spoke documents should be focused on single topics (< 400 lines)
+- Use progressive disclosure: README → Plan → Phases → Analysis
+
+### Admin Directory Structure
+
+- `admin/planning/features/` - Feature-based planning with hub-and-spoke docs
+- `admin/planning/releases/` - Release management with version directories
+- `admin/planning/notes/` - Planning insights and decisions
+- `admin/feedback/` - External code reviews (Sourcery, Bugbot)
+- `admin/chat-logs/` - AI conversation history organized by year
+- `admin/research/` - Decision-making documentation
+
+### Project Types
+
+- **Regular Projects**: Application/tool/service with standard development workflow
+- **Learning Projects**: Tutorial/exercise-based with stage organization
+
+## Git Flow Practices
+
+### Branch Naming
+
+- `feat/` - New features (require PRs, full CI)
+- `fix/` - Bug fixes (require PRs, full CI)
+- `docs/` - Documentation (can push to develop directly)
+- `chore/` - Maintenance (can push to develop directly)
+- `ci/` - CI/CD changes (require PRs, full CI)
+- `release/` - Release preparation (require external reviews)
+
+### Commit Requirements
+
+- **NEVER commit without testing** - All changes must be verified
+- Use descriptive commit messages
+- Include PR numbers in commit messages when applicable
+- Test functionality before committing
+
+## CI/CD Requirements
+
+### Branch-Based Workflows
+
+- Feature branches: Full testing, linting, external reviews
+- Documentation branches: Minimal validation
+- Release branches: Full validation + external reviews
+- Main/develop: Full validation + external reviews
+
+### Testing Standards
+
+- Unit tests for core functionality
+- Integration tests for workflows
+- Template validation for structure
+- Documentation link checking
+
+## Template Maintenance
+
+### When Modifying Templates
+
+- Test template generation with `scripts/new-project.sh`
+- Update documentation in `docs/` directory
+- Validate all template files follow hub-and-spoke pattern
+- Update version in CHANGELOG.md
+
+### Documentation Updates
+
+- Keep README.md files current with actual structure
+- Update quick links when adding new documents
+- Archive superseded documents instead of deleting
+- Maintain consistent status indicators
+
+## Code Quality Standards
+
+### File Organization
+
+- Use existing files rather than creating new ones when possible
+- Maintain consistent directory structure across templates
+- Follow naming conventions (kebab-case for directories, descriptive names)
+
+### Documentation Quality
+
+- Each document should have clear purpose statement
+- Use consistent status indicators (🔴 Not Started, 🟡 Planned, 🟠 In Progress, ✅ Complete)
+- Include last updated dates
+- Link related documents
+
+## Template Usage Guidelines
+
+### Creating New Projects
+
+- Use `scripts/new-project.sh` for template instantiation
+- Customize start.txt with project-specific details
+- Adapt admin structure based on project needs
+- Not all directories required - remove unused sections
+
+### Best Practices
+
+- Start with fundamentals before implementation
+- Document decisions and rationale
+- Use research directories for complex decisions
+- Maintain separation between planning and results
+
+## Integration Requirements
+
+### External Tools
+
+- Sourcery AI for code review (optional but recommended)
+- Bugbot for bug detection
+- Dev-toolkit integration for workflow automation
+- GitHub CLI for repository management
+
+### Development Environment
+
+- Docker for consistent development environments
+- Automated testing before commits
+- Health checks for services
+- Performance monitoring
+
+## Security Considerations
+
+- Lightweight security for MVP (can be enhanced later)
+- No community involvement required initially
+- Focus on individual developer workflow optimization
+
+---
+
+**Remember**: This repository serves as a template foundation. Adapt these rules based on specific project needs while maintaining core structural principles.
