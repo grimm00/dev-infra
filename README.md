@@ -1,23 +1,43 @@
 # Dev-Infra
 
+[![Release](https://img.shields.io/github/v/release/grimm00/dev-infra)](https://github.com/grimm00/dev-infra/releases)
+[![License](https://img.shields.io/github/license/grimm00/dev-infra)](LICENSE)
+
 **Purpose:** Standardized development infrastructure templates and best practices  
-**Version:** v0.1.0  
+**Version:** v1.0.0  
 **Last Updated:** 2025-01-27  
 **Status:** ✅ Active
 
 ---
 
-## 🎯 Quick Start
+## 🚀 Quick Start
 
-Create a new project with consistent structure and best practices:
+### 1. Get Dev-Infra
+
+**Option A: Download Release (Recommended)**
+```bash
+# Download specific version
+curl -L https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz | tar -xz
+cd dev-infra-1.0.0
+```
+
+**Option B: Clone Repository**
+```bash
+git clone https://github.com/grimm00/dev-infra.git
+cd dev-infra
+```
+
+**Option C: For Dev-Toolkit Integration**
+See [Integration Guide](docs/INTEGRATION.md) for version-pinned download approach.
+
+### 2. Create Your Project
 
 ```bash
-# Clone dev-infra
-git clone [repository-url]
-cd dev-infra
-
 # Generate new project
 ./scripts/new-project.sh
+
+# Validate templates
+./scripts/validate-templates.sh
 ```
 
 **Choose your project type:**
@@ -123,6 +143,36 @@ Templates incorporate patterns learned from real projects:
 - Easy to remove unused sections
 - Simple to add project-specific directories
 - Maintains core structural principles
+
+---
+
+## 🔗 Dev-Toolkit Integration
+
+Dev-infra is designed for seamless integration with dev-toolkit projects:
+
+### Version-Pinned Downloads (Recommended)
+```bash
+# In dev-toolkit configuration
+DEVINFRA_VERSION="1.0.0"
+curl -L "https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz" | tar -xz
+```
+
+### Integration Commands
+```bash
+# Dev-toolkit new commands
+dev-toolkit install-templates [version]
+dev-toolkit new-project --template regular
+dev-toolkit new-project --template learning
+dev-toolkit update-templates
+```
+
+### Benefits
+- **No Git Dependencies** - Download and extract approach
+- **Version Control** - Pin to specific stable versions
+- **Fast Integration** - Quick download and setup
+- **Easy Updates** - Change version number to update
+
+See [Integration Guide](docs/INTEGRATION.md) for complete implementation examples.
 
 ---
 
