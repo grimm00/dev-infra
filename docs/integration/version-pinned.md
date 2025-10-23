@@ -20,6 +20,65 @@ Version-pinned downloads are the recommended approach for integrating dev-infra 
 
 ---
 
+## 📦 Download Options
+
+### Option 1: Distribution Package (Recommended)
+
+**Clean package with only user-facing files** - no internal planning or development files.
+
+**For Linux/Mac:**
+```bash
+curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.tar.gz" -o dev-infra.tar.gz
+tar -xzf dev-infra.tar.gz
+cd dev-infra-1.0.0
+```
+
+**For Windows:**
+```powershell
+curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.zip" -o dev-infra.zip
+Expand-Archive dev-infra.zip
+cd dev-infra-1.0.0
+```
+
+**Verify checksum:**
+```bash
+# Download checksum
+curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.tar.gz.sha256" -o checksum.txt
+
+# Verify (Linux/Mac)
+sha256sum -c checksum.txt
+
+# Verify (Windows PowerShell)
+(Get-FileHash dev-infra-1.0.0.tar.gz -Algorithm SHA256).Hash -eq (Get-Content checksum.txt).Split()[0]
+```
+
+### Option 2: Full Source (For Contributors)
+
+**Includes internal planning and development files.**
+
+```bash
+curl -L "https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz" -o dev-infra-full.tar.gz
+```
+
+### What's the Difference?
+
+**Distribution Package (`dev-infra-1.0.0.tar.gz`):**
+- ✅ Templates
+- ✅ Scripts  
+- ✅ Documentation
+- ✅ README, CHANGELOG, CONTRIBUTING
+- ❌ Admin directory (internal planning)
+- ❌ .cursor directory (AI rules)
+- ❌ start.txt (our setup file)
+- **Size:** ~50% smaller
+- **Use case:** Using dev-infra templates
+
+**Full Source (`archive/v1.0.0.tar.gz`):**
+- ✅ Everything (all files and directories)
+- **Use case:** Contributing to dev-infra development
+
+---
+
 ## 🚀 Implementation
 
 ### Basic Implementation
