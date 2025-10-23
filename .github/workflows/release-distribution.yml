@@ -111,7 +111,7 @@ jobs:
           cat "${PACKAGE_NAME}.zip.sha256"
       
       - name: Upload distribution to release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090
         with:
           files: |
             dev-infra-${{ steps.get_version.outputs.version }}.tar.gz
