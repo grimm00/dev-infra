@@ -1,6 +1,6 @@
 # Release Notes - v1.1.0
 
-**Release Date:** 2025-01-27  
+**Release Date:** 2025-11-10  
 **Release Type:** Minor Release  
 **Repository:** https://github.com/grimm00/dev-infra
 
@@ -259,7 +259,7 @@ This release makes it easier than ever to get clean, user-focused distribution p
 ---
 
 **Release Manager:** Dev-Infra Team  
-**Release Date:** 2025-01-27  
+**Release Date:** 2025-11-10  
 **Version:** 1.1.0  
 **Type:** Minor Release
 
