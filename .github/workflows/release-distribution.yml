@@ -28,6 +28,24 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "package_name=dev-infra-${VERSION}" >> $GITHUB_OUTPUT
       
+      - name: Merge admin changelog to root changelog
+        run: |
+          if [ -f "admin/CHANGELOG.md" ]; then
+            echo "Found admin/CHANGELOG.md, merging into root CHANGELOG.md..."
+            
+            # Append admin changelog content to root changelog
+            echo "" >> CHANGELOG.md
+            echo "---" >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            echo "## Admin/Internal Changes" >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            cat admin/CHANGELOG.md >> CHANGELOG.md
+            
+            echo "✅ Admin changelog merged into root CHANGELOG.md"
+          else
+            echo "ℹ️  No admin/CHANGELOG.md found, skipping merge"
+          fi
+      
       - name: Create distribution package
         run: |
           PACKAGE_NAME="${{ steps.get_version.outputs.package_name }}"
