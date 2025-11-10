@@ -125,6 +125,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2025-01-27
+
+### Added
+
+- **Automated Release Distribution** - GitHub Actions workflow for clean release packages
+  - Automatic creation of distribution packages (tar.gz and zip)
+  - Package validation before upload
+  - SHA256 checksum generation for security
+  - Excludes internal development files (admin/, .cursor/, start.txt)
+  - Includes only user-facing content (templates, scripts, docs)
+  - Cross-platform support (Linux/Mac/Windows)
+
+- **Release Process Documentation** - Standardized release workflow
+  - Complete release process guide
+  - Phase-based release preparation
+  - External review integration
+  - Git Flow adherence
+
+- **CI/CD Planning Structure** - Hub-and-spoke planning for CI features
+  - CI planning hub
+  - Release distribution planning documentation
+  - Implementation plans and testing strategies
+  - Design decisions documentation
+
+### Changed
+
+- **Integration Documentation** - Enhanced version-pinned download guide
+  - Distribution package download options
+  - Checksum verification instructions
+  - Updated for automated distribution
+
+- **Release Process** - Established proper Git Flow for releases
+  - Separation of feature development and release preparation
+  - Clear phase-based workflow
+  - External review requirements
+
+### Fixed
+
+- **Version Extraction** - Robust tag parsing in GitHub Actions
+  - Handles tags with or without 'v' prefix
+  - Prevents workflow failures from tag format issues
+
+### Security
+
+- **Action Pinning** - Pinned third-party GitHub Action to commit SHA
+  - Enhanced security by using immutable action versions
+  - Prevents supply chain attacks from action updates
+
+---
+
 ## [Unreleased]
 
 ### Planned
@@ -150,6 +200,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## Version History
+
+### 1.1.0 (2025-01-27)
+
+- **Automated Release Distribution** - GitHub Actions workflow creates clean distribution packages automatically
+- Automated package validation and checksum generation
+- Enhanced release process documentation and Git Flow adherence
+- Security improvements (action pinning, robust version extraction)
+- CI/CD planning structure with hub-and-spoke documentation
 
 ### 1.0.0 (2025-01-27)
 
@@ -189,6 +247,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Breaking Changes
 
+### 1.1.0
+
+- No breaking changes
+
 ### 1.0.0
 
 - Initial production release - no breaking changes
@@ -197,6 +259,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Deprecations
 
+### 1.1.0
+
+- No deprecations
+
 ### 1.0.0
 
 - No deprecations in initial production release
@@ -204,6 +270,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## Security
+
+### 1.1.0
+
+- Pinned third-party GitHub Actions to commit SHA for immutability
+- SHA256 checksum generation for distribution packages
+- Enhanced version extraction to prevent workflow failures
 
 ### 1.0.0
 
@@ -226,6 +298,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## Dependencies
+
+### 1.1.0
+
+- Same as 1.0.0
+- GitHub Actions (for automated release distribution)
 
 ### 1.0.0
 
