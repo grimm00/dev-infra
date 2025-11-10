@@ -30,6 +30,7 @@ When you create a GitHub release, a GitHub Action automatically:
 ### 📦 Distribution Packages
 
 **Available Downloads:**
+
 - `dev-infra-1.1.0.tar.gz` - Clean distribution (Linux/Mac)
 - `dev-infra-1.1.0.tar.gz.sha256` - Checksum
 - `dev-infra-1.1.0.zip` - Clean distribution (Windows)
@@ -38,12 +39,14 @@ When you create a GitHub release, a GitHub Action automatically:
 - `Source code (tar.gz)` - Full source with internal files
 
 **Package Contents:**
+
 - ✅ `templates/` - Project templates
 - ✅ `scripts/` - Generator and validation tools
 - ✅ `docs/` - User documentation
 - ✅ Essential files (README, CHANGELOG, CONTRIBUTING)
 
 **Excluded (Internal Files):**
+
 - ❌ `admin/` - Internal planning and management
 - ❌ `.cursor/` - AI assistant rules
 - ❌ `.github/` - CI/CD workflows
@@ -111,11 +114,13 @@ sha256sum -c dev-infra-1.1.0.tar.gz.sha256
 ### Added
 
 - **Automated Release Distribution** - GitHub Actions workflow
+
   - Automatic package creation on release
   - Package validation and checksum generation
   - Clean, user-focused packages
 
 - **Release Process Documentation** - Standardized workflow
+
   - Phase-based release preparation
   - Git Flow adherence
   - External review integration
@@ -128,6 +133,7 @@ sha256sum -c dev-infra-1.1.0.tar.gz.sha256
 ### Changed
 
 - **Release Workflow** - Proper Git Flow established
+
   - Feature development on `develop` branch
   - Release preparation on `release/vX.Y.Z` branch
   - Separation of concerns
@@ -262,4 +268,3 @@ This release makes it easier than ever to get clean, user-focused distribution p
 **Release Date:** 2025-11-10  
 **Version:** 1.1.0  
 **Type:** Minor Release
-
