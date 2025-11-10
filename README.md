@@ -14,11 +14,14 @@
 
 ### 1. Get Dev-Infra
 
-**Option A: Download Release (Recommended)**
+**Option A: Download Distribution (Recommended)**
 ```bash
-# Download specific version
-curl -L https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz | tar -xz
+# Download clean package (Linux/Mac)
+curl -L https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.tar.gz | tar -xz
 cd dev-infra-1.0.0
+
+# Or download for Windows
+curl -L https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.zip -o dev-infra.zip
 ```
 
 **Option B: Clone Repository**
