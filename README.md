@@ -4,8 +4,8 @@
 [![License](https://img.shields.io/github/license/grimm00/dev-infra)](LICENSE)
 
 **Purpose:** Standardized development infrastructure templates and best practices  
-**Version:** v1.0.0  
-**Last Updated:** 2025-01-27  
+**Version:** v1.1.0  
+**Last Updated:** 2025-11-10  
 **Status:** ✅ Active
 
 ---
@@ -17,11 +17,11 @@
 **Option A: Download Distribution (Recommended)**
 ```bash
 # Download clean package (Linux/Mac)
-curl -L https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.tar.gz | tar -xz
-cd dev-infra-1.0.0
+curl -L https://github.com/grimm00/dev-infra/releases/download/v1.1.0/dev-infra-1.1.0.tar.gz | tar -xz
+cd dev-infra-1.1.0
 
 # Or download for Windows
-curl -L https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.zip -o dev-infra.zip
+curl -L https://github.com/grimm00/dev-infra/releases/download/v1.1.0/dev-infra-1.1.0.zip -o dev-infra.zip
 ```
 
 **Option B: Clone Repository**
@@ -395,6 +395,6 @@ Templates evolve based on:
 
 ---
 
-**Last Updated:** 2025-01-27  
+**Last Updated:** 2025-11-10  
 **Status:** ✅ Active  
 **Next:** [Template Usage Guide](docs/TEMPLATE-USAGE.md)

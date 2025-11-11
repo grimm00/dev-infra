@@ -28,28 +28,28 @@ Version-pinned downloads are the recommended approach for integrating dev-infra 
 
 **For Linux/Mac:**
 ```bash
-curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.tar.gz" -o dev-infra.tar.gz
+curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.1.0/dev-infra-1.1.0.tar.gz" -o dev-infra.tar.gz
 tar -xzf dev-infra.tar.gz
-cd dev-infra-1.0.0
+cd dev-infra-1.1.0
 ```
 
 **For Windows:**
 ```powershell
-curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.zip" -o dev-infra.zip
+curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.1.0/dev-infra-1.1.0.zip" -o dev-infra.zip
 Expand-Archive dev-infra.zip
-cd dev-infra-1.0.0
+cd dev-infra-1.1.0
 ```
 
 **Verify checksum:**
 ```bash
 # Download checksum
-curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.0.0/dev-infra-1.0.0.tar.gz.sha256" -o checksum.txt
+curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.1.0/dev-infra-1.1.0.tar.gz.sha256" -o checksum.txt
 
 # Verify (Linux/Mac)
 sha256sum -c checksum.txt
 
 # Verify (Windows PowerShell)
-(Get-FileHash dev-infra-1.0.0.tar.gz -Algorithm SHA256).Hash -eq (Get-Content checksum.txt).Split()[0]
+(Get-FileHash dev-infra-1.1.0.tar.gz -Algorithm SHA256).Hash -eq (Get-Content checksum.txt).Split()[0]
 ```
 
 ### Option 2: Full Source (For Contributors)
@@ -57,12 +57,12 @@ sha256sum -c checksum.txt
 **Includes internal planning and development files.**
 
 ```bash
-curl -L "https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz" -o dev-infra-full.tar.gz
+curl -L "https://github.com/grimm00/dev-infra/archive/v1.1.0.tar.gz" -o dev-infra-full.tar.gz
 ```
 
 ### What's the Difference?
 
-**Distribution Package (`dev-infra-1.0.0.tar.gz`):**
+**Distribution Package (`dev-infra-1.1.0.tar.gz`):**
 - ✅ Templates
 - ✅ Scripts  
 - ✅ Documentation
@@ -73,7 +73,7 @@ curl -L "https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz" -o dev-infr
 - **Size:** ~50% smaller
 - **Use case:** Using dev-infra templates
 
-**Full Source (`archive/v1.0.0.tar.gz`):**
+**Full Source (`archive/v1.1.0.tar.gz`):**
 - ✅ Everything (all files and directories)
 - **Use case:** Contributing to dev-infra development
 
@@ -87,7 +87,7 @@ curl -L "https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz" -o dev-infr
 #!/bin/bash
 # download-devinfra.sh - Download dev-infra templates
 
-DEVINFRA_VERSION="${1:-1.0.0}"
+DEVINFRA_VERSION="${1:-1.1.0}"
 DOWNLOAD_URL="https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz"
 TEMP_DIR="/tmp/dev-infra-$$"
 TARGET_DIR="./templates/dev-infra"
@@ -112,7 +112,7 @@ echo "✅ Dev-infra templates v${DEVINFRA_VERSION} installed"
 #!/bin/bash
 # download-devinfra-cached.sh - Cached version
 
-DEVINFRA_VERSION="${1:-1.0.0}"
+DEVINFRA_VERSION="${1:-1.1.0}"
 DOWNLOAD_URL="https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz"
 CACHE_DIR="./cache"
 TEMPLATES_DIR="./templates"
@@ -199,7 +199,7 @@ DEVINFRA_VERSION="1.1.0-beta"
 DEVINFRA_VERSION="1.1.0"
 
 # Production environment
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="1.1.0"
 ```
 
 ---
@@ -212,7 +212,7 @@ DEVINFRA_VERSION="1.0.0"
 #!/bin/bash
 # Simple integration example
 
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="1.1.0"
 DOWNLOAD_URL="https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz"
 TEMP_DIR="/tmp/dev-infra-$$"
 TARGET_DIR="./templates"
@@ -238,7 +238,7 @@ echo "✅ Dev-infra templates v${DEVINFRA_VERSION} installed"
 # Version-pinned installation
 
 # Configuration
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="1.1.0"
 DEVINFRA_REPO="grimm00/dev-infra"
 DEVINFRA_URL="https://github.com/${DEVINFRA_REPO}/archive/v${DEVINFRA_VERSION}.tar.gz"
 CACHE_DIR="./cache"
