@@ -132,8 +132,10 @@ validate_target_directory() {
         fi
     fi
     
-    # Normalize path (remove trailing slashes)
-    dir_path="${dir_path%/}"
+    # Normalize path (remove all trailing slashes)
+    while [[ "$dir_path" =~ /$ ]]; do
+        dir_path="${dir_path%/}"
+    done
     
     # Check if directory exists
     if [ -d "$dir_path" ]; then
@@ -173,13 +175,14 @@ validate_project_name() {
         return 1
     fi
     
-    # Check if name contains spaces
+    # Check if name contains any whitespace
     if [[ "$name" =~ [[:space:]] ]]; then
-        print_error "Project name cannot contain spaces"
-        print_warning "Spaces are not allowed in project names for compatibility with file systems and URLs"
+        print_error "Project name cannot contain whitespace"
+        print_warning "Whitespace characters (spaces, tabs, newlines) are not allowed in project names for compatibility with file systems and URLs"
         
-        # Offer to replace spaces with dashes
-        local sanitized_name="${name// /-}"
+        # Offer to replace all whitespace (spaces, tabs, newlines) with dashes
+        local sanitized_name
+        sanitized_name=$(echo "$name" | sed 's/[[:space:]]\+/-/g')
         if prompt_yes_no "Would you like to use '$sanitized_name' instead?" "y"; then
             name="$sanitized_name"
             print_status "Using sanitized name: $name"
@@ -195,7 +198,8 @@ validate_project_name() {
         return 1
     fi
     
-    # Build full project path
+    # Build full project path (normalize to prevent double slashes)
+    target_dir="${target_dir%/}"
     local full_path="$target_dir/$name"
     
     # Check if directory already exists in target location
@@ -320,13 +324,31 @@ verify_github_auth() {
     if ! command -v gh &> /dev/null; then
         print_error "GitHub CLI (gh) is not installed"
         print_error "Please install it from https://cli.github.com/"
+        echo
+        print_error "Alternatively, you can manually create a repository on GitHub:"
+        echo "1. Go to https://github.com/new"
+        echo "2. Fill in the repository name and details."
+        echo "3. Click 'Create repository'."
+        echo "4. Initialize your local git repository and add the remote:"
+        echo "   git init"
+        echo "   git remote add origin https://github.com/<your-username>/<repo-name>.git"
+        echo "5. Add, commit, and push your code:"
+        echo "   git add ."
+        echo "   git commit -m 'Initial commit'"
+        echo "   git push -u origin main"
+        print_error "If you need to authenticate, follow instructions at https://docs.github.com/en/get-started/getting-started-with-git/set-up-git"
         return 1
     fi
     
     # Check if user is authenticated
     if ! gh auth status &>/dev/null; then
-        print_error "Not authenticated with GitHub CLI"
-        print_error "Please run: gh auth login"
+        print_error "Not authenticated with GitHub CLI."
+        print_error "Troubleshooting steps:"
+        print_error "1. Run: gh auth login"
+        print_error "2. If you are still unable to authenticate, your token may have expired or your CLI may be misconfigured."
+        print_error "   - Try: gh auth refresh"
+        print_error "   - Or re-run: gh auth login --with-token"
+        print_error "3. For more help, see: https://cli.github.com/manual/gh_auth_login"
         return 1
     fi
     
@@ -355,11 +377,11 @@ verify_github_auth() {
         fi
     fi
     
-    # Show authenticated user info
-    local user_info
-    user_info=$(gh api user --jq '{name: .name, login: .login, email: .email}' 2>/dev/null)
-    if [ -n "$user_info" ]; then
-        print_status "Authenticated as: $(echo "$user_info" | jq -r '.login // "unknown"')"
+    # Show authenticated user info using gh's built-in --jq flag (no jq dependency)
+    local github_login
+    github_login=$(gh api user --jq '.login // "unknown"' 2>/dev/null)
+    if [ -n "$github_login" ] && [ "$github_login" != "unknown" ]; then
+        print_status "Authenticated as: $github_login"
     fi
     
     return 0
@@ -401,7 +423,7 @@ init_git_repo() {
             fi
             
             print_status "Creating GitHub repository..."
-            if gh repo create "$repo_name" --description "$repo_description" $is_private 2>/dev/null; then
+            if gh repo create "$repo_name" --description "$repo_description" $is_private; then
                 local github_user
                 github_user=$(gh api user --jq .login 2>/dev/null)
                 git remote add origin "https://github.com/$github_user/$repo_name.git"
@@ -569,6 +591,10 @@ main() {
     while ! full_project_path=$(validate_project_name "$project_name" "$TARGET_DIR"); do
         project_name=$(prompt_input "Project name")
     done
+    
+    # Extract sanitized project name from full path to ensure consistency
+    # This fixes the mismatch where original name with spaces is shown but sanitized name is used
+    project_name=$(basename "$full_project_path")
     
     local description=$(prompt_input "Project description")
     local author=$(prompt_input "Author name" "$(git config user.name 2>/dev/null || echo '')")
