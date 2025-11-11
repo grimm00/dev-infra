@@ -300,3 +300,7 @@ After each fix:
 **Last Updated:** 2025-11-11  
 **Status:** ✅ Complete  
 **Implementation:** All 8 fixes implemented in commit 2ff27ee
+
+**Additional Fixes:**
+- Script exit issue when entering non-existent directory (commit ca50669)
+- Path normalization error handling improvements (commit 8490c15, df3a838)

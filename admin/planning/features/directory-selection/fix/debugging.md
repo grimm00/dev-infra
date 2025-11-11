@@ -217,7 +217,9 @@ set -e
 - Root cause: `set -e` in main script causes command substitution to exit on function failure
 - Fix 1: Disable `set -e` in function - Not sufficient (command substitution still affected)
 - Fix 2: Disable `set -e` around command substitution call - Applied
-- Status: Testing fix
+- Fix 3: Improve path normalization error handling - Applied
+- Manual testing: ✅ Working correctly after fixes
+- Status: ✅ Resolved - Ready for automated testing
 
 ---
 
@@ -228,6 +230,23 @@ set -e
 
 ---
 
+## ✅ Resolution Summary
+
+**Final Fix:** Disable `set -e` around command substitution call in main function
+
+**Iterations:**
+1. **First attempt:** Disable `set -e` only in function - Insufficient
+2. **Second attempt:** Improve path normalization error handling - Partial fix
+3. **Final fix:** Disable `set -e` around command substitution call - ✅ Success
+
+**Key Learning:** When using `set -e`, command substitution `$(...)` will cause script exit if the function returns non-zero, even if those are expected error codes. Must disable `set -e` around the call site.
+
+**Commits:**
+- `8490c15` - Disable set -e for entire validate_target_directory function
+- `ca50669` - Disable set -e around validate_target_directory call (final fix)
+
+---
+
 **Last Updated:** 2025-11-11  
-**Status:** 🟠 In Progress
+**Status:** ✅ Resolved
 
