@@ -284,10 +284,13 @@ validate_target_directory() {
 - **[Status & Next Steps](status-and-next-steps.md)** - Current progress
 - **[Phase 1](phase-1-directory-prompt.md)** - Directory prompt
 - **[Phase 2](phase-2-path-handling.md)** - Path handling
+- **[Testing Documentation](testing/README.md)** - All testing documentation
+- **[Manual Testing](testing/manual/README.md)** - Manual testing plans and results
+- **[Automated Testing](testing/automated/README.md)** - Automated testing strategy
 
 ---
 
-**Last Updated:** 2025-11-10  
-**Status:** 🟡 Planned  
-**Next:** Implementation
+**Last Updated:** 2025-11-11  
+**Status:** 🟠 In Progress  
+**Next:** Complete testing and final validation
 
