@@ -173,9 +173,25 @@ validate_project_name() {
         return 1
     fi
     
+    # Check if name contains spaces
+    if [[ "$name" =~ [[:space:]] ]]; then
+        print_error "Project name cannot contain spaces"
+        print_warning "Spaces are not allowed in project names for compatibility with file systems and URLs"
+        
+        # Offer to replace spaces with dashes
+        local sanitized_name="${name// /-}"
+        if prompt_yes_no "Would you like to use '$sanitized_name' instead?" "y"; then
+            name="$sanitized_name"
+            print_status "Using sanitized name: $name"
+        else
+            return 1
+        fi
+    fi
+    
     # Check if name contains only valid characters
     if [[ ! "$name" =~ ^[a-zA-Z0-9_-]+$ ]]; then
         print_error "Project name can only contain letters, numbers, hyphens, and underscores"
+        print_error "Invalid characters found in: $name"
         return 1
     fi
     
@@ -296,9 +312,63 @@ EOF
     print_success "Project files customized"
 }
 
+# Function to verify GitHub authentication
+verify_github_auth() {
+    local expected_author="$1"
+    
+    # Check if gh is installed
+    if ! command -v gh &> /dev/null; then
+        print_error "GitHub CLI (gh) is not installed"
+        print_error "Please install it from https://cli.github.com/"
+        return 1
+    fi
+    
+    # Check if user is authenticated
+    if ! gh auth status &>/dev/null; then
+        print_error "Not authenticated with GitHub CLI"
+        print_error "Please run: gh auth login"
+        return 1
+    fi
+    
+    # Get current authenticated user
+    local current_user
+    current_user=$(gh api user --jq .login 2>/dev/null)
+    
+    if [ -z "$current_user" ]; then
+        print_error "Failed to get current GitHub user"
+        return 1
+    fi
+    
+    # If author name provided, try to match (case-insensitive)
+    if [ -n "$expected_author" ]; then
+        local author_lower=$(echo "$expected_author" | tr '[:upper:]' '[:lower:]')
+        local user_lower=$(echo "$current_user" | tr '[:upper:]' '[:lower:]')
+        
+        if [ "$author_lower" != "$user_lower" ]; then
+            print_warning "Author name '$expected_author' doesn't match authenticated GitHub user '$current_user'"
+            if ! prompt_yes_no "Continue with GitHub user '$current_user'?" "y"; then
+                print_error "Repository creation cancelled"
+                return 1
+            fi
+        else
+            print_status "GitHub user '$current_user' matches author name"
+        fi
+    fi
+    
+    # Show authenticated user info
+    local user_info
+    user_info=$(gh api user --jq '{name: .name, login: .login, email: .email}' 2>/dev/null)
+    if [ -n "$user_info" ]; then
+        print_status "Authenticated as: $(echo "$user_info" | jq -r '.login // "unknown"')"
+    fi
+    
+    return 0
+}
+
 # Function to initialize git repository
 init_git_repo() {
     local full_project_path="$1"
+    local author="$2"
     local project_name=$(basename "$full_project_path")
     local original_dir=$(pwd)
     
@@ -313,6 +383,14 @@ init_git_repo() {
         print_success "Git repository initialized"
         
         if prompt_yes_no "Create GitHub repository?" "n"; then
+            # Verify GitHub authentication before proceeding
+            if ! verify_github_auth "$author"; then
+                print_error "GitHub authentication verification failed"
+                print_error "Skipping repository creation"
+                cd "$original_dir"
+                return 1
+            fi
+            
             local repo_name=$(prompt_input "GitHub repository name" "$project_name")
             local repo_description=$(prompt_input "Repository description" "")
             local is_private
@@ -323,13 +401,20 @@ init_git_repo() {
             fi
             
             print_status "Creating GitHub repository..."
-            gh repo create "$repo_name" --description "$repo_description" $is_private
-            
-            git remote add origin "https://github.com/$(gh api user --jq .login)/$repo_name.git"
-            git branch -M main
-            git push -u origin main
-            
-            print_success "GitHub repository created and pushed"
+            if gh repo create "$repo_name" --description "$repo_description" $is_private 2>/dev/null; then
+                local github_user
+                github_user=$(gh api user --jq .login 2>/dev/null)
+                git remote add origin "https://github.com/$github_user/$repo_name.git"
+                git branch -M main
+                git push -u origin main
+                
+                print_success "GitHub repository created and pushed"
+            else
+                print_error "Failed to create GitHub repository"
+                print_error "Please check your GitHub CLI authentication and permissions"
+                cd "$original_dir"
+                return 1
+            fi
         fi
         
         cd "$original_dir"
@@ -533,7 +618,7 @@ main() {
     # Create project
     copy_template "$template_type" "$full_project_path"
     customize_project "$full_project_path" "$project_type" "$description" "$author"
-    init_git_repo "$full_project_path"
+    init_git_repo "$full_project_path" "$author"
     show_next_steps "$full_project_path" "$project_type"
 }
 

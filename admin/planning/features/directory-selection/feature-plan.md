@@ -27,11 +27,13 @@ This is inconvenient and doesn't match common development workflows where projec
 
 1. **User can specify target directory** - Prompt for directory with clear default
 2. **Default directory works** - `$HOME/Projects/` is used as default if it exists
-3. **Path flexibility** - Supports absolute paths, relative paths, and `~` expansion
+3. **Path flexibility** - Supports absolute paths, relative paths, `~` expansion, and environment variables ($HOME, $USER, $PWD)
 4. **Validation** - Comprehensive checks for existence, permissions, and validity
 5. **Backward compatibility** - Falls back to current directory if default doesn't exist and user declines creation
 6. **Clear feedback** - Shows full project path in summary and next steps
 7. **Error handling** - Helpful error messages for common issues
+8. **Project name validation** - Clear error messages and automatic space-to-dash replacement
+9. **GitHub integration** - Authentication verification and account matching before repo creation
 
 ---
 
@@ -42,12 +44,21 @@ This is inconvenient and doesn't match common development workflows where projec
 - Implement default directory logic (`$HOME/Projects/`)
 - Basic validation (existence, writability)
 - Handle directory creation prompt
+- Environment variable expansion ($HOME, $USER, $PWD)
+- Comprehensive error handling
 
 ### Phase 2: Path Handling Updates
 - Update all functions to use full paths
-- Implement path resolution (absolute, relative, `~` expansion)
+- Implement path resolution (absolute, relative, `~` expansion, env vars)
 - Update function signatures
 - Modify all file operations to use absolute paths
+
+### Phase 3: Manual Testing & Enhancements
+- Fix silent failure issues
+- Improve project name validation with clear error messages
+- Add automatic space-to-dash replacement for project names
+- Add GitHub authentication verification
+- Handle multiple GitHub accounts with user confirmation
 
 ### Phase 3: Validation & Testing
 - Create comprehensive validation function
@@ -124,7 +135,27 @@ All functions need to accept and use full project paths:
 
 ---
 
-**Last Updated:** 2025-11-10  
-**Status:** 🟡 Planned  
+## 🆕 Additional Features (From Manual Testing)
+
+**Project Name Validation:**
+- Clear error messages explaining why spaces aren't allowed
+- Automatic space-to-dash replacement option
+- Better user experience for invalid project names
+
+**GitHub Integration:**
+- Authentication verification before repo creation
+- Account matching with author name
+- Support for multiple GitHub accounts
+- Clear feedback on which account will be used
+
+**Error Handling:**
+- Comprehensive error messages for all failure cases
+- No silent failures
+- Actionable error messages with suggestions
+
+---
+
+**Last Updated:** 2025-11-11  
+**Status:** 🟠 In Progress  
 **Next:** [Status & Next Steps](status-and-next-steps.md)
 
