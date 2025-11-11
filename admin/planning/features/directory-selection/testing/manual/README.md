@@ -10,6 +10,7 @@
 
 - **[Test Plan](test-plan.md)** - Manual testing plan and scenarios
 - **[Test Results](results.md)** - Manual testing results and findings
+- **[Backward Compatibility](backward-compatibility.md)** - Compatibility verification
 - **[Testing Fixes](../../fix/README.md)** - Issues found and fixes applied
 
 ---
