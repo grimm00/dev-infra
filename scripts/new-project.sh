@@ -516,10 +516,14 @@ main() {
     local target_dir=$(prompt_input "Target directory (press Enter for $DEFAULT_DIR or enter custom path)" "$DEFAULT_DIR")
     
     # Validate and resolve target directory
+    # Disable set -e around function call to prevent premature exit
     local TARGET_DIR
     local resolved_dir
+    local error_code
+    set +e
     resolved_dir=$(validate_target_directory "$target_dir" 2>/dev/null)
-    local error_code=$?
+    error_code=$?
+    set -e
     
     # Check if we got a valid path back
     if [ -z "$resolved_dir" ] && [ $error_code -ne 0 ]; then
