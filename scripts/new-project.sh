@@ -90,10 +90,14 @@ expand_env_vars() {
 
 # Function to validate target directory
 validate_target_directory() {
+    # Disable set -e for this function to prevent premature exits
+    set +e
+    
     local dir_path="$1"
     
     # Check if path is empty
     if [ -z "$dir_path" ]; then
+        set -e
         return 1
     fi
     
@@ -102,12 +106,11 @@ validate_target_directory() {
     
     # Check if expansion resulted in empty path
     if [ -z "$dir_path" ]; then
+        set -e
         return 1
     fi
     
     # Resolve to absolute path
-    # Temporarily disable set -e for path resolution (cd may fail)
-    set +e
     if [[ ! "$dir_path" =~ ^/ ]]; then
         # Relative path - try to resolve
         if [ -d "$dir_path" ]; then
@@ -143,7 +146,6 @@ validate_target_directory() {
             fi
         fi
     fi
-    set -e
     
     # Normalize path (remove all trailing slashes)
     while [[ "$dir_path" =~ /$ ]]; do
@@ -155,9 +157,11 @@ validate_target_directory() {
         # Check if directory is writable
         if [ ! -w "$dir_path" ]; then
             echo "$dir_path"
+            set -e
             return 2  # Directory not writable
         fi
         echo "$dir_path"
+        set -e
         return 0
     else
         # Directory doesn't exist - check if parent is writable
@@ -165,14 +169,17 @@ validate_target_directory() {
         if [ ! -d "$parent_dir" ]; then
             # Parent doesn't exist - return path anyway so caller can try to create full path
             echo "$dir_path"
+            set -e
             return 1  # Parent doesn't exist, but return path for creation attempt
         fi
         if [ ! -w "$parent_dir" ]; then
             echo "$dir_path"
+            set -e
             return 2  # Parent directory not writable
         fi
         # Return path for potential creation
         echo "$dir_path"
+        set -e
         return 3  # Special code: doesn't exist but can be created
     fi
 }
