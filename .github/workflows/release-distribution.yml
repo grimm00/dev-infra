@@ -1,0 +1,149 @@
+name: Create Release Distribution
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  create-distribution:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      
+      - name: Get version from tag
+        id: get_version
+        run: |
+          # Use github.event.release.tag_name for release events (not GITHUB_REF)
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          
+          if [[ "${TAG_NAME}" =~ ^v(.+)$ ]]; then
+            VERSION="${BASH_REMATCH[1]}"
+          elif [[ "${TAG_NAME}" =~ ^(.+)$ ]]; then
+            VERSION="${TAG_NAME}"
+          else
+            echo "Error: Tag format not recognized. Expected 'v*' or '*'."
+            exit 1
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "package_name=dev-infra-${VERSION}" >> $GITHUB_OUTPUT
+      
+      - name: Merge admin changelog to root changelog
+        run: |
+          # Note: This intentionally includes admin/internal changes in the distribution.
+          # The admin changelog provides transparency about internal development decisions
+          # and processes, which can be valuable for users understanding the project.
+          if [ -f "admin/CHANGELOG.md" ]; then
+            echo "Found admin/CHANGELOG.md, merging into root CHANGELOG.md..."
+            
+            # Append admin changelog content to root changelog with clear section header
+            echo "" >> CHANGELOG.md
+            echo "---" >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            echo "## Internal/Admin Changes" >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            echo "*Note: This section documents internal development decisions and processes.*" >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            cat admin/CHANGELOG.md >> CHANGELOG.md
+            
+            echo "✅ Admin changelog merged into root CHANGELOG.md"
+          else
+            echo "ℹ️  No admin/CHANGELOG.md found, skipping merge"
+          fi
+      
+      - name: Create distribution package
+        run: |
+          PACKAGE_NAME="${{ steps.get_version.outputs.package_name }}"
+          mkdir -p "${PACKAGE_NAME}"
+          
+          # Copy user-facing files
+          cp -r templates/ "${PACKAGE_NAME}/templates/"
+          cp -r scripts/ "${PACKAGE_NAME}/scripts/"
+          cp -r docs/ "${PACKAGE_NAME}/docs/"
+          cp README.md "${PACKAGE_NAME}/"
+          cp CHANGELOG.md "${PACKAGE_NAME}/"
+          cp CONTRIBUTING.md "${PACKAGE_NAME}/"
+          [ -f LICENSE ] && cp LICENSE "${PACKAGE_NAME}/"
+          
+          # Create tarball
+          tar -czf "${PACKAGE_NAME}.tar.gz" "${PACKAGE_NAME}/"
+          
+          # Create zip for Windows users
+          zip -r "${PACKAGE_NAME}.zip" "${PACKAGE_NAME}/"
+          
+          echo "✅ Distribution packages created"
+          ls -lh *.tar.gz *.zip
+      
+      - name: Validate distribution package
+        run: |
+          PACKAGE_NAME="${{ steps.get_version.outputs.package_name }}"
+          
+          echo "Validating distribution package..."
+          
+          # Extract tarball to test
+          TEST_DIR="/tmp/test-dist"
+          mkdir -p "${TEST_DIR}"
+          tar -xzf "${PACKAGE_NAME}.tar.gz" -C "${TEST_DIR}"
+          
+          # Check required files exist
+          echo "Checking required files..."
+          [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates" ] || { echo "❌ Missing templates/"; exit 1; }
+          [ -d "${TEST_DIR}/${PACKAGE_NAME}/scripts" ] || { echo "❌ Missing scripts/"; exit 1; }
+          [ -d "${TEST_DIR}/${PACKAGE_NAME}/docs" ] || { echo "❌ Missing docs/"; exit 1; }
+          [ -f "${TEST_DIR}/${PACKAGE_NAME}/README.md" ] || { echo "❌ Missing README.md"; exit 1; }
+          [ -f "${TEST_DIR}/${PACKAGE_NAME}/CHANGELOG.md" ] || { echo "❌ Missing CHANGELOG.md"; exit 1; }
+          
+          # Check internal files are excluded
+          echo "Checking internal files are excluded..."
+          [ ! -d "${TEST_DIR}/${PACKAGE_NAME}/admin" ] || { echo "❌ admin/ should not be in distribution"; exit 1; }
+          [ ! -d "${TEST_DIR}/${PACKAGE_NAME}/.cursor" ] || { echo "❌ .cursor/ should not be in distribution"; exit 1; }
+          [ ! -d "${TEST_DIR}/${PACKAGE_NAME}/.github" ] || { echo "❌ .github/ should not be in distribution"; exit 1; }
+          [ ! -f "${TEST_DIR}/${PACKAGE_NAME}/start.txt" ] || { echo "❌ start.txt should not be in distribution"; exit 1; }
+          
+          # Test that scripts are present
+          echo "Checking scripts are present..."
+          [ -f "${TEST_DIR}/${PACKAGE_NAME}/scripts/new-project.sh" ] || { echo "❌ Missing new-project.sh"; exit 1; }
+          [ -f "${TEST_DIR}/${PACKAGE_NAME}/scripts/validate-templates.sh" ] || { echo "❌ Missing validate-templates.sh"; exit 1; }
+          
+          # Test that both templates exist
+          echo "Checking templates..."
+          [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates/regular-project" ] || { echo "❌ Missing regular-project template"; exit 1; }
+          [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates/learning-project" ] || { echo "❌ Missing learning-project template"; exit 1; }
+          
+          # Test that documentation exists
+          echo "Checking documentation..."
+          [ -f "${TEST_DIR}/${PACKAGE_NAME}/docs/README.md" ] || { echo "❌ Missing docs/README.md"; exit 1; }
+          [ -f "${TEST_DIR}/${PACKAGE_NAME}/docs/TEMPLATE-USAGE.md" ] || { echo "❌ Missing TEMPLATE-USAGE.md"; exit 1; }
+          [ -f "${TEST_DIR}/${PACKAGE_NAME}/docs/INTEGRATION.md" ] || { echo "❌ Missing INTEGRATION.md"; exit 1; }
+          
+          echo "✅ Distribution package validation passed"
+          
+          # Cleanup
+          rm -rf "${TEST_DIR}"
+      
+      - name: Generate checksums
+        run: |
+          PACKAGE_NAME="${{ steps.get_version.outputs.package_name }}"
+          
+          echo "Generating checksums..."
+          sha256sum "${PACKAGE_NAME}.tar.gz" > "${PACKAGE_NAME}.tar.gz.sha256"
+          sha256sum "${PACKAGE_NAME}.zip" > "${PACKAGE_NAME}.zip.sha256"
+          
+          echo "✅ Checksums generated"
+          cat "${PACKAGE_NAME}.tar.gz.sha256"
+          cat "${PACKAGE_NAME}.zip.sha256"
+      
+      - name: Upload distribution to release
+        uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090
+        with:
+          files: |
+            dev-infra-${{ steps.get_version.outputs.version }}.tar.gz
+            dev-infra-${{ steps.get_version.outputs.version }}.tar.gz.sha256
+            dev-infra-${{ steps.get_version.outputs.version }}.zip
+            dev-infra-${{ steps.get_version.outputs.version }}.zip.sha256
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
