@@ -130,6 +130,7 @@ validate_target_directory() {
 # Function to validate project name
 validate_project_name() {
     local name="$1"
+    local target_dir="$2"
     
     # Check if name is empty
     if [ -z "$name" ]; then
@@ -143,19 +144,23 @@ validate_project_name() {
         return 1
     fi
     
-    # Check if directory already exists
-    if [ -d "$name" ]; then
-        print_error "Directory '$name' already exists"
+    # Build full project path
+    local full_path="$target_dir/$name"
+    
+    # Check if directory already exists in target location
+    if [ -d "$full_path" ]; then
+        print_error "Directory '$full_path' already exists"
         return 1
     fi
     
+    echo "$full_path"
     return 0
 }
 
 # Function to copy template
 copy_template() {
     local template_type="$1"
-    local project_name="$2"
+    local full_project_path="$2"
     local template_dir="$DEV_INFRA_DIR/templates/$template_type"
     
     print_status "Copying $template_type template..."
@@ -166,10 +171,10 @@ copy_template() {
     fi
     
     # Copy template including hidden files
-    cp -r "$template_dir" "$project_name"
+    cp -r "$template_dir" "$full_project_path"
     
     # Verify important files were copied
-    if [ ! -f "$project_name/.gitignore" ]; then
+    if [ ! -f "$full_project_path/.gitignore" ]; then
         print_warning ".gitignore not found - template may need updating"
     fi
     
@@ -178,25 +183,28 @@ copy_template() {
 
 # Function to customize project files
 customize_project() {
-    local project_name="$1"
+    local full_project_path="$1"
     local project_type="$2"
     local description="$3"
     local author="$4"
     local current_date=$(date +"%Y-%m-%d")
     
+    # Extract project name from path
+    local project_name=$(basename "$full_project_path")
+    
     print_status "Customizing project files..."
     
     # Update README.md
-    if [ -f "$project_name/README.md" ]; then
-        sed -i.bak "s/\[Project Name\]/$project_name/g" "$project_name/README.md"
-        sed -i.bak "s/\[Brief description of what this project does\]/$description/g" "$project_name/README.md"
-        sed -i.bak "s/\[Date\]/$current_date/g" "$project_name/README.md"
-        rm "$project_name/README.md.bak"
+    if [ -f "$full_project_path/README.md" ]; then
+        sed -i.bak "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
+        sed -i.bak "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
+        sed -i.bak "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
+        rm "$full_project_path/README.md.bak"
     fi
     
     # Update start.txt
-    if [ -f "$project_name/start.txt" ]; then
-        cat > "$project_name/start.txt" << EOF
+    if [ -f "$full_project_path/start.txt" ]; then
+        cat > "$full_project_path/start.txt" << EOF
 # Project Initialization Template
 
 ## Problem Statement
@@ -244,10 +252,10 @@ EOF
     fi
     
     # Update package.json if it exists
-    if [ -f "$project_name/package.json" ]; then
-        sed -i.bak "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$project_name/package.json"
-        sed -i.bak "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$project_name/package.json"
-        rm "$project_name/package.json.bak"
+    if [ -f "$full_project_path/package.json" ]; then
+        sed -i.bak "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
+        sed -i.bak "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
+        rm "$full_project_path/package.json.bak"
     fi
     
     print_success "Project files customized"
@@ -255,12 +263,14 @@ EOF
 
 # Function to initialize git repository
 init_git_repo() {
-    local project_name="$1"
+    local full_project_path="$1"
+    local project_name=$(basename "$full_project_path")
+    local original_dir=$(pwd)
     
     if prompt_yes_no "Initialize git repository?" "y"; then
         print_status "Initializing git repository..."
         
-        cd "$project_name"
+        cd "$full_project_path"
         git init
         git add .
         git commit -m "Initial commit: $project_name created from dev-infra template"
@@ -269,18 +279,16 @@ init_git_repo() {
         
         if prompt_yes_no "Create GitHub repository?" "n"; then
             local repo_name=$(prompt_input "GitHub repository name" "$project_name")
-            local repo_description=$(prompt_input "Repository description" "$description")
-            local is_private=$(prompt_yes_no "Make repository private?" "n")
-            
-            local gh_args=""
-            if [ "$is_private" = true ]; then
-                gh_args="--private"
+            local repo_description=$(prompt_input "Repository description" "")
+            local is_private
+            if prompt_yes_no "Make repository private?" "n"; then
+                is_private="--private"
             else
-                gh_args="--public"
+                is_private="--public"
             fi
             
             print_status "Creating GitHub repository..."
-            gh repo create "$repo_name" --description "$repo_description" $gh_args
+            gh repo create "$repo_name" --description "$repo_description" $is_private
             
             git remote add origin "https://github.com/$(gh api user --jq .login)/$repo_name.git"
             git branch -M main
@@ -289,20 +297,21 @@ init_git_repo() {
             print_success "GitHub repository created and pushed"
         fi
         
-        cd ..
+        cd "$original_dir"
     fi
 }
 
 # Function to show next steps
 show_next_steps() {
-    local project_name="$1"
+    local full_project_path="$1"
     local project_type="$2"
+    local project_name=$(basename "$full_project_path")
     
     echo
     print_success "Project '$project_name' created successfully!"
     echo
     echo "Next steps:"
-    echo "1. cd $project_name"
+    echo "1. cd $full_project_path"
     echo "2. Review and customize start.txt"
     echo "3. Update README.md with project-specific details"
     echo "4. Set up development environment"
@@ -340,13 +349,7 @@ main() {
         fi
     fi
     
-    # Get project information
-    local project_name=$(prompt_input "Project name")
-    while ! validate_project_name "$project_name"; do
-        project_name=$(prompt_input "Project name")
-    done
-    
-    # Get target directory
+    # Get target directory first
     echo
     local target_dir=$(prompt_input "Target directory (press Enter for $DEFAULT_DIR or enter custom path)" "$DEFAULT_DIR")
     
@@ -394,6 +397,14 @@ main() {
             ;;
     esac
     
+    # Get project information
+    echo
+    local project_name=$(prompt_input "Project name")
+    local full_project_path
+    while ! full_project_path=$(validate_project_name "$project_name" "$TARGET_DIR"); do
+        project_name=$(prompt_input "Project name")
+    done
+    
     local description=$(prompt_input "Project description")
     local author=$(prompt_input "Author name" "$(git config user.name 2>/dev/null || echo '')")
     
@@ -428,7 +439,7 @@ main() {
     echo
     echo "Project Summary:"
     echo "Name: $project_name"
-    echo "Location: $TARGET_DIR"
+    echo "Location: $full_project_path"
     echo "Type: $project_type"
     echo "Description: $description"
     echo "Author: $author"
@@ -440,10 +451,10 @@ main() {
     fi
     
     # Create project
-    copy_template "$template_type" "$project_name"
-    customize_project "$project_name" "$project_type" "$description" "$author"
-    init_git_repo "$project_name"
-    show_next_steps "$project_name" "$project_type"
+    copy_template "$template_type" "$full_project_path"
+    customize_project "$full_project_path" "$project_type" "$description" "$author"
+    init_git_repo "$full_project_path"
+    show_next_steps "$full_project_path" "$project_type"
 }
 
 # Run main function
