@@ -70,6 +70,24 @@ prompt_yes_no() {
     done
 }
 
+# Function to expand environment variables in path
+expand_env_vars() {
+    local path="$1"
+    
+    # Expand common environment variables
+    path="${path//\$HOME/$HOME}"
+    path="${path//\$USER/$USER}"
+    path="${path//\$PWD/$PWD}"
+    # Expand ~ to home
+    path="${path/#\~/$HOME}"
+    # Handle ${VAR} syntax
+    path="${path//\$\{HOME\}/$HOME}"
+    path="${path//\$\{USER\}/$USER}"
+    path="${path//\$\{PWD\}/$PWD}"
+    
+    echo "$path"
+}
+
 # Function to validate target directory
 validate_target_directory() {
     local dir_path="$1"
@@ -79,8 +97,8 @@ validate_target_directory() {
         return 1
     fi
     
-    # Expand ~ to home directory
-    dir_path="${dir_path/#\~/$HOME}"
+    # Expand environment variables first
+    dir_path=$(expand_env_vars "$dir_path")
     
     # Resolve to absolute path
     if [[ ! "$dir_path" =~ ^/ ]]; then
@@ -93,12 +111,20 @@ validate_target_directory() {
             if [ -d "$parent_dir" ]; then
                 dir_path="$(cd "$parent_dir" && pwd)/$(basename "$dir_path")"
             else
-                return 1
+                # Parent doesn't exist - build absolute path from current directory
+                dir_path="$(pwd)/$dir_path"
             fi
         fi
     else
-        # Absolute path - normalize
-        dir_path="$(cd "$(dirname "$dir_path")" 2>/dev/null && pwd)/$(basename "$dir_path")" 2>/dev/null || echo "$dir_path"
+        # Absolute path - normalize if parent exists, otherwise keep as-is
+        local parent_dir=$(dirname "$dir_path")
+        local dir_name=$(basename "$dir_path")
+        if [ -d "$parent_dir" ]; then
+            dir_path="$(cd "$parent_dir" && pwd)/$dir_name"
+        else
+            # Parent doesn't exist - keep path as-is for now (will be created)
+            dir_path="$dir_path"
+        fi
     fi
     
     # Normalize path (remove trailing slashes)
@@ -108,6 +134,7 @@ validate_target_directory() {
     if [ -d "$dir_path" ]; then
         # Check if directory is writable
         if [ ! -w "$dir_path" ]; then
+            echo "$dir_path"
             return 2  # Directory not writable
         fi
         echo "$dir_path"
@@ -116,9 +143,12 @@ validate_target_directory() {
         # Directory doesn't exist - check if parent is writable
         local parent_dir=$(dirname "$dir_path")
         if [ ! -d "$parent_dir" ]; then
-            return 1
+            # Parent doesn't exist - return path anyway so caller can try to create full path
+            echo "$dir_path"
+            return 1  # Parent doesn't exist, but return path for creation attempt
         fi
         if [ ! -w "$parent_dir" ]; then
+            echo "$dir_path"
             return 2  # Parent directory not writable
         fi
         # Return path for potential creation
@@ -365,7 +395,7 @@ main() {
             TARGET_DIR="$resolved_dir"
             ;;
         3)
-            # Directory doesn't exist but can be created
+            # Directory doesn't exist but parent exists and is writable - can be created
             if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it?" "n"; then
                 mkdir -p "$resolved_dir"
                 TARGET_DIR="$(cd "$resolved_dir" && pwd)"
@@ -377,10 +407,16 @@ main() {
             ;;
         1)
             # Directory doesn't exist and parent doesn't exist or invalid
-            if prompt_yes_no "Directory '$target_dir' doesn't exist. Create it?" "n"; then
-                mkdir -p "$target_dir"
-                TARGET_DIR="$(cd "$target_dir" && pwd)"
-                print_success "Created directory: $TARGET_DIR"
+            # Try to create the full path
+            if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it (including parent directories)?" "n"; then
+                mkdir -p "$resolved_dir"
+                if [ -d "$resolved_dir" ]; then
+                    TARGET_DIR="$(cd "$resolved_dir" && pwd)"
+                    print_success "Created directory: $TARGET_DIR"
+                else
+                    print_error "Failed to create directory: $resolved_dir"
+                    exit 1
+                fi
             else
                 print_error "Cannot proceed without valid directory"
                 exit 1
@@ -388,7 +424,7 @@ main() {
             ;;
         2)
             # Directory not writable
-            print_error "Directory '$target_dir' is not writable"
+            print_error "Directory '$resolved_dir' is not writable"
             exit 1
             ;;
         *)
