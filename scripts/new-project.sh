@@ -70,6 +70,63 @@ prompt_yes_no() {
     done
 }
 
+# Function to validate target directory
+validate_target_directory() {
+    local dir_path="$1"
+    
+    # Check if path is empty
+    if [ -z "$dir_path" ]; then
+        return 1
+    fi
+    
+    # Expand ~ to home directory
+    dir_path="${dir_path/#\~/$HOME}"
+    
+    # Resolve to absolute path
+    if [[ ! "$dir_path" =~ ^/ ]]; then
+        # Relative path - try to resolve
+        if [ -d "$dir_path" ]; then
+            dir_path="$(cd "$dir_path" 2>/dev/null && pwd)"
+        else
+            # Path doesn't exist yet, resolve parent
+            local parent_dir=$(dirname "$dir_path")
+            if [ -d "$parent_dir" ]; then
+                dir_path="$(cd "$parent_dir" && pwd)/$(basename "$dir_path")"
+            else
+                return 1
+            fi
+        fi
+    else
+        # Absolute path - normalize
+        dir_path="$(cd "$(dirname "$dir_path")" 2>/dev/null && pwd)/$(basename "$dir_path")" 2>/dev/null || echo "$dir_path"
+    fi
+    
+    # Normalize path (remove trailing slashes)
+    dir_path="${dir_path%/}"
+    
+    # Check if directory exists
+    if [ -d "$dir_path" ]; then
+        # Check if directory is writable
+        if [ ! -w "$dir_path" ]; then
+            return 2  # Directory not writable
+        fi
+        echo "$dir_path"
+        return 0
+    else
+        # Directory doesn't exist - check if parent is writable
+        local parent_dir=$(dirname "$dir_path")
+        if [ ! -d "$parent_dir" ]; then
+            return 1
+        fi
+        if [ ! -w "$parent_dir" ]; then
+            return 2  # Parent directory not writable
+        fi
+        # Return path for potential creation
+        echo "$dir_path"
+        return 3  # Special code: doesn't exist but can be created
+    fi
+}
+
 # Function to validate project name
 validate_project_name() {
     local name="$1"
@@ -271,11 +328,71 @@ main() {
     echo "======================================"
     echo
     
+    # Determine default directory
+    local DEFAULT_DIR="$HOME/Projects"
+    if [ ! -d "$DEFAULT_DIR" ]; then
+        if prompt_yes_no "Directory $DEFAULT_DIR doesn't exist. Create it?" "n"; then
+            mkdir -p "$DEFAULT_DIR"
+            print_success "Created directory: $DEFAULT_DIR"
+        else
+            DEFAULT_DIR="$PWD"
+            print_status "Using current directory as default"
+        fi
+    fi
+    
     # Get project information
     local project_name=$(prompt_input "Project name")
     while ! validate_project_name "$project_name"; do
         project_name=$(prompt_input "Project name")
     done
+    
+    # Get target directory
+    echo
+    local target_dir=$(prompt_input "Target directory (press Enter for $DEFAULT_DIR or enter custom path)" "$DEFAULT_DIR")
+    
+    # Validate and resolve target directory
+    local TARGET_DIR
+    local resolved_dir
+    resolved_dir=$(validate_target_directory "$target_dir" 2>/dev/null)
+    local error_code=$?
+    
+    case $error_code in
+        0)
+            # Directory exists and is writable
+            TARGET_DIR="$resolved_dir"
+            ;;
+        3)
+            # Directory doesn't exist but can be created
+            if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it?" "n"; then
+                mkdir -p "$resolved_dir"
+                TARGET_DIR="$(cd "$resolved_dir" && pwd)"
+                print_success "Created directory: $TARGET_DIR"
+            else
+                print_error "Cannot proceed without valid directory"
+                exit 1
+            fi
+            ;;
+        1)
+            # Directory doesn't exist and parent doesn't exist or invalid
+            if prompt_yes_no "Directory '$target_dir' doesn't exist. Create it?" "n"; then
+                mkdir -p "$target_dir"
+                TARGET_DIR="$(cd "$target_dir" && pwd)"
+                print_success "Created directory: $TARGET_DIR"
+            else
+                print_error "Cannot proceed without valid directory"
+                exit 1
+            fi
+            ;;
+        2)
+            # Directory not writable
+            print_error "Directory '$target_dir' is not writable"
+            exit 1
+            ;;
+        *)
+            print_error "Invalid directory: $target_dir"
+            exit 1
+            ;;
+    esac
     
     local description=$(prompt_input "Project description")
     local author=$(prompt_input "Author name" "$(git config user.name 2>/dev/null || echo '')")
@@ -311,6 +428,7 @@ main() {
     echo
     echo "Project Summary:"
     echo "Name: $project_name"
+    echo "Location: $TARGET_DIR"
     echo "Type: $project_type"
     echo "Description: $description"
     echo "Author: $author"
