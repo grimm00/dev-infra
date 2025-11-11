@@ -106,19 +106,25 @@ validate_target_directory() {
     fi
     
     # Resolve to absolute path
+    # Temporarily disable set -e for path resolution (cd may fail)
+    set +e
     if [[ ! "$dir_path" =~ ^/ ]]; then
         # Relative path - try to resolve
         if [ -d "$dir_path" ]; then
             local resolved
-            resolved="$(cd "$dir_path" 2>/dev/null && pwd)" || resolved="$dir_path"
-            dir_path="$resolved"
+            resolved="$(cd "$dir_path" 2>/dev/null && pwd 2>/dev/null)"
+            if [ $? -eq 0 ] && [ -n "$resolved" ]; then
+                dir_path="$resolved"
+            fi
         else
             # Path doesn't exist yet, resolve parent
             local parent_dir=$(dirname "$dir_path")
             if [ -d "$parent_dir" ]; then
                 local normalized_parent
-                normalized_parent="$(cd "$parent_dir" 2>/dev/null && pwd)" || normalized_parent="$parent_dir"
-                dir_path="$normalized_parent/$(basename "$dir_path")"
+                normalized_parent="$(cd "$parent_dir" 2>/dev/null && pwd 2>/dev/null)"
+                if [ $? -eq 0 ] && [ -n "$normalized_parent" ]; then
+                    dir_path="$normalized_parent/$(basename "$dir_path")"
+                fi
             else
                 # Parent doesn't exist - build absolute path from current directory
                 dir_path="$(pwd)/$dir_path"
@@ -131,13 +137,13 @@ validate_target_directory() {
         if [ -d "$parent_dir" ]; then
             # Normalize parent path (resolve symlinks, etc.)
             local normalized_parent
-            normalized_parent="$(cd "$parent_dir" 2>/dev/null && pwd)" || normalized_parent="$parent_dir"
-            dir_path="$normalized_parent/$dir_name"
-        else
-            # Parent doesn't exist - keep path as-is for now (will be created)
-            dir_path="$dir_path"
+            normalized_parent="$(cd "$parent_dir" 2>/dev/null && pwd 2>/dev/null)"
+            if [ $? -eq 0 ] && [ -n "$normalized_parent" ]; then
+                dir_path="$normalized_parent/$dir_name"
+            fi
         fi
     fi
+    set -e
     
     # Normalize path (remove all trailing slashes)
     while [[ "$dir_path" =~ /$ ]]; do
