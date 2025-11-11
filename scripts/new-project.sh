@@ -100,6 +100,11 @@ validate_target_directory() {
     # Expand environment variables first
     dir_path=$(expand_env_vars "$dir_path")
     
+    # Check if expansion resulted in empty path
+    if [ -z "$dir_path" ]; then
+        return 1
+    fi
+    
     # Resolve to absolute path
     if [[ ! "$dir_path" =~ ^/ ]]; then
         # Relative path - try to resolve
@@ -389,28 +394,32 @@ main() {
     resolved_dir=$(validate_target_directory "$target_dir" 2>/dev/null)
     local error_code=$?
     
+    # Check if we got a valid path back
+    if [ -z "$resolved_dir" ] && [ $error_code -ne 0 ]; then
+        print_error "Failed to validate directory: $target_dir"
+        print_error "The path may be invalid or inaccessible"
+        print_error "Please check the path and try again"
+        exit 1
+    fi
+    
     case $error_code in
         0)
             # Directory exists and is writable
+            if [ -z "$resolved_dir" ]; then
+                print_error "Validation returned empty path"
+                exit 1
+            fi
             TARGET_DIR="$resolved_dir"
+            print_status "Using directory: $TARGET_DIR"
             ;;
         3)
             # Directory doesn't exist but parent exists and is writable - can be created
-            if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it?" "n"; then
-                mkdir -p "$resolved_dir"
-                TARGET_DIR="$(cd "$resolved_dir" && pwd)"
-                print_success "Created directory: $TARGET_DIR"
-            else
-                print_error "Cannot proceed without valid directory"
+            if [ -z "$resolved_dir" ]; then
+                print_error "Cannot determine directory path for: $target_dir"
                 exit 1
             fi
-            ;;
-        1)
-            # Directory doesn't exist and parent doesn't exist or invalid
-            # Try to create the full path
-            if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it (including parent directories)?" "n"; then
-                mkdir -p "$resolved_dir"
-                if [ -d "$resolved_dir" ]; then
+            if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it?" "n"; then
+                if mkdir -p "$resolved_dir" 2>/dev/null; then
                     TARGET_DIR="$(cd "$resolved_dir" && pwd)"
                     print_success "Created directory: $TARGET_DIR"
                 else
@@ -422,13 +431,48 @@ main() {
                 exit 1
             fi
             ;;
+        1)
+            # Directory doesn't exist and parent doesn't exist or invalid
+            # Try to create the full path
+            if [ -z "$resolved_dir" ]; then
+                print_error "Cannot determine directory path for: $target_dir"
+                exit 1
+            fi
+            if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it (including parent directories)?" "n"; then
+                if mkdir -p "$resolved_dir" 2>/dev/null; then
+                    if [ -d "$resolved_dir" ]; then
+                        TARGET_DIR="$(cd "$resolved_dir" && pwd)"
+                        print_success "Created directory: $TARGET_DIR"
+                    else
+                        print_error "Failed to create directory: $resolved_dir"
+                        exit 1
+                    fi
+                else
+                    print_error "Failed to create directory: $resolved_dir"
+                    print_error "Please check permissions and try again"
+                    exit 1
+                fi
+            else
+                print_error "Cannot proceed without valid directory"
+                exit 1
+            fi
+            ;;
         2)
             # Directory not writable
-            print_error "Directory '$resolved_dir' is not writable"
+            if [ -z "$resolved_dir" ]; then
+                print_error "Directory '$target_dir' is not writable"
+            else
+                print_error "Directory '$resolved_dir' is not writable"
+            fi
+            print_error "Please check permissions or choose a different directory"
             exit 1
             ;;
         *)
             print_error "Invalid directory: $target_dir"
+            if [ -n "$resolved_dir" ]; then
+                print_error "Resolved path: $resolved_dir"
+            fi
+            print_error "Error code: $error_code"
             exit 1
             ;;
     esac
