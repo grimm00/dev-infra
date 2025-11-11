@@ -13,6 +13,7 @@
 - **[Phase 1: Directory Selection Prompt](phase-1-directory-prompt.md)** - Initial implementation
 - **[Phase 2: Path Handling Updates](phase-2-path-handling.md)** - Function updates
 - **[Phase 3: Validation & Testing](phase-3-validation-testing.md)** - Validation and testing
+- **[Testing Documentation](testing/README.md)** - All testing documentation
 - **[Manual Testing Fixes](fix/README.md)** - Fixes for issues found during manual testing
 
 ---
