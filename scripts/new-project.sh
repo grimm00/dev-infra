@@ -109,12 +109,16 @@ validate_target_directory() {
     if [[ ! "$dir_path" =~ ^/ ]]; then
         # Relative path - try to resolve
         if [ -d "$dir_path" ]; then
-            dir_path="$(cd "$dir_path" 2>/dev/null && pwd)"
+            local resolved
+            resolved="$(cd "$dir_path" 2>/dev/null && pwd)" || resolved="$dir_path"
+            dir_path="$resolved"
         else
             # Path doesn't exist yet, resolve parent
             local parent_dir=$(dirname "$dir_path")
             if [ -d "$parent_dir" ]; then
-                dir_path="$(cd "$parent_dir" && pwd)/$(basename "$dir_path")"
+                local normalized_parent
+                normalized_parent="$(cd "$parent_dir" 2>/dev/null && pwd)" || normalized_parent="$parent_dir"
+                dir_path="$normalized_parent/$(basename "$dir_path")"
             else
                 # Parent doesn't exist - build absolute path from current directory
                 dir_path="$(pwd)/$dir_path"
@@ -125,7 +129,10 @@ validate_target_directory() {
         local parent_dir=$(dirname "$dir_path")
         local dir_name=$(basename "$dir_path")
         if [ -d "$parent_dir" ]; then
-            dir_path="$(cd "$parent_dir" && pwd)/$dir_name"
+            # Normalize parent path (resolve symlinks, etc.)
+            local normalized_parent
+            normalized_parent="$(cd "$parent_dir" 2>/dev/null && pwd)" || normalized_parent="$parent_dir"
+            dir_path="$normalized_parent/$dir_name"
         else
             # Parent doesn't exist - keep path as-is for now (will be created)
             dir_path="$dir_path"
