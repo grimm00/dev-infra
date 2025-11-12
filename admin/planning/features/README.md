@@ -2,21 +2,32 @@
 
 **Purpose:** Feature-based planning and tracking using hub-and-spoke documentation  
 **Status:** ✅ Active  
-**Last Updated:** 2025-11-10
+**Last Updated:** 2025-11-12
 
 ---
 
 ## 📋 Quick Links
 
-### Planned Features
+### Active Features
 
-- **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (🟡 Planned)
+- **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (✅ Complete)
+
+### Template Features
+
+- **[Regular Project Features](regular-project-features/README.md)** - Regular project template features
+- **[Learning Project Features](learning-project-features/README.md)** - Learning project template features
+- **[Generator Features](generator-features/README.md)** - Project generator features
+- **[Validation Features](validation-features/README.md)** - Template validation features
 
 ---
 
 ## 🎯 Overview
 
 Feature planning organizes development work around user-facing functionality. Each feature has its own directory with hub-and-spoke documentation for clear navigation and focused content.
+
+This directory serves two purposes:
+1. **Template Features** - Planning for dev-infra template enhancements (template types, generator, validation)
+2. **Project Features** - Planning for new functionality in the dev-infra project itself (like directory selection)
 
 ### Feature Planning Philosophy
 
@@ -25,10 +36,14 @@ Feature planning organizes development work around user-facing functionality. Ea
 3. **Phase-Based** - Break features into manageable phases
 4. **Status Tracking** - Consistent progress monitoring
 5. **Fix Integration** - Troubleshooting documentation included
+6. **Template-First** - Focus on template quality and usability (for template features)
+7. **Automation** - Reduce manual setup and configuration (for template features)
 
 ---
 
 ## 📁 Feature Directory Structure
+
+### Project Features (New Structure)
 
 ```
 features/
@@ -38,7 +53,18 @@ features/
 │   ├── status-and-next-steps.md     # Current status
 │   ├── phase-1.md                   # Phase 1 details
 │   ├── phase-2.md                   # Phase 2 details
-│   └── phase-N.md                   # Additional phases
+│   ├── fix/                         # Fix documentation
+│   └── testing/                     # Testing documentation
+```
+
+### Template Features (Legacy Structure)
+
+```
+features/
+├── regular-project-features/  # Regular project template features
+├── learning-project-features/ # Learning project template features
+├── generator-features/        # Project generator features
+└── validation-features/       # Template validation features
 ```
 
 ---
@@ -76,11 +102,17 @@ features/
 
 ## 📊 Feature Status Overview
 
+### ✅ Completed Features
+
+| Feature | Status | Completed |
+|---------|--------|-----------|
+| [Directory Selection](directory-selection/README.md) | ✅ Complete | 2025-11-12 |
+
 ### 🟡 Planned Features
 
 | Feature | Priority | Estimated | Dependencies |
 |---------|----------|-----------|--------------|
-| [Directory Selection](directory-selection/README.md) | Medium | TBD | None |
+| (None currently) | - | - | - |
 
 ---
 
@@ -107,7 +139,6 @@ features/
 
 ---
 
-**Last Updated:** 2025-11-10  
+**Last Updated:** 2025-11-12  
 **Status:** ✅ Active  
-**Next:** [Directory Selection Feature](directory-selection/README.md)
-
+**Next:** See individual feature directories for current work
