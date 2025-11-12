@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write  # Required to upload release assets
+      id-token: write  # Required for some GitHub API operations
     
     steps:
       - name: Checkout code
@@ -139,13 +140,17 @@ jobs:
           cat "${PACKAGE_NAME}.zip.sha256"
       
       - name: Upload distribution to release
-        uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090
-        with:
-          files: |
-            dev-infra-${{ steps.get_version.outputs.version }}.tar.gz
-            dev-infra-${{ steps.get_version.outputs.version }}.tar.gz.sha256
-            dev-infra-${{ steps.get_version.outputs.version }}.zip
-            dev-infra-${{ steps.get_version.outputs.version }}.zip.sha256
+        run: |
+          PACKAGE_NAME="dev-infra-${{ steps.get_version.outputs.version }}"
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          
+          # Upload each file using GitHub CLI
+          gh release upload "$TAG_NAME" \
+            "${PACKAGE_NAME}.tar.gz" \
+            "${PACKAGE_NAME}.tar.gz.sha256" \
+            "${PACKAGE_NAME}.zip" \
+            "${PACKAGE_NAME}.zip.sha256" \
+            --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
