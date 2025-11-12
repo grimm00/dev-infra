@@ -7,6 +7,8 @@ on:
 jobs:
   create-distribution:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required to upload release assets
     
     steps:
       - name: Checkout code
