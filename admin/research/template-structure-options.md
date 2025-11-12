@@ -33,5 +33,6 @@ This document compares current structures with a proposed hub‑and‑spoke alig
 - Naming alternatives: `standard-project` vs others
 
 ## Next Steps
+- See comprehensive analysis: `template-restructure-comprehensive-analysis.md`
 - Validate with maintainers
 - Draft ADR with decision criteria and migration plan

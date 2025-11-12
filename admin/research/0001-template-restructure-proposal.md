@@ -30,6 +30,7 @@ Adopt hub‑and‑spoke documentation across templates and converge maintainer d
 See `admin/research/structure-snapshots/*.tree.txt` for current trees.
 
 ## Proposed Direction (Pending Approval)
+- See comprehensive analysis: `template-restructure-comprehensive-analysis.md`
 - Proceed with Options 2, 3, 4 in a release branch after sign‑off
 - Keep main repo in `admin/` for now; re‑evaluate `docs/maintainers/` move later
 
