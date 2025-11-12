@@ -10,9 +10,9 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 11
-- 🟡 **MEDIUM**: 7 tasks
-- 🟢 **LOW**: 4 tasks
+**Total Tasks:** 13
+- 🟡 **MEDIUM**: 8 tasks
+- 🟢 **LOW**: 5 tasks
 
 ---
 
@@ -157,6 +157,47 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
+#### Task 12: Test for Existing File (Not Directory)
+- **Source:** PR #7 - Sourcery Comment #1
+- **Location:** `tests/new-project.bats:252-264` - `validate_project_name()` tests
+- **Priority:** 🟡 MEDIUM
+- **Impact:** 🟡 MEDIUM
+- **Effort:** 🟢 LOW
+- **Description:** Add a test case for when a file (not directory) with the intended project name exists, to ensure this edge case is handled correctly by `validate_project_name()`.
+- **Proposed Implementation:**
+  ```bash
+  @test "validate_project_name: detects existing file with project name" {
+      local test_dir="$TEST_TMPDIR/projects"
+      local existing_file="$test_dir/existingfile"
+      mkdir -p "$test_dir"
+      touch "$existing_file"
+      
+      local result
+      local exit_code
+      set +e
+      result=$(validate_project_name "existingfile" "$test_dir" 2>/dev/null)
+      exit_code=$?
+      set -e
+      
+      [ $exit_code -ne 0 ]
+      [ -z "$result" ]
+  }
+  ```
+- **Status:** ⏸️ Deferred
+
+---
+
+#### Task 13: Use Portable Path Utilities
+- **Source:** PR #7 - Sourcery Overall Comment #1
+- **Location:** `scripts/new-project.sh:92-175` - `validate_target_directory()` function
+- **Priority:** 🟡 MEDIUM
+- **Impact:** 🟡 MEDIUM
+- **Effort:** 🟠 HIGH
+- **Description:** Consider leveraging portable utilities like `realpath` or `readlink -f` with fallbacks instead of extensive custom string manipulation for path normalization. This would reduce code complexity and improve maintainability.
+- **Status:** ⏸️ Deferred
+
+---
+
 ## Summary by Status
 
 ### 🟡 Planned (Ready to Address)
@@ -171,6 +212,8 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - Task 6: Split Integration Guide
 - Task 8: Multiple Trailing Slashes
 - Task 11: Automate CURRENT_DATE Placeholder
+- Task 12: Test for Existing File (Not Directory)
+- Task 13: Use Portable Path Utilities
 
 ### ✅ Addressed (Already Fixed)
 - Task 7: Root Directory Edge Case (Fixed in PR #6)
@@ -220,4 +263,18 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 **Last Updated:** 2025-11-12  
 **Status:** 📋 Active Backlog
+
+---
+
+## PR #7 Additions
+
+**Date:** 2025-11-12  
+**Status:** ✅ Critical issue fixed, medium/low priority items deferred
+
+### Fixed in PR #7
+- ✅ **sed -i.bak portability** - Replaced with portable sed -i syntax using OSTYPE detection for macOS/BSD compatibility
+
+### Deferred from PR #7
+- Task 12: Test for existing file case (MEDIUM priority)
+- Task 13: Use portable path utilities (MEDIUM priority, HIGH effort)
 

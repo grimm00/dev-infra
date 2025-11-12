@@ -262,10 +262,18 @@ customize_project() {
     
     # Update README.md
     if [ -f "$full_project_path/README.md" ]; then
-        sed -i.bak "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
-        sed -i.bak "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
-        sed -i.bak "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
-        rm "$full_project_path/README.md.bak"
+        # Use portable sed -i syntax (works on both GNU and BSD/macOS)
+        # On macOS/BSD: sed -i '' requires empty string for no backup
+        # On GNU: sed -i works without extension
+        if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == "freebsd"* ]]; then
+            sed -i '' "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
+            sed -i '' "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
+            sed -i '' "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
+        else
+            sed -i "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
+            sed -i "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
+            sed -i "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
+        fi
     fi
     
     # Update start.txt
@@ -319,9 +327,14 @@ EOF
     
     # Update package.json if it exists
     if [ -f "$full_project_path/package.json" ]; then
-        sed -i.bak "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
-        sed -i.bak "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
-        rm "$full_project_path/package.json.bak"
+        # Use portable sed -i syntax (works on both GNU and BSD/macOS)
+        if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == "freebsd"* ]]; then
+            sed -i '' "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
+            sed -i '' "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
+        else
+            sed -i "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
+            sed -i "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
+        fi
     fi
     
     print_success "Project files customized"
@@ -408,7 +421,12 @@ init_git_repo() {
     if prompt_yes_no "Initialize git repository?" "y"; then
         print_status "Initializing git repository..."
         
-        cd "$full_project_path"
+        # Change to project directory with error checking
+        if ! cd "$full_project_path"; then
+            print_error "Failed to change to project directory: $full_project_path"
+            return 1
+        fi
+        
         git init
         git add .
         git commit -m "Initial commit: $project_name created from dev-infra template"
@@ -420,7 +438,8 @@ init_git_repo() {
             if ! verify_github_auth "$author"; then
                 print_error "GitHub authentication verification failed"
                 print_error "Skipping repository creation"
-                cd "$original_dir"
+                # Return to original directory (best effort)
+                cd "$original_dir" 2>/dev/null || true
                 return 1
             fi
             
@@ -445,12 +464,14 @@ init_git_repo() {
             else
                 print_error "Failed to create GitHub repository"
                 print_error "Please check your GitHub CLI authentication and permissions"
-                cd "$original_dir"
+                # Return to original directory (best effort)
+                cd "$original_dir" 2>/dev/null || true
                 return 1
             fi
         fi
         
-        cd "$original_dir"
+        # Return to original directory (best effort)
+        cd "$original_dir" 2>/dev/null || true
     fi
 }
 
