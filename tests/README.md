@@ -12,8 +12,11 @@ This directory contains BATS (Bash Automated Testing System) tests for the `new-
 
 ## Test Suite
 
-**Test File:** `new-project.bats`  
-**Total Tests:** 33  
+**Test Files:** 
+- `new-project.bats` - 33 tests (directory selection feature)
+- `sed-portability.bats` - 4 tests (PR #7 sed -i portability fix)
+
+**Total Tests:** 37  
 **Status:** ✅ All tests passing
 
 ### Test Categories
@@ -57,6 +60,12 @@ This directory contains BATS (Bash Automated Testing System) tests for the `new-
 - Script works from any directory
 - Relative paths resolve correctly
 
+#### Portability Tests (4 tests) - `sed-portability.bats`
+- sed -i works on macOS/BSD with empty string
+- sed -i works on GNU/Linux without extension
+- OSTYPE detection works correctly
+- Multiple replacements work (simulates customize_project usage)
+
 ## Running Tests
 
 ### Prerequisites
@@ -66,7 +75,14 @@ This directory contains BATS (Bash Automated Testing System) tests for the `new-
 ### Run All Tests
 ```bash
 cd tests
-bats new-project.bats
+bats new-project.bats sed-portability.bats
+```
+
+Or run individually:
+```bash
+cd tests
+bats new-project.bats      # Directory selection tests
+bats sed-portability.bats # sed portability tests
 ```
 
 ### Run Specific Test
@@ -98,6 +114,7 @@ bats new-project.bats --tap
 - ✅ `expand_env_vars()` - Full coverage
 - ✅ `validate_target_directory()` - Full coverage
 - ✅ `validate_project_name()` - Core functionality (simplified for non-interactive testing)
+- ✅ `sed -i` portability - Cross-platform sed in-place editing (PR #7 fix)
 
 ### Features Tested
 - ✅ Environment variable expansion
@@ -112,12 +129,13 @@ bats new-project.bats --tap
 - `prompt_input()` - Requires user input
 - `prompt_yes_no()` - Requires user input
 - `verify_github_auth()` - Requires GitHub CLI and authentication
+- `customize_project()` - Full function requires templates (sed -i part is tested)
 - Full end-to-end project creation flow
 
 ## Test Results
 
 **Last Run:** 2025-11-12  
-**Status:** ✅ All 33 tests passing  
+**Status:** ✅ All 37 tests passing (33 + 4 sed portability)  
 **Execution Time:** < 5 seconds
 
 ## Future Enhancements
