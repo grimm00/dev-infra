@@ -15,9 +15,10 @@
 
 ### Supporting Materials
 - **[Structure Snapshots](structure-snapshots/)** - Current state tree diagrams
-  - [Admin Structure](structure-snapshots/admin.tree.txt)
-  - [Regular Project Template](structure-snapshots/regular-project.tree.txt)
-  - [Learning Project Template](structure-snapshots/learning-project.tree.txt)
+  - [Main Dev-Infra Project](structure-snapshots/dev-infra-main.tree.txt) - Complete project structure with all files
+  - [Admin Structure](structure-snapshots/admin.tree.txt) - Admin directory structure
+  - [Regular Project Template](structure-snapshots/regular-project.tree.txt) - Complete template structure with all files
+  - [Learning Project Template](structure-snapshots/learning-project.tree.txt) - Complete template structure with all files
 
 ---
 
@@ -107,12 +108,13 @@ This research evaluates the current template structure against:
 **Directory:** `structure-snapshots/`
 
 **Contents:**
-- Tree diagrams of current structures
-- Admin structure
-- Regular project template structure
-- Learning project template structure
+- Tree diagrams of current structures with complete file listings
+- Main dev-infra project structure (complete with all directories and files)
+- Admin directory structure
+- Regular project template structure (complete with all files)
+- Learning project template structure (complete with all files)
 
-**Status:** ✅ Complete - Baseline documentation
+**Status:** ✅ Complete - Baseline documentation with full file listings
 
 ---
 
@@ -181,4 +183,5 @@ This research evaluates the current template structure against:
 **Last Updated:** 2025-01-27  
 **Status:** 🔴 Research Complete - Awaiting Approval  
 **Primary Document:** [Comprehensive Analysis](template-restructure-comprehensive-analysis.md)
+
 

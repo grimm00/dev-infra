@@ -1,13 +1,28 @@
 templates/regular-project
+├── .dockerignore
 ├── .github
 │   └── workflows
+│       └── ci.yml
+├── .gitignore
 ├── admin
-│   └── planning
+│   ├── planning
+│   │   ├── features
+│   │   │   └── README.md
+│   │   └── README.md
+│   └── README.md
 ├── backend
-│   └── instance
+│   ├── instance
+│   │   └── .gitkeep
+│   └── README.md
 ├── docs
+│   └── README.md
 ├── frontend
+│   └── README.md
+├── README.md
 ├── scripts
+│   └── README.md
+├── start.txt
 └── tests
+    └── README.md
 
-11 directories
+12 directories, 14 files
