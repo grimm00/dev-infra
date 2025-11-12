@@ -20,6 +20,10 @@
   - [Regular Project Template](structure-snapshots/regular-project.tree.txt) - Complete template structure with all files
   - [Learning Project Template](structure-snapshots/learning-project.tree.txt) - Complete template structure with all files
 
+### Proposed Structure Snapshots
+- **[Proposed Standard Project](structure-snapshots/standard-project-proposed.tree.txt)** - Proposed structure after restructure (admin/ → docs/maintainers/, renamed to standard-project)
+- **[Proposed Learning Project](structure-snapshots/learning-project-proposed.tree.txt)** - Proposed structure after restructure (admin/ → docs/maintainers/)
+
 ---
 
 ## 🎯 Research Overview
@@ -107,14 +111,18 @@ This research evaluates the current template structure against:
 ### 4. Structure Snapshots
 **Directory:** `structure-snapshots/`
 
-**Contents:**
+**Current State:**
 - Tree diagrams of current structures with complete file listings
 - Main dev-infra project structure (complete with all directories and files)
 - Admin directory structure
 - Regular project template structure (complete with all files)
 - Learning project template structure (complete with all files)
 
-**Status:** ✅ Complete - Baseline documentation with full file listings
+**Proposed State:**
+- Standard project proposed structure (shows admin/ → docs/maintainers/ migration)
+- Learning project proposed structure (shows admin/ → docs/maintainers/ migration)
+
+**Status:** ✅ Complete - Baseline and proposed structures documented
 
 ---
 

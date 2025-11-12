@@ -1,0 +1,27 @@
+templates/learning-project
+├── .dockerignore
+├── .gitignore
+├── docs
+│   ├── README.md
+│   └── maintainers
+│       ├── README.md
+│       ├── planning
+│       │   ├── features
+│       │   │   └── README.md
+│       │   └── README.md
+│       ├── notes
+│       └── research
+├── practice-apps
+│   └── README.md
+├── README.md
+├── reference
+│   └── README.md
+├── stage0-fundamentals
+│   └── README.md
+├── stage1-topic
+├── stage2-topic
+├── stage3-topic
+└── start.txt
+
+13 directories, 11 files
+
