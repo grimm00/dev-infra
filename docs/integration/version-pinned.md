@@ -49,7 +49,7 @@ curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.2.0/dev-infra
 sha256sum -c checksum.txt
 
 # Verify (Windows PowerShell)
-(Get-FileHash dev-infra-1.1.0.tar.gz -Algorithm SHA256).Hash -eq (Get-Content checksum.txt).Split()[0]
+(Get-FileHash dev-infra-1.2.0.tar.gz -Algorithm SHA256).Hash -eq (Get-Content checksum.txt).Split()[0]
 ```
 
 ### Option 2: Full Source (For Contributors)
