@@ -144,13 +144,18 @@ jobs:
           PACKAGE_NAME="dev-infra-${{ steps.get_version.outputs.version }}"
           TAG_NAME="${{ github.event.release.tag_name }}"
           
+          # Use PAT if available, otherwise fall back to GITHUB_TOKEN
+          # PAT is needed for uploading to manually-created releases
+          TOKEN="${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}"
+          
           # Upload each file using GitHub CLI
           gh release upload "$TAG_NAME" \
             "${PACKAGE_NAME}.tar.gz" \
             "${PACKAGE_NAME}.tar.gz.sha256" \
             "${PACKAGE_NAME}.zip" \
             "${PACKAGE_NAME}.zip.sha256" \
-            --clobber
+            --clobber \
+            --repo "${{ github.repository }}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
