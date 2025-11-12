@@ -262,10 +262,18 @@ customize_project() {
     
     # Update README.md
     if [ -f "$full_project_path/README.md" ]; then
-        sed -i.bak "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
-        sed -i.bak "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
-        sed -i.bak "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
-        rm "$full_project_path/README.md.bak"
+        # Use portable sed -i syntax (works on both GNU and BSD/macOS)
+        # On macOS/BSD: sed -i '' requires empty string for no backup
+        # On GNU: sed -i works without extension
+        if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == "freebsd"* ]]; then
+            sed -i '' "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
+            sed -i '' "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
+            sed -i '' "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
+        else
+            sed -i "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
+            sed -i "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
+            sed -i "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
+        fi
     fi
     
     # Update start.txt
@@ -319,9 +327,14 @@ EOF
     
     # Update package.json if it exists
     if [ -f "$full_project_path/package.json" ]; then
-        sed -i.bak "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
-        sed -i.bak "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
-        rm "$full_project_path/package.json.bak"
+        # Use portable sed -i syntax (works on both GNU and BSD/macOS)
+        if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == "freebsd"* ]]; then
+            sed -i '' "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
+            sed -i '' "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
+        else
+            sed -i "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
+            sed -i "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
+        fi
     fi
     
     print_success "Project files customized"
