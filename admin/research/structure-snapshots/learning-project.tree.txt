@@ -1,0 +1,13 @@
+templates/learning-project
+├── admin
+│   ├── notes
+│   ├── planning
+│   └── research
+├── practice-apps
+├── reference
+├── stage0-fundamentals
+├── stage1-topic
+├── stage2-topic
+└── stage3-topic
+
+11 directories

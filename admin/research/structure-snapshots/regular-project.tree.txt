@@ -1,0 +1,13 @@
+templates/regular-project
+├── .github
+│   └── workflows
+├── admin
+│   └── planning
+├── backend
+│   └── instance
+├── docs
+├── frontend
+├── scripts
+└── tests
+
+11 directories
