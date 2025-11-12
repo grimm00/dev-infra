@@ -178,6 +178,91 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2025-11-12
+
+### Added
+
+- **Directory Selection Feature** - Choose target directory for project generation
+
+  - Default directory support (`$HOME/Projects/`)
+  - Custom path support (absolute, relative, environment variables)
+  - Environment variable expansion (`$HOME`, `$USER`, `$PWD`, `~`, `${VAR}` syntax)
+  - Comprehensive path validation (existence, permissions, writability)
+  - Automatic directory creation prompts
+  - Backward compatible (falls back to current directory)
+
+- **Automated Testing Suite** - Comprehensive BATS test suite
+
+  - 33 tests covering all key functionality
+  - Unit tests for core functions (24 tests)
+  - Integration tests for path resolution (4 tests)
+  - Regression tests for critical fixes (3 tests)
+  - Backward compatibility tests (2 tests)
+  - All tests passing
+  - Fast execution (< 5 seconds)
+
+- **Project Name Validation Improvements**
+
+  - Clear error messages for invalid names
+  - Automatic space-to-dash replacement option
+  - Better user experience with helpful prompts
+
+- **GitHub Authentication Verification**
+
+  - Checks GitHub CLI authentication before repo creation
+  - Verifies authenticated user matches author name
+  - Handles multiple GitHub accounts with user confirmation
+
+- **Documentation Enhancements**
+
+  - PR feedback documentation system (PRs #4, #5, #6)
+  - Deferred tasks backlog
+  - Automated testing documentation
+  - Complete feature documentation
+
+### Fixed
+
+- **Cross-Platform Compatibility** - macOS/BSD compatibility fix
+
+  - Replaced GNU-specific `sed` pattern with bash parameter expansion
+  - Works correctly on all Unix-like systems (Linux, macOS, BSD)
+  - No external dependencies
+
+- **Root Directory Handling** - Fixed root directory bug
+
+  - Root directory `/` no longer converted to empty string
+  - Proper handling of edge cases
+  - Preserves root directory path correctly
+
+- **Error Handling** - Refactored fragile error handling
+
+  - Removed `set -e` toggles from functions
+  - Cleaner, more maintainable code
+  - Better error isolation
+
+- **Silent Failure Fix** - Non-existent paths now return proper errors
+
+  - Clear error messages for invalid paths
+  - No more silent failures
+  - Helpful feedback for users
+
+### Changed
+
+- **Path Resolution** - Enhanced path handling throughout script
+
+  - Robust path normalization
+  - Consistent trailing slash handling
+  - Better relative path resolution
+  - Improved environment variable expansion
+
+- **User Experience** - Improved prompts and feedback
+
+  - Clearer error messages
+  - Helpful suggestions for common issues
+  - Better validation feedback
+
+---
+
 ## [Unreleased]
 
 ### Planned
