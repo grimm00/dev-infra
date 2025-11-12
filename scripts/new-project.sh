@@ -90,14 +90,10 @@ expand_env_vars() {
 
 # Function to validate target directory
 validate_target_directory() {
-    # Disable set -e for this function to prevent premature exits
-    set +e
-    
     local dir_path="$1"
     
     # Check if path is empty
     if [ -z "$dir_path" ]; then
-        set -e
         return 1
     fi
     
@@ -106,7 +102,6 @@ validate_target_directory() {
     
     # Check if expansion resulted in empty path
     if [ -z "$dir_path" ]; then
-        set -e
         return 1
     fi
     
@@ -147,8 +142,8 @@ validate_target_directory() {
         fi
     fi
     
-    # Normalize path (remove all trailing slashes)
-    while [[ "$dir_path" =~ /$ ]]; do
+    # Normalize path (remove all trailing slashes, but keep '/' if root)
+    while [[ "$dir_path" =~ /$ ]] && [[ "$dir_path" != "/" ]]; do
         dir_path="${dir_path%/}"
     done
     
@@ -157,11 +152,9 @@ validate_target_directory() {
         # Check if directory is writable
         if [ ! -w "$dir_path" ]; then
             echo "$dir_path"
-            set -e
             return 2  # Directory not writable
         fi
         echo "$dir_path"
-        set -e
         return 0
     else
         # Directory doesn't exist - check if parent is writable
@@ -169,17 +162,14 @@ validate_target_directory() {
         if [ ! -d "$parent_dir" ]; then
             # Parent doesn't exist - return path anyway so caller can try to create full path
             echo "$dir_path"
-            set -e
             return 1  # Parent doesn't exist, but return path for creation attempt
         fi
         if [ ! -w "$parent_dir" ]; then
             echo "$dir_path"
-            set -e
             return 2  # Parent directory not writable
         fi
         # Return path for potential creation
         echo "$dir_path"
-        set -e
         return 3  # Special code: doesn't exist but can be created
     fi
 }
@@ -201,8 +191,9 @@ validate_project_name() {
         print_warning "Whitespace characters (spaces, tabs, newlines) are not allowed in project names for compatibility with file systems and URLs"
         
         # Offer to replace all whitespace (spaces, tabs, newlines) with dashes
+        # Use bash parameter expansion for cross-platform compatibility (no sed dependency)
         local sanitized_name
-        sanitized_name=$(echo "$name" | sed 's/[[:space:]]\+/-/g')
+        sanitized_name="${name//[[:space:]]/-}"
         if prompt_yes_no "Would you like to use '$sanitized_name' instead?" "y"; then
             name="$sanitized_name"
             print_status "Using sanitized name: $name"
