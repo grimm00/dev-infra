@@ -1,0 +1,14 @@
+Iteration: [Description: [SubDesc]]
+
+1:
+- For a path that doesn't exist, it still fails silently.
+---- This must also mean that the option to create new directory is also failing
+
+- project name, of course, does not take spaces, but just reprompts for project name
+---- There should be clarity to the user as to why this is (spaces are not accepted)
+---- We can offer the ability replace the name with one that replaces spaces with dashes
+
+- When repos are created, gh repo create should check against the author name given.
+---- Logic should be applied when dealing with a machine with multiple accounts logged in
+---- I think an gh auth command should be used to check against given author name, whatever is best
+---- Overall, for the sake of repo creation with gh, much care should be taken to understand what credentials are being used. 

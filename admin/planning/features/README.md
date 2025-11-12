@@ -1,14 +1,19 @@
-# Features Planning
+# Feature Planning Hub
 
-**Purpose:** Dev-infra template feature development planning  
+**Purpose:** Feature-based planning and tracking using hub-and-spoke documentation  
 **Status:** ✅ Active  
-**Last Updated:** 2025-01-27
+**Last Updated:** 2025-11-12
 
 ---
 
 ## 📋 Quick Links
 
+### Active Features
+
+- **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (✅ Complete)
+
 ### Template Features
+
 - **[Regular Project Features](regular-project-features/README.md)** - Regular project template features
 - **[Learning Project Features](learning-project-features/README.md)** - Learning project template features
 - **[Generator Features](generator-features/README.md)** - Project generator features
@@ -18,16 +23,41 @@
 
 ## 🎯 Overview
 
-This directory organizes planning for dev-infra template features, including new template types, generator enhancements, and validation improvements.
+Feature planning organizes development work around user-facing functionality. Each feature has its own directory with hub-and-spoke documentation for clear navigation and focused content.
+
+This directory serves two purposes:
+1. **Template Features** - Planning for dev-infra template enhancements (template types, generator, validation)
+2. **Project Features** - Planning for new functionality in the dev-infra project itself (like directory selection)
 
 ### Feature Planning Philosophy
-1. **User-Driven** - Features based on real developer needs
-2. **Template-First** - Focus on template quality and usability
-3. **Automation** - Reduce manual setup and configuration
+
+1. **User-Centric** - Features solve real user problems
+2. **Hub-and-Spoke** - Clear entry points with detailed documentation
+3. **Phase-Based** - Break features into manageable phases
+4. **Status Tracking** - Consistent progress monitoring
+5. **Fix Integration** - Troubleshooting documentation included
+6. **Template-First** - Focus on template quality and usability (for template features)
+7. **Automation** - Reduce manual setup and configuration (for template features)
 
 ---
 
-## 📁 Directory Structure
+## 📁 Feature Directory Structure
+
+### Project Features (New Structure)
+
+```
+features/
+├── [feature-name]/
+│   ├── README.md                    # 📍 HUB - Feature overview
+│   ├── feature-plan.md              # High-level plan
+│   ├── status-and-next-steps.md     # Current status
+│   ├── phase-1.md                   # Phase 1 details
+│   ├── phase-2.md                   # Phase 2 details
+│   ├── fix/                         # Fix documentation
+│   └── testing/                     # Testing documentation
+```
+
+### Template Features (Legacy Structure)
 
 ```
 features/
@@ -39,6 +69,76 @@ features/
 
 ---
 
-**Last Updated:** 2025-01-27  
+## 🎨 Feature Development Pattern
+
+### 1. Feature Discovery
+
+- Identify user problem or opportunity
+- Create feature directory
+- Write initial feature-plan.md
+
+### 2. Planning Phase
+
+- Define success criteria
+- Break into phases
+- Create phase documents
+- Set up status tracking
+
+### 3. Implementation Phase
+
+- Execute phases sequentially
+- Update status documents
+- Document decisions and learnings
+- Create fix documentation as needed
+
+### 4. Completion Phase
+
+- Document results and metrics
+- Archive superseded documents
+- Update project roadmap
+- Share lessons learned
+
+---
+
+## 📊 Feature Status Overview
+
+### ✅ Completed Features
+
+| Feature | Status | Completed |
+|---------|--------|-----------|
+| [Directory Selection](directory-selection/README.md) | ✅ Complete | 2025-11-12 |
+
+### 🟡 Planned Features
+
+| Feature | Priority | Estimated | Dependencies |
+|---------|----------|-----------|--------------|
+| (None currently) | - | - | - |
+
+---
+
+## 🚀 Quick Start
+
+### Creating a New Feature
+
+1. **Create Directory**
+   ```bash
+   mkdir -p features/[feature-name]
+   cd features/[feature-name]
+   ```
+
+2. **Create Documents**
+   - Create `README.md` hub
+   - Create `feature-plan.md` with overview
+   - Create `status-and-next-steps.md`
+   - Add phase documents as needed
+
+3. **Link to Hub**
+   - Add feature to this README.md
+   - Update project roadmap
+   - Create initial status document
+
+---
+
+**Last Updated:** 2025-11-12  
 **Status:** ✅ Active  
-**Next:** Plan specific template features
+**Next:** See individual feature directories for current work
