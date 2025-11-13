@@ -11,11 +11,13 @@
 ## 📋 Quick Links
 
 ### Core Documents
+
 - **[ADR 0001](0001-template-restructure.md)** - Architecture decision record
 - **[Comprehensive Analysis](../research/template-restructure-comprehensive-analysis.md)** - Research and rationale
 - **[Structure Snapshots](../research/structure-snapshots/)** - Current and proposed structures
 
 ### Implementation Phases
+
 - **[Phase 1: Template Restructure](#phase-1-template-restructure)** - Core restructuring
 - **[Phase 2: Documentation Updates](#phase-2-documentation-updates)** - Documentation alignment
 - **[Phase 3: Main Repo Consideration](#phase-3-main-repo-consideration)** - Future evaluation
@@ -53,6 +55,7 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 ## 🚫 Out of Scope
 
 **Excluded from this migration:**
+
 - ❌ Main repo `admin/` → `docs/maintainers/` migration (deferred to Phase 3)
 - ❌ Changes to template functionality (only structure changes)
 - ❌ Breaking changes to existing projects (migration guide provided)
@@ -70,11 +73,13 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 #### Tasks
 
 1. **Rename Template Directory**
+
    - [ ] Rename `templates/regular-project/` → `templates/standard-project/`
    - [ ] Verify all files copied correctly
    - [ ] Test template structure integrity
 
 2. **Restructure Standard Project Template**
+
    - [ ] Create `docs/maintainers/` directory structure
    - [ ] Move `admin/planning/` → `docs/maintainers/planning/`
    - [ ] Create `docs/maintainers/README.md` hub following hub-and-spoke pattern
@@ -85,6 +90,7 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
    - [ ] Remove `admin/` directory
 
 3. **Restructure Learning Project Template**
+
    - [ ] Create `docs/maintainers/` directory structure
    - [ ] Move `admin/planning/` → `docs/maintainers/planning/`
    - [ ] Move `admin/notes/` → `docs/maintainers/notes/`
@@ -94,6 +100,7 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
    - [ ] Remove `admin/` directory
 
 4. **Update Generator Script**
+
    - [ ] Update `scripts/new-project.sh` line 651: `template_type="regular-project"` → `template_type="standard-project"`
    - [ ] Update template menu/selection logic if needed
    - [ ] Test script with new template name
@@ -131,17 +138,20 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 #### Tasks
 
 1. **Update Template READMEs**
+
    - [ ] Update `templates/standard-project/README.md` with new structure
    - [ ] Update `templates/learning-project/README.md` with new structure
    - [ ] Update structure diagrams/examples
 
 2. **Update Project Documentation**
+
    - [ ] Update `docs/BEST-PRACTICES.md` with new structure examples
    - [ ] Update `docs/TEMPLATE-USAGE.md` with new structure references
    - [ ] Update `docs/PROJECT-TYPES.md` with renamed template
    - [ ] Update main `README.md` with new template name
 
 3. **Update Admin Documentation**
+
    - [ ] Update `admin/README.md` if it references templates
    - [ ] Update planning documents that reference template structure
 
@@ -175,6 +185,7 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 #### Tasks
 
 1. **Evaluate Main Repo Structure**
+
    - [ ] Assess impact of moving main repo `admin/` → `docs/maintainers/`
    - [ ] Review existing workflows and dependencies
    - [ ] Consider team preferences and established patterns
@@ -195,11 +206,11 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 
 ## 📊 Timeline Estimate
 
-| Phase | Duration | Dependencies |
-|-------|----------|--------------|
-| Phase 1: Template Restructure | 2-3 days | None |
-| Phase 2: Documentation Updates | 1-2 days | Phase 1 complete |
-| Phase 3: Main Repo Consideration | TBD | Optional, future |
+| Phase                            | Duration | Dependencies     |
+| -------------------------------- | -------- | ---------------- |
+| Phase 1: Template Restructure    | 2-3 days | None             |
+| Phase 2: Documentation Updates   | 1-2 days | Phase 1 complete |
+| Phase 3: Main Repo Consideration | TBD      | Optional, future |
 
 **Total Estimated Duration:** 3-5 days (Phases 1-2)
 
@@ -216,6 +227,7 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 ### Medium Risk
 
 - **Documentation Gaps:** Some references may be missed
+
   - **Mitigation:** Comprehensive review, automated link checking
   - **Impact:** Low (can be fixed incrementally)
 
@@ -258,11 +270,13 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 If issues arise during implementation:
 
 1. **Immediate Rollback:**
+
    - Revert template directory rename
    - Restore `admin/` directories
    - Revert generator script changes
 
 2. **Partial Rollback:**
+
    - Keep completed phases
    - Fix issues in current phase
    - Continue with remaining phases
@@ -277,11 +291,13 @@ If issues arise during implementation:
 ## 📚 References
 
 ### Research Documents
+
 - [Comprehensive Analysis](../research/template-restructure-comprehensive-analysis.md)
 - [Template Structure Options](../research/template-structure-options.md)
 - [Pre-ADR Proposal](../research/0001-template-restructure-proposal.md)
 
 ### Structure Snapshots
+
 - [Current Regular Project](../research/structure-snapshots/regular-project.tree.txt)
 - [Current Learning Project](../research/structure-snapshots/learning-project.tree.txt)
 - [Proposed Standard Project](../research/structure-snapshots/standard-project-proposed.tree.txt)
@@ -289,6 +305,7 @@ If issues arise during implementation:
 - [Main Dev-Infra Project](../research/structure-snapshots/dev-infra-main.tree.txt)
 
 ### Best Practices
+
 - [Best Practices Guide](../../docs/BEST-PRACTICES.md)
 - [Hub-and-Spoke Guide](../notes/examples/hub-and-spoke-documentation-best-practices.md)
 
@@ -312,4 +329,3 @@ If issues arise during implementation:
 **Last Updated:** 2025-01-27  
 **Status:** 🟡 Planned  
 **Next:** Review and approval, then begin Phase 1
-
