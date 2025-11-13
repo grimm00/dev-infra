@@ -539,7 +539,7 @@ teardown() {
 
 @test "github_auth: returns error when not authenticated" {
     # Mock gh to return auth failure
-    local mock_gh_script="$TEST_TMPDIR/mock_gh"
+    local mock_gh_script="$TEST_TMPDIR/gh"
     cat > "$mock_gh_script" << 'MOCKEOF'
 #!/bin/bash
 if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
