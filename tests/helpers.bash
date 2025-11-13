@@ -224,9 +224,33 @@ define_test_functions() {
         local expected_author="$1"
         
         # Check if gh is installed (mocked in tests)
-        # Use full path lookup to ensure we get the right gh (mock or real)
-        local gh_cmd
-        gh_cmd=$(command -v gh 2>/dev/null || echo "")
+        # Clear command cache first to ensure we get the right gh (mock or real)
+        hash -r 2>/dev/null || true
+        
+        # Find gh in PATH, checking each directory in order
+        # This ensures we find the mock if it's in PATH before the real gh
+        # Check TEST_TMPDIR first (where mocks are placed), then PATH
+        local gh_cmd=""
+        
+        # First check TEST_TMPDIR (where mocks are placed in tests)
+        if [ -n "${TEST_TMPDIR:-}" ] && [ -x "${TEST_TMPDIR}/gh" ]; then
+            gh_cmd="${TEST_TMPDIR}/gh"
+        else
+            # Fall back to PATH lookup
+            local IFS_SAVE="$IFS"
+            local path_expanded="${PATH:-}"
+            IFS=":"
+            for dir in $path_expanded; do
+                # Skip empty directories
+                [ -z "$dir" ] && continue
+                if [ -x "$dir/gh" ] && [ -f "$dir/gh" ]; then
+                    gh_cmd="$dir/gh"
+                    break
+                fi
+            done
+            IFS="$IFS_SAVE"
+        fi
+        
         if [ -z "$gh_cmd" ]; then
             return 1
         fi

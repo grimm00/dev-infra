@@ -580,6 +580,8 @@ exit 1
 MOCKEOF
     chmod +x "$mock_gh_script"
     export PATH="$TEST_TMPDIR:$PATH"
+    # Clear command cache so mock is found
+    hash -r 2>/dev/null || true
     
     local exit_code
     set +e
@@ -592,7 +594,7 @@ MOCKEOF
 
 @test "github_auth: returns mismatch when user doesn't match" {
     # Mock gh to return different user
-    local mock_gh_script="$TEST_TMPDIR/mock_gh"
+    local mock_gh_script="$TEST_TMPDIR/gh"
     cat > "$mock_gh_script" << 'MOCKEOF'
 #!/bin/bash
 if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
@@ -625,7 +627,7 @@ MOCKEOF
 
 @test "github_auth: succeeds when no expected author provided" {
     # Mock gh to return successful auth
-    local mock_gh_script="$TEST_TMPDIR/mock_gh"
+    local mock_gh_script="$TEST_TMPDIR/gh"
     cat > "$mock_gh_script" << 'MOCKEOF'
 #!/bin/bash
 if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
