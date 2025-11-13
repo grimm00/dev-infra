@@ -64,7 +64,7 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 
 ## 📅 Implementation Phases
 
-### Phase 1: Template Restructure
+### Phase 1: Template Restructure (Structure Only)
 
 **Status:** 🔴 Not Started  
 **Estimated Duration:** 2-3 days  
@@ -99,37 +99,82 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
    - [ ] Update all internal links in moved files
    - [ ] Remove `admin/` directory
 
-4. **Update Generator Script**
-
-   - [ ] Update `scripts/new-project.sh` line 651: `template_type="regular-project"` → `template_type="standard-project"`
-   - [ ] Update template menu/selection logic if needed
-   - [ ] Test script with new template name
-
-5. **Clean Up Templates**
+4. **Clean Up Templates**
    - [ ] Remove `migrations/` directory if present
    - [ ] Remove `project-index/` directory if present
    - [ ] Verify only essential structure remains
 
 #### Testing
 
-- [ ] Run `scripts/new-project.sh` with `standard-project` template
-- [ ] Verify generated project has `docs/maintainers/` structure
-- [ ] Verify all hub READMEs are present and correct
-- [ ] Verify all links work correctly
-- [ ] Test with `learning-project` template
 - [ ] Run `scripts/validate-templates.sh` to ensure structure integrity
+- [ ] Verify both templates pass validation
+- [ ] Check for any validation errors or warnings
+- [ ] Verify directory structure matches proposed snapshots
+- [ ] Check all internal links in moved files
+- [ ] Verify hub READMEs have correct quick links
+- [ ] Verify no broken links
 
 #### Success Criteria
 
 - ✅ Both templates use `docs/maintainers/` structure
 - ✅ Template renamed to `standard-project`
-- ✅ Generator script works with new structure
 - ✅ All hub-and-spoke patterns maintained
 - ✅ No broken links or missing files
+- ✅ Template structure validated
 
 ---
 
-### Phase 2: Documentation Updates
+### Phase 2: Generator Script Updates (TDD)
+
+**Status:** 🔴 Not Started  
+**Estimated Duration:** 1-2 days  
+**Priority:** High
+
+#### Tasks
+
+1. **Write Tests First (TDD Approach)**
+
+   - [ ] Create test for `standard-project` template selection
+   - [ ] Create test for template path resolution with new name
+   - [ ] Create test for template validation with new name
+   - [ ] Create test for error handling (invalid template name)
+   - [ ] Create test for menu/selection logic
+   - [ ] Ensure existing tests still pass
+
+2. **Update Generator Script**
+
+   - [ ] Update `scripts/new-project.sh` line 651: `template_type="regular-project"` → `template_type="standard-project"`
+   - [ ] Search for all references to "regular-project" in script
+   - [ ] Update template menu/selection logic if needed
+   - [ ] Update any hardcoded template paths
+   - [ ] Update template validation logic if needed
+
+3. **Run Tests and Fix Issues**
+
+   - [ ] Run all BATS tests
+   - [ ] Fix any failing tests
+   - [ ] Ensure all tests pass
+   - [ ] Verify no regressions in existing functionality
+
+4. **Integration Testing**
+
+   - [ ] Test template generation with `standard-project` template
+   - [ ] Verify generated project has correct structure
+   - [ ] Test template generation with `learning-project` template
+   - [ ] Verify both templates work correctly
+   - [ ] Test error cases (invalid template name, missing template)
+
+#### Success Criteria
+
+- ✅ Tests written for new template name functionality
+- ✅ Generator script updated to use `standard-project`
+- ✅ All tests pass
+- ✅ Template generation works with new template name
+- ✅ Both template types work correctly
+
+---
+
+### Phase 3: Documentation Updates
 
 **Status:** 🔴 Not Started  
 **Estimated Duration:** 1-2 days  
@@ -176,7 +221,7 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 
 ---
 
-### Phase 3: Main Repo Consideration (Optional, Future)
+### Phase 4: Main Repo Consideration (Optional, Future)
 
 **Status:** 🔴 Not Started  
 **Estimated Duration:** TBD  
@@ -206,13 +251,14 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 
 ## 📊 Timeline Estimate
 
-| Phase                            | Duration | Dependencies     |
-| -------------------------------- | -------- | ---------------- |
-| Phase 1: Template Restructure    | 2-3 days | None             |
-| Phase 2: Documentation Updates   | 1-2 days | Phase 1 complete |
-| Phase 3: Main Repo Consideration | TBD      | Optional, future |
+| Phase                            | Duration | Dependencies              |
+| -------------------------------- | -------- | ------------------------- |
+| Phase 1: Template Restructure    | 2-3 days | None                      |
+| Phase 2: Generator Script (TDD)  | 1-2 days | Phase 1 complete          |
+| Phase 3: Documentation Updates   | 1-2 days | Phase 1 and Phase 2 complete |
+| Phase 4: Main Repo Consideration  | TBD      | Optional, future          |
 
-**Total Estimated Duration:** 3-5 days (Phases 1-2)
+**Total Estimated Duration:** 4-7 days (Phases 1-3)
 
 ---
 

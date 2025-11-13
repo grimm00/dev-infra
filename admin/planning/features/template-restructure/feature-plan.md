@@ -48,20 +48,27 @@ Current template structure has several issues:
 
 ## 📋 Implementation Phases
 
-### Phase 1: Template Restructure
+### Phase 1: Template Restructure (Structure Only)
 - Rename template directory
 - Restructure both templates (admin/ → docs/maintainers/)
-- Update generator script
 - Clean up templates
-- Testing and validation
+- Structure validation only
+- No code changes
 
-### Phase 2: Documentation Updates
+### Phase 2: Generator Script Updates (TDD)
+- Write tests first for new template name
+- Update generator script to use `standard-project`
+- Test-driven development workflow
+- Integration testing
+- All code changes in this phase
+
+### Phase 3: Documentation Updates
 - Update template READMEs
 - Update project documentation
 - Update admin documentation
 - Create migration guide (if needed)
 
-### Phase 3: Main Repo Consideration (Optional, Future)
+### Phase 4: Main Repo Consideration (Optional, Future)
 - Evaluate main repo structure
 - Make decision based on evaluation
 
@@ -77,9 +84,10 @@ Current template structure has several issues:
 
 ## ⏱️ Timeline Estimate
 
-- **Phase 1:** 2-3 days
-- **Phase 2:** 1-2 days
-- **Total:** 3-5 days (Phases 1-2)
+- **Phase 1:** 2-3 days (structure only)
+- **Phase 2:** 1-2 days (TDD for generator script)
+- **Phase 3:** 1-2 days (documentation updates)
+- **Total:** 4-7 days (Phases 1-3)
 
 ---
 
@@ -89,7 +97,9 @@ Current template structure has several issues:
 - **[ADR 0001](../../decisions/0001-template-restructure.md)** - Architecture decision
 - **[Comprehensive Analysis](../../research/template-restructure-comprehensive-analysis.md)** - Research and rationale
 - **[Status & Next Steps](status-and-next-steps.md)** - Current progress
-- **[Phase 1 Plan](phase-1.md)** - Detailed Phase 1 tasks
+- **[Phase 1: Template Restructure](phase-1.md)** - Structure changes only
+- **[Phase 2: Generator Script Updates](phase-2.md)** - TDD approach for code changes
+- **[Phase 3: Documentation Updates](phase-3.md)** - Documentation alignment
 
 ---
 

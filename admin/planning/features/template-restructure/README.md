@@ -10,7 +10,9 @@
 
 - **[Feature Plan](feature-plan.md)** - High-level implementation plan
 - **[Status & Next Steps](status-and-next-steps.md)** - Current progress
-- **[Phase 1: Template Restructure](phase-1.md)** - Detailed Phase 1 implementation plan
+- **[Phase 1: Template Restructure](phase-1.md)** - Structure changes only
+- **[Phase 2: Generator Script Updates](phase-2.md)** - TDD approach for code changes
+- **[Phase 3: Documentation Updates](phase-3.md)** - Documentation alignment
 
 ---
 

@@ -23,7 +23,7 @@ None yet - Feature in planning phase
 
 ## 🎯 Phase Breakdown
 
-### Phase 1: Template Restructure 🔴 Not Started
+### Phase 1: Template Restructure (Structure Only) 🔴 Not Started
 
 **Status:** 🔴 Not Started  
 **Estimated Duration:** 2-3 days  
@@ -32,15 +32,32 @@ None yet - Feature in planning phase
 **Overview:**
 - Rename `templates/regular-project/` → `templates/standard-project/`
 - Move `admin/` → `docs/maintainers/` in both templates
-- Update generator script
 - Clean up templates
-- Testing and validation
+- Structure validation only
+- No code changes
 
 **See:** [Phase 1 Plan](phase-1.md) for detailed tasks
 
 ---
 
-### Phase 2: Documentation Updates 🔴 Not Started
+### Phase 2: Generator Script Updates (TDD) 🔴 Not Started
+
+**Status:** 🔴 Not Started  
+**Estimated Duration:** 1-2 days  
+**Priority:** High
+
+**Overview:**
+- Write tests first for new template name
+- Update generator script to use `standard-project`
+- Test-driven development workflow
+- Integration testing
+- All code changes in this phase
+
+**See:** [Phase 2 Plan](phase-2.md) for detailed tasks
+
+---
+
+### Phase 3: Documentation Updates 🔴 Not Started
 
 **Status:** 🔴 Not Started  
 **Estimated Duration:** 1-2 days  
@@ -52,9 +69,11 @@ None yet - Feature in planning phase
 - Update admin documentation
 - Create migration guide (if needed)
 
+**See:** [Phase 3 Plan](phase-3.md) for detailed tasks
+
 ---
 
-### Phase 3: Main Repo Consideration 🔴 Not Started
+### Phase 4: Main Repo Consideration 🔴 Not Started
 
 **Status:** 🔴 Not Started  
 **Estimated Duration:** TBD  
@@ -86,20 +105,20 @@ None yet - Feature in planning phase
 
 ### Option A: Begin Phase 1 Implementation 🟡 Recommended
 
-**Goal:** Complete template restructure
+**Goal:** Complete template structure restructure
 
 **Scope:**
 - Rename template directory
-- Restructure both templates
-- Update generator script
-- Testing and validation
+- Restructure both templates (admin/ → docs/maintainers/)
+- Clean up templates
+- Structure validation
 
 **Estimated Effort:** 2-3 days
 
 **Benefits:**
-- Core restructure complete
-- Templates ready for use
-- Foundation for Phase 2
+- Core structure restructure complete
+- Templates ready for code changes in Phase 2
+- Foundation for generator script updates
 
 ---
 
@@ -114,8 +133,8 @@ None yet - Feature in planning phase
 4. Low risk, high value
 
 **Timeline:**
-- Week 1: Phase 1 implementation
-- Week 2: Phase 2 documentation updates
+- Week 1: Phase 1 (structure) + Phase 2 (TDD for generator script)
+- Week 2: Phase 3 (documentation updates)
 
 ---
 

@@ -9,7 +9,7 @@
 
 ## 📋 Overview
 
-Phase 1 focuses on the core template restructure: renaming the template, moving maintainer documentation from `admin/` to `docs/maintainers/`, updating the generator script, and ensuring all changes are tested and validated.
+Phase 1 focuses solely on template structure changes: renaming the template directory, moving maintainer documentation from `admin/` to `docs/maintainers/` in both templates, and cleaning up templates. No code changes are included in this phase - generator script updates are handled in Phase 2.
 
 ---
 
@@ -17,10 +17,10 @@ Phase 1 focuses on the core template restructure: renaming the template, moving 
 
 - ✅ Both templates use `docs/maintainers/` structure
 - ✅ Template renamed to `standard-project`
-- ✅ Generator script works with new structure
 - ✅ All hub-and-spoke patterns maintained
 - ✅ No broken links or missing files
-- ✅ Template generation tested and verified
+- ✅ Template structure validated
+- ✅ All internal links updated correctly
 
 ---
 
@@ -76,20 +76,7 @@ Phase 1 focuses on the core template restructure: renaming the template, moving 
 
 ---
 
-### 4. Update Generator Script
-
-- [ ] Update `scripts/new-project.sh` line 651: `template_type="regular-project"` → `template_type="standard-project"`
-- [ ] Update template menu/selection logic if needed
-- [ ] Test script with new template name
-
-**Notes:**
-- Check for all references to "regular-project"
-- Verify template selection menu works
-- Test script execution end-to-end
-
----
-
-### 5. Clean Up Templates
+### 4. Clean Up Templates
 
 - [ ] Remove `migrations/` directory if present
 - [ ] Remove `project-index/` directory if present
@@ -109,15 +96,7 @@ Phase 1 focuses on the core template restructure: renaming the template, moving 
 - [ ] Run `scripts/validate-templates.sh` to ensure structure integrity
 - [ ] Verify both templates pass validation
 - [ ] Check for any validation errors or warnings
-
-### Template Generation Testing
-
-- [ ] Run `scripts/new-project.sh` with `standard-project` template
-- [ ] Verify generated project has `docs/maintainers/` structure
-- [ ] Verify all hub READMEs are present and correct
-- [ ] Verify all links work correctly
-- [ ] Test with `learning-project` template
-- [ ] Verify generated project structure matches expected
+- [ ] Verify directory structure matches proposed snapshots
 
 ### Link Validation
 
@@ -130,9 +109,9 @@ Phase 1 focuses on the core template restructure: renaming the template, moving 
 
 ## 📊 Progress Tracking
 
-**Tasks:** 0/25 complete (0%)  
-**Testing:** 0/11 complete (0%)  
-**Overall:** 0/36 complete (0%)
+**Tasks:** 0/22 complete (0%)  
+**Testing:** 0/5 complete (0%)  
+**Overall:** 0/27 complete (0%)
 
 ---
 
@@ -149,11 +128,6 @@ Phase 1 focuses on the core template restructure: renaming the template, moving 
 - **Broken Links:** Internal links may break during move
   - **Mitigation:** Update all links as part of move process, validate after
 
-### Medium Risk
-
-- **Generator Script Issues:** Script may have issues with new template name
-  - **Mitigation:** Thorough testing, check all references
-
 ### Low Risk
 
 - **File Permissions:** File permissions should be preserved
@@ -164,6 +138,7 @@ Phase 1 focuses on the core template restructure: renaming the template, moving 
 ## 📚 Related Documents
 
 - **[Feature Plan](feature-plan.md)** - High-level plan
+- **[Phase 2: Generator Script Updates](phase-2.md)** - Code changes with TDD
 - **[Status & Next Steps](status-and-next-steps.md)** - Current status
 - **[Migration Roadmap](../../decisions/template-restructure-roadmap.md)** - Complete roadmap
 - **[ADR 0001](../../decisions/0001-template-restructure.md)** - Architecture decision
