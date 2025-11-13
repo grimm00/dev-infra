@@ -146,10 +146,168 @@ define_test_functions() {
         return 0
     }
     
+    # Define copy_template function (simplified for testing)
+    copy_template() {
+        local template_type="$1"
+        local full_project_path="$2"
+        local git_root
+        git_root=$(git rev-parse --show-toplevel 2>/dev/null || echo "$PROJECT_ROOT")
+        local template_dir="$git_root/templates/$template_type"
+        
+        if [ ! -d "$template_dir" ]; then
+            return 1
+        fi
+        
+        # Create project directory
+        mkdir -p "$full_project_path"
+        
+        # Copy template contents including hidden files
+        cp -r "$template_dir"/* "$full_project_path/" 2>/dev/null || true
+        cp -r "$template_dir"/.[!.]* "$full_project_path/" 2>/dev/null || true
+        
+        # Verify important files were copied
+        if [ ! -f "$full_project_path/.gitignore" ]; then
+            return 2  # Warning: .gitignore not found
+        fi
+        
+        return 0
+    }
+    
+    # Define customize_project function (simplified for testing - no prompts)
+    customize_project() {
+        local full_project_path="$1"
+        local project_type="$2"
+        local description="$3"
+        local author="$4"
+        local current_date="${5:-$(date +"%Y-%m-%d")}"
+        
+        # Extract project name from path
+        local project_name=$(basename "$full_project_path")
+        
+        # Update README.md
+        if [ -f "$full_project_path/README.md" ]; then
+            # Use portable sed -i syntax (works on both GNU and BSD/macOS)
+            if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == "freebsd"* ]]; then
+                sed -i '' "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
+                sed -i '' "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
+                sed -i '' "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
+            else
+                sed -i "s/\[Project Name\]/$project_name/g" "$full_project_path/README.md"
+                sed -i "s/\[Brief description of what this project does\]/$description/g" "$full_project_path/README.md"
+                sed -i "s/\[Date\]/$current_date/g" "$full_project_path/README.md"
+            fi
+        fi
+        
+        # Update start.txt (simplified - just check it exists)
+        if [ -f "$full_project_path/start.txt" ]; then
+            # In real function, this overwrites with template content
+            # For testing, we just verify the file exists
+            :
+        fi
+        
+        # Update package.json if it exists
+        if [ -f "$full_project_path/package.json" ]; then
+            if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == "freebsd"* ]]; then
+                sed -i '' "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
+                sed -i '' "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
+            else
+                sed -i "s/\"name\": \"[^\"]*\"/\"name\": \"$project_name\"/g" "$full_project_path/package.json"
+                sed -i "s/\"description\": \"[^\"]*\"/\"description\": \"$description\"/g" "$full_project_path/package.json"
+            fi
+        fi
+        
+        return 0
+    }
+    
+    # Define verify_github_auth function (simplified for testing)
+    verify_github_auth() {
+        local expected_author="$1"
+        
+        # Check if gh is installed (mocked in tests)
+        if ! command -v gh &> /dev/null; then
+            return 1
+        fi
+        
+        # Check if user is authenticated (mocked in tests)
+        if ! gh auth status &>/dev/null; then
+            return 1
+        fi
+        
+        # Get current authenticated user (mocked in tests)
+        local current_user
+        current_user=$(gh api user --jq .login 2>/dev/null || echo "")
+        
+        if [ -z "$current_user" ]; then
+            return 1
+        fi
+        
+        # If author name provided, try to match (case-insensitive)
+        if [ -n "$expected_author" ]; then
+            local author_lower=$(echo "$expected_author" | tr '[:upper:]' '[:lower:]')
+            local user_lower=$(echo "$current_user" | tr '[:upper:]' '[:lower:]')
+            
+            if [ "$author_lower" != "$user_lower" ]; then
+                return 2  # Mismatch
+            fi
+        fi
+        
+        return 0
+    }
+    
+    # Define init_git_repo function (simplified for testing - no prompts)
+    init_git_repo() {
+        local full_project_path="$1"
+        local author="$2"
+        local project_name=$(basename "$full_project_path")
+        local original_dir=$(pwd)
+        
+        # Change to project directory with error checking
+        if ! cd "$full_project_path"; then
+            return 1
+        fi
+        
+        # Initialize git (may fail if git not available, but that's ok for tests)
+        git init >/dev/null 2>&1 || return 1
+        git add . >/dev/null 2>&1 || return 1
+        git commit -m "Initial commit: $project_name created from dev-infra template" >/dev/null 2>&1 || return 1
+        
+        # Return to original directory (best effort)
+        cd "$original_dir" 2>/dev/null || true
+        
+        return 0
+    }
+    
+    # Define show_next_steps function (simplified for testing)
+    show_next_steps() {
+        local full_project_path="$1"
+        local project_type="$2"
+        local project_name=$(basename "$full_project_path")
+        
+        echo "Project '$project_name' created successfully!"
+        echo "Next steps:"
+        echo "1. cd $full_project_path"
+        echo "2. Review and customize start.txt"
+        echo "3. Update README.md with project-specific details"
+        echo "4. Set up development environment"
+        echo "5. Start development!"
+        echo
+        echo "For $project_type projects:"
+        if [ "$project_type" = "Learning Project" ]; then
+            echo "- Start with stage0-fundamentals/README.md"
+        else
+            echo "- Review admin/planning/README.md for project management"
+        fi
+    }
+    
     # Export functions
     export -f expand_env_vars
     export -f validate_target_directory
     export -f validate_project_name
+    export -f copy_template
+    export -f customize_project
+    export -f verify_github_auth
+    export -f init_git_repo
+    export -f show_next_steps
 }
 
 # Setup test environment

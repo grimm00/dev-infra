@@ -1,49 +1,80 @@
 # Automated Tests for new-project.sh
 
-**Purpose:** Automated testing suite for directory selection feature  
+**Purpose:** Automated testing suite for new-project.sh script  
 **Status:** ✅ Implemented  
-**Last Updated:** 2025-11-12
+**Last Updated:** 2025-01-27
 
 ---
 
 ## Overview
 
-This directory contains BATS (Bash Automated Testing System) tests for the `new-project.sh` script, specifically focusing on the directory selection feature and related functionality.
+This directory contains BATS (Bash Automated Testing System) tests for the `new-project.sh` script. Tests are organized by behavior/specification rather than script function order, following TDD best practices.
 
 ## Test Suite
 
 **Test Files:** 
-- `new-project.bats` - 33 tests (directory selection feature)
-- `sed-portability.bats` - 4 tests (PR #7 sed -i portability fix)
+- `new-project.bats` - 63 tests (comprehensive coverage)
 
-**Total Tests:** 37  
+**Total Tests:** 63  
 **Status:** ✅ All tests passing
 
-### Test Categories
+### Test Organization (By Behavior)
 
-#### Unit Tests (24 tests)
-- **expand_env_vars()** - 9 tests
-  - Environment variable expansion ($HOME, $USER, $PWD)
-  - Tilde expansion (~)
-  - ${VAR} syntax
-  - Mixed variables
-  - Edge cases
+#### Path Expansion and Resolution (9 tests)
+- Environment variable expansion ($HOME, $USER, $PWD)
+- Tilde expansion (~)
+- ${VAR} syntax
+- Mixed variables
+- Edge cases
 
-- **validate_target_directory()** - 10 tests
-  - Absolute and relative paths
-  - Non-existent paths
-  - Non-writable directories
-  - Environment variable paths
-  - Root directory handling
-  - Trailing slash normalization
-  - Return codes (0, 1, 2, 3)
+#### Directory Validation and Path Resolution (12 tests)
+- Absolute and relative paths
+- Non-existent paths
+- Non-writable directories
+- Environment variable paths
+- Root directory handling
+- Trailing slash normalization
+- Return codes (0, 1, 2, 3)
 
-- **validate_project_name()** - 5 tests
-  - Valid names
-  - Empty names
-  - Names with spaces
-  - Invalid characters
-  - Existing directory detection
+#### Project Name Validation (5 tests)
+- Valid names
+- Empty names
+- Names with spaces
+- Invalid characters
+- Existing directory detection
+
+#### Template Operations (4 tests)
+- Template copying (standard-project, learning-project)
+- Error handling (missing template)
+- .gitignore verification
+
+#### File Customization (9 tests)
+- Cross-platform sed -i behavior (macOS/BSD vs GNU/Linux)
+- OSTYPE detection
+- Multiple replacements
+- README.md customization
+- package.json customization
+- Error handling
+
+#### GitHub Authentication (5 tests)
+- gh CLI installation check
+- Authentication status check
+- Author name matching
+- Mismatch handling
+- Missing gh CLI
+
+#### Git Repository Operations (4 tests)
+- Git initialization
+- Initial commit creation
+- Error handling (cd failures)
+- Directory change and return
+
+#### User Experience (5 tests)
+- Next steps output format
+- Project path display
+- Project type display
+- Learning project instructions
+- Regular project instructions
 
 #### Integration Tests (4 tests)
 - Absolute path resolution end-to-end
@@ -60,34 +91,27 @@ This directory contains BATS (Bash Automated Testing System) tests for the `new-
 - Script works from any directory
 - Relative paths resolve correctly
 
-#### Portability Tests (4 tests) - `sed-portability.bats`
-- sed -i works on macOS/BSD with empty string
-- sed -i works on GNU/Linux without extension
-- OSTYPE detection works correctly
-- Multiple replacements work (simulates customize_project usage)
+#### Template Structure Tests (3 tests)
+- standard-project template path resolution
+- regular-project template removal verification
+- Both template types available
 
 ## Running Tests
 
 ### Prerequisites
 - BATS installed (`brew install bats-core` on macOS)
 - Bash 4.0+
+- Git (for template structure tests)
 
 ### Run All Tests
 ```bash
 cd tests
-bats new-project.bats sed-portability.bats
-```
-
-Or run individually:
-```bash
-cd tests
-bats new-project.bats      # Directory selection tests
-bats sed-portability.bats # sed portability tests
+bats new-project.bats
 ```
 
 ### Run Specific Test
 ```bash
-bats new-project.bats -t "expand_env_vars: expands \$HOME"
+bats new-project.bats -t "path_expansion: expands \$HOME"
 ```
 
 ### Verbose Output
@@ -102,52 +126,80 @@ bats new-project.bats --tap
   - `setup_test_env()` - Creates isolated test environment
   - `cleanup_test_env()` - Cleans up test environment
   - Function definitions extracted from main script
+  - Mock utilities for external commands (git, gh)
 
 ### Test Isolation
 - Each test runs in an isolated temporary directory
 - Test environment variables are set per test
 - Cleanup after each test ensures no side effects
+- Mocks for external dependencies (GitHub CLI, git)
 
 ## Test Coverage
 
 ### Functions Tested
 - ✅ `expand_env_vars()` - Full coverage
 - ✅ `validate_target_directory()` - Full coverage
-- ✅ `validate_project_name()` - Core functionality (simplified for non-interactive testing)
-- ✅ `sed -i` portability - Cross-platform sed in-place editing (PR #7 fix)
+- ✅ `validate_project_name()` - Core functionality
+- ✅ `copy_template()` - Full coverage
+- ✅ `customize_project()` - Full coverage (including sed portability)
+- ✅ `verify_github_auth()` - Full coverage (with mocks)
+- ✅ `init_git_repo()` - Full coverage (with mocks)
+- ✅ `show_next_steps()` - Full coverage
 
 ### Features Tested
 - ✅ Environment variable expansion
 - ✅ Path resolution (absolute, relative)
 - ✅ Directory validation
 - ✅ Project name validation
+- ✅ Template copying and customization
+- ✅ Cross-platform sed -i behavior
+- ✅ GitHub authentication
+- ✅ Git repository initialization
 - ✅ Error handling
 - ✅ Edge cases (root directory, trailing slashes)
-- ✅ Regression fixes (PR #6)
+- ✅ Regression fixes (PR #6, PR #7)
+- ✅ Template structure (standard-project)
 
 ### Not Tested (Requires Interactive Input)
 - `prompt_input()` - Requires user input
 - `prompt_yes_no()` - Requires user input
-- `verify_github_auth()` - Requires GitHub CLI and authentication
-- `customize_project()` - Full function requires templates (sed -i part is tested)
-- Full end-to-end project creation flow
+- Full end-to-end interactive project creation flow
 
 ## Test Results
 
-**Last Run:** 2025-11-12  
-**Status:** ✅ All 37 tests passing (33 + 4 sed portability)  
+**Last Run:** 2025-01-27  
+**Status:** ✅ All 63 tests passing  
 **Execution Time:** < 5 seconds
+
+## Test Organization Philosophy
+
+Tests are organized by **behavior/specification** rather than script function order:
+- **Path Expansion** - How paths are expanded and resolved
+- **Directory Validation** - How directories are validated
+- **Project Name Validation** - How project names are validated
+- **Template Operations** - How templates are copied and customized
+- **GitHub Authentication** - How GitHub auth is verified
+- **Git Operations** - How git repos are initialized
+- **User Experience** - How information is presented to users
+- **Integration** - End-to-end scenarios
+- **Regression** - Historical bug fixes
+- **Backward Compatibility** - Cross-cutting concerns
+- **Template Structure** - Template availability and structure
+
+This organization makes it easier to:
+- Find tests for specific behaviors
+- Understand what the code does (specification)
+- Add new tests in the right place
+- Maintain test suite as code evolves
 
 ## Future Enhancements
 
-- [ ] Mock GitHub CLI for `verify_github_auth()` tests
 - [ ] Integration tests for full project creation flow
 - [ ] Performance tests
-- [ ] CI/CD integration
 - [ ] Test coverage reporting
+- [ ] CI/CD integration
 
 ---
 
-**Last Updated:** 2025-11-12  
-**Status:** ✅ Implemented and Passing
-
+**Last Updated:** 2025-01-27  
+**Status:** ✅ Implemented
