@@ -561,7 +561,7 @@ MOCKEOF
 
 @test "github_auth: succeeds when authenticated and user matches" {
     # Mock gh to return successful auth with matching user
-    local mock_gh_script="$TEST_TMPDIR/mock_gh"
+    local mock_gh_script="$TEST_TMPDIR/gh"
     cat > "$mock_gh_script" << 'MOCKEOF'
 #!/bin/bash
 if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
