@@ -648,7 +648,7 @@ main() {
         case $project_type_choice in
             1)
                 project_type="Regular Project"
-                template_type="regular-project"
+                template_type="standard-project"
                 break
                 ;;
             2)
