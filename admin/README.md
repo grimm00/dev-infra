@@ -12,6 +12,7 @@
 
 - **[Planning Hub](planning/README.md)** - Template roadmap and evolution
 - **[Research Hub](research/README.md)** - Template design decisions
+- **[Decisions Hub](decisions/README.md)** - Architecture decisions and migration roadmaps
 - **[Notes Hub](notes/README.md)** - Template insights and examples
 
 ### Template Examples
@@ -49,6 +50,10 @@ admin/
 │   ├── README.md               # Research overview
 │   ├── template-design-decisions.md # Why templates are structured this way
 │   └── best-practices-analysis.md # Analysis of patterns from examples
+├── decisions/                  # 📡 SPOKE - Architecture decisions
+│   ├── README.md               # Decisions overview
+│   ├── 0001-template-restructure.md # ADR for template restructure
+│   └── template-restructure-roadmap.md # Migration roadmap
 ├── notes/                      # 📡 SPOKE - Insights and examples
 │   ├── README.md               # Notes overview
 │   └── examples/               # 📁 Real project examples
