@@ -144,8 +144,7 @@ planning/
 
 ### External References
 
-- [Hub-and-Spoke Best Practices](../../../admin/notes/hub-and-spoke-documentation-best-practices.md)
-- [Project Structure](../../../admin/notes/PROJECT-STRUCTURE.md)
+- [Hub-and-Spoke Best Practices](../../../../docs/BEST-PRACTICES.md) - See hub-and-spoke documentation patterns
 
 ---
 
