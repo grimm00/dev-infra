@@ -373,21 +373,76 @@ create_test_dir() {
 }
 
 # Mock gh CLI for GitHub auth tests
+# Usage: mock_gh [scenario] [username]
+# Scenarios: success, failure, mismatch, not_installed
+# Default: success with testuser
 mock_gh() {
-    local mock_gh_script="$TEST_TMPDIR/mock_gh"
-    cat > "$mock_gh_script" << 'MOCKEOF'
+    local scenario="${1:-success}"
+    local username="${2:-testuser}"
+    local mock_gh_script="$TEST_TMPDIR/gh"
+    
+    case "$scenario" in
+        "not_installed")
+            # Remove gh from PATH temporarily
+            export PATH="/nonexistent:$PATH"
+            hash -r 2>/dev/null || true
+            return 0
+            ;;
+        "failure")
+            cat > "$mock_gh_script" << 'MOCKEOF'
 #!/bin/bash
-case "$1" in
-    "auth"|"api")
-        # Mock successful auth
-        if [ "$2" = "status" ] || [ "$2" = "user" ]; then
-            echo '{"login":"testuser","name":"Test User"}'
-            exit 0
-        fi
-        ;;
-esac
+if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
+    exit 1  # Not authenticated
+fi
 exit 1
 MOCKEOF
-    chmod +x "$mock_gh_script"
-    export PATH="$TEST_TMPDIR:$PATH"
+            ;;
+        "mismatch")
+            cat > "$mock_gh_script" << 'MOCKEOF'
+#!/bin/bash
+if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
+    exit 0  # Authenticated
+fi
+if [ "$1" = "api" ] && [ "$2" = "user" ]; then
+    if [ "$3" = "--jq" ] && [ "$4" = ".login" ]; then
+        echo "otheruser"
+    else
+        echo '{"login":"otheruser"}'
+    fi
+    exit 0
+fi
+exit 1
+MOCKEOF
+            ;;
+        "success"|*)
+            cat > "$mock_gh_script" << 'MOCKEOF'
+#!/bin/bash
+if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
+    exit 0  # Authenticated
+fi
+if [ "$1" = "api" ] && [ "$2" = "user" ]; then
+    if [ "$3" = "--jq" ] && [ "$4" = ".login" ]; then
+        echo "USERNAME_PLACEHOLDER"
+    else
+        echo '{"login":"USERNAME_PLACEHOLDER"}'
+    fi
+    exit 0
+fi
+exit 1
+MOCKEOF
+            # Replace username placeholder (cross-platform sed)
+            if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == "freebsd"* ]]; then
+                sed -i '' "s/USERNAME_PLACEHOLDER/$username/g" "$mock_gh_script"
+            else
+                sed -i "s/USERNAME_PLACEHOLDER/$username/g" "$mock_gh_script"
+            fi
+            ;;
+    esac
+    
+    if [ "$scenario" != "not_installed" ]; then
+        chmod +x "$mock_gh_script"
+        # Ensure PATH includes TEST_TMPDIR at the front
+        export PATH="$TEST_TMPDIR:$PATH"
+        hash -r 2>/dev/null || true
+    fi
 }

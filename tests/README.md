@@ -13,9 +13,9 @@ This directory contains BATS (Bash Automated Testing System) tests for the `new-
 ## Test Suite
 
 **Test Files:** 
-- `new-project.bats` - 63 tests (comprehensive coverage)
+- `new-project.bats` - 64 tests (comprehensive coverage, 1 smoke test skipped)
 
-**Total Tests:** 63  
+**Total Tests:** 64 (63 passing, 1 skipped)  
 **Status:** ✅ All tests passing
 
 ### Test Organization (By Behavior)
@@ -96,6 +96,9 @@ This directory contains BATS (Bash Automated Testing System) tests for the `new-
 - regular-project template removal verification
 - Both template types available
 
+#### Smoke Tests (1 test, skipped)
+- End-to-end script execution (requires refinement for interactive testing)
+
 ## Running Tests
 
 ### Prerequisites
@@ -126,13 +129,19 @@ bats new-project.bats --tap
   - `setup_test_env()` - Creates isolated test environment
   - `cleanup_test_env()` - Cleans up test environment
   - Function definitions extracted from main script
-  - Mock utilities for external commands (git, gh)
+  - `mock_gh()` - Configurable GitHub CLI mock (scenarios: success, failure, mismatch, not_installed)
 
 ### Test Isolation
 - Each test runs in an isolated temporary directory
 - Test environment variables are set per test
 - Cleanup after each test ensures no side effects
 - Mocks for external dependencies (GitHub CLI, git)
+
+### Test Style
+- Uses BATS `run` command for cleaner test syntax
+- Automatic capture of exit status (`$status`) and output (`$output`)
+- No manual `set +e`/`set -e` toggling required
+- Reusable `mock_gh()` helper for GitHub CLI tests
 
 ## Test Coverage
 

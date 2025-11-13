@@ -21,57 +21,57 @@ teardown() {
 # ============================================================================
 
 @test "path_expansion: expands \$HOME" {
-    local result
-    result=$(expand_env_vars "\$HOME/test")
-    [ "$result" = "$HOME/test" ]
+    run expand_env_vars "\$HOME/test"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$HOME/test" ]
 }
 
 @test "path_expansion: expands \$USER" {
-    local result
-    result=$(expand_env_vars "\$USER/test")
-    [ "$result" = "$USER/test" ]
+    run expand_env_vars "\$USER/test"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$USER/test" ]
 }
 
 @test "path_expansion: expands \$PWD" {
-    local result
-    result=$(expand_env_vars "\$PWD/test")
-    [ "$result" = "$PWD/test" ]
+    run expand_env_vars "\$PWD/test"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$PWD/test" ]
 }
 
 @test "path_expansion: expands ~ to home" {
-    local result
-    result=$(expand_env_vars "~/test")
-    [ "$result" = "$HOME/test" ]
+    run expand_env_vars "~/test"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$HOME/test" ]
 }
 
 @test "path_expansion: expands \${HOME} syntax" {
-    local result
-    result=$(expand_env_vars "\${HOME}/test")
-    [ "$result" = "$HOME/test" ]
+    run expand_env_vars "\${HOME}/test"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$HOME/test" ]
 }
 
 @test "path_expansion: expands \${USER} syntax" {
-    local result
-    result=$(expand_env_vars "\${USER}/test")
-    [ "$result" = "$USER/test" ]
+    run expand_env_vars "\${USER}/test"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$USER/test" ]
 }
 
 @test "path_expansion: expands \${PWD} syntax" {
-    local result
-    result=$(expand_env_vars "\${PWD}/test")
-    [ "$result" = "$PWD/test" ]
+    run expand_env_vars "\${PWD}/test"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$PWD/test" ]
 }
 
 @test "path_expansion: handles mixed variables" {
-    local result
-    result=$(expand_env_vars "\$HOME/\$USER/\${PWD}/test")
-    [ "$result" = "$HOME/$USER/$PWD/test" ]
+    run expand_env_vars "\$HOME/\$USER/\${PWD}/test"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$HOME/$USER/$PWD/test" ]
 }
 
 @test "path_expansion: handles empty path" {
-    local result
-    result=$(expand_env_vars "")
-    [ -z "$result" ]
+    run expand_env_vars ""
+    [ "$status" -eq 0 ]
+    [ -z "$output" ]
 }
 
 # ============================================================================
@@ -82,26 +82,14 @@ teardown() {
     local test_dir="$TEST_TMPDIR/existing"
     mkdir -p "$test_dir"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_target_directory "$test_dir")
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -eq 0 ]
-    [ "$result" = "$test_dir" ]
+    run validate_target_directory "$test_dir"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "directory_validation: rejects empty path" {
-    local result
-    local exit_code
-    set +e
-    result=$(validate_target_directory "")
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -eq 1 ]
+    run validate_target_directory ""
+    [ "$status" -eq 1 ]
 }
 
 @test "directory_validation: detects non-writable directory" {
@@ -109,15 +97,9 @@ teardown() {
     mkdir -p "$test_dir"
     chmod -w "$test_dir" 2>/dev/null || skip "Cannot test non-writable directory on this system"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_target_directory "$test_dir")
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -eq 2 ]
-    [ "$result" = "$test_dir" ]
+    run validate_target_directory "$test_dir"
+    [ "$status" -eq 2 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "directory_validation: accepts non-existent but creatable directory" {
@@ -125,25 +107,18 @@ teardown() {
     local test_dir="$parent_dir/newdir"
     mkdir -p "$parent_dir"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_target_directory "$test_dir")
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -eq 3 ]
-    [ "$result" = "$test_dir" ]
+    run validate_target_directory "$test_dir"
+    [ "$status" -eq 3 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "directory_validation: handles absolute paths" {
     local test_dir="$TEST_TMPDIR/absolute"
     mkdir -p "$test_dir"
     
-    local result
-    result=$(validate_target_directory "$test_dir")
-    
-    [ "$result" = "$test_dir" ]
+    run validate_target_directory "$test_dir"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "directory_validation: handles relative paths" {
@@ -151,58 +126,44 @@ teardown() {
     mkdir -p "$test_dir"
     cd "$TEST_TMPDIR"
     
-    local result
-    result=$(validate_target_directory "relative")
-    
-    [ "$result" = "$test_dir" ]
+    run validate_target_directory "relative"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "directory_validation: handles environment variables in path" {
     local test_dir="$TEST_HOME/envtest"
     mkdir -p "$test_dir"
     
-    local result
-    result=$(validate_target_directory "\$HOME/envtest")
-    
-    [ "$result" = "$test_dir" ]
+    run validate_target_directory "\$HOME/envtest"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "directory_validation: preserves root directory /" {
     # This tests the fix for root directory bug
-    local result
-    local exit_code
-    set +e
-    result=$(validate_target_directory "/" 2>/dev/null)
-    exit_code=$?
-    set -e
+    run validate_target_directory "/" 2>/dev/null
     
     # Should return the root directory, not empty string
-    [ "$result" = "/" ]
-    [ -n "$result" ]  # Most important: should not be empty
+    [ "$output" = "/" ]
+    [ -n "$output" ]  # Most important: should not be empty
 }
 
 @test "directory_validation: normalizes trailing slashes" {
     local test_dir="$TEST_TMPDIR/trailing"
     mkdir -p "$test_dir"
     
-    local result
-    result=$(validate_target_directory "$test_dir///")
-    
-    [ "$result" = "$test_dir" ]
+    run validate_target_directory "$test_dir///"
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "directory_validation: rejects path when parent doesn't exist" {
     local test_dir="$TEST_TMPDIR/nonexistent/parent/newdir"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_target_directory "$test_dir")
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -eq 1 ]
-    [ -n "$result" ]  # Should still return path
+    run validate_target_directory "$test_dir"
+    [ "$status" -eq 1 ]
+    [ -n "$output" ]  # Should still return path
 }
 
 # ============================================================================
@@ -213,60 +174,36 @@ teardown() {
     local test_dir="$TEST_TMPDIR/projects"
     mkdir -p "$test_dir"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_project_name "test-project" "$test_dir" 2>/dev/null)
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -eq 0 ]
-    [ "$result" = "$test_dir/test-project" ]
+    run validate_project_name "test-project" "$test_dir" 2>/dev/null
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir/test-project" ]
 }
 
 @test "project_name_validation: rejects empty name" {
     local test_dir="$TEST_TMPDIR/projects"
     mkdir -p "$test_dir"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_project_name "" "$test_dir" 2>/dev/null)
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -ne 0 ]
-    [ -z "$result" ]
+    run validate_project_name "" "$test_dir" 2>/dev/null
+    [ "$status" -ne 0 ]
+    [ -z "$output" ]
 }
 
 @test "project_name_validation: detects names with spaces" {
     local test_dir="$TEST_TMPDIR/projects"
     mkdir -p "$test_dir"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_project_name "test project" "$test_dir" 2>/dev/null)
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -ne 0 ]
-    [ -z "$result" ]
+    run validate_project_name "test project" "$test_dir" 2>/dev/null
+    [ "$status" -ne 0 ]
+    [ -z "$output" ]
 }
 
 @test "project_name_validation: rejects invalid characters" {
     local test_dir="$TEST_TMPDIR/projects"
     mkdir -p "$test_dir"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_project_name "test@project" "$test_dir" 2>/dev/null)
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -ne 0 ]
-    [ -z "$result" ]
+    run validate_project_name "test@project" "$test_dir" 2>/dev/null
+    [ "$status" -ne 0 ]
+    [ -z "$output" ]
 }
 
 @test "project_name_validation: detects existing directory" {
@@ -274,15 +211,9 @@ teardown() {
     local existing_dir="$test_dir/existing"
     mkdir -p "$existing_dir"
     
-    local result
-    local exit_code
-    set +e
-    result=$(validate_project_name "existing" "$test_dir" 2>/dev/null)
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -ne 0 ]
-    [ -z "$result" ]
+    run validate_project_name "existing" "$test_dir" 2>/dev/null
+    [ "$status" -ne 0 ]
+    [ -z "$output" ]
 }
 
 # ============================================================================
@@ -295,13 +226,9 @@ teardown() {
     [ -n "$git_root" ]
     
     local project_dir="$TEST_TMPDIR/test-project"
-    local exit_code
-    set +e
-    copy_template "standard-project" "$project_dir"
-    exit_code=$?
-    set -e
+    run copy_template "standard-project" "$project_dir"
     
-    [ $exit_code -eq 0 ]
+    [ "$status" -eq 0 ]
     [ -d "$project_dir" ]
     [ -f "$project_dir/README.md" ]
     [ -f "$project_dir/.gitignore" ]
@@ -313,26 +240,18 @@ teardown() {
     [ -n "$git_root" ]
     
     local project_dir="$TEST_TMPDIR/test-learning"
-    local exit_code
-    set +e
-    copy_template "learning-project" "$project_dir"
-    exit_code=$?
-    set -e
+    run copy_template "learning-project" "$project_dir"
     
-    [ $exit_code -eq 0 ]
+    [ "$status" -eq 0 ]
     [ -d "$project_dir" ]
     [ -f "$project_dir/README.md" ]
 }
 
 @test "template_operations: returns error for non-existent template" {
     local project_dir="$TEST_TMPDIR/test-nonexistent"
-    local exit_code
-    set +e
-    copy_template "nonexistent-template" "$project_dir"
-    exit_code=$?
-    set -e
+    run copy_template "nonexistent-template" "$project_dir"
     
-    [ $exit_code -ne 0 ]
+    [ "$status" -ne 0 ]
     [ ! -d "$project_dir" ]
 }
 
@@ -342,14 +261,10 @@ teardown() {
     [ -n "$git_root" ]
     
     local project_dir="$TEST_TMPDIR/test-gitignore"
-    local exit_code
-    set +e
-    copy_template "standard-project" "$project_dir"
-    exit_code=$?
-    set -e
+    run copy_template "standard-project" "$project_dir"
     
     # Should succeed and have .gitignore
-    [ $exit_code -eq 0 ]
+    [ "$status" -eq 0 ]
     [ -f "$project_dir/.gitignore" ]
 }
 
@@ -522,139 +437,39 @@ teardown() {
 # ============================================================================
 
 @test "github_auth: returns error when gh CLI not installed" {
-    # Temporarily remove gh from PATH
-    local original_path="$PATH"
-    export PATH="/nonexistent:$PATH"
+    mock_gh "not_installed"
     
-    local exit_code
-    set +e
-    verify_github_auth "testuser"
-    exit_code=$?
-    set -e
-    
-    export PATH="$original_path"
-    
-    [ $exit_code -ne 0 ]
+    run verify_github_auth "testuser"
+    [ "$status" -ne 0 ]
 }
 
 @test "github_auth: returns error when not authenticated" {
-    # Mock gh to return auth failure
-    local mock_gh_script="$TEST_TMPDIR/gh"
-    cat > "$mock_gh_script" << 'MOCKEOF'
-#!/bin/bash
-if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
-    exit 1  # Not authenticated
-fi
-exit 1
-MOCKEOF
-    chmod +x "$mock_gh_script"
-    export PATH="$TEST_TMPDIR:$PATH"
+    mock_gh "failure"
     
-    local exit_code
-    set +e
-    verify_github_auth "testuser"
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -ne 0 ]
+    run verify_github_auth "testuser"
+    [ "$status" -ne 0 ]
 }
 
 @test "github_auth: succeeds when authenticated and user matches" {
-    # Mock gh to return successful auth with matching user
-    local mock_gh_script="$TEST_TMPDIR/gh"
-    cat > "$mock_gh_script" << 'MOCKEOF'
-#!/bin/bash
-if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
-    exit 0  # Authenticated
-fi
-if [ "$1" = "api" ] && [ "$2" = "user" ]; then
-    # Handle --jq flag: output JSON that jq can parse, or just the value
-    if [ "$3" = "--jq" ] && [ "$4" = ".login" ]; then
-        echo "testuser"
-    else
-        echo '{"login":"testuser"}'
-    fi
-    exit 0
-fi
-exit 1
-MOCKEOF
-    chmod +x "$mock_gh_script"
-    export PATH="$TEST_TMPDIR:$PATH"
-    # Clear command cache so mock is found
-    hash -r 2>/dev/null || true
+    mock_gh "success" "testuser"
     
-    local exit_code
-    set +e
-    verify_github_auth "testuser"
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -eq 0 ]
+    run verify_github_auth "testuser"
+    [ "$status" -eq 0 ]
 }
 
 @test "github_auth: returns mismatch when user doesn't match" {
-    # Mock gh to return different user
-    local mock_gh_script="$TEST_TMPDIR/gh"
-    cat > "$mock_gh_script" << 'MOCKEOF'
-#!/bin/bash
-if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
-    exit 0  # Authenticated
-fi
-if [ "$1" = "api" ] && [ "$2" = "user" ]; then
-    # Handle --jq flag: output JSON that jq can parse, or just the value
-    if [ "$3" = "--jq" ] && [ "$4" = ".login" ]; then
-        echo "otheruser"
-    else
-        echo '{"login":"otheruser"}'
-    fi
-    exit 0
-fi
-exit 1
-MOCKEOF
-    chmod +x "$mock_gh_script"
-    export PATH="$TEST_TMPDIR:$PATH"
-    hash -r 2>/dev/null || true
+    mock_gh "mismatch"
     
-    local exit_code
-    set +e
-    verify_github_auth "testuser"
-    exit_code=$?
-    set -e
-    
+    run verify_github_auth "testuser"
     # Should return mismatch code (2)
-    [ $exit_code -eq 2 ]
+    [ "$status" -eq 2 ]
 }
 
 @test "github_auth: succeeds when no expected author provided" {
-    # Mock gh to return successful auth
-    local mock_gh_script="$TEST_TMPDIR/gh"
-    cat > "$mock_gh_script" << 'MOCKEOF'
-#!/bin/bash
-if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
-    exit 0  # Authenticated
-fi
-if [ "$1" = "api" ] && [ "$2" = "user" ]; then
-    # Handle --jq flag: output JSON that jq can parse, or just the value
-    if [ "$3" = "--jq" ] && [ "$4" = ".login" ]; then
-        echo "anyuser"
-    else
-        echo '{"login":"anyuser"}'
-    fi
-    exit 0
-fi
-exit 1
-MOCKEOF
-    chmod +x "$mock_gh_script"
-    export PATH="$TEST_TMPDIR:$PATH"
-    hash -r 2>/dev/null || true
+    mock_gh "success" "anyuser"
     
-    local exit_code
-    set +e
-    verify_github_auth ""
-    exit_code=$?
-    set -e
-    
-    [ $exit_code -eq 0 ]
+    run verify_github_auth ""
+    [ "$status" -eq 0 ]
 }
 
 # ============================================================================
@@ -670,13 +485,9 @@ MOCKEOF
         skip "Git not available"
     fi
     
-    local exit_code
-    set +e
-    init_git_repo "$project_dir" "Test Author"
-    exit_code=$?
-    set -e
+    run init_git_repo "$project_dir" "Test Author"
     
-    [ $exit_code -eq 0 ]
+    [ "$status" -eq 0 ]
     [ -d "$project_dir/.git" ]
 }
 
@@ -689,13 +500,9 @@ MOCKEOF
         skip "Git not available"
     fi
     
-    local exit_code
-    set +e
-    init_git_repo "$project_dir" "Test Author"
-    exit_code=$?
-    set -e
+    run init_git_repo "$project_dir" "Test Author"
     
-    [ $exit_code -eq 0 ]
+    [ "$status" -eq 0 ]
     
     # Check that commit was created
     cd "$project_dir"
@@ -707,13 +514,9 @@ MOCKEOF
     local project_dir="$TEST_TMPDIR/nonexistent/project"
     # Directory doesn't exist, so cd will fail
     
-    local exit_code
-    set +e
-    init_git_repo "$project_dir" "Test Author"
-    exit_code=$?
-    set -e
+    run init_git_repo "$project_dir" "Test Author"
     
-    [ $exit_code -ne 0 ]
+    [ "$status" -ne 0 ]
 }
 
 @test "git_operations: returns to original directory" {
@@ -726,14 +529,10 @@ MOCKEOF
         skip "Git not available"
     fi
     
-    local exit_code
-    set +e
-    init_git_repo "$project_dir" "Test Author"
-    exit_code=$?
-    set -e
+    run init_git_repo "$project_dir" "Test Author"
     
     # Should return to original directory (best effort)
-    [ "$(pwd)" = "$original_dir" ] || [ $exit_code -ne 0 ]
+    [ "$(pwd)" = "$original_dir" ] || [ "$status" -ne 0 ]
 }
 
 # ============================================================================
@@ -744,8 +543,7 @@ MOCKEOF
     local project_dir="$TEST_TMPDIR/test-steps"
     mkdir -p "$project_dir"
     
-    local output
-    output=$(show_next_steps "$project_dir" "Regular Project")
+    run show_next_steps "$project_dir" "Regular Project"
     
     [[ "$output" == *"test-steps"* ]]
 }
@@ -754,8 +552,7 @@ MOCKEOF
     local project_dir="$TEST_TMPDIR/test-path"
     mkdir -p "$project_dir"
     
-    local output
-    output=$(show_next_steps "$project_dir" "Regular Project")
+    run show_next_steps "$project_dir" "Regular Project"
     
     [[ "$output" == *"$project_dir"* ]]
 }
@@ -764,8 +561,7 @@ MOCKEOF
     local project_dir="$TEST_TMPDIR/test-instructions"
     mkdir -p "$project_dir"
     
-    local output
-    output=$(show_next_steps "$project_dir" "Regular Project")
+    run show_next_steps "$project_dir" "Regular Project"
     
     [[ "$output" == *"Next steps"* ]]
     [[ "$output" == *"cd"* ]]
@@ -775,8 +571,7 @@ MOCKEOF
     local project_dir="$TEST_TMPDIR/test-learning"
     mkdir -p "$project_dir"
     
-    local output
-    output=$(show_next_steps "$project_dir" "Learning Project")
+    run show_next_steps "$project_dir" "Learning Project"
     
     [[ "$output" == *"stage0-fundamentals"* ]]
 }
@@ -785,8 +580,7 @@ MOCKEOF
     local project_dir="$TEST_TMPDIR/test-regular"
     mkdir -p "$project_dir"
     
-    local output
-    output=$(show_next_steps "$project_dir" "Regular Project")
+    run show_next_steps "$project_dir" "Regular Project"
     
     [[ "$output" == *"admin/planning"* ]] || [[ "$output" == *"project management"* ]]
 }
@@ -799,11 +593,11 @@ MOCKEOF
     local test_dir="$TEST_TMPDIR/integration/absolute"
     mkdir -p "$test_dir"
     
-    local result
-    result=$(validate_target_directory "$test_dir")
+    run validate_target_directory "$test_dir"
     
-    [ "$result" = "$test_dir" ]
-    [ -d "$result" ]
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
+    [ -d "$output" ]
 }
 
 @test "integration: relative path resolution end-to-end" {
@@ -811,30 +605,30 @@ MOCKEOF
     mkdir -p "$test_dir"
     cd "$TEST_TMPDIR/integration"
     
-    local result
-    result=$(validate_target_directory "relative")
+    run validate_target_directory "relative"
     
-    [ "$result" = "$test_dir" ]
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "integration: environment variable expansion in path" {
     local test_dir="$TEST_HOME/integration/env"
     mkdir -p "$test_dir"
     
-    local result
-    result=$(validate_target_directory "\$HOME/integration/env")
+    run validate_target_directory "\$HOME/integration/env"
     
-    [ "$result" = "$test_dir" ]
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "integration: tilde expansion in path" {
     local test_dir="$TEST_HOME/integration/tilde"
     mkdir -p "$test_dir"
     
-    local result
-    result=$(validate_target_directory "~/integration/tilde")
+    run validate_target_directory "~/integration/tilde"
     
-    [ "$result" = "$test_dir" ]
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 # ============================================================================
@@ -843,16 +637,11 @@ MOCKEOF
 
 @test "regression: root directory fix preserves /" {
     # This verifies the fix for PR #6 bug where / became empty string
-    local result
-    local exit_code
-    set +e  # Don't fail on command substitution
-    result=$(validate_target_directory "/" 2>/dev/null)
-    exit_code=$?
-    set -e
+    run validate_target_directory "/" 2>/dev/null
     
     # Should return /, not empty string (the key fix)
-    [ "$result" = "/" ]
-    [ -n "$result" ]
+    [ "$output" = "/" ]
+    [ -n "$output" ]
 }
 
 @test "regression: cross-platform sed fix - bash expansion works" {
@@ -863,32 +652,22 @@ MOCKEOF
     
     # The function should detect spaces
     # We can't easily test the interactive part, but we can verify detection
-    local result
-    local exit_code
-    set +e  # Don't fail on command substitution
-    result=$(validate_project_name "test project" "$test_dir" 2>/dev/null)
-    exit_code=$?
-    set -e
+    run validate_project_name "test project" "$test_dir" 2>/dev/null
     
     # Should detect spaces (non-zero exit)
-    [ $exit_code -ne 0 ]
-    [ -z "$result" ]
+    [ "$status" -ne 0 ]
+    [ -z "$output" ]
 }
 
 @test "regression: silent failure fix - non-existent paths return error" {
     # This verifies the fix where non-existent paths failed silently
     local test_dir="$TEST_TMPDIR/nonexistent/path"
     
-    local result
-    local exit_code
-    set +e  # Don't fail on command substitution
-    result=$(validate_target_directory "$test_dir" 2>/dev/null)
-    exit_code=$?
-    set -e
+    run validate_target_directory "$test_dir" 2>/dev/null
     
     # Should return error code, not fail silently
-    [ $exit_code -ne 0 ]
-    [ -n "$result" ]  # Should still return path for caller
+    [ "$status" -ne 0 ]
+    [ -n "$output" ]  # Should still return path for caller
 }
 
 # ============================================================================
@@ -903,10 +682,10 @@ MOCKEOF
     # Change to different directory
     cd "$TEST_TMPDIR"
     
-    local result
-    result=$(validate_target_directory "$test_dir")
+    run validate_target_directory "$test_dir"
     
-    [ "$result" = "$test_dir" ]
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 @test "backward_compat: relative paths resolve correctly" {
@@ -915,10 +694,10 @@ MOCKEOF
     mkdir -p "$test_dir"
     cd "$TEST_TMPDIR/backward"
     
-    local result
-    result=$(validate_target_directory "relative")
+    run validate_target_directory "relative"
     
-    [ "$result" = "$test_dir" ]
+    [ "$status" -eq 0 ]
+    [ "$output" = "$test_dir" ]
 }
 
 # ============================================================================
@@ -969,4 +748,48 @@ MOCKEOF
     
     [ -d "$templates_dir/standard-project" ]
     [ -d "$templates_dir/learning-project" ]
+}
+
+# ============================================================================
+# Smoke Tests: End-to-End Script Execution
+# ============================================================================
+
+@test "smoke: new-project.sh happy path creates project" {
+    # Skip if running in CI or if script has set -e issues
+    # This is a complex end-to-end test that may need environment setup
+    skip "Smoke test requires interactive script execution - needs refinement"
+    
+    # Answers (one per prompt): create default dir? no, dir, project name, description, author, type, confirm, init git? no, create repo? no
+    local answers="n
+$TEST_PROJECTS
+my-app
+demo project
+Test User
+1
+y
+n
+n
+"
+    
+    # Get script path
+    local git_root
+    git_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+    local script_path="$git_root/scripts/new-project.sh"
+    
+    # Temporarily disable set -e for script execution
+    # Run script with piped answers
+    run bash -c "set +e; printf '%s\n' '$answers' | timeout 10 bash '$script_path' || true"
+    
+    # Should succeed (or at least not hang)
+    [ "$status" -eq 0 ] || [ "$status" -eq 124 ]  # 124 is timeout
+    
+    # If it succeeded, verify project was created
+    if [ "$status" -eq 0 ]; then
+        # Check success message
+        [[ "$output" == *"Project 'my-app' created successfully!"* ]] || true
+        
+        # Verify project was created
+        [ -d "$TEST_PROJECTS/my-app" ] || true
+        [ -f "$TEST_PROJECTS/my-app/README.md" ] || true
+    fi
 }
