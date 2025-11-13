@@ -224,18 +224,22 @@ define_test_functions() {
         local expected_author="$1"
         
         # Check if gh is installed (mocked in tests)
-        if ! command -v gh &> /dev/null; then
+        # Use full path lookup to ensure we get the right gh (mock or real)
+        local gh_cmd
+        gh_cmd=$(command -v gh 2>/dev/null || echo "")
+        if [ -z "$gh_cmd" ]; then
             return 1
         fi
         
         # Check if user is authenticated (mocked in tests)
-        if ! gh auth status &>/dev/null; then
+        if ! "$gh_cmd" auth status &>/dev/null; then
             return 1
         fi
         
         # Get current authenticated user (mocked in tests)
+        # gh api user --jq .login returns just the login value
         local current_user
-        current_user=$(gh api user --jq .login 2>/dev/null || echo "")
+        current_user=$("$gh_cmd" api user --jq .login 2>/dev/null || echo "")
         
         if [ -z "$current_user" ]; then
             return 1

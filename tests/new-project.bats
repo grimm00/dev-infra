@@ -568,7 +568,12 @@ if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
     exit 0  # Authenticated
 fi
 if [ "$1" = "api" ] && [ "$2" = "user" ]; then
-    echo '{"login":"testuser"}'
+    # Handle --jq flag: output JSON that jq can parse, or just the value
+    if [ "$3" = "--jq" ] && [ "$4" = ".login" ]; then
+        echo "testuser"
+    else
+        echo '{"login":"testuser"}'
+    fi
     exit 0
 fi
 exit 1
@@ -594,13 +599,19 @@ if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
     exit 0  # Authenticated
 fi
 if [ "$1" = "api" ] && [ "$2" = "user" ]; then
-    echo '{"login":"otheruser"}'
+    # Handle --jq flag: output JSON that jq can parse, or just the value
+    if [ "$3" = "--jq" ] && [ "$4" = ".login" ]; then
+        echo "otheruser"
+    else
+        echo '{"login":"otheruser"}'
+    fi
     exit 0
 fi
 exit 1
 MOCKEOF
     chmod +x "$mock_gh_script"
     export PATH="$TEST_TMPDIR:$PATH"
+    hash -r 2>/dev/null || true
     
     local exit_code
     set +e
@@ -621,13 +632,19 @@ if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
     exit 0  # Authenticated
 fi
 if [ "$1" = "api" ] && [ "$2" = "user" ]; then
-    echo '{"login":"anyuser"}'
+    # Handle --jq flag: output JSON that jq can parse, or just the value
+    if [ "$3" = "--jq" ] && [ "$4" = ".login" ]; then
+        echo "anyuser"
+    else
+        echo '{"login":"anyuser"}'
+    fi
     exit 0
 fi
 exit 1
 MOCKEOF
     chmod +x "$mock_gh_script"
     export PATH="$TEST_TMPDIR:$PATH"
+    hash -r 2>/dev/null || true
     
     local exit_code
     set +e
