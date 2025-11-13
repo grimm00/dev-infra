@@ -103,27 +103,28 @@ validate_template() {
     check_file "$template_dir/.gitignore" "Git ignore file" || ((template_errors++))
     check_file "$template_dir/.dockerignore" "Docker ignore file" || ((template_errors++))
     
-    # Check required directories
-    check_directory "$template_dir/admin" "Admin directory" || ((template_errors++))
+    # Check required directories - now using docs/maintainers structure
+    check_directory "$template_dir/docs" "Docs directory" || ((template_errors++))
+    check_directory "$template_dir/docs/maintainers" "Maintainers directory" || ((template_errors++))
     
-    # Check admin structure
-    if [ -d "$template_dir/admin" ]; then
-        check_readme_hub "$template_dir/admin" "Admin" || ((template_errors++))
-        check_directory "$template_dir/admin/planning" "Admin planning" || ((template_errors++))
+    # Check maintainers structure
+    if [ -d "$template_dir/docs/maintainers" ]; then
+        check_readme_hub "$template_dir/docs/maintainers" "Maintainers" || ((template_errors++))
+        check_directory "$template_dir/docs/maintainers/planning" "Maintainers planning" || ((template_errors++))
         
-        if [ -d "$template_dir/admin/planning" ]; then
-            check_readme_hub "$template_dir/admin/planning" "Planning" || ((template_errors++))
-            check_directory "$template_dir/admin/planning/features" "Features planning" || ((template_errors++))
+        if [ -d "$template_dir/docs/maintainers/planning" ]; then
+            check_readme_hub "$template_dir/docs/maintainers/planning" "Planning" || ((template_errors++))
+            check_directory "$template_dir/docs/maintainers/planning/features" "Features planning" || ((template_errors++))
             
-            if [ -d "$template_dir/admin/planning/features" ]; then
-                check_readme_hub "$template_dir/admin/planning/features" "Features" || ((template_errors++))
+            if [ -d "$template_dir/docs/maintainers/planning/features" ]; then
+                check_readme_hub "$template_dir/docs/maintainers/planning/features" "Features" || ((template_errors++))
             fi
         fi
     fi
     
     # Template-specific checks
-    if [ "$template_type" = "regular-project" ]; then
-        validate_regular_template "$template_dir" || ((template_errors++))
+    if [ "$template_type" = "standard-project" ]; then
+        validate_standard_template "$template_dir" || ((template_errors++))
     elif [ "$template_type" = "learning-project" ]; then
         validate_learning_template "$template_dir" || ((template_errors++))
     fi
@@ -137,12 +138,12 @@ validate_template() {
     fi
 }
 
-# Function to validate regular project template
-validate_regular_template() {
+# Function to validate standard project template
+validate_standard_template() {
     local template_dir="$1"
     local errors=0
     
-    print_status "Validating regular project template structure..."
+    print_status "Validating standard project template structure..."
     
     # Check required directories
     check_directory "$template_dir/backend" "Backend directory" || ((errors++))
@@ -378,7 +379,7 @@ main() {
     echo
     
     # Validate templates
-    validate_template "regular-project"
+    validate_template "standard-project"
     validate_template "learning-project"
     
     # Validate documentation
