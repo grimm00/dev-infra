@@ -11,6 +11,7 @@
 ### Active Features
 
 - **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (✅ Complete)
+- **[Template Restructure](template-restructure/README.md)** - Restructure templates (admin/ → docs/maintainers/, rename to standard-project) (🟡 Planned)
 
 ### Template Features
 
@@ -112,7 +113,7 @@ features/
 
 | Feature | Priority | Estimated | Dependencies |
 |---------|----------|-----------|--------------|
-| (None currently) | - | - | - |
+| [Template Restructure](template-restructure/README.md) | High | 3-5 days | Research complete, ADR approved |
 
 ---
 
