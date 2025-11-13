@@ -33,6 +33,7 @@ Phase 1 focuses solely on template structure changes: renaming the template dire
 - [ ] Test template structure integrity
 
 **Notes:**
+
 - Use `git mv` to preserve history
 - Verify all files are present after rename
 - Check for any hardcoded paths or references
@@ -51,6 +52,7 @@ Phase 1 focuses solely on template structure changes: renaming the template dire
 - [ ] Remove `admin/` directory
 
 **Notes:**
+
 - Follow hub-and-spoke pattern for README.md
 - Update all relative links in moved files
 - Ensure planning structure is preserved
@@ -69,6 +71,7 @@ Phase 1 focuses solely on template structure changes: renaming the template dire
 - [ ] Remove `admin/` directory
 
 **Notes:**
+
 - Learning project has additional directories (notes/, research/)
 - Maintain same structure in new location
 - Update all relative links
@@ -83,6 +86,7 @@ Phase 1 focuses solely on template structure changes: renaming the template dire
 - [ ] Verify only essential structure remains
 
 **Notes:**
+
 - These are operational directories, not template structure
 - Users can create these as needed
 - Templates should be minimal and focused
@@ -165,4 +169,3 @@ Phase 1 focuses solely on template structure changes: renaming the template dire
 **Last Updated:** 2025-01-27  
 **Status:** 🔴 Not Started  
 **Next:** Create feature branch and begin implementation
-

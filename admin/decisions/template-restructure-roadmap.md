@@ -251,12 +251,12 @@ This roadmap outlines the migration from `admin/` to `docs/maintainers/` in temp
 
 ## 📊 Timeline Estimate
 
-| Phase                            | Duration | Dependencies              |
-| -------------------------------- | -------- | ------------------------- |
-| Phase 1: Template Restructure    | 2-3 days | None                      |
-| Phase 2: Generator Script (TDD)  | 1-2 days | Phase 1 complete          |
+| Phase                            | Duration | Dependencies                 |
+| -------------------------------- | -------- | ---------------------------- |
+| Phase 1: Template Restructure    | 2-3 days | None                         |
+| Phase 2: Generator Script (TDD)  | 1-2 days | Phase 1 complete             |
 | Phase 3: Documentation Updates   | 1-2 days | Phase 1 and Phase 2 complete |
-| Phase 4: Main Repo Consideration  | TBD      | Optional, future          |
+| Phase 4: Main Repo Consideration | TBD      | Optional, future             |
 
 **Total Estimated Duration:** 4-7 days (Phases 1-3)
 
