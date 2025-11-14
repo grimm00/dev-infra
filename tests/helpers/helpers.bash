@@ -323,7 +323,7 @@ define_test_functions() {
         if [ "$project_type" = "Learning Project" ]; then
             echo "- Start with stage0-fundamentals/README.md"
         else
-            echo "- Review admin/planning/README.md for project management"
+            echo "- Review docs/maintainers/planning/README.md for project management"
         fi
     }
     

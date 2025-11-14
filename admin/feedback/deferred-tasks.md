@@ -10,8 +10,8 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 13
-- 🟡 **MEDIUM**: 8 tasks
+**Total Tasks:** 16
+- 🟡 **MEDIUM**: 11 tasks
 - 🟢 **LOW**: 5 tasks
 
 ---
@@ -198,11 +198,47 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
+#### Task 14: Test for gh CLI Unexpected Errors
+- **Source:** PR #8 - Sourcery Comment #1
+- **Location:** `tests/github-auth.bats`
+- **Priority:** 🟡 MEDIUM
+- **Impact:** 🟡 MEDIUM
+- **Effort:** 🟢 LOW
+- **Description:** Add a test case where gh CLI is installed but returns an unexpected error, to verify error handling in `verify_github_auth()` function handles edge cases beyond the current scenarios (not_installed, failure, mismatch).
+- **Status:** 🟡 Planned
+
+---
+
+#### Task 15: Test for Template Directory Permissions
+- **Source:** PR #8 - Sourcery Comment #2
+- **Location:** `tests/template-operations.bats` or new test file
+- **Priority:** 🟡 MEDIUM
+- **Impact:** 🟡 MEDIUM
+- **Effort:** 🟡 MEDIUM
+- **Description:** Add a test that triggers permission or read errors on the template directory to verify the script handles these cases and reports errors clearly. This requires permission manipulation which may be complex in test environments.
+- **Status:** 🟡 Planned
+
+---
+
+#### Task 16: Extract Test Implementations to Dedicated Fixture Library
+- **Source:** PR #8 - Sourcery Overall Comment #2
+- **Location:** `tests/helpers.bash` - extract test-specific implementations
+- **Priority:** 🟡 MEDIUM
+- **Impact:** 🟡 MEDIUM
+- **Effort:** 🟠 HIGH
+- **Description:** Extract test-specific implementations (copy_template, customize_project, etc.) out of helpers.bash into a dedicated test fixture or mock library to avoid mixing production logic with test stubs. This would improve separation of concerns and make test helpers more maintainable.
+- **Status:** 🟡 Planned
+
+---
+
 ## Summary by Status
 
 ### 🟡 Planned (Ready to Address)
 - Task 1: Return Code Documentation
 - Task 10: Duplicate Status Fields
+- Task 14: Test for gh CLI Unexpected Errors
+- Task 15: Test for Template Directory Permissions
+- Task 16: Extract Test Implementations to Dedicated Fixture Library
 
 ### ⏸️ Deferred (Future Work)
 - Task 2: Path Resolution Duplication
@@ -214,6 +250,9 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - Task 11: Automate CURRENT_DATE Placeholder
 - Task 12: Test for Existing File (Not Directory)
 - Task 13: Use Portable Path Utilities
+- Task 14: Test for gh CLI Unexpected Errors
+- Task 15: Test for Template Directory Permissions
+- Task 16: Extract Test Implementations to Dedicated Fixture Library
 
 ### ✅ Addressed (Already Fixed)
 - Task 7: Root Directory Edge Case (Fixed in PR #6)
@@ -277,4 +316,77 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 ### Deferred from PR #7
 - Task 12: Test for existing file case (MEDIUM priority)
 - Task 13: Use portable path utilities (MEDIUM priority, HIGH effort)
+
+---
+
+## PR #8 Additions
+
+**Date:** 2025-11-13  
+**Status:** ✅ Critical issues fixed, test file refactored, medium priority items deferred
+
+### Fixed in PR #8
+- ✅ **Broken paths in show_next_steps** - Updated to use `docs/maintainers/planning/` paths
+- ✅ **Test file structure** - Split monolithic `new-project.bats` into 13 behavior-focused files (Sourcery Overall Comment #1)
+- ✅ **mock_gh helper** - Already improved in previous PR (Sourcery Overall Comment #3)
+
+### Deferred from PR #8
+- Task 14: Test for gh CLI unexpected errors (MEDIUM priority, LOW effort)
+- Task 15: Test for template directory permissions (MEDIUM priority, MEDIUM effort)
+- Task 16: Extract test implementations to dedicated fixture library (MEDIUM priority, HIGH effort)
+
+
+- 🔴 **VERY_HIGH**: Major rewrites
+
+---
+
+## How to Use This Document
+
+1. **When Planning Work:** Review this list when planning sprints or code quality improvements
+2. **When Addressing Tasks:** Update the status when a task is completed
+3. **When Adding New Tasks:** Add new deferred medium/low priority items from PR reviews
+4. **When Prioritizing:** Use priority, impact, and effort to determine what to tackle next
+
+---
+
+## Related Documentation
+
+- **[PR Feedback Index](README.md)** - Overview of all PR feedback
+- **[Sourcery Reviews](sourcery/)** - Individual PR review analyses
+- **[Bugbot Reviews](bugbot/)** - Bug detection reports
+
+---
+
+**Last Updated:** 2025-11-12  
+**Status:** 📋 Active Backlog
+
+---
+
+## PR #7 Additions
+
+**Date:** 2025-11-12  
+**Status:** ✅ Critical issue fixed, medium/low priority items deferred
+
+### Fixed in PR #7
+- ✅ **sed -i.bak portability** - Replaced with portable sed -i syntax using OSTYPE detection for macOS/BSD compatibility
+
+### Deferred from PR #7
+- Task 12: Test for existing file case (MEDIUM priority)
+- Task 13: Use portable path utilities (MEDIUM priority, HIGH effort)
+
+---
+
+## PR #8 Additions
+
+**Date:** 2025-11-13  
+**Status:** ✅ Critical issues fixed, test file refactored, medium priority items deferred
+
+### Fixed in PR #8
+- ✅ **Broken paths in show_next_steps** - Updated to use `docs/maintainers/planning/` paths
+- ✅ **Test file structure** - Split monolithic `new-project.bats` into 13 behavior-focused files (Sourcery Overall Comment #1)
+- ✅ **mock_gh helper** - Already improved in previous PR (Sourcery Overall Comment #3)
+
+### Deferred from PR #8
+- Task 14: Test for gh CLI unexpected errors (MEDIUM priority, LOW effort)
+- Task 15: Test for template directory permissions (MEDIUM priority, MEDIUM effort)
+- Task 16: Extract test implementations to dedicated fixture library (MEDIUM priority, HIGH effort)
 
