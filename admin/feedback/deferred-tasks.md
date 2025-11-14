@@ -10,7 +10,7 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 22
+**Total Tasks:** 22 (No new tasks from PR #10 - all items fixed/verified)
 - 🟡 **MEDIUM**: 17 tasks
 - 🟢 **LOW**: 5 tasks
 
@@ -300,7 +300,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
-**Last Updated:** 2025-11-13  
+**Last Updated:** 2025-11-14  
 **Status:** 📋 Active Backlog
 
 ---
@@ -351,5 +351,20 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - Task 20: Test gh CLI not executable scenario (MEDIUM priority, MEDIUM effort)
 - Task 21: Refine smoke test for end-to-end validation (MEDIUM priority, MEDIUM effort)
 - Task 22: Create migration guide for template restructure (MEDIUM priority, MEDIUM effort)
+
+---
+
+## PR #10 Additions
+
+**Date:** 2025-11-14  
+**Status:** ✅ All items fixed/verified, no deferred tasks
+
+### Fixed in PR #10 / PR #11
+- ✅ **CLI script references** - Updated `scripts/new-project.sh` to reference "Standard Project" instead of "Regular Project" (Fixed in PR #11)
+- ✅ **CI/CD workflow references** - Updated `.github/workflows/release-distribution.yml` to reference `standard-project` template (Fixed in PR #11)
+- ✅ **Markdown links verification** - Verified all template links correctly point to `docs/maintainers/` paths (Already correct in PR #10)
+
+### Deferred from PR #10
+- None - All verification items were addressed (fixed or verified)
 
 
