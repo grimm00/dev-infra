@@ -497,8 +497,8 @@ show_next_steps() {
         echo "- Follow the learning path in order"
         echo "- Complete exercises as you go"
     else
-        echo "- Review admin/planning/README.md for project management"
-        echo "- Set up your first feature in admin/planning/features/"
+        echo "- Review docs/maintainers/planning/README.md for project management"
+        echo "- Set up your first feature in docs/maintainers/planning/features/"
         echo "- Configure CI/CD workflows"
     fi
     echo
@@ -648,7 +648,7 @@ main() {
         case $project_type_choice in
             1)
                 project_type="Regular Project"
-                template_type="regular-project"
+                template_type="standard-project"
                 break
                 ;;
             2)
