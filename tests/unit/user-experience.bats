@@ -60,6 +60,6 @@ teardown() {
     
     run show_next_steps "$project_dir" "Regular Project"
     
-    [[ "$output" == *"admin/planning"* ]] || [[ "$output" == *"project management"* ]]
+    [[ "$output" == *"docs/maintainers/planning"* ]] || [[ "$output" == *"project management"* ]]
 }
 

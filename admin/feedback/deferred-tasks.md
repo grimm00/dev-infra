@@ -10,8 +10,8 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 16
-- 🟡 **MEDIUM**: 11 tasks
+**Total Tasks:** 22
+- 🟡 **MEDIUM**: 17 tasks
 - 🟢 **LOW**: 5 tasks
 
 ---
@@ -300,7 +300,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
-**Last Updated:** 2025-11-12  
+**Last Updated:** 2025-11-13  
 **Status:** 📋 Active Backlog
 
 ---
@@ -334,59 +334,22 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - Task 15: Test for template directory permissions (MEDIUM priority, MEDIUM effort)
 - Task 16: Extract test implementations to dedicated fixture library (MEDIUM priority, HIGH effort)
 
-
-- 🔴 **VERY_HIGH**: Major rewrites
-
 ---
 
-## How to Use This Document
-
-1. **When Planning Work:** Review this list when planning sprints or code quality improvements
-2. **When Addressing Tasks:** Update the status when a task is completed
-3. **When Adding New Tasks:** Add new deferred medium/low priority items from PR reviews
-4. **When Prioritizing:** Use priority, impact, and effort to determine what to tackle next
-
----
-
-## Related Documentation
-
-- **[PR Feedback Index](README.md)** - Overview of all PR feedback
-- **[Sourcery Reviews](sourcery/)** - Individual PR review analyses
-- **[Bugbot Reviews](bugbot/)** - Bug detection reports
-
----
-
-**Last Updated:** 2025-11-12  
-**Status:** 📋 Active Backlog
-
----
-
-## PR #7 Additions
-
-**Date:** 2025-11-12  
-**Status:** ✅ Critical issue fixed, medium/low priority items deferred
-
-### Fixed in PR #7
-- ✅ **sed -i.bak portability** - Replaced with portable sed -i syntax using OSTYPE detection for macOS/BSD compatibility
-
-### Deferred from PR #7
-- Task 12: Test for existing file case (MEDIUM priority)
-- Task 13: Use portable path utilities (MEDIUM priority, HIGH effort)
-
----
-
-## PR #8 Additions
+## PR #8-2 Additions
 
 **Date:** 2025-11-13  
-**Status:** ✅ Critical issues fixed, test file refactored, medium priority items deferred
+**Status:** ✅ Critical issue fixed, medium priority items deferred
 
-### Fixed in PR #8
-- ✅ **Broken paths in show_next_steps** - Updated to use `docs/maintainers/planning/` paths
-- ✅ **Test file structure** - Split monolithic `new-project.bats` into 13 behavior-focused files (Sourcery Overall Comment #1)
-- ✅ **mock_gh helper** - Already improved in previous PR (Sourcery Overall Comment #3)
+### Fixed in PR #8-2
+- ✅ **Deprecated path in test** - Updated test to check `docs/maintainers/planning` instead of `admin/planning`
 
-### Deferred from PR #8
-- Task 14: Test for gh CLI unexpected errors (MEDIUM priority, LOW effort)
-- Task 15: Test for template directory permissions (MEDIUM priority, MEDIUM effort)
-- Task 16: Extract test implementations to dedicated fixture library (MEDIUM priority, HIGH effort)
+### Deferred from PR #8-2
+- Task 17: Test package.json with additional fields (MEDIUM priority, LOW effort)
+- Task 18: Test git initialization failure scenarios (MEDIUM priority, MEDIUM effort)
+- Task 19: Test undefined environment variables in path expansion (MEDIUM priority, LOW effort)
+- Task 20: Test gh CLI not executable scenario (MEDIUM priority, MEDIUM effort)
+- Task 21: Refine smoke test for end-to-end validation (MEDIUM priority, MEDIUM effort)
+- Task 22: Create migration guide for template restructure (MEDIUM priority, MEDIUM effort)
+
 
