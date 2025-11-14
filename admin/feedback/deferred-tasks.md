@@ -10,7 +10,7 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 23
+**Total Tasks:** 22 (No new tasks from PR #10 - all items fixed/verified)
 
 - 🟡 **MEDIUM**: 17 tasks
 - 🟢 **LOW**: 5 tasks
@@ -178,6 +178,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - **Effort:** 🟢 LOW
 - **Description:** Add a test case for when a file (not directory) with the intended project name exists, to ensure this edge case is handled correctly by `validate_project_name()`.
 - **Proposed Implementation:**
+
   ```bash
   @test "validate_project_name: detects existing file with project name" {
       local test_dir="$TEST_TMPDIR/projects"
@@ -196,6 +197,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
       [ -z "$result" ]
   }
   ```
+
 - **Status:** ⏸️ Deferred
 
 ---
