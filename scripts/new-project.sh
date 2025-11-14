@@ -638,7 +638,7 @@ main() {
     # Select project type
     echo
     echo "Select project type:"
-    echo "1) Regular Project (application, tool, service)"
+    echo "1) Standard Project (application, tool, service)"
     echo "2) Learning Project (tutorial, exercises, reference)"
     echo
     
@@ -647,7 +647,7 @@ main() {
         read -p "Enter choice [1-2]: " project_type_choice
         case $project_type_choice in
             1)
-                project_type="Regular Project"
+                project_type="Standard Project"
                 template_type="standard-project"
                 break
                 ;;

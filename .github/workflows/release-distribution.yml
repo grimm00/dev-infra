@@ -113,7 +113,7 @@ jobs:
           
           # Test that both templates exist
           echo "Checking templates..."
-          [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates/regular-project" ] || { echo "❌ Missing regular-project template"; exit 1; }
+          [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates/standard-project" ] || { echo "❌ Missing standard-project template"; exit 1; }
           [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates/learning-project" ] || { echo "❌ Missing learning-project template"; exit 1; }
           
           # Test that documentation exists
