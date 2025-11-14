@@ -45,7 +45,7 @@ See [Integration Guide](docs/INTEGRATION.md) for version-pinned download approac
 
 **Choose your project type:**
 
-- **Regular Project** - Applications, tools, services
+- **Standard Project** - Applications, tools, services
 - **Learning Project** - Tutorials, courses, exercises
 
 ---
@@ -67,7 +67,7 @@ Dev-infra provides standardized project templates that incorporate proven patter
 
 ## 📁 Project Templates
 
-### Regular Project Template
+### Standard Project Template
 
 **For:** Applications, tools, services, APIs
 
@@ -78,19 +78,20 @@ Dev-infra provides standardized project templates that incorporate proven patter
 - Backend/frontend separation
 - Centralized testing structure
 - CI/CD workflows
-- Admin directory for project management
+- Maintainers directory for project management
 
 **Structure:**
 
 ```
 project/
-├── admin/          # Project management hub
-├── backend/        # Backend application (includes instance/)
-├── frontend/       # Frontend application
-├── tests/          # Centralized testing
-├── scripts/        # Automation
-├── docs/           # User documentation
-└── .github/        # CI/CD workflows
+├── docs/
+│   └── maintainers/  # Project management hub
+├── backend/          # Backend application (includes instance/)
+├── frontend/         # Frontend application
+├── tests/            # Centralized testing
+├── scripts/          # Automation
+├── docs/             # User documentation
+└── .github/          # CI/CD workflows
 ```
 
 ### Learning Project Template
@@ -116,7 +117,8 @@ project/
 ├── stage3-[topic]/      # Third learning stage
 ├── reference/           # Quick reference
 ├── practice-apps/       # Hands-on practice
-└── admin/              # Learning management
+└── docs/
+    └── maintainers/     # Learning management
 ```
 
 ---
@@ -239,9 +241,9 @@ See [Integration Guide](docs/INTEGRATION.md) for complete implementation example
 
 ### 3. Start Development
 
-**Regular Projects:**
+**Standard Projects:**
 
-- Create first feature in `admin/planning/features/`
+- Create first feature in `docs/maintainers/planning/features/`
 - Set up development environment
 - Begin feature development
 
@@ -264,7 +266,7 @@ See [Integration Guide](docs/INTEGRATION.md) for complete implementation example
 
 ### Template Examples
 
-- **[Regular Project Template](templates/regular-project/)** - Application template
+- **[Standard Project Template](templates/standard-project/)** - Application template
 - **[Learning Project Template](templates/learning-project/)** - Educational template
 
 ### Real Project Examples
@@ -283,7 +285,7 @@ See [Integration Guide](docs/INTEGRATION.md) for complete implementation example
 ```
 dev-infra/
 ├── templates/              # Project templates
-│   ├── regular-project/   # Application template
+│   ├── standard-project/   # Application template
 │   └── learning-project/  # Educational template
 ├── scripts/               # Automation scripts
 │   └── new-project.sh     # Project generator
