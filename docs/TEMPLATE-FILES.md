@@ -12,7 +12,7 @@ This document describes the standard files included in each project template and
 
 ---
 
-## 📁 Regular Project Template Files
+## 📁 Standard Project Template Files
 
 ### Configuration Files
 
@@ -44,7 +44,7 @@ This document describes the standard files included in each project template and
 **Includes:**
 
 - Version control (.git/)
-- Documentation (\*.md, docs/, admin/)
+- Documentation (\*.md, docs/, docs/maintainers/)
 - CI/CD files (.github/)
 - Editor files (.vscode/, .idea/)
 - Testing files (tests/, coverage/)
@@ -200,7 +200,7 @@ After generation, the script:
 
 ### After Project Generation
 
-**Regular Project:**
+**Standard Project:**
 
 - [ ] `.gitignore` present and appropriate
 - [ ] `.dockerignore` present (if using Docker)

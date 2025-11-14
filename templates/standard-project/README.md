@@ -42,11 +42,11 @@ This project follows a **hub-and-spoke documentation pattern**:
 
 - **Hub Files** (README.md) serve as entry points and navigation guides
 - **Spoke Directories** contain detailed implementation and specialized documentation
-- **Admin Directory** manages project planning, feedback, and decision tracking
+- **Maintainers Directory** manages project planning, feedback, and decision tracking
 
 ### Key Directories
 
-- **`admin/`** - Project management hub ([Admin Guide](admin/README.md))
+- **`docs/maintainers/`** - Project management hub ([Maintainers Guide](docs/maintainers/README.md))
 - **`backend/`** - Backend application ([Backend Guide](backend/README.md))
 - **`frontend/`** - Frontend application ([Frontend Guide](frontend/README.md))
 - **`tests/`** - Centralized testing ([Testing Guide](tests/README.md))
@@ -126,9 +126,9 @@ This project follows a **hub-and-spoke documentation pattern**:
 
 ### Planning Documents
 
-- [Project Roadmap](admin/planning/roadmap.md)
-- [Feature Plans](admin/planning/features/)
-- [Release History](admin/planning/releases/)
+- [Project Roadmap](docs/maintainers/planning/roadmap.md)
+- [Feature Plans](docs/maintainers/planning/features/)
+- [Release History](docs/maintainers/planning/releases/)
 
 ---
 

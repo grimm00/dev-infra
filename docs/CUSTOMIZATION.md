@@ -49,7 +49,7 @@ This guide explains how to customize dev-infra templates for your specific proje
 
 ### Removing Unused Directories
 
-**Regular Project - Common Removals:**
+**Standard Project - Common Removals:**
 
 **Frontend-only projects:**
 ```bash
@@ -72,7 +72,7 @@ rm -rf tests/performance/frontend/
 # Remove web-related directories
 rm -rf frontend/
 rm -rf backend/
-# Keep: admin/, scripts/, docs/, tests/
+# Keep: docs/maintainers/, scripts/, docs/, tests/
 ```
 
 **Learning Project - Common Removals:**
@@ -95,7 +95,7 @@ rm -rf practice-apps/
 
 ### Adding Project-Specific Directories
 
-**Regular Project Additions:**
+**Standard Project Additions:**
 
 **Mobile development:**
 ```bash
@@ -139,7 +139,7 @@ mkdir -p monitoring/{logs,metrics,alerts}
 
 **After removing directories:**
 1. Update main README.md
-2. Remove references from admin/planning/
+2. Remove references from docs/maintainers/planning/
 3. Update CI/CD workflows
 4. Remove from .gitignore if needed
 
@@ -559,7 +559,7 @@ course/
 ├── stage3-advanced/
 ├── assessments/        # Added
 ├── reference/          # Quick reference
-└── admin/              # Course management
+└── docs/maintainers/   # Course management
 ```
 
 ---

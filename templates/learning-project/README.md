@@ -103,7 +103,7 @@ This learning project uses a **stage-based organization** with progressive compl
 ├── practice-apps/             # 📡 SPOKE - Hands-on practice
 │   ├── README.md              # Practice apps overview
 │   └── [app-name]/            # Individual practice apps
-└── admin/                     # 📡 SPOKE - Learning management
+└── docs/maintainers/          # 📡 SPOKE - Learning management
     ├── planning/              # Learning roadmap
     ├── research/              # Learning decisions
     └── notes/                 # Learning insights
