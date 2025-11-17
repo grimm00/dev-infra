@@ -8,6 +8,18 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+x-bats-setup: &bats-setup
+  - name: Install BATS
+    run: |
+      if [ "${{ runner.os }}" == "Linux" ]; then
+        sudo apt-get update || exit 1
+        sudo apt-get install -y bats || exit 1
+        bats --version || exit 1
+      elif [ "${{ runner.os }}" == "macOS" ]; then
+        brew install bats-core || exit 1
+        bats --version || exit 1
+      fi
+
 jobs:
   quick-checks:
     runs-on: ubuntu-latest
@@ -18,13 +30,10 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name }}
 
-      - name: Install BATS
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y bats
+      - <<: *bats-setup
 
       - name: Run unit tests
-        run: bats --recursive tests/unit/
+        run: bats --recursive tests/unit/ || exit 1
 
   full-tests:
     strategy:
@@ -38,17 +47,10 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name }}
 
-      - name: Install BATS
-        run: |
-          if [ "${{ runner.os }}" == "Linux" ]; then
-            sudo apt-get update
-            sudo apt-get install -y bats
-          elif [ "${{ runner.os }}" == "macOS" ]; then
-            brew install bats-core
-          fi
+      - <<: *bats-setup
 
       - name: Run all tests
-        run: bats --recursive tests/
+        run: bats --recursive tests/ || exit 1
 
   create-distribution:
     needs: [quick-checks, full-tests]
@@ -205,4 +207,3 @@ jobs:
             --repo "${{ github.repository }}"
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
-
