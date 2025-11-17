@@ -34,11 +34,25 @@ teardown() {
 @test "directory_validation: detects non-writable directory" {
     local test_dir="$TEST_TMPDIR/nowrite"
     mkdir -p "$test_dir"
-    chmod -w "$test_dir" 2>/dev/null || skip "Cannot test non-writable directory on this system"
     
-    run validate_target_directory "$test_dir"
-    [ "$status" -eq 2 ]
-    [ "$output" = "$test_dir" ]
+    # Try to make directory non-writable
+    # In some environments (like Docker containers), chmod -w might not work
+    # or the directory might still be writable due to parent permissions
+    if chmod -w "$test_dir" 2>/dev/null; then
+        # Verify it's actually non-writable
+        if [ -w "$test_dir" ]; then
+            skip "Directory still writable after chmod -w (parent permissions or container environment)"
+        fi
+        
+        run validate_target_directory "$test_dir"
+        [ "$status" -eq 2 ]
+        [ "$output" = "$test_dir" ]
+        
+        # Restore permissions for cleanup
+        chmod +w "$test_dir" 2>/dev/null || true
+    else
+        skip "Cannot make directory non-writable on this system"
+    fi
 }
 
 @test "directory_validation: accepts non-existent but creatable directory" {
