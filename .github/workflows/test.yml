@@ -12,7 +12,7 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -24,13 +24,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Cache BATS dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/apt
+            ~/Library/Caches/Homebrew
+          key: ${{ runner.os }}-bats-${{ hashFiles('.github/workflows/test.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-bats-
+
       - name: Install BATS
         run: |
-          sudo apt-get update
-          sudo apt-get install -y bats
+          sudo apt-get update || exit 1
+          sudo apt-get install -y bats || exit 1
+          bats --version || exit 1
 
       - name: Run unit tests
-        run: bats --recursive tests/unit/
+        run: bats --recursive tests/unit/ || exit 1
 
   full-tests:
     if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
@@ -43,15 +54,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Cache BATS dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/apt
+            ~/Library/Caches/Homebrew
+          key: ${{ runner.os }}-bats-${{ hashFiles('.github/workflows/test.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-bats-
+
       - name: Install BATS
         run: |
           if [ "${{ runner.os }}" == "Linux" ]; then
-            sudo apt-get update
-            sudo apt-get install -y bats
+            sudo apt-get update || exit 1
+            sudo apt-get install -y bats || exit 1
+            bats --version || exit 1
           elif [ "${{ runner.os }}" == "macOS" ]; then
-            brew install bats-core
+            brew install bats-core || exit 1
+            bats --version || exit 1
           fi
 
       - name: Run all tests
-        run: bats --recursive tests/
-
+        run: bats --recursive tests/ || exit 1
