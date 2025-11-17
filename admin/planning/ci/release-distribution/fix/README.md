@@ -51,4 +51,3 @@ This directory documents the issues encountered during the implementation of the
 
 **Status:** 🟠 In Progress  
 **Next:** Review [Failed Jobs](pr16-failures.md) for detailed error information
-

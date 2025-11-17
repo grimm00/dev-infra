@@ -20,23 +20,27 @@ This document analyzes the root causes of failures in PR #16. It examines workfl
 **Issue:** Different installation methods for Ubuntu vs macOS
 
 **Ubuntu:**
+
 ```yaml
 sudo apt-get update
 sudo apt-get install -y bats
 ```
 
 **macOS:**
+
 ```yaml
 brew install bats-core
 ```
 
 **Potential Issues:**
+
 - Package name difference (`bats` vs `bats-core`)
 - Homebrew may not be available or may need setup
 - `apt-get update` may fail due to network issues
 - Installation may take longer than expected
 
 **Root Cause:**
+
 - Platform-specific installation is necessary but may have reliability issues
 - No error handling for installation failures
 - No verification step after installation
@@ -50,12 +54,14 @@ brew install bats-core
 **Issue:** BATS setup and test execution steps are duplicated
 
 **Locations:**
+
 - `.github/workflows/test.yml` - quick-checks job
 - `.github/workflows/test.yml` - full-tests job
 - `.github/workflows/release-distribution.yml` - quick-checks job
 - `.github/workflows/release-distribution.yml` - full-tests job
 
 **Duplicated Code:**
+
 ```yaml
 - name: Install BATS
   run: |
@@ -67,6 +73,7 @@ brew install bats-core
 ```
 
 **Root Cause:**
+
 - No reusable action or YAML anchor
 - Changes must be made in multiple places
 - Higher risk of inconsistencies
@@ -80,12 +87,14 @@ brew install bats-core
 **Issue:** BATS is installed on every workflow run
 
 **Current Behavior:**
+
 - Every run downloads and installs BATS
 - No caching of installed packages
 - Slower workflow execution
 - Higher CI/CD costs
 
 **Root Cause:**
+
 - No `actions/cache` implementation
 - BATS installation happens fresh each time
 
@@ -98,6 +107,7 @@ brew install bats-core
 **Issue:** Concurrency group definitions may cause unintended cancellations
 
 **Current Configuration:**
+
 ```yaml
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref }}
@@ -105,11 +115,13 @@ concurrency:
 ```
 
 **Potential Issues:**
+
 - May cancel unrelated workflow runs
 - Group scoping may not be correct for all scenarios
 - Could cancel legitimate runs
 
 **Root Cause:**
+
 - Concurrency group definition needs verification
 - May need more specific scoping
 
@@ -122,12 +134,14 @@ concurrency:
 **Issue:** Tests may behave differently on macOS vs Ubuntu
 
 **Known Platform Differences:**
+
 - `sed -i` behavior (BSD vs GNU)
 - Path handling
 - File permissions
 - Shell differences
 
 **Root Cause:**
+
 - Tests may not handle platform differences correctly
 - Some tests may skip on certain platforms
 - Platform-specific logic may be incorrect
@@ -141,12 +155,14 @@ concurrency:
 **Issue:** No error handling for installation or test failures
 
 **Current Behavior:**
+
 - Installation failures cause immediate workflow failure
 - No retry logic
 - No fallback mechanisms
 - No detailed error reporting
 
 **Root Cause:**
+
 - Workflow steps don't handle errors gracefully
 - No verification steps after installation
 
@@ -159,11 +175,13 @@ concurrency:
 **Issue:** Release workflow duplicates test jobs
 
 **Current Behavior:**
+
 - `release-distribution.yml` has its own test jobs
 - Tests run twice (once in test.yml, once in release-distribution.yml)
 - Potential for inconsistencies
 
 **Root Cause:**
+
 - Tests were added to release workflow for dependency
 - Should use workflow_run or separate approach
 
@@ -173,15 +191,15 @@ concurrency:
 
 ## 📊 Root Cause Summary
 
-| Issue | Severity | Impact | Frequency |
-|------|----------|--------|-----------|
-| BATS Installation Failures | 🔴 Critical | Blocks all tests | TBD |
-| Code Duplication | 🟡 Medium | Maintainability | Always |
-| Missing Caching | 🟡 Medium | Performance | Always |
-| Concurrency Issues | 🟠 High | Workflow stability | TBD |
-| Platform-Specific Failures | 🔴 Critical | Test failures | TBD |
-| Missing Error Handling | 🟠 High | Developer experience | TBD |
-| Workflow Integration | 🟡 Medium | Redundancy | Always |
+| Issue                      | Severity    | Impact               | Frequency |
+| -------------------------- | ----------- | -------------------- | --------- |
+| BATS Installation Failures | 🔴 Critical | Blocks all tests     | TBD       |
+| Code Duplication           | 🟡 Medium   | Maintainability      | Always    |
+| Missing Caching            | 🟡 Medium   | Performance          | Always    |
+| Concurrency Issues         | 🟠 High     | Workflow stability   | TBD       |
+| Platform-Specific Failures | 🔴 Critical | Test failures        | TBD       |
+| Missing Error Handling     | 🟠 High     | Developer experience | TBD       |
+| Workflow Integration       | 🟡 Medium   | Redundancy           | Always    |
 
 ---
 
@@ -205,4 +223,3 @@ concurrency:
 
 **Status:** 🟠 In Progress  
 **Next:** See [Fixes Needed](fixes-needed.md) for prioritized fix list
-

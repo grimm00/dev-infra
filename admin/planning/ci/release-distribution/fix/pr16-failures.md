@@ -23,17 +23,20 @@ This document captures detailed information about failed jobs in the multi-envir
 **Workflow Run:** [Link to be added]
 
 **Error Details:**
+
 - **Error Type:** TBD (to be filled from actual workflow run)
 - **Error Message:** TBD
 - **Failed Step:** TBD
 - **Exit Code:** TBD
 
 **Logs:**
+
 ```
 [To be filled from actual workflow run]
 ```
 
 **Analysis:**
+
 - TBD
 
 ---
@@ -46,17 +49,20 @@ This document captures detailed information about failed jobs in the multi-envir
 **Workflow Run:** [Link to be added]
 
 **Error Details:**
+
 - **Error Type:** TBD
 - **Error Message:** TBD
 - **Failed Step:** TBD
 - **Exit Code:** TBD
 
 **Logs:**
+
 ```
 [To be filled from actual workflow run]
 ```
 
 **Analysis:**
+
 - TBD
 
 ---
@@ -69,17 +75,20 @@ This document captures detailed information about failed jobs in the multi-envir
 **Workflow Run:** [Link to be added]
 
 **Error Details:**
+
 - **Error Type:** TBD
 - **Error Message:** TBD
 - **Failed Step:** TBD
 - **Exit Code:** TBD
 
 **Logs:**
+
 ```
 [To be filled from actual workflow run]
 ```
 
 **Analysis:**
+
 - TBD
 
 ---
@@ -92,17 +101,20 @@ This document captures detailed information about failed jobs in the multi-envir
 **Workflow Run:** [Link to be added]
 
 **Error Details:**
+
 - **Error Type:** TBD
 - **Error Message:** TBD
 - **Failed Step:** TBD
 - **Exit Code:** TBD
 
 **Logs:**
+
 ```
 [To be filled from actual workflow run]
 ```
 
 **Analysis:**
+
 - TBD
 
 ---
@@ -115,17 +127,20 @@ This document captures detailed information about failed jobs in the multi-envir
 **Workflow Run:** [Link to be added]
 
 **Error Details:**
+
 - **Error Type:** TBD
 - **Error Message:** TBD
 - **Failed Step:** TBD
 - **Exit Code:** TBD
 
 **Logs:**
+
 ```
 [To be filled from actual workflow run]
 ```
 
 **Analysis:**
+
 - TBD
 
 ---
@@ -138,17 +153,20 @@ This document captures detailed information about failed jobs in the multi-envir
 **Workflow Run:** [Link to be added]
 
 **Error Details:**
+
 - **Error Type:** TBD
 - **Error Message:** TBD
 - **Failed Step:** TBD
 - **Exit Code:** TBD
 
 **Logs:**
+
 ```
 [To be filled from actual workflow run]
 ```
 
 **Analysis:**
+
 - TBD
 
 ---
@@ -158,14 +176,17 @@ This document captures detailed information about failed jobs in the multi-envir
 ### Pattern 1: BATS Installation Failures
 
 **Symptoms:**
+
 - `bats: command not found`
 - Package manager errors
 - Installation timeout
 
 **Affected Platforms:**
+
 - TBD
 
 **Frequency:**
+
 - TBD
 
 ---
@@ -173,14 +194,17 @@ This document captures detailed information about failed jobs in the multi-envir
 ### Pattern 2: Test Execution Failures
 
 **Symptoms:**
+
 - Tests fail with exit code 1
 - Platform-specific test failures
 - Test file not found errors
 
 **Affected Platforms:**
+
 - TBD
 
 **Frequency:**
+
 - TBD
 
 ---
@@ -188,13 +212,16 @@ This document captures detailed information about failed jobs in the multi-envir
 ### Pattern 3: Timeout Issues
 
 **Symptoms:**
+
 - Workflow exceeds timeout limit
 - Jobs cancelled due to timeout
 
 **Affected Platforms:**
+
 - TBD
 
 **Frequency:**
+
 - TBD
 
 ---
@@ -202,28 +229,31 @@ This document captures detailed information about failed jobs in the multi-envir
 ### Pattern 4: Concurrency Conflicts
 
 **Symptoms:**
+
 - Workflow runs cancelled unexpectedly
 - Multiple runs for same commit
 - Concurrency group conflicts
 
 **Affected Platforms:**
+
 - All
 
 **Frequency:**
+
 - TBD
 
 ---
 
 ## 📊 Failure Summary
 
-| Job | Platform | Status | Error Type | Priority |
-|-----|----------|--------|------------|----------|
-| quick-checks | Ubuntu | ❌ | TBD | TBD |
-| full-tests | Ubuntu | ❌ | TBD | TBD |
-| full-tests | macOS | ❌ | TBD | TBD |
-| quick-checks (release) | Ubuntu | ❌ | TBD | TBD |
-| full-tests (release) | Ubuntu | ❌ | TBD | TBD |
-| full-tests (release) | macOS | ❌ | TBD | TBD |
+| Job                    | Platform | Status | Error Type | Priority |
+| ---------------------- | -------- | ------ | ---------- | -------- |
+| quick-checks           | Ubuntu   | ❌     | TBD        | TBD      |
+| full-tests             | Ubuntu   | ❌     | TBD        | TBD      |
+| full-tests             | macOS    | ❌     | TBD        | TBD      |
+| quick-checks (release) | Ubuntu   | ❌     | TBD        | TBD      |
+| full-tests (release)   | Ubuntu   | ❌     | TBD        | TBD      |
+| full-tests (release)   | macOS    | ❌     | TBD        | TBD      |
 
 ---
 
@@ -239,4 +269,3 @@ This document captures detailed information about failed jobs in the multi-envir
 
 **Status:** 🟠 In Progress  
 **Next:** Fill in actual error details from workflow runs, then proceed to [Root Cause Analysis](root-cause-analysis.md)
-
