@@ -54,6 +54,15 @@ prompt_yes_no() {
     local default="$2"
     local input
     
+    # Check if we're in a non-interactive environment (CI, automated tests, etc.)
+    if [ ! -t 0 ] || [ -n "$CI" ] || [ -n "$BATS_RUN_TMPDIR" ]; then
+        # Non-interactive: return default value
+        case "${default:-n}" in
+            [Yy]* ) return 0;;
+            * ) return 1;;
+        esac
+    fi
+    
     while true; do
         if [ -n "$default" ]; then
             read -p "$prompt [y/N]: " input
