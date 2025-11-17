@@ -47,6 +47,9 @@ jobs:
 
       - name: Run unit tests
         run: bats --recursive tests/unit/ || exit 1
+        env:
+          CI: true
+          NON_INTERACTIVE: true
 
   full-tests:
     if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
@@ -87,3 +90,6 @@ jobs:
 
       - name: Run all tests
         run: bats --recursive tests/ || exit 1
+        env:
+          CI: true
+          NON_INTERACTIVE: true

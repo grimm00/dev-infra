@@ -55,7 +55,12 @@ prompt_yes_no() {
     local input
     
     # Check if we're in a non-interactive environment (CI, automated tests, etc.)
-    if [ ! -t 0 ] || [ -n "$CI" ] || [ -n "$BATS_RUN_TMPDIR" ]; then
+    # Check GITHUB_ACTIONS first (GitHub Actions specific)
+    # Then check CI (generic CI systems)
+    # Then check NON_INTERACTIVE (explicit flag)
+    # Then check terminal (fallback)
+    # Finally check BATS environment
+    if [ -n "$GITHUB_ACTIONS" ] || [ -n "$CI" ] || [ -n "$NON_INTERACTIVE" ] || [ ! -t 0 ] || [ -n "$BATS_RUN_TMPDIR" ]; then
         # Non-interactive: return default value
         case "${default:-n}" in
             [Yy]* ) return 0;;
