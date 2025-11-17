@@ -1,0 +1,724 @@
+# Multi-Image Docker Build and Push Pipeline
+
+name: cdwilson-docker-build-and-push
+
+env:
+  REGISTRY_URL: artifacts.drwholdings.com
+  ARTIFACTORY_PATH: apprenticeship-docker-local-default/appr-2025
+  BASE_IMAGES_PATH: apprenticeship-docker-local-default/appr-2025/base-images
+  CONTRIBUTOR_NAME: cdwilson
+
+on:
+  pull_request:
+    branches: ["ci/cdwilson-docker-build", "main"]
+    types: [opened, reopened, labeled, synchronize]
+    paths:
+      - 'docker/cdwilson/**'
+      - 'kubernetes/cdwilson/**'
+      - '.github/workflows/cdwilson-docker-build-and-push.yaml'
+
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "What is your name?"
+        required: true
+        default: "cdwilson"
+
+  push:
+    branches: ["dev/cdwilson-docker-build", "ci/cdwilson-docker-build", "main"]
+    paths:
+      - 'docker/cdwilson/**'
+      - 'kubernetes/cdwilson/**'
+      - '.github/workflows/cdwilson-docker-build-and-push.yaml'
+
+jobs:
+  check-base-images:
+    runs-on: [self-hosted, linux-x64-drw-chhq-c1m2]
+    outputs:
+      node-base-image: ${{ steps.set-base-images.outputs.node-base-image }}
+      nginx-base-image: ${{ steps.set-base-images.outputs.nginx-base-image }}
+    steps:
+      - name: Login to Artifact Registry
+        run: |
+          echo "${{ secrets.ARTIFACTORY_REGISTRY_PASS }}" | docker login --username "${{ secrets.ARTIFACTORY_REGISTRY_USER }}" --password-stdin ${{ env.REGISTRY_URL }}
+
+      - name: Login to Docker Hub (fallback)
+        run: |
+          if [ -n "${{ secrets.DOCKERHUB_USERNAME }}" ] && [ -n "${{ secrets.DOCKERHUB_PASSWORD }}" ]; then
+            echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login --username "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+            echo "Docker Hub authentication successful"
+          else
+            echo "Docker Hub credentials not available, skipping authentication"
+          fi
+
+      - name: Check and push base images
+        id: set-base-images
+        run: |
+          # Set base image URLs with dedicated base-images path
+          NODE_BASE="${{ env.REGISTRY_URL }}/${{ env.BASE_IMAGES_PATH }}/node:18-alpine"
+          NGINX_BASE="${{ env.REGISTRY_URL }}/${{ env.BASE_IMAGES_PATH }}/nginx:alpine"
+
+          echo "node-base-image=$NODE_BASE" >> $GITHUB_OUTPUT
+          echo "nginx-base-image=$NGINX_BASE" >> $GITHUB_OUTPUT
+
+          # Check and push node:18-alpine
+          echo "Checking for node:18-alpine in Artifactory base-images..."
+          if ! docker pull $NODE_BASE 2>/dev/null; then
+            echo "node:18-alpine not found in base-images, pulling from Docker Hub and pushing..."
+            docker pull node:18-alpine
+            docker tag node:18-alpine $NODE_BASE
+            docker push $NODE_BASE
+            echo "Successfully pushed node:18-alpine to base-images"
+          else
+            echo "node:18-alpine already exists in base-images"
+          fi
+
+          # Check and push nginx:alpine
+          echo "Checking for nginx:alpine in Artifactory base-images..."
+          if ! docker pull $NGINX_BASE 2>/dev/null; then
+            echo "nginx:alpine not found in base-images, pulling from Docker Hub and pushing..."
+            docker pull nginx:alpine
+            docker tag nginx:alpine $NGINX_BASE
+            docker push $NGINX_BASE
+            echo "Successfully pushed nginx:alpine to base-images"
+          else
+            echo "nginx:alpine already exists in base-images"
+          fi
+
+  build-frontend:
+    needs: check-base-images
+    runs-on: [self-hosted, linux-x64-drw-chhq-c1m2]
+    outputs:
+      frontend-version: ${{ steps.get-version.outputs.frontend-version }}
+      frontend-image-digest: ${{ steps.build-image.outputs.image-digest }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            docker/cdwilson/task-app/frontend
+            .github/workflows/cdwilson-docker-build-and-push.yaml
+            docker/cdwilson/.version
+
+      - name: Login to Artifact Registry
+        run: |
+          echo "${{ secrets.ARTIFACTORY_REGISTRY_PASS }}" | docker login --username "${{ secrets.ARTIFACTORY_REGISTRY_USER }}" --password-stdin ${{ env.REGISTRY_URL }}
+
+      - name: Debug - List checked out files
+        run: |
+          echo "=== Files in docker/cdwilson/task-app/frontend ==="
+          ls -la docker/cdwilson/task-app/frontend/ || echo "Directory not found"
+          echo "=== Dockerfile content ==="
+          cat docker/cdwilson/task-app/frontend/Dockerfile || echo "Dockerfile not found"
+
+      - name: Get frontend version
+        id: get-version
+        run: |
+          VERSION=$(cat docker/cdwilson/task-app/frontend/.version | tr -d '\n')
+          echo "frontend-version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Frontend version: $VERSION"
+
+      - name: Update Dockerfile with Artifactory base images
+        run: |
+          cd docker/cdwilson/task-app/frontend
+          # Update the FROM statements to use Artifactory base images
+          sed -i "2s|FROM node:18-alpine|FROM ${{ needs.check-base-images.outputs.node-base-image }}|" Dockerfile
+          sed -i "12s|FROM nginx:alpine|FROM ${{ needs.check-base-images.outputs.nginx-base-image }}|" Dockerfile
+          echo "Updated Dockerfile with Artifactory base images"
+
+      - name: Build frontend image
+        id: build-image
+        run: |
+          cd docker/cdwilson/task-app/frontend
+
+          # Build image
+          IMAGE_NAME="task-app-frontend"
+          docker build -t $IMAGE_NAME . 2>&1 | tee build.log
+          BUILD_EXIT_CODE=${PIPESTATUS[0]}
+
+          if [ $BUILD_EXIT_CODE -eq 0 ]; then
+            echo "Frontend build successful"
+            
+            # Tag with version and latest
+            VERSIONED_TAG="${{ env.REGISTRY_URL }}/${{ env.ARTIFACTORY_PATH }}/${{ env.CONTRIBUTOR_NAME }}/$IMAGE_NAME:v${{ steps.get-version.outputs.frontend-version }}"
+            LATEST_TAG="${{ env.REGISTRY_URL }}/${{ env.ARTIFACTORY_PATH }}/${{ env.CONTRIBUTOR_NAME }}/$IMAGE_NAME:latest"
+            
+            docker tag $IMAGE_NAME $VERSIONED_TAG
+            docker tag $IMAGE_NAME $LATEST_TAG
+            
+            # Push images
+            docker push $VERSIONED_TAG
+            docker push $LATEST_TAG
+            
+            # Get image digest after push
+            DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $VERSIONED_TAG)
+            echo "image-digest=$DIGEST" >> $GITHUB_OUTPUT
+            
+            # Save digest to file
+            echo "$DIGEST" > .image-sha
+            
+            # Save build info
+            docker images $IMAGE_NAME --format "Size: {{.Size}}" > image-info.txt
+              echo "BUILD_SUCCESS" > build-status.txt
+            echo "Used Artifactory base images" >> build.log
+            
+            echo "Frontend image pushed successfully:"
+            echo "  Versioned: $VERSIONED_TAG"
+            echo "  Latest: $LATEST_TAG"
+            echo "  Digest: $DIGEST"
+          else
+              echo "BUILD_FAILED" > build-status.txt
+            echo "Frontend build failed"
+            exit 1
+          fi
+
+      - name: Update frontend version based on conventional commits
+        if: github.event_name == 'push' && steps.build-image.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            try {
+                // Check if last commit is already a version update (avoid loops)
+                const lastCommit = context.sha;
+                const commitData = await github.rest.repos.getCommit({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ref: lastCommit
+                });
+
+                if (commitData.data.commit.message.startsWith('chore: update frontend version to')) {
+                    console.log('Skipping - last commit is already a frontend version update');
+                    return;
+                }
+
+                // Get recent commits that touched frontend directory
+                const commits = await github.rest.repos.listCommits({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                    sha: context.sha,
+                    path: 'docker/cdwilson/task-app/frontend',
+                    per_page: 10
+                });
+
+                // Analyze commit messages for conventional commit types
+                let hasFeat = false;
+                let hasFix = false;
+
+                for (const commit of commits.data) {
+                    const message = commit.commit.message.toLowerCase();
+                    if (message.startsWith('feat:') || message.startsWith('feat(')) {
+                        hasFeat = true;
+                    }
+                    if (message.startsWith('fix:') || message.startsWith('fix(')) {
+                        hasFix = true;
+                    }
+                }
+
+                // Determine version bump type (feat takes priority)
+                if (!hasFeat && !hasFix) {
+                    console.log('No conventional commits found for frontend, skipping version update');
+                    return;
+                }
+
+                // Read current version
+                const versionPath = path.join('docker', 'cdwilson', 'task-app', 'frontend', '.version');
+                const currentVersion = fs.readFileSync(versionPath, 'utf8').trim();
+                const [major, minor, patch] = currentVersion.split('.').map(Number);
+
+                // Calculate new version
+                let newVersion;
+                if (hasFeat) {
+                    newVersion = `${major}.${minor + 1}.0`;
+                } else {
+                    newVersion = `${major}.${minor}.${patch + 1}`;
+                }
+
+                console.log(`Updating frontend version from ${currentVersion} to ${newVersion}`);
+
+                // Write new version
+                fs.writeFileSync(versionPath, newVersion + '\n');
+
+                // Configure git
+                await exec.exec('git', ['config', 'user.name', 'github-actions[bot]']);
+                await exec.exec('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com']);
+
+                // Commit and push
+                await exec.exec('git', ['add', versionPath]);
+                await exec.exec('git', ['commit', '-m', `chore: update frontend version to ${newVersion}`]);
+                const branchName = context.ref.replace('refs/heads/', '');
+                await exec.exec('git', ['push', 'origin', `HEAD:${branchName}`, '--force']);
+
+            } catch (error) {
+                console.log('Error updating frontend version:', error.message);
+            }
+
+      - name: Upload frontend build artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-build-artifacts
+          path: |
+            docker/cdwilson/task-app/frontend/build.log
+            docker/cdwilson/task-app/frontend/build-status.txt
+            docker/cdwilson/task-app/frontend/image-info.txt
+            docker/cdwilson/task-app/frontend/.image-sha
+            docker/cdwilson/task-app/frontend/.version
+
+  build-backend:
+    needs: check-base-images
+    runs-on: [self-hosted, linux-x64-drw-chhq-c1m2]
+    outputs:
+      backend-version: ${{ steps.get-version.outputs.backend-version }}
+      backend-image-digest: ${{ steps.build-image.outputs.image-digest }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            docker/cdwilson/task-app/backend
+            .github/workflows/cdwilson-docker-build-and-push.yaml
+            docker/cdwilson/.version
+
+      - name: Login to Artifact Registry
+        run: |
+          echo "${{ secrets.ARTIFACTORY_REGISTRY_PASS }}" | docker login --username "${{ secrets.ARTIFACTORY_REGISTRY_USER }}" --password-stdin ${{ env.REGISTRY_URL }}
+
+      - name: Debug - List checked out files
+        run: |
+          echo "=== Files in docker/cdwilson/task-app/backend ==="
+          ls -la docker/cdwilson/task-app/backend/ || echo "Directory not found"
+          echo "=== Dockerfile content ==="
+          cat docker/cdwilson/task-app/backend/Dockerfile || echo "Dockerfile not found"
+
+      - name: Get backend version
+        id: get-version
+        run: |
+          VERSION=$(cat docker/cdwilson/task-app/backend/.version | tr -d '\n')
+          echo "backend-version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Backend version: $VERSION"
+
+      - name: Update Dockerfile with Artifactory base images
+        run: |
+          cd docker/cdwilson/task-app/backend
+          # Update the FROM statements to use Artifactory base images
+          sed -i "2s|FROM node:18-alpine|FROM ${{ needs.check-base-images.outputs.node-base-image }}|" Dockerfile
+          sed -i "20s|FROM node:18-alpine|FROM ${{ needs.check-base-images.outputs.node-base-image }}|" Dockerfile
+          echo "Updated Dockerfile with Artifactory base images"
+
+      - name: Build backend image
+        id: build-image
+        run: |
+          cd docker/cdwilson/task-app/backend
+
+          # Build image
+          IMAGE_NAME="task-app-backend"
+          docker build -t $IMAGE_NAME . 2>&1 | tee build.log
+          BUILD_EXIT_CODE=${PIPESTATUS[0]}
+
+          if [ $BUILD_EXIT_CODE -eq 0 ]; then
+            echo "Backend build successful"
+            
+            # Tag with version and latest
+            VERSIONED_TAG="${{ env.REGISTRY_URL }}/${{ env.ARTIFACTORY_PATH }}/${{ env.CONTRIBUTOR_NAME }}/$IMAGE_NAME:v${{ steps.get-version.outputs.backend-version }}"
+            LATEST_TAG="${{ env.REGISTRY_URL }}/${{ env.ARTIFACTORY_PATH }}/${{ env.CONTRIBUTOR_NAME }}/$IMAGE_NAME:latest"
+            
+            docker tag $IMAGE_NAME $VERSIONED_TAG
+            docker tag $IMAGE_NAME $LATEST_TAG
+            
+            # Push images
+            docker push $VERSIONED_TAG
+            docker push $LATEST_TAG
+            
+            # Get image digest after push
+            DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $VERSIONED_TAG)
+            echo "image-digest=$DIGEST" >> $GITHUB_OUTPUT
+            
+            # Save digest to file
+            echo "$DIGEST" > .image-sha
+            
+            # Save build info
+            docker images $IMAGE_NAME --format "Size: {{.Size}}" > image-info.txt
+            echo "BUILD_SUCCESS" > build-status.txt
+            echo "Used Artifactory base images" >> build.log
+            
+            echo "Backend image pushed successfully:"
+            echo "  Versioned: $VERSIONED_TAG"
+            echo "  Latest: $LATEST_TAG"
+            echo "  Digest: $DIGEST"
+          else
+            echo "BUILD_FAILED" > build-status.txt
+            echo "Backend build failed"
+            exit 1
+          fi
+
+      - name: Update backend version based on conventional commits
+        if: github.event_name == 'push' && steps.build-image.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            try {
+                // Check if last commit is already a version update (avoid loops)
+                const lastCommit = context.sha;
+                const commitData = await github.rest.repos.getCommit({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ref: lastCommit
+                });
+
+                if (commitData.data.commit.message.startsWith('chore: update backend version to')) {
+                    console.log('Skipping - last commit is already a backend version update');
+                    return;
+                }
+
+                // Get recent commits that touched backend directory
+                const commits = await github.rest.repos.listCommits({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    sha: context.sha,
+                    path: 'docker/cdwilson/task-app/backend',
+                    per_page: 10
+                });
+                
+                // Analyze commit messages for conventional commit types
+                let hasFeat = false;
+                let hasFix = false;
+                
+                for (const commit of commits.data) {
+                    const message = commit.commit.message.toLowerCase();
+                    if (message.startsWith('feat:') || message.startsWith('feat(')) {
+                        hasFeat = true;
+                    }
+                    if (message.startsWith('fix:') || message.startsWith('fix(')) {
+                        hasFix = true;
+                    }
+                }
+                
+                // Determine version bump type (feat takes priority)
+                if (!hasFeat && !hasFix) {
+                    console.log('No conventional commits found for backend, skipping version update');
+                    return;
+                }
+                
+                // Read current version
+                const versionPath = path.join('docker', 'cdwilson', 'task-app', 'backend', '.version');
+                const currentVersion = fs.readFileSync(versionPath, 'utf8').trim();
+                const [major, minor, patch] = currentVersion.split('.').map(Number);
+                
+                // Calculate new version
+                let newVersion;
+                if (hasFeat) {
+                    newVersion = `${major}.${minor + 1}.0`;
+                } else {
+                    newVersion = `${major}.${minor}.${patch + 1}`;
+                }
+                
+                console.log(`Updating backend version from ${currentVersion} to ${newVersion}`);
+                
+                // Write new version
+                fs.writeFileSync(versionPath, newVersion + '\n');
+                
+                // Configure git
+                await exec.exec('git', ['config', 'user.name', 'github-actions[bot]']);
+                await exec.exec('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com']);
+                
+                // Commit and push
+                await exec.exec('git', ['add', versionPath]);
+                await exec.exec('git', ['commit', '-m', `chore: update backend version to ${newVersion}`]);
+                const branchName = context.ref.replace('refs/heads/', '');
+                await exec.exec('git', ['push', 'origin', `HEAD:${branchName}`, '--force']);
+                
+            } catch (error) {
+                console.log('Error updating backend version:', error.message);
+            }
+
+      - name: Upload backend build artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-build-artifacts
+          path: |
+            docker/cdwilson/task-app/backend/build.log
+            docker/cdwilson/task-app/backend/build-status.txt
+            docker/cdwilson/task-app/backend/image-info.txt
+            docker/cdwilson/task-app/backend/.image-sha
+            docker/cdwilson/task-app/backend/.version
+
+  update-manifests:
+    needs: [build-frontend, build-backend]
+    runs-on: [self-hosted, linux-x64-drw-chhq-c1m2]
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Pull latest changes
+        run: |
+          git pull origin ${{ github.ref_name }}
+
+      - name: Update Kubernetes manifests
+        run: |
+          # Read current versions from files (after build jobs updated them)
+          BACKEND_VERSION=$(cat docker/cdwilson/task-app/backend/.version | tr -d '\n')
+          FRONTEND_VERSION=$(cat docker/cdwilson/task-app/frontend/.version | tr -d '\n')
+          BACKEND_DIGEST="${{ needs.build-backend.outputs.backend-image-digest }}"
+          FRONTEND_DIGEST="${{ needs.build-frontend.outputs.frontend-image-digest }}"
+
+          BACKEND_IMAGE="${{ env.REGISTRY_URL }}/${{ env.ARTIFACTORY_PATH }}/${{ env.CONTRIBUTOR_NAME }}/task-app-backend:v${BACKEND_VERSION}"
+          FRONTEND_IMAGE="${{ env.REGISTRY_URL }}/${{ env.ARTIFACTORY_PATH }}/${{ env.CONTRIBUTOR_NAME }}/task-app-frontend:v${FRONTEND_VERSION}"
+
+          echo "Updating manifests with:"
+          echo "  Backend: $BACKEND_IMAGE"
+          echo "  Frontend: $FRONTEND_IMAGE"
+
+          # Update backend manifest (line 21)
+          sed -i "21s|image:.*|image: $BACKEND_IMAGE|" kubernetes/cdwilson/manifests/02-backend.yaml
+          sed -i "23s|# Latest digest:.*|# Latest digest: $BACKEND_DIGEST|" kubernetes/cdwilson/manifests/02-backend.yaml
+
+          # Update frontend manifest (line 21)
+          sed -i "21s|image:.*|image: $FRONTEND_IMAGE|" kubernetes/cdwilson/manifests/03-frontend.yaml
+          sed -i "23s|# Latest digest:.*|# Latest digest: $FRONTEND_DIGEST|" kubernetes/cdwilson/manifests/03-frontend.yaml
+
+          echo "Manifests updated successfully"
+
+      - name: Show changes
+        run: |
+          git diff kubernetes/cdwilson/manifests/
+
+      - name: Commit and push manifest updates
+        run: |
+          git add kubernetes/cdwilson/manifests/02-backend.yaml
+          git add kubernetes/cdwilson/manifests/03-frontend.yaml
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update K8s manifests to backend:v${BACKEND_VERSION}, frontend:v${FRONTEND_VERSION} [skip ci]"
+            
+            git push origin ${{ github.ref_name }}
+            echo "Manifests committed and pushed"
+          fi
+
+  update-project-version:
+    needs: [build-frontend, build-backend, update-manifests]
+    if: github.event_name == 'push' && (needs.build-frontend.result == 'success' || needs.build-backend.result == 'success')
+    runs-on: [self-hosted, linux-x64-drw-chhq-c1m2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            docker/cdwilson/.version
+            .github/workflows/cdwilson-docker-build-and-push.yaml
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-build-artifacts
+          path: frontend-artifacts/
+
+      - name: Download backend artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: backend-build-artifacts
+          path: backend-artifacts/
+
+      - name: Update project version based on component changes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            try {
+                // Check if last commit is already a project version update (avoid loops)
+                const lastCommit = context.sha;
+                const commitData = await github.rest.repos.getCommit({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ref: lastCommit
+                });
+
+                if (commitData.data.commit.message.startsWith('chore: update project version to')) {
+                    console.log('Skipping - last commit is already a project version update');
+                    return;
+                }
+
+                // Read current project version
+                const projectVersionPath = path.join('docker', 'cdwilson', '.version');
+                const currentProjectVersion = fs.readFileSync(projectVersionPath, 'utf8').trim();
+                const [projectMajor, projectMinor, projectPatch] = currentProjectVersion.split('.').map(Number);
+
+                // Read component versions from artifacts
+                let frontendVersion = null;
+                let backendVersion = null;
+                let frontendBump = null;
+                let backendBump = null;
+
+                try {
+                    const frontendVersionPath = path.join('frontend-artifacts', 'docker', 'cdwilson', 'task-app', 'frontend', '.version');
+                    if (fs.existsSync(frontendVersionPath)) {
+                        frontendVersion = fs.readFileSync(frontendVersionPath, 'utf8').trim();
+                        console.log('Frontend version from artifact:', frontendVersion);
+                    }
+                } catch (error) {
+                    console.log('Could not read frontend version from artifact:', error.message);
+                }
+
+                try {
+                    const backendVersionPath = path.join('backend-artifacts', 'docker', 'cdwilson', 'task-app', 'backend', '.version');
+                    if (fs.existsSync(backendVersionPath)) {
+                        backendVersion = fs.readFileSync(backendVersionPath, 'utf8').trim();
+                        console.log('Backend version from artifact:', backendVersion);
+                    }
+                } catch (error) {
+                    console.log('Could not read backend version from artifact:', error.message);
+                }
+
+                // For now, we'll determine bump based on commit messages since we don't have old versions
+                // In a real scenario, you'd compare old vs new versions
+                const commits = await github.rest.repos.listCommits({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    sha: context.sha,
+                    per_page: 10
+                });
+
+                let hasFeat = false;
+                let hasFix = false;
+
+                for (const commit of commits.data) {
+                    const message = commit.commit.message.toLowerCase();
+                    if (message.startsWith('feat:') || message.startsWith('feat(')) {
+                        hasFeat = true;
+                    }
+                    if (message.startsWith('fix:') || message.startsWith('fix(')) {
+                        hasFix = true;
+                    }
+                }
+
+                // Determine project version bump
+                if (!hasFeat && !hasFix) {
+                    console.log('No conventional commits found, skipping project version update');
+                    return;
+                }
+
+                let newProjectVersion;
+                if (hasFeat) {
+                    newProjectVersion = `${projectMajor}.${projectMinor + 1}.0`;
+                } else {
+                    newProjectVersion = `${projectMajor}.${projectMinor}.${projectPatch + 1}`;
+                }
+
+                console.log(`Updating project version from ${currentProjectVersion} to ${newProjectVersion}`);
+
+                // Write new project version
+                fs.writeFileSync(projectVersionPath, newProjectVersion + '\n');
+
+                // Configure git
+                await exec.exec('git', ['config', 'user.name', 'github-actions[bot]']);
+                await exec.exec('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com']);
+
+                // Commit and push
+                await exec.exec('git', ['add', projectVersionPath]);
+                await exec.exec('git', ['commit', '-m', `chore: update project version to ${newProjectVersion}`]);
+                const branchName = context.ref.replace('refs/heads/', '');
+                await exec.exec('git', ['push', 'origin', `HEAD:${branchName}`, '--force']);
+
+            } catch (error) {
+                console.log('Error updating project version:', error.message);
+            }
+
+  comment-pr:
+    if: github.event_name == 'pull_request'
+    needs: [build-frontend, build-backend]
+    runs-on: [self-hosted, linux-x64-drw-chhq-c1m2]
+    steps:
+      - name: Download frontend artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-build-artifacts
+          path: frontend-artifacts/
+
+      - name: Download backend artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: backend-build-artifacts
+          path: backend-artifacts/
+
+      - name: Comment PR with build results
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            try {
+                let commentBody = '## Multi-Image Docker Build Results\n\n';
+
+                // Frontend results
+                const frontendStatusPath = path.join('frontend-artifacts', 'docker', 'cdwilson', 'task-app', 'frontend', 'build-status.txt');
+                const frontendLogPath = path.join('frontend-artifacts', 'docker', 'cdwilson', 'task-app', 'frontend', 'build.log');
+                const frontendInfoPath = path.join('frontend-artifacts', 'docker', 'cdwilson', 'task-app', 'frontend', 'image-info.txt');
+                const frontendVersionPath = path.join('frontend-artifacts', 'docker', 'cdwilson', 'task-app', 'frontend', '.version');
+
+                if (fs.existsSync(frontendStatusPath)) {
+                    const frontendStatus = fs.readFileSync(frontendStatusPath, 'utf8').trim();
+                    const frontendVersion = fs.existsSync(frontendVersionPath) ? fs.readFileSync(frontendVersionPath, 'utf8').trim() : 'unknown';
+                    
+                    if (frontendStatus === 'BUILD_SUCCESS') {
+                        const frontendInfo = fs.existsSync(frontendInfoPath) ? fs.readFileSync(frontendInfoPath, 'utf8').trim() : '';
+                        commentBody += `### Frontend ✅\n- **Version**: v${frontendVersion}\n- **${frontendInfo}**\n\n`;
+                    } else {
+                        const frontendLog = fs.existsSync(frontendLogPath) ? fs.readFileSync(frontendLogPath, 'utf8') : 'No log available';
+                        commentBody += `### Frontend ❌\n- **Version**: v${frontendVersion}\n- **Error**: Build failed\n\n`;
+                    }
+                }
+
+                // Backend results
+                const backendStatusPath = path.join('backend-artifacts', 'docker', 'cdwilson', 'task-app', 'backend', 'build-status.txt');
+                const backendLogPath = path.join('backend-artifacts', 'docker', 'cdwilson', 'task-app', 'backend', 'build.log');
+                const backendInfoPath = path.join('backend-artifacts', 'docker', 'cdwilson', 'task-app', 'backend', 'image-info.txt');
+                const backendVersionPath = path.join('backend-artifacts', 'docker', 'cdwilson', 'task-app', 'backend', '.version');
+
+                if (fs.existsSync(backendStatusPath)) {
+                    const backendStatus = fs.readFileSync(backendStatusPath, 'utf8').trim();
+                    const backendVersion = fs.existsSync(backendVersionPath) ? fs.readFileSync(backendVersionPath, 'utf8').trim() : 'unknown';
+                    
+                    if (backendStatus === 'BUILD_SUCCESS') {
+                        const backendInfo = fs.existsSync(backendInfoPath) ? fs.readFileSync(backendInfoPath, 'utf8').trim() : '';
+                        commentBody += `### Backend ✅\n- **Version**: v${backendVersion}\n- **${backendInfo}**\n\n`;
+                    } else {
+                        const backendLog = fs.existsSync(backendLogPath) ? fs.readFileSync(backendLogPath, 'utf8') : 'No log available';
+                        commentBody += `### Backend ❌\n- **Version**: v${backendVersion}\n- **Error**: Build failed\n\n`;
+                    }
+                }
+
+                // Add registry info
+                commentBody += `### Registry Images 📦\n`;
+                commentBody += `- **Frontend**: \`${{ env.REGISTRY_URL }}/${{ env.ARTIFACTORY_PATH }}/${{ env.CONTRIBUTOR_NAME }}/task-app-frontend:v${{ needs.build-frontend.outputs.frontend-version }}\`\n`;
+                commentBody += `- **Backend**: \`${{ env.REGISTRY_URL }}/${{ env.ARTIFACTORY_PATH }}/${{ env.CONTRIBUTOR_NAME }}/task-app-backend:v${{ needs.build-backend.outputs.backend-version }}\`\n`;
+
+                await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: context.issue.number,
+                    body: commentBody
+                });
+
+            } catch (error) {
+                console.log('Error creating PR comment:', error.message);
+            }

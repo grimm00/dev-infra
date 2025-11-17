@@ -1,0 +1,33 @@
+# .github/workflows/ci-pr.yml
+name: CI (pull request to develop)
+on:
+  pull_request:
+    branches: [ develop ]
+    types: [opened, synchronize, reopened, ready_for_review]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: ${{ github.event.pull_request.draft == false }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      matrix:
+        node: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: ${{ matrix.node }} }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test -- --ci --coverage
+      # Add heavier checks here:
+      # - name: Integration tests
+      #   run: npm run test:integration
+      # - name: Build image & scan
+      #   run: |
+      #     docker build -t app:pr-$GITHUB_SHA .
+      #     trivy image --exit-code 1 app:pr-$GITHUB_SHA

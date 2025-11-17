@@ -10,6 +10,7 @@
 
 ### Architecture Decision Records (ADRs)
 - **[0001: Template Restructure](0001-template-restructure.md)** - Decision to restructure templates (admin/ → docs/maintainers/)
+- **[0002: CI/CD Workflow Improvements](0002-cicd-workflow-improvements.md)** - Decision to implement automated testing, workflow optimizations, and validation enhancements
 
 ### Migration Roadmaps
 - **[Template Restructure Roadmap](template-restructure-roadmap.md)** - Detailed migration plan for template restructure
@@ -33,9 +34,10 @@ This directory documents architectural decisions made for the dev-infra project,
 
 ```
 admin/decisions/
-├── README.md                    # 📍 HUB - This file
-├── 0001-template-restructure.md # ADR for template restructure
-└── template-restructure-roadmap.md # Migration roadmap
+├── README.md                          # 📍 HUB - This file
+├── 0001-template-restructure.md       # ADR for template restructure
+├── 0002-cicd-workflow-improvements.md # ADR for CI/CD workflow improvements
+└── template-restructure-roadmap.md    # Migration roadmap
 ```
 
 ---

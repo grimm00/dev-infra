@@ -51,6 +51,7 @@ venv.bak/
 
 # Project-specific ignores
 # Add any project-specific ignore patterns here
+admin/notes/opportunities/internal/cdwilson-docker-build-and-push.yaml
 
 # Keep important template files
 !templates/
