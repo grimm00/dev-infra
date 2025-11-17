@@ -289,6 +289,15 @@ define_test_functions() {
         local project_name=$(basename "$full_project_path")
         local original_dir=$(pwd)
         
+        # Ensure git is configured (required for commits)
+        # Check if git config is set, if not set it
+        if ! git config --global user.name >/dev/null 2>&1; then
+            git config --global user.name "Test User" || true
+        fi
+        if ! git config --global user.email >/dev/null 2>&1; then
+            git config --global user.email "test@example.com" || true
+        fi
+        
         # Change to project directory with error checking
         if ! cd "$full_project_path"; then
             return 1
