@@ -12,6 +12,7 @@
 - **[Implementation Plan](PLAN.md)** - Detailed implementation steps
 - **[Design Decisions](DECISIONS.md)** - Key architectural decisions
 - **[Workflow Specification](WORKFLOW.md)** - Complete workflow YAML and explanation
+- **[PR #17 Fix Documentation](fix/)** - Issues and fixes for workflow implementation
 
 ---
 
