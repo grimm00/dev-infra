@@ -339,12 +339,50 @@ Fixes git operations tests failing in CI:
 
 ---
 
+## 🔄 Long-Term Improvements
+
+### Docker Images for Ubuntu Jobs
+
+**Status:** 🟡 Under Evaluation
+
+**Research:** See [GHCR Docker Images Research](../../../research/ci-cd-workflow-improvements/ghcr-docker-images.md)
+
+**Benefits:**
+- 15 seconds saved per Ubuntu job
+- Consistent tool versions
+- Eliminates platform-specific issues
+- Faster test execution
+
+**Implementation:**
+- Create `Dockerfile.test`
+- Set up build workflow
+- Update test workflow to use container
+- Test in separate branch
+
+**Timeline:** 4-6 hours total
+
+**Recommendation:** ✅ Proceed with Docker images for Ubuntu jobs
+
+### macOS Cancellation Handling
+
+**Status:** 🟡 Documented
+
+**Issue:** macOS jobs cancelled when commits pushed rapidly
+
+**Solution:** Accept behavior, document it, rely on Ubuntu for fast feedback
+
+**Documentation:** See [Platform Differences Investigation](platform-differences-investigation.md)
+
+---
+
 ## 📚 Related Documentation
 
 - **[Failed Jobs](pr17-failures.md)** - Detailed failure information
 - **[Root Cause Analysis](root-cause-analysis.md)** - Why failures occurred
 - **[Prompt Interactive Analysis](prompt-interactive-analysis.md)** - Deep dive into detection issue
 - **[Fixes Needed](fixes-needed.md)** - Prioritized fix list
+- **[Platform Differences Investigation](platform-differences-investigation.md)** - Comprehensive platform analysis
+- **[GHCR Docker Images Research](../../../research/ci-cd-workflow-improvements/ghcr-docker-images.md)** - Docker image evaluation
 
 ---
 

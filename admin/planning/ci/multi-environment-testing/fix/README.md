@@ -14,6 +14,7 @@
 - **[Prompt Interactive Analysis](prompt-interactive-analysis.md)** - Deep dive into prompt_yes_no detection issue
 - **[Fixes Needed](fixes-needed.md)** - Prioritized list of required fixes
 - **[Next Steps](next-steps.md)** - Action plan for addressing issues
+- **[Platform Differences Investigation](platform-differences-investigation.md)** - Comprehensive analysis of Ubuntu vs macOS differences
 
 ---
 
@@ -28,6 +29,8 @@ This directory documents the issues encountered during the implementation of the
 1. **Git Operations Test Failures** - Tests pass locally but fail in CI
 2. **Non-Interactive Prompt Detection** - `prompt_yes_no` fix attempted but didn't work in GitHub Actions
 3. **Environment Detection** - Detection logic not working as expected in CI
+4. **macOS Job Cancellation** - macOS jobs cancelled when commits pushed rapidly
+5. **Platform Differences** - Tool version and behavioral differences between Ubuntu and macOS
 
 ---
 

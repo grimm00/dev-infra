@@ -76,14 +76,38 @@ fi
 - macOS CI: Tests pass
 - Local (macOS): Tests pass
 
-**Possible Reasons:**
+**Root Cause Analysis:**
 
-1. **Different Shell Behavior:** Ubuntu uses bash differently than macOS
-2. **Environment Variable Differences:** Different variables set in each environment
-3. **Terminal Detection:** `[ ! -t 0 ]` may behave differently on each platform
-4. **BATS Execution:** BATS may run differently on each platform
+After comprehensive investigation (see [Platform Differences Investigation](platform-differences-investigation.md)), the following differences were identified:
 
-**Impact:** 🟠 High - Inconsistent test results across platforms
+1. **Tool Versions:**
+   - Ubuntu: BATS 1.2.0-1.3.0 (apt-get)
+   - macOS: BATS 1.8.0+ (Homebrew)
+   - **Impact:** Low - Both versions work, but may have subtle differences
+
+2. **Installation Timing:**
+   - Ubuntu: 13-14 seconds (apt-get install)
+   - macOS: 10 seconds (brew install, better caching)
+   - **Impact:** Low - Timing doesn't affect test results
+
+3. **Test Execution:**
+   - Ubuntu: Fails quickly (2-3 seconds)
+   - macOS: Runs longer before cancellation (12+ seconds)
+   - **Impact:** Medium - macOS has more time to complete before cancellation
+
+4. **Environment Detection:**
+   - Both platforms should behave identically
+   - Detection logic works the same on both
+   - **Impact:** Low - Not the root cause of failures
+
+**Actual Root Cause:**
+
+The platform difference is not the cause of test failures. Both platforms fail the same tests when `prompt_yes_no` detection doesn't work. macOS tests pass in some runs because:
+- They may have different environment variable values
+- They run longer, giving more time for detection to work
+- Cancellation may occur before tests complete
+
+**Impact:** 🟠 High - Inconsistent test results across platforms, but root cause is detection logic, not platform differences
 
 ---
 
@@ -155,12 +179,50 @@ When functions are sourced from the script, they may not have access to:
 
 ---
 
+### 5. macOS Job Cancellation
+
+**Issue:** macOS test jobs are being cancelled before completion
+
+**Observation:**
+
+- macOS jobs take 30-33 seconds to complete
+- Ubuntu jobs take 20-23 seconds to complete
+- When commits are pushed rapidly (< 2 minutes apart), macOS jobs are cancelled
+- Concurrency control cancels in-progress runs when new commits are pushed
+
+**Root Cause:**
+
+The concurrency group `${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}` cancels all in-progress runs when a new commit is pushed to the same PR branch. Since macOS jobs take longer to complete, they are more vulnerable to cancellation.
+
+**Timeline Example:**
+```
+21:36:13 - Run starts, macOS job begins
+21:36:46 - macOS job cancelled (29s runtime, not complete)
+21:38:00 - New commit pushed, new run starts
+         - Previous run's macOS job cancelled
+```
+
+**Impact:** 🟡 Medium - macOS tests may not complete if commits are pushed rapidly
+
+**Solutions Considered:**
+
+1. **Include Commit SHA in Concurrency Group:** Only cancels duplicate runs of same commit
+2. **Remove `cancel-in-progress`:** Not recommended (wastes CI minutes)
+3. **Optimize macOS Job Speed:** Use Docker images (not supported on macOS)
+4. **Accept Cancellation:** Document behavior, rely on Ubuntu for fast feedback
+
+**Recommendation:** Accept cancellation behavior for now, document it, and consider Docker images for Ubuntu jobs to improve consistency.
+
+---
+
 ## 🎯 Next Steps
 
-1. Investigate GitHub Actions environment variables
-2. Test different non-interactive detection methods
-3. Verify fix locally before pushing
-4. Consider alternative approaches (explicit environment variable, mock stdin)
+1. ✅ Investigate GitHub Actions environment variables (Completed - see investigation doc)
+2. ✅ Test different non-interactive detection methods (Completed - fix implemented)
+3. ✅ Verify fix locally before pushing (Completed)
+4. ✅ Consider alternative approaches (Docker images evaluated - see GHCR research)
+5. Document platform differences and cancellation behavior
+6. Evaluate Docker images for Ubuntu jobs (see [GHCR Docker Images Research](../../../research/ci-cd-workflow-improvements/ghcr-docker-images.md))
 
 ---
 
