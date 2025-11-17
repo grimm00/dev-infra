@@ -70,12 +70,14 @@ jobs:
         run: |
           git config --global user.name "Test User"
           git config --global user.email "test@example.com"
+          git config --global --list
 
       - name: Run unit tests
         run: bats --recursive tests/unit/ || exit 1
         env:
           CI: true
           NON_INTERACTIVE: true
+          GITHUB_ACTIONS: true
 
   full-tests:
     if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
@@ -104,12 +106,14 @@ jobs:
         run: |
           git config --global user.name "Test User"
           git config --global user.email "test@example.com"
+          git config --global --list
 
       - name: Run all tests
         run: bats --recursive tests/ || exit 1
         env:
           CI: true
           NON_INTERACTIVE: true
+          GITHUB_ACTIONS: true
 
   tag-image:
     needs: [quick-checks, full-tests]
