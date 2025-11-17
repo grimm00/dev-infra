@@ -40,6 +40,11 @@ jobs:
           sudo apt-get install -y bats || exit 1
           bats --version || exit 1
 
+      - name: Configure git for tests
+        run: |
+          git config --global user.name "Test User"
+          git config --global user.email "test@example.com"
+
       - name: Run unit tests
         run: bats --recursive tests/unit/ || exit 1
 
@@ -74,6 +79,11 @@ jobs:
             brew install bats-core || exit 1
             bats --version || exit 1
           fi
+
+      - name: Configure git for tests
+        run: |
+          git config --global user.name "Test User"
+          git config --global user.email "test@example.com"
 
       - name: Run all tests
         run: bats --recursive tests/ || exit 1
