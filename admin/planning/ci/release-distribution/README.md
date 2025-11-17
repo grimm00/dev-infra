@@ -12,6 +12,7 @@
 - **[Implementation Plan](PLAN.md)** - Detailed implementation steps
 - **[Testing Strategy](TESTING.md)** - How we'll test and validate
 - **[Design Decisions](DECISIONS.md)** - Key architectural decisions
+- **[PR #16 Fix Documentation](fix/)** - Issues and fixes for multi-environment testing
 
 ---
 
