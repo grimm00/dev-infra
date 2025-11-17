@@ -1,0 +1,57 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [main, develop]
+    paths-ignore:
+      - "**/*.md"
+      - "docs/**"
+      - "admin/**"
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quick-checks:
+    if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install BATS
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bats
+
+      - name: Run unit tests
+        run: bats --recursive tests/unit/
+
+  full-tests:
+    if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install BATS
+        run: |
+          if [ "${{ runner.os }}" == "Linux" ]; then
+            sudo apt-get update
+            sudo apt-get install -y bats
+          elif [ "${{ runner.os }}" == "macOS" ]; then
+            brew install bats-core
+          fi
+
+      - name: Run all tests
+        run: bats --recursive tests/
+
