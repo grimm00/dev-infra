@@ -18,10 +18,8 @@ teardown() {
 # ============================================================================
 
 @test "template_operations: copies standard-project template successfully" {
-    local git_root
-    git_root=$(git rev-parse --show-toplevel 2>/dev/null || echo "")
-    [ -n "$git_root" ]
-    
+    # Note: copy_template uses PROJECT_ROOT fallback if git rev-parse fails
+    # This works in Docker containers where git context may not be available
     local project_dir="$TEST_TMPDIR/test-project"
     run copy_template "standard-project" "$project_dir"
     
@@ -32,10 +30,7 @@ teardown() {
 }
 
 @test "template_operations: copies learning-project template successfully" {
-    local git_root
-    git_root=$(git rev-parse --show-toplevel 2>/dev/null || echo "")
-    [ -n "$git_root" ]
-    
+    # Note: copy_template uses PROJECT_ROOT fallback if git rev-parse fails
     local project_dir="$TEST_TMPDIR/test-learning"
     run copy_template "learning-project" "$project_dir"
     
@@ -53,10 +48,7 @@ teardown() {
 }
 
 @test "template_operations: verifies .gitignore exists after copy" {
-    local git_root
-    git_root=$(git rev-parse --show-toplevel 2>/dev/null || echo "")
-    [ -n "$git_root" ]
-    
+    # Note: copy_template uses PROJECT_ROOT fallback if git rev-parse fails
     local project_dir="$TEST_TMPDIR/test-gitignore"
     run copy_template "standard-project" "$project_dir"
     

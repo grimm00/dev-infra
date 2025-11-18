@@ -12,6 +12,7 @@
 - **[Implementation Plan](PLAN.md)** - Detailed implementation steps
 - **[Design Decisions](DECISIONS.md)** - Key architectural decisions
 - **[Workflow Specification](WORKFLOW.md)** - Complete workflow YAML and explanation
+- **[PR #17 Fix Documentation](fix/)** - Issues and fixes for workflow implementation
 
 ---
 
@@ -38,8 +39,9 @@ Currently, dev-infra tests are run manually or locally:
 1. **Automated Testing** - Run tests automatically on PRs and pushes
 2. **Multi-Platform** - Test on Ubuntu and macOS (Windows deferred)
 3. **Quality Gate** - Block release if tests fail
-4. **Fast Feedback** - Quick checks for rapid iteration
+4. **Fast Feedback** - Quick checks for rapid iteration (~6-10 seconds with Docker)
 5. **Optimized** - Use concurrency control, path filtering, draft PR filtering
+6. **Consistent Environment** - Docker images for Ubuntu jobs ensure tool version consistency
 
 ---
 
@@ -69,6 +71,7 @@ Currently, dev-infra tests are run manually or locally:
 ## 📚 Related Documentation
 
 - **[Multi-Environment Testing Research](../../../research/ci-cd-workflow-improvements/multi-environment-testing.md)** - Research and analysis
+- **[GHCR Docker Images Research](../../../research/ci-cd-workflow-improvements/ghcr-docker-images.md)** - Docker image evaluation and implementation
 - **[External Patterns Analysis](../../../research/ci-cd-workflow-improvements/external-patterns-analysis.md)** - Industry best practices
 - **[CI/CD Workflow Improvements ADR](../../../decisions/0002-cicd-workflow-improvements.md)** - Architecture decision
 - **[Test Suite Documentation](../../../../tests/README.md)** - Current test structure

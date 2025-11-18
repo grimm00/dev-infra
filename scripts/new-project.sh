@@ -54,6 +54,20 @@ prompt_yes_no() {
     local default="$2"
     local input
     
+    # Check if we're in a non-interactive environment (CI, automated tests, etc.)
+    # Check GITHUB_ACTIONS first (GitHub Actions specific)
+    # Then check CI (generic CI systems)
+    # Then check NON_INTERACTIVE (explicit flag)
+    # Then check terminal (fallback)
+    # Finally check BATS environment
+    if [ -n "$GITHUB_ACTIONS" ] || [ -n "$CI" ] || [ -n "$NON_INTERACTIVE" ] || [ ! -t 0 ] || [ -n "$BATS_RUN_TMPDIR" ]; then
+        # Non-interactive: return default value
+        case "${default:-n}" in
+            [Yy]* ) return 0;;
+            * ) return 1;;
+        esac
+    fi
+    
     while true; do
         if [ -n "$default" ]; then
             read -p "$prompt [y/N]: " input

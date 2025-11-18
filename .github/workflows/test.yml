@@ -1,0 +1,163 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [main, develop]
+    paths-ignore:
+      - "**/*.md"
+      - "docs/**"
+      - "admin/**"
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set image tags
+        id: tags
+        run: |
+          IMAGE="ghcr.io/${{ github.repository }}/test-image"
+          SHA="${{ github.sha }}"
+          echo "tags=${IMAGE}:${SHA},${IMAGE}:latest" >> $GITHUB_OUTPUT
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.test
+          push: true
+          tags: ${{ steps.tags.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  quick-checks:
+    if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
+    needs: [build-image]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container:
+      image: ghcr.io/${{ github.repository }}/test-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure git for tests
+        run: |
+          git config --global user.name "Test User"
+          git config --global user.email "test@example.com"
+          git config --global --list
+
+      - name: Run unit tests
+        run: bats --recursive tests/unit/ || exit 1
+        env:
+          CI: true
+          NON_INTERACTIVE: true
+          GITHUB_ACTIONS: true
+
+  full-tests:
+    if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
+    needs: [build-image]
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            container: ghcr.io/${{ github.repository }}/test-image:latest
+          - os: macos-latest
+            container: null
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install BATS (macOS only)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install bats-core || exit 1
+          bats --version || exit 1
+
+      - name: Configure git for tests
+        run: |
+          git config --global user.name "Test User"
+          git config --global user.email "test@example.com"
+          git config --global --list
+
+      - name: Run all tests
+        run: bats --recursive tests/ || exit 1
+        env:
+          CI: true
+          NON_INTERACTIVE: true
+          GITHUB_ACTIONS: true
+
+  tag-image:
+    needs: [quick-checks, full-tests]
+    if: success() && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tag image as verified
+        run: |
+          IMAGE="ghcr.io/${{ github.repository }}/test-image"
+          SHA="${{ github.sha }}"
+          
+          # Try to pull the image with commit SHA tag, fallback to latest
+          if docker pull ${IMAGE}:${SHA} 2>/dev/null; then
+            echo "Found image with SHA tag: ${SHA}"
+            SOURCE_TAG="${SHA}"
+          elif docker pull ${IMAGE}:latest 2>/dev/null; then
+            echo "Using latest image as source"
+            SOURCE_TAG="latest"
+          else
+            echo "Error: Could not find image to tag. Image may need to be built first."
+            exit 1
+          fi
+          
+          # Tag with commit SHA for this specific verified version
+          docker tag ${IMAGE}:${SOURCE_TAG} ${IMAGE}:verified-${SHA}
+          docker push ${IMAGE}:verified-${SHA}
+          echo "Tagged ${IMAGE}:verified-${SHA}"
+          
+          # Update stable tag to point to this verified version
+          docker tag ${IMAGE}:verified-${SHA} ${IMAGE}:stable
+          docker push ${IMAGE}:stable
+          echo "Updated ${IMAGE}:stable to point to verified-${SHA}"
+          
+          # Also update latest to point to this verified version (for consistency)
+          docker tag ${IMAGE}:verified-${SHA} ${IMAGE}:latest
+          docker push ${IMAGE}:latest
+          echo "Updated ${IMAGE}:latest to point to verified-${SHA}"

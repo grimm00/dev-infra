@@ -15,6 +15,7 @@
 - **[Version Management](version-management.md)** - .version file vs workflow-based approach
 - **[Secrets and Variables](secrets-variables.md)** - Required CI/CD configuration
 - **[External Patterns Analysis](external-patterns-analysis.md)** - Industry best practices and optimizations
+- **[GHCR Docker Images](ghcr-docker-images.md)** - Docker image evaluation for consistent testing
 - **[Recommendations](recommendations.md)** - ⭐ **START HERE** - Consolidated recommendations and next steps
 
 ---
@@ -29,6 +30,7 @@ This research evaluates CI/CD workflow improvements for the dev-infra project, f
 4. **Version Management** - Determining optimal versioning approach
 5. **Secrets and Variables** - Documenting required CI/CD configuration
 6. **External CI/CD Patterns** - Industry best practices and optimization opportunities
+7. **GHCR Docker Images** - Using Docker images for consistent testing environments
 
 ### Key Research Questions
 
@@ -51,6 +53,7 @@ This research evaluates CI/CD workflow improvements for the dev-infra project, f
 - ✅ Version management research
 - ✅ Secrets/variables documentation
 - ✅ External CI/CD patterns analysis
+- ✅ GHCR Docker images research
 
 ### Pending
 - ⏳ Implementation planning

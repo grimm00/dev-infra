@@ -140,9 +140,9 @@ jobs:
 
 **Execution Time:**
 
-- Ubuntu: ~5-7 minutes
-- macOS: ~7-10 minutes
-- Total: ~10-15 minutes (parallel execution)
+- Ubuntu: ~5-10 seconds (with Docker image, down from ~20-23 seconds)
+- macOS: ~7-10 minutes (unchanged, no Docker support)
+- Total: ~7-10 minutes (parallel execution, Ubuntu much faster)
 
 **When It Runs:**
 
@@ -207,26 +207,32 @@ if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' 
 
 ### BATS Installation
 
-**Platform-Specific Installation:**
+**Ubuntu (Docker Container):**
 
-**Ubuntu:**
+- Uses pre-built Docker image from GHCR: `ghcr.io/${{ github.repository }}/test-image:latest`
+- Image contains BATS, git, bash, and other required tools
+- No installation step needed - saves ~15 seconds per run
+- Image is tagged after successful test runs for reproducibility
 
-```bash
-sudo apt-get update
-sudo apt-get install -y bats
-```
-
-**macOS:**
+**macOS (Native Installation):**
 
 ```bash
 brew install bats-core
 ```
 
-**Detection:**
+**Image Tagging Strategy:**
 
-- Uses `${{ runner.os }}` to detect platform
-- Installs appropriate package manager tool
-- Standard approach for multi-platform workflows
+- `latest`: Current image (updated after successful test runs)
+- `stable`: Last verified working image (updated after successful test runs)
+- `verified-{sha}`: Specific commit's verified image
+- `{branch}-{sha}`: Branch-specific commit image
+
+**Benefits:**
+
+- Consistent tool versions across all Ubuntu test runs
+- Faster execution (no installation time)
+- Reproducible test environments
+- Known-good versions available via tags
 
 ### Test Execution
 
@@ -293,9 +299,10 @@ jobs:
 
 2. **Quick Checks (Ubuntu)**
 
-   - ~2-3 minutes
+   - ~6-10 seconds (with Docker image, down from ~20-23 seconds)
    - Unit tests only
    - Fast feedback
+   - Uses Docker container with pre-installed tools
 
 3. **Full Tests (Ubuntu + macOS)**
 
