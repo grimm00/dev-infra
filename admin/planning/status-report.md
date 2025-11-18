@@ -32,7 +32,7 @@ This report provides a comprehensive overview of all active CI/CD and feature pr
 
 | Feature | Status | PR | Last Updated | Notes |
 |---------|--------|----|--------------|-------|
-| [Directory Selection](features/directory-selection/README.md) | ⚠️ Discrepancy | - | 2025-11-11 | See discrepancies section |
+| [Directory Selection](features/directory-selection/README.md) | ✅ Complete | #4 (merged) | 2025-11-11 | Released in v1.2.0, docs need update |
 | [Template Restructure](features/template-restructure/README.md) | ✅ Complete | #8 (merged) | 2025-11-14 | All phases complete |
 
 ---

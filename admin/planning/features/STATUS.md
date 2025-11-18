@@ -146,6 +146,7 @@ None - Feature is complete and merged.
 ## Summary
 
 ### Completed Features
+- **Directory Selection** - ✅ Complete (PR #4 merged 2025-11-11, released v1.2.0)
 - **Template Restructure** - ✅ Complete (PR #8 merged 2025-11-14)
 
 ### Features with Discrepancies
