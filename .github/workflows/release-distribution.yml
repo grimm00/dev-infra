@@ -84,6 +84,26 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "package_name=dev-infra-${VERSION}" >> $GITHUB_OUTPUT
       
+      - name: Merge release changelog to root changelog
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          RELEASE_CHANGELOG="admin/planning/releases/v${VERSION}/CHANGELOG.md"
+          
+          # Check if release-specific changelog exists
+          if [ -f "$RELEASE_CHANGELOG" ]; then
+            echo "Found release changelog at $RELEASE_CHANGELOG, merging into root CHANGELOG.md..."
+            
+            # Extract the version section from release changelog
+            # The release changelog should start with "## [X.Y.Z]" and end before next "##" or EOF
+            # Use awk to extract from the version header to the next header or end of file
+            awk "/^## \[${VERSION}\]/,/^## \[/ { if (/^## \[/ && !/^## \[${VERSION}\]/) exit; print }" "$RELEASE_CHANGELOG" >> CHANGELOG.md
+            
+            echo "✅ Release changelog merged into root CHANGELOG.md"
+          else
+            echo "ℹ️  No release changelog found at $RELEASE_CHANGELOG, skipping merge"
+            echo "ℹ️  Note: Root CHANGELOG.md should already have the version section if release changelog doesn't exist"
+          fi
+      
       - name: Merge admin changelog to root changelog
         run: |
           # Note: This intentionally includes admin/internal changes in the distribution.
