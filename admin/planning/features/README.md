@@ -10,8 +10,8 @@
 
 ### Active Features
 
-- **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (✅ Complete)
-- **[Template Restructure](template-restructure/README.md)** - Restructure templates (admin/ → docs/maintainers/, rename to standard-project) (🟡 Planned)
+- **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (⚠️ **Status Discrepancy** - See [STATUS.md](STATUS.md) for details)
+- **[Template Restructure](template-restructure/README.md)** - Restructure templates (admin/ → docs/maintainers/, rename to standard-project) (✅ Complete)
 
 ### Template Features
 
@@ -25,6 +25,12 @@
 ## 🎯 Overview
 
 Feature planning organizes development work around user-facing functionality. Each feature has its own directory with hub-and-spoke documentation for clear navigation and focused content.
+
+---
+
+## 📊 Status Documentation
+
+- **[Detailed Status Analysis](STATUS.md)** - Comprehensive analysis of all features, completion status, discrepancies, and next steps
 
 This directory serves two purposes:
 1. **Template Features** - Planning for dev-infra template enhancements (template types, generator, validation)
@@ -107,13 +113,17 @@ features/
 
 | Feature | Status | Completed |
 |---------|--------|-----------|
-| [Directory Selection](directory-selection/README.md) | ✅ Complete | 2025-11-12 |
+| [Template Restructure](template-restructure/README.md) | ✅ Complete | 2025-11-14 (PR #8) |
+
+### ⚠️ Features with Status Discrepancies
+
+| Feature | Status | Issue | See |
+|---------|--------|-------|-----|
+| [Directory Selection](directory-selection/README.md) | ⚠️ Discrepancy | Implementation appears complete but PR not created, status indicators inconsistent | [STATUS.md](STATUS.md) |
 
 ### 🟡 Planned Features
 
-| Feature | Priority | Estimated | Dependencies |
-|---------|----------|-----------|--------------|
-| [Template Restructure](template-restructure/README.md) | High | 3-5 days | Research complete, ADR approved |
+None currently - all features are either complete or have status discrepancies that need resolution.
 
 ---
 
