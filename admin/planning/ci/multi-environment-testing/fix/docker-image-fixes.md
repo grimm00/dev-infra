@@ -180,3 +180,50 @@ ERROR: failed to build: invalid tag "ghcr.io/grimm00/dev-infra/test-image:-ca88d
 **Status:** ✅ All Fixes Complete  
 **Next:** Monitor workflow runs to verify all tests pass
 
+---
+
+## 🔍 Additional Fix: Template Operations Path Resolution
+
+### Issue: Template Operations Tests Failing After Alignment
+
+**Tests Affected:**
+- `template_operations: copies standard-project template successfully`
+- `template_operations: copies learning-project template successfully`
+- `template_operations: verifies .gitignore exists after copy`
+
+**Error:**
+```
+`[ "$status" -eq 0 ]' failed
+```
+
+**Root Cause:**
+- After aligning test helper with actual script, `PROJECT_ROOT` calculation was incorrect
+- `PROJECT_ROOT` was calculated as `$(cd "$SCRIPT_DIR/.." && pwd)` where `SCRIPT_DIR` is `tests/helpers/`
+- This resolved to `tests/` instead of project root
+- Template directory path was wrong: `tests/templates/...` instead of `templates/...`
+
+**Fix:**
+- Updated `PROJECT_ROOT` calculation to go up two levels: `$(cd "$SCRIPT_DIR/../.." && pwd)`
+- This correctly resolves to project root (parent of `tests/`)
+- Matches the actual script's `DEV_INFRA_DIR` calculation (parent of `scripts/`)
+
+**Result:** ✅ All template operations tests now pass
+
+---
+
+## 📊 Updated Fix Summary
+
+| Fix | Status | Impact | Tests Fixed |
+|-----|--------|--------|-------------|
+| Invalid Docker tag format | ✅ Fixed | Critical | Build now succeeds |
+| Git operations test failures | ✅ Fixed | Critical | 2 tests now pass |
+| Build image dependency | ✅ Fixed | Critical | Workflow now self-contained |
+| Template operations alignment | ✅ Fixed | Medium | 3 tests now pass |
+| Template operations path resolution | ✅ Fixed | Medium | 3 tests now pass |
+| Directory validation failure | ✅ Fixed | Low | 1 test now handles container env |
+
+---
+
+**Status:** ✅ All Fixes Complete  
+**Next:** Monitor workflow runs to verify all tests pass in Docker container
+

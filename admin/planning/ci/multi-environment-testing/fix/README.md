@@ -16,6 +16,8 @@
 - **[Next Steps](next-steps.md)** - Action plan for addressing issues
 - **[Platform Differences Investigation](platform-differences-investigation.md)** - Comprehensive analysis of Ubuntu vs macOS differences
 - **[Docker Image Fixes](docker-image-fixes.md)** - Fixes applied during Docker image implementation
+- **[Template Operations Investigation](template-operations-investigation.md)** - Investigation and fix for template operations test failures
+- **[Template Operations Alignment Analysis](template-operations-alignment-analysis.md)** - Analysis of test helper vs actual script alignment
 
 ---
 

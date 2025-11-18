@@ -4,7 +4,9 @@
 # This file provides utilities for testing the new-project.sh script
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+# PROJECT_ROOT is the parent of tests/ (equivalent to DEV_INFRA_DIR in actual script)
+# SCRIPT_DIR is tests/helpers/, so we need to go up two levels: tests/helpers/ -> tests/ -> project root
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 SCRIPT_PATH="$PROJECT_ROOT/scripts/new-project.sh"
 
 # Extract and define functions directly to avoid sourcing issues
@@ -146,29 +148,27 @@ define_test_functions() {
         return 0
     }
     
-    # Define copy_template function (simplified for testing)
+    # Define copy_template function (aligned with scripts/new-project.sh)
     copy_template() {
         local template_type="$1"
         local full_project_path="$2"
-        local git_root
-        git_root=$(git rev-parse --show-toplevel 2>/dev/null || echo "$PROJECT_ROOT")
-        local template_dir="$git_root/templates/$template_type"
+        # Use PROJECT_ROOT directly (equivalent to DEV_INFRA_DIR in actual script)
+        # PROJECT_ROOT is calculated as parent of tests/helpers/ = project root
+        local template_dir="$PROJECT_ROOT/templates/$template_type"
         
         if [ ! -d "$template_dir" ]; then
             return 1
         fi
         
-        # Create project directory
-        mkdir -p "$full_project_path"
+        # Copy template directory (matches actual script behavior)
+        # cp -r will create $full_project_path as a copy of $template_dir
+        # This matches: cp -r "$template_dir" "$full_project_path" in actual script
+        cp -r "$template_dir" "$full_project_path"
         
-        # Copy template contents including hidden files
-        cp -r "$template_dir"/* "$full_project_path/" 2>/dev/null || true
-        cp -r "$template_dir"/.[!.]* "$full_project_path/" 2>/dev/null || true
-        
-        # Verify important files were copied
-        if [ ! -f "$full_project_path/.gitignore" ]; then
-            return 2  # Warning: .gitignore not found
-        fi
+        # Verify important files were copied (matches actual script - only warns, doesn't fail)
+        # Actual script: print_warning ".gitignore not found - template may need updating"
+        # Test helper: just continue (tests will verify .gitignore exists separately)
+        # Note: We don't return 2 here because actual script doesn't fail on missing .gitignore
         
         return 0
     }
