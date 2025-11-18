@@ -41,28 +41,23 @@ This report provides a comprehensive overview of all active CI/CD and feature pr
 
 ### 1. Directory Selection Feature
 
-**Conflict Identified:**
-- `admin/planning/features/README.md` states: ✅ Complete
-- `admin/planning/features/directory-selection/README.md` states: 🟡 Planned
-- `admin/planning/features/directory-selection/status-and-next-steps.md` states: ✅ Complete (100% progress, ready for PR)
+**✅ RESOLVED - Feature is Complete and Merged**
 
-**Evidence Analysis:**
-- `status-and-next-steps.md` shows:
-  - Overall Status: ✅ Complete
-  - Progress: 100%
-  - Current Phase: Ready for PR
-  - All phases (1, 2, 3) marked complete
-  - Manual testing completed
-  - Next step: "Create PR to develop for feedback"
+**Verification via Git History:**
+- PR #4: "feat: Add directory selection to new-project.sh" - MERGED 2025-11-11
+- PR #7: "Release v1.2.0: Directory Selection & Automated Testing" - MERGED 2025-11-12
+- Code verified: `validate_target_directory()` function exists and is used
+- Feature released in v1.2.0
 
-**Resolution Needed:**
-- Determine actual status: If implementation is complete but PR not created, status should be "Ready for PR" or "Complete (Pending PR)"
-- Update `directory-selection/README.md` to match actual status
-- Update `features/README.md` if status needs correction
-- Create PR if feature is truly complete
+**Documentation Status:**
+- `admin/planning/features/README.md`: ✅ Complete (CORRECT)
+- `admin/planning/features/directory-selection/README.md`: 🟡 Planned (INCORRECT - needs update)
+- `admin/planning/features/directory-selection/status-and-next-steps.md`: ✅ Complete (CORRECT)
 
-**Recommendation:**
-Based on evidence, the feature appears to be **implementation complete** but **not merged**. Status should be updated to reflect "Ready for PR" or "Complete (Pending Merge)".
+**Resolution:**
+- Feature is actually **complete and merged** (PR #4, v1.2.0)
+- Only documentation update needed: Update `directory-selection/README.md` to reflect completion
+- Remove from discrepancy tracking (not actually a discrepancy, just outdated docs)
 
 ---
 
