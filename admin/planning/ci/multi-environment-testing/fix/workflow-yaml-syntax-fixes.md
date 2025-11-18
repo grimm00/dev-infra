@@ -3,7 +3,7 @@
 **Purpose:** Document fixes for YAML syntax errors in workflow files  
 **Status:** ✅ Complete  
 **Date:** 2025-11-18  
-**PR:** TBD
+**PR:** #18
 
 ---
 
