@@ -79,25 +79,43 @@ jobs:
           NON_INTERACTIVE: true
           GITHUB_ACTIONS: true
 
-  full-tests:
+  full-tests-ubuntu:
     if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
     needs: [build-image]
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            container: ghcr.io/${{ github.repository }}/test-image:latest
-          - os: macos-latest
-            container: null
-    runs-on: ${{ matrix.os }}
-    container: ${{ matrix.container }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository }}/test-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     timeout-minutes: 30
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install BATS (macOS only)
-        if: matrix.os == 'macos-latest'
+      - name: Configure git for tests
+        run: |
+          git config --global user.name "Test User"
+          git config --global user.email "test@example.com"
+          git config --global --list
+
+      - name: Run all tests
+        run: bats --recursive tests/ || exit 1
+        env:
+          CI: true
+          NON_INTERACTIVE: true
+          GITHUB_ACTIONS: true
+
+  full-tests-macos:
+    if: ${{ github.event.pull_request.draft == false || github.event_name == 'push' }}
+    needs: [build-image]
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install BATS
         run: |
           brew install bats-core || exit 1
           bats --version || exit 1
@@ -116,7 +134,7 @@ jobs:
           GITHUB_ACTIONS: true
 
   tag-image:
-    needs: [quick-checks, full-tests]
+    needs: [quick-checks, full-tests-ubuntu, full-tests-macos]
     if: success() && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:

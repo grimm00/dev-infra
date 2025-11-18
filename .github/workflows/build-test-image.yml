@@ -8,9 +8,14 @@ on:
       - '.github/workflows/build-test-image.yml'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
       packages: write
@@ -28,15 +33,28 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/${{ github.repository }}/test-image
-          tags: |
-            type=ref,event=branch
-            type=sha,prefix={{branch}}-
-            type=raw,value=latest,enable={{is_default_branch}}
+      - name: Set image tags
+        id: tags
+        run: |
+          IMAGE="ghcr.io/${{ github.repository }}/test-image"
+          SHA="${{ github.sha }}"
+          BRANCH="${{ github.ref_name }}"
+          
+          # Build tags: commit SHA, branch-SHA, and latest (for main/develop)
+          TAGS="${IMAGE}:${SHA}"
+          
+          # Add branch-specific tag if not main/develop
+          if [ "$BRANCH" != "main" ] && [ "$BRANCH" != "develop" ]; then
+            TAGS="${TAGS},${IMAGE}:${BRANCH}-${SHA}"
+          fi
+          
+          # Add latest tag for main and develop branches
+          if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "develop" ]; then
+            TAGS="${TAGS},${IMAGE}:latest"
+          fi
+          
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+          echo "Built tags: ${TAGS}"
 
       - name: Build and push
         uses: docker/build-push-action@v5
@@ -44,8 +62,7 @@ jobs:
           context: .
           file: ./Dockerfile.test
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.tags.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
