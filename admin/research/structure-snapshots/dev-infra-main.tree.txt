@@ -1,0 +1,171 @@
+.
+├── .cursor
+│   └── rules
+│       └── main.mdc
+├── .github
+│   └── workflows
+│       └── release-distribution.yml
+├── .gitignore
+├── admin
+│   ├── feedback
+│   │   ├── bugbot
+│   │   │   ├── pr03.md
+│   │   │   ├── pr04.md
+│   │   │   ├── pr05.md
+│   │   │   └── pr07.md
+│   │   ├── deferred-tasks.md
+│   │   └── sourcery
+│   │       ├── pr01.md
+│   │       ├── pr02.md
+│   │       ├── pr03.md
+│   │       ├── pr04.md
+│   │       ├── pr05.md
+│   │       ├── pr06.md
+│   │       ├── pr07-2.md
+│   │       └── pr07.md
+│   ├── notes
+│   │   ├── ci.yml.example
+│   │   ├── examples
+│   │   │   ├── hub-and-spoke-documentation-best-practices.md
+│   │   │   ├── PROJECT-STRUCTURE-2.md
+│   │   │   └── PROJECT-STRUCTURE.md
+│   │   └── main.mdc.example
+│   ├── planning
+│   │   ├── ci
+│   │   │   ├── README.md
+│   │   │   └── release-distribution
+│   │   │       ├── DECISIONS.md
+│   │   │       ├── PLAN.md
+│   │   │       ├── README.md
+│   │   │       └── TESTING.md
+│   │   ├── features
+│   │   │   ├── directory-selection
+│   │   │   │   ├── feature-plan.md
+│   │   │   │   ├── fix
+│   │   │   │   ├── phase-1-directory-prompt.md
+│   │   │   │   ├── phase-2-path-handling.md
+│   │   │   │   ├── phase-3-validation-testing.md
+│   │   │   │   ├── README.md
+│   │   │   │   ├── status-and-next-steps.md
+│   │   │   │   └── testing
+│   │   │   └── README.md
+│   │   ├── notes
+│   │   │   └── README.md
+│   │   ├── README.md
+│   │   └── releases
+│   │       ├── PROCESS.md
+│   │       ├── README.md
+│   │       ├── v1.0.0
+│   │       │   ├── CHECKLIST.md
+│   │       │   ├── README.md
+│   │       │   └── RELEASE-NOTES.md
+│   │       ├── v1.1.0
+│   │       │   ├── CHECKLIST.md
+│   │       │   ├── README.md
+│   │       │   └── RELEASE-NOTES.md
+│   │       └── v1.2.0
+│   │           ├── RELEASE-NOTES.md
+│   │           └── RELEASE-READINESS.md
+│   ├── README.md
+│   └── research
+│       ├── 0001-template-restructure-proposal.md
+│       ├── README.md
+│       ├── structure-snapshots
+│       │   ├── admin.tree.txt
+│       │   ├── dev-infra-main.tree.txt
+│       │   ├── learning-project.tree.txt
+│       │   └── regular-project.tree.txt
+│       ├── template-restructure-comprehensive-analysis.md
+│       └── template-structure-options.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── docs
+│   ├── BEST-PRACTICES.md
+│   ├── CUSTOMIZATION.md
+│   ├── integration
+│   │   ├── dev-toolkit.md
+│   │   ├── README.md
+│   │   ├── troubleshooting.md
+│   │   └── version-pinned.md
+│   ├── INTEGRATION.md
+│   ├── maintainers
+│   │   ├── archived
+│   │   └── decisions
+│   │       └── notes
+│   │           └── opportunities
+│   ├── PROJECT-TYPES.md
+│   ├── README.md
+│   ├── TEMPLATE-FILES.md
+│   └── TEMPLATE-USAGE.md
+├── README.md
+├── scripts
+│   ├── new-project.sh
+│   └── validate-templates.sh
+├── start.txt
+├── templates
+│   ├── learning-project
+│   │   ├── .dockerignore
+│   │   ├── .gitignore
+│   │   ├── admin
+│   │   │   ├── notes
+│   │   │   ├── planning
+│   │   │   │   ├── features
+│   │   │   │   └── README.md
+│   │   │   ├── README.md
+│   │   │   └── research
+│   │   ├── practice-apps
+│   │   │   └── README.md
+│   │   ├── README.md
+│   │   ├── reference
+│   │   │   └── README.md
+│   │   ├── stage0-fundamentals
+│   │   │   └── README.md
+│   │   ├── stage1-topic
+│   │   ├── stage2-topic
+│   │   ├── stage3-topic
+│   │   └── start.txt
+│   ├── regular-project
+│   │   ├── .dockerignore
+│   │   ├── .github
+│   │   │   └── workflows
+│   │   │       └── ci.yml
+│   │   ├── .gitignore
+│   │   ├── admin
+│   │   │   ├── planning
+│   │   │   │   ├── features
+│   │   │   │   └── README.md
+│   │   │   └── README.md
+│   │   ├── backend
+│   │   │   ├── instance
+│   │   │   │   └── .gitkeep
+│   │   │   └── README.md
+│   │   ├── docs
+│   │   │   └── README.md
+│   │   ├── frontend
+│   │   │   └── README.md
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   │   └── README.md
+│   │   ├── start.txt
+│   │   └── tests
+│   │       └── README.md
+│   └── standard-project
+│       └── admin
+│           ├── chat-logs
+│           ├── docs
+│           ├── feedback
+│           ├── planning
+│           │   ├── ci
+│           │   ├── notes
+│           │   ├── phases
+│           │   └── releases
+│           ├── research
+│           └── testing
+└── tests
+    ├── fixtures
+    ├── helpers.bash
+    ├── new-project.bats
+    ├── README.md
+    └── sed-portability.bats
+
+72 directories, 97 files

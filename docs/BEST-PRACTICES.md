@@ -93,7 +93,7 @@ directory/
 ### Feature Structure
 
 ```
-admin/planning/features/feature-name/
+docs/maintainers/planning/features/feature-name/
 ├── README.md                    # 📍 HUB - Feature overview
 ├── feature-plan.md              # High-level plan
 ├── status-and-next-steps.md     # Current status

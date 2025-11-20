@@ -23,7 +23,7 @@ This guide explains how to use the dev-infra templates to create new projects wi
 
 ### 1. Choose Template Type
 
-- **Regular Project**: For applications, tools, services
+- **Standard Project**: For applications, tools, services
 - **Learning Project**: For tutorials, exercises, reference materials
 
 ### 2. Generate Project
@@ -50,7 +50,7 @@ cd /path/to/dev-infra
 
 ## 🎨 Template Types
 
-### Regular Project Template
+### Standard Project Template
 
 **Best For:**
 
@@ -71,7 +71,8 @@ cd /path/to/dev-infra
 
 ```
 project-name/
-├── admin/                    # Project management
+├── docs/
+│   └── maintainers/          # Project management
 ├── backend/                  # Backend application
 ├── frontend/                 # Frontend application
 ├── tests/                    # Centralized testing
@@ -107,7 +108,7 @@ project-name/
 ├── stage3-[topic]/          # Third learning stage
 ├── reference/               # Quick reference
 ├── practice-apps/           # Hands-on practice
-└── admin/                   # Learning management
+└── docs/maintainers/        # Learning management
 ```
 
 ---
@@ -140,7 +141,7 @@ The `new-project.sh` script provides an interactive way to create new projects:
 
 **Project Type:**
 
-- Regular Project (1)
+- Standard Project (1)
 - Learning Project (2)
 
 **Git Integration:**
@@ -288,7 +289,7 @@ directory/
 
 ```bash
 ./scripts/new-project.sh
-# Choose: Regular Project
+   # Choose: Standard Project
 # Name: my-web-app
 # Description: Full-stack web application
 ```
@@ -318,7 +319,7 @@ directory/
 
 ```bash
 ./scripts/new-project.sh
-# Choose: Regular Project
+   # Choose: Standard Project
 # Name: my-cli-tool
 # Description: Command-line utility
 ```

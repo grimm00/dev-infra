@@ -126,7 +126,7 @@ mkdir -p "${PROJECT_DIR}"
 if [ "$PROJECT_TYPE" = "learning" ]; then
     cp -r "${DEVINFRA_TEMPLATES_DIR}/learning-project/"* "${PROJECT_DIR}/"
 else
-    cp -r "${DEVINFRA_TEMPLATES_DIR}/regular-project/"* "${PROJECT_DIR}/"
+    cp -r "${DEVINFRA_TEMPLATES_DIR}/standard-project/"* "${PROJECT_DIR}/"
 fi
 
 # Customize files
@@ -211,7 +211,7 @@ esac
 # Install specific version
 dev-toolkit install-templates 1.0.0
 
-# Create new regular project
+# Create new standard project
 dev-toolkit new-project regular
 
 # Create new learning project

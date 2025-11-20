@@ -1,0 +1,86 @@
+# Multi-Environment Testing Workflow - Planning Hub
+
+**Purpose:** Automated testing across Ubuntu and macOS to ensure cross-platform compatibility  
+**Status:** ✅ Complete  
+**Last Updated:** 2025-11-18  
+**Type:** CI/CD Enhancement
+
+---
+
+## 🎯 Quick Links
+
+- **[Implementation Plan](PLAN.md)** - Detailed implementation steps
+- **[Design Decisions](DECISIONS.md)** - Key architectural decisions
+- **[Workflow Specification](WORKFLOW.md)** - Complete workflow YAML and explanation
+- **[PR #17 Fix Documentation](fix/)** - Issues and fixes for workflow implementation
+
+---
+
+## 📋 Problem Statement
+
+Currently, dev-infra tests are run manually or locally:
+- ❌ No automated CI/CD testing
+- ❌ No multi-platform validation
+- ❌ Tests may pass on one OS but fail on another
+- ❌ No integration with release workflow
+- ❌ Manual testing before releases
+
+**We need:**
+- ✅ Automated testing on every PR
+- ✅ Multi-platform validation (Ubuntu + macOS)
+- ✅ Tests block release if they fail
+- ✅ Fast feedback for developers
+- ✅ Cross-platform compatibility assurance
+
+---
+
+## 🎯 Goals
+
+1. **Automated Testing** - Run tests automatically on PRs and pushes
+2. **Multi-Platform** - Test on Ubuntu and macOS (Windows deferred)
+3. **Quality Gate** - Block release if tests fail
+4. **Fast Feedback** - Quick checks for rapid iteration (~6-10 seconds with Docker)
+5. **Optimized** - Use concurrency control, path filtering, draft PR filtering
+6. **Consistent Environment** - Docker images for Ubuntu jobs ensure tool version consistency
+
+---
+
+## 📊 Success Criteria
+
+- [x] Tests run automatically on all PRs ✅
+- [x] Tests run on Ubuntu and macOS ✅
+- [x] Tests block release if they fail ✅
+- [x] Path filtering skips docs/admin changes ✅
+- [x] Draft PRs don't trigger full validation ✅
+- [x] Concurrency control prevents duplicate runs ✅
+- [x] Timeout limits prevent hung workflows ✅
+- [x] All 63 tests passing (1 skipped) ✅
+- [x] Docker images for consistent Ubuntu environment ✅
+- [x] Image tagging strategy implemented ✅
+
+---
+
+## 🗓️ Timeline
+
+- **Planning:** 1 session (this phase)
+- **Implementation:** 1-2 sessions
+- **Testing:** 1 session
+- **Review:** External review via PR
+- **Deployment:** Activates on next PR
+
+---
+
+## 📚 Related Documentation
+
+- **[Multi-Environment Testing Research](../../../research/ci-cd-workflow-improvements/multi-environment-testing.md)** - Research and analysis
+- **[GHCR Docker Images Research](../../../research/ci-cd-workflow-improvements/ghcr-docker-images.md)** - Docker image evaluation and implementation
+- **[External Patterns Analysis](../../../research/ci-cd-workflow-improvements/external-patterns-analysis.md)** - Industry best practices
+- **[CI/CD Workflow Improvements ADR](../../../decisions/0002-cicd-workflow-improvements.md)** - Architecture decision
+- **[Test Suite Documentation](../../../../tests/README.md)** - Current test structure
+
+---
+
+**Status:** ✅ Complete  
+**Merged:** PR #17 merged to develop on 2025-11-18  
+**Next:** Workflow is active and running on all PRs
+

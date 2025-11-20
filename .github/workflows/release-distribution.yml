@@ -4,9 +4,59 @@ on:
   release:
     types: [published]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  create-distribution:
+  quick-checks:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Install BATS
+        run: |
+          sudo apt-get update || exit 1
+          sudo apt-get install -y bats || exit 1
+          bats --version || exit 1
+
+      - name: Run unit tests
+        run: bats --recursive tests/unit/ || exit 1
+
+  full-tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Install BATS
+        run: |
+          if [ "${{ runner.os }}" == "Linux" ]; then
+            sudo apt-get update || exit 1
+            sudo apt-get install -y bats || exit 1
+            bats --version || exit 1
+          elif [ "${{ runner.os }}" == "macOS" ]; then
+            brew install bats-core || exit 1
+            bats --version || exit 1
+          fi
+
+      - name: Run all tests
+        run: bats --recursive tests/ || exit 1
+
+  create-distribution:
+    needs: [quick-checks, full-tests]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: write  # Required to upload release assets
       id-token: write  # Required for some GitHub API operations
@@ -33,6 +83,26 @@ jobs:
           fi
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "package_name=dev-infra-${VERSION}" >> $GITHUB_OUTPUT
+      
+      - name: Merge release changelog to root changelog
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          RELEASE_CHANGELOG="admin/planning/releases/v${VERSION}/CHANGELOG.md"
+          
+          # Check if release-specific changelog exists
+          if [ -f "$RELEASE_CHANGELOG" ]; then
+            echo "Found release changelog at $RELEASE_CHANGELOG, merging into root CHANGELOG.md..."
+            
+            # Extract the version section from release changelog
+            # The release changelog should start with "## [X.Y.Z]" and end before next "##" or EOF
+            # Use awk to extract from the version header to the next header or end of file
+            awk "/^## \[${VERSION}\]/,/^## \[/ { if (/^## \[/ && !/^## \[${VERSION}\]/) exit; print }" "$RELEASE_CHANGELOG" >> CHANGELOG.md
+            
+            echo "✅ Release changelog merged into root CHANGELOG.md"
+          else
+            echo "ℹ️  No release changelog found at $RELEASE_CHANGELOG, skipping merge"
+            echo "ℹ️  Note: Root CHANGELOG.md should already have the version section if release changelog doesn't exist"
+          fi
       
       - name: Merge admin changelog to root changelog
         run: |
@@ -113,7 +183,7 @@ jobs:
           
           # Test that both templates exist
           echo "Checking templates..."
-          [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates/regular-project" ] || { echo "❌ Missing regular-project template"; exit 1; }
+          [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates/standard-project" ] || { echo "❌ Missing standard-project template"; exit 1; }
           [ -d "${TEST_DIR}/${PACKAGE_NAME}/templates/learning-project" ] || { echo "❌ Missing learning-project template"; exit 1; }
           
           # Test that documentation exists
@@ -158,4 +228,3 @@ jobs:
             --repo "${{ github.repository }}"
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
-

@@ -54,6 +54,20 @@ prompt_yes_no() {
     local default="$2"
     local input
     
+    # Check if we're in a non-interactive environment (CI, automated tests, etc.)
+    # Check GITHUB_ACTIONS first (GitHub Actions specific)
+    # Then check CI (generic CI systems)
+    # Then check NON_INTERACTIVE (explicit flag)
+    # Then check terminal (fallback)
+    # Finally check BATS environment
+    if [ -n "$GITHUB_ACTIONS" ] || [ -n "$CI" ] || [ -n "$NON_INTERACTIVE" ] || [ ! -t 0 ] || [ -n "$BATS_RUN_TMPDIR" ]; then
+        # Non-interactive: return default value
+        case "${default:-n}" in
+            [Yy]* ) return 0;;
+            * ) return 1;;
+        esac
+    fi
+    
     while true; do
         if [ -n "$default" ]; then
             read -p "$prompt [y/N]: " input
@@ -497,8 +511,8 @@ show_next_steps() {
         echo "- Follow the learning path in order"
         echo "- Complete exercises as you go"
     else
-        echo "- Review admin/planning/README.md for project management"
-        echo "- Set up your first feature in admin/planning/features/"
+        echo "- Review docs/maintainers/planning/README.md for project management"
+        echo "- Set up your first feature in docs/maintainers/planning/features/"
         echo "- Configure CI/CD workflows"
     fi
     echo
@@ -638,7 +652,7 @@ main() {
     # Select project type
     echo
     echo "Select project type:"
-    echo "1) Regular Project (application, tool, service)"
+    echo "1) Standard Project (application, tool, service)"
     echo "2) Learning Project (tutorial, exercises, reference)"
     echo
     
@@ -647,8 +661,8 @@ main() {
         read -p "Enter choice [1-2]: " project_type_choice
         case $project_type_choice in
             1)
-                project_type="Regular Project"
-                template_type="regular-project"
+                project_type="Standard Project"
+                template_type="standard-project"
                 break
                 ;;
             2)

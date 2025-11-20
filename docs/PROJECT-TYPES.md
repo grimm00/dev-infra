@@ -12,16 +12,16 @@ Dev-infra provides two distinct project templates, each optimized for different 
 
 ### Template Types
 
-- **Regular Project** - For applications, tools, and services
+- **Standard Project** - For applications, tools, and services
 - **Learning Project** - For tutorials, courses, and educational content
 
 ---
 
-## 🔄 Regular vs Learning Projects
+## 🔄 Standard vs Learning Projects
 
 ### Quick Comparison
 
-| Aspect            | Regular Project           | Learning Project         |
+| Aspect            | Standard Project          | Learning Project         |
 | ----------------- | ------------------------- | ------------------------ |
 | **Purpose**       | Build applications/tools  | Teach concepts/skills    |
 | **Structure**     | Feature-based development | Stage-based learning     |
@@ -32,7 +32,7 @@ Dev-infra provides two distinct project templates, each optimized for different 
 
 ---
 
-## 🏗️ Regular Project Template
+## 🏗️ Standard Project Template
 
 ### When to Use
 
@@ -57,14 +57,13 @@ Dev-infra provides two distinct project templates, each optimized for different 
 ### Structure Overview
 
 ```
-regular-project/
-├── admin/                    # 📍 Project management hub
-│   ├── planning/            # Feature planning, releases
-│   ├── feedback/            # Code reviews, external feedback
-│   ├── chat-logs/           # AI conversation history
-│   ├── testing/             # Testing strategies
-│   ├── docs/                # Admin documentation
-│   └── research/            # Decision documentation
+standard-project/
+├── docs/
+│   └── maintainers/         # 📍 Project management hub
+│       ├── planning/        # Feature planning, releases
+│       ├── feedback/        # Code reviews, external feedback
+│       ├── decisions/       # Architecture decisions (ADRs)
+│       └── archived/        # Historical documentation
 ├── backend/                  # 📍 Backend application hub
 │   ├── models/              # Data models
 │   ├── routes/              # API endpoints
@@ -168,10 +167,11 @@ learning-project/
 ├── practice-apps/           # 📍 Hands-on practice hub
 │   ├── README.md            # Practice apps overview
 │   └── [app-name]/          # Individual practice apps
-└── admin/                   # 📍 Learning management hub
-    ├── planning/            # Learning roadmap
-    ├── research/            # Learning decisions
-    └── notes/               # Learning insights
+└── docs/
+    └── maintainers/         # 📍 Learning management hub
+        ├── planning/        # Learning roadmap
+        ├── research/        # Learning decisions
+        └── notes/           # Learning insights
 ```
 
 ### Key Features
@@ -203,7 +203,7 @@ learning-project/
 
 ### Decision Matrix
 
-**Choose Regular Project If:**
+**Choose Standard Project If:**
 
 - [ ] Building an application or tool
 - [ ] Need production-ready code
@@ -228,12 +228,12 @@ learning-project/
 **Learning + Regular:**
 
 - Start with Learning Project for course content
-- Create Regular Project for practice applications
+- Create Standard Project for practice applications
 - Link between learning materials and working code
 
-**Regular + Learning:**
+**Standard + Learning:**
 
-- Use Regular Project for main application
+- Use Standard Project for main application
 - Add Learning Project for documentation/tutorials
 - Create educational content about your project
 
@@ -241,12 +241,12 @@ learning-project/
 
 ## 🔧 Customization Examples
 
-### Regular Project Customizations
+### Standard Project Customizations
 
 **Web Application:**
 
 ```bash
-# Keep: admin/, backend/, frontend/, tests/, scripts/, docs/
+# Keep: docs/maintainers/, backend/, frontend/, tests/, scripts/, docs/
 # Customize: Add specific frameworks, update CI/CD
 # Remove: Unused directories based on tech stack
 ```
@@ -254,7 +254,7 @@ learning-project/
 **CLI Tool:**
 
 ```bash
-# Keep: admin/, scripts/, docs/, tests/
+# Keep: docs/maintainers/, scripts/, docs/, tests/
 # Customize: Focus on scripts/ directory
 # Remove: frontend/, backend/ (if not needed)
 ```
@@ -262,7 +262,7 @@ learning-project/
 **API Service:**
 
 ```bash
-# Keep: admin/, backend/, tests/, docs/
+# Keep: docs/maintainers/, backend/, tests/, docs/
 # Customize: Focus on backend/ structure
 # Remove: frontend/ (if API-only)
 ```
@@ -299,9 +299,9 @@ learning-project/
 
 ### Development Workflow
 
-**Regular Project:**
+**Standard Project:**
 
-1. Plan features in admin/planning/features/
+1. Plan features in docs/maintainers/planning/features/
 2. Develop in backend/ and frontend/
 3. Test in tests/ directory
 4. Deploy using scripts/
@@ -317,7 +317,7 @@ learning-project/
 
 ### Documentation Approach
 
-**Regular Project:**
+**Standard Project:**
 
 - Technical documentation
 - API references
@@ -335,7 +335,7 @@ learning-project/
 
 ### Maintenance Patterns
 
-**Regular Project:**
+**Standard Project:**
 
 - Feature updates
 - Bug fixes
@@ -355,13 +355,13 @@ learning-project/
 
 ## 🚀 Getting Started
 
-### For Regular Projects
+### For Standard Projects
 
 1. **Generate Project**
 
    ```bash
    ./scripts/new-project.sh
-   # Choose: Regular Project
+   # Choose: Standard Project
    ```
 
 2. **Customize Structure**
@@ -371,7 +371,7 @@ learning-project/
    - Set up CI/CD workflows
 
 3. **Start Development**
-   - Create first feature in admin/planning/features/
+   - Create first feature in docs/maintainers/planning/features/
    - Set up development environment
    - Begin feature development
 

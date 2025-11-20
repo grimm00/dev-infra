@@ -1,0 +1,36 @@
+templates/standard-project
+├── .dockerignore
+├── .github
+│   └── workflows
+│       └── ci.yml
+├── .gitignore
+├── backend
+│   ├── instance
+│   │   └── .gitkeep
+│   └── README.md
+├── docs
+│   ├── README.md
+│   ├── guides
+│   ├── api
+│   └── maintainers
+│       ├── README.md
+│       ├── planning
+│       │   ├── features
+│       │   │   └── README.md
+│       │   ├── releases
+│       │   ├── ci
+│       │   └── README.md
+│       ├── decisions
+│       ├── feedback
+│       └── archived
+├── frontend
+│   └── README.md
+├── README.md
+├── scripts
+│   └── README.md
+├── start.txt
+└── tests
+    └── README.md
+
+17 directories, 15 files
+
