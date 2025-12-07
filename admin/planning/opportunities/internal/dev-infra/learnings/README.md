@@ -11,6 +11,7 @@
 
 ### Learning Documents
 
+- **[Command Adaptation Template Learnings](command-adaptation-template-learnings.md)** - Learnings from creating the Command Adaptation Template feature
 - **[Cursor Commands Integration Learnings](cursor-commands-integration-learnings.md)** - Learnings from adapting 14 workflow automation commands
 
 ---
@@ -27,7 +28,7 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 1  
+**Total Learning Documents:** 2  
 **Status:** ✅ Active
 
 ---
