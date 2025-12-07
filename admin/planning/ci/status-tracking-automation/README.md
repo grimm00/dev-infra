@@ -11,6 +11,7 @@
 ## 📋 Quick Links
 
 - **[Improvement Plan](improvement-plan.md)** - Detailed improvement plan
+- **[Transition Plan](transition-plan.md)** - Implementation transition plan
 
 ---
 
