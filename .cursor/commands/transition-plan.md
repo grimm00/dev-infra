@@ -44,7 +44,7 @@ This command supports multiple project organization patterns:
 - To plan transition to next stage (feature, release, infrastructure)
 - When ready to move from reflection to implementation planning
 
-**Key principle:** Transform reflection artifacts into actionable transition plans ready for implementation, following established planning patterns.
+**Key principle:** Transform reflection artifacts into actionable transition plans ready for implementation, following established planning patterns. For feature transitions, also create detailed phase documents (`phase-#.md`) following work-prod's comprehensive phase structure.
 
 ---
 
@@ -313,6 +313,7 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **Documents created:**
 
 - `transition-plan.md` - Detailed transition plan
+- `phase-1.md`, `phase-2.md`, `phase-3.md`, etc. - Detailed phase documents (one per phase)
 - Update `feature-plan.md` - Add transition-specific details
 
 **Transition Plan Template:**
@@ -518,7 +519,78 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 ---
 
-### 5. Update Planning Hubs
+### 5. Create Phase Documents (Feature Transitions Only)
+
+**When to create:** Only for feature transitions with phases
+
+**Process:**
+
+1. **Extract phases from transition plan:**
+   - Parse `transition-plan.md` for phase sections
+   - Extract phase number, name, goal, tasks, deliverables, prerequisites, effort
+   - Identify all phases (Phase 1, Phase 2, Phase 3, etc.)
+
+2. **For each phase, create `phase-#.md` file:**
+   - Use phase document template (see `docs/PHASE-DOCUMENT-TEMPLATE.md`)
+   - Populate with extracted phase information
+   - Expand tasks with TDD flow structure (RED → GREEN → REFACTOR)
+   - Add project-specific implementation notes
+
+3. **Phase document structure:**
+   - Header: Phase number, name, duration, status, prerequisites
+   - Overview: What phase delivers, success definition
+   - Goals: Numbered list of phase goals
+   - Tasks: Detailed TDD flow with sub-tasks
+   - Completion Criteria: Checklist of completion requirements
+   - Deliverables: What gets created/delivered
+   - Dependencies: Prerequisites, external dependencies, blocks
+   - Risks: Risk assessment with mitigation (if applicable)
+   - Progress Tracking: Status tracking by category
+   - Implementation Notes: TDD workflow, patterns, examples
+   - Related Documents: Links to related docs
+
+**File locations:**
+
+- Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
+- Project-wide: `docs/maintainers/planning/phases/phase-N.md`
+
+**Phase document template:**
+
+Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
+
+**Key sections to populate:**
+
+- **Header:** Extract from transition plan phase header
+- **Overview:** Expand phase goal into detailed overview with success definition
+- **Goals:** Extract and expand phase goals
+- **Tasks:** Expand transition plan tasks into detailed TDD flow:
+  - Group tasks into RED/GREEN pairs where applicable
+  - Add detailed sub-tasks with checkboxes
+  - Include code examples where applicable
+  - Add testing commands and manual testing steps
+- **Completion Criteria:** Extract from transition plan "Definition of Done"
+- **Deliverables:** Extract from transition plan deliverables
+- **Dependencies:** Extract prerequisites, add external dependencies if known
+- **Risks:** Add risk assessment if applicable
+- **Progress Tracking:** Add status tracking sections
+- **Implementation Notes:** Add TDD workflow guidance, patterns, examples
+- **Related Documents:** Link to previous/next phases, feature plan, hub
+
+**Checklist:**
+
+- [ ] All phases extracted from transition plan
+- [ ] Phase documents created (`phase-1.md`, `phase-2.md`, etc.)
+- [ ] Phase documents follow template structure
+- [ ] Tasks expanded with TDD flow
+- [ ] Implementation notes added
+- [ ] Related documents linked
+- [ ] Phase documents are detailed (~300+ lines)
+
+**Note:** Phase documents should be comprehensive and actionable, following work-prod's phase document structure. They serve as the primary implementation guide for each phase.
+
+---
+
+### 6. Update Planning Hubs
 
 **Update relevant hub files:**
 
@@ -531,6 +603,7 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
    - File: `docs/maintainers/planning/features/README.md` (if exists)
    - Update feature status
    - Add transition plan link
+   - Add phase document links (if created)
 
 3. **CI/CD Hub:**
    - File: `docs/maintainers/planning/ci/README.md` (if exists)
@@ -541,12 +614,13 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 - [ ] Release hub updated (if release transition)
 - [ ] Feature hub updated (if feature transition)
+- [ ] Phase document links added to feature hub (if phase documents created)
 - [ ] CI/CD hub updated (if CI/CD transition)
 - [ ] Hub links verified
 
 ---
 
-### 6. Summary Report
+### 7. Summary Report
 
 **Present to user:**
 
@@ -559,19 +633,28 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 ### Transition Planning Documents Created
 
 - `transition-plan.md` - Detailed transition plan
+- `phase-1.md`, `phase-2.md`, `phase-3.md`, etc. - Detailed phase documents (for feature transitions)
 - Updated artifact files with transition details
 
 ### Transition Steps
 
-- [N] steps identified
+- [N] steps/phases identified
 - Estimated effort: [X] hours
 - Estimated duration: [Y] days
+
+### Phase Documents (Feature Transitions)
+
+- [N] phase documents created
+- Each phase document includes: Overview, Goals, Tasks (TDD flow), Completion Criteria, Deliverables, Dependencies, Implementation Notes
+- Phase documents follow work-prod structure (~300+ lines each)
 
 ### Next Steps
 
 1. Review transition plan
-2. Begin implementation when ready
-3. Use `/task-phase` or `/task-release` or `/pr` commands for implementation
+2. Review phase documents (if created)
+3. Begin implementation when ready
+4. Use `/task-phase` to implement phases (reads `phase-#.md` files)
+5. Use `/task-release` or `/pr` commands for releases
 ```
 
 ---
