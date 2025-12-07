@@ -11,6 +11,7 @@ Creates transition planning documents from reflection artifacts or directly from
 This command supports multiple project organization patterns:
 
 1. **Feature-Specific Structure (default):**
+
    - Artifacts: `docs/maintainers/planning/features/[feature-name]/feature-plan.md`
    - Transition plans: `docs/maintainers/planning/features/[feature-name]/transition-plan.md`
 
@@ -78,6 +79,7 @@ This command supports multiple project organization patterns:
 **Two modes of operation:**
 
 1. **Artifact Mode (default):** Create plans from existing artifacts
+
    - Use: `/transition-plan --from-artifacts [path]`
    - Reads: Artifact files created by `/reflection-artifacts`
    - Creates: Transition planning documents
@@ -145,16 +147,19 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **Auto-detection logic:**
 
 1. **Release Transition:**
+
    - Artifact path contains `releases/`
    - Artifact filename is `checklist.md` or `release-notes.md`
    - Artifact content mentions "release", "version", "tag"
 
 2. **Feature Transition:**
+
    - Artifact path contains `features/`
    - Artifact filename is `feature-plan.md`
    - Artifact content mentions "feature", "implementation", "phases"
 
 3. **CI/CD Transition:**
+
    - Artifact path contains `ci/`
    - Artifact filename is `improvement-plan.md`
    - Artifact content mentions "ci", "cd", "pipeline", "automation"
@@ -273,11 +278,13 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **IMPORTANT:** Extract **ALL steps** from the artifact. Do not limit to just 2 steps.
 
 1. **Step 1: [Name]**
+
    - [ ] Task 1
    - [ ] Task 2
    - Estimated: [X] hours
 
 2. **Step 2: [Name]**
+
    - [ ] Task 1
    - [ ] Task 2
    - Estimated: [X] hours
@@ -357,19 +364,23 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **Estimated Effort:** [X] hours/days
 
 **Prerequisites:**
+
 - [ ] [Prerequisite 1]
 - [ ] [Prerequisite 2]
 
 **Tasks:**
+
 - [ ] Task 1
 - [ ] Task 2
 - [ ] Task 3
 
 **Deliverables:**
+
 - [Deliverable 1]
 - [Deliverable 2]
 
 **Definition of Done:**
+
 - [ ] All tasks complete
 - [ ] Deliverables created
 - [ ] Ready for Phase 2
@@ -383,19 +394,23 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **Estimated Effort:** [X] hours/days
 
 **Prerequisites:**
+
 - [ ] Phase 1 complete
 - [ ] [Additional prerequisites]
 
 **Tasks:**
+
 - [ ] Task 1
 - [ ] Task 2
 - [ ] Task 3
 
 **Deliverables:**
+
 - [Deliverable 1]
 - [Deliverable 2]
 
 **Definition of Done:**
+
 - [ ] All tasks complete
 - [ ] Deliverables created
 - [ ] Ready for Phase 3 (or post-transition if last phase)
@@ -411,17 +426,21 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **Estimated Effort:** [X] hours/days
 
 **Prerequisites:**
+
 - [ ] Phase 2 complete
 - [ ] [Additional prerequisites]
 
 **Tasks:**
+
 - [ ] Task 1
 - [ ] Task 2
 
 **Deliverables:**
+
 - [Deliverable 1]
 
 **Definition of Done:**
+
 - [ ] All tasks complete
 - [ ] Deliverables created
 - [ ] Ready for post-transition (if last phase)
@@ -451,6 +470,8 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 - `transition-plan.md` - Detailed transition plan
 - `phase-1.md`, `phase-2.md`, `phase-3.md`, etc. - Detailed phase documents (one per step, treating steps as phases)
+
+**Note:** CI/CD improvements use `/task-improvement` command (not `/task-phase`) because they have different structure and workflow (process/documentation vs. TDD).
 
 **Transition Plan Template:**
 
@@ -487,11 +508,13 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **IMPORTANT:** Extract **ALL steps** from the artifact. Do not limit to just 2 steps.
 
 1. **Step 1: [Name]**
+
    - [ ] Task 1
    - [ ] Task 2
    - Estimated: [X] hours
 
 2. **Step 2: [Name]**
+
    - [ ] Task 1
    - [ ] Task 2
    - Estimated: [X] hours
@@ -522,19 +545,22 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 ### 5. Create Phase Documents (Feature and CI/CD Transitions)
 
-**When to create:** 
+**When to create:**
+
 - For feature transitions with phases (always)
 - For CI/CD transitions with steps (treat steps as phases)
 
 **Process:**
 
 1. **Extract phases/steps from transition plan:**
+
    - **For Feature Transitions:** Parse `transition-plan.md` for phase sections (Phase 1, Phase 2, etc.)
    - **For CI/CD Transitions:** Parse `transition-plan.md` for step sections (Step 1, Step 2, etc.) and treat as phases
    - Extract phase/step number, name, goal, tasks, deliverables, prerequisites, effort
    - Identify all phases/steps (Phase/Step 1, Phase/Step 2, Phase/Step 3, etc.)
 
 2. **For each phase/step, create `phase-#.md` file:**
+
    - Use phase document template (see `docs/PHASE-DOCUMENT-TEMPLATE.md`)
    - Populate with extracted phase/step information
    - **For Feature Transitions:** Expand tasks with TDD flow structure (RED → GREEN → REFACTOR)
@@ -592,7 +618,8 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
 - [ ] Related documents linked
 - [ ] Phase documents are detailed (~200-300+ lines)
 
-**Note:** 
+**Note:**
+
 - **Feature transitions:** Phase documents should be comprehensive and actionable, following work-prod's phase document structure with TDD flow. They serve as the primary implementation guide for each phase.
 - **CI/CD transitions:** Phase documents should be comprehensive and actionable, following the phase document template structure. Tasks may focus on documentation, process improvements, and workflow integration rather than TDD. They serve as the primary implementation guide for each improvement step.
 
@@ -603,11 +630,13 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
 **Update relevant hub files:**
 
 1. **Release Hub:**
+
    - File: `docs/maintainers/planning/releases/README.md`
    - Update release status
    - Add transition plan link
 
 2. **Feature Hub:**
+
    - File: `docs/maintainers/planning/features/README.md` (if exists)
    - Update feature status
    - Add transition plan link
@@ -816,7 +845,8 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
 
 - `/reflection-artifacts` - Generate artifacts from reflection (run first, or auto-called)
 - `/reflect` - Create reflection documents (if available)
-- `/task-phase` - Implement phase tasks (reads `phase-#.md` files created by this command)
+- `/task-phase` - Implement feature phase tasks (reads `phase-#.md` files created by this command)
+- `/task-improvement` - Implement CI/CD improvement phase tasks (reads `phase-#.md` files created by this command)
 - `/task-release` - Implement release transition tasks
 - `/pre-phase-review` - Review phase plans before implementation
 
@@ -830,4 +860,3 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
 **Last Updated:** 2025-12-07  
 **Status:** ✅ Active  
 **Next:** Use after `/reflection-artifacts` to create transition plans, or use `--from-reflection` to streamline workflow (supports feature-specific and project-wide structures)
-

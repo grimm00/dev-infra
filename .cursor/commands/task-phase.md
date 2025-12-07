@@ -20,23 +20,16 @@ This command supports multiple phase organization patterns:
    - Used when no feature structure exists
    - Example: `docs/maintainers/planning/phases/phase-1.md`
 
-3. **CI/CD Improvement Phases:**
-   - Path: `docs/maintainers/planning/ci/[improvement-name]/phase-N.md`
-   - Improvement name auto-detected from context or configuration
-   - Example: `docs/maintainers/planning/ci/status-tracking-automation/phase-1.md`
-   - Use `--ci-improvement [name]` option to specify improvement name
+**Note:** For CI/CD improvements, use `/task-improvement` command instead. CI/CD improvements have different structure (no `status-and-next-steps.md`, process/documentation workflow vs. TDD).
 
-**Feature/Improvement Detection:**
+**Feature Detection:**
 
-- Use `--feature` option if provided (for features)
-- Use `--ci-improvement` option if provided (for CI/CD improvements)
+- Use `--feature` option if provided
 - Otherwise, auto-detect:
   - Check if `docs/maintainers/planning/features/` exists
   - If multiple features exist, use configuration or prompt user
   - If single feature exists, use that feature name
-  - Check if `docs/maintainers/planning/ci/` exists
-  - If CI improvements exist, check for phase documents in each
-  - If no features/improvements exist, use project-wide structure
+  - If no features exist, use project-wide structure
 
 **Phase Structure Support:**
 
@@ -114,9 +107,10 @@ This command supports multiple phase organization patterns:
 **Options:**
 
 - `--feature [name]` - Specify feature name (overrides auto-detection)
-- `--ci-improvement [name]` - Specify CI/CD improvement name (for CI/CD improvements)
 - `--project-wide` - Use project-wide phase structure
 - `--phase-type [type]` - Specify phase type (phase, milestone, sprint)
+
+**Note:** For CI/CD improvements, use `/task-improvement` command instead.
 
 **Important:** 
 - This command handles **one task group at a time** (typically RED+GREEN pair)
@@ -133,21 +127,19 @@ This command supports multiple phase organization patterns:
 **What to do:**
 
 1. **Detect phase structure:**
-   - Use `--feature` option if provided (for features)
-   - Use `--ci-improvement` option if provided (for CI/CD improvements)
+   - Use `--feature` option if provided
    - Otherwise, auto-detect using same logic as other commands:
      - Check if `docs/maintainers/planning/features/` exists
      - If single feature exists, use that feature name
      - If multiple features exist, search for phase documents in each
-     - Check if `docs/maintainers/planning/ci/` exists
-     - If CI improvements exist, search for phase documents in each
-     - If no features/improvements exist, use project-wide structure
+     - If no features exist, use project-wide structure
 
 2. **Read the phase document:**
    - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
-   - CI/CD improvement: `docs/maintainers/planning/ci/[improvement-name]/phase-N.md`
    - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
    - Support alternative structures: `milestone-N.md`, `sprint-N.md` (if configured)
+
+**Note:** If CI/CD improvement detected, suggest using `/task-improvement` command instead.
 
 3. **Identify the current task** (numbered in the document)
 
@@ -156,14 +148,12 @@ This command supports multiple phase organization patterns:
 5. **Create feature branch if starting phase:**
    - Default: `feat/phase-N-[description]`
    - Feature-specific: `feat/[feature-name]-phase-N-[description]` (if configured)
-   - CI/CD improvement: `ci/[improvement-name]-phase-N-[description]` (if configured)
    - Configurable via project configuration
 
 **Branch naming:**
 
 - First task: `feat/phase-N-[description]` (e.g., `feat/phase-3-delete-archive`)
 - Feature-specific: `feat/[feature-name]-phase-N-[description]` (if configured)
-- CI/CD improvement: `ci/[improvement-name]-phase-N-[description]` (e.g., `ci/status-tracking-automation-phase-1`)
 - Subsequent tasks: Use same branch
 
 **Checklist:**
@@ -587,9 +577,10 @@ Tasks are typically numbered in phase documents:
 **Phase Documents:**
 
 - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
-- CI/CD improvement: `docs/maintainers/planning/ci/[improvement-name]/phase-N.md`
 - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
 - Alternative structures: `milestone-N.md`, `sprint-N.md` (if configured)
+
+**Note:** For CI/CD improvements, use `/task-improvement` command which reads from `docs/maintainers/planning/ci/[improvement-name]/phase-N.md`.
 
 **Feature Planning:**
 
