@@ -40,11 +40,11 @@ Phase 2 focuses on supporting workflow commands that complete the automation sui
 
 ## 📊 Command Breakdown
 
-| Command                 | Priority  | Effort | Status         | Notes                                        |
-| ----------------------- | --------- | ------ | -------------- | -------------------------------------------- |
-| `/fix-review`           | 🟠 HIGH   | 4h     | 🟠 In Progress | Cross-PR fix management, command adapted     |
-| `/post-pr`              | 🟠 HIGH   | 3h     | 🟠 In Progress | Post-merge documentation, command adapted    |
-| `/pr-validation`        | 🟡 MEDIUM | 4h     | 🟠 In Progress | Sourcery review integration, command adapted |
+| Command                 | Priority  | Effort | Status         | Notes                                           |
+| ----------------------- | --------- | ------ | -------------- | ----------------------------------------------- |
+| `/fix-review`           | 🟠 HIGH   | 4h     | 🟠 In Progress | Cross-PR fix management, command adapted        |
+| `/post-pr`              | 🟠 HIGH   | 3h     | 🟠 In Progress | Post-merge documentation, command adapted       |
+| `/pr-validation`        | 🟡 MEDIUM | 4h     | 🟠 In Progress | Sourcery review integration, command adapted    |
 | `/reflection-artifacts` | 🟡 MEDIUM | 3h     | 🟠 In Progress | Reflection workflow completion, command adapted |
 
 **Total Effort:** 14 hours

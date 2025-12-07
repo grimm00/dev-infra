@@ -59,12 +59,12 @@
 
 | Command | Priority | Effort | Status | Notes |
 |---------|----------|--------|--------|-------|
-| `/transition-plan` | 🟡 MEDIUM | 4h | 🟡 Documented | Release transition planning |
-| `/reflect` | 🟡 MEDIUM | 4h | 🟡 Documented | Project reflection workflow |
-| `/pre-phase-review` | 🟡 MEDIUM | 3h | 🔴 Not Started | Pre-phase planning review |
-| `/task-release` | 🟡 MEDIUM | 4h | 🔴 Not Started | Release task implementation |
+| `/transition-plan` | 🟡 MEDIUM | 4h | 🟠 In Progress | Release transition planning, command adapted |
+| `/reflect` | 🟡 MEDIUM | 4h | 🟠 In Progress | Project reflection workflow, command adapted |
+| `/pre-phase-review` | 🟡 MEDIUM | 3h | 🟠 In Progress | Pre-phase planning review, command adapted |
+| `/task-release` | 🟡 MEDIUM | 4h | 🟠 In Progress | Release task implementation, command adapted |
 | `/int-opp` | 🟡 MEDIUM | 2h | ✅ Complete | Internal opportunities (already adapted) |
-| `/cursor-rules` | 🟢 LOW | 2h | 🔴 Not Started | Rules management (optional) |
+| `/cursor-rules` | 🟢 LOW | 2h | 🟠 In Progress | Rules management, command adapted |
 
 **Phase 3 Total:** 19 hours (15h excluding int-opp)
 
@@ -103,7 +103,7 @@
 - [ ] `/reflect` command implemented (4h)
 - [ ] `/pre-phase-review` command adapted (3h)
 - [ ] `/task-release` command adapted (4h)
-- [ ] `/cursor-rules` command adapted (2h)
+- [x] `/cursor-rules` command adapted (2h) 🟠 (ready for testing)
 
 **Progress:** 1/6 commands (17%)  
 **Estimated Completion:** TBD
