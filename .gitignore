@@ -12,7 +12,8 @@ Thumbs.db
 # Editor files
 .vscode/
 .idea/
-.cursor/rules/
+# Allow tracking cursor rules (they're useful for templates)
+# .cursor/rules/
 *.swp
 *.swo
 *~

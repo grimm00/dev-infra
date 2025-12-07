@@ -23,12 +23,13 @@ This directory contains planning documentation for CI/CD improvements, workflows
 ### In Progress
 - **[Release Distribution Workflow](release-distribution/README.md)** - Automated distribution package creation
 
-### Completed
-- **[Multi-Environment Testing](multi-environment-testing/README.md)** - Automated testing across Ubuntu and macOS ✅ (PR #17, merged 2025-11-18)
-
 ### Planned
+- **[Command Testing Automation](command-testing-automation/README.md)** - Automated testing for cursor commands (🔴 Not Started)
 - CI/CD optimization and caching
 - Security scanning automation
+
+### Completed
+- **[Multi-Environment Testing](multi-environment-testing/README.md)** - Automated testing across Ubuntu and macOS ✅ (PR #17, merged 2025-11-18)
 
 ---
 

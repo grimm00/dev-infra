@@ -11,6 +11,8 @@
 ### Dev-Infra Planning
 - **[Features Planning](features/README.md)** - Template feature development
 - **[Releases Planning](releases/README.md)** - Version and release management
+- **[Commands Planning](commands/README.md)** - 🔴 CRITICAL: Cursor commands integration
+- **[Opportunities Planning](opportunities/README.md)** - Learnings and template improvements
 - **[Notes](notes/README.md)** - Planning insights and decisions
 
 ---
@@ -32,6 +34,7 @@ This directory organizes all planning activities for the dev-infra project itsel
 planning/
 ├── features/           # Template feature development
 ├── releases/          # Version and release management
+├── opportunities/     # Learnings and template improvements
 └── notes/             # Planning insights and decisions
 ```
 

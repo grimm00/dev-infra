@@ -1,0 +1,278 @@
+---
+alwaysApply: true
+---
+
+# Workflow Rules
+
+**Purpose:** Development workflow processes and commands for dev-infra  
+**Last Updated:** 2025-12-07  
+**Status:** ✅ Active
+
+---
+
+## 📋 Quick Links
+
+- **[Main Rules](main.mdc)** - Core project rules and standards
+- **[Template Rules](template.mdc)** - Template-specific standards
+
+---
+
+## 🚀 Git Flow Workflow
+
+### Branch Strategy
+
+**ALWAYS follow this branching model:**
+
+- `main` - Production releases ONLY (protected)
+- `develop` - Ongoing development (protected)
+- `feat/*` - Feature branches (e.g., `feat/new-template-type`)
+- `fix/*` - Bug fixes (e.g., `fix/generator-script-bug`)
+- `docs/*` - Documentation updates
+- `chore/*` - Maintenance tasks
+- `ci/*` - CI/CD changes
+- `release/*` - Release preparation branches
+
+### Commit Requirements
+
+1. **Feature/Fix/CI Branches**
+
+   - REQUIRE pull requests to develop/main
+   - Full testing and linting required
+   - External reviews on release branches
+   - Use conventional commits format
+
+2. **Documentation/Chore Branches**
+
+   - CAN push directly to develop/main
+   - Minimal validation required
+   - Focus on clarity and accuracy
+
+3. **Commit Message Format**
+
+   ```
+   type(scope): brief description
+
+   Longer explanation if needed
+   ```
+
+   Types: feat, fix, docs, chore, test, refactor, ci
+
+   Examples:
+   - `feat(templates): add CLI project template type`
+   - `fix(scripts): handle spaces in project names`
+   - `docs(planning): add command integration planning`
+   - `chore(ci): update Docker test image`
+
+---
+
+## 🔍 Pull Request Review Workflow
+
+### NEVER Merge Without Review
+
+**CRITICAL:** Do NOT merge pull requests automatically. Always follow this workflow:
+
+1. **Create PR** - Use `/pr --phase [N]` or `/pr --fix [batch]` command (when available)
+2. **Stop and Wait** - Present PR link to user, do NOT proceed to merge
+3. **External Review** - User will run `dt-review` (or use `/pr-validation` when available)
+   - **Note:** Missing reviews are acceptable - workflow continues without review
+4. **Sourcery Feedback** - Reviews saved to `admin/feedback/sourcery/pr##.md` (if applicable)
+   - **Note:** Missing reviews are acceptable - workflow continues without review
+5. **Priority Assessment** - Fill out priority matrix in Sourcery review file (if review available)
+6. **Fix Planning** - Use `/fix-plan` to create fix plans (when applicable)
+7. **User Approval** - Only merge after user explicitly approves
+8. **Post-Merge** - Use `/post-pr` to update documentation (when available)
+
+### Priority Matrix Assessment
+
+For each Sourcery comment, assess:
+- **Priority:** CRITICAL 🔴 / HIGH 🟠 / MEDIUM 🟡 / LOW 🟢
+- **Impact:** CRITICAL 🔴 / HIGH 🟠 / MEDIUM 🟡 / LOW 🟢  
+- **Effort:** LOW 🟢 / MEDIUM 🟡 / HIGH 🟠 / VERY_HIGH 🔴
+
+---
+
+## 📊 Template Development Process
+
+### Creating New Template Features
+
+**ALWAYS follow this structure when creating template features:**
+
+1. **Create Feature Directory**
+
+   ```
+   admin/planning/features/[feature-name]/
+   ```
+
+2. **Required Files**
+
+   - `README.md` - Feature hub with quick links
+   - `feature-plan.md` - High-level overview and phases
+   - `status-and-next-steps.md` - Current progress tracking
+   - `phase-1.md` - First phase details (additional phases as needed)
+
+3. **Feature Plan Structure**
+
+   ```markdown
+   # [Feature Name] - Feature Plan
+
+   **Status:** [Status Indicator]
+   **Created:** [YYYY-MM-DD]
+   **Priority:** [High/Medium/Low]
+
+   ## 📋 Overview
+
+   [Template feature description]
+
+   ## 🎯 Success Criteria
+
+   - [ ] Measurable criterion 1
+   - [ ] Measurable criterion 2
+
+   ## 📅 Implementation Phases
+
+   ### Phase 1: [Name]
+
+   - [ ] Task 1
+   - [ ] Task 2
+
+   ## 🚀 Next Steps
+
+   [Immediate next actions]
+   ```
+
+### Template Development Lifecycle
+
+1. **Discovery** - Identify opportunity from real projects
+2. **Planning** - Write feature-plan.md, break into phases
+3. **Implementation** - Execute phases, update templates
+4. **Testing** - Test template generation
+5. **Documentation** - Update user docs and examples
+6. **Release** - Include in next release
+
+---
+
+## 🔄 CI/CD Integration
+
+### Testing Requirements
+
+- **Feature branches:** Full test suite, template validation, linting
+- **Documentation branches:** Markdown validation only
+- **Release branches:** Full validation + external reviews
+- **CI branches:** Full validation + workflow testing
+
+### Template Validation
+
+**Before committing template changes:**
+
+```bash
+# Test template generation
+./scripts/new-project.sh
+
+# Validate templates
+./scripts/validate-templates.sh
+```
+
+**Validation Checklist:**
+- [ ] Template generates successfully
+- [ ] All required directories created
+- [ ] All README.md files present
+- [ ] Documentation links work
+- [ ] No broken references
+
+---
+
+## 🔗 Command Integration Workflow
+
+### Phase 1: Core Commands (In Progress)
+
+**Commands Being Integrated:**
+
+- `/fix-plan` - ✅ Adapted and ready for testing
+- `/fix-implement` - 🟡 Planned
+- `/task-phase` - 🟡 Planned
+- `/pr` - 🟡 Planned
+
+**Integration Process:**
+
+1. **Adapt Command** - Make paths generic, support multiple project structures
+2. **Test in Dev-Infra** - Test command in dev-infra project
+3. **Integrate into Templates** - Add command to template `.cursor/commands/`
+4. **Document** - Update template documentation with command usage
+5. **Validate** - Test with new project creation
+
+**See:** `admin/planning/commands/` for detailed planning
+
+---
+
+## 📝 Release Process
+
+### Standard Release Workflow
+
+**Phase 1: Feature Development (on develop)**
+
+- Develop features on `develop` branch
+- Create feature branches from `develop`
+- Merge features to `develop` after review
+- Accumulate features over time
+
+**Phase 2: Release Preparation (on release/vX.Y.Z)**
+
+- Create release branch from `develop`
+- **Only** make release-specific changes:
+  - Update CHANGELOG version
+  - Update version numbers in files
+  - Create release notes
+  - Fix critical bugs found in testing
+- **Do not** add new features on release branch
+
+**Phase 3: Release Distribution**
+
+- Merge release branch to `main`
+- Create GitHub release
+- Tag release version
+- Distribution workflow runs automatically
+
+**See:** `admin/planning/releases/PROCESS.md` for complete process
+
+---
+
+## 🎯 Template Maintenance Guidelines
+
+### When Modifying Templates
+
+1. **Test First**
+   - Always test with `./scripts/new-project.sh`
+   - Verify generated project structure
+   - Check all links and navigation
+
+2. **Update Documentation**
+   - Update template README files
+   - Update user documentation in `docs/`
+   - Update planning documents if feature-related
+
+3. **Maintain Consistency**
+   - Follow existing template patterns
+   - Keep structure consistent across template types
+   - Preserve proven patterns from real projects
+
+### Template Versioning
+
+- Templates evolve based on real project learnings
+- Capture learnings in `admin/planning/opportunities/`
+- Apply improvements in planned releases
+- Document changes in CHANGELOG.md
+
+---
+
+## 🔗 Related
+
+- **Main Rules:** [main.mdc](main.mdc) - Core project rules and standards
+- **Template Rules:** [template.mdc](template.mdc) - Template-specific standards
+- **Command Documentation:** `.cursor/commands/` - Detailed command workflows
+- **Release Process:** `admin/planning/releases/PROCESS.md`
+
+---
+
+**Last Updated:** 2025-12-07  
+**Status:** ✅ Active  
+**Next:** Continue Phase 1 command integration

@@ -1,0 +1,449 @@
+---
+alwaysApply: true
+---
+
+# Dev-Infra Template Repository - Cursor AI Rules
+
+**Purpose:** Guide AI assistance to align with dev-infra template best practices and workflows  
+**Last Updated:** 2025-12-07  
+**Status:** ✅ Active
+
+---
+
+## 📋 Quick Links
+
+### Rules Files
+
+- **[Workflow Rules](workflow.mdc)** - Git Flow, PR workflow, template development processes
+- **[Template Rules](template.mdc)** - Template structure, generation, and validation standards
+
+---
+
+## 🎯 Project Overview
+
+This is a development infrastructure template repository that provides standardized project templates and best practices. Unlike application projects, dev-infra focuses on:
+
+- **Template Generation** - Creating consistent project structures
+- **Template Maintenance** - Evolving templates based on real project learnings
+- **Best Practices** - Encoding proven patterns into templates
+- **Workflow Automation** - Cursor commands for template development
+
+### Key Principles
+
+- **Hub-and-spoke documentation pattern** for organization
+- **Template-first development** - Templates evolve based on real project needs
+- **Git Flow** version control strategy
+- **Progressive disclosure** for documentation (Overview → Details → Analysis)
+- **Command-driven workflows** - Cursor commands automate complex processes
+
+---
+
+## 📁 Documentation Standards
+
+### Hub-and-Spoke Pattern
+
+**ALWAYS follow this pattern when creating or updating documentation:**
+
+1. **Hub Files (README.md)**
+
+   - Serve as navigation entry points
+   - Include "📋 Quick Links" section at the top
+   - Provide overview of the directory/feature
+   - Link to spoke documents
+   - Include status indicators and last updated date
+
+2. **Spoke Documents**
+
+   - Focus on single topics or phases
+   - Link back to hub files
+   - Use descriptive filenames (e.g., `feature-plan.md`, `phase-1.md`)
+   - Include status and date metadata
+
+3. **Progressive Disclosure**
+   - Start with high-level overview
+   - Provide links to detailed documents
+   - Use clear section hierarchy
+   - Avoid overwhelming users with too much detail in hub files
+
+### Status Indicators
+
+Use these **consistently** across all documentation:
+
+- 🔴 **Not Started** - Planning stage only
+- 🟡 **Planned** - Approved but not yet begun
+- 🟠 **In Progress** - Active development
+- ✅ **Active/Complete** - Operational or finished
+
+### Date Format
+
+Always use: `YYYY-MM-DD` format (e.g., 2025-12-07)
+
+### File Naming Conventions
+
+- Use **kebab-case** for file names: `feature-plan.md`, `status-and-next-steps.md`
+- Use **descriptive names**: `phase-1-foundation.md` not `p1.md`
+- README.md files are always **UPPERCASE**
+
+---
+
+## 🏗️ Project Structure
+
+### Directory Organization
+
+**Respect this structure when creating files:**
+
+```
+dev-infra/
+├── templates/              # Project templates
+│   ├── standard-project/   # Standard application template
+│   └── learning-project/   # Learning/tutorial template
+├── scripts/                # Automation scripts
+│   ├── new-project.sh      # Template generator
+│   └── validate-templates.sh
+├── docs/                   # User documentation
+├── admin/                  # Dev-infra project management
+│   ├── planning/           # Template evolution planning
+│   │   ├── features/       # Template feature development
+│   │   ├── releases/       # Version management
+│   │   ├── commands/       # Cursor commands integration
+│   │   └── opportunities/  # Learnings and improvements
+│   ├── research/           # Template design decisions
+│   ├── decisions/          # Architecture Decision Records (ADRs)
+│   └── notes/              # Template insights and examples
+├── tests/                  # Template validation tests
+├── .cursor/                # Cursor IDE configuration
+│   ├── commands/           # Workflow automation commands
+│   └── rules/              # AI assistant rules (this file)
+└── README.md               # Project hub
+```
+
+### File Location Rules
+
+1. **Template Files** → `templates/[type]/`
+2. **Template Planning** → `admin/planning/features/[feature-name]/`
+3. **Release Management** → `admin/planning/releases/vX.Y.Z/`
+4. **Command Integration** → `admin/planning/commands/`
+5. **Research Documents** → `admin/research/[category]/`
+6. **Architecture Decisions (ADRs)** → `admin/decisions/`
+7. **User Documentation** → `docs/`
+8. **Cursor Commands** → `.cursor/commands/`
+
+---
+
+## 🔄 Workflow Processes
+
+**Detailed workflow documentation:** See [workflow.mdc](workflow.mdc) for complete workflow processes including:
+
+- Git Flow branching strategy and commit requirements
+- Pull Request review workflow
+- Template development lifecycle
+- Release process
+- Command integration workflow
+
+---
+
+## 🎨 Template Development Standards
+
+### When Modifying Templates
+
+1. **Test Template Generation**
+
+   - Always test with `./scripts/new-project.sh`
+   - Verify generated project structure
+   - Check all links and navigation
+   - Validate template files
+
+2. **Update Documentation**
+
+   - Update template README files
+   - Update user documentation in `docs/`
+   - Update planning documents if feature-related
+   - Maintain hub-and-spoke structure
+
+3. **Maintain Consistency**
+   - Follow existing template patterns
+   - Keep structure consistent across template types
+   - Preserve proven patterns from real projects
+   - Document changes in planning documents
+
+### Template Structure Requirements
+
+**Standard Project Template:**
+
+- Hub-and-spoke documentation structure
+- Feature-based planning (`docs/maintainers/planning/features/`)
+- Backend/frontend separation
+- Centralized testing structure
+- CI/CD workflows
+
+**Learning Project Template:**
+
+- Stage-based learning progression (`stage0-fundamentals/`, `stage1-topic/`, etc.)
+- Practice apps directory
+- Reference materials
+- Exercise structure
+
+---
+
+## 🤖 Cursor Commands Integration
+
+### Available Commands
+
+**Phase 1 (Core Workflow):**
+
+- `/fix-plan` - Create fix batches from Sourcery reviews
+- `/fix-implement` - Implement fix batches (planned)
+- `/task-phase` - Phase implementation with TDD (planned)
+- `/pr` - Centralized PR creation (planned)
+
+**See:** `admin/planning/commands/` for command planning and integration status
+
+### Command Usage Guidelines
+
+- Commands are adapted from work-prod for template development
+- Commands support generic paths (feature-specific or project-wide)
+- Commands integrate with dev-infra's Git Flow workflow
+- Commands follow hub-and-spoke documentation patterns
+
+---
+
+## 📝 Code and Development Standards
+
+### Template Code Quality
+
+When modifying templates:
+
+1. Follow language-specific best practices
+2. Write clear, self-documenting code
+3. Include inline comments for complex logic
+4. Create validation tests for template structure
+5. Update documentation when changing behavior
+
+### Script Quality
+
+**Template Generation Scripts:**
+
+- Handle errors gracefully
+- Provide clear user feedback
+- Validate inputs
+- Test edge cases
+- Support both interactive and non-interactive modes
+
+**Validation Scripts:**
+
+- Check template structure
+- Validate documentation links
+- Verify file organization
+- Report issues clearly
+
+---
+
+## 🔍 AI Assistant Guidelines
+
+### When Suggesting Changes
+
+1. **Respect existing patterns** - Don't introduce new organizational patterns
+2. **Update documentation** - When creating templates, update relevant hub files
+3. **Maintain consistency** - Use established status indicators and date formats
+4. **Follow templates** - Use feature plan and phase templates
+5. **Link bidirectionally** - Hub → Spoke and Spoke → Hub
+
+### When Creating New Templates
+
+1. Create template directory with all required files
+2. Update `templates/README.md` with new template link
+3. Add entry to template roadmap
+4. Use appropriate status indicators
+5. Include all required directories and files
+6. Test template generation
+
+### When Making Template Changes
+
+1. Check if documentation needs updating
+2. Determine if PR is required (feat/fix) or can push directly (docs/chore)
+3. Test template generation with changes
+4. Update relevant README files
+5. Consider if ADR is needed for significant decisions
+
+### When Integrating Commands
+
+1. Adapt commands from work-prod for dev-infra context
+2. Make paths generic (support feature-specific and project-wide)
+3. Test commands in dev-infra project
+4. Integrate commands into templates
+5. Document command usage
+
+### Response Style
+
+- Be clear and actionable
+- Provide rationale for suggestions
+- Reference project patterns
+- Offer to implement rather than just suggest
+- Ask clarifying questions when scope is unclear
+
+---
+
+## 📚 Reference Templates
+
+### Quick Links Section Template
+
+```markdown
+## 📋 Quick Links
+
+### [Category Name]
+
+- **[Link 1](path/to/doc.md)** - Brief description (🟠 Status)
+- **[Link 2](path/to/doc.md)** - Brief description (✅ Status)
+```
+
+### Document Footer Template
+
+```markdown
+---
+
+**Last Updated:** [YYYY-MM-DD]  
+**Status:** [Status Indicator]  
+**Next:** [Next action or milestone]
+```
+
+### Hub File Opening Template
+
+```markdown
+# [Title]
+
+**Purpose:** [One-line description]  
+**Status:** [Status Indicator]  
+**Last Updated:** [YYYY-MM-DD]
+
+---
+
+## 📋 Quick Links
+
+[Links here]
+
+---
+
+## 🎯 Overview
+
+[Content here]
+```
+
+---
+
+## 🔍 Project-Specific Context
+
+### Target Audience
+
+**Primary Users:**
+
+- Developers creating new projects
+- Template maintainers evolving templates
+- Projects using dev-infra templates
+
+### Core Goals
+
+1. **Template Quality** - Provide proven, tested templates
+2. **Consistency** - Ensure all projects start with consistent structure
+3. **Best Practices** - Encode proven patterns from real projects
+4. **Workflow Automation** - Provide commands for common workflows
+5. **Documentation** - Maintain comprehensive guides and examples
+
+### Success Metrics
+
+- Template generation success rate
+- Template usage across projects
+- Command adoption and effectiveness
+- Documentation completeness
+- Template evolution based on learnings
+
+---
+
+## 🚧 Current Project State
+
+**Version:** v1.3.0  
+**Stage:** Active Development  
+**Updated:** 2025-12-07  
+**Priority:** Phase 1 command integration in progress
+
+### ✅ Completed
+
+**Template System:**
+
+- ✅ Standard project template
+- ✅ Learning project template
+- ✅ Template generator script
+- ✅ Template validation script
+- ✅ Hub-and-spoke documentation pattern
+
+**CI/CD:**
+
+- ✅ Multi-environment testing workflow
+- ✅ Release distribution workflow
+- ✅ Docker test image builds
+
+**Documentation:**
+
+- ✅ Template usage guides
+- ✅ Project types guide
+- ✅ Best practices guide
+- ✅ Customization guide
+
+**Planning:**
+
+- ✅ Feature planning structure
+- ✅ Release planning structure
+- ✅ Opportunities tracking (external/internal)
+- ✅ Command integration planning
+
+### 🟠 In Progress
+
+- 🟠 Phase 1: Core workflow commands integration
+  - `/fix-plan` command adapted (✅ Complete)
+  - `/fix-implement` command (🟡 Planned)
+  - `/task-phase` command (🟡 Planned)
+  - `/pr` command (🟡 Planned)
+
+### 🟡 Planned
+
+**Template Improvements:**
+
+- 🟡 Cursor commands integration into templates
+- 🟡 Documentation template improvements
+- 🟡 Process template improvements
+
+**Command Integration:**
+
+- 🟡 Phase 2: Supporting workflow commands
+- 🟡 Phase 3: Optional commands
+
+---
+
+## 📞 Maintenance
+
+### Updating These Rules
+
+**Update this file when:**
+
+- New patterns are established
+- Template structure changes
+- Workflow processes change
+- New commands are integrated
+- Best practices evolve
+
+**Update Process:**
+
+1. Make changes to this file (or appropriate split file)
+2. Commit with message: `docs(cursor-rules): [description]`
+3. Push to develop branch (docs/\* can push directly)
+4. No PR required for cursor rules updates
+
+**Split Files:**
+
+- **Workflow changes:** Update [workflow.mdc](workflow.mdc)
+- **Template changes:** Update [template.mdc](template.mdc)
+
+---
+
+**Last Updated:** 2025-12-07  
+**Status:** ✅ Active  
+**Next:** Continue Phase 1 command integration

@@ -10,6 +10,8 @@
 
 ### Active Features
 
+- **[Command Adaptation Template](command-adaptation-template/README.md)** - Document command adaptation pattern as reusable template (🟡 Planned)
+- **[Command Testing & Template Integration](command-testing-integration/README.md)** - Test and integrate cursor commands into templates (🟡 Planned)
 - **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (⚠️ **Status Discrepancy** - See [STATUS.md](STATUS.md) for details)
 - **[Template Restructure](template-restructure/README.md)** - Restructure templates (admin/ → docs/maintainers/, rename to standard-project) (✅ Complete)
 
