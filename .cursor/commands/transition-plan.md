@@ -450,6 +450,7 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **Documents created:**
 
 - `transition-plan.md` - Detailed transition plan
+- `phase-1.md`, `phase-2.md`, `phase-3.md`, etc. - Detailed phase documents (one per step, treating steps as phases)
 
 **Transition Plan Template:**
 
@@ -519,21 +520,25 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 ---
 
-### 5. Create Phase Documents (Feature Transitions Only)
+### 5. Create Phase Documents (Feature and CI/CD Transitions)
 
-**When to create:** Only for feature transitions with phases
+**When to create:** 
+- For feature transitions with phases (always)
+- For CI/CD transitions with steps (treat steps as phases)
 
 **Process:**
 
-1. **Extract phases from transition plan:**
-   - Parse `transition-plan.md` for phase sections
-   - Extract phase number, name, goal, tasks, deliverables, prerequisites, effort
-   - Identify all phases (Phase 1, Phase 2, Phase 3, etc.)
+1. **Extract phases/steps from transition plan:**
+   - **For Feature Transitions:** Parse `transition-plan.md` for phase sections (Phase 1, Phase 2, etc.)
+   - **For CI/CD Transitions:** Parse `transition-plan.md` for step sections (Step 1, Step 2, etc.) and treat as phases
+   - Extract phase/step number, name, goal, tasks, deliverables, prerequisites, effort
+   - Identify all phases/steps (Phase/Step 1, Phase/Step 2, Phase/Step 3, etc.)
 
-2. **For each phase, create `phase-#.md` file:**
+2. **For each phase/step, create `phase-#.md` file:**
    - Use phase document template (see `docs/PHASE-DOCUMENT-TEMPLATE.md`)
-   - Populate with extracted phase information
-   - Expand tasks with TDD flow structure (RED → GREEN → REFACTOR)
+   - Populate with extracted phase/step information
+   - **For Feature Transitions:** Expand tasks with TDD flow structure (RED → GREEN → REFACTOR)
+   - **For CI/CD Transitions:** Expand tasks with process/documentation workflow (may not need TDD)
    - Add project-specific implementation notes
 
 3. **Phase document structure:**
@@ -553,6 +558,7 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
 - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
+- CI/CD improvements: `docs/maintainers/planning/ci/[improvement-name]/phase-N.md`
 
 **Phase document template:**
 
@@ -578,15 +584,17 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
 
 **Checklist:**
 
-- [ ] All phases extracted from transition plan
+- [ ] All phases/steps extracted from transition plan
 - [ ] Phase documents created (`phase-1.md`, `phase-2.md`, etc.)
 - [ ] Phase documents follow template structure
-- [ ] Tasks expanded with TDD flow
+- [ ] Tasks expanded with appropriate workflow (TDD for features, process workflow for CI/CD)
 - [ ] Implementation notes added
 - [ ] Related documents linked
-- [ ] Phase documents are detailed (~300+ lines)
+- [ ] Phase documents are detailed (~200-300+ lines)
 
-**Note:** Phase documents should be comprehensive and actionable, following work-prod's phase document structure. They serve as the primary implementation guide for each phase.
+**Note:** 
+- **Feature transitions:** Phase documents should be comprehensive and actionable, following work-prod's phase document structure with TDD flow. They serve as the primary implementation guide for each phase.
+- **CI/CD transitions:** Phase documents should be comprehensive and actionable, following the phase document template structure. Tasks may focus on documentation, process improvements, and workflow integration rather than TDD. They serve as the primary implementation guide for each improvement step.
 
 ---
 
@@ -609,6 +617,7 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
    - File: `docs/maintainers/planning/ci/README.md` (if exists)
    - Update improvement status
    - Add transition plan link
+   - Add phase document links (if created)
 
 **Checklist:**
 
@@ -616,6 +625,7 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
 - [ ] Feature hub updated (if feature transition)
 - [ ] Phase document links added to feature hub (if phase documents created)
 - [ ] CI/CD hub updated (if CI/CD transition)
+- [ ] Phase document links added to CI/CD hub (if phase documents created)
 - [ ] Hub links verified
 
 ---
