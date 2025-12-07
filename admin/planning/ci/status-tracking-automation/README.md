@@ -12,6 +12,10 @@
 
 - **[Improvement Plan](improvement-plan.md)** - Detailed improvement plan
 - **[Transition Plan](transition-plan.md)** - Implementation transition plan
+- **[Phase 1: Add Status Update Reminders](phase-1.md)** - Phase 1 implementation details
+- **[Phase 2: Document Status Update Process](phase-2.md)** - Phase 2 implementation details
+- **[Phase 3: Integrate with PR Workflow](phase-3.md)** - Phase 3 implementation details
+- **[Phase 4: Consider Automation](phase-4.md)** - Phase 4 implementation details
 
 ---
 
