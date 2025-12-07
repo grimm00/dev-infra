@@ -806,8 +806,13 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
 
 - `/reflection-artifacts` - Generate artifacts from reflection (run first, or auto-called)
 - `/reflect` - Create reflection documents (if available)
-- `/task-phase` - Implement phase tasks
+- `/task-phase` - Implement phase tasks (reads `phase-#.md` files created by this command)
 - `/task-release` - Implement release transition tasks
+- `/pre-phase-review` - Review phase plans before implementation
+
+**Related Templates:**
+
+- `docs/PHASE-DOCUMENT-TEMPLATE.md` - Template for phase documents (used when creating phase-#.md files)
 - `/pr` - Create PRs for completed work
 
 ---
