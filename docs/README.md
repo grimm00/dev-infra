@@ -16,6 +16,7 @@
 ### Advanced Usage
 - **[Best Practices Guide](BEST-PRACTICES.md)** - Comprehensive best practices
 - **[Customization Guide](CUSTOMIZATION.md)** - Advanced customization instructions
+- **[Command Adaptation Pattern](COMMAND-ADAPTATION-PATTERN.md)** - Pattern for adapting Cursor commands
 
 ### Project Management
 - **[Admin Documentation](../admin/README.md)** - Dev-infra project management
