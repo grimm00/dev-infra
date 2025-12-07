@@ -25,6 +25,8 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 ### Planned
 - **[Command Testing Automation](command-testing-automation/README.md)** - Automated testing for cursor commands (🔴 Not Started)
+- **[Documentation Validation](documentation-validation/README.md)** - Documentation validation process for docs-only PRs (🔴 Not Started)
+- **[Status Tracking Automation](status-tracking-automation/README.md)** - Improved status tracking process (🔴 Not Started)
 - CI/CD optimization and caching
 - Security scanning automation
 
