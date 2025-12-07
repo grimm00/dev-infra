@@ -548,7 +548,7 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **When to create:**
 
 - For feature transitions with phases (always)
-- For CI/CD transitions with steps (treat steps as phases)
+- For CI/CD transitions with steps (treat steps as phases, use `/task-improvement` command)
 
 **Process:**
 
@@ -620,8 +620,8 @@ Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
 
 **Note:**
 
-- **Feature transitions:** Phase documents should be comprehensive and actionable, following work-prod's phase document structure with TDD flow. They serve as the primary implementation guide for each phase.
-- **CI/CD transitions:** Phase documents should be comprehensive and actionable, following the phase document template structure. Tasks may focus on documentation, process improvements, and workflow integration rather than TDD. They serve as the primary implementation guide for each improvement step.
+- **Feature transitions:** Phase documents should be comprehensive and actionable, following work-prod's phase document structure with TDD flow. They serve as the primary implementation guide for each phase. Use `/task-phase` command to implement.
+- **CI/CD transitions:** Phase documents should be comprehensive and actionable, following the phase document template structure. Tasks may focus on documentation, process improvements, and workflow integration rather than TDD. They serve as the primary implementation guide for each improvement step. Use `/task-improvement` command to implement (not `/task-phase`).
 
 ---
 
