@@ -1,7 +1,7 @@
 # Fix Implement Command - Implementation Plan
 
 **Command:** `/fix-implement`  
-**Status:** 🟡 Planned  
+**Status:** 🟠 In Progress  
 **Priority:** 🔴 CRITICAL  
 **Estimated Effort:** 6 hours  
 **Last Updated:** 2025-12-07
@@ -126,13 +126,13 @@ OR docs/maintainers/planning/fix/cross-pr/[name].md (project-wide)
 
 ### Step 3: Create Adapted Command File
 
-- [ ] Create `.cursor/commands/fix-implement.md` in dev-infra
-- [ ] Replace hardcoded paths with generic patterns
-- [ ] Match `/fix-plan` path structure
-- [ ] Add feature detection logic
-- [ ] Make batch name parsing configurable
-- [ ] Make branch naming configurable
-- [ ] Update fix tracking paths
+- [x] Create `.cursor/commands/fix-implement.md` in dev-infra
+- [x] Replace hardcoded paths with generic patterns
+- [x] Match `/fix-plan` path structure
+- [x] Add feature detection logic
+- [x] Make batch name parsing configurable
+- [x] Make branch naming configurable
+- [x] Update fix tracking paths
 
 **Target Location:**
 - `.cursor/commands/fix-implement.md` (for dev-infra project)
@@ -199,16 +199,16 @@ OR docs/maintainers/planning/fix/cross-pr/[name].md (project-wide)
 ## ✅ Definition of Done
 
 - [ ] Adaptation document created
-- [ ] Command adapted for dev-infra
-- [ ] Generic fix plan paths implemented
-- [ ] Batch name parsing configurable
-- [ ] Branch naming configurable
-- [ ] Fix tracking updates working
-- [ ] TDD workflow enforced
+- [x] Command adapted for dev-infra
+- [x] Generic fix plan paths implemented
+- [x] Batch name parsing configurable
+- [x] Branch naming configurable
+- [x] Fix tracking updates working
+- [x] TDD workflow enforced
 - [ ] Tested in dev-infra project
-- [ ] Integrated with `/fix-plan` command
+- [x] Integrated with `/fix-plan` command
 - [ ] Integrated into templates
-- [ ] Documentation complete
+- [x] Documentation complete
 
 ---
 
@@ -240,6 +240,6 @@ OR docs/maintainers/planning/fix/cross-pr/[name].md (project-wide)
 ---
 
 **Last Updated:** 2025-12-07  
-**Status:** 🟡 Planned  
-**Next:** Create adaptation document, then start implementation
+**Status:** 🟠 In Progress  
+**Next:** Test command in dev-infra project, then integrate into templates
 

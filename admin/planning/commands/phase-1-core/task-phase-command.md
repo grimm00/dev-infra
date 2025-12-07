@@ -1,7 +1,7 @@
 # Task Phase Command - Implementation Plan
 
 **Command:** `/task-phase`  
-**Status:** 🟡 Planned  
+**Status:** 🟠 In Progress  
 **Priority:** 🔴 CRITICAL  
 **Estimated Effort:** 8 hours  
 **Last Updated:** 2025-12-07
@@ -114,12 +114,12 @@ docs/maintainers/planning/phases/phase-N.md  (project-wide)
 
 ### Step 2: Create Adapted Command File
 
-- [ ] Create `.cursor/commands/task-phase.md` in dev-infra
-- [ ] Replace hardcoded paths with generic patterns
-- [ ] Add feature detection logic
-- [ ] Add phase structure detection
-- [ ] Make task grouping configurable
-- [ ] Make branch naming configurable
+- [x] Create `.cursor/commands/task-phase.md` in dev-infra
+- [x] Replace hardcoded paths with generic patterns
+- [x] Add feature detection logic
+- [x] Add phase structure detection
+- [x] Make task grouping configurable
+- [x] Make branch naming configurable
 
 **Target Location:**
 - `.cursor/commands/task-phase.md` (for dev-infra project)
@@ -190,15 +190,15 @@ docs/maintainers/planning/phases/phase-N.md  (project-wide)
 
 ## ✅ Definition of Done
 
-- [ ] Command adapted for dev-infra
-- [ ] Generic phase paths implemented
-- [ ] Phase structure detection working
-- [ ] Task grouping configurable
-- [ ] Branch naming configurable
-- [ ] TDD workflow enforced
+- [x] Command adapted for dev-infra
+- [x] Generic phase paths implemented
+- [x] Phase structure detection working
+- [x] Task grouping configurable
+- [x] Branch naming configurable
+- [x] TDD workflow enforced
 - [ ] Tested in dev-infra project
 - [ ] Integrated into templates
-- [ ] Documentation complete
+- [x] Documentation complete
 
 ---
 
@@ -217,6 +217,6 @@ docs/maintainers/planning/phases/phase-N.md  (project-wide)
 ---
 
 **Last Updated:** 2025-12-07  
-**Status:** 🟡 Planned  
-**Next:** Start implementation - read source command and create adapted version
+**Status:** 🟠 In Progress  
+**Next:** Test command in dev-infra project, then integrate into templates
 
