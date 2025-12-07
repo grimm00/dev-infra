@@ -191,9 +191,11 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 **Parse implementation steps:**
 
 - Extract actionable steps
+- **Extract ALL phases** from artifact (Phase 1, Phase 2, Phase 3, etc.)
 - Organize into logical phases (if feature)
-- Identify dependencies
-- Estimate effort
+- Preserve phase structure, goals, tasks, deliverables, and effort estimates
+- Identify dependencies between phases
+- Estimate effort per phase
 
 **Example parsing:**
 
@@ -207,10 +209,19 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 5. Prepare MVP release (v0.1.0)
 ```
 
+**For Feature Artifacts with Phases:**
+
+- Extract **ALL phases** from artifact (e.g., Phase 1, Phase 2, Phase 3, Phase 4, etc.)
+- Preserve phase structure: Goal, Tasks, Deliverables, Estimated Effort
+- Include prerequisites between phases
+- Maintain phase numbering and naming
+
 **Checklist:**
 
 - [ ] Artifact content parsed
+- [ ] **ALL phases extracted** (not just Phase 1 and Phase 2)
 - [ ] Implementation steps extracted
+- [ ] Phase structure preserved (goals, tasks, deliverables, effort)
 - [ ] Dependencies identified
 - [ ] Effort estimated
 
@@ -327,17 +338,83 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 [Extracted from artifact implementation steps, organized into phases]
 
+**IMPORTANT:** Extract **ALL phases** from the artifact (Phase 1, Phase 2, Phase 3, Phase 4, etc.). Do not stop at Phase 2.
+
 ### Phase 1: [Phase Name]
 
+**Goal:** [Extracted from artifact phase goal]
+
+**Estimated Effort:** [X] hours/days
+
+**Prerequisites:**
+- [ ] [Prerequisite 1]
+- [ ] [Prerequisite 2]
+
+**Tasks:**
 - [ ] Task 1
 - [ ] Task 2
-- Estimated: [X] hours
+- [ ] Task 3
+
+**Deliverables:**
+- [Deliverable 1]
+- [Deliverable 2]
+
+**Definition of Done:**
+- [ ] All tasks complete
+- [ ] Deliverables created
+- [ ] Ready for Phase 2
+
+---
 
 ### Phase 2: [Phase Name]
 
+**Goal:** [Extracted from artifact phase goal]
+
+**Estimated Effort:** [X] hours/days
+
+**Prerequisites:**
+- [ ] Phase 1 complete
+- [ ] [Additional prerequisites]
+
+**Tasks:**
 - [ ] Task 1
 - [ ] Task 2
-- Estimated: [X] hours
+- [ ] Task 3
+
+**Deliverables:**
+- [Deliverable 1]
+- [Deliverable 2]
+
+**Definition of Done:**
+- [ ] All tasks complete
+- [ ] Deliverables created
+- [ ] Ready for Phase 3 (or post-transition if last phase)
+
+---
+
+### Phase 3: [Phase Name]
+
+[Continue extracting ALL phases from artifact. Include Phase 3, Phase 4, Phase 5, etc. as they exist in the artifact.]
+
+**Goal:** [Extracted from artifact phase goal]
+
+**Estimated Effort:** [X] hours/days
+
+**Prerequisites:**
+- [ ] Phase 2 complete
+- [ ] [Additional prerequisites]
+
+**Tasks:**
+- [ ] Task 1
+- [ ] Task 2
+
+**Deliverables:**
+- [Deliverable 1]
+
+**Definition of Done:**
+- [ ] All tasks complete
+- [ ] Deliverables created
+- [ ] Ready for post-transition (if last phase)
 
 ## Post-Transition
 
