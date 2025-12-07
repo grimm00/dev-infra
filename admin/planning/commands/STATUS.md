@@ -63,7 +63,7 @@
 | `/reflect` | 🟡 MEDIUM | 4h | 🟠 In Progress | Project reflection workflow, command adapted |
 | `/pre-phase-review` | 🟡 MEDIUM | 3h | 🟠 In Progress | Pre-phase planning review, command adapted |
 | `/task-release` | 🟡 MEDIUM | 4h | 🟠 In Progress | Release task implementation, command adapted |
-| `/int-opp` | 🟡 MEDIUM | 2h | ✅ Complete | Internal opportunities (already adapted) |
+| `/int-opp` | 🟡 MEDIUM | 2h | 🟠 In Progress | Internal opportunities, command adapted |
 | `/cursor-rules` | 🟢 LOW | 2h | 🟠 In Progress | Rules management, command adapted |
 
 **Phase 3 Total:** 19 hours (15h excluding int-opp)
