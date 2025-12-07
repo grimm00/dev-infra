@@ -270,6 +270,8 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 [Extracted from artifact implementation steps, organized chronologically]
 
+**IMPORTANT:** Extract **ALL steps** from the artifact. Do not limit to just 2 steps.
+
 1. **Step 1: [Name]**
    - [ ] Task 1
    - [ ] Task 2
@@ -279,6 +281,13 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
    - [ ] Task 1
    - [ ] Task 2
    - Estimated: [X] hours
+
+3. **Step 3: [Name]**
+   - [ ] Task 1
+   - [ ] Task 2
+   - Estimated: [X] hours
+
+[Continue extracting ALL steps from artifact. Include Step 3, Step 4, Step 5, etc. as they exist in the artifact.]
 
 ## Post-Transition
 
@@ -473,6 +482,8 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
 
 [Extracted from artifact implementation steps]
 
+**IMPORTANT:** Extract **ALL steps** from the artifact. Do not limit to just 2 steps.
+
 1. **Step 1: [Name]**
    - [ ] Task 1
    - [ ] Task 2
@@ -482,6 +493,13 @@ ls docs/maintainers/planning/releases/v0.1.0/checklist.md
    - [ ] Task 1
    - [ ] Task 2
    - Estimated: [X] hours
+
+3. **Step 3: [Name]**
+   - [ ] Task 1
+   - [ ] Task 2
+   - Estimated: [X] hours
+
+[Continue extracting ALL steps from artifact. Include Step 3, Step 4, Step 5, etc. as they exist in the artifact.]
 
 ## Post-Transition
 
