@@ -21,7 +21,7 @@
 |---------|-------|----------|--------|----------------|--------|
 | `/int-opp` | Phase 3 | MEDIUM | 2h | [int-opp-adaptation.md](../../opportunities/external/work-prod/cursor-commands/adaptations/int-opp-adaptation.md) | ✅ Complete |
 | `/reflect` | Phase 3 | MEDIUM | 4h | [reflect-adaptation.md](../../opportunities/external/work-prod/cursor-commands/adaptations/reflect-adaptation.md) | 🟡 Documented |
-| `/fix-plan` | Phase 1 | HIGH | 6h | [fix-plan-adaptation.md](../../opportunities/external/work-prod/cursor-commands/adaptations/fix-plan-adaptation.md) | 🟡 Documented |
+| `/fix-plan` | Phase 1 | HIGH | 6h | [fix-plan-adaptation.md](../../opportunities/external/work-prod/cursor-commands/adaptations/fix-plan-adaptation.md) | 🟠 In Progress |
 | `/transition-plan` | Phase 3 | MEDIUM | 4h | [transition-plan-adaptation.md](../../opportunities/external/work-prod/cursor-commands/adaptations/transition-plan-adaptation.md) | 🟡 Documented |
 | `/task-phase` | Phase 1 | CRITICAL | 8h | [task-phase-adaptation.md](../../opportunities/external/work-prod/cursor-commands/adaptations/task-phase-adaptation.md) | 🟡 Documented |
 

@@ -200,6 +200,6 @@ docs/maintainers/planning/fix/pr##/  (project-wide)
 ---
 
 **Last Updated:** 2025-12-07  
-**Status:** 🟡 Planned  
-**Next:** Start implementation - read source command and create adapted version
+**Status:** 🟠 In Progress  
+**Next:** Test command in dev-infra project and integrate into templates
 
