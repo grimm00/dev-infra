@@ -13,6 +13,9 @@
 - **[Feature Plan](feature-plan.md)** - Detailed feature plan
 - **[Transition Plan](transition-plan.md)** - Implementation transition plan
 - **[Status & Next Steps](status-and-next-steps.md)** - Current progress tracking
+- **[Phase 1: Document Adaptation Pattern](phase-1.md)** - Phase 1 implementation details
+- **[Phase 2: Create Adaptation Template](phase-2.md)** - Phase 2 implementation details
+- **[Phase 3: Create Adaptation Checklist](phase-3.md)** - Phase 3 implementation details
 - **[Reflection Source](../../notes/reflections/reflection-commands-integration-2025-12-07.md)** - Source reflection document
 
 ---
