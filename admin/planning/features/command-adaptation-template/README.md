@@ -11,6 +11,7 @@
 ## 📋 Quick Links
 
 - **[Feature Plan](feature-plan.md)** - Detailed feature plan
+- **[Transition Plan](transition-plan.md)** - Implementation transition plan
 - **[Status & Next Steps](status-and-next-steps.md)** - Current progress tracking
 - **[Reflection Source](../../notes/reflections/reflection-commands-integration-2025-12-07.md)** - Source reflection document
 
