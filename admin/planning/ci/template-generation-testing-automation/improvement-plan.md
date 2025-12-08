@@ -116,12 +116,14 @@ Automate template generation testing to reduce manual verification burden and en
 ## Definition of Done
 
 **Phase 1:**
+
 - [x] Non-interactive mode added to `scripts/new-project.sh` ✅
 - [x] Environment variables supported for test inputs ✅
 - [x] Documentation updated ✅
 - [x] Manual testing checklist documented ✅
 
 **Phase 2:**
+
 - [ ] Template validation test suite created
 - [ ] File presence tests implemented
 - [ ] Link validation tests implemented
