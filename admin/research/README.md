@@ -9,6 +9,7 @@
 ## 📋 Quick Links
 
 ### Core Research Documents
+- **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Research on automating template generation testing (🔴 Research)
 - **[Templates Enhancement](templates-enhancement/README.md)** - Research on template enhancements (🔴 Research)
 - **[Comprehensive Analysis](template-restructure-comprehensive-analysis.md)** - ⭐ **START HERE** - Deep analysis combining internal best practices with external guidance
 - **[Template Structure Options](template-structure-options.md)** - As-is vs proposed comparison

@@ -9,7 +9,8 @@
 ## 📋 Quick Links
 
 ### Architecture Decision Records (ADRs)
-- **[Templates Enhancement](templates-enhancement/README.md)** - Template enhancements with workflow automation (🔴 Proposed)
+- **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Decisions for automating template generation testing (🔴 Proposed)
+- **[Templates Enhancement](templates-enhancement/README.md)** - Template enhancements with workflow automation (✅ Accepted)
 - **[0001: Template Restructure](0001-template-restructure.md)** - Decision to restructure templates (admin/ → docs/maintainers/)
 - **[0002: CI/CD Workflow Improvements](0002-cicd-workflow-improvements.md)** - Decision to implement automated testing, workflow optimizations, and validation enhancements
 

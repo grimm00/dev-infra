@@ -24,6 +24,7 @@ This directory contains planning documentation for CI/CD improvements, workflows
 - **[Release Distribution Workflow](release-distribution/README.md)** - Automated distribution package creation
 
 ### Planned
+- **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Automate template generation testing (🔴 Not Started, 🔴 High Priority)
 - **[Command Testing Automation](command-testing-automation/README.md)** - Automated testing for cursor commands (🔴 Not Started)
 - **[Documentation Validation](documentation-validation/README.md)** - Documentation validation process for docs-only PRs (🔴 Not Started)
 - **[CI/CD Improvement Process Enhancements](cicd-improvement-process-enhancements/README.md)** - Enhance CI/CD improvement process based on learnings (🔴 Not Started)
