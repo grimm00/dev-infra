@@ -151,6 +151,123 @@ This command supports multiple project organization patterns, matching `/task-ph
 - [ ] No broken links in documentation
 - [ ] Code comments added where needed
 
+#### Status Validation
+
+**Auto-Detect and Update Outdated Status:**
+
+This command automatically detects outdated status and offers to update it before PR creation.
+
+**Auto-Detection Process:**
+
+1. **Read phase document:**
+   - Location: `docs/maintainers/planning/features/[feature-name]/phase-N.md` or `docs/maintainers/planning/phases/phase-N.md`
+   - Check status field at top of document
+   - Check if all task checkboxes are marked complete
+   - Detect if status is outdated (not "✅ Complete" when all tasks done)
+
+2. **Read feature status document (if applicable):**
+   - Location: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Check phase completion status
+   - Check progress tracking
+   - Detect if feature status is outdated
+
+3. **Detect Status Issues:**
+   - Phase status is "🟠 In Progress" but all tasks complete → Outdated
+   - Phase status is "🔴 Not Started" but tasks complete → Outdated
+   - Feature status doesn't reflect phase completion → Outdated
+   - Progress tracking inaccurate → Outdated
+
+**Auto-Update Process (If Status Outdated):**
+
+If outdated status is detected, offer to auto-update:
+
+1. **Prompt User:**
+   ```
+   ⚠️  Status documents appear outdated:
+   - Phase document status: "🟠 In Progress" (should be "✅ Complete")
+   - Feature status document: Not updated with phase completion
+   
+   Would you like to auto-update status? (y/n)
+   ```
+
+2. **If User Confirms (y):**
+   - Update phase document status to "✅ Complete"
+   - Add completion date: `**Completed:** YYYY-MM-DD`
+   - Update feature status document with phase completion
+   - Update progress tracking
+   - Commit status updates: `docs(phase-N): auto-update status to Complete`
+   - Continue with PR creation
+
+3. **If User Declines (n):**
+   - Show warning: Status outdated, PR validation may fail
+   - Continue with PR creation (lenient approach)
+   - User can update status manually later
+
+**Manual Status Check (If Auto-Update Not Used):**
+
+- [ ] Phase document status updated to "✅ Complete"
+  - Location: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
+  - Verify: Status matches actual completion state
+  - Example: `**Status:** ✅ Complete`
+- [ ] Feature status document updated with phase completion
+  - Location: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+  - Verify: Phase marked complete, progress updated
+  - Example: `**Phase 3:** ✅ Complete (2025-12-07)`
+- [ ] Progress tracking accurate
+  - Verify: Progress percentages reflect actual completion
+  - Verify: Task checkboxes match completed work
+  - Verify: No outdated status indicators
+
+**Status Check Process:**
+
+1. **Read phase document:**
+   - Check status field at top of document
+   - Verify all task checkboxes are marked complete
+   - Verify status matches actual work completed
+
+2. **Read feature status document:**
+   - Check phase completion status
+   - Verify progress tracking is current
+   - Verify next steps are accurate
+
+3. **Validate consistency:**
+   - Phase document status matches feature status
+   - Progress percentages are accurate
+   - No discrepancies between documents
+
+**Status Update Examples:**
+
+**Phase Document:**
+```markdown
+**Status:** ✅ Complete  # Must be "Complete" before PR
+**Completed:** 2025-12-07
+```
+
+**Feature Status Document:**
+```markdown
+**Phase 3: Documentation & Examples**
+- [x] Dependency sections added ✅ (2025-12-07)
+- [x] Dependency documentation created ✅ (2025-12-07)
+```
+
+**If status is not current (Manual Fallback):**
+- Update phase document status to "✅ Complete"
+- Update feature status document with phase completion
+- Commit status updates before creating PR
+- Note: Status updates should happen during work (per `/task-phase` workflow), but verify before PR
+
+**Status Update Requirements for PR Approval:**
+- **Mandatory:** Status updates are required for PR approval
+- **Lenient Approach:** Validation uses warnings, not blockers (to start)
+- **During Work:** Status automatically updated by `/task-phase` command
+- **Before PR:** Status auto-detected and auto-updated by this command (if outdated)
+- **After Merge:** Status automatically updated by `/post-pr` command
+
+**See Also:**
+- [Status Update Workflow](../../docs/STATUS-UPDATE-WORKFLOW.md) - Complete status update guide
+- [Status Update Checklist](../../docs/STATUS-UPDATE-CHECKLIST.md) - Checklist for status updates
+- [Status Update Timing](../../docs/STATUS-UPDATE-TIMING.md) - Timing and frequency guide
+
 #### Git State
 
 - [ ] All changes committed to feature branch
@@ -957,6 +1074,54 @@ git branch --show-current
 ---
 
 ## Common Workflow Steps
+
+### Status Updates in PR Process
+
+**Status updates are mandatory throughout the PR lifecycle:**
+
+1. **During Work:** Update status as tasks complete (per `/task-phase` workflow)
+   - **Automatic:** `/task-phase` command auto-updates status at phase start and completion
+   - Mark task checkboxes `- [x]` as tasks complete
+   - Update progress tracking at milestones
+   - See: [Status Update (Start of Phase)](../../.cursor/commands/task-phase.md#status-update-start-of-phase) and [Status Update (Phase Completion)](../../.cursor/commands/task-phase.md#status-update-phase-completion)
+
+2. **Before PR Creation:** Status must be current (validated and auto-updated by this command)
+   - **Automatic:** This command auto-detects outdated status and offers to update
+   - Phase document status: "✅ Complete"
+   - Feature status document: Updated with phase completion
+   - Progress tracking: Accurate percentages
+   - See: [Status Validation](#status-validation) section above
+
+3. **During PR Review:** Status updates verified (per PR Review Workflow)
+   - Status Check Checklist verifies status updates
+   - Warnings if status outdated (not blockers)
+   - See: [Status Check Checklist](../../.cursor/rules/workflow.mdc#status-check-checklist)
+
+4. **After PR Merge:** Status automatically updated (per `/post-pr` command)
+   - Run `/post-pr [pr-number] --phase [N]` after PR merge
+   - Command automatically updates phase and feature status
+   - See: [Status Update Behavior](../../.cursor/commands/post-pr.md#status-update-behavior)
+
+**Status Update Requirements:**
+- **Mandatory:** Status updates are required for PR approval
+- **Lenient Approach:** Validation uses warnings, not blockers (to start)
+- **During Work:** Status automatically updated by `/task-phase` command
+- **Before PR:** Status auto-detected and auto-updated by this command (if outdated)
+- **After Merge:** Status automatically updated by `/post-pr` command
+
+**Auto-Update Behavior:**
+
+- **Phase Start:** `/task-phase` automatically updates status to "🟠 In Progress"
+- **Phase Completion:** `/task-phase` automatically updates status to "✅ Complete"
+- **Before PR:** `/pr` command auto-detects outdated status and offers to update
+- **After Merge:** `/post-pr` automatically updates status after PR merge
+
+**See Also:**
+- [PR Status Update Requirements](../../docs/PR-STATUS-UPDATE-REQUIREMENTS.md) - Complete PR status update guide
+- [Status Update Workflow](../../docs/STATUS-UPDATE-WORKFLOW.md) - Complete status update guide
+- [Status Update Checklist](../../docs/STATUS-UPDATE-CHECKLIST.md) - Checklist for status updates
+
+---
 
 ### Pre-PR Validation
 
