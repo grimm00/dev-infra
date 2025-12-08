@@ -31,19 +31,19 @@ Integrate status checks into PR validation workflow and ensure `/post-pr` consis
 
 #### 1. Include Status Checks in PR Validation
 
-- [ ] Add status validation to `/pr-validation` command
-  - Read current `/pr-validation` command documentation
-  - Add status validation section
-  - Implement status check logic
-  - Add status validation to validation checklist
-- [ ] Check phase status before PR creation
-  - Verify phase status is current
-  - Verify phase status matches actual progress
-  - Require status update if outdated
-- [ ] Verify feature status is current
-  - Check feature status document
-  - Verify feature status matches phase progress
-  - Require status update if outdated
+- [x] Add status validation to `/pr-validation` command
+  - [x] Read current `/pr-validation` command documentation
+  - [x] Add status validation section
+  - [x] Implement status check logic
+  - [x] Add status validation to validation checklist
+- [x] Check phase status before PR creation
+  - [x] Verify phase status is current
+  - [x] Verify phase status matches actual progress
+  - [x] Require status update if outdated (lenient: warnings, not blockers)
+- [x] Verify feature status is current
+  - [x] Check feature status document
+  - [x] Verify feature status matches phase progress
+  - [x] Require status update if outdated (lenient: warnings, not blockers)
 
 **PR Validation Updates:**
 - Status validation added to `/pr-validation` command
