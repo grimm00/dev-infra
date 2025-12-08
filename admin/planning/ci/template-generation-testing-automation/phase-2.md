@@ -226,22 +226,17 @@ teardown() {
 
 #### 6. Implement Structure Validation Tests
 
-- [ ] Create test for directory structure validation:
-  - Check required directories exist
-  - Check directory structure matches template
-  - Check template variables replaced correctly
-- [ ] Add helper function to validate directory structure:
-  ```bash
-  validate_directory_structure() {
-    local project_dir="$1"
-    local template_type="$2"
-    # Check directory structure matches expected
-  }
-  ```
-- [ ] Test structure validation for both template types:
+- [x] Create test for directory structure validation: ✅
+  - Check required directories exist ✅
+  - Check directory structure matches template ✅
+  - Check template variables replaced correctly ✅
+- [x] Add helper function to validate directory structure: ✅
+  - Using existing `validate_directory_exists()` helper ✅
+  - Direct directory checks in tests ✅
+- [x] Test structure validation for both template types: ✅
   ```bash
   bats tests/integration/template-validation/structure-validation.bats
-  # Should validate structure for both template types
+  # All 12 tests passing - validates structure for both template types ✅
   ```
 
 **Implementation Example:**
