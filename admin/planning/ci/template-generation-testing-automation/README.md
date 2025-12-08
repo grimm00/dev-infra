@@ -11,6 +11,7 @@
 
 ## 📋 Quick Links
 
+- **[Status & Next Steps](status-and-next-steps.md)** - Current status and progress tracking
 - **[Transition Plan](transition-plan.md)** - Detailed transition plan with implementation steps
 - **[Phase 1: Add Non-Interactive Mode](phase-1.md)** - Add non-interactive mode to template generation script
 - **[Phase 2: Create Template Validation Test Suite](phase-2.md)** - Create automated test suite
