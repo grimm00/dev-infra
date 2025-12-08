@@ -601,9 +601,12 @@ Verify with health check (project-specific):
 - [ ] Backend server is running (if applicable)
 - [ ] Manual testing guide exists (or will be created)
 - [ ] dev-toolkit is available (optional, for Sourcery review)
+- [ ] Status documents are current (checked during validation)
 
 **During execution:**
 
+- [ ] Status documents validated (NEW)
+- [ ] Status warnings documented (if status outdated)
 - [ ] Manual testing guide updated with scenarios (MANDATORY)
 - [ ] All scenarios tested and passed
 - [ ] Checkboxes checked off (`- [ ]` → `- [x]`) for passing scenarios
