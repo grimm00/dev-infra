@@ -9,6 +9,7 @@
 ## 📋 Quick Links
 
 ### Core Research Documents
+- **[Templates Enhancement](templates-enhancement/README.md)** - Research on template enhancements (🔴 Research)
 - **[Comprehensive Analysis](template-restructure-comprehensive-analysis.md)** - ⭐ **START HERE** - Deep analysis combining internal best practices with external guidance
 - **[Template Structure Options](template-structure-options.md)** - As-is vs proposed comparison
 - **[Pre-ADR Proposal](0001-template-restructure-proposal.md)** - Initial proposal document
