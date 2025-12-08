@@ -245,28 +245,49 @@ test -d /tmp/test-proj-env/test-optional/.git && echo "✅ Git initialized (INIT
 
 ### Scenario 8: Backward Compatibility - Interactive Mode
 
-**Test:** Verify interactive mode still works (no flag)
+**Test:** Verify interactive mode still works when `--non-interactive` flag is NOT provided (backward compatibility)
+
+**Purpose:** Ensure that existing users who run the script without flags still get the interactive experience they expect. This verifies that the new non-interactive mode doesn't break existing interactive behavior.
 
 **Prerequisites:** None
 
-**CLI Test:**
+**Manual Test Steps:**
+
+1. **Run script without any flags:**
+   ```bash
+   ./scripts/new-project.sh
+   ```
+
+2. **Verify interactive behavior:**
+   - Script should display welcome message: "🚀 Dev-Infra Project Template Generator"
+   - Script should prompt for target directory (not use environment variables)
+   - Script should prompt for project name (not read from PROJECT_NAME env var)
+   - Script should prompt for project description (not read from PROJECT_DESCRIPTION env var)
+   - Script should prompt for author name (not read from AUTHOR env var)
+   - Script should display project type menu (1) Standard Project, 2) Learning Project)
+   - Script should prompt for confirmation before creating project
+   - Script should prompt for git initialization (not use INIT_GIT env var)
+
+**Automated Verification (Basic Check):**
 
 ```bash
-# Note: This test requires manual verification that prompts appear
-# Automated test would require expect or similar tool
-echo "Interactive mode test - verify prompts appear"
-# Expected: Script prompts for inputs (cannot be fully automated)
-```
-
-**Verification:**
-
-```bash
-# Check that script doesn't exit immediately (would indicate non-interactive mode)
+# Check that script doesn't exit immediately (would indicate non-interactive mode was triggered)
+# If script exits immediately, it might be detecting non-interactive mode incorrectly
 timeout 1 ./scripts/new-project.sh 2>&1 | head -5
-# Expected: Script waits for input (doesn't exit immediately)
+# Expected: Script waits for input (doesn't exit immediately with error)
+# Expected: Welcome message appears
 ```
 
-**Expected Result:** ✅ Interactive mode works (prompts appear, script waits for input)
+**What to Verify:**
+
+- [ ] Script runs without `--non-interactive` flag
+- [ ] Script displays welcome message
+- [ ] Script prompts for all inputs (not reading from environment variables)
+- [ ] Script waits for user input (doesn't exit immediately)
+- [ ] No environment variable detection triggers non-interactive mode incorrectly
+- [ ] Interactive prompts work as expected
+
+**Expected Result:** ✅ Interactive mode works correctly - script prompts for all inputs and waits for user interaction, demonstrating backward compatibility is maintained
 
 ---
 
