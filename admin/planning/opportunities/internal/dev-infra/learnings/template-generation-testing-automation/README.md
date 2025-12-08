@@ -1,0 +1,32 @@
+# Template Generation Testing Automation Learnings
+
+**Purpose:** Phase learnings from Template Generation Testing Automation CI/CD improvement  
+**Target:** Inform dev-infra template and other projects  
+**Status:** ✅ Active  
+**Last Updated:** 2025-12-08
+
+---
+
+## 📋 Quick Links
+
+### Phase Learnings
+
+- **[Phase 1](phase-1-learnings.md)** - Add Non-Interactive Mode (2025-12-08)
+
+---
+
+## 🎯 Purpose
+
+This directory contains phase-specific learnings from the Template Generation Testing Automation CI/CD improvement implementation.
+
+---
+
+## 📊 Summary
+
+**Total Phase Learnings:** 1  
+**Status:** ✅ Active
+
+---
+
+**Last Updated:** 2025-12-08
+
