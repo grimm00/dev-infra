@@ -431,8 +431,20 @@ init_git_repo() {
     local author="$2"
     local project_name=$(basename "$full_project_path")
     local original_dir=$(pwd)
+    local should_init_git
     
-    if prompt_yes_no "Initialize git repository?" "y"; then
+    # Check if we should initialize git
+    if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+        should_init_git="$INIT_GIT"
+    else
+        if prompt_yes_no "Initialize git repository?" "y"; then
+            should_init_git="true"
+        else
+            should_init_git="false"
+        fi
+    fi
+    
+    if [ "$should_init_git" = "true" ]; then
         print_status "Initializing git repository..."
         
         # Change to project directory with error checking
@@ -447,40 +459,43 @@ init_git_repo() {
         
         print_success "Git repository initialized"
         
-        if prompt_yes_no "Create GitHub repository?" "n"; then
-            # Verify GitHub authentication before proceeding
-            if ! verify_github_auth "$author"; then
-                print_error "GitHub authentication verification failed"
-                print_error "Skipping repository creation"
-                # Return to original directory (best effort)
-                cd "$original_dir" 2>/dev/null || true
-                return 1
-            fi
-            
-            local repo_name=$(prompt_input "GitHub repository name" "$project_name")
-            local repo_description=$(prompt_input "Repository description" "")
-            local is_private
-            if prompt_yes_no "Make repository private?" "n"; then
-                is_private="--private"
-            else
-                is_private="--public"
-            fi
-            
-            print_status "Creating GitHub repository..."
-            if gh repo create "$repo_name" --description "$repo_description" $is_private; then
-                local github_user
-                github_user=$(gh api user --jq .login 2>/dev/null)
-                git remote add origin "https://github.com/$github_user/$repo_name.git"
-                git branch -M main
-                git push -u origin main
+        # Skip GitHub repository creation in non-interactive mode
+        if [ "$NON_INTERACTIVE_MODE" != "true" ]; then
+            if prompt_yes_no "Create GitHub repository?" "n"; then
+                # Verify GitHub authentication before proceeding
+                if ! verify_github_auth "$author"; then
+                    print_error "GitHub authentication verification failed"
+                    print_error "Skipping repository creation"
+                    # Return to original directory (best effort)
+                    cd "$original_dir" 2>/dev/null || true
+                    return 1
+                fi
                 
-                print_success "GitHub repository created and pushed"
-            else
-                print_error "Failed to create GitHub repository"
-                print_error "Please check your GitHub CLI authentication and permissions"
-                # Return to original directory (best effort)
-                cd "$original_dir" 2>/dev/null || true
-                return 1
+                local repo_name=$(prompt_input "GitHub repository name" "$project_name")
+                local repo_description=$(prompt_input "Repository description" "")
+                local is_private
+                if prompt_yes_no "Make repository private?" "n"; then
+                    is_private="--private"
+                else
+                    is_private="--public"
+                fi
+                
+                print_status "Creating GitHub repository..."
+                if gh repo create "$repo_name" --description "$repo_description" $is_private; then
+                    local github_user
+                    github_user=$(gh api user --jq .login 2>/dev/null)
+                    git remote add origin "https://github.com/$github_user/$repo_name.git"
+                    git branch -M main
+                    git push -u origin main
+                    
+                    print_success "GitHub repository created and pushed"
+                else
+                    print_error "Failed to create GitHub repository"
+                    print_error "Please check your GitHub CLI authentication and permissions"
+                    # Return to original directory (best effort)
+                    cd "$original_dir" 2>/dev/null || true
+                    return 1
+                fi
             fi
         fi
         
@@ -622,23 +637,38 @@ main() {
     
     # Determine default directory
     local DEFAULT_DIR="$HOME/Projects"
-    if [ ! -d "$DEFAULT_DIR" ]; then
-        if prompt_yes_no "Directory $DEFAULT_DIR doesn't exist. Create it?" "n"; then
-            mkdir -p "$DEFAULT_DIR"
-            print_success "Created directory: $DEFAULT_DIR"
-        else
+    if [ "$NON_INTERACTIVE_MODE" != "true" ]; then
+        if [ ! -d "$DEFAULT_DIR" ]; then
+            if prompt_yes_no "Directory $DEFAULT_DIR doesn't exist. Create it?" "n"; then
+                mkdir -p "$DEFAULT_DIR"
+                print_success "Created directory: $DEFAULT_DIR"
+            else
+                DEFAULT_DIR="$PWD"
+                print_status "Using current directory as default"
+            fi
+        fi
+    else
+        # In non-interactive mode, use TARGET_DIR if set, otherwise use DEFAULT_DIR
+        if [ -n "$TARGET_DIR" ]; then
+            DEFAULT_DIR="$TARGET_DIR"
+        elif [ ! -d "$DEFAULT_DIR" ]; then
             DEFAULT_DIR="$PWD"
-            print_status "Using current directory as default"
         fi
     fi
     
     # Get target directory first
     echo
-    local target_dir=$(prompt_input "Target directory (press Enter for $DEFAULT_DIR or enter custom path)" "$DEFAULT_DIR")
+    local target_dir
+    if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+        target_dir="${TARGET_DIR:-$DEFAULT_DIR}"
+        print_status "Using target directory: $target_dir"
+    else
+        target_dir=$(prompt_input "Target directory (press Enter for $DEFAULT_DIR or enter custom path)" "$DEFAULT_DIR")
+    fi
     
     # Validate and resolve target directory
     # Disable set -e around function call to prevent premature exit
-    local TARGET_DIR
+    local TARGET_DIR_VAR
     local resolved_dir
     local error_code
     set +e
@@ -661,8 +691,8 @@ main() {
                 print_error "Validation returned empty path"
                 exit 1
             fi
-            TARGET_DIR="$resolved_dir"
-            print_status "Using directory: $TARGET_DIR"
+            TARGET_DIR_VAR="$resolved_dir"
+            print_status "Using directory: $TARGET_DIR_VAR"
             ;;
         3)
             # Directory doesn't exist but parent exists and is writable - can be created
@@ -670,17 +700,28 @@ main() {
                 print_error "Cannot determine directory path for: $target_dir"
                 exit 1
             fi
-            if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it?" "n"; then
+            if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+                # In non-interactive mode, create directory automatically
                 if mkdir -p "$resolved_dir" 2>/dev/null; then
-                    TARGET_DIR="$(cd "$resolved_dir" && pwd)"
-                    print_success "Created directory: $TARGET_DIR"
+                    TARGET_DIR_VAR="$(cd "$resolved_dir" && pwd)"
+                    print_success "Created directory: $TARGET_DIR_VAR"
                 else
                     print_error "Failed to create directory: $resolved_dir"
                     exit 1
                 fi
             else
-                print_error "Cannot proceed without valid directory"
-                exit 1
+                if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it?" "n"; then
+                    if mkdir -p "$resolved_dir" 2>/dev/null; then
+                        TARGET_DIR_VAR="$(cd "$resolved_dir" && pwd)"
+                        print_success "Created directory: $TARGET_DIR_VAR"
+                    else
+                        print_error "Failed to create directory: $resolved_dir"
+                        exit 1
+                    fi
+                else
+                    print_error "Cannot proceed without valid directory"
+                    exit 1
+                fi
             fi
             ;;
         1)
@@ -690,11 +731,12 @@ main() {
                 print_error "Cannot determine directory path for: $target_dir"
                 exit 1
             fi
-            if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it (including parent directories)?" "n"; then
+            if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+                # In non-interactive mode, create directory automatically
                 if mkdir -p "$resolved_dir" 2>/dev/null; then
                     if [ -d "$resolved_dir" ]; then
-                        TARGET_DIR="$(cd "$resolved_dir" && pwd)"
-                        print_success "Created directory: $TARGET_DIR"
+                        TARGET_DIR_VAR="$(cd "$resolved_dir" && pwd)"
+                        print_success "Created directory: $TARGET_DIR_VAR"
                     else
                         print_error "Failed to create directory: $resolved_dir"
                         exit 1
@@ -705,8 +747,24 @@ main() {
                     exit 1
                 fi
             else
-                print_error "Cannot proceed without valid directory"
-                exit 1
+                if prompt_yes_no "Directory '$resolved_dir' doesn't exist. Create it (including parent directories)?" "n"; then
+                    if mkdir -p "$resolved_dir" 2>/dev/null; then
+                        if [ -d "$resolved_dir" ]; then
+                            TARGET_DIR_VAR="$(cd "$resolved_dir" && pwd)"
+                            print_success "Created directory: $TARGET_DIR_VAR"
+                        else
+                            print_error "Failed to create directory: $resolved_dir"
+                            exit 1
+                        fi
+                    else
+                        print_error "Failed to create directory: $resolved_dir"
+                        print_error "Please check permissions and try again"
+                        exit 1
+                    fi
+                else
+                    print_error "Cannot proceed without valid directory"
+                    exit 1
+                fi
             fi
             ;;
         2)
@@ -745,31 +803,43 @@ main() {
     local author=$(prompt_input "Author name" "$(git config user.name 2>/dev/null || echo '')")
     
     # Select project type
-    echo
-    echo "Select project type:"
-    echo "1) Standard Project (application, tool, service)"
-    echo "2) Learning Project (tutorial, exercises, reference)"
-    echo
-    
-    local project_type_choice
-    while true; do
-        read -p "Enter choice [1-2]: " project_type_choice
-        case $project_type_choice in
-            1)
-                project_type="Standard Project"
-                template_type="standard-project"
-                break
-                ;;
-            2)
-                project_type="Learning Project"
-                template_type="learning-project"
-                break
-                ;;
-            *)
-                echo "Please enter 1 or 2"
-                ;;
-        esac
-    done
+    local project_type
+    local template_type
+    if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+        template_type="$PROJECT_TYPE"
+        if [ "$PROJECT_TYPE" = "standard-project" ]; then
+            project_type="Standard Project"
+        elif [ "$PROJECT_TYPE" = "learning-project" ]; then
+            project_type="Learning Project"
+        fi
+        print_status "Using project type: $project_type"
+    else
+        echo
+        echo "Select project type:"
+        echo "1) Standard Project (application, tool, service)"
+        echo "2) Learning Project (tutorial, exercises, reference)"
+        echo
+        
+        local project_type_choice
+        while true; do
+            read -p "Enter choice [1-2]: " project_type_choice
+            case $project_type_choice in
+                1)
+                    project_type="Standard Project"
+                    template_type="standard-project"
+                    break
+                    ;;
+                2)
+                    project_type="Learning Project"
+                    template_type="learning-project"
+                    break
+                    ;;
+                *)
+                    echo "Please enter 1 or 2"
+                    ;;
+            esac
+        done
+    fi
     
     # Confirm project creation
     echo
@@ -781,9 +851,13 @@ main() {
     echo "Author: $author"
     echo
     
-    if ! prompt_yes_no "Create project with these settings?" "y"; then
-        print_warning "Project creation cancelled"
-        exit 0
+    if [ "$NON_INTERACTIVE_MODE" != "true" ]; then
+        if ! prompt_yes_no "Create project with these settings?" "y"; then
+            print_warning "Project creation cancelled"
+            exit 0
+        fi
+    else
+        print_status "Non-interactive mode: proceeding with project creation"
     fi
     
     # Create project
