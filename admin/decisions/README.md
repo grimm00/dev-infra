@@ -9,6 +9,7 @@
 ## 📋 Quick Links
 
 ### Architecture Decision Records (ADRs)
+- **[Templates Enhancement](templates-enhancement/README.md)** - Template enhancements with workflow automation (🔴 Proposed)
 - **[0001: Template Restructure](0001-template-restructure.md)** - Decision to restructure templates (admin/ → docs/maintainers/)
 - **[0002: CI/CD Workflow Improvements](0002-cicd-workflow-improvements.md)** - Decision to implement automated testing, workflow optimizations, and validation enhancements
 
