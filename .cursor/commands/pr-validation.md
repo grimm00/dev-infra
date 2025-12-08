@@ -13,12 +13,14 @@ This command supports multiple project organization patterns, matching `/pr` and
 1. **Feature-Specific Structure (default):**
    - Manual testing: `docs/maintainers/planning/features/[feature-name]/manual-testing.md`
    - Phase documents: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
-   - Sourcery reviews: `docs/maintainers/feedback/sourcery/pr##.md`
+   - Sourcery reviews: `docs/maintainers/feedback/sourcery/pr##.md` (for generated projects)
 
 2. **Project-Wide Structure:**
    - Manual testing: `docs/maintainers/planning/manual-testing.md` (if exists)
    - Phase documents: `docs/maintainers/planning/phases/phase-N.md`
-   - Sourcery reviews: `docs/maintainers/feedback/sourcery/pr##.md`
+   - Sourcery reviews: `docs/maintainers/feedback/sourcery/pr##.md` (for generated projects)
+
+**Note:** For dev-infra project, feedback docs are currently in `admin/feedback/sourcery/pr##.md`. This will be moved to `docs/maintainers/feedback/sourcery/pr##.md` as part of the admin docs migration to `docs/maintainers/`.
 
 **Feature Detection:**
 
@@ -33,8 +35,11 @@ This command supports multiple project organization patterns, matching `/pr` and
 **Sourcery Review:**
 
 - Review tool: `dt-review` (if available from dev-toolkit)
-- Review output: `docs/maintainers/feedback/sourcery/pr##.md`
+- Review output: 
+  - Dev-infra project: `admin/feedback/sourcery/pr##.md` (current location)
+  - Generated projects: `docs/maintainers/feedback/sourcery/pr##.md` (template structure)
 - **Note:** Missing reviews are acceptable - workflow continues without review
+- **Note:** Dev-infra will migrate admin docs to `docs/maintainers/` structure (see admin docs migration note)
 
 ---
 
@@ -468,7 +473,9 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ### 5. Fill Out Priority Matrix (If Review Available)
 
-**File:** `docs/maintainers/feedback/sourcery/pr##.md`
+**File:** 
+- Dev-infra: `admin/feedback/sourcery/pr##.md` (current location)
+- Generated projects: `docs/maintainers/feedback/sourcery/pr##.md` (template structure)
 
 **Skip this step if:**
 
