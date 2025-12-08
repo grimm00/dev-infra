@@ -13,6 +13,7 @@
 
 - **[Phase 1](phase-1-learnings.md)** - Add Non-Interactive Mode
 - **[Phase 2](phase-2-learnings.md)** - Create Template Validation Test Suite
+- **[Fix Implementation](fix-implementation-learnings.md)** - Fix Implementation Process (PR #30)
 - **[Phase 2](phase-2-learnings.md)** - Fix Implementation (PR #28) (2025-12-08)
 
 ---
