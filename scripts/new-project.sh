@@ -789,18 +789,57 @@ main() {
     
     # Get project information
     echo
-    local project_name=$(prompt_input "Project name")
-    local full_project_path
-    while ! full_project_path=$(validate_project_name "$project_name" "$TARGET_DIR"); do
+    local project_name
+    if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+        project_name="$PROJECT_NAME"
+        print_status "Using project name: $project_name"
+    else
         project_name=$(prompt_input "Project name")
+    fi
+    
+    # Validate project name
+    local sanitized_name
+    sanitized_name=$(validate_project_name "$project_name")
+    if [ "$sanitized_name" != "$project_name" ]; then
+        if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+            print_error "Project name contains invalid characters: $project_name"
+            print_error "Sanitized name would be: $sanitized_name"
+            exit 1
+        else
+            print_warning "Project name contains invalid characters"
+            if prompt_yes_no "Would you like to use '$sanitized_name' instead?" "y"; then
+                project_name="$sanitized_name"
+            else
+                project_name=$(prompt_input "Project name")
+            fi
+        fi
+    fi
+    
+    local full_project_path
+    while ! full_project_path=$(validate_project_name "$project_name" "$TARGET_DIR_VAR"); do
+        if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+            print_error "Failed to validate project name: $project_name"
+            exit 1
+        else
+            project_name=$(prompt_input "Project name")
+        fi
     done
     
     # Extract sanitized project name from full path to ensure consistency
     # This fixes the mismatch where original name with spaces is shown but sanitized name is used
     project_name=$(basename "$full_project_path")
     
-    local description=$(prompt_input "Project description")
-    local author=$(prompt_input "Author name" "$(git config user.name 2>/dev/null || echo '')")
+    local description
+    local author
+    if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+        description="${PROJECT_DESCRIPTION:-}"
+        author="${AUTHOR:-$(git config user.name 2>/dev/null || echo '')}"
+        print_status "Using description: ${description:-<none>}"
+        print_status "Using author: ${author:-<none>}"
+    else
+        description=$(prompt_input "Project description")
+        author=$(prompt_input "Author name" "$(git config user.name 2>/dev/null || echo '')")
+    fi
     
     # Select project type
     local project_type
