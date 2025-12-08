@@ -306,6 +306,36 @@ For each Sourcery comment, assess:
 
 ---
 
+## 🔍 CI/CD Failure Investigation Best Practices
+
+### Comprehensive Root Cause Analysis
+
+**When investigating CI/CD failures:**
+
+1. **Check All Similar Patterns**
+   - Don't stop at the first issue found
+   - Look for similar directories, files, or patterns
+   - Check test failures for patterns (e.g., multiple stage directories)
+   - Verify fix addresses all similar issues
+
+2. **PR Validation Value**
+   - PR validation workflow (`/pr-validation`) is valuable for catching issues before merge
+   - CI environment may expose issues not visible locally
+   - Different test execution order may reveal additional failures
+   - Systematic validation catches edge cases
+
+3. **Workflow File Investigation**
+   - Always investigate workflow files when CI failures occur
+   - Check `.github/workflows/` files for configuration issues
+   - Verify Docker/test environment setup
+   - Even if root cause seems clear, verify workflow files are correct
+
+**Example:** PR #31 fix discovered that `stage1-topic`, `stage2-topic`, and `stage3-topic` all had the same empty directory issue, not just the one causing immediate failures.
+
+**See:** `admin/planning/notes/chat-log-2025-12-08-pr31-fix-implementation.md` for complete example
+
+---
+
 ## 🔗 Related
 
 - **Main Rules:** [main.mdc](main.mdc) - Core project rules and standards
@@ -315,6 +345,6 @@ For each Sourcery comment, assess:
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-08  
 **Status:** ✅ Active  
 **Next:** Continue Phase 1 command integration

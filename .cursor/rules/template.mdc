@@ -250,6 +250,32 @@ Always: `YYYY-MM-DD` (e.g., 2025-12-07)
 - [ ] Test template validation script
 - [ ] Verify no broken references
 
+### Template Structure Issue Investigation
+
+**When fixing template structure issues:**
+
+1. **Check All Similar Directories**
+   - Don't stop at the first issue found
+   - Review all similar directories (e.g., all `stage*-topic/` directories)
+   - Check for patterns across template structure
+   - Verify fix addresses all similar issues
+
+2. **Empty Directory Handling**
+   - Git doesn't track empty directories
+   - Use `.gitkeep` files to ensure directories are tracked
+   - Check all empty directories in template structure
+   - Verify directories exist after Git checkout
+
+3. **Comprehensive Fix Verification**
+   - Test template generation after fix
+   - Verify all similar issues are resolved
+   - Check CI tests pass for all affected areas
+   - Document fix addresses all similar patterns
+
+**Example:** PR #31 fix discovered that `stage1-topic`, `stage2-topic`, and `stage3-topic` all needed `.gitkeep` files, not just the one causing immediate CI failures.
+
+**See:** `admin/planning/notes/chat-log-2025-12-08-pr31-fix-implementation.md` for complete example
+
 ### Template Validation Tests
 
 **Location:** `tests/`
@@ -289,6 +315,6 @@ Always: `YYYY-MM-DD` (e.g., 2025-12-07)
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-08  
 **Status:** ✅ Active  
 **Next:** Continue template evolution based on learnings
