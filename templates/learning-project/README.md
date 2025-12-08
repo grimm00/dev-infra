@@ -17,6 +17,88 @@ By the end of this project, you will understand:
 
 ---
 
+## 🔍 Exploration/Research/Decision Workflows
+
+This project supports structured workflows for exploring ideas, conducting research, and making architectural decisions before transitioning to feature planning.
+
+### Directory Structure
+
+**Hub Directories:**
+- `docs/maintainers/planning/explorations/` - Exploration hub (created by template)
+- `docs/maintainers/research/` - Research hub (created by template)
+- `docs/maintainers/decisions/` - Decisions hub (created by template)
+
+**Topic-Specific Directories:**
+- Commands (`/explore`, `/research`, `/decision`) create topic-specific directories automatically
+- Example: `/explore my-topic` creates `docs/maintainers/planning/explorations/my-topic/`
+- Example: `/research my-topic` creates `docs/maintainers/research/my-topic/`
+- Example: `/decision my-topic` creates `docs/maintainers/decisions/my-topic/`
+
+### Workflow: Exploration → Research → Decision → Planning
+
+1. **Exploration** (`/explore [topic]`)
+   - Organize abstract ideas and proof of concepts
+   - Identify research topics
+   - Creates: `docs/maintainers/planning/explorations/[topic]/`
+
+2. **Research** (`/research [topic]`)
+   - Conduct structured research on identified topics
+   - Extract functional and non-functional requirements
+   - Creates: `docs/maintainers/research/[topic]/` + `requirements.md`
+
+3. **Decision** (`/decision [topic]`)
+   - Make architectural decisions based on research
+   - Create Architecture Decision Records (ADRs)
+   - Creates: `docs/maintainers/decisions/[topic]/` + ADRs
+
+4. **Transition** (`/transition-plan --from-adr`)
+   - Transition from decisions to feature planning
+   - Creates feature plan and phase documents
+   - Ready for implementation with `/task-phase`
+
+### Hub vs Topic-Specific Directories
+
+**Hub Directories:**
+- Created by templates (already present in new projects)
+- Contain `README.md` files that serve as navigation hubs
+- Provide overview and workflow documentation
+- List active explorations/research/decisions
+
+**Topic-Specific Directories:**
+- Created by commands (`/explore`, `/research`, `/decision`)
+- Contain topic-specific documents
+- Automatically organized under hub directories
+- Commands populate these directories with structured content
+
+### Getting Started
+
+1. **Start exploration:** Use `/explore [topic]` for new ideas
+2. **Conduct research:** Use `/research [topic]` to investigate
+3. **Make decisions:** Use `/decision [topic]` to document decisions
+4. **Plan implementation:** Use `/transition-plan --from-adr` to create plans
+
+### Example Workflow
+
+```
+/explore new-feature
+  → Creates: docs/maintainers/planning/explorations/new-feature/
+  → Identifies research topics
+
+/research new-feature --from-explore new-feature
+  → Creates: docs/maintainers/research/new-feature/
+  → Extracts requirements
+
+/decision new-feature --from-research
+  → Creates: docs/maintainers/decisions/new-feature/
+  → Creates ADRs
+
+/transition-plan --from-adr docs/maintainers/decisions/new-feature/adr-001-*.md
+  → Creates: docs/maintainers/planning/features/new-feature/
+  → Ready for /task-phase
+```
+
+---
+
 ## 📚 Learning Path
 
 This project follows a **stage-based learning approach** with fundamentals before implementation:
