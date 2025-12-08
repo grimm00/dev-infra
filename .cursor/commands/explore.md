@@ -10,10 +10,13 @@ Initiate exploration cycles for proof of concepts or abstract ideas. Creates exp
 
 This command supports multiple project organization patterns:
 
-1. **Feature-Specific Structure (default):**
+1. **Dev-Infra Structure (default):**
+   - Explorations: `admin/explorations/[topic]/`
+
+2. **Template Structure (for generated projects):**
    - Explorations: `docs/maintainers/planning/explorations/[topic]/`
 
-2. **Project-Wide Structure:**
+3. **Project-Wide Structure:**
    - Explorations: `docs/maintainers/planning/explorations/[topic]/`
 
 **Topic Detection:**
@@ -85,7 +88,16 @@ This command supports multiple project organization patterns:
 
 ### 2. Create Exploration Document
 
-**Location:** `docs/maintainers/planning/explorations/[topic]/`
+**Location Detection:**
+
+- **Dev-Infra:** `admin/explorations/[topic]/`
+- **Template Structure:** `docs/maintainers/planning/explorations/[topic]/`
+- **Project-Wide:** `docs/maintainers/planning/explorations/[topic]/`
+
+**Auto-detection:**
+- Check if `admin/explorations/` exists → use dev-infra structure
+- Check if `docs/maintainers/planning/explorations/` exists → use template structure
+- Otherwise → use project-wide structure
 
 **Directory structure:**
 
@@ -256,7 +268,10 @@ This document lists research topics and questions that need investigation before
 
 **Update explorations hub:**
 
-**File:** `docs/maintainers/planning/explorations/README.md` (create if doesn't exist)
+**File location (auto-detected):**
+- **Dev-Infra:** `admin/explorations/README.md`
+- **Template Structure:** `docs/maintainers/planning/explorations/README.md`
+- **Project-Wide:** `docs/maintainers/planning/explorations/README.md`
 
 ```markdown
 # Explorations Hub
@@ -378,8 +393,10 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 **Exploration Structure:**
 
-- Explorations: `docs/maintainers/planning/explorations/[topic]/`
-- Research Topics: `docs/maintainers/planning/explorations/[topic]/research-topics.md`
+- **Dev-Infra:** `admin/explorations/[topic]/`
+- **Template Structure:** `docs/maintainers/planning/explorations/[topic]/`
+- **Project-Wide:** `docs/maintainers/planning/explorations/[topic]/`
+- Research Topics: `[explorations-path]/[topic]/research-topics.md`
 
 **Related Commands:**
 

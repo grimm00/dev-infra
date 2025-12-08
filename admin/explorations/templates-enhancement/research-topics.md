@@ -149,6 +149,8 @@ This document lists research topics and questions that need investigation before
 2. Research will create documents in `admin/research/templates-enhancement/`
 3. After research complete, use `/decision templates-enhancement --from-research` to make decisions
 
+**Note:** Exploration is located at `admin/explorations/templates-enhancement/` (same level as `admin/research/`)
+
 ---
 
 **Last Updated:** 2025-12-07
