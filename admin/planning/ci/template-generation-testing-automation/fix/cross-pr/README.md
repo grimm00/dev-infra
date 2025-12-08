@@ -34,7 +34,7 @@
 - **Status:** ✅ Complete
 - **Issues:** 2 LOW effort issues
 - **File:** [quick-wins-low-low-01.md](quick-wins-low-low-01.md)
-- **Completed:** 2025-12-08 via PR #[number]
+- **Completed:** 2025-12-08 via PR #30
 
 **Issues:**
 - PR29-#1: Add INIT_GIT=true tests (🟡 MEDIUM, 🟢 LOW)
