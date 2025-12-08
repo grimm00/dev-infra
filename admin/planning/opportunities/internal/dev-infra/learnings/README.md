@@ -13,6 +13,7 @@
 
 - **[Command Adaptation Template Learnings](command-adaptation-template-learnings.md)** - Learnings from creating the Command Adaptation Template feature
 - **[Cursor Commands Integration Learnings](cursor-commands-integration-learnings.md)** - Learnings from adapting 14 workflow automation commands
+- **[Status Tracking Automation Learnings](status-tracking-automation-learnings.md)** - Learnings from implementing Status Tracking Automation CI/CD improvement
 
 ---
 
@@ -28,7 +29,7 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 2  
+**Total Learning Documents:** 3  
 **Status:** ✅ Active
 
 ---
