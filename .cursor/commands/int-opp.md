@@ -73,16 +73,19 @@ This command supports dev-infra's opportunity structure:
 **New project discovery (`--new-project`):**
 
 1. **Check if directory exists:**
+
    - Look for `admin/planning/opportunities/internal/[project]/`
    - If exists, project is known
 
 2. **Search for project information:**
+
    - Check Projects API: `./proj list --search "[project-name]"` (if available)
    - Check GitHub: Search for repository with project name
    - Check local filesystem: Look for project directories in `~/Projects/` or `~/Learning/`
    - Check if project is mentioned in documentation
 
 3. **Gather project context:**
+
    - Project type (application, tool, library, template)
    - Technology stack (if known)
    - Purpose/description
@@ -151,6 +154,7 @@ admin/planning/opportunities/internal/[project-name]/
 [Project description and purpose]
 
 **Project Context:**
+
 - **Type:** [Application/Tool/Library/Template]
 - **Technology Stack:** [If known]
 - **Purpose:** [What this project does]
@@ -194,6 +198,7 @@ admin/planning/opportunities/internal/[project-name]/
 ## 🎯 Purpose
 
 This directory contains learnings from [project name] that can inform:
+
 - Dev-infra template improvements
 - Future project patterns
 - Best practices documentation
@@ -263,12 +268,14 @@ This directory contains actionable improvement checklists based on learnings fro
 **Types:**
 
 1. **Learnings** (default):
+
    - What worked well
    - What needs improvement
    - Unexpected discoveries
    - Time investment analysis
 
 2. **Improvements** (for dev-infra):
+
    - Actionable checklists
    - Template updates needed
    - Pattern documentation
@@ -299,6 +306,7 @@ This directory contains actionable improvement checklists based on learnings fro
 **Location:** `admin/planning/opportunities/internal/[project]/learnings/`
 
 **File naming:**
+
 - Format: `[topic]-learnings.md` (e.g., `phase-N-learnings.md`, `fix-management-learnings.md`)
 - Or: `[project]-learnings-[date].md` for general learnings
 
@@ -338,6 +346,7 @@ This directory contains actionable improvement checklists based on learnings fro
 [Code/documentation examples]
 
 **Benefits:**
+
 - Benefit 1
 - Benefit 2
 
@@ -382,16 +391,20 @@ This directory contains actionable improvement checklists based on learnings fro
 ## ⏱️ Time Investment Analysis
 
 **Breakdown:**
+
 - [Activity]: [Time]
 - [Activity]: [Time]
 
 **What took longer:**
+
 - [Activity]: [Reason]
 
 **What was faster:**
+
 - [Activity]: [Reason]
 
 **Estimation lessons:**
+
 - Lesson 1
 - Lesson 2
 
@@ -400,15 +413,18 @@ This directory contains actionable improvement checklists based on learnings fro
 ## 📊 Metrics & Impact
 
 **Code metrics:**
+
 - Lines of code: [N]
 - Test coverage: [X]% (if applicable)
 - Files created/modified: [N]
 
 **Quality metrics:**
+
 - Bugs found/fixed: [N]
 - External review feedback: [Summary]
 
 **Developer experience:**
+
 - Improvement 1
 - Improvement 2
 
@@ -424,6 +440,7 @@ This directory contains actionable improvement checklists based on learnings fro
 **Location:** `admin/planning/opportunities/internal/[project]/improvements/`
 
 **File naming:**
+
 - Format: `[project]-improvements-[topic].md` (e.g., `dev-infra-improvements-phaseN.md`)
 
 **Improvements Template:**
@@ -470,6 +487,7 @@ This directory contains actionable improvement checklists based on learnings fro
 **Location:** `admin/planning/opportunities/internal/dev-infra/command-adaptations/`
 
 **File naming:**
+
 - Format: `[command-name]-adaptation.md` (e.g., `int-opp-adaptation.md`, `reflect-adaptation.md`)
 
 **Command Adaptation Template:**
@@ -498,6 +516,7 @@ This directory contains actionable improvement checklists based on learnings fro
 **Location:** `.cursor/commands/[command-name].md`
 
 **Key Features:**
+
 - Feature 1
 - Feature 2
 
@@ -518,6 +537,7 @@ This directory contains actionable improvement checklists based on learnings fro
 [Adapted code/pattern]
 
 **Files to modify:**
+
 - `[file1]` - [reason]
 - `[file2]` - [reason]
 
@@ -526,6 +546,7 @@ This directory contains actionable improvement checklists based on learnings fro
 ## 📝 Implementation Steps
 
 1. **Step 1: [Name]**
+
    - [ ] Task 1
    - [ ] Task 2
 
@@ -589,11 +610,11 @@ This directory contains actionable improvement checklists based on learnings fro
 **Update completion tracking:**
 
 ```markdown
-| Project | Learnings | Improvements | Status |
-|---------|-----------|--------------|--------|
-| work-prod | [N] | [M] | ✅ Active |
-| dev-infra | [N] | [M] | ✅ Active |
-| [project] | [N] | [M] | ✅ Active |
+| Project   | Learnings | Improvements | Status    |
+| --------- | --------- | ------------ | --------- |
+| work-prod | [N]       | [M]          | ✅ Active |
+| dev-infra | [N]       | [M]          | ✅ Active |
+| [project] | [N]       | [M]          | ✅ Active |
 ```
 
 **Checklist:**
@@ -605,6 +626,116 @@ This directory contains actionable improvement checklists based on learnings fro
 
 ---
 
+### 7. Commit and Push Changes
+
+**Since learnings/improvements are documentation-only, use docs-only workflow:**
+
+**Branch naming:**
+
+- Format: `docs/int-opp-[project]-[topic]` (e.g., `docs/int-opp-dev-infra-phase-4`)
+- Or: `docs/int-opp-[project]-learnings` (for general learnings)
+
+**Steps:**
+
+1. **Check current branch:**
+
+   ```bash
+   git branch --show-current
+   ```
+
+2. **Create docs branch (if not already on one):**
+
+   ```bash
+   git checkout -b docs/int-opp-[project]-[topic]
+   ```
+
+3. **Stage all changes:**
+
+   ```bash
+   git add admin/planning/opportunities/internal/
+   ```
+
+4. **Commit with proper message:**
+
+   ```bash
+   git commit -m "docs(learnings): capture [project] learnings - [topic]
+
+   Created learnings document:
+   - [Brief summary of learnings]
+   - Updated project hub
+   - Updated learnings hub
+   - Updated main opportunities hub
+
+   Related: [Phase N or topic]"
+   ```
+
+5. **Push branch:**
+
+   ```bash
+   git push origin docs/int-opp-[project]-[topic]
+   ```
+
+6. **Merge directly to develop (docs-only, no PR needed):**
+
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git merge docs/int-opp-[project]-[topic] --no-edit
+   git push origin develop
+   ```
+
+7. **Clean up branch:**
+   ```bash
+   git branch -d docs/int-opp-[project]-[topic]
+   git push origin --delete docs/int-opp-[project]-[topic]
+   ```
+
+**Commit message examples:**
+
+**For phase learnings:**
+
+```bash
+git commit -m "docs(learnings): capture dev-infra learnings - Phase 4
+
+Created learnings document for Phase 4:
+- What worked well: Requirements template pattern replication
+- What needs improvement: Template generation testing
+- Unexpected discoveries: Commands already support template structure
+- Time analysis: ~20 minutes (faster than estimated)
+
+Updated learnings hub with new document link.
+
+Related: Phase 4"
+```
+
+**For general learnings:**
+
+```bash
+git commit -m "docs(learnings): capture work-prod learnings - Fix Management
+
+Created learnings document:
+- What worked well: Batch-based fix planning
+- What needs improvement: Priority assessment timing
+- Unexpected discoveries: Automated fix detection patterns
+
+Updated project hub and learnings hub.
+
+Related: Fix Management Workflow"
+```
+
+**Checklist:**
+
+- [ ] Docs branch created
+- [ ] All changes staged
+- [ ] Commit message follows conventional format
+- [ ] Branch pushed to remote
+- [ ] Merged directly to develop
+- [ ] Branch cleaned up (local and remote)
+
+**Note:** Learnings/improvements are documentation-only, so they can be merged directly to `develop` without a PR, following Git Flow pattern for `docs/*` branches.
+
+---
+
 ## Project Discovery Process (--new-project)
 
 ### 1. Check Existing Projects
@@ -612,16 +743,19 @@ This directory contains actionable improvement checklists based on learnings fro
 **Search locations:**
 
 1. **Projects API:**
+
    ```bash
    ./proj list --search "[project-name]"  # If available
    ```
 
 2. **GitHub:**
+
    ```bash
    gh repo list --search "[project-name]"
    ```
 
 3. **Local filesystem:**
+
    ```bash
    find ~/Projects ~/Learning -type d -name "*[project-name]*" 2>/dev/null
    ```
@@ -730,11 +864,13 @@ This directory contains actionable improvement checklists based on learnings fro
 **For each command:**
 
 1. **Read command documentation:**
+
    - Understand original purpose
    - Identify key features
    - Note project-specific assumptions
 
 2. **Identify adaptations needed:**
+
    - What's project-specific?
    - What should be generic?
    - What paths need to change?
@@ -758,6 +894,7 @@ This directory contains actionable improvement checklists based on learnings fro
 **Location:** `admin/planning/opportunities/internal/dev-infra/command-adaptations/`
 
 **File naming:**
+
 - Format: `[command-name]-adaptation.md`
 
 **Template:** See "Command Adaptation Template" above
@@ -798,6 +935,7 @@ This directory contains actionable improvement checklists based on learnings fro
 **Command:** `/int-opp [project] --phase N`
 
 **Process:**
+
 1. Identify project
 2. Create phase learnings document
 3. Use phase learnings template
@@ -810,6 +948,7 @@ This directory contains actionable improvement checklists based on learnings fro
 **Command:** `/int-opp inventory-tools --new-project`
 
 **Process:**
+
 1. Search for inventory-tools project
 2. Gather project information
 3. Ask for clarification if needed
@@ -823,6 +962,7 @@ This directory contains actionable improvement checklists based on learnings fro
 **Command:** `/int-opp dev-infra --command-adaptation`
 
 **Process:**
+
 1. Identify commands to adapt
 2. Analyze each command
 3. Create adaptation documents
@@ -876,4 +1016,3 @@ This directory contains actionable improvement checklists based on learnings fro
 **Last Updated:** 2025-12-07  
 **Status:** ✅ Active  
 **Next:** Use to capture learnings, create project directories, or document command adaptations (supports any project with automatic discovery)
-

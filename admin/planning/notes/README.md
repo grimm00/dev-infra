@@ -8,6 +8,10 @@
 
 ## 📋 Quick Links
 
+### Chat Logs
+
+- **[Chat Log 2025-12-08](chat-log-2025-12-08-templates-enhancement.md)** - Templates Enhancement work session (Phase 4 learnings, Phase 5 prep)
+
 ### Planning Documents
 - **[Decision Records](decisions/README.md)** - Architectural and design decisions
 - **[Research Notes](research/README.md)** - Investigation and analysis

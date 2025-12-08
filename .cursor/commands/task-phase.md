@@ -111,15 +111,40 @@ This command supports multiple phase organization patterns:
 - `--feature [name]` - Specify feature name (overrides auto-detection)
 - `--project-wide` - Use project-wide phase structure
 - `--phase-type [type]` - Specify phase type (phase, milestone, sprint)
+- `--force-pr` - Force PR creation even for docs-only phases (overrides auto-detection)
 
 **Note:** For CI/CD improvements, use `/task-improvement` command instead.
+
+**Docs-Only Detection:**
+
+This command automatically detects if a phase is documentation-only and uses a direct merge workflow (no PR) to preserve Sourcery review quota for code changes.
+
+**Detection Criteria:**
+
+A phase is considered "docs-only" if:
+- Only documentation files are modified (`.md`, `.txt`, `.yml`, `.yaml`, `.json` config files)
+- Only copying existing files (no code modifications)
+- Creating new documentation/README files
+- Template work that involves copying files and creating documentation
+
+A phase requires PR if:
+- Any code files are modified (`.py`, `.js`, `.ts`, `.go`, `.rs`, `.java`, `.cpp`, `.sh`, `.bash`, etc.)
+- Scripts are modified (even if they generate docs)
+- CI/CD workflows are modified (`.yml` in `.github/workflows/`)
+- Mixed changes (code + docs) → Use PR workflow
+
+**Workflow:**
+
+- **Docs-Only Phase:** Feature branch → Commit → Merge directly to develop → Update status docs
+- **Code Phase:** Feature branch → Commit → Create PR → Review → Merge → Update status docs
 
 **Important:**
 
 - This command handles **one task group at a time** (typically RED+GREEN pair)
 - After completing a task group, stop and wait for user to invoke again for next group
 - Do NOT continue to next task group automatically
-- Use `/pr --phase [N]` command when all tasks are complete to create PR
+- Use `/pr --phase [N]` command when all tasks are complete to create PR (for code phases)
+- Docs-only phases merge directly to develop (no PR needed)
 
 ---
 
@@ -357,19 +382,41 @@ git commit -m "feat(phase-3): add proj delete CLI command"
 
 ---
 
-### 6. Complete All Tasks - Create PR
+### 6. Complete All Tasks - Determine Workflow
 
 **When ALL tasks in phase are done:**
 
-**Pre-PR Checklist:**
+**First, detect phase type (docs-only vs code):**
+
+1. **Analyze modified files:**
+   - Check git diff for files that will be modified
+   - Check phase document tasks for file patterns mentioned
+   - Look for code file extensions vs docs-only extensions
+
+2. **Detection logic:**
+   ```bash
+   # Check for code files in changes
+   git diff --name-only develop...HEAD | grep -E '\.(py|js|ts|go|rs|java|cpp|c|h|sh|bash)$'
+   # If found → Code phase (use PR workflow)
+   # If not found → Docs-only phase (use direct merge)
+   ```
+
+3. **Special cases:**
+   - Template generation scripts (`.sh` in `scripts/`) → Code phase
+   - CI/CD workflows (`.yml` in `.github/workflows/`) → Code phase
+   - Mixed changes (code + docs) → Code phase (use PR workflow)
+   - User override: `--force-pr` flag forces PR workflow
+
+**Pre-Completion Checklist:**
 
 - [ ] All tasks completed
-- [ ] All tests passing
-- [ ] Coverage maintained/improved
+- [ ] All tests passing (if applicable)
+- [ ] Coverage maintained/improved (if applicable)
 - [ ] Manual testing complete (if applicable)
 - [ ] Phase document updated (all tasks marked complete)
 - [ ] README/docs updated (if needed)
-- [ ] No linter errors
+- [ ] No linter errors (if applicable)
+- [ ] Phase type detected (docs-only vs code)
 
 **Status Update (Phase Completion):**
 
@@ -414,9 +461,9 @@ When all tasks in phase are complete, automatically update status:
 5. **Commit status updates:**
    - Commit message: `docs(phase-N): update phase status to Complete`
    - Include both phase document and feature status document
-   - Commit before creating PR (status must be current for PR validation)
+   - Commit before creating PR (for code phases) or before direct merge (for docs-only phases)
 
-**Note:** Status updates are committed before PR creation to ensure PR validation passes. The `/pr` command validates that status is current.
+**Note:** Status updates are committed before PR creation (code phases) or direct merge (docs-only phases) to ensure status is current.
 
 **Checklist:**
 
@@ -424,7 +471,51 @@ When all tasks in phase are complete, automatically update status:
 - [ ] Completion date added to phase document
 - [ ] Feature status document updated with phase completion
 - [ ] Progress tracking updated
-- [ ] Status updates committed before PR creation
+- [ ] Status updates committed
+
+---
+
+### 6a. Docs-Only Phase: Direct Merge Workflow
+
+**If phase is detected as docs-only (and `--force-pr` not used):**
+
+1. **Push feature branch to remote:**
+   ```bash
+   git push origin feat/phase-N-[description]
+   ```
+
+2. **Merge directly to develop:**
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git merge feat/phase-N-[description] --no-edit
+   git push origin develop
+   ```
+
+3. **Update post-merge documentation:**
+   - Run `/post-pr --direct --phase N` to update status documents
+   - This updates phase and feature status without PR number
+
+4. **Clean up branch:**
+   ```bash
+   git branch -d feat/phase-N-[description]
+   git push origin --delete feat/phase-N-[description]
+   ```
+
+**Checklist:**
+
+- [ ] Feature branch pushed
+- [ ] Merged directly to develop
+- [ ] Post-merge documentation updated (`/post-pr --direct --phase N`)
+- [ ] Branch cleaned up (local and remote)
+
+**Note:** Docs-only phases skip PR creation to preserve Sourcery review quota for code changes. Status documents are still updated via `/post-pr --direct`.
+
+---
+
+### 6b. Code Phase: PR Workflow
+
+**If phase contains code changes (or `--force-pr` used):**
 
 **Create PR:**
 
@@ -486,6 +577,7 @@ feat: [Phase N Description] (Phase N)
 - [ ] Wait for external review (dt-review, if available)
 - [ ] Address CRITICAL/HIGH issues
 - [ ] Get user approval before merge
+- [ ] After merge, run `/post-pr [pr-number] --phase N` to update documentation
 
 ---
 
