@@ -60,7 +60,8 @@ This guide contains manual testing scenarios for validating the non-interactive 
 
 **Test:** Create project with all environment variables set
 
-**Prerequisites:** 
+**Prerequisites:**
+
 - `/tmp/test-proj-env` directory exists or can be created
 - No existing project at `/tmp/test-proj-env/test-project`
 
@@ -208,7 +209,8 @@ PROJECT_NAME="test" PROJECT_TYPE="standard-project" INIT_GIT="maybe" ./scripts/n
 
 **Test:** Create project with optional variables set
 
-**Prerequisites:** 
+**Prerequisites:**
+
 - `/tmp/test-proj-env` directory exists or can be created
 - No existing project at `/tmp/test-proj-env/test-optional`
 
@@ -254,6 +256,7 @@ test -d /tmp/test-proj-env/test-optional/.git && echo "✅ Git initialized (INIT
 **Manual Test Steps:**
 
 1. **Run script without any flags:**
+
    ```bash
    ./scripts/new-project.sh
    ```
@@ -295,7 +298,8 @@ timeout 1 ./scripts/new-project.sh 2>&1 | head -5
 
 **Test:** Create learning project in non-interactive mode
 
-**Prerequisites:** 
+**Prerequisites:**
+
 - `/tmp/test-proj-env` directory exists or can be created
 - No existing project at `/tmp/test-proj-env/test-learning`
 
@@ -331,7 +335,8 @@ test -d /tmp/test-proj-env/test-learning/stage0-fundamentals && echo "✅ Learni
 
 **Test:** Verify directory is created automatically in non-interactive mode
 
-**Prerequisites:** 
+**Prerequisites:**
+
 - `/tmp/test-proj-env/new-dir` does not exist
 
 **CLI Test:**
@@ -370,6 +375,7 @@ test -d /tmp/test-proj-env/new-dir/test-dir && echo "✅ Project created in new 
 **Scenarios Failed:** 0 (Scenarios 3 and 5 grep tests failed due to color codes, but functionality works correctly)
 
 **Notes:**
+
 - Scenarios 3 and 5: Grep tests failed due to ANSI color codes in error messages, but manual verification confirms error messages are displayed correctly
 - All functionality verified working correctly
 - All acceptance criteria met
@@ -377,4 +383,3 @@ test -d /tmp/test-proj-env/new-dir/test-dir && echo "✅ Project created in new 
 ---
 
 **Last Updated:** 2025-12-08
-
