@@ -253,3 +253,49 @@ teardown() {
     [ -f "$TEST_DIR/project-one/README.md" ]
     [ -f "$TEST_DIR/project-two/README.md" ]
 }
+
+# ============================================================================
+# Git Initialization Tests
+# ============================================================================
+
+@test "generation-success: standard-project git initialization works" {
+    generate_test_project "test-standard-git" "standard-project" "$TEST_DIR" "true"
+    
+    [ "$status" -eq 0 ]
+    
+    local project_dir="$TEST_DIR/test-standard-git"
+    
+    # Verify project was created
+    [ -d "$project_dir" ]
+    [ -f "$project_dir/README.md" ]
+    
+    # Verify git was initialized
+    [ -d "$project_dir/.git" ]
+    
+    # Verify default branch exists (check git branch output)
+    run git -C "$project_dir" branch --show-current
+    [ "$status" -eq 0 ]
+    # Default branch should be "main" or "master" (depending on git config)
+    [[ "$output" =~ ^(main|master)$ ]]
+}
+
+@test "generation-success: learning-project git initialization works" {
+    generate_test_project "test-learning-git" "learning-project" "$TEST_DIR" "true"
+    
+    [ "$status" -eq 0 ]
+    
+    local project_dir="$TEST_DIR/test-learning-git"
+    
+    # Verify project was created
+    [ -d "$project_dir" ]
+    [ -f "$project_dir/README.md" ]
+    
+    # Verify git was initialized
+    [ -d "$project_dir/.git" ]
+    
+    # Verify default branch exists (check git branch output)
+    run git -C "$project_dir" branch --show-current
+    [ "$status" -eq 0 ]
+    # Default branch should be "main" or "master" (depending on git config)
+    [[ "$output" =~ ^(main|master)$ ]]
+}

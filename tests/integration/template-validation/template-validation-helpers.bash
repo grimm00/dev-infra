@@ -4,14 +4,20 @@
 # Shared helper functions for template validation tests
 
 # Generate a test project using non-interactive mode
-# Usage: generate_test_project <project-name> <project-type> [target-dir]
+# Usage: generate_test_project <project-name> <project-type> [target-dir] [init-git]
 # Note: This function sets environment variables and runs the script
 # The generated project will be at: $TARGET_DIR/$project_name
 # Requires: PROJECT_ROOT (from helpers.bash), TEST_DIR (from setup())
+# Args:
+#   project-name: Name of the project to generate
+#   project-type: Type of project (standard-project or learning-project)
+#   target-dir: Optional target directory (defaults to TEST_DIR)
+#   init-git: Optional git initialization flag (true or false, defaults to false)
 generate_test_project() {
     local project_name="$1"
     local project_type="$2"
     local target_dir="${3:-$TEST_DIR}"
+    local init_git="${4:-false}"
     
     # Ensure PROJECT_ROOT is set (from helpers.bash)
     if [[ -z "$PROJECT_ROOT" ]]; then
@@ -37,7 +43,7 @@ generate_test_project() {
     export PROJECT_NAME="$project_name"
     export PROJECT_TYPE="$project_type"
     export TARGET_DIR="$target_dir"
-    export INIT_GIT="false"
+    export INIT_GIT="$init_git"
     
     # Run the script
     run "$script_path" --non-interactive
@@ -46,6 +52,7 @@ generate_test_project() {
     export PROJECT_NAME="test-project"
     export PROJECT_TYPE="standard-project"
     export TARGET_DIR="$TEST_DIR"
+    export INIT_GIT="false"
     
     # Return status code for test assertions
     # Note: $status is set by bats 'run' command
@@ -155,6 +162,7 @@ validate_markdown_links() {
 # Validate all markdown links in a project
 # Usage: validate_all_markdown_links <project-dir>
 # Returns: 0 if all links valid, 1 if any broken links found
+# Optimized: Captures output once and uses exit status to avoid double validation
 validate_all_markdown_links() {
     local project_dir="$1"
     local total_broken=0
@@ -168,14 +176,33 @@ validate_all_markdown_links() {
     fi
     
     # Validate links in each markdown file
+    # Capture output once and use exit status to determine if broken links exist
     while IFS= read -r md_file; do
-        local broken=$(validate_markdown_links "$md_file" "$project_dir" 2>&1 | wc -l)
-        if [[ $broken -gt 0 ]]; then
-            validate_markdown_links "$md_file" "$project_dir" >&2
-            ((total_broken += broken))
+        local validation_output
+        validation_output=$(validate_markdown_links "$md_file" "$project_dir" 2>&1)
+        local validation_status=$?
+        
+        # If validation failed (broken links found), count them and output errors
+        if [[ $validation_status -ne 0 ]]; then
+            # Count broken links from output (each broken link is one line)
+            local broken_count=$(echo "$validation_output" | grep -c "Broken link" || echo "0")
+            if [[ $broken_count -gt 0 ]]; then
+                echo "$validation_output" >&2
+                ((total_broken += broken_count))
+            else
+                # If exit status indicates failure but no broken link messages,
+                # it might be a file not found error - count as 1 broken
+                echo "$validation_output" >&2
+                ((total_broken++))
+            fi
         fi
     done <<< "$markdown_files"
     
-    return $total_broken
+    # Return 0 if no broken links, 1 if any broken links found
+    if [[ $total_broken -eq 0 ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
