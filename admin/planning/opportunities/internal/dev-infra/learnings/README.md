@@ -11,6 +11,7 @@
 
 ### Learning Documents
 
+- **[Templates Enhancement Phase 3](templates-enhancement-phase-3-learnings.md)** - Learnings from Phase 3: Exploration/Research/Decision Workflows (✅ Complete)
 - **[Templates Enhancement Phase 2](templates-enhancement-phase-2-learnings.md)** - Learnings from Phase 2: CI/CD Improvement Structure (✅ Complete)
 - **[Templates Enhancement Phase 1](templates-enhancement-phase-1-learnings.md)** - Learnings from Phase 1: Commands Integration (✅ Complete)
 - **[Command Adaptation Template Learnings](command-adaptation-template-learnings.md)** - Learnings from creating the Command Adaptation Template feature
@@ -31,7 +32,7 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 5  
+**Total Learning Documents:** 6  
 **Status:** ✅ Active
 
 ---
