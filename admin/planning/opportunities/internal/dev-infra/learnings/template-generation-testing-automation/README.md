@@ -11,7 +11,8 @@
 
 ### Phase Learnings
 
-- **[Phase 1](phase-1-learnings.md)** - Add Non-Interactive Mode (2025-12-08)
+- **[Phase 1](phase-1-learnings.md)** - Add Non-Interactive Mode
+- **[Phase 2](phase-2-learnings.md)** - Fix Implementation (PR #28) (2025-12-08)
 
 ---
 
@@ -23,7 +24,7 @@ This directory contains phase-specific learnings from the Template Generation Te
 
 ## 📊 Summary
 
-**Total Phase Learnings:** 1  
+**Total Phase Learnings:** 2  
 **Status:** ✅ Active
 
 ---
