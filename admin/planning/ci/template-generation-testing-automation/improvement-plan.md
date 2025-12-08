@@ -140,5 +140,17 @@ Automate template generation testing to reduce manual verification burden and en
 
 ---
 
+## Fix Tracking
+
+**Location:** `admin/planning/ci/template-generation-testing-automation/fix/`
+
+Fixes from PR reviews are tracked within the improvement directory structure (topic-centric approach). This keeps fixes organized with their source context.
+
+**Related:**
+- [Fix Tracking Hub](fix/README.md) - Fix plans and tracking
+- PR #27 fixes: Documentation accuracy improvements (✅ Complete via PR #28)
+
+---
+
 **Last Updated:** 2025-12-08
 

@@ -213,11 +213,24 @@ Automate template generation testing to reduce manual verification burden and en
 ## Related Documents
 
 - [Improvement Plan](improvement-plan.md)
+- [Fix Tracking](fix/README.md) - Fix plans and tracking (topic-centric organization)
 - [ADR-001: Non-Interactive Mode Implementation](../../decisions/template-generation-testing-automation/adr-001-non-interactive-mode-implementation.md)
 - [ADR-002: Template Validation Test Suite](../../decisions/template-generation-testing-automation/adr-002-template-validation-test-suite.md)
 - [Decisions Summary](../../decisions/template-generation-testing-automation/decisions-summary.md)
 - [Requirements Document](../../research/template-generation-testing-automation/requirements.md)
 - [Research Summary](../../research/template-generation-testing-automation/research-summary.md)
+
+---
+
+## Fix Tracking
+
+**Location:** `admin/planning/ci/template-generation-testing-automation/fix/`
+
+Fixes from PR reviews are tracked within the improvement directory structure (topic-centric approach). This keeps fixes organized with their source context.
+
+**Related:**
+- [Fix Tracking Hub](fix/README.md) - Fix plans and tracking
+- PR #27 fixes: Documentation accuracy improvements (✅ Complete via PR #28)
 
 ---
 

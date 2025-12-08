@@ -26,12 +26,14 @@ Phase 1 focuses on testing all 14 adapted cursor commands systematically in the 
 ```
 
 **Why this helps:**
+
 - Ensures correct feature detection
 - Points to correct phase document: `docs/maintainers/planning/features/command-testing-integration/phase-1.md`
 - Prevents confusion about directory structure
 - Works even if context is lost between sessions
 
 **Best Practice:**
+
 - Always use `--feature` flag when starting a new phase
 - Verify feature name matches directory name exactly (kebab-case)
 - Check that phase document exists before proceeding
@@ -57,6 +59,7 @@ Phase 1 focuses on testing all 14 adapted cursor commands systematically in the 
 - [ ] Document test scenarios for Phase 3 commands (`/transition-plan`, `/reflect`, `/pre-phase-review`, `/task-release`, `/cursor-rules`, `/int-opp`)
 
 **Notes:**
+
 - Create test scenarios document
 - Cover all command types and use cases
 - Include edge cases and error scenarios
@@ -70,6 +73,7 @@ Phase 1 focuses on testing all 14 adapted cursor commands systematically in the 
 - [ ] Test auto-detection logic
 
 **Notes:**
+
 - Verify commands detect correct paths
 - Test with different project structures
 - Validate auto-detection works correctly
@@ -83,6 +87,7 @@ Phase 1 focuses on testing all 14 adapted cursor commands systematically in the 
 - [ ] Validate file creation and updates
 
 **Notes:**
+
 - Test complete workflows, not just individual steps
 - Verify outputs match expected results
 - Check file creation and updates are correct
@@ -96,6 +101,7 @@ Phase 1 focuses on testing all 14 adapted cursor commands systematically in the 
 - [ ] Document successful test cases
 
 **Notes:**
+
 - Create comprehensive test results document
 - Document all issues found during testing
 - Document successful test cases for reference
@@ -109,6 +115,7 @@ Phase 1 focuses on testing all 14 adapted cursor commands systematically in the 
 - [ ] Update command documentation if needed
 
 **Notes:**
+
 - Fix all issues found during testing
 - Update command documentation if changes made
 - Verify fixes resolve issues
@@ -135,4 +142,3 @@ Phase 1 focuses on testing all 14 adapted cursor commands systematically in the 
 ---
 
 **Last Updated:** 2025-12-07
-
