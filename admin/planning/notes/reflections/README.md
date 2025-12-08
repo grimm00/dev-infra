@@ -12,6 +12,7 @@
 
 - **[Command Adaptation Template Reflection](reflection-command-adaptation-template-2025-12-07.md)** - Reflection on Command Adaptation Template feature (2025-12-07)
 - **[Cursor Commands Integration Reflection](reflection-commands-integration-2025-12-07.md)** - Reflection on cursor commands integration work (2025-12-07)
+- **[Status Tracking Automation Reflection](reflection-status-tracking-automation-2025-12-07.md)** - Reflection on Status Tracking Automation CI/CD improvement (2025-12-07)
 
 ---
 
