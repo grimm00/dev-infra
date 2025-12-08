@@ -15,6 +15,29 @@ Phase 1 focuses on testing all 14 adapted cursor commands systematically in the 
 
 ---
 
+## ⚠️ Important: Context Memory for New Agent Sessions
+
+**Issue:** When moving from chat to chat (new agent context), the AI assistant may not remember the directory structure or where things should go.
+
+**Solution:** Always specify the feature name explicitly when starting work:
+
+```bash
+/task-phase 1 --feature command-testing-integration
+```
+
+**Why this helps:**
+- Ensures correct feature detection
+- Points to correct phase document: `docs/maintainers/planning/features/command-testing-integration/phase-1.md`
+- Prevents confusion about directory structure
+- Works even if context is lost between sessions
+
+**Best Practice:**
+- Always use `--feature` flag when starting a new phase
+- Verify feature name matches directory name exactly (kebab-case)
+- Check that phase document exists before proceeding
+
+---
+
 ## 🎯 Success Criteria
 
 - [ ] All 14 commands tested

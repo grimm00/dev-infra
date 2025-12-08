@@ -15,6 +15,7 @@
 - **[Phase 1: Add Non-Interactive Mode](phase-1.md)** - Add non-interactive mode to template generation script
 - **[Phase 2: Create Template Validation Test Suite](phase-2.md)** - Create automated test suite
 - **[Improvement Plan](improvement-plan.md)** - Detailed improvement plan
+- **[Fix Tracking](fix/README.md)** - Fix plans and tracking (PR #27 fixes)
 
 ---
 
