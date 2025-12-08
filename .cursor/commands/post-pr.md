@@ -787,6 +787,98 @@ git push origin --delete fix/pr12-batch-medium-medium-01
 
 ---
 
+## Status Update Behavior
+
+**What `/post-pr` Updates:**
+
+### Phase Mode Status Updates
+
+**Phase Document:**
+- Updates status field to "✅ Complete"
+- Adds completion date if not present
+- Verifies all task checkboxes are marked complete
+- Updates "Last Updated" field
+
+**Feature Status Document:**
+- Updates current phase field
+- Calculates and updates overall progress percentage
+- Adds completed milestone entry with PR number and date
+- Updates "What's Happening Now" section
+- Updates "Immediate Next Steps" section
+- Updates progress tracking table (phase row status, end date, duration)
+- Updates "Last Updated" field
+
+### Fix Mode Status Updates
+
+**Fix Plan:**
+- Updates fix plan status
+- Marks batch as complete
+- Updates fix tracking hubs
+
+### Release Mode Status Updates
+
+**Release Documentation:**
+- Updates release status
+- Updates release notes status
+
+**When `/post-pr` Updates Status:**
+
+- **After PR Merge:** `/post-pr` should be run immediately after PR is merged to `develop`
+- **Before Next Phase:** Run `/post-pr` before starting the next phase to ensure documentation is current
+- **As Part of Workflow:** `/post-pr` is part of the standard PR workflow (see step 8 in PR Review Workflow)
+
+**Status Update Examples:**
+
+**Example 1: Phase Completion**
+```bash
+# After PR #10 (Phase 3) is merged
+/post-pr 10 --phase 3
+
+# Updates:
+# - phase-3.md: Status → "✅ Complete", Completed → "2025-12-07"
+# - status-and-next-steps.md: Phase 3 marked complete, progress updated
+```
+
+**Example 2: Feature Status Update**
+```markdown
+# Before /post-pr:
+**Current Phase:** Phase 3 - Documentation & Examples
+**Progress:** 50% (2 of 4 phases complete)
+
+# After /post-pr:
+**Current Phase:** Phase 3 Complete
+**Progress:** 75% (3 of 4 phases complete)
+
+**Completed Milestones:**
+- Phase 3: Documentation & Examples ✅ (PR #10, 2025-12-07)
+```
+
+**Example 3: Progress Tracking Update**
+```markdown
+# Before /post-pr:
+| Phase | Status | Start Date | End Date | Duration |
+|-------|--------|------------|----------|----------|
+| Phase 3 | 🟠 In Progress | 2025-12-06 | - | - |
+
+# After /post-pr:
+| Phase | Status | Start Date | End Date | Duration |
+|-------|--------|------------|----------|----------|
+| Phase 3 | ✅ Complete | 2025-12-06 | 2025-12-07 | 1 day |
+```
+
+**Consistency Requirements:**
+
+- **Always Run After PR Merge:** `/post-pr` should be run consistently after every PR merge
+- **Before Next Phase:** Ensure `/post-pr` is run before starting the next phase
+- **Part of Standard Workflow:** `/post-pr` is step 8 in the PR Review Workflow (see workflow rules)
+
+**See Also:**
+- [Status Update Workflow](../../docs/STATUS-UPDATE-WORKFLOW.md) - Complete status update guide
+- [Status Update Checklist](../../docs/STATUS-UPDATE-CHECKLIST.md) - Checklist for status updates
+- [Status Update Timing](../../docs/STATUS-UPDATE-TIMING.md) - Timing and frequency guide
+
+---
+
 ## Tips
 
 ### Before Running Command
