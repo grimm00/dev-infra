@@ -288,6 +288,10 @@ pytest --cov --cov-report=term-missing
 
 ### 4. Commit Each Issue
 
+**IMPORTANT:** Always commit work before stopping or moving to next issue.
+
+**Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
+
 **Commit message format:**
 
 **For PR-Specific Batches:**
