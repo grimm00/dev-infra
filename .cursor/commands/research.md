@@ -227,10 +227,13 @@ research/[topic]/
 
 [How will this research be conducted?]
 
+**Note:** Web search is **allowed and encouraged** for research. Use web search tools to find current information, best practices, documentation, examples, and real-world implementations. This helps ensure research is based on up-to-date information and industry standards.
+
 **Sources:**
 - [ ] Source 1: [Description]
 - [ ] Source 2: [Description]
 - [ ] Source 3: [Description]
+- [ ] Web search: [Use web search for current information, documentation, examples]
 
 ---
 
