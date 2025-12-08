@@ -125,7 +125,7 @@ gh pr view [pr-number] --json state,title,headRefName
 2. **Get detailed check information:**
 
    ```bash
-   gh pr checks [pr-number] --json name,state,conclusion,url
+   gh pr checks [pr-number] --json name,state,url
    ```
 
    **Expected JSON structure:**
@@ -133,22 +133,22 @@ gh pr view [pr-number] --json state,title,headRefName
    [
      {
        "name": "CI / Test",
-       "state": "COMPLETED",
-       "conclusion": "SUCCESS",
+       "state": "SUCCESS",
        "url": "https://github.com/..."
      },
      {
        "name": "CI / Lint",
-       "state": "COMPLETED",
-       "conclusion": "SUCCESS",
+       "state": "FAILURE",
        "url": "https://github.com/..."
      }
    ]
    ```
 
+   **Note:** The `state` field can be: `SUCCESS`, `FAILURE`, `PENDING`, `ERROR`, etc.
+
 3. **Identify failed checks:**
 
-   - Filter for `"conclusion": "FAILURE"` or `"state": "FAILED"`
+   - Filter for `"state": "FAILURE"` or `"state": "ERROR"`
    - Note check names and URLs
    - Check if checks are required for merge
 
