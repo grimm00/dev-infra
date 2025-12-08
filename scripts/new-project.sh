@@ -204,6 +204,14 @@ validate_project_name() {
         print_error "Project name cannot contain whitespace"
         print_warning "Whitespace characters (spaces, tabs, newlines) are not allowed in project names for compatibility with file systems and URLs"
         
+        # In non-interactive mode, fail immediately
+        if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+            local sanitized_name
+            sanitized_name="${name//[[:space:]]/-}"
+            print_error "Sanitized name would be: $sanitized_name"
+            return 1
+        fi
+        
         # Offer to replace all whitespace (spaces, tabs, newlines) with dashes
         # Use bash parameter expansion for cross-platform compatibility (no sed dependency)
         local sanitized_name
