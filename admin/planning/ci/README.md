@@ -24,6 +24,10 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 - **[Release Distribution Workflow](release-distribution/README.md)** - Automated distribution package creation
 
+### Active
+
+- **[Command Documentation & Maintenance](command-documentation-maintenance/README.md)** - Track command documentation updates and improvements (✅ Active)
+
 ### Planned
 
 - **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Automate template generation testing (🟠 In Progress - Phase 1 Complete, 🔴 High Priority)
