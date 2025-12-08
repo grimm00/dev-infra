@@ -134,25 +134,21 @@ teardown() {
 
 #### 4. Implement File Presence Tests
 
-- [ ] Create test for standard-project file presence:
-  - Check all required files exist (README.md, start.txt, etc.)
-  - Check directory structure files exist
-  - Check file permissions
-- [ ] Create test for learning-project file presence:
-  - Check all required files exist
-  - Check stage directories exist
-  - Check file permissions
-- [ ] Add helper function to check file existence:
-  ```bash
-  check_file_exists() {
-    local file="$1"
-    [[ -f "$file" ]]
-  }
-  ```
-- [ ] Test file presence tests:
+- [x] Create test for standard-project file presence: ✅
+  - Check all required files exist (README.md, start.txt, etc.) ✅
+  - Check directory structure files exist ✅
+  - Check file permissions ✅
+- [x] Create test for learning-project file presence: ✅
+  - Check all required files exist ✅
+  - Check stage directories exist ✅
+  - Check file permissions ✅
+- [x] Add helper function to check file existence: ✅
+  - `validate_file_exists()` and `validate_directory_exists()` implemented ✅
+  - Helper functions in `template-validation-helpers.bash` ✅
+- [x] Test file presence tests: ✅
   ```bash
   bats tests/integration/template-validation/file-presence.bats
-  # Should validate file presence for both template types
+  # All 21 tests passing - validates file presence for both template types ✅
   ```
 
 **Implementation Example:**

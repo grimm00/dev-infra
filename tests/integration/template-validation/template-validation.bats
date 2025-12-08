@@ -6,6 +6,7 @@
 # They should also load this file's helpers or define their own setup/teardown
 
 load '../../helpers/helpers.bash'
+load 'template-validation-helpers'
 
 # ============================================================================
 # Test Suite Setup and Teardown
@@ -58,54 +59,8 @@ teardown() {
 }
 
 # ============================================================================
-# Helper Functions for Test Categories
+# Helper Functions
 # ============================================================================
-
-# Generate a test project using non-interactive mode
-# Usage: generate_test_project <project-name> <project-type> [target-dir]
-generate_test_project() {
-    local project_name="$1"
-    local project_type="$2"
-    local target_dir="${3:-$TEST_DIR}"
-    
-    export PROJECT_NAME="$project_name"
-    export PROJECT_TYPE="$project_type"
-    export TARGET_DIR="$target_dir"
-    export INIT_GIT="false"
-    
-    run "$NEW_PROJECT_SCRIPT" --non-interactive
-    
-    # Restore default test variables
-    export PROJECT_NAME="test-project"
-    export PROJECT_TYPE="standard-project"
-    export TARGET_DIR="$TEST_DIR"
-}
-
-# Validate that a file exists in a generated project
-# Usage: validate_file_exists <project-dir> <file-path>
-validate_file_exists() {
-    local project_dir="$1"
-    local file_path="$2"
-    local full_path="$project_dir/$file_path"
-    
-    if [[ ! -f "$full_path" ]]; then
-        echo "File not found: $full_path"
-        return 1
-    fi
-    return 0
-}
-
-# Validate that a directory exists in a generated project
-# Usage: validate_directory_exists <project-dir> <dir-path>
-validate_directory_exists() {
-    local project_dir="$1"
-    local dir_path="$2"
-    local full_path="$project_dir/$dir_path"
-    
-    if [[ ! -d "$full_path" ]]; then
-        echo "Directory not found: $full_path"
-        return 1
-    fi
-    return 0
-}
+# Helper functions are defined in template-validation-helpers.bash
+# and loaded above using: load 'template-validation-helpers'
 
