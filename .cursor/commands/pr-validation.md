@@ -759,6 +759,100 @@ Add priority assessment after the comment:
 
 ---
 
+### 5a. Update Deferred Tasks Collection (NEW)
+
+**Purpose:** Centralize all deferred issues (MEDIUM/LOW priority) in one location for easy tracking and future review.
+
+**When to update:**
+
+- After filling out priority matrix
+- Only for MEDIUM/LOW priority issues that are deferred
+- CRITICAL/HIGH issues should be addressed, not deferred
+
+**Process:**
+
+1. **Read deferred tasks file:**
+
+   - Location: `admin/feedback/deferred-tasks.md`
+   - Parse existing tasks to avoid duplicates
+   - Check if file exists, create if needed
+
+2. **For each deferred issue (MEDIUM/LOW priority):**
+
+   - Extract issue details from priority matrix:
+     - Issue ID (PR##-#N or PR##-Overall-#N)
+     - Priority, Impact, Effort
+     - Description
+     - File location (if available)
+     - Source PR number
+   - Check if already exists (by PR number and description)
+   - If new: Add to appropriate section
+   - If exists: Update status/age (if needed)
+
+3. **Organize by Priority/Effort combination:**
+
+   - **MEDIUM/HIGH:** High effort, medium priority (requires significant work)
+   - **MEDIUM/MEDIUM:** Medium effort, medium priority
+   - **MEDIUM/LOW:** Low effort, medium priority
+   - **LOW/LOW:** Low effort, low priority (quick wins)
+
+4. **Add to appropriate section:**
+
+   ```markdown
+   ## 🟡 Medium Priority Tasks
+
+   ### Code Quality & Maintainability
+
+   #### Task [N]: [Description]
+
+   - **Source:** PR #[number] - Sourcery Comment #[N] (or Overall Comment #[N])
+   - **Location:** [file-path]:[line-range] - [function/area]
+   - **Priority:** 🟡 MEDIUM
+   - **Impact:** 🟡 MEDIUM / 🟢 LOW
+   - **Effort:** 🟠 HIGH / 🟡 MEDIUM / 🟢 LOW
+   - **Description:** [Full description from review]
+   - **Status:** ⏸️ Deferred
+   ```
+
+5. **Update summary:**
+
+   - Total tasks count
+   - Breakdown by priority/effort
+   - Last updated date
+   - Add PR number to "PR #[number] Additions" section
+
+**File Format:**
+
+**Location:** `admin/feedback/deferred-tasks.md`
+
+**Add new section at end:**
+
+```markdown
+## PR #[number] Additions
+
+**Date:** YYYY-MM-DD  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #[number]
+
+- Task [N]: [Description] (MEDIUM priority, HIGH/MEDIUM/LOW effort)
+- Task [N+1]: [Description] (LOW priority, LOW effort)
+```
+
+**Checklist:**
+
+- [ ] Deferred tasks file read/created
+- [ ] All MEDIUM/LOW deferred issues extracted
+- [ ] Duplicates checked (by PR number and description)
+- [ ] New tasks added to appropriate sections
+- [ ] Summary updated (total count, breakdown)
+- [ ] PR additions section created/updated
+- [ ] File saved
+
+**Note:** This step ensures all deferred issues are tracked centrally, making it easier for `/fix-review` to identify candidates for addressing.
+
+---
+
 ### 6. Address Critical Issues (If Any)
 
 **If CRITICAL 🔴 or HIGH 🟠 issues found:**
@@ -974,6 +1068,7 @@ Verify with health check (project-specific):
 - [ ] Expected Result lines marked with ✅ for passing scenarios
 - [ ] Sourcery review completed (if available)
 - [ ] Priority matrix filled out (if review available)
+- [ ] Deferred tasks collection updated (NEW)
 - [ ] Critical issues addressed (if any)
 
 **After execution:**
@@ -1020,6 +1115,10 @@ Verify with health check (project-specific):
 **Code Review:**
 
 - `docs/maintainers/feedback/sourcery/pr##.md`
+
+**Deferred Tasks:**
+
+- `admin/feedback/deferred-tasks.md` (centralized deferred tasks collection)
 
 **Known Issues:**
 

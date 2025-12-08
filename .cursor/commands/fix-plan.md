@@ -80,6 +80,11 @@ This command supports multiple fix organization patterns. It will auto-detect th
 - `--quick-wins` - Create only Quick Wins batch from report
 - `--review-old` - Review old deferred issues (see "Reviewing Old Issues" section)
 - `--archive-completed` - Archive completed fix plans to `fix/archived/`
+- `--known-issues [path]` - Consider known CI/CD issues when planning (NEW)
+  - Default: `admin/planning/ci/multi-environment-testing/known-issues.md`
+  - Checks if fixes depend on known issues
+  - Adds warnings for fixes blocked by known issues
+  - Prioritizes fixes that address known issues
 
 ---
 
@@ -237,7 +242,7 @@ ls docs/maintainers/feedback/sourcery/pr##.md
 
 ---
 
-### 4. Batch Issues by Priority and Effort
+### 5. Batch Issues by Priority and Effort
 
 **Batching Strategy:**
 
