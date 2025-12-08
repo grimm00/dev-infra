@@ -2,7 +2,7 @@
 
 **PR:** 27 - ci: Add Non-Interactive Mode to Template Generator  
 **Date:** 2025-12-08  
-**Status:** 🟡 Planned  
+**Status:** ✅ Complete (PR #28)  
 **Last Updated:** 2025-12-08
 
 ---
@@ -27,7 +27,7 @@
 
 ---
 
-## 🟡 Active Batches
+## ✅ Completed Batches
 
 ### Batch medium-low-01
 
