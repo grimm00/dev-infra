@@ -791,6 +791,7 @@ This directory contains actionable improvement checklists based on learnings fro
    ```
 
 7. **Clean up branch:**
+
    ```bash
    git branch -d docs/int-opp-[project]-[topic]
    git push origin --delete docs/int-opp-[project]-[topic]

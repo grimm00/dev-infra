@@ -214,6 +214,10 @@ ls docs/maintainers/planning/releases/[version]/checklist.md
 
 ### 6. Commit Changes
 
+**IMPORTANT:** Always commit work before stopping or moving to next task.
+
+**Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
+
 **Commit strategy:**
 
 - Commit test first: `test(release): add test for [task description]`
@@ -224,6 +228,13 @@ ls docs/maintainers/planning/releases/[version]/checklist.md
 
 - Work on release branch: `release/[version]`
 - Or feature branch if needed: `feat/release-[version]-[task]`
+
+**Before Stopping:**
+- [ ] Check `git status` for uncommitted changes
+- [ ] Stage all changes (`git add`)
+- [ ] Commit with proper message
+- [ ] Push to remote
+- [ ] Verify no uncommitted changes remain
 
 **Checklist:**
 

@@ -34,6 +34,7 @@ Related: [Context]
 ```
 
 **Types:**
+
 - `feat` - New feature/functionality
 - `fix` - Bug fix
 - `docs` - Documentation only
@@ -43,6 +44,7 @@ Related: [Context]
 - `ci` - CI/CD changes
 
 **Examples:**
+
 - `feat(phase-3): implement DELETE endpoint`
 - `docs(ci/status-tracking-automation): add status update reminders`
 - `test(phase-3): add DELETE endpoint tests`
@@ -55,6 +57,7 @@ Related: [Context]
 ### Feature/Fix/CI Branches
 
 **Workflow:**
+
 - Create feature branch: `feat/[feature-name]`, `fix/[bug-name]`, `ci/[improvement-name]`
 - Commit frequently with small commits
 - Push to remote regularly
@@ -62,11 +65,13 @@ Related: [Context]
 - **DO NOT merge directly** - requires PR review
 
 **Commit Pattern:**
+
 - Commit after each logical unit (test file, implementation, documentation section)
 - Small commits are better than large commits
 - Commit message should clearly describe what changed
 
 **Examples:**
+
 ```bash
 git commit -m "test(phase-3): add DELETE endpoint tests"
 git commit -m "feat(phase-3): implement DELETE endpoint"
@@ -78,17 +83,20 @@ git commit -m "docs(phase-3): update API documentation"
 ### Documentation/Chore Branches
 
 **Workflow:**
+
 - Create docs branch: `docs/[topic]` or `chore/[topic]`
 - Commit frequently
 - **CAN merge directly to develop** (no PR required)
 - Use fast-forward merge
 
 **Commit Pattern:**
+
 - Same as feature branches (small, logical commits)
 - Can merge directly after commits complete
 - No PR review required
 
 **Examples:**
+
 ```bash
 git commit -m "docs(learnings): capture dev-infra learnings - Phase 4"
 git commit -m "docs(reflection): create templates-enhancement reflection"
@@ -96,6 +104,7 @@ git commit -m "chore(ci): update Docker test image"
 ```
 
 **Direct Merge Workflow:**
+
 ```bash
 git checkout develop
 git pull origin develop
@@ -138,17 +147,20 @@ git push origin --delete docs/[topic]
 ### Issue: Work Not Committed
 
 **Symptoms:**
+
 - Uncommitted changes when command completes
 - Work lost between sessions
 - Git status shows modified files
 
 **Solution:**
+
 - **Always commit before stopping**
 - Check `git status` before completing command
 - Commit even if work seems incomplete
 - Use descriptive commit messages
 
 **Prevention:**
+
 - Reference this workflow document
 - Include commit step in command workflow
 - Verify commits before completing command
@@ -158,16 +170,19 @@ git push origin --delete docs/[topic]
 ### Issue: Large Commits
 
 **Symptoms:**
+
 - Single commit with many changes
 - Hard to review
 - Hard to revert specific changes
 
 **Solution:**
+
 - Break into smaller commits
 - One commit per logical unit
 - Commit frequently during work
 
 **Prevention:**
+
 - Commit after each logical unit
 - Don't accumulate changes
 - Reference commit patterns in this document
@@ -177,16 +192,19 @@ git push origin --delete docs/[topic]
 ### Issue: Missing Commit Messages
 
 **Symptoms:**
+
 - Generic commit messages
 - No context about what changed
 - Hard to understand commit history
 
 **Solution:**
+
 - Use standard commit message format
 - Include scope and description
 - Add "Related:" line for context
 
 **Prevention:**
+
 - Reference commit message format
 - Use examples from this document
 - Include context in commit message
@@ -198,11 +216,13 @@ git push origin --delete docs/[topic]
 ### `/task-phase` Command
 
 **Commit Pattern:**
+
 - Commit after each task group (RED + GREEN pair)
 - Commit message: `feat(phase-N): implement [task description]` or `test(phase-N): add [test description]`
 - Commit before stopping (even if more tasks remain)
 
 **Example:**
+
 ```bash
 git commit -m "test(phase-3): add DELETE endpoint tests"
 git commit -m "feat(phase-3): implement DELETE endpoint"
@@ -213,11 +233,13 @@ git commit -m "feat(phase-3): implement DELETE endpoint"
 ### `/task-improvement` Command
 
 **Commit Pattern:**
+
 - Commit after each logical unit (documentation section, process improvement)
 - Commit message: `docs(ci/[improvement-name]): [description]` or `feat(ci/[improvement-name]): [description]`
 - Commit before stopping
 
 **Example:**
+
 ```bash
 git commit -m "docs(ci/status-tracking-automation): add status update reminders to task-phase command"
 git commit -m "feat(ci/status-tracking-automation): integrate status checks into PR workflow"
@@ -228,11 +250,13 @@ git commit -m "feat(ci/status-tracking-automation): integrate status checks into
 ### `/int-opp` Command
 
 **Commit Pattern:**
+
 - Create docs branch: `docs/int-opp-[project]-[topic]`
 - Commit learnings document and hub updates
 - Merge directly to develop (docs-only workflow)
 
 **Example:**
+
 ```bash
 git checkout -b docs/int-opp-dev-infra-phase-5
 git add admin/planning/opportunities/internal/
@@ -254,11 +278,13 @@ Related: Phase 5"
 ### `/reflect` Command
 
 **Commit Pattern:**
+
 - Create docs branch: `docs/reflect-[feature]-[date]`
 - Commit reflection document
 - Merge directly to develop (docs-only workflow)
 
 **Example:**
+
 ```bash
 git checkout -b docs/reflect-templates-enhancement-2025-12-08
 git add admin/planning/notes/reflections/
@@ -278,11 +304,13 @@ Related: Templates Enhancement Feature"
 ### `/research` Command
 
 **Commit Pattern:**
+
 - Create docs branch: `docs/research-[topic]`
 - Commit research documents and requirements
 - Merge directly to develop (docs-only workflow)
 
 **Example:**
+
 ```bash
 git checkout -b docs/research-template-generation-testing-automation
 git add admin/research/template-generation-testing-automation/
@@ -303,11 +331,13 @@ Related: Template Generation Testing Automation"
 ### `/decision` Command
 
 **Commit Pattern:**
+
 - Create docs branch: `docs/decision-[topic]`
 - Commit ADR documents
 - Merge directly to develop (docs-only workflow)
 
 **Example:**
+
 ```bash
 git checkout -b docs/decision-template-generation-testing-automation
 git add admin/decisions/template-generation-testing-automation/
@@ -360,4 +390,3 @@ git status --short
 **Last Updated:** 2025-12-08  
 **Status:** ✅ Active  
 **Next:** Commands should reference this document instead of duplicating commit instructions
-
