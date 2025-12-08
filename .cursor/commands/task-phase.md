@@ -11,6 +11,7 @@ Use this command to implement phase tasks step-by-step, following TDD workflow a
 This command supports multiple phase organization patterns:
 
 1. **Feature-Specific Phases (default):**
+
    - Path: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
    - Feature name auto-detected from context or configuration
    - Example: `docs/maintainers/planning/features/my-feature/phase-1.md`
@@ -55,6 +56,7 @@ This command supports multiple phase organization patterns:
 ## Workflow Overview
 
 **Pattern:**
+
 1. Phase has multiple tasks (usually TDD: RED → GREEN cycles)
 2. **Task Grouping:** RED + GREEN phases are grouped together (tightly coupled TDD cycle)
 3. Implement the task group completely (RED → GREEN → REFACTOR)
@@ -112,7 +114,8 @@ This command supports multiple phase organization patterns:
 
 **Note:** For CI/CD improvements, use `/task-improvement` command instead.
 
-**Important:** 
+**Important:**
+
 - This command handles **one task group at a time** (typically RED+GREEN pair)
 - After completing a task group, stop and wait for user to invoke again for next group
 - Do NOT continue to next task group automatically
@@ -127,6 +130,7 @@ This command supports multiple phase organization patterns:
 **What to do:**
 
 1. **Detect phase structure:**
+
    - Use `--feature` option if provided
    - Otherwise, auto-detect using same logic as other commands:
      - Check if `docs/maintainers/planning/features/` exists
@@ -156,6 +160,49 @@ This command supports multiple phase organization patterns:
 - Feature-specific: `feat/[feature-name]-phase-N-[description]` (if configured)
 - Subsequent tasks: Use same branch
 
+**Status Update (Start of Phase):**
+
+**Note:** For authoritative status update requirements, see [PR Status Update Requirements](../../docs/PR-STATUS-UPDATE-REQUIREMENTS.md). Examples below use placeholder dates (e.g., `2025-12-07`) and phase numbers (e.g., `Phase 3`) for illustration.
+
+**Auto-Update Phase Status:**
+
+When starting a phase (first task of the phase), automatically update status:
+
+1. **Read phase document:**
+
+   - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
+   - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
+
+2. **Check current status:**
+
+   - If status is "🔴 Not Started" or missing, update to "🟠 In Progress"
+   - If status is already "🟠 In Progress", leave as is (may be resuming)
+   - If status is "✅ Complete", warn user (shouldn't happen)
+
+3. **Update phase document:**
+
+   - Change `**Status:** 🔴 Not Started` to `**Status:** 🟠 In Progress`
+   - Update `**Last Updated:**` field to today's date
+   - Example:
+     ```markdown
+     **Status:** 🟠 In Progress
+     **Last Updated:** 2025-12-07
+     ```
+
+4. **Update feature status document (if first phase):**
+
+   - File: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Update `**Status:**` to "🟠 In Progress" if still "🔴 Not Started"
+   - Update `**Current Phase:**` to reflect starting phase
+   - Update `**Last Updated:**` field
+
+5. **Commit status updates:**
+   - Commit message: `docs(phase-N): update phase status to In Progress`
+   - Include both phase document and feature status document if updated
+   - Commit immediately after updating (before starting work)
+
+**Note:** Status updates are committed immediately at phase start to ensure status is current from the beginning.
+
 **Checklist:**
 
 - [ ] Phase structure detected
@@ -163,6 +210,9 @@ This command supports multiple phase organization patterns:
 - [ ] Prerequisites met (previous phase complete)
 - [ ] Feature branch created (if first task)
 - [ ] Current task identified and understood
+- [ ] Phase status auto-updated to "🟠 In Progress" (if starting phase)
+- [ ] Feature status auto-updated (if first phase)
+- [ ] Status updates committed
 
 ---
 
@@ -321,6 +371,61 @@ git commit -m "feat(phase-3): add proj delete CLI command"
 - [ ] README/docs updated (if needed)
 - [ ] No linter errors
 
+**Status Update (Phase Completion):**
+
+**Auto-Update Phase Status:**
+
+When all tasks in phase are complete, automatically update status:
+
+1. **Read phase document:**
+
+   - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
+   - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
+
+2. **Verify all tasks complete:**
+
+   - Check all task checkboxes are marked `- [x]`
+   - Verify no incomplete tasks remain
+   - If tasks incomplete, warn user before updating status
+
+3. **Update phase document:**
+
+   - Change `**Status:** 🟠 In Progress` to `**Status:** ✅ Complete`
+   - Add `**Completed:** YYYY-MM-DD` field if not present
+   - Update `**Last Updated:**` field to today's date
+   - Example:
+     ```markdown
+     **Status:** ✅ Complete
+     **Completed:** 2025-12-07
+     **Last Updated:** 2025-12-07
+     ```
+
+4. **Update feature status document:**
+
+   - File: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Update `**Current Phase:**` to reflect completed phase
+   - Update `**Progress:**` percentage (calculate based on completed phases)
+   - Add completed milestone entry:
+     ```markdown
+     - **Phase N:** [Phase Name] ✅ (2025-12-07) - [Brief summary]
+     ```
+   - Update `**Last Updated:**` field
+
+5. **Commit status updates:**
+   - Commit message: `docs(phase-N): update phase status to Complete`
+   - Include both phase document and feature status document
+   - Commit before creating PR (status must be current for PR validation)
+
+**Note:** Status updates are committed before PR creation to ensure PR validation passes. The `/pr` command validates that status is current.
+
+**Checklist:**
+
+- [ ] Phase status auto-updated to "✅ Complete"
+- [ ] Completion date added to phase document
+- [ ] Feature status document updated with phase completion
+- [ ] Progress tracking updated
+- [ ] Status updates committed before PR creation
+
 **Create PR:**
 
 1. Push final commits to feature branch
@@ -347,11 +452,13 @@ feat: [Phase N Description] (Phase N)
 ## What's Included
 
 ### [Component 1]
+
 - Feature/change description
 - Tests added
 - Files modified
 
 ### [Component 2]
+
 - Feature/change description
 - Tests added
 - Files modified
@@ -530,12 +637,14 @@ Tasks are typically numbered in phase documents:
 - [ ] Coverage maintained
 - [ ] Manual testing done
 - [ ] Documentation updated
+- [ ] Phase status auto-updated to "✅ Complete" (automatic)
+- [ ] Feature status auto-updated (automatic)
+- [ ] Status updates committed (automatic)
 - [ ] PR created and reviewed
 - [ ] Sourcery review completed (if available)
 - [ ] CRITICAL/HIGH issues addressed
 - [ ] PR merged to develop
-- [ ] Phase document status updated to "✅ Complete"
-- [ ] Feature status updated (if needed)
+- [ ] Post-merge status updates handled by `/post-pr` command (automatic)
 
 ---
 
@@ -607,4 +716,3 @@ Tasks are typically numbered in phase documents:
 **Last Updated:** 2025-12-07  
 **Status:** ✅ Active  
 **Next:** Use to implement phase tasks following TDD workflow (supports feature-specific and project-wide phases)
-
