@@ -151,6 +151,73 @@ This command supports multiple project organization patterns, matching `/task-ph
 - [ ] No broken links in documentation
 - [ ] Code comments added where needed
 
+#### Status Validation
+
+**Before PR creation, verify status documents are current:**
+
+- [ ] Phase document status updated to "✅ Complete"
+  - Location: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
+  - Verify: Status matches actual completion state
+  - Example: `**Status:** ✅ Complete`
+- [ ] Feature status document updated with phase completion
+  - Location: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+  - Verify: Phase marked complete, progress updated
+  - Example: `**Phase 3:** ✅ Complete (2025-12-07)`
+- [ ] Progress tracking accurate
+  - Verify: Progress percentages reflect actual completion
+  - Verify: Task checkboxes match completed work
+  - Verify: No outdated status indicators
+
+**Status Check Process:**
+
+1. **Read phase document:**
+   - Check status field at top of document
+   - Verify all task checkboxes are marked complete
+   - Verify status matches actual work completed
+
+2. **Read feature status document:**
+   - Check phase completion status
+   - Verify progress tracking is current
+   - Verify next steps are accurate
+
+3. **Validate consistency:**
+   - Phase document status matches feature status
+   - Progress percentages are accurate
+   - No discrepancies between documents
+
+**Status Update Examples:**
+
+**Phase Document:**
+```markdown
+**Status:** ✅ Complete  # Must be "Complete" before PR
+```
+
+**Feature Status Document:**
+```markdown
+**Phase 3: Documentation & Examples**
+- [x] Dependency sections added ✅ (2025-12-07)
+- [x] Dependency documentation created ✅ (2025-12-07)
+```
+
+**If status is not current:**
+- Update phase document status to "✅ Complete"
+- Update feature status document with phase completion
+- Commit status updates before creating PR
+- Note: Status updates should happen during work (per `/task-phase` workflow), but verify before PR
+
+**Status Update Requirements for PR Approval:**
+
+- **Mandatory:** Status updates are required for PR approval
+- **Lenient Approach:** Validation uses warnings, not blockers (to start)
+- **During Work:** Status should be updated during work (per `/task-phase` workflow)
+- **Before PR:** Status must be current before PR creation (validated by this command)
+- **After Merge:** Status automatically updated by `/post-pr` command
+
+**See Also:**
+- [Status Update Workflow](../../docs/STATUS-UPDATE-WORKFLOW.md) - Complete status update guide
+- [Status Update Checklist](../../docs/STATUS-UPDATE-CHECKLIST.md) - Checklist for status updates
+- [Status Update Timing](../../docs/STATUS-UPDATE-TIMING.md) - Timing and frequency guide
+
 #### Git State
 
 - [ ] All changes committed to feature branch
