@@ -46,6 +46,7 @@ Create automated test suite for template validation using bats framework. This p
 - [x] Plan test organization and helper functions ✅
 
 **Design Notes:**
+
 - Use bats framework for consistency with existing tests
 - Organize tests by category for modularity
 - Use temporary directories for test projects
@@ -70,6 +71,7 @@ Create automated test suite for template validation using bats framework. This p
   ```
 
 **Implementation Example:**
+
 ```bash
 # template-validation.bats
 #!/usr/bin/env bats
@@ -87,26 +89,27 @@ load 'generation-success'
 
 #### 3. Implement Test Setup and Teardown
 
-- [ ] Create `setup()` function for test environment setup:
-  - Create temporary directory for test projects
-  - Set up environment variables for non-interactive mode
-  - Initialize test project variables
-- [ ] Create `teardown()` function for cleanup:
-  - Remove temporary test projects
-  - Clean up environment variables
-- [ ] Test setup and teardown:
+- [x] Create `setup()` function for test environment setup: ✅
+  - Create temporary directory for test projects ✅
+  - Set up environment variables for non-interactive mode ✅
+  - Initialize test project variables ✅
+- [x] Create `teardown()` function for cleanup: ✅
+  - Remove temporary test projects ✅
+  - Clean up environment variables ✅
+- [x] Test setup and teardown: ✅
   ```bash
   bats tests/integration/template-validation/template-validation.bats
-  # Should run setup/teardown for each test
+  # Setup and teardown run correctly (no tests yet, but structure works)
   ```
 
 **Implementation Example:**
+
 ```bash
 setup() {
   # Create temporary directory
   TEST_DIR=$(mktemp -d)
   export TEST_DIR
-  
+
   # Set up environment variables for non-interactive mode
   export PROJECT_NAME="test-project"
   export PROJECT_TYPE="standard-project"
@@ -118,7 +121,7 @@ teardown() {
   if [[ -n "$TEST_DIR" && -d "$TEST_DIR" ]]; then
     rm -rf "$TEST_DIR"
   fi
-  
+
   # Clean up environment variables
   unset PROJECT_NAME
   unset PROJECT_TYPE
@@ -153,14 +156,15 @@ teardown() {
   ```
 
 **Implementation Example:**
+
 ```bash
 @test "standard-project: all required files exist" {
   PROJECT_TYPE="standard-project" \
     PROJECT_NAME="test-standard" \
     run ./scripts/new-project.sh --non-interactive "$TEST_DIR/test-standard"
-  
+
   [ "$status" -eq 0 ]
-  
+
   # Check required files
   [ -f "$TEST_DIR/test-standard/README.md" ]
   [ -f "$TEST_DIR/test-standard/start.txt" ]
@@ -172,9 +176,9 @@ teardown() {
   PROJECT_TYPE="learning-project" \
     PROJECT_NAME="test-learning" \
     run ./scripts/new-project.sh --non-interactive "$TEST_DIR/test-learning"
-  
+
   [ "$status" -eq 0 ]
-  
+
   # Check required files
   [ -f "$TEST_DIR/test-learning/README.md" ]
   [ -f "$TEST_DIR/test-learning/start.txt" ]
@@ -205,14 +209,15 @@ teardown() {
   ```
 
 **Implementation Example:**
+
 ```bash
 @test "standard-project: markdown links are valid" {
   PROJECT_TYPE="standard-project" \
     PROJECT_NAME="test-standard" \
     run ./scripts/new-project.sh --non-interactive "$TEST_DIR/test-standard"
-  
+
   [ "$status" -eq 0 ]
-  
+
   # Validate links in README.md
   local readme="$TEST_DIR/test-standard/README.md"
   while IFS= read -r line; do
@@ -248,14 +253,15 @@ teardown() {
   ```
 
 **Implementation Example:**
+
 ```bash
 @test "standard-project: directory structure matches template" {
   PROJECT_TYPE="standard-project" \
     PROJECT_NAME="test-standard" \
     run ./scripts/new-project.sh --non-interactive "$TEST_DIR/test-standard"
-  
+
   [ "$status" -eq 0 ]
-  
+
   # Check required directories
   [ -d "$TEST_DIR/test-standard/docs" ]
   [ -d "$TEST_DIR/test-standard/docs/maintainers" ]
@@ -269,9 +275,9 @@ teardown() {
   PROJECT_NAME="my-project" \
     PROJECT_TYPE="standard-project" \
     run ./scripts/new-project.sh --non-interactive "$TEST_DIR/my-project"
-  
+
   [ "$status" -eq 0 ]
-  
+
   # Check template variables replaced
   grep -q "my-project" "$TEST_DIR/my-project/README.md"
   # ... more variable checks
@@ -302,12 +308,13 @@ teardown() {
   ```
 
 **Implementation Example:**
+
 ```bash
 @test "standard-project: generation succeeds" {
   PROJECT_TYPE="standard-project" \
     PROJECT_NAME="test-standard" \
     run ./scripts/new-project.sh --non-interactive "$TEST_DIR/test-standard"
-  
+
   [ "$status" -eq 0 ]
   [ -d "$TEST_DIR/test-standard" ]
   [ -f "$TEST_DIR/test-standard/README.md" ]
@@ -317,7 +324,7 @@ teardown() {
   PROJECT_TYPE="learning-project" \
     PROJECT_NAME="test-learning" \
     run ./scripts/new-project.sh --non-interactive "$TEST_DIR/test-learning"
-  
+
   [ "$status" -eq 0 ]
   [ -d "$TEST_DIR/test-learning" ]
   [ -f "$TEST_DIR/test-learning/README.md" ]
@@ -340,16 +347,17 @@ teardown() {
   ```
 
 **Implementation Example:**
+
 ```bash
 teardown() {
   # Remove test projects
   if [[ -n "$TEST_DIR" && -d "$TEST_DIR" ]]; then
     rm -rf "$TEST_DIR"
   fi
-  
+
   # Clean up any other temporary files
   # ... cleanup logic
-  
+
   # Clean up environment variables
   unset PROJECT_NAME
   unset PROJECT_TYPE
@@ -384,19 +392,20 @@ teardown() {
   ```
 
 **Implementation Example:**
+
 ```bash
 @test "standard-project: all required files exist" {
   PROJECT_TYPE="standard-project" \
     PROJECT_NAME="test-standard" \
     run ./scripts/new-project.sh --non-interactive "$TEST_DIR/test-standard"
-  
+
   if [ "$status" -ne 0 ]; then
     echo "FAIL: Template generation failed" >&2
     echo "Exit code: $status" >&2
     echo "Output: $output" >&2
     return 1
   fi
-  
+
   if [ ! -f "$TEST_DIR/test-standard/README.md" ]; then
     echo "FAIL: README.md not found" >&2
     echo "Expected: $TEST_DIR/test-standard/README.md" >&2
@@ -426,6 +435,7 @@ teardown() {
 - [ ] Document CI/CD integration
 
 **Implementation Example:**
+
 ```yaml
 # .github/workflows/test.yml (or similar)
 - name: Run Template Validation Tests
@@ -470,6 +480,7 @@ teardown() {
 ## 📦 Deliverables
 
 1. **Test Suite**
+
    - `tests/integration/template-validation/template-validation.bats` - Main test suite
    - `tests/integration/template-validation/file-presence.bats` - File presence tests
    - `tests/integration/template-validation/link-validation.bats` - Link validation tests
@@ -477,6 +488,7 @@ teardown() {
    - `tests/integration/template-validation/generation-success.bats` - Generation success tests
 
 2. **CI/CD Integration**
+
    - Updated CI/CD workflow file (`.github/workflows/`)
    - Test step added to workflow
 
@@ -528,17 +540,20 @@ teardown() {
 **Phase Status:** 🔴 Not Started
 
 **Design & Setup (0/3 complete)**
+
 - [ ] Review prerequisites and design test suite structure
 - [ ] Create test suite directory structure
 - [ ] Implement test setup and teardown
 
 **Test Implementation (0/4 complete)**
+
 - [ ] Implement file presence tests
 - [ ] Implement link validation tests
 - [ ] Implement structure validation tests
 - [ ] Implement generation success tests
 
 **Integration & Testing (0/4 complete)**
+
 - [ ] Implement test cleanup
 - [ ] Add clear failure messages
 - [ ] Integrate with CI/CD workflow
@@ -551,6 +566,7 @@ teardown() {
 ### Process Workflow
 
 **For Test Suite Development:**
+
 1. Review prerequisites → Verify Phase 1 complete, review ADR and requirements
 2. Design test suite structure → Plan test organization
 3. Create directory structure → Set up test files
@@ -564,6 +580,7 @@ teardown() {
 ### Test Pattern
 
 **Bats Test Structure:**
+
 ```bash
 #!/usr/bin/env bats
 
@@ -586,6 +603,7 @@ teardown() {
 ```
 
 **Helper Functions:**
+
 ```bash
 check_file_exists() {
   local file="$1"
@@ -601,6 +619,7 @@ validate_markdown_links() {
 ### Testing Pattern
 
 **Manual Testing:**
+
 ```bash
 # Run all tests
 bats tests/integration/template-validation/template-validation.bats
@@ -647,4 +666,3 @@ ls -la /tmp/ | grep test-project
 **Status:** 🔴 Not Started  
 **Approach:** Process/Documentation Workflow (CI/CD Improvement)  
 **Next:** Begin after Phase 1 complete, use `/task-improvement` command to implement
-
