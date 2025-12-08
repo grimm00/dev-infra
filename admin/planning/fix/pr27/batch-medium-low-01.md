@@ -6,7 +6,7 @@
 **Effort:** 🟢 LOW  
 **Status:** ✅ Complete  
 **Completed:** 2025-12-08  
-**PR:** #[number]  
+**PR:** #28  
 **Created:** 2025-12-08  
 **Issues:** 2 issues
 
@@ -32,7 +32,7 @@ This batch contains 2 documentation issues with LOW effort. These are documentat
 
 ---
 
-## Issues Details
+## Issue Details
 
 ### Issue PR27-#1: Exit Code Documentation Mismatch
 
