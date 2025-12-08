@@ -12,6 +12,7 @@
 ### Feature-Specific Learnings
 
 - **[Templates Enhancement Learnings](templates-enhancement/README.md)** - Phase learnings from Templates Enhancement feature (5 phases, ✅ Complete)
+- **[Template Generation Testing Automation Learnings](template-generation-testing-automation/README.md)** - Phase learnings from Template Generation Testing Automation CI/CD improvement (1 phase)
 
 ### Learning Documents
 
@@ -37,8 +38,8 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 8  
-**Feature-Specific Learnings:** 1 feature (5 phases)  
+**Total Learning Documents:** 9  
+**Feature-Specific Learnings:** 2 features (6 phases total)  
 **Status:** ✅ Active
 
 ---
