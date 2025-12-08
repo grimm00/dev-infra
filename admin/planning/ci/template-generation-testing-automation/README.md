@@ -17,6 +17,7 @@
 - **[Phase 2: Create Template Validation Test Suite](phase-2.md)** - Create automated test suite
 - **[Improvement Plan](improvement-plan.md)** - Detailed improvement plan
 - **[Fix Tracking](fix/README.md)** - Fix plans and tracking (PR #27 fixes)
+- **[Reflections](reflections/)** - Reflection documents and cross-phase analysis
 
 ---
 
