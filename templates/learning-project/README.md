@@ -183,6 +183,121 @@ This learning project uses a **stage-based organization** with progressive compl
 
 ---
 
+## 🤖 Workflow Automation Commands
+
+This learning project includes workflow automation commands to help organize learning, track progress, and plan learning stages. All commands are located in `.cursor/commands/` and can be used directly in Cursor IDE.
+
+### Quick Reference
+
+| Command | Purpose | Learning Use Case |
+|---------|---------|-------------------|
+| `/explore` | Start exploration cycles | Research learning topics |
+| `/research` | Conduct structured research | Investigate concepts |
+| `/decision` | Make learning decisions | Choose learning paths |
+| `/transition-plan` | Create transition plans | Plan learning stages |
+| `/reflect` | Analyze learning progress | After completing stages |
+| `/reflection-artifacts` | Extract planning artifacts | Plan next learning stages |
+| `/task-phase` | Implement learning tasks | Hands-on exercises |
+| `/pr` | Create pull requests | Document learning work |
+| `/post-pr` | Update docs after PR merge | Track learning progress |
+| `/cursor-rules` | Manage cursor rules | Update AI config |
+
+### Learning Workflow Commands
+
+#### Exploration and Research
+
+- **`/explore [topic]`** - Start exploration of learning topic
+  - Creates exploration documents
+  - Identifies research questions
+  - Output: `docs/maintainers/planning/explorations/[topic]/`
+
+- **`/research [topic] --from-explore [topic]`** - Research learning topic
+  - Reads research topics from exploration
+  - Creates research documents
+  - Extracts learning requirements
+  - Output: `docs/maintainers/research/[topic]/` + `requirements.md`
+
+- **`/decision [topic] --from-research`** - Make learning decisions
+  - Reads research documents
+  - Creates ADR documents for learning choices
+  - Output: `docs/maintainers/decisions/[topic]/` + ADRs
+
+#### Learning Planning
+
+- **`/transition-plan --from-adr`** - Plan learning stages
+  - Reads learning decisions
+  - Creates learning stage plans
+  - Output: Learning plan + stage documents
+
+- **`/task-phase [N]`** - Implement learning tasks
+  - Reads from `docs/maintainers/planning/features/[stage-name]/phase-N.md`
+  - Implements exercises and practice
+  - Tracks learning progress
+
+#### Reflection and Progress
+
+- **`/reflect`** - Reflect on learning progress
+  - Reviews completed stages
+  - Identifies learning gaps
+  - Suggests next steps
+
+- **`/reflection-artifacts --type [type]`** - Extract learning plans
+  - Creates plans for next learning stages
+  - From reflection documents
+  - Ready for implementation
+
+#### Project Management
+
+- **`/pr --phase [N]`** - Create PR for learning work
+  - Documents learning progress
+  - Creates comprehensive PR description
+
+- **`/post-pr`** - Update learning documentation
+  - Updates stage status
+  - Updates learning progress
+  - Tracks achievements
+
+- **`/cursor-rules`** - Manage cursor rules
+  - Updates AI assistant configuration
+  - Customizes learning support
+
+### Learning Workflow Examples
+
+**Research a Learning Topic:**
+```
+/explore python-fundamentals
+  → /research python-fundamentals --from-explore python-fundamentals
+  → /decision python-fundamentals --from-research
+  → /transition-plan --from-adr
+```
+
+**Plan Learning Stages:**
+```
+/reflect
+  → /reflection-artifacts --type feature
+  → /task-phase 1
+  → /pr --phase 1
+```
+
+**Track Learning Progress:**
+```
+/task-phase 1  # Complete exercises
+  → /pr --phase 1  # Document progress
+  → /post-pr  # Update learning status
+```
+
+### Command Documentation
+
+All commands have detailed documentation in `.cursor/commands/`. Each command includes:
+
+- Configuration and path detection
+- Workflow overview
+- Step-by-step process
+- Usage examples
+- Learning-specific patterns
+
+---
+
 ## 📚 Reference Materials
 
 ### Quick References
