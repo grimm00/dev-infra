@@ -11,6 +11,7 @@
 
 ### Learning Documents
 
+- **[Templates Enhancement Phase 5](templates-enhancement-phase-5-learnings.md)** - Learnings from Phase 5: Workflow Guides and Examples (✅ Complete)
 - **[Templates Enhancement Phase 4](templates-enhancement-phase-4-learnings.md)** - Learnings from Phase 4: Requirements Template (✅ Complete)
 - **[Templates Enhancement Phase 3](templates-enhancement-phase-3-learnings.md)** - Learnings from Phase 3: Exploration/Research/Decision Workflows (✅ Complete)
 - **[Templates Enhancement Phase 2](templates-enhancement-phase-2-learnings.md)** - Learnings from Phase 2: CI/CD Improvement Structure (✅ Complete)
@@ -33,10 +34,10 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 7  
+**Total Learning Documents:** 8  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2025-12-07
+**Last Updated:** 2025-12-08
 
