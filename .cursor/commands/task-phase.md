@@ -156,6 +156,43 @@ This command supports multiple phase organization patterns:
 - Feature-specific: `feat/[feature-name]-phase-N-[description]` (if configured)
 - Subsequent tasks: Use same branch
 
+**Status Update (Start of Phase):**
+
+**Auto-Update Phase Status:**
+
+When starting a phase (first task of the phase), automatically update status:
+
+1. **Read phase document:**
+   - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
+   - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
+
+2. **Check current status:**
+   - If status is "🔴 Not Started" or missing, update to "🟠 In Progress"
+   - If status is already "🟠 In Progress", leave as is (may be resuming)
+   - If status is "✅ Complete", warn user (shouldn't happen)
+
+3. **Update phase document:**
+   - Change `**Status:** 🔴 Not Started` to `**Status:** 🟠 In Progress`
+   - Update `**Last Updated:**` field to today's date
+   - Example:
+     ```markdown
+     **Status:** 🟠 In Progress
+     **Last Updated:** 2025-12-07
+     ```
+
+4. **Update feature status document (if first phase):**
+   - File: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Update `**Status:**` to "🟠 In Progress" if still "🔴 Not Started"
+   - Update `**Current Phase:**` to reflect starting phase
+   - Update `**Last Updated:**` field
+
+5. **Commit status updates:**
+   - Commit message: `docs(phase-N): update phase status to In Progress`
+   - Include both phase document and feature status document if updated
+   - Commit immediately after updating (before starting work)
+
+**Note:** Status updates are committed immediately at phase start to ensure status is current from the beginning.
+
 **Checklist:**
 
 - [ ] Phase structure detected
@@ -163,6 +200,9 @@ This command supports multiple phase organization patterns:
 - [ ] Prerequisites met (previous phase complete)
 - [ ] Feature branch created (if first task)
 - [ ] Current task identified and understood
+- [ ] Phase status auto-updated to "🟠 In Progress" (if starting phase)
+- [ ] Feature status auto-updated (if first phase)
+- [ ] Status updates committed
 
 ---
 
@@ -320,6 +360,57 @@ git commit -m "feat(phase-3): add proj delete CLI command"
 - [ ] Phase document updated (all tasks marked complete)
 - [ ] README/docs updated (if needed)
 - [ ] No linter errors
+
+**Status Update (Phase Completion):**
+
+**Auto-Update Phase Status:**
+
+When all tasks in phase are complete, automatically update status:
+
+1. **Read phase document:**
+   - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
+   - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
+
+2. **Verify all tasks complete:**
+   - Check all task checkboxes are marked `- [x]`
+   - Verify no incomplete tasks remain
+   - If tasks incomplete, warn user before updating status
+
+3. **Update phase document:**
+   - Change `**Status:** 🟠 In Progress` to `**Status:** ✅ Complete`
+   - Add `**Completed:** YYYY-MM-DD` field if not present
+   - Update `**Last Updated:**` field to today's date
+   - Example:
+     ```markdown
+     **Status:** ✅ Complete
+     **Completed:** 2025-12-07
+     **Last Updated:** 2025-12-07
+     ```
+
+4. **Update feature status document:**
+   - File: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Update `**Current Phase:**` to reflect completed phase
+   - Update `**Progress:**` percentage (calculate based on completed phases)
+   - Add completed milestone entry:
+     ```markdown
+     - **Phase N:** [Phase Name] ✅ (2025-12-07) - [Brief summary]
+     ```
+   - Update `**Last Updated:**` field
+
+5. **Commit status updates:**
+   - Commit message: `docs(phase-N): update phase status to Complete`
+   - Include both phase document and feature status document
+   - Commit before creating PR (status must be current for PR validation)
+
+**Note:** Status updates are committed before PR creation to ensure PR validation passes. The `/pr` command validates that status is current.
+
+**Checklist:**
+
+- [ ] Phase status auto-updated to "✅ Complete"
+- [ ] Completion date added to phase document
+- [ ] Feature status document updated with phase completion
+- [ ] Progress tracking updated
+- [ ] Status updates committed before PR creation
 
 **Create PR:**
 
