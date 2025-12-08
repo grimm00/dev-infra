@@ -8,6 +8,20 @@
 
 ## 📋 Quick Links
 
+### Workflow Guides
+
+- **[Workflow Overview](WORKFLOW-OVERVIEW.md)** - All available workflows
+- **[Exploration/Research/Decision Workflow](WORKFLOW-EXPLORATION-RESEARCH-DECISION.md)** - Discovery and decision-making process
+- **[Feature Development Workflow](WORKFLOW-FEATURE-DEVELOPMENT.md)** - Feature planning and implementation
+- **[CI/CD Improvement Workflow](WORKFLOW-CICD-IMPROVEMENT.md)** - CI/CD process improvements
+
+### Example Documents
+
+- **[Example Exploration](examples/example-exploration.md)** - Sample exploration document
+- **[Example Research](examples/example-research.md)** - Sample research document
+- **[Example ADR](examples/example-adr.md)** - Sample architecture decision record
+- **[Example Feature Plan](examples/example-feature-plan.md)** - Sample feature plan
+
 ### Core Management
 
 - **[Planning Hub](planning/README.md)** - Learning path planning and features
