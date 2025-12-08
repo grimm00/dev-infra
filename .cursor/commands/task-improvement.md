@@ -210,38 +210,33 @@ This command supports CI/CD improvement phase organization:
 
 ### 3. Commit Strategy
 
-**Commit after each logical unit:**
+**IMPORTANT:** Always commit work before stopping or moving to next task group.
 
-**Small commits are better:**
+**Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
 
-- One commit per documentation section updated
-- One commit per process improvement
-- One commit per workflow integration
+**Commit Pattern:**
+- Commit after each logical unit (documentation section, process improvement, workflow integration)
+- Small commits are better than large commits
+- Always commit before stopping (even if work incomplete)
 
-**Commit message format:**
-
-```
-type(scope): brief description
-
-Longer explanation if needed
-
-Related: CI Improvement [name], Phase N, Task M
-```
-
-**Types:**
-
-- `docs` - Documentation only
-- `feat` - New process/improvement
-- `refactor` - Process improvement
-- `chore` - Maintenance
+**Commit Message Format:**
+- Follow standard format: `type(scope): brief description`
+- Include "Related:" line for context
+- See [Commit Workflow](../../docs/COMMIT-WORKFLOW.md#commit-message-format) for complete format
 
 **Examples:**
-
 ```bash
 git commit -m "docs(ci/status-tracking-automation): add status update reminders to task-phase command"
 git commit -m "feat(ci/status-tracking-automation): integrate status checks into PR workflow"
 git commit -m "docs(ci/documentation-validation): create validation checklist template"
 ```
+
+**Before Stopping:**
+- [ ] Check `git status` for uncommitted changes
+- [ ] Stage all changes (`git add`)
+- [ ] Commit with proper message
+- [ ] Push to remote if on feature branch
+- [ ] Verify no uncommitted changes remain
 
 ---
 

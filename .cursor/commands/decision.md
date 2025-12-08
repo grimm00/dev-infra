@@ -465,6 +465,80 @@ This directory contains Architecture Decision Records (ADRs) documenting key dec
 
 ---
 
+### 7. Commit and Push Changes
+
+**IMPORTANT:** Always commit work before completing command.
+
+**Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation, especially [Documentation/Chore Branches](../../docs/COMMIT-WORKFLOW.md#documentationchore-branches) section
+
+**Since decisions are documentation-only, use docs-only workflow:**
+
+**Branch naming:**
+
+- Format: `docs/decision-[topic]` (e.g., `docs/decision-template-generation-testing-automation`)
+
+**Steps:**
+
+1. **Check current branch:**
+
+   ```bash
+   git branch --show-current
+   ```
+
+2. **Create docs branch (if not already on one):**
+
+   ```bash
+   git checkout -b docs/decision-[topic]
+   ```
+
+3. **Stage all changes:**
+
+   ```bash
+   git add admin/decisions/[topic]/  # or docs/maintainers/decisions/[topic]/
+   ```
+
+4. **Commit with proper message:**
+
+   ```bash
+   git commit -m "docs(decisions): add [topic] decisions
+
+   Created ADR documents:
+   - Decisions hub
+   - ADR-001: [Decision 1]
+   - ADR-002: [Decision 2]
+   - Decisions summary
+
+   Related: [Context]"
+   ```
+
+5. **Push branch:**
+
+   ```bash
+   git push origin docs/decision-[topic]
+   ```
+
+6. **Merge directly to develop (docs-only, no PR needed):**
+
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git merge docs/decision-[topic] --no-edit
+   git push origin develop
+   ```
+
+7. **Clean up branch:**
+   ```bash
+   git branch -d docs/decision-[topic]
+   git push origin --delete docs/decision-[topic]
+   ```
+
+8. **Verify no uncommitted changes:**
+   ```bash
+   git status --short
+   ```
+
+---
+
 ## Integration with Other Commands
 
 ### Decision → Planning Flow

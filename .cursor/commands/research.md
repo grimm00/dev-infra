@@ -552,6 +552,80 @@ This directory contains research documents supporting exploration and decision-m
 
 ---
 
+### 7. Commit and Push Changes
+
+**IMPORTANT:** Always commit work before completing command.
+
+**Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation, especially [Documentation/Chore Branches](../../docs/COMMIT-WORKFLOW.md#documentationchore-branches) section
+
+**Since research is documentation-only, use docs-only workflow:**
+
+**Branch naming:**
+
+- Format: `docs/research-[topic]` (e.g., `docs/research-template-generation-testing-automation`)
+
+**Steps:**
+
+1. **Check current branch:**
+
+   ```bash
+   git branch --show-current
+   ```
+
+2. **Create docs branch (if not already on one):**
+
+   ```bash
+   git checkout -b docs/research-[topic]
+   ```
+
+3. **Stage all changes:**
+
+   ```bash
+   git add admin/research/[topic]/  # or docs/maintainers/research/[topic]/
+   ```
+
+4. **Commit with proper message:**
+
+   ```bash
+   git commit -m "docs(research): add [topic] research
+
+   Created research documents:
+   - Research hub with [N] research topics
+   - [Research document 1]
+   - [Research document 2]
+   - Requirements document ([N] FRs, [N] NFRs)
+
+   Related: [Context]"
+   ```
+
+5. **Push branch:**
+
+   ```bash
+   git push origin docs/research-[topic]
+   ```
+
+6. **Merge directly to develop (docs-only, no PR needed):**
+
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git merge docs/research-[topic] --no-edit
+   git push origin develop
+   ```
+
+7. **Clean up branch:**
+   ```bash
+   git branch -d docs/research-[topic]
+   git push origin --delete docs/research-[topic]
+   ```
+
+8. **Verify no uncommitted changes:**
+   ```bash
+   git status --short
+   ```
+
+---
+
 ## Integration with Other Commands
 
 ### Research → Decision → Planning Flow

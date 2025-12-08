@@ -730,6 +730,10 @@ This directory contains actionable improvement checklists based on learnings fro
 
 ### 7. Commit and Push Changes
 
+**IMPORTANT:** Always commit work before completing command.
+
+**Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation, especially [Documentation/Chore Branches](../../docs/COMMIT-WORKFLOW.md#documentationchore-branches) section
+
 **Since learnings/improvements are documentation-only, use docs-only workflow:**
 
 **Branch naming:**
@@ -790,6 +794,11 @@ This directory contains actionable improvement checklists based on learnings fro
    ```bash
    git branch -d docs/int-opp-[project]-[topic]
    git push origin --delete docs/int-opp-[project]-[topic]
+   ```
+
+8. **Verify no uncommitted changes:**
+   ```bash
+   git status --short
    ```
 
 **Commit message examples:**

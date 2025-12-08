@@ -560,6 +560,79 @@ This command supports multiple project organization patterns:
 
 ---
 
+### 8. Commit and Push Changes
+
+**IMPORTANT:** Always commit work before completing command.
+
+**Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation, especially [Documentation/Chore Branches](../../docs/COMMIT-WORKFLOW.md#documentationchore-branches) section
+
+**Since reflections are documentation-only, use docs-only workflow:**
+
+**Branch naming:**
+
+- Format: `docs/reflect-[feature]-[date]` or `docs/reflect-[scope]-[date]` (e.g., `docs/reflect-templates-enhancement-2025-12-08`)
+
+**Steps:**
+
+1. **Check current branch:**
+
+   ```bash
+   git branch --show-current
+   ```
+
+2. **Create docs branch (if not already on one):**
+
+   ```bash
+   git checkout -b docs/reflect-[feature]-[date]
+   ```
+
+3. **Stage all changes:**
+
+   ```bash
+   git add docs/maintainers/planning/notes/reflections/  # or feature-specific path
+   ```
+
+4. **Commit with proper message:**
+
+   ```bash
+   git commit -m "docs(reflection): create [feature] reflection
+
+   Created reflection document:
+   - Analyzed [scope/period]
+   - Identified patterns and opportunities
+   - Provided actionable suggestions
+
+   Related: [Feature or context]"
+   ```
+
+5. **Push branch:**
+
+   ```bash
+   git push origin docs/reflect-[feature]-[date]
+   ```
+
+6. **Merge directly to develop (docs-only, no PR needed):**
+
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git merge docs/reflect-[feature]-[date] --no-edit
+   git push origin develop
+   ```
+
+7. **Clean up branch:**
+   ```bash
+   git branch -d docs/reflect-[feature]-[date]
+   git push origin --delete docs/reflect-[feature]-[date]
+   ```
+
+8. **Verify no uncommitted changes:**
+   ```bash
+   git status --short
+   ```
+
+---
+
 ## Common Scenarios
 
 ### Scenario 1: Post-Phase Reflection

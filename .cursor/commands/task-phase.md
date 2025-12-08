@@ -305,41 +305,33 @@ When starting a phase (first task of the phase), automatically update status:
 
 ### 3. Commit Strategy
 
-**Commit after each logical unit:**
+**IMPORTANT:** Always commit work before stopping or moving to next task group.
 
-**Small commits are better:**
+**Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
 
-- One commit per test file
-- One commit per implementation
-- One commit per migration
-- One commit per CLI command
+**Commit Pattern:**
+- Commit after each logical unit (test file, implementation, migration, CLI command)
+- Small commits are better than large commits
+- Always commit before stopping (even if work incomplete)
 
-**Commit message format:**
-
-```
-type(scope): brief description
-
-Longer explanation if needed
-
-Related: Phase N, Task M
-```
-
-**Types:**
-
-- `test` - Adding tests
-- `feat` - New feature/functionality
-- `fix` - Bug fix
-- `refactor` - Code improvement
-- `docs` - Documentation only
-- `chore` - Maintenance
+**Commit Message Format:**
+- Follow standard format: `type(scope): brief description`
+- Include "Related:" line for context
+- See [Commit Workflow](../../docs/COMMIT-WORKFLOW.md#commit-message-format) for complete format
 
 **Examples:**
-
 ```bash
 git commit -m "test(phase-3): add DELETE endpoint tests"
 git commit -m "feat(phase-3): implement DELETE endpoint"
 git commit -m "feat(phase-3): add proj delete CLI command"
 ```
+
+**Before Stopping:**
+- [ ] Check `git status` for uncommitted changes
+- [ ] Stage all changes (`git add`)
+- [ ] Commit with proper message
+- [ ] Push to remote if on feature branch
+- [ ] Verify no uncommitted changes remain
 
 ---
 
