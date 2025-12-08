@@ -10,6 +10,7 @@
 
 ### Active Explorations
 
+- **[Release Readiness](release-readiness/README.md)** - Explore release readiness assessment and automation (🔴 Exploration)
 - **[Templates Enhancement](templates-enhancement/README.md)** - Explore enhancements to dev-infra templates (🔴 Exploration)
 
 ---
@@ -26,5 +27,5 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2025-12-07
+**Last Updated:** 2025-12-08
 
