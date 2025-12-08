@@ -34,7 +34,7 @@ This directory captures learnings and improvements discovered during dev-infra t
 
 ## 📊 Summary
 
-**Learnings Documents:** 3  
+**Learnings Documents:** 5  
 **Improvement Documents:** 0  
 **Status:** ✅ Active
 

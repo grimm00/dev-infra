@@ -11,6 +11,7 @@ Use this command when a PR is already open to run manual testing, update documen
 This command supports multiple project organization patterns, matching `/pr` and `/post-pr`:
 
 1. **Feature-Specific Structure (default):**
+
    - Manual testing: `docs/maintainers/planning/features/[feature-name]/manual-testing.md`
    - Phase documents: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
    - Sourcery reviews: `docs/maintainers/feedback/sourcery/pr##.md` (for generated projects)
@@ -35,7 +36,7 @@ This command supports multiple project organization patterns, matching `/pr` and
 **Sourcery Review:**
 
 - Review tool: `dt-review` (if available from dev-toolkit)
-- Review output: 
+- Review output:
   - Dev-infra project: `admin/feedback/sourcery/pr##.md` (current location)
   - Generated projects: `docs/maintainers/feedback/sourcery/pr##.md` (template structure)
 - **Note:** Missing reviews are acceptable - workflow continues without review
@@ -105,19 +106,22 @@ gh pr view [pr-number] --json state,title,headRefName
 **Process:**
 
 1. **Check modified files:**
+
    ```bash
    git status --short
    ```
 
 2. **Identify phase/fix-related files:**
+
    - Review what files should actually be modified for this PR
    - Keep only files that are part of the implementation
 
 3. **Restore unrelated files:**
+
    ```bash
    # Restore all unrelated files (adjust paths as needed)
    git restore [unrelated-file-1] [unrelated-file-2] ...
-   
+
    # Or restore all modified files except phase-specific ones
    git restore $(git diff --name-only | grep -v "phase-[N]\.md\|[relevant-files]")
    ```
@@ -147,6 +151,7 @@ gh pr view [pr-number] --json state,title,headRefName
 **Purpose:** Verify that phase and feature status documents are current before proceeding with PR validation. This ensures status updates happen during work, not just at PR creation time.
 
 **When to check:**
+
 - Before proceeding with manual testing
 - After PR is verified to be open
 - As part of PR validation workflow
@@ -154,6 +159,7 @@ gh pr view [pr-number] --json state,title,headRefName
 **Status Check Process:**
 
 1. **Detect feature name:**
+
    - Use `--feature` option if provided
    - Otherwise, auto-detect from PR branch name or phase number:
      - Check if `docs/maintainers/planning/features/` exists
@@ -162,6 +168,7 @@ gh pr view [pr-number] --json state,title,headRefName
      - If no features exist, use project-wide structure
 
 2. **Read phase document:**
+
    - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
    - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
    - Check status field at top of document
@@ -169,6 +176,7 @@ gh pr view [pr-number] --json state,title,headRefName
    - Verify status matches actual work completed
 
 3. **Read feature status document (if applicable):**
+
    - Feature-specific: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
    - Project-wide: `docs/maintainers/planning/status-and-next-steps.md` (if exists)
    - Check phase completion status
@@ -198,13 +206,16 @@ gh pr view [pr-number] --json state,title,headRefName
 **Status Check Examples:**
 
 **Phase Document:**
+
 ```markdown
-**Status:** ✅ Complete  # Should match actual completion state
+**Status:** ✅ Complete # Should match actual completion state
 ```
 
 **Feature Status Document:**
+
 ```markdown
 **Phase 3: Documentation & Examples**
+
 - [x] Dependency sections added ✅ (2025-12-07)
 - [x] Dependency documentation created ✅ (2025-12-07)
 - Status: ✅ Complete
@@ -213,6 +224,7 @@ gh pr view [pr-number] --json state,title,headRefName
 **If status is not current:**
 
 **Warning (Lenient Approach):**
+
 - ⚠️ **Warning:** Status documents may be outdated
 - ⚠️ **Recommendation:** Update status documents before proceeding
 - ⚠️ **Note:** This is a warning, not a blocker - validation can continue
@@ -220,6 +232,7 @@ gh pr view [pr-number] --json state,title,headRefName
 - Suggest updating status documents
 
 **Action Items (if status outdated):**
+
 - [ ] Update phase document status if needed
 - [ ] Update feature status document if needed
 - [ ] Commit status updates if made
@@ -259,22 +272,26 @@ gh pr view [pr-number] --json state,title,headRefName
 **Process:**
 
 1. **Review PR changes to identify new features:**
+
    - Check what endpoints/commands were added/modified
    - Identify all user-facing functionality
    - Note any validation or error handling changes
 
 2. **Check if scenarios exist:**
+
    - Search manual testing guide for relevant scenarios
    - Check if all new features are covered
    - Verify scenarios match current implementation
 
 3. **Add missing scenarios:**
+
    - If scenarios are missing, add them using the template below
    - For phase PRs: Add scenarios for all new functionality
    - For fix PRs: Add scenarios if validation/error handling changed
    - Use consistent format and numbering
 
 4. **Update header if needed:**
+
    - Add PR number to header if not already listed
    - Update "Last Updated" date
    - Note which scenarios were added for this PR
@@ -285,7 +302,7 @@ gh pr view [pr-number] --json state,title,headRefName
 
 **Scenario Template:**
 
-```markdown
+````markdown
 ### Scenario N: [Feature Name] - [Test Type]
 
 **Test:** [Brief description]
@@ -293,19 +310,23 @@ gh pr view [pr-number] --json state,title,headRefName
 **Prerequisites:** [Any setup needed]
 
 **[API/CLI] Test:**
+
 ```bash
 [Command or curl example]
 # Expected: [Expected result]
 ```
+````
 
 **Verification:**
+
 ```bash
 [Verification command]
 # Expected: [What to verify]
 ```
 
 **Expected Result:** ✅ [Success criteria]
-```
+
+````
 
 **Common scenarios to add:**
 
@@ -374,22 +395,23 @@ gh pr view [pr-number] --json state,title,headRefName
    ```bash
    # Run curl command from scenario
    curl [endpoint] [options]
-   
+
    # Verify response matches expected
    # Check status code, JSON structure, values
-   ```
+````
 
-   **CLI Tests:**
-   ```bash
-   # Navigate to CLI directory (project-specific)
-   cd [cli-directory]
-   
-   # Run CLI command from scenario
-   [project-cli] [command] [options]
-   
-   # Verify output matches expected
-   # Check formatting, values, error messages
-   ```
+**CLI Tests:**
+
+```bash
+# Navigate to CLI directory (project-specific)
+cd [cli-directory]
+
+# Run CLI command from scenario
+[project-cli] [command] [options]
+
+# Verify output matches expected
+# Check formatting, values, error messages
+```
 
 4. **Document results and check off scenarios:**
    - For each scenario that passes, check off its checkboxes in the manual testing guide
@@ -418,7 +440,8 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ### 4. Run Sourcery Review (dt-review)
 
-**Important:** 
+**Important:**
+
 - Run from the project directory to ensure review is for the correct repository
 - Use the path parameter to save directly to the project's documentation structure
 - **Note:** If review is not available or fails, that's okay - continue without review
@@ -426,21 +449,25 @@ gh pr view [pr-number] --json state,title,headRefName
 **Process:**
 
 1. **Navigate to project directory:**
+
    ```bash
    cd [project-directory]
    ```
 
 2. **Ensure output directory exists:**
+
    ```bash
    mkdir -p docs/maintainers/feedback/sourcery
    ```
 
 3. **Run review with custom path:**
+
    ```bash
    dt-review [pr-number] docs/maintainers/feedback/sourcery/pr##.md
    ```
 
    **Example:**
+
    ```bash
    dt-review 19 docs/maintainers/feedback/sourcery/pr19.md
    ```
@@ -448,6 +475,7 @@ gh pr view [pr-number] --json state,title,headRefName
    **Note:** The `dt-review` command should be available in PATH. If not found, check if dev-toolkit is installed.
 
    **If review fails or is not available:**
+
    - This is acceptable - some PRs may not have reviews available
    - Continue with validation workflow
    - Note in summary that review was skipped
@@ -473,7 +501,8 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ### 5. Fill Out Priority Matrix (If Review Available)
 
-**File:** 
+**File:**
+
 - Dev-infra: `admin/feedback/sourcery/pr##.md` (current location)
 - Generated projects: `docs/maintainers/feedback/sourcery/pr##.md` (template structure)
 
@@ -499,24 +528,28 @@ Add priority assessment after the comment:
 **Priority Guidelines:**
 
 **CRITICAL 🔴:**
+
 - Security vulnerabilities
 - Data loss risks
 - Breaking API changes
 - Test failures
 
 **HIGH 🟠:**
+
 - Performance issues
 - Code quality problems
 - Maintainability concerns
 - Missing error handling
 
 **MEDIUM 🟡:**
+
 - Code style improvements
 - Refactoring opportunities
 - Documentation gaps
 - Minor optimizations
 
 **LOW 🟢:**
+
 - Naming suggestions
 - Style preferences
 - Minor readability improvements
@@ -541,11 +574,13 @@ Add priority assessment after the comment:
 **If CRITICAL 🔴 or HIGH 🟠 issues found:**
 
 1. **Create fix branch (if not already on PR branch):**
+
    ```bash
    git checkout [pr-branch-name]
    ```
 
 2. **Implement fixes:**
+
    - Follow fix plans (if available)
    - Write tests for fixes
    - Run full test suite
@@ -588,6 +623,7 @@ Update PR description to include:
 ## Review Summary
 
 **Sourcery Review:** (if available)
+
 - Total comments: [N]
 - CRITICAL: [N] (all addressed)
 - HIGH: [N] (all addressed)
@@ -595,6 +631,7 @@ Update PR description to include:
 - LOW: [N] (documented for future)
 
 **Manual Testing:**
+
 - Scenarios tested: [N]
 - All scenarios passed: ✅
 - Checkboxes checked off: ✅ (all passing scenarios marked)
@@ -614,6 +651,7 @@ Update PR description to include:
 **PR:** #[pr-number] - [PR Title]
 
 ### Manual Testing
+
 - ✅ Scenarios tested: [N]
 - ✅ All scenarios passed
 - ✅ Checkboxes checked off for passing scenarios
@@ -621,17 +659,20 @@ Update PR description to include:
 - ⚠️ Issues found: [None / List]
 
 ### Code Review
+
 - ✅ Sourcery review complete (or ⚠️ Review not available - skipped)
 - ✅ Priority matrix filled out (or ⚠️ Skipped - no review)
 - ⚠️ Critical issues: [N] (all addressed) or [None - no review]
 - ⚠️ Deferred issues: [N] or [None - no review]
 
 ### Status Validation
+
 - ✅ Status documents validated (or ⚠️ Status warnings documented)
 - ✅ Phase status current (or ⚠️ Status update recommended)
 - ✅ Feature status current (or ⚠️ Status update recommended)
 
 ### Next Steps
+
 - [ ] User review PR changes
 - [ ] User approve merge (if ready)
 - [ ] Merge PR
@@ -784,4 +825,3 @@ Verify with health check (project-specific):
 **Last Updated:** 2025-12-07  
 **Status:** ✅ Active  
 **Next:** Use when PR is open to validate features, run reviews, and update documentation (supports feature-specific and project-wide structures)
-
