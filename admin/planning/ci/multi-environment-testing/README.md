@@ -12,6 +12,7 @@
 - **[Implementation Plan](PLAN.md)** - Detailed implementation steps
 - **[Design Decisions](DECISIONS.md)** - Key architectural decisions
 - **[Workflow Specification](WORKFLOW.md)** - Complete workflow YAML and explanation
+- **[Known Issues Registry](known-issues.md)** - Track known CI/CD failures with fixes pending (NEW)
 - **[PR #17 Fix Documentation](fix/)** - Issues and fixes for workflow implementation
 
 ---

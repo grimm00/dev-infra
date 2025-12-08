@@ -212,6 +212,83 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ---
 
+### 1d. Check Known Issues Registry (NEW)
+
+**Purpose:** Identify if failures match known issues with fixes pending. This prevents blocking PR validation for issues that are already documented and have fixes planned.
+
+**When to check:**
+
+- After identifying failed checks
+- Before blocking PR validation
+- To avoid duplicate failure documentation
+
+**Process:**
+
+1. **Read known issues registry:**
+
+   - Location: `admin/planning/ci/multi-environment-testing/known-issues.md`
+   - Check if failed job matches any active known issue
+   - Compare job names and error patterns
+
+2. **Match failure to known issue:**
+
+   - Compare job name (e.g., `full-tests-ubuntu`, `full-tests-macos`)
+   - Compare error patterns (if error messages available)
+   - Check if symptoms match known issue description
+
+3. **If match found:**
+
+   - Note: "Failure matches Known Issue #[number]"
+   - Reference known issue in summary
+   - Link to fix tracking
+   - **Action:** Document failure but don't block PR validation
+   - Add PR number to "PRs Affected" list in known issues registry
+   - Update failure document to reference known issue
+
+4. **If no match:**
+
+   - This is a new issue
+   - Document as new failure
+   - Create new known issue entry if fix is pending
+   - Block PR validation if critical (CRITICAL/HIGH priority)
+   - Allow PR validation to proceed if MEDIUM/LOW priority (with warning)
+
+**Known Issue Match Example:**
+
+```markdown
+### CI/CD Status
+
+- GitHub Actions checks: Some checks failing
+  - `full-tests-ubuntu`: FAIL ❌
+  - **Known Issue:** Matches Known Issue #1 (full-tests-ubuntu intermittent failures)
+  - **Status:** Fix pending in multi-environment-testing topic
+  - **Reference:** `admin/planning/ci/multi-environment-testing/known-issues.md`
+  - **Action:** Documented, not blocking PR validation (local tests passing)
+```
+
+**Update Known Issues Registry:**
+
+**File:** `admin/planning/ci/multi-environment-testing/known-issues.md`
+
+**Add PR to "PRs Affected" list:**
+
+```markdown
+**PRs Affected:**
+- PR #30: Documented failure (2025-12-08)
+- PR #[number]: Documented failure (YYYY-MM-DD)
+```
+
+**Checklist:**
+
+- [ ] Known issues registry checked
+- [ ] Failure matched to known issue (if applicable)
+- [ ] Known issue updated with PR number (if match found)
+- [ ] PR validation proceeds (if known issue)
+- [ ] New issue documented (if no match)
+- [ ] Failure document created/updated
+
+---
+
 ### 1a. Restore Unrelated Files (Cursor IDE Bug Fix)
 
 **Issue:** Cursor IDE may modify unrelated files when opening them. These should be restored before proceeding.
@@ -858,12 +935,15 @@ Verify with health check (project-specific):
 **Solution:**
 
 - Review failed check logs using URLs from `gh pr checks` output
-- Identify root cause (test failures, lint errors, build issues)
+- Check known issues registry for matching failures
+- If matches known issue: Document and proceed (don't block)
+- If new issue: Identify root cause (test failures, lint errors, build issues)
 - Fix issues locally and verify
 - Push fixes to PR branch
 - Wait for checks to re-run
 - Verify all checks pass before merge
 - **Note:** Some checks may be flaky - re-run if needed
+- **Note:** Known issues with fixes pending don't block PR validation
 
 ---
 
@@ -873,6 +953,7 @@ Verify with health check (project-specific):
 
 - [ ] PR is open and accessible
 - [ ] GitHub Actions checks reviewed (NEW)
+- [ ] Known issues registry checked (NEW)
 - [ ] Backend server is running (if applicable)
 - [ ] Manual testing guide exists (or will be created)
 - [ ] dev-toolkit is available (optional, for Sourcery review)
@@ -882,6 +963,9 @@ Verify with health check (project-specific):
 
 - [ ] GitHub Actions/CI-CD status checked (NEW)
 - [ ] Failed checks identified and documented (if any)
+- [ ] Known issues registry checked (NEW)
+- [ ] Failures matched to known issues (if applicable)
+- [ ] Known issues updated with PR number (if match found)
 - [ ] Status documents validated (NEW)
 - [ ] Status warnings documented (if status outdated)
 - [ ] Manual testing guide updated with scenarios (MANDATORY)
@@ -937,6 +1021,11 @@ Verify with health check (project-specific):
 
 - `docs/maintainers/feedback/sourcery/pr##.md`
 
+**Known Issues:**
+
+- `admin/planning/ci/multi-environment-testing/known-issues.md` (known issues registry)
+- `admin/planning/ci/multi-environment-testing/fix/pr##-failures.md` (failure documentation)
+
 **PR Management:**
 
 - GitHub CLI: `gh pr view [number]`
@@ -950,6 +1039,6 @@ Verify with health check (project-specific):
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-08  
 **Status:** ✅ Active  
-**Next:** Use when PR is open to validate features, run reviews, and update documentation (supports feature-specific and project-wide structures)
+**Next:** Use when PR is open to validate features, run reviews, and update documentation (supports feature-specific and project-wide structures, includes known issues checking)

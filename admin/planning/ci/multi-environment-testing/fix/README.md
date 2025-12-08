@@ -9,7 +9,9 @@
 
 ## 🎯 Quick Links
 
+- **[Known Issues Registry](../known-issues.md)** - Active known issues with fixes pending (NEW)
 - **[Failed Jobs](pr17-failures.md)** - Detailed documentation of all failed jobs and errors
+- **[PR #30 Failures](pr30-failures.md)** - Failed jobs documentation for PR #30 (NEW)
 - **[Root Cause Analysis](root-cause-analysis.md)** - Analysis of why failures occurred
 - **[Prompt Interactive Analysis](prompt-interactive-analysis.md)** - Deep dive into prompt_yes_no detection issue
 - **[Fixes Needed](fixes-needed.md)** - Prioritized list of required fixes
@@ -30,21 +32,23 @@ This directory documents the issues encountered during the implementation of the
 
 ## 🔍 Key Issues Identified
 
-1. **Git Operations Test Failures** - Tests pass locally but fail in CI
-2. **Non-Interactive Prompt Detection** - `prompt_yes_no` fix attempted but didn't work in GitHub Actions
-3. **Environment Detection** - Detection logic not working as expected in CI
-4. **macOS Job Cancellation** - macOS jobs cancelled when commits pushed rapidly
-5. **Platform Differences** - Tool version and behavioral differences between Ubuntu and macOS
+1. **Git Operations Test Failures** - Tests pass locally but fail in CI (✅ Resolved)
+2. **Non-Interactive Prompt Detection** - `prompt_yes_no` fix attempted but didn't work in GitHub Actions (✅ Resolved)
+3. **Environment Detection** - Detection logic not working as expected in CI (✅ Resolved)
+4. **macOS Job Cancellation** - macOS jobs cancelled when commits pushed rapidly (✅ Resolved)
+5. **Platform Differences** - Tool version and behavioral differences between Ubuntu and macOS (✅ Resolved)
+6. **Intermittent CI Failures** - Tests pass locally but fail in CI (🟡 Under Investigation - PR #30)
 
 ---
 
 ## 📊 Status Summary
 
-- **Total Issues:** All resolved ✅
+- **Total Issues:** 1 active known issue, all historical issues resolved ✅
 - **Critical Fixes:** All completed ✅
-- **Tests Passing:** 63/63 (100%) - 1 test skipped (interactive smoke test)
-- **Platforms:** Both Ubuntu (Docker) and macOS passing ✅
+- **Tests Passing:** 58/58 locally (100%), CI failures under investigation
+- **Platforms:** Both Ubuntu (Docker) and macOS passing locally ✅
 - **Workflow Status:** Successfully merged to develop (PR #17)
+- **Known Issues:** See [Known Issues Registry](../known-issues.md) for active issues
 
 ---
 
