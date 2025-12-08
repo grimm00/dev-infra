@@ -314,7 +314,59 @@ All commands have detailed documentation in `.cursor/commands/`. Each command in
 
 - [Project Roadmap](docs/maintainers/planning/roadmap.md)
 - [Feature Plans](docs/maintainers/planning/features/)
+- [CI/CD Improvements](docs/maintainers/planning/ci/)
 - [Release History](docs/maintainers/planning/releases/)
+
+---
+
+## 🔄 CI/CD Improvements
+
+This project supports CI/CD improvements for process enhancements, workflow automation, and infrastructure improvements.
+
+### CI/CD Improvement Structure
+
+**Location:** `docs/maintainers/planning/ci/[improvement-name]/`
+
+**Key Files:**
+- `README.md` - Improvement hub
+- `improvement-plan.md` - Improvement plan
+- `phase-N.md` - Phase documents
+
+**Key Differences from Features:**
+- Uses `improvement-plan.md` instead of `feature-plan.md`
+- No `status-and-next-steps.md` file (status tracked in README.md)
+- Similar phase structure to features
+- Use `/task-improvement` command instead of `/task-phase`
+
+### Creating CI/CD Improvements
+
+1. **Create improvement directory:**
+   ```bash
+   mkdir -p docs/maintainers/planning/ci/[improvement-name]
+   ```
+
+2. **Create improvement plan:**
+   - Copy `docs/maintainers/planning/ci/improvement-plan-template.md` as `improvement-plan.md`
+   - Fill in improvement details
+   - Define implementation steps
+
+3. **Create phase documents:**
+   - Create `phase-1.md`, `phase-2.md`, etc.
+   - Define tasks and deliverables
+
+4. **Implement improvements:**
+   - Use `/task-improvement [N]` to implement phases
+   - Use `/pr --ci-improvement [name]` to create PRs
+
+### CI/CD vs Feature Structure
+
+| Aspect | Features | CI/CD Improvements |
+|--------|----------|-------------------|
+| Plan File | `feature-plan.md` | `improvement-plan.md` |
+| Status File | `status-and-next-steps.md` | Status in `README.md` |
+| Command | `/task-phase` | `/task-improvement` |
+| Phase Structure | Similar | Similar |
+| Purpose | User-facing features | Process/infrastructure improvements |
 
 ---
 
