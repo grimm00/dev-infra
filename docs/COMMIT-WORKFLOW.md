@@ -108,7 +108,7 @@ git commit -m "chore(ci): update Docker test image"
 ```bash
 git checkout develop
 git pull origin develop
-git merge docs/[topic] --no-edit
+git merge --ff-only docs/[topic] --no-edit
 git push origin develop
 git branch -d docs/[topic]
 git push origin --delete docs/[topic]
