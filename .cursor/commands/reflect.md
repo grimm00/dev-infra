@@ -311,14 +311,18 @@ This command supports multiple project organization patterns:
 
 **File Location:**
 
-- **Feature-specific:** `docs/maintainers/planning/features/[feature-name]/reflections/reflection-[scope]-[date].md`
-- **Project-wide:** `docs/maintainers/planning/notes/reflections/reflection-[scope]-[date].md`
+**IMPORTANT:** For dev-infra, all reflections are centralized in `admin/planning/notes/reflections/` regardless of whether they're feature-specific or CI/CD-specific. This ensures all reflections are in one place for easy discovery and maintenance.
+
+- **Centralized (dev-infra):** `admin/planning/notes/reflections/reflection-[topic]-[date].md`
+- **Feature-specific (templates):** `docs/maintainers/planning/features/[feature-name]/reflections/reflection-[scope]-[date].md`
+- **Project-wide (templates):** `docs/maintainers/planning/notes/reflections/reflection-[scope]-[date].md`
 - **Alternative:** `docs/maintainers/planning/reflections/reflection-[scope]-[date].md`
 
 **Examples:**
-- Feature reflection: `docs/maintainers/planning/features/my-feature/reflections/reflection-phase6-2025-12-06.md`
-- Full project: `docs/maintainers/planning/notes/reflections/reflection-2025-12-06.md`
-- Workflow: `docs/maintainers/planning/notes/reflections/reflection-workflow-2025-12-06.md`
+- CI/CD reflection (dev-infra): `admin/planning/notes/reflections/reflection-template-generation-testing-automation-2025-12-08.md`
+- Feature reflection (dev-infra): `admin/planning/notes/reflections/reflection-templates-enhancement-2025-12-08.md`
+- Feature reflection (templates): `docs/maintainers/planning/features/my-feature/reflections/reflection-phase6-2025-12-06.md`
+- Full project (templates): `docs/maintainers/planning/notes/reflections/reflection-2025-12-06.md`
 
 **Report structure:**
 
