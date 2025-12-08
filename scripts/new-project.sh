@@ -489,6 +489,71 @@ init_git_repo() {
     fi
 }
 
+# Function to show help
+show_help() {
+    cat << EOF
+Usage: $0 [--non-interactive] [--help]
+
+Dev-Infra Project Template Generator
+Creates new projects from dev-infra templates
+
+Options:
+  --non-interactive    Run in non-interactive mode (reads from environment variables)
+  --help, -h          Show this help message
+
+Non-Interactive Mode:
+  When --non-interactive flag is used, the script reads inputs from environment variables:
+  
+  Required:
+    PROJECT_NAME         Project name
+    PROJECT_TYPE         Template type: standard-project or learning-project
+  
+  Optional:
+    PROJECT_DESCRIPTION  Project description
+    INIT_GIT            Initialize git repository: true or false (default: false)
+    TARGET_DIR          Target directory (default: \$HOME/Projects or current directory)
+    AUTHOR              Author name (default: git config user.name)
+  
+  Example:
+    PROJECT_NAME="my-project" \\
+    PROJECT_TYPE="standard-project" \\
+    ./scripts/new-project.sh --non-interactive
+
+Exit Codes:
+  0  Success
+  1  Validation error or general error
+  2  Invalid arguments or usage error
+EOF
+}
+
+# Function to validate non-interactive inputs
+validate_non_interactive_inputs() {
+    local errors=0
+    
+    if [[ -z "$PROJECT_NAME" ]]; then
+        print_error "PROJECT_NAME environment variable is required in non-interactive mode"
+        errors=$((errors + 1))
+    fi
+    
+    if [[ -z "$PROJECT_TYPE" ]]; then
+        print_error "PROJECT_TYPE environment variable is required in non-interactive mode"
+        errors=$((errors + 1))
+    elif [[ "$PROJECT_TYPE" != "standard-project" && "$PROJECT_TYPE" != "learning-project" ]]; then
+        print_error "PROJECT_TYPE must be 'standard-project' or 'learning-project', got: $PROJECT_TYPE"
+        errors=$((errors + 1))
+    fi
+    
+    if [[ -n "$INIT_GIT" && "$INIT_GIT" != "true" && "$INIT_GIT" != "false" ]]; then
+        print_error "INIT_GIT must be 'true' or 'false', got: $INIT_GIT"
+        errors=$((errors + 1))
+    fi
+    
+    if [[ $errors -gt 0 ]]; then
+        print_error "Validation failed with $errors error(s). Please fix the issues above."
+        exit 1
+    fi
+}
+
 # Function to show next steps
 show_next_steps() {
     local full_project_path="$1"
@@ -521,6 +586,36 @@ show_next_steps() {
 
 # Main function
 main() {
+    # Parse command-line arguments
+    NON_INTERACTIVE_MODE="false"
+    if [[ "$1" == "--non-interactive" ]]; then
+        NON_INTERACTIVE_MODE="true"
+        shift  # Remove flag from arguments
+    elif [[ "$1" == "--help" || "$1" == "-h" ]]; then
+        show_help
+        exit 0
+    fi
+    
+    # Fallback to existing detection (maintain backward compatibility)
+    if [[ "$NON_INTERACTIVE_MODE" != "true" ]]; then
+        if [[ -n "$GITHUB_ACTIONS" || -n "$CI" || -n "$NON_INTERACTIVE" ]]; then
+            NON_INTERACTIVE_MODE="true"
+        fi
+    fi
+    
+    # Read environment variables if in non-interactive mode
+    if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
+        PROJECT_NAME="${PROJECT_NAME:-}"
+        PROJECT_TYPE="${PROJECT_TYPE:-}"
+        PROJECT_DESCRIPTION="${PROJECT_DESCRIPTION:-}"
+        INIT_GIT="${INIT_GIT:-false}"
+        TARGET_DIR="${TARGET_DIR:-}"
+        AUTHOR="${AUTHOR:-$(git config user.name 2>/dev/null || echo '')}"
+        
+        # Validate inputs early
+        validate_non_interactive_inputs
+    fi
+    
     echo "🚀 Dev-Infra Project Template Generator"
     echo "======================================"
     echo
