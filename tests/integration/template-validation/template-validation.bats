@@ -1,15 +1,11 @@
 #!/usr/bin/env bats
 
 # Template Validation Test Suite
-# Main test suite file that includes all test category files
+# Main test suite file with shared setup/teardown and helper functions
+# Note: Category test files (file-presence.bats, etc.) are discovered automatically by bats
+# They should also load this file's helpers or define their own setup/teardown
 
-load '../helpers/helpers.bash'
-
-# Load test category files
-load 'file-presence'
-load 'link-validation'
-load 'structure-validation'
-load 'generation-success'
+load '../../helpers/helpers.bash'
 
 # ============================================================================
 # Test Suite Setup and Teardown
