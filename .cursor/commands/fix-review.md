@@ -11,6 +11,7 @@ Review old deferred issues to identify candidates for addressing. Helps prioriti
 This command supports multiple fix organization patterns, matching `/fix-plan` and `/fix-implement`:
 
 1. **Feature-Specific Fixes (default):**
+
    - Main hub: `docs/maintainers/planning/features/[feature-name]/fix/README.md`
    - PR hubs: `docs/maintainers/planning/features/[feature-name]/fix/pr##/README.md`
    - Fix plans: `docs/maintainers/planning/features/[feature-name]/fix/pr##/batch-*.md` or `pr##/issue-*.md`
@@ -170,21 +171,25 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 **Criteria for addressing:**
 
 1. **Accumulated Issues**
+
    - Same issue appears multiple times
    - Similar issues that can be batched
    - Example: Multiple "use click.Choice" suggestions
 
 2. **Quick Wins**
+
    - LOW effort, LOW priority
    - Can be fixed quickly
    - Example: Style improvements, minor refactors
 
 3. **Blocking Issues**
+
    - Fixing enables other improvements
    - Reduces technical debt
    - Example: Code duplication that blocks refactoring
 
 4. **Old Issues**
+
    - Been deferred for a while
    - Code may have changed making fix easier
    - Example: Issues from early PRs
@@ -240,6 +245,7 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 **Total Effort:** [Effort Level]
 
 **Issues:**
+
 - PR##-#N: [Description] ([Priority], [Effort])
 - PR##-#M: [Description] ([Priority], [Effort])
 - PR##-#K: [Description] ([Priority], [Effort])
@@ -250,9 +256,9 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 
 ## Quick Wins
 
-| Issue | Priority | Effort | Age | Description |
-|-------|----------|--------|-----|-------------|
-| PR##-#N | 🟢 LOW | 🟢 LOW | [N] days | [Description] |
+| Issue   | Priority | Effort | Age      | Description   |
+| ------- | -------- | ------ | -------- | ------------- |
+| PR##-#N | 🟢 LOW   | 🟢 LOW | [N] days | [Description] |
 
 **Recommendation:** Create quick-wins batch
 
@@ -260,8 +266,8 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 
 ## Blocking Issues
 
-| Issue | Priority | Effort | Blocks | Description |
-|-------|----------|--------|--------|-------------|
+| Issue   | Priority  | Effort    | Blocks           | Description   |
+| ------- | --------- | --------- | ---------------- | ------------- |
 | PR##-#N | 🟡 MEDIUM | 🟡 MEDIUM | [What it blocks] | [Description] |
 
 **Recommendation:** Address before [blocked work]
@@ -270,8 +276,8 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 
 ## Old Issues (30+ days)
 
-| Issue | Priority | Effort | Age | Description |
-|-------|----------|--------|-----|-------------|
+| Issue   | Priority  | Effort | Age      | Description   |
+| ------- | --------- | ------ | -------- | ------------- |
 | PR##-#N | 🟡 MEDIUM | 🟢 LOW | [N] days | [Description] |
 
 **Recommendation:** Review if still relevant
@@ -280,10 +286,10 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 
 ## Related to Known Issues (NEW - if --known-issues provided)
 
-| Issue | Priority | Effort | Related Known Issue | Relationship | Description |
-|-------|----------|--------|---------------------|--------------|-------------|
-| PR##-#N | 🟡 MEDIUM | 🟠 HIGH | Known Issue #1 | Depends on | Fix blocked until known issue resolved |
-| PR##-#M | 🟡 MEDIUM | 🟢 LOW | Known Issue #2 | Addresses | Fix would resolve known issue |
+| Issue   | Priority  | Effort  | Related Known Issue | Relationship | Description                            |
+| ------- | --------- | ------- | ------------------- | ------------ | -------------------------------------- |
+| PR##-#N | 🟡 MEDIUM | 🟠 HIGH | Known Issue #1      | Depends on   | Fix blocked until known issue resolved |
+| PR##-#M | 🟡 MEDIUM | 🟢 LOW  | Known Issue #2      | Addresses    | Fix would resolve known issue          |
 
 **Recommendation:** Prioritize fixes that address known issues. Defer fixes that depend on known issues until known issue is resolved.
 
@@ -312,18 +318,20 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 **If issues are worth addressing:**
 
 1. **Use `/fix-plan --from-review-report` command:**
+
    ```bash
    # Create batches from latest review report
    /fix-plan --from-review-report fix-review-report-YYYY-MM-DD.md
-   
+
    # Create specific batch from report
    /fix-plan --from-review-report fix-review-report-YYYY-MM-DD.md --batch "Quick Wins"
-   
+
    # Create only Quick Wins batch
    /fix-plan --from-review-report --quick-wins
    ```
 
 2. **The command will:**
+
    - Parse review report recommendations
    - Resolve issue details from source PRs
    - Create cross-PR batches
@@ -360,7 +368,7 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 - PR #10: Use click.Choice for status
 - PR #12: Use click.Choice for status
 - PR #15: Use click.Choice for classification
-→ Batch together: "CLI validation improvements"
+  → Batch together: "CLI validation improvements"
 
 ---
 
@@ -377,7 +385,7 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 **Example:**
 
 - 5 LOW/LOW issues from different PRs
-→ Batch: "Code quality quick wins"
+  → Batch: "Code quality quick wins"
 
 ---
 
@@ -394,7 +402,7 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 **Example:**
 
 - PR #8 Overall: Code duplication
-→ Fix before major refactoring work
+  → Fix before major refactoring work
 
 ---
 
@@ -459,4 +467,3 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 **Last Updated:** 2025-12-08  
 **Status:** ✅ Active  
 **Next:** Run periodically to identify fix opportunities (supports feature-specific and project-wide fix structures, reads from deferred tasks collection, supports known issues integration)
-
