@@ -137,6 +137,102 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ---
 
+### 1b. Status Validation (NEW)
+
+**Purpose:** Verify that phase and feature status documents are current before proceeding with PR validation. This ensures status updates happen during work, not just at PR creation time.
+
+**When to check:**
+- Before proceeding with manual testing
+- After PR is verified to be open
+- As part of PR validation workflow
+
+**Status Check Process:**
+
+1. **Detect feature name:**
+   - Use `--feature` option if provided
+   - Otherwise, auto-detect from PR branch name or phase number:
+     - Check if `docs/maintainers/planning/features/` exists
+     - If single feature exists, use that feature name
+     - If multiple features exist, search for phase documents
+     - If no features exist, use project-wide structure
+
+2. **Read phase document:**
+   - Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
+   - Project-wide: `docs/maintainers/planning/phases/phase-N.md`
+   - Check status field at top of document
+   - Verify all task checkboxes are marked complete
+   - Verify status matches actual work completed
+
+3. **Read feature status document (if applicable):**
+   - Feature-specific: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Project-wide: `docs/maintainers/planning/status-and-next-steps.md` (if exists)
+   - Check phase completion status
+   - Verify progress tracking is current
+   - Verify next steps are accurate
+
+4. **Validate consistency:**
+   - Phase document status matches feature status
+   - Progress percentages are accurate
+   - No discrepancies between documents
+
+**Status Validation Checklist:**
+
+- [ ] Phase document status is current
+  - Location: `docs/maintainers/planning/features/[feature-name]/phase-N.md` or `docs/maintainers/planning/phases/phase-N.md`
+  - Verify: Status reflects actual completion state
+  - Expected: `**Status:** ✅ Complete` (if phase is complete) or `**Status:** 🟠 In Progress` (if still in progress)
+- [ ] Feature status document is current (if applicable)
+  - Location: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+  - Verify: Phase marked appropriately, progress updated
+  - Expected: Phase status matches phase document
+- [ ] Progress tracking is accurate
+  - Verify: Progress percentages reflect actual completion
+  - Verify: Task checkboxes match completed work
+  - Verify: No outdated status indicators
+
+**Status Check Examples:**
+
+**Phase Document:**
+```markdown
+**Status:** ✅ Complete  # Should match actual completion state
+```
+
+**Feature Status Document:**
+```markdown
+**Phase 3: Documentation & Examples**
+- [x] Dependency sections added ✅ (2025-12-07)
+- [x] Dependency documentation created ✅ (2025-12-07)
+- Status: ✅ Complete
+```
+
+**If status is not current:**
+
+**Warning (Lenient Approach):**
+- ⚠️ **Warning:** Status documents may be outdated
+- ⚠️ **Recommendation:** Update status documents before proceeding
+- ⚠️ **Note:** This is a warning, not a blocker - validation can continue
+- Document the warning in the summary report
+- Suggest updating status documents
+
+**Action Items (if status outdated):**
+- [ ] Update phase document status if needed
+- [ ] Update feature status document if needed
+- [ ] Commit status updates if made
+- [ ] Note status update in PR description
+
+**Note:** This validation uses a **lenient approach** (warnings, not blockers) to start. Validation strictness can be tightened based on feedback from real PR usage.
+
+**Checklist:**
+
+- [ ] Feature name detected or specified
+- [ ] Phase document found and read
+- [ ] Feature status document found and read (if applicable)
+- [ ] Status documents validated
+- [ ] Warnings documented if status outdated
+- [ ] Ready to proceed with validation
+
+---
+
 ### 2. Update Manual Testing Guide (MANDATORY)
 
 **Detect feature name:**
@@ -522,6 +618,11 @@ Update PR description to include:
 - ✅ Priority matrix filled out (or ⚠️ Skipped - no review)
 - ⚠️ Critical issues: [N] (all addressed) or [None - no review]
 - ⚠️ Deferred issues: [N] or [None - no review]
+
+### Status Validation
+- ✅ Status documents validated (or ⚠️ Status warnings documented)
+- ✅ Phase status current (or ⚠️ Status update recommended)
+- ✅ Feature status current (or ⚠️ Status update recommended)
 
 ### Next Steps
 - [ ] User review PR changes
