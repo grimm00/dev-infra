@@ -162,6 +162,8 @@ This command supports multiple phase organization patterns:
 
 **Status Update (Start of Phase):**
 
+**Note:** For authoritative status update requirements, see [PR Status Update Requirements](../../docs/PR-STATUS-UPDATE-REQUIREMENTS.md). Examples below use placeholder dates (e.g., `2025-12-07`) and phase numbers (e.g., `Phase 3`) for illustration.
+
 **Auto-Update Phase Status:**
 
 When starting a phase (first task of the phase), automatically update status:

@@ -12,6 +12,8 @@ This document defines the mandatory status update requirements for pull requests
 
 **Key Principle:** Status updates are mandatory throughout the PR lifecycle, from creation through review to merge.
 
+**Note:** This document serves as the **single source of truth** for status update requirements. Other documents (command docs, workflow rules) reference this document for authoritative requirements. Examples in this document use placeholder dates (e.g., `2025-12-07`) and phase numbers (e.g., `Phase 3`) for illustration purposes.
+
 ---
 
 ## ✅ Status Update Requirements
@@ -176,16 +178,16 @@ This document defines the mandatory status update requirements for pull requests
    - Update phase row status to "✅ Complete"
    - Add end date and duration
 
-**Example:**
+**Example (using placeholder dates, phase numbers, and PR numbers for illustration):**
 ```markdown
 # My Feature - Status & Next Steps
 
-**Current Phase:** Phase 3 Complete
-**Progress:** 75% (3 of 4 phases complete)
+**Current Phase:** Phase 3 Complete  # Example phase number - use actual phase
+**Progress:** 75% (3 of 4 phases complete)  # Example progress - calculate actual
 
 ## Completed Milestones
 
-- **Phase 3:** Documentation & Examples ✅ (PR #10, 2025-12-07)
+- **Phase 3:** Documentation & Examples ✅ (PR #10, 2025-12-07)  # Example PR number and date - use actual values
 
 ## Progress Tracking
 

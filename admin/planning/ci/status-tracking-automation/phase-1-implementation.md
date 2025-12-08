@@ -8,7 +8,7 @@
 
 ## 📋 Overview
 
-This document documents the implementation of Phase 1 automation enhancement: adding automatic status updates to the `/task-phase` command.
+This document describes the implementation of Phase 1 automation enhancement: adding automatic status updates to the `/task-phase` command.
 
 **Implementation:** ✅ Complete  
 **Effort:** Low-Medium (as estimated)  

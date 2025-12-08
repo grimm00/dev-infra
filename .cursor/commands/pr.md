@@ -153,6 +153,8 @@ This command supports multiple project organization patterns, matching `/task-ph
 
 #### Status Validation
 
+**Note:** For authoritative status update requirements, see [PR Status Update Requirements](../../docs/PR-STATUS-UPDATE-REQUIREMENTS.md). Examples below use placeholder dates (e.g., `2025-12-07`) and phase numbers (e.g., `Phase 3`) for illustration.
+
 **Before PR creation, verify status documents are current:**
 
 - [ ] Phase document status updated to "✅ Complete"
