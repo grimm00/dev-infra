@@ -99,6 +99,119 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ---
 
+### 1c. Check GitHub Actions/CI-CD Status (NEW)
+
+**Purpose:** Verify that all GitHub Actions workflows and CI/CD jobs are passing before proceeding with PR validation. Failed CI/CD jobs should be addressed before merge.
+
+**When to check:**
+
+- After verifying PR is open
+- Before proceeding with manual testing
+- As part of PR validation workflow
+
+**Process:**
+
+1. **Check GitHub Actions status for PR:**
+
+   ```bash
+   gh pr checks [pr-number]
+   ```
+
+   **Expected output shows:**
+   - All checks passing (✅)
+   - Or any failing checks (❌)
+   - Check names and status
+
+2. **Get detailed check information:**
+
+   ```bash
+   gh pr checks [pr-number] --json name,state,url
+   ```
+
+   **Expected JSON structure:**
+   ```json
+   [
+     {
+       "name": "CI / Test",
+       "state": "SUCCESS",
+       "url": "https://github.com/..."
+     },
+     {
+       "name": "CI / Lint",
+       "state": "FAILURE",
+       "url": "https://github.com/..."
+     }
+   ]
+   ```
+
+   **Note:** The `state` field can be: `SUCCESS`, `FAILURE`, `PENDING`, `ERROR`, etc.
+
+3. **Identify failed checks:**
+
+   - Filter for `"state": "FAILURE"` or `"state": "ERROR"`
+   - Note check names and URLs
+   - Check if checks are required for merge
+
+4. **Check required checks:**
+
+   ```bash
+   gh pr view [pr-number] --json mergeable,mergeStateStatus
+   ```
+
+   **Expected:**
+   - `mergeable`: `true` (if all required checks pass)
+   - `mergeStateStatus`: `CLEAN` (if all checks pass)
+
+**CI/CD Status Validation:**
+
+- [ ] All GitHub Actions checks passing
+  - Verify: `gh pr checks [pr-number]` shows all ✅
+  - Expected: No ❌ checks
+- [ ] No failed CI/CD jobs
+  - Verify: All workflow runs completed successfully
+  - Expected: No failed workflows
+- [ ] Required checks passing
+  - Verify: `mergeable: true` and `mergeStateStatus: CLEAN`
+  - Expected: PR is mergeable
+
+**If checks are failing:**
+
+**Warning (Lenient Approach):**
+
+- ⚠️ **Warning:** Some CI/CD checks are failing
+- ⚠️ **Recommendation:** Address failing checks before merge
+- ⚠️ **Note:** This is a warning, not a blocker - validation can continue
+- Document the warning in the summary report
+- List failed checks and their URLs
+- Suggest investigating and fixing failures
+
+**Action Items (if checks failing):**
+
+- [ ] Review failed check logs (use URLs from check output)
+- [ ] Identify root cause of failures
+- [ ] Fix issues causing failures
+- [ ] Push fixes to PR branch
+- [ ] Wait for checks to re-run
+- [ ] Verify checks pass before merge
+
+**Common CI/CD Check Types:**
+
+- **Test Suite:** Unit tests, integration tests, test coverage
+- **Linting:** Code style, formatting, static analysis
+- **Build:** Compilation, build verification
+- **Security:** Security scanning, dependency checks
+- **Documentation:** Documentation validation, link checking
+
+**Checklist:**
+
+- [ ] GitHub Actions status checked
+- [ ] All checks passing (or warnings documented)
+- [ ] Failed checks identified (if any)
+- [ ] Check URLs documented (if failures)
+- [ ] Ready to proceed with validation (or blocked by failures)
+
+---
+
 ### 1a. Restore Unrelated Files (Cursor IDE Bug Fix)
 
 **Issue:** Cursor IDE may modify unrelated files when opening them. These should be restored before proceeding.
@@ -740,6 +853,18 @@ Verify with health check (project-specific):
 - Ensure all dependencies installed
 - Document failures and fix before proceeding
 
+### Issue: GitHub Actions Checks Failing
+
+**Solution:**
+
+- Review failed check logs using URLs from `gh pr checks` output
+- Identify root cause (test failures, lint errors, build issues)
+- Fix issues locally and verify
+- Push fixes to PR branch
+- Wait for checks to re-run
+- Verify all checks pass before merge
+- **Note:** Some checks may be flaky - re-run if needed
+
 ---
 
 ## Checklist Summary
@@ -747,6 +872,7 @@ Verify with health check (project-specific):
 **Before running command:**
 
 - [ ] PR is open and accessible
+- [ ] GitHub Actions checks reviewed (NEW)
 - [ ] Backend server is running (if applicable)
 - [ ] Manual testing guide exists (or will be created)
 - [ ] dev-toolkit is available (optional, for Sourcery review)
@@ -754,6 +880,8 @@ Verify with health check (project-specific):
 
 **During execution:**
 
+- [ ] GitHub Actions/CI-CD status checked (NEW)
+- [ ] Failed checks identified and documented (if any)
 - [ ] Status documents validated (NEW)
 - [ ] Status warnings documented (if status outdated)
 - [ ] Manual testing guide updated with scenarios (MANDATORY)
