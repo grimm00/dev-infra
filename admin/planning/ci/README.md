@@ -34,7 +34,7 @@ This directory contains planning documentation for CI/CD improvements, workflows
   - Phase 1 complete: Non-interactive mode added (PR #27)
   - Phase 2 complete: Template validation test suite (PR #29)
   - Fixes: PR #28, PR #30
-- **[CI/CD Failure Investigation](ci-cd-failure-investigation/improvement-plan.md)** - Investigate PR #30 CI/CD failures (🔴 Not Started, 🔴 High Priority)
+- **[CI/CD Failure Investigation](ci-cd-failure-investigation/README.md)** - Investigate PR #30 CI/CD failures (🔴 Not Started, 🔴 High Priority)
 - **[Test Suite Maintenance](test-suite-maintenance/improvement-plan.md)** - Centralize test setup/teardown (🔴 Not Started, 🟡 Medium Priority)
 - **[Command Testing Automation](command-testing-automation/README.md)** - Automated testing for cursor commands (🔴 Not Started)
 - **[Documentation Validation](documentation-validation/README.md)** - Documentation validation process for docs-only PRs (🔴 Not Started)
