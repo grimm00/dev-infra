@@ -10,13 +10,20 @@ Conduct structured research following standardized workflow. Creates research do
 
 This command supports multiple project organization patterns:
 
-1. **Feature-Specific Structure (default):**
-   - Research: `docs/maintainers/research/[topic]/`
-   - Requirements: `docs/maintainers/research/[topic]/requirements.md`
+1. **Dev-Infra Structure (default):**
+   - Research: `admin/research/[topic]/`
+   - Requirements: `admin/research/[topic]/requirements.md`
+   - Explorations: `admin/explorations/[topic]/`
 
-2. **Project-Wide Structure:**
+2. **Template Structure (for generated projects):**
    - Research: `docs/maintainers/research/[topic]/`
    - Requirements: `docs/maintainers/research/[topic]/requirements.md`
+   - Explorations: `docs/maintainers/planning/explorations/[topic]/`
+
+3. **Project-Wide Structure:**
+   - Research: `docs/maintainers/research/[topic]/`
+   - Requirements: `docs/maintainers/research/[topic]/requirements.md`
+   - Explorations: `docs/maintainers/planning/explorations/[topic]/`
 
 **Topic Detection:**
 - Use `--topic` option if provided
@@ -74,7 +81,8 @@ This command supports multiple project organization patterns:
 **Determine input source:**
 
 1. **From Exploration (`--from-explore`):**
-   - Read `docs/maintainers/planning/explorations/[explore-topic]/research-topics.md`
+   - **Dev-Infra:** Read `admin/explorations/[explore-topic]/research-topics.md`
+   - **Template Structure:** Read `docs/maintainers/planning/explorations/[explore-topic]/research-topics.md`
    - Extract research topics/questions
    - Use explore-topic as research topic name (or use --topic to override)
 
@@ -98,7 +106,16 @@ This command supports multiple project organization patterns:
 
 ### 2. Create Research Hub
 
-**Location:** `docs/maintainers/research/[topic]/`
+**Location Detection:**
+
+- **Dev-Infra:** `admin/research/[topic]/`
+- **Template Structure:** `docs/maintainers/research/[topic]/`
+- **Project-Wide:** `docs/maintainers/research/[topic]/`
+
+**Auto-detection:**
+- Check if `admin/research/` exists → use dev-infra structure
+- Check if `docs/maintainers/research/` exists → use template structure
+- Otherwise → use project-wide structure
 
 **Directory structure:**
 
@@ -490,7 +507,10 @@ This document captures requirements discovered during research on [topic].
 
 **Update research hub:**
 
-**File:** `docs/maintainers/research/README.md` (create if doesn't exist)
+**File location (auto-detected):**
+- **Dev-Infra:** `admin/research/README.md`
+- **Template Structure:** `docs/maintainers/research/README.md`
+- **Project-Wide:** `docs/maintainers/research/README.md`
 
 ```markdown
 # Research Hub
@@ -617,8 +637,10 @@ This directory contains research documents supporting exploration and decision-m
 
 **Research Structure:**
 
-- Research: `docs/maintainers/research/[topic]/`
-- Requirements: `docs/maintainers/research/[topic]/requirements.md`
+- **Dev-Infra:** `admin/research/[topic]/`
+- **Template Structure:** `docs/maintainers/research/[topic]/`
+- **Project-Wide:** `docs/maintainers/research/[topic]/`
+- Requirements: `[research-path]/[topic]/requirements.md`
 
 **Related Commands:**
 
