@@ -9,13 +9,12 @@
 
 ## 📋 Quick Links
 
+### Feature-Specific Learnings
+
+- **[Templates Enhancement Learnings](templates-enhancement/README.md)** - Phase learnings from Templates Enhancement feature (5 phases, ✅ Complete)
+
 ### Learning Documents
 
-- **[Templates Enhancement Phase 5](templates-enhancement-phase-5-learnings.md)** - Learnings from Phase 5: Workflow Guides and Examples (✅ Complete)
-- **[Templates Enhancement Phase 4](templates-enhancement-phase-4-learnings.md)** - Learnings from Phase 4: Requirements Template (✅ Complete)
-- **[Templates Enhancement Phase 3](templates-enhancement-phase-3-learnings.md)** - Learnings from Phase 3: Exploration/Research/Decision Workflows (✅ Complete)
-- **[Templates Enhancement Phase 2](templates-enhancement-phase-2-learnings.md)** - Learnings from Phase 2: CI/CD Improvement Structure (✅ Complete)
-- **[Templates Enhancement Phase 1](templates-enhancement-phase-1-learnings.md)** - Learnings from Phase 1: Commands Integration (✅ Complete)
 - **[Command Adaptation Template Learnings](command-adaptation-template-learnings.md)** - Learnings from creating the Command Adaptation Template feature
 - **[Cursor Commands Integration Learnings](cursor-commands-integration-learnings.md)** - Learnings from adapting 14 workflow automation commands
 - **[Status Tracking Automation Learnings](status-tracking-automation-learnings.md)** - Learnings from implementing Status Tracking Automation CI/CD improvement
@@ -30,11 +29,16 @@ This directory contains learnings from dev-infra development that can inform:
 - Best practices documentation
 - Workflow automation patterns
 
+**Organization:**
+- Phase learnings grouped by feature: `[feature-name]/phase-N-learnings.md`
+- General learnings in root: `[topic]-learnings.md`
+
 ---
 
 ## 📊 Summary
 
 **Total Learning Documents:** 8  
+**Feature-Specific Learnings:** 1 feature (5 phases)  
 **Status:** ✅ Active
 
 ---

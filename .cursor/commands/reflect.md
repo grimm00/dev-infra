@@ -72,7 +72,8 @@ This command supports multiple project organization patterns:
 - `--scope SCOPE` - Focus area (phase, workflow, code-quality, documentation, technical-debt)
 - `--feature [name]` - Specify feature name (overrides auto-detection)
 - `--include-fixes` - Include deferred fixes in analysis
-- `--include-learnings` - Reference phase learnings
+- `--include-learnings` - Reference phase learnings (single phase or latest)
+- `--include-learnings all` - Include learnings from all phases, identify common patterns
 - `--actionable-only` - Only show actionable suggestions
 
 ---
@@ -100,15 +101,37 @@ This command supports multiple project organization patterns:
    - Review next steps
 
 4. **Recent learnings:**
-   - Check latest phase learnings document (if exists)
+   - If `--include-learnings` (single): Check latest phase learnings document (if exists)
+   - If `--include-learnings all`: Read all phase learnings for feature (if feature detected)
    - Review improvement documents (if exists)
+
+**When `--include-learnings all` is used:**
+
+1. **Detect feature name:**
+   - From `--feature` flag (if provided)
+   - From git branch name
+   - From current directory context
+   - From feature status document
+
+2. **Find all phase learnings:**
+   - Check `admin/planning/opportunities/internal/[project]/learnings/[feature-name]/` (feature-grouped)
+   - Check `admin/planning/opportunities/internal/[project]/learnings/` for `[feature-name]-phase-*-learnings.md` (legacy)
+   - Read all phase learnings documents
+
+3. **Identify common patterns:**
+   - Group similar "What Worked Well" observations
+   - Group similar "What Needs Improvement" observations
+   - Group similar "Unexpected Discoveries"
+   - Identify recurring issues across phases
+   - Note patterns that appear in multiple phases
 
 **Checklist:**
 
 - [ ] Recent commits analyzed
 - [ ] Recent PRs reviewed
 - [ ] Current phase/feature status checked
-- [ ] Learnings reviewed (if available)
+- [ ] Learnings reviewed (single or all phases, if requested)
+- [ ] Common patterns identified (if `--include-learnings all`)
 
 ---
 
@@ -282,7 +305,7 @@ This command supports multiple project organization patterns:
 
 ---
 
-### 6. Generate Reflection Report
+### 7. Generate Reflection Report
 
 **IMPORTANT:** Reflection files must be saved to the `reflections/` subdirectory:
 
@@ -444,6 +467,75 @@ This command supports multiple project organization patterns:
 
 ---
 
+## 🔍 Cross-Phase Learnings (if --include-learnings all)
+
+**When `--include-learnings all` is used, include this section:**
+
+### Recurring Successes
+
+**Patterns that worked well across multiple phases:**
+
+#### [Pattern Name]
+
+**Phases:** Phase 1, Phase 2, Phase 4  
+**Frequency:** 3/5 phases
+
+**Observation:**
+[Common observation across phases]
+
+**Why it's valuable:**
+[Why this pattern is important]
+
+**Recommendation:**
+[How to leverage this pattern]
+
+---
+
+### Persistent Issues
+
+**Issues mentioned in multiple phases:**
+
+#### [Issue Name]
+
+**Phases:** Phase 2, Phase 4, Phase 5  
+**Frequency:** 3/5 phases  
+**Priority:** 🔴 High (recurring issue)
+
+**Issue:**
+[Common issue description]
+
+**Impact:**
+[How this affects development]
+
+**Suggested Solution:**
+[How to address this recurring issue]
+
+**Related Phases:**
+- Phase 2: [Brief note]
+- Phase 4: [Brief note]
+- Phase 5: [Brief note]
+
+---
+
+### Emerging Patterns
+
+**Patterns that become clearer across phases:**
+
+#### [Pattern Name]
+
+**Evolution:**
+- Phase 1: [Initial observation]
+- Phase 3: [Refinement]
+- Phase 5: [Clear pattern]
+
+**Insight:**
+[What this pattern reveals]
+
+**Action:**
+[What to do with this insight]
+
+---
+
 **Last Updated:** [Date]  
 **Next Reflection:** [Suggested date]
 ```
@@ -485,6 +577,24 @@ This command supports multiple project organization patterns:
 - What could improve
 - Suggestions for next phase
 - Reference to phase learnings (if available)
+
+---
+
+### Scenario 1b: Cross-Phase Reflection
+
+**Situation:** Completed multiple phases, want to identify common patterns
+
+**Action:**
+```bash
+/reflect --feature templates-enhancement --include-learnings all
+```
+
+**Output:**
+- Analysis of all phases
+- Common patterns identified
+- Recurring successes highlighted
+- Persistent issues prioritized
+- Cross-phase insights documented
 
 ---
 
@@ -582,6 +692,8 @@ This command supports multiple project organization patterns:
 - Feature-specific: `docs/maintainers/planning/features/[feature-name]/learnings/` (if exists)
 - Project-wide: `docs/maintainers/planning/notes/learnings/` (if exists)
 - Opportunities: `docs/maintainers/planning/opportunities/internal/` (if exists)
+- Feature-grouped phase learnings: `admin/planning/opportunities/internal/[project]/learnings/[feature-name]/phase-N-learnings.md` (new format)
+- Legacy phase learnings: `admin/planning/opportunities/internal/[project]/learnings/[feature-name]-phase-N-learnings.md` (legacy format)
 
 **Related Commands:**
 
