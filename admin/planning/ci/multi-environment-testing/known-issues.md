@@ -45,6 +45,11 @@
   - Workflow Run: [20036474596](https://github.com/grimm00/dev-infra/actions/runs/20036474596)
   - Status: Local tests passing (58/58), CI failure documented
   - Failure Document: `admin/planning/ci/multi-environment-testing/fix/pr30-failures.md`
+- PR #31: Empty directory fix (2025-12-08)
+  - Workflow Run: [20041642506](https://github.com/grimm00/dev-infra/actions/runs/20041642506)
+  - Status: ✅ All CI checks passing (full-tests-ubuntu, full-tests-macos)
+  - Fix: Added `.gitkeep` files to empty stage directories
+  - Fix Document: `admin/planning/ci/multi-environment-testing/fix/pr30-fix-plan.md`
 
 ---
 
