@@ -545,7 +545,6 @@ Non-Interactive Mode:
 Exit Codes:
   0  Success
   1  Validation error or general error
-  2  Invalid arguments or usage error
 EOF
 }
 
