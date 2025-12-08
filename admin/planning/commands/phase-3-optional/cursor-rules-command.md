@@ -170,3 +170,4 @@ The `/cursor-rules` command manages cursor rules files (`.mdc` files) for AI ass
 **Status:** 🟠 In Progress  
 **Next:** Test command in dev-infra project, then integrate into templates
 
+
