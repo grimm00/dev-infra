@@ -79,8 +79,50 @@ alwaysApply: true
    - **Note:** Missing reviews are acceptable - workflow continues without review
 5. **Priority Assessment** - Fill out priority matrix in Sourcery review file (if review available)
 6. **Fix Planning** - Use `/fix-plan` to create fix plans (when applicable)
-7. **User Approval** - Only merge after user explicitly approves
-8. **Post-Merge** - Use `/post-pr` to update documentation (when available)
+7. **Status Validation** - Verify status updates are included in PR (see Status Check Checklist below)
+   - **Note:** Status updates are mandatory but validation is lenient (warnings, not blockers) to start
+8. **User Approval** - Only merge after user explicitly approves
+9. **Post-Merge** - Use `/post-pr` to update documentation (when available)
+   - **Note:** `/post-pr` automatically updates phase and feature status after PR merge
+
+### Status Check Checklist
+
+**Before PR Approval, verify status updates:**
+
+- [ ] Phase document status is current
+  - Location: `docs/maintainers/planning/features/[feature-name]/phase-N.md` or `docs/maintainers/planning/phases/phase-N.md`
+  - Verify: Status reflects actual completion state
+  - Expected: `**Status:** ✅ Complete` (if phase is complete)
+- [ ] Feature status document is current (if applicable)
+  - Location: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+  - Verify: Phase marked appropriately, progress updated
+- [ ] Status updates are included in PR commits
+  - Verify: Status document changes are committed
+  - Verify: Status updates match actual work completed
+- [ ] Progress tracking is accurate
+  - Verify: Progress percentages reflect actual completion
+  - Verify: Task checkboxes match completed work
+
+**Status Update Requirements:**
+
+- **Mandatory:** Status updates are required for PR approval
+- **Lenient Approach:** Validation uses warnings, not blockers (to start)
+- **During Work:** Status should be updated during work (per `/task-phase` workflow)
+- **Before PR:** Status must be current before PR creation (per `/pr` command validation)
+- **After Merge:** Status automatically updated by `/post-pr` command
+
+**If Status Not Current:**
+
+- ⚠️ **Warning:** Status documents may be outdated
+- ⚠️ **Recommendation:** Update status documents before PR approval
+- ⚠️ **Note:** This is a warning, not a blocker - PR can proceed but status should be updated
+- Document the warning in PR review
+- Suggest updating status documents
+
+**See Also:**
+- [Status Update Workflow](../../docs/STATUS-UPDATE-WORKFLOW.md) - Complete status update guide
+- [Status Update Checklist](../../docs/STATUS-UPDATE-CHECKLIST.md) - Checklist for status updates
+- [Status Validation](../commands/pr.md#status-validation) - Status validation in `/pr` command
 
 ### Priority Matrix Assessment
 
