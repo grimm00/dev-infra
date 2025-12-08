@@ -267,6 +267,119 @@ This document evaluates automation options for status tracking, including GitHub
 
 **Recommendation:** ⚠️ **Not Recommended** - Commands already provide this functionality. Adding scripts would duplicate effort and add maintenance burden.
 
+**Detailed Custom Script Design (For Reference):**
+
+**Script Approach:**
+
+1. **Status Update Script**
+   ```bash
+   # scripts/update-status.sh
+   # Usage: ./scripts/update-status.sh --phase 3 --feature my-feature
+   
+   # Detect phase and feature
+   # Read phase document
+   # Update status field
+   # Update feature status document
+   # Commit changes
+   ```
+
+2. **Status Validation Script**
+   ```bash
+   # scripts/validate-status.sh
+   # Usage: ./scripts/validate-status.sh --phase 3
+   
+   # Check phase document status
+   # Check feature status document
+   # Report warnings if outdated
+   ```
+
+**Script Integration:**
+- Can be called from commands
+- Can be called from CI workflows
+- Can be called manually
+
+**Script Maintenance:**
+- Requires shell script maintenance
+- Requires testing for edge cases
+- Requires documentation updates
+- Requires version control
+
+**Script Reliability:**
+- Depends on shell environment
+- May fail on different systems
+- Requires error handling
+- Requires input validation
+
+**Script Limitations:**
+- Duplicates command functionality
+- May not be used consistently
+- Requires separate documentation
+- Adds tooling complexity
+
+**Existing Tools Research:**
+
+**Status Tracking Tools:**
+- GitHub Projects: Not suitable for markdown-based status
+- Jira: Over-engineered for this use case
+- Linear: Not integrated with markdown documents
+- Asana: Not integrated with repository
+
+**Project Management Tools:**
+- GitHub Issues: Not suitable for phase tracking
+- GitHub Milestones: Not suitable for feature phases
+- GitHub Projects: Not integrated with markdown
+
+**Automation Platforms:**
+- Zapier: Over-engineered, requires external service
+- GitHub Actions: Already evaluated (not recommended)
+- Custom webhooks: Already evaluated (not recommended)
+
+**Tool Capabilities and Limitations:**
+- Most tools don't integrate with markdown documents
+- Most tools require external services
+- Most tools add complexity without benefit
+- Current command-based approach is more suitable
+
+**Command Enhancement Evaluation:**
+
+**Current Commands:**
+- `/task-phase`: Phase task implementation
+- `/pr`: PR creation with validation
+- `/post-pr`: Post-merge status updates (already automated)
+
+**Enhancement Approach:**
+- Incremental enhancements to existing commands
+- Add auto-status features gradually
+- Maintain backward compatibility
+- Test enhancements with real usage
+
+**Enhancement Maintenance:**
+- Low maintenance (commands already maintained)
+- Incremental updates possible
+- Can be tested incrementally
+- Can be rolled back if needed
+
+**Enhancement Reliability:**
+- High reliability (commands already work)
+- Builds on existing infrastructure
+- Uses existing error handling
+- Uses existing feature detection
+
+**Enhancement Integration:**
+- Integrates with existing workflow
+- Uses existing command infrastructure
+- Maintains developer control
+- Can be optional (opt-in)
+
+**Tool Comparison:**
+
+| Tool Type | Complexity | Maintenance | Reliability | Integration | Recommendation |
+|-----------|-----------|-------------|-------------|-------------|----------------|
+| GitHub Projects | Low | Low | High | Low | ❌ Not suitable |
+| Jira | High | High | High | Low | ❌ Over-engineered |
+| Custom Scripts | Medium | Medium | Medium | Medium | ⚠️ Duplicates commands |
+| Command Enhancements | Low-Medium | Low | High | High | ✅ **Recommended** |
+
 ---
 
 ### Option 5: Webhook-Based Automation
