@@ -20,7 +20,7 @@ This document captures detailed information about failed jobs in PR #30. The fai
 **Status:** ❌ Failed  
 **Platform:** ubuntu-latest (Docker container)  
 **Workflow:** `.github/workflows/test.yml`  
-**Workflow Run:** [To be added from workflow run]  
+**Workflow Run:** [20036474596](https://github.com/grimm00/dev-infra/actions/runs/20036474596)  
 **Created:** 2025-12-08
 
 **Error Details:**

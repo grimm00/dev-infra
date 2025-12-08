@@ -42,8 +42,9 @@
 
 **PRs Affected:**
 - PR #30: Documented failure (2025-12-08)
-  - Workflow Run: [To be added]
-  - Status: Local tests passing, CI failure documented
+  - Workflow Run: [20036474596](https://github.com/grimm00/dev-infra/actions/runs/20036474596)
+  - Status: Local tests passing (58/58), CI failure documented
+  - Failure Document: `admin/planning/ci/multi-environment-testing/fix/pr30-failures.md`
 
 ---
 
