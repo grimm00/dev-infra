@@ -11,6 +11,9 @@
 
 ## 📋 Quick Links
 
+- **[Transition Plan](transition-plan.md)** - Detailed transition plan with implementation steps
+- **[Phase 1: Add Non-Interactive Mode](phase-1.md)** - Add non-interactive mode to template generation script
+- **[Phase 2: Create Template Validation Test Suite](phase-2.md)** - Create automated test suite
 - **[Improvement Plan](improvement-plan.md)** - Detailed improvement plan
 
 ---
@@ -40,6 +43,11 @@ This CI/CD improvement addresses the recurring issue of template generation test
 **Priority:** 🔴 High  
 **Effort:** Moderate (2-4 hours for non-interactive mode, 3-5 hours for test suite)  
 **Source:** Templates Enhancement reflection (cross-phase learning)
+
+**Implementation:**
+- Use `/task-improvement` command to implement phases
+- Phase 1: Add Non-Interactive Mode (prerequisite for Phase 2)
+- Phase 2: Create Template Validation Test Suite (requires Phase 1)
 
 ---
 
