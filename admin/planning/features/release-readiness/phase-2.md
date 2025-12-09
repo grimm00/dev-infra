@@ -14,6 +14,7 @@
 Implement a phased automation approach for release readiness checks. This phase focuses on creating the scripts and tools to automatically validate as many readiness criteria as possible, reducing manual effort and error.
 
 **Success Definition:**
+
 - An automation script (`scripts/check-release-readiness.sh`) exists
 - High-value criteria (tests, git status) are checked automatically
 - Manual checks have automated data gathering where possible
@@ -85,4 +86,3 @@ Implement a phased automation approach for release readiness checks. This phase 
 - [Feature Plan](../feature-plan.md)
 - [Phase 1: Criteria Standardization](../phase-1.md)
 - [Research: Automation Opportunities](../../../../research/release-readiness/research-automation-opportunities.md)
-
