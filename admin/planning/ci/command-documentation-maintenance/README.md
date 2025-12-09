@@ -65,6 +65,33 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📊 Recent Updates
 
+### 2025-12-09: PR Branch Detection (HIGH)
+
+**Branch:** `docs/pr-branch-detection`  
+**Status:** ✅ Applied to develop  
+**Commands Affected:** `pr`
+
+**Changes:**
+- **NEW:** Added "Pre-Command Branch Validation (BLOCKING)" section
+- Branch pattern detection for phase/fix/release PRs
+- Worktree awareness - detects if branch is in different worktree
+- Clear resolution guidance for branch mismatches
+- Auto-detection logic for expected branch patterns
+
+**Impact:**
+- Prevents PR creation from wrong branch/location
+- Guides user to correct worktree when applicable
+- Provides actionable resolution steps
+
+**Root Cause:**
+- `/pr --phase 3` failed because on `develop` not feature branch
+- Feature branch was in worktree, not main workspace
+- No detection or guidance to correct location
+
+**Details:** [2025-12-09-pr-branch-detection.md](updates/2025-12-09-pr-branch-detection.md)
+
+---
+
 ### 2025-12-09: Task Phase Branch Validation (HIGH)
 
 **Branch:** `docs/task-phase-branch-validation`  
@@ -138,7 +165,7 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 3  
+**Total Updates:** 4  
 **Commands Maintained:** 4+  
 **Last Updated:** 2025-12-09
 
