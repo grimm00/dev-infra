@@ -56,11 +56,11 @@ Implement a phased automation approach for release readiness checks. This phase 
 
 ### 4. Implement Data Gathering (TDD)
 
-- [ ] **RED:** Write tests for gathering:
+- [x] **RED:** Write tests for gathering:
   - Recent merged PRs
   - Open blocking issues
-- [ ] **GREEN:** Implement data gathering functions
-- [ ] **REFACTOR:** Format output for the assessment report
+- [x] **GREEN:** Implement data gathering functions
+- [x] **REFACTOR:** Format output for the assessment report
 
 ---
 
