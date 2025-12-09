@@ -122,6 +122,84 @@ print_status() {
     fi
 }
 
+# Check release branch existence
+check_release_branch() {
+    local version="$1"
+    local release_branch="release/$version"
+    
+    log "Checking for release branch: $release_branch"
+    
+    if git show-ref --verify --quiet "refs/heads/$release_branch" || \
+       git show-ref --verify --quiet "refs/remotes/origin/$release_branch"; then
+        print_status "Release Branch Exists" true "Found: $release_branch"
+        add_result "Release Branch" true
+        return 0
+    else
+        print_status "Release Branch Exists" false "Not found: $release_branch"
+        add_result "Release Branch" false
+        return 1
+    fi
+}
+
+# Check version consistency
+check_version_consistency() {
+    local version="$1"
+    local version_number="${version#v}"  # Remove 'v' prefix if present
+    
+    log "Checking version consistency for: $version"
+    
+    # Check if version format is valid (semantic versioning)
+    if [[ "$version_number" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9-]+)?$ ]]; then
+        print_status "Version Format" true "Valid semantic version: $version"
+        add_result "Version Format" true
+        return 0
+    else
+        print_status "Version Format" false "Invalid version format: $version"
+        add_result "Version Format" false
+        return 1
+    fi
+}
+
+# Check CI/CD test status (if gh CLI is available)
+check_ci_test_status() {
+    local version="$1"
+    
+    log "Checking CI/CD test status"
+    
+    # Check if gh CLI is available
+    if ! command -v gh &> /dev/null; then
+        print_status "CI/CD Test Status" false "gh CLI not available (skipping)"
+        add_result "CI/CD Test Status" false
+        return 1
+    fi
+    
+    # Check if authenticated
+    if ! gh auth status &> /dev/null; then
+        print_status "CI/CD Test Status" false "gh CLI not authenticated (skipping)"
+        add_result "CI/CD Test Status" false
+        return 1
+    fi
+    
+    # Try to get latest workflow run status
+    # This is a simplified check - in practice, you'd want to check specific workflows
+    local workflow_status
+    workflow_status=$(gh run list --limit 1 --json conclusion,status --jq '.[0].conclusion // "unknown"' 2>/dev/null || echo "unknown")
+    
+    if [[ "$workflow_status" == "success" ]]; then
+        print_status "CI/CD Test Status" true "Latest workflow run: success"
+        add_result "CI/CD Test Status" true
+        return 0
+    elif [[ "$workflow_status" == "failure" ]]; then
+        print_status "CI/CD Test Status" false "Latest workflow run: failure"
+        add_result "CI/CD Test Status" false
+        return 1
+    else
+        print_status "CI/CD Test Status" false "Could not determine workflow status"
+        add_result "CI/CD Test Status" false
+        return 1
+    fi
+}
+
 # Main check function
 main() {
     log "Checking release readiness for $VERSION..."
@@ -132,8 +210,14 @@ main() {
     echo "=================================="
     echo ""
     
-    # Placeholder checks (will be implemented in subsequent tasks)
     echo "Running automated checks..."
+    echo ""
+    
+    # Task 2: Fully Automated Checks
+    check_release_branch "$VERSION"
+    check_version_consistency "$VERSION"
+    check_ci_test_status "$VERSION"
+    
     echo ""
     
     # Summary
