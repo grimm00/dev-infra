@@ -62,6 +62,11 @@
   - Note: Local tests passing (26/26), CI-specific git issue
   - Issue: Git branch creation fails in CI (status 128) - same as PR #32
   - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
+- PR #36: Quick Wins Cross-PR Batch (2025-12-09)
+  - Workflow Run: [20079363685](https://github.com/grimm00/dev-infra/actions/runs/20079363685)
+  - Status: Test failure - same CI-specific git issue
+  - Note: Local tests passing (26/26 check-release-readiness.bats)
+  - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
 
 ---
 
