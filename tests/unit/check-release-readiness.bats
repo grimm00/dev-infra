@@ -2,7 +2,7 @@
 
 # Tests for scripts/check-release-readiness.sh
 
-load '../../helpers/helpers.bash'
+load '../helpers/helpers.bash'
 
 setup() {
     setup_test_env
