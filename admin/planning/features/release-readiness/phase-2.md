@@ -48,11 +48,11 @@ Implement a phased automation approach for release readiness checks. This phase 
 
 ### 3. Implement Documentation Checks (TDD)
 
-- [ ] **RED:** Write tests for detecting:
+- [x] **RED:** Write tests for detecting:
   - CHANGELOG update (current version header)
   - Release notes file existence
-- [ ] **GREEN:** Implement file parsing checks
-- [ ] **REFACTOR:** Improve regex patterns
+- [x] **GREEN:** Implement file parsing checks
+- [x] **REFACTOR:** Improve regex patterns
 
 ### 4. Implement Data Gathering (TDD)
 
