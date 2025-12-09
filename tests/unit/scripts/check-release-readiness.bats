@@ -2,11 +2,15 @@
 
 # Tests for scripts/check-release-readiness.sh
 
+load '../../helpers/helpers.bash'
+
 setup() {
-    # Get the directory of this test file
-    TEST_DIR="$(cd "$(dirname "$BATS_TEST_FILENAME")" && pwd)"
-    PROJECT_ROOT="$(cd "$TEST_DIR/../../.." && pwd)"
+    setup_test_env
     SCRIPT="$PROJECT_ROOT/scripts/check-release-readiness.sh"
+}
+
+teardown() {
+    cleanup_test_env
 }
 
 @test "check-release-readiness.sh exists and is executable" {
