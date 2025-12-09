@@ -65,6 +65,35 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📊 Recent Updates
 
+### 2025-12-09: PR Validation Conditional Manual Testing (MEDIUM)
+
+**Branch:** `docs/pr-validation-conditional-manual-testing`  
+**Status:** ✅ Applied to develop  
+**Commands Affected:** `pr-validation`
+
+**Changes:**
+- **NEW:** Added "Step 1e: Determine Manual Testing Applicability"
+- Manual testing now **conditional** based on PR type/branch
+- Auto-detect: `docs/*`, `chore/*`, `ci/*` PRs skip manual testing
+- Auto-detect: `feat/*`, `fix/*` PRs require manual testing
+- File change analysis for edge cases
+- Added `--force-manual-testing` override flag
+
+**Impact:**
+- `docs/chore/ci` PRs skip manual testing automatically
+- `feat/fix` PRs require manual testing (as before)
+- Reduces unnecessary manual testing documentation
+- User informed of determination with override option
+
+**Root Cause:**
+- PR #35 validation revealed manual testing was mandatory for all PRs
+- Not all PRs have user-facing functionality to test
+- Creating empty manual testing guides is wasteful
+
+**Details:** [2025-12-09-pr-validation-conditional-manual-testing.md](updates/2025-12-09-pr-validation-conditional-manual-testing.md)
+
+---
+
 ### 2025-12-09: PR Branch Detection (HIGH)
 
 **Branch:** `docs/pr-branch-detection`  
@@ -165,8 +194,8 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 4  
-**Commands Maintained:** 4+  
+**Total Updates:** 5  
+**Commands Maintained:** 5+  
 **Last Updated:** 2025-12-09
 
 ---

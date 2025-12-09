@@ -70,8 +70,9 @@ This command supports multiple project organization patterns, matching `/pr` and
 **Options:**
 
 - `--feature [name]` - Specify feature name (overrides auto-detection)
-- `--skip-manual-testing` - Skip manual testing (not recommended)
+- `--skip-manual-testing` - Skip manual testing (auto-detected for non-feature PRs)
 - `--skip-review` - Skip Sourcery review (if review not available)
+- `--force-manual-testing` - Force manual testing even for non-feature PRs
 
 ---
 
@@ -445,7 +446,93 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ---
 
-### 2. Update Manual Testing Guide (MANDATORY)
+### 1e. Determine Manual Testing Applicability (NEW)
+
+**Purpose:** Automatically determine if this PR requires manual testing based on PR type, branch name, and file changes. Not all PRs need manual testing scenarios.
+
+**When manual testing IS required:**
+
+| PR Type | Branch Pattern | Requires Manual Testing |
+|---------|----------------|------------------------|
+| Feature (new functionality) | `feat/*` | ✅ Yes - new user-facing features need scenarios |
+| Feature (phase work) | `feat/*-phase-*` | ✅ Yes - phase work adds functionality |
+| Fix (user-facing) | `fix/*` with UI/API changes | ✅ Yes - need regression scenarios |
+| Script/Command changes | Any with `scripts/` or `.cursor/commands/` changes | ✅ Yes - CLI functionality needs testing |
+
+**When manual testing is NOT required:**
+
+| PR Type | Branch Pattern | Requires Manual Testing |
+|---------|----------------|------------------------|
+| Documentation only | `docs/*` | ❌ No - no user-facing changes |
+| Chore/maintenance | `chore/*` | ❌ No - internal changes only |
+| CI/CD changes | `ci/*` | ❌ No - infrastructure only |
+| Fix (internal only) | `fix/*` with no UI/API changes | ❌ No - covered by unit tests |
+| Refactoring | `refactor/*` | ❌ No - no new functionality |
+| Template-only changes | Changes only to `templates/` docs | ⚠️ Maybe - depends on scope |
+
+**Detection Process:**
+
+1. **Extract branch type from PR head branch:**
+   ```bash
+   gh pr view [pr-number] --json headRefName --jq '.headRefName'
+   ```
+   
+2. **Identify branch type:**
+   - `feat/*` → Feature PR
+   - `fix/*` → Fix PR
+   - `docs/*` → Documentation PR
+   - `chore/*` → Chore PR
+   - `ci/*` → CI/CD PR
+   - `refactor/*` → Refactoring PR
+
+3. **For feature/fix PRs, analyze file changes:**
+   ```bash
+   gh pr diff [pr-number] --name-only
+   ```
+   
+   - Check if changes include: `scripts/`, `.cursor/commands/`, API files, UI files
+   - If only docs/templates changed → May skip manual testing
+
+4. **Make determination:**
+   - **Requires manual testing:** Proceed to Step 2
+   - **Does NOT require manual testing:** Skip to Step 4 (Sourcery Review)
+   - **Uncertain:** Ask user or default to requiring manual testing
+
+**Output:**
+
+```markdown
+### Manual Testing Applicability
+
+**PR Type:** [feat/fix/docs/chore/ci/refactor]
+**Branch:** [branch-name]
+**File Changes:** [summary of changed files]
+
+**Determination:** [✅ Required / ❌ Not Required / ⚠️ Uncertain]
+**Reason:** [explanation]
+
+[If not required]
+**Skipping manual testing:** No new user-facing functionality detected.
+**To override:** Use `--force-manual-testing` flag.
+```
+
+**Checklist:**
+
+- [ ] Branch type identified
+- [ ] File changes analyzed (if feat/fix)
+- [ ] Manual testing determination made
+- [ ] User informed of determination
+- [ ] Override option noted (if skipping)
+
+---
+
+### 2. Update Manual Testing Guide (CONDITIONAL)
+
+**Applicability:** This step is **conditional** based on Step 1e determination.
+
+- **If manual testing required:** Proceed with this step
+- **If manual testing NOT required:** Skip to Step 4 (Sourcery Review)
+- **If `--force-manual-testing` provided:** Proceed with this step regardless of determination
+- **If `--skip-manual-testing` provided:** Skip to Step 4 (Sourcery Review)
 
 **Detect feature name:**
 
@@ -461,7 +548,7 @@ gh pr view [pr-number] --json state,title,headRefName
 - Feature-specific: `docs/maintainers/planning/features/[feature-name]/manual-testing.md`
 - Project-wide: `docs/maintainers/planning/manual-testing.md` (if exists)
 
-**IMPORTANT:** This step is MANDATORY for all PRs. Always check and update the manual testing guide, even if scenarios already exist.
+**When this step applies:** Only for PRs with new user-facing functionality (determined in Step 1e).
 
 **Process:**
 
@@ -555,7 +642,12 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ---
 
-### 3. Run Manual Testing Scenarios
+### 3. Run Manual Testing Scenarios (CONDITIONAL)
+
+**Applicability:** This step is **conditional** - only runs if Step 2 was executed (manual testing is required).
+
+- **If manual testing required:** Proceed with this step
+- **If manual testing NOT required:** Skip to Step 4 (Sourcery Review)
 
 **Location:**
 
@@ -937,14 +1029,23 @@ Update PR description to include:
 ## PR Validation Complete
 
 **PR:** #[pr-number] - [PR Title]
+**PR Type:** [feat/fix/docs/chore/ci]
+**Branch:** [branch-name]
 
 ### Manual Testing
 
+[If manual testing was required:]
 - ✅ Scenarios tested: [N]
 - ✅ All scenarios passed
 - ✅ Checkboxes checked off for passing scenarios
 - ✅ Expected Result lines marked with ✅
 - ⚠️ Issues found: [None / List]
+
+[If manual testing was NOT required:]
+- ⏭️ Skipped - No new user-facing functionality
+- **PR Type:** [docs/chore/ci/refactor]
+- **Reason:** [explanation from Step 1e]
+- **To test manually:** Re-run with `--force-manual-testing`
 
 ### Code Review
 
@@ -1052,8 +1153,7 @@ Verify with health check (project-specific):
 - [ ] PR is open and accessible
 - [ ] GitHub Actions checks reviewed (NEW)
 - [ ] Known issues registry checked (NEW)
-- [ ] Backend server is running (if applicable)
-- [ ] Manual testing guide exists (or will be created)
+- [ ] Backend server is running (if applicable, for feat/fix PRs)
 - [ ] dev-toolkit is available (optional, for Sourcery review)
 - [ ] Status documents are current (checked during validation)
 
@@ -1066,10 +1166,14 @@ Verify with health check (project-specific):
 - [ ] Known issues updated with PR number (if match found)
 - [ ] Status documents validated (NEW)
 - [ ] Status warnings documented (if status outdated)
-- [ ] Manual testing guide updated with scenarios (MANDATORY)
-- [ ] All scenarios tested and passed
-- [ ] Checkboxes checked off (`- [ ]` → `- [x]`) for passing scenarios
-- [ ] Expected Result lines marked with ✅ for passing scenarios
+- [ ] **Manual testing applicability determined (NEW)**
+  - [ ] Branch type identified (feat/fix/docs/chore/ci)
+  - [ ] File changes analyzed
+  - [ ] Determination: Required / Not Required / Skipped
+- [ ] Manual testing guide updated with scenarios (IF REQUIRED)
+- [ ] All scenarios tested and passed (IF REQUIRED)
+- [ ] Checkboxes checked off (`- [ ]` → `- [x]`) for passing scenarios (IF REQUIRED)
+- [ ] Expected Result lines marked with ✅ for passing scenarios (IF REQUIRED)
 - [ ] Sourcery review completed (if available)
 - [ ] Priority matrix filled out (if review available)
 - [ ] Deferred tasks collection updated (NEW)
@@ -1142,6 +1246,6 @@ Verify with health check (project-specific):
 
 ---
 
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-09  
 **Status:** ✅ Active  
-**Next:** Use when PR is open to validate features, run reviews, and update documentation (supports feature-specific and project-wide structures, includes known issues checking)
+**Next:** Use when PR is open to validate features, run reviews, and update documentation (supports feature-specific and project-wide structures, includes known issues checking, conditional manual testing based on PR type)
