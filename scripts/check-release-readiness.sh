@@ -3,7 +3,7 @@
 # Release Readiness Check Script
 # Automates validation of release readiness criteria
 
-set -euo pipefail
+set -uo pipefail
 
 # Colors for output
 RED='\033[0;31m'
@@ -200,6 +200,51 @@ check_ci_test_status() {
     fi
 }
 
+# Check CHANGELOG for version entry
+check_changelog_entry() {
+    local version="$1"
+    local version_number="${version#v}"  # Remove 'v' prefix if present
+    local changelog_file="$PROJECT_ROOT/CHANGELOG.md"
+    
+    log "Checking CHANGELOG for version entry: $version"
+    
+    if [[ ! -f "$changelog_file" ]]; then
+        print_status "CHANGELOG Entry" false "CHANGELOG.md not found"
+        add_result "CHANGELOG Entry" false
+        return 1
+    fi
+    
+    # Check for version entry in CHANGELOG (format: ## [VERSION] - DATE or ## [VERSION])
+    # Match both with and without 'v' prefix
+    if grep -qE "^## \[($version_number|$version)\]" "$changelog_file"; then
+        print_status "CHANGELOG Entry" true "Found entry for $version"
+        add_result "CHANGELOG Entry" true
+        return 0
+    else
+        print_status "CHANGELOG Entry" false "No entry found for $version"
+        add_result "CHANGELOG Entry" false
+        return 1
+    fi
+}
+
+# Check release notes file existence
+check_release_notes() {
+    local version="$1"
+    local release_notes_file="$PROJECT_ROOT/admin/planning/releases/$version/RELEASE-NOTES.md"
+    
+    log "Checking release notes file: $release_notes_file"
+    
+    if [[ -f "$release_notes_file" ]]; then
+        print_status "Release Notes" true "Found: $release_notes_file"
+        add_result "Release Notes" true
+        return 0
+    else
+        print_status "Release Notes" false "Not found: $release_notes_file"
+        add_result "Release Notes" false
+        return 1
+    fi
+}
+
 # Main check function
 main() {
     log "Checking release readiness for $VERSION..."
@@ -217,6 +262,10 @@ main() {
     check_release_branch "$VERSION"
     check_version_consistency "$VERSION"
     check_ci_test_status "$VERSION"
+    
+    # Task 3: Documentation Checks
+    check_changelog_entry "$VERSION"
+    check_release_notes "$VERSION"
     
     echo ""
     
