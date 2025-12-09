@@ -342,6 +342,40 @@ generate_assessment() {
     check_release_notes "$version" > /dev/null 2>&1
     local notes_status=$?
     
+    # Calculate summary metrics
+    # Blocking criteria: Testing (ci_status), Documentation (changelog_status, notes_status), Release Prep (branch_status, version_status)
+    local blocking_failures=0
+    [ $ci_status -ne 0 ] && ((blocking_failures++))
+    [ $changelog_status -ne 0 ] && ((blocking_failures++))
+    [ $notes_status -ne 0 ] && ((blocking_failures++))
+    [ $branch_status -ne 0 ] && ((blocking_failures++))
+    [ $version_status -ne 0 ] && ((blocking_failures++))
+    
+    # Determine overall readiness status
+    local overall_status=""
+    if [ $blocking_failures -eq 0 ]; then
+        # All automated blocking criteria pass, but Code Quality needs manual review
+        overall_status="🟡 REVIEW NEEDED"
+    else
+        # Some blocking criteria failed
+        overall_status="🔴 NOT READY"
+    fi
+    
+    # Determine release type from version (v1.2.3 -> minor)
+    local release_type="Patch"
+    if [[ "$version" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+        local major="${BASH_REMATCH[1]}"
+        local minor="${BASH_REMATCH[2]}"
+        local patch="${BASH_REMATCH[3]}"
+        if [ "$major" != "0" ] && [ "$minor" == "0" ] && [ "$patch" == "0" ]; then
+            release_type="Major"
+        elif [ "$patch" == "0" ]; then
+            release_type="Minor"
+        else
+            release_type="Patch"
+        fi
+    fi
+    
     # Generate markdown output
     cat <<EOF
 # Release Readiness Assessment - $version
@@ -349,6 +383,16 @@ generate_assessment() {
 **Purpose:** Assess project readiness for $version release
 **Date:** $date
 **Status:** 🟠 Assessment in Progress
+
+---
+
+## 📊 Overall Readiness Summary
+
+**Overall Readiness Status:** $overall_status  
+**Blocking Issues:** $blocking_failures identified  
+**Release Type:** $release_type
+
+**Key Takeaways:** $([ $blocking_failures -eq 0 ] && echo "All automated blocking criteria pass. Manual review required for Code Quality." || echo "$blocking_failures blocking criteria need attention before release.")
 
 ---
 
@@ -428,6 +472,40 @@ generate_assessment() {
     check_release_notes "$version" > /dev/null 2>&1
     local notes_status=$?
     
+    # Calculate summary metrics
+    # Blocking criteria: Testing (ci_status), Documentation (changelog_status, notes_status), Release Prep (branch_status, version_status)
+    local blocking_failures=0
+    [ $ci_status -ne 0 ] && ((blocking_failures++))
+    [ $changelog_status -ne 0 ] && ((blocking_failures++))
+    [ $notes_status -ne 0 ] && ((blocking_failures++))
+    [ $branch_status -ne 0 ] && ((blocking_failures++))
+    [ $version_status -ne 0 ] && ((blocking_failures++))
+    
+    # Determine overall readiness status
+    local overall_status=""
+    if [ $blocking_failures -eq 0 ]; then
+        # All automated blocking criteria pass, but Code Quality needs manual review
+        overall_status="🟡 REVIEW NEEDED"
+    else
+        # Some blocking criteria failed
+        overall_status="🔴 NOT READY"
+    fi
+    
+    # Determine release type from version (v1.2.3 -> minor)
+    local release_type="Patch"
+    if [[ "$version" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+        local major="${BASH_REMATCH[1]}"
+        local minor="${BASH_REMATCH[2]}"
+        local patch="${BASH_REMATCH[3]}"
+        if [ "$major" != "0" ] && [ "$minor" == "0" ] && [ "$patch" == "0" ]; then
+            release_type="Major"
+        elif [ "$patch" == "0" ]; then
+            release_type="Minor"
+        else
+            release_type="Patch"
+        fi
+    fi
+    
     # Generate markdown output
     cat <<EOF
 # Release Readiness Assessment - $version
@@ -435,6 +513,16 @@ generate_assessment() {
 **Purpose:** Assess project readiness for $version release
 **Date:** $date
 **Status:** 🟠 Assessment in Progress
+
+---
+
+## 📊 Overall Readiness Summary
+
+**Overall Readiness Status:** $overall_status  
+**Blocking Issues:** $blocking_failures identified  
+**Release Type:** $release_type
+
+**Key Takeaways:** $([ $blocking_failures -eq 0 ] && echo "All automated blocking criteria pass. Manual review required for Code Quality." || echo "$blocking_failures blocking criteria need attention before release.")
 
 ---
 
