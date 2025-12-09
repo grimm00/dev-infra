@@ -245,6 +245,79 @@ check_release_notes() {
     fi
 }
 
+# Gather recent merged PRs (informational)
+gather_recent_prs() {
+    local version="$1"
+    local limit="${2:-10}"  # Default to last 10 PRs
+    
+    log "Gathering recent merged PRs..."
+    
+    # Check if gh CLI is available
+    if ! command -v gh &> /dev/null; then
+        log "  gh CLI not available, skipping PR gathering"
+        return 0
+    fi
+    
+    # Check if authenticated
+    if ! gh auth status &> /dev/null; then
+        log "  gh CLI not authenticated, skipping PR gathering"
+        return 0
+    fi
+    
+    # Get recent merged PRs
+    local prs
+    prs=$(gh pr list --state merged --limit "$limit" --json number,title,mergedAt --jq '.[] | "\(.number): \(.title) (merged: \(.mergedAt))"' 2>/dev/null || echo "")
+    
+    if [[ -n "$prs" ]]; then
+        echo ""
+        echo "Recent Merged PRs (last $limit):"
+        echo "--------------------------------"
+        echo "$prs" | while IFS= read -r line; do
+            echo "  - $line"
+        done
+        return 0
+    else
+        log "  No recent PRs found or error occurred"
+        return 0
+    fi
+}
+
+# Gather open blocking issues (informational)
+gather_blocking_issues() {
+    local version="$1"
+    
+    log "Gathering open blocking issues..."
+    
+    # Check if gh CLI is available
+    if ! command -v gh &> /dev/null; then
+        log "  gh CLI not available, skipping issue gathering"
+        return 0
+    fi
+    
+    # Check if authenticated
+    if ! gh auth status &> /dev/null; then
+        log "  gh CLI not authenticated, skipping issue gathering"
+        return 0
+    fi
+    
+    # Get open issues labeled as blocking or critical
+    local issues
+    issues=$(gh issue list --state open --label "blocking" --label "critical" --json number,title,labels --jq '.[] | "\(.number): \(.title) [\(.labels[].name | select(. == "blocking" or . == "critical"))]"' 2>/dev/null || echo "")
+    
+    if [[ -n "$issues" ]]; then
+        echo ""
+        echo "Open Blocking Issues:"
+        echo "--------------------"
+        echo "$issues" | while IFS= read -r line; do
+            echo "  - $line"
+        done
+        return 0
+    else
+        log "  No blocking issues found"
+        return 0
+    fi
+}
+
 # Main check function
 main() {
     log "Checking release readiness for $VERSION..."
@@ -266,6 +339,12 @@ main() {
     # Task 3: Documentation Checks
     check_changelog_entry "$VERSION"
     check_release_notes "$VERSION"
+    
+    echo ""
+    
+    # Task 4: Data Gathering (Informational)
+    gather_recent_prs "$VERSION"
+    gather_blocking_issues "$VERSION"
     
     echo ""
     
