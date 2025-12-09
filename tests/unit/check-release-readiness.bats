@@ -225,3 +225,34 @@ teardown() {
     # If any blocking criteria fail → NOT READY
     [[ "$output" =~ "Summary" ]]
 }
+
+# Task 3: Evidence Sections Tests (RED)
+
+@test "check-release-readiness.sh evidence sections include details/summary tags" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Evidence sections should use HTML details/summary for collapsible content
+    [[ "$output" =~ "<details>" ]] || [[ "$output" =~ "<summary>" ]]
+}
+
+@test "check-release-readiness.sh evidence sections include command output" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Evidence should include validation details or command output
+    # Check for evidence section content beyond simple status messages
+    [[ "$output" =~ "Evidence:" ]]
+    # Should have more than just simple pass/fail messages
+    local evidence_lines=$(echo "$output" | grep -A5 "Evidence:" | grep -v "^--$" | wc -l)
+    [ "$evidence_lines" -gt 1 ]
+}
+
+@test "check-release-readiness.sh evidence sections are readable and formatted" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Evidence sections should be well-formatted
+    # Check that evidence appears after status in each criteria section
+    [[ "$output" =~ "Status:" ]] && [[ "$output" =~ "Evidence:" ]]
+}

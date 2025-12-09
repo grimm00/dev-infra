@@ -401,15 +401,27 @@ generate_assessment() {
 ### 🧪 1. Testing & Quality (Blocking)
 **Status:** $([ $ci_status -eq 0 ] && echo "✅ PASS" || echo "❌ FAIL")
 **Evidence:**
-- CI/CD test status: $([ $ci_status -eq 0 ] && echo "All tests passing" || echo "Tests not passing or CI check skipped")
+<details>
+<summary>CI/CD Test Status</summary>
+
+$([ $ci_status -eq 0 ] && echo "✅ All tests passing" || echo "❌ Tests not passing or CI check skipped")
+
+$([ $ci_status -ne 0 ] && echo "**Details:** Run \`gh run list --limit 1\` to check latest CI run status" || echo "")
+</details>
 
 ---
 
 ### 📄 2. Documentation (Blocking)
 **Status:** $([ $changelog_status -eq 0 ] && [ $notes_status -eq 0 ] && echo "✅ PASS" || echo "❌ FAIL")
 **Evidence:**
+<details>
+<summary>Documentation Status</summary>
+
 - CHANGELOG updated: $([ $changelog_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
 - Release notes created: $([ $notes_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
+
+$([ $changelog_status -ne 0 ] || [ $notes_status -ne 0 ] && echo "**Details:** Check \`CHANGELOG.md\` and \`admin/planning/releases/$version/RELEASE-NOTES.md\`" || echo "")
+</details>
 
 ---
 
@@ -426,8 +438,15 @@ generate_assessment() {
 ### 🚀 4. Release Preparation (Blocking)
 **Status:** $([ $branch_status -eq 0 ] && [ $version_status -eq 0 ] && echo "✅ PASS" || echo "⚠️ NEEDS ATTENTION")
 **Evidence:**
+<details>
+<summary>Release Preparation Status</summary>
+
 - Release branch created: $([ $branch_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
 - Version numbers updated: $([ $version_status -eq 0 ] && echo "✅ Yes" || echo "⚠️ Check format")
+
+$([ $branch_status -ne 0 ] && echo "**Details:** Expected branch: \`release/$version\`. Run \`git branch -a | grep release\` to check." || echo "")
+$([ $version_status -ne 0 ] && echo "**Details:** Version format should match semantic versioning (vX.Y.Z). Check version consistency across files." || echo "")
+</details>
 
 ---
 
@@ -531,15 +550,27 @@ generate_assessment() {
 ### 🧪 1. Testing & Quality (Blocking)
 **Status:** $([ $ci_status -eq 0 ] && echo "✅ PASS" || echo "❌ FAIL")
 **Evidence:**
-- CI/CD test status: $([ $ci_status -eq 0 ] && echo "All tests passing" || echo "Tests not passing or CI check skipped")
+<details>
+<summary>CI/CD Test Status</summary>
+
+$([ $ci_status -eq 0 ] && echo "✅ All tests passing" || echo "❌ Tests not passing or CI check skipped")
+
+$([ $ci_status -ne 0 ] && echo "**Details:** Run \`gh run list --limit 1\` to check latest CI run status" || echo "")
+</details>
 
 ---
 
 ### 📄 2. Documentation (Blocking)
 **Status:** $([ $changelog_status -eq 0 ] && [ $notes_status -eq 0 ] && echo "✅ PASS" || echo "❌ FAIL")
 **Evidence:**
+<details>
+<summary>Documentation Status</summary>
+
 - CHANGELOG updated: $([ $changelog_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
 - Release notes created: $([ $notes_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
+
+$([ $changelog_status -ne 0 ] || [ $notes_status -ne 0 ] && echo "**Details:** Check \`CHANGELOG.md\` and \`admin/planning/releases/$version/RELEASE-NOTES.md\`" || echo "")
+</details>
 
 ---
 
@@ -556,8 +587,15 @@ generate_assessment() {
 ### 🚀 4. Release Preparation (Blocking)
 **Status:** $([ $branch_status -eq 0 ] && [ $version_status -eq 0 ] && echo "✅ PASS" || echo "⚠️ NEEDS ATTENTION")
 **Evidence:**
+<details>
+<summary>Release Preparation Status</summary>
+
 - Release branch created: $([ $branch_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
 - Version numbers updated: $([ $version_status -eq 0 ] && echo "✅ Yes" || echo "⚠️ Check format")
+
+$([ $branch_status -ne 0 ] && echo "**Details:** Expected branch: \`release/$version\`. Run \`git branch -a | grep release\` to check." || echo "")
+$([ $version_status -ne 0 ] && echo "**Details:** Version format should match semantic versioning (vX.Y.Z). Check version consistency across files." || echo "")
+</details>
 
 ---
 
