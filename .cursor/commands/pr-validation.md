@@ -99,196 +99,6 @@ gh pr view [pr-number] --json state,title,headRefName
 
 ---
 
-### 1c. Check GitHub Actions/CI-CD Status (NEW)
-
-**Purpose:** Verify that all GitHub Actions workflows and CI/CD jobs are passing before proceeding with PR validation. Failed CI/CD jobs should be addressed before merge.
-
-**When to check:**
-
-- After verifying PR is open
-- Before proceeding with manual testing
-- As part of PR validation workflow
-
-**Process:**
-
-1. **Check GitHub Actions status for PR:**
-
-   ```bash
-   gh pr checks [pr-number]
-   ```
-
-   **Expected output shows:**
-   - All checks passing (✅)
-   - Or any failing checks (❌)
-   - Check names and status
-
-2. **Get detailed check information:**
-
-   ```bash
-   gh pr checks [pr-number] --json name,state,url
-   ```
-
-   **Expected JSON structure:**
-   ```json
-   [
-     {
-       "name": "CI / Test",
-       "state": "SUCCESS",
-       "url": "https://github.com/..."
-     },
-     {
-       "name": "CI / Lint",
-       "state": "FAILURE",
-       "url": "https://github.com/..."
-     }
-   ]
-   ```
-
-   **Note:** The `state` field can be: `SUCCESS`, `FAILURE`, `PENDING`, `ERROR`, etc.
-
-3. **Identify failed checks:**
-
-   - Filter for `"state": "FAILURE"` or `"state": "ERROR"`
-   - Note check names and URLs
-   - Check if checks are required for merge
-
-4. **Check required checks:**
-
-   ```bash
-   gh pr view [pr-number] --json mergeable,mergeStateStatus
-   ```
-
-   **Expected:**
-   - `mergeable`: `true` (if all required checks pass)
-   - `mergeStateStatus`: `CLEAN` (if all checks pass)
-
-**CI/CD Status Validation:**
-
-- [ ] All GitHub Actions checks passing
-  - Verify: `gh pr checks [pr-number]` shows all ✅
-  - Expected: No ❌ checks
-- [ ] No failed CI/CD jobs
-  - Verify: All workflow runs completed successfully
-  - Expected: No failed workflows
-- [ ] Required checks passing
-  - Verify: `mergeable: true` and `mergeStateStatus: CLEAN`
-  - Expected: PR is mergeable
-
-**If checks are failing:**
-
-**Warning (Lenient Approach):**
-
-- ⚠️ **Warning:** Some CI/CD checks are failing
-- ⚠️ **Recommendation:** Address failing checks before merge
-- ⚠️ **Note:** This is a warning, not a blocker - validation can continue
-- Document the warning in the summary report
-- List failed checks and their URLs
-- Suggest investigating and fixing failures
-
-**Action Items (if checks failing):**
-
-- [ ] Review failed check logs (use URLs from check output)
-- [ ] Identify root cause of failures
-- [ ] Fix issues causing failures
-- [ ] Push fixes to PR branch
-- [ ] Wait for checks to re-run
-- [ ] Verify checks pass before merge
-
-**Common CI/CD Check Types:**
-
-- **Test Suite:** Unit tests, integration tests, test coverage
-- **Linting:** Code style, formatting, static analysis
-- **Build:** Compilation, build verification
-- **Security:** Security scanning, dependency checks
-- **Documentation:** Documentation validation, link checking
-
-**Checklist:**
-
-- [ ] GitHub Actions status checked
-- [ ] All checks passing (or warnings documented)
-- [ ] Failed checks identified (if any)
-- [ ] Check URLs documented (if failures)
-- [ ] Ready to proceed with validation (or blocked by failures)
-
----
-
-### 1d. Check Known Issues Registry (NEW)
-
-**Purpose:** Identify if failures match known issues with fixes pending. This prevents blocking PR validation for issues that are already documented and have fixes planned.
-
-**When to check:**
-
-- After identifying failed checks
-- Before blocking PR validation
-- To avoid duplicate failure documentation
-
-**Process:**
-
-1. **Read known issues registry:**
-
-   - Location: `admin/planning/ci/multi-environment-testing/known-issues.md`
-   - Check if failed job matches any active known issue
-   - Compare job names and error patterns
-
-2. **Match failure to known issue:**
-
-   - Compare job name (e.g., `full-tests-ubuntu`, `full-tests-macos`)
-   - Compare error patterns (if error messages available)
-   - Check if symptoms match known issue description
-
-3. **If match found:**
-
-   - Note: "Failure matches Known Issue #[number]"
-   - Reference known issue in summary
-   - Link to fix tracking
-   - **Action:** Document failure but don't block PR validation
-   - Add PR number to "PRs Affected" list in known issues registry
-   - Update failure document to reference known issue
-
-4. **If no match:**
-
-   - This is a new issue
-   - Document as new failure
-   - Create new known issue entry if fix is pending
-   - Block PR validation if critical (CRITICAL/HIGH priority)
-   - Allow PR validation to proceed if MEDIUM/LOW priority (with warning)
-
-**Known Issue Match Example:**
-
-```markdown
-### CI/CD Status
-
-- GitHub Actions checks: Some checks failing
-  - `full-tests-ubuntu`: FAIL ❌
-  - **Known Issue:** Matches Known Issue #1 (full-tests-ubuntu intermittent failures)
-  - **Status:** Fix pending in multi-environment-testing topic
-  - **Reference:** `admin/planning/ci/multi-environment-testing/known-issues.md`
-  - **Action:** Documented, not blocking PR validation (local tests passing)
-```
-
-**Update Known Issues Registry:**
-
-**File:** `admin/planning/ci/multi-environment-testing/known-issues.md`
-
-**Add PR to "PRs Affected" list:**
-
-```markdown
-**PRs Affected:**
-- PR #30: Documented failure (2025-12-08)
-- PR #[number]: Documented failure (YYYY-MM-DD)
-```
-
-**Checklist:**
-
-- [ ] Known issues registry checked
-- [ ] Failure matched to known issue (if applicable)
-- [ ] Known issue updated with PR number (if match found)
-- [ ] PR validation proceeds (if known issue)
-- [ ] New issue documented (if no match)
-- [ ] Failure document created/updated
-
----
-
 ### 1a. Restore Unrelated Files (Cursor IDE Bug Fix)
 
 **Issue:** Cursor IDE may modify unrelated files when opening them. These should be restored before proceeding.
@@ -438,6 +248,200 @@ gh pr view [pr-number] --json state,title,headRefName
 - [ ] Status documents validated
 - [ ] Warnings documented if status outdated
 - [ ] Ready to proceed with validation
+
+---
+
+### 1c. Check GitHub Actions/CI-CD Status (NEW)
+
+**Purpose:** Verify that all GitHub Actions workflows and CI/CD jobs are passing before proceeding with PR validation. Failed CI/CD jobs should be addressed before merge.
+
+**When to check:**
+
+- After verifying PR is open
+- Before proceeding with manual testing
+- As part of PR validation workflow
+
+**Process:**
+
+1. **Check GitHub Actions status for PR:**
+
+   ```bash
+   gh pr checks [pr-number]
+   ```
+
+   **Expected output shows:**
+
+   - All checks passing (✅)
+   - Or any failing checks (❌)
+   - Check names and status
+
+2. **Get detailed check information:**
+
+   ```bash
+   gh pr checks [pr-number] --json name,state,url
+   ```
+
+   **Expected JSON structure:**
+
+   ```json
+   [
+     {
+       "name": "CI / Test",
+       "state": "SUCCESS",
+       "url": "https://github.com/..."
+     },
+     {
+       "name": "CI / Lint",
+       "state": "FAILURE",
+       "url": "https://github.com/..."
+     }
+   ]
+   ```
+
+   **Note:** The `state` field can be: `SUCCESS`, `FAILURE`, `PENDING`, `ERROR`, etc.
+
+3. **Identify failed checks:**
+
+   - Filter for `"state": "FAILURE"` or `"state": "ERROR"`
+   - Note check names and URLs
+   - Check if checks are required for merge
+
+4. **Check required checks:**
+
+   ```bash
+   gh pr view [pr-number] --json mergeable,mergeStateStatus
+   ```
+
+   **Expected:**
+
+   - `mergeable`: `true` (if all required checks pass)
+   - `mergeStateStatus`: `CLEAN` (if all checks pass)
+
+**CI/CD Status Validation:**
+
+- [ ] All GitHub Actions checks passing
+  - Verify: `gh pr checks [pr-number]` shows all ✅
+  - Expected: No ❌ checks
+- [ ] No failed CI/CD jobs
+  - Verify: All workflow runs completed successfully
+  - Expected: No failed workflows
+- [ ] Required checks passing
+  - Verify: `mergeable: true` and `mergeStateStatus: CLEAN`
+  - Expected: PR is mergeable
+
+**If checks are failing:**
+
+**Warning (Lenient Approach):**
+
+- ⚠️ **Warning:** Some CI/CD checks are failing
+- ⚠️ **Recommendation:** Address failing checks before merge
+- ⚠️ **Note:** This is a warning, not a blocker - validation can continue
+- Document the warning in the summary report
+- List failed checks and their URLs
+- Suggest investigating and fixing failures
+
+**Action Items (if checks failing):**
+
+- [ ] Review failed check logs (use URLs from check output)
+- [ ] Identify root cause of failures
+- [ ] Fix issues causing failures
+- [ ] Push fixes to PR branch
+- [ ] Wait for checks to re-run
+- [ ] Verify checks pass before merge
+
+**Common CI/CD Check Types:**
+
+- **Test Suite:** Unit tests, integration tests, test coverage
+- **Linting:** Code style, formatting, static analysis
+- **Build:** Compilation, build verification
+- **Security:** Security scanning, dependency checks
+- **Documentation:** Documentation validation, link checking
+
+**Checklist:**
+
+- [ ] GitHub Actions status checked
+- [ ] All checks passing (or warnings documented)
+- [ ] Failed checks identified (if any)
+- [ ] Check URLs documented (if failures)
+- [ ] Ready to proceed with validation (or blocked by failures)
+
+---
+
+### 1d. Check Known Issues Registry (NEW)
+
+**Purpose:** Identify if failures match known issues with fixes pending. This prevents blocking PR validation for issues that are already documented and have fixes planned.
+
+**When to check:**
+
+- After identifying failed checks
+- Before blocking PR validation
+- To avoid duplicate failure documentation
+
+**Process:**
+
+1. **Read known issues registry:**
+
+   - Location: `admin/planning/ci/multi-environment-testing/known-issues.md`
+   - Check if failed job matches any active known issue
+   - Compare job names and error patterns
+
+2. **Match failure to known issue:**
+
+   - Compare job name (e.g., `full-tests-ubuntu`, `full-tests-macos`)
+   - Compare error patterns (if error messages available)
+   - Check if symptoms match known issue description
+
+3. **If match found:**
+
+   - Note: "Failure matches Known Issue #[number]"
+   - Reference known issue in summary
+   - Link to fix tracking
+   - **Action:** Document failure but don't block PR validation
+   - Add PR number to "PRs Affected" list in known issues registry
+   - Update failure document to reference known issue
+
+4. **If no match:**
+
+   - This is a new issue
+   - Document as new failure
+   - Create new known issue entry if fix is pending
+   - Block PR validation if critical (CRITICAL/HIGH priority)
+   - Allow PR validation to proceed if MEDIUM/LOW priority (with warning)
+
+**Known Issue Match Example:**
+
+```markdown
+### CI/CD Status
+
+- GitHub Actions checks: Some checks failing
+  - `full-tests-ubuntu`: FAIL ❌
+  - **Known Issue:** Matches Known Issue #1 (full-tests-ubuntu intermittent failures)
+  - **Status:** Fix pending in multi-environment-testing topic
+  - **Reference:** `admin/planning/ci/multi-environment-testing/known-issues.md`
+  - **Action:** Documented, not blocking PR validation (local tests passing)
+```
+
+**Update Known Issues Registry:**
+
+**File:** `admin/planning/ci/multi-environment-testing/known-issues.md`
+
+**Add PR to "PRs Affected" list:**
+
+```markdown
+**PRs Affected:**
+
+- PR #30: Documented failure (2025-12-08)
+- PR #[number]: Documented failure (YYYY-MM-DD)
+```
+
+**Checklist:**
+
+- [ ] Known issues registry checked
+- [ ] Failure matched to known issue (if applicable)
+- [ ] Known issue updated with PR number (if match found)
+- [ ] PR validation proceeds (if known issue)
+- [ ] New issue documented (if no match)
+- [ ] Failure document created/updated
 
 ---
 

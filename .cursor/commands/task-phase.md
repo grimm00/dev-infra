@@ -122,12 +122,14 @@ This command automatically detects if a phase is documentation-only and uses a d
 **Detection Criteria:**
 
 A phase is considered "docs-only" if:
+
 - Only documentation files are modified (`.md`, `.txt`, `.yml`, `.yaml`, `.json` config files)
 - Only copying existing files (no code modifications)
 - Creating new documentation/README files
 - Template work that involves copying files and creating documentation
 
 A phase requires PR if:
+
 - Any code files are modified (`.py`, `.js`, `.ts`, `.go`, `.rs`, `.java`, `.cpp`, `.sh`, `.bash`, etc.)
 - Scripts are modified (even if they generate docs)
 - CI/CD workflows are modified (`.yml` in `.github/workflows/`)
@@ -310,16 +312,19 @@ When starting a phase (first task of the phase), automatically update status:
 **Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
 
 **Commit Pattern:**
+
 - Commit after each logical unit (test file, implementation, migration, CLI command)
 - Small commits are better than large commits
 - Always commit before stopping (even if work incomplete)
 
 **Commit Message Format:**
+
 - Follow standard format: `type(scope): brief description`
 - Include "Related:" line for context
 - See [Commit Workflow](../../docs/COMMIT-WORKFLOW.md#commit-message-format) for complete format
 
 **Examples:**
+
 ```bash
 git commit -m "test(phase-3): add DELETE endpoint tests"
 git commit -m "feat(phase-3): implement DELETE endpoint"
@@ -327,6 +332,7 @@ git commit -m "feat(phase-3): add proj delete CLI command"
 ```
 
 **Before Stopping:**
+
 - [ ] Check `git status` for uncommitted changes
 - [ ] Stage all changes (`git add`)
 - [ ] Commit with proper message
@@ -381,11 +387,13 @@ git commit -m "feat(phase-3): add proj delete CLI command"
 **First, detect phase type (docs-only vs code):**
 
 1. **Analyze modified files:**
+
    - Check git diff for files that will be modified
    - Check phase document tasks for file patterns mentioned
    - Look for code file extensions vs docs-only extensions
 
 2. **Detection logic:**
+
    ```bash
    # Check for code files in changes
    git diff --name-only develop...HEAD | grep -E '\.(py|js|ts|go|rs|java|cpp|c|h|sh|bash)$'
@@ -472,11 +480,13 @@ When all tasks in phase are complete, automatically update status:
 **If phase is detected as docs-only (and `--force-pr` not used):**
 
 1. **Push feature branch to remote:**
+
    ```bash
    git push origin feat/phase-N-[description]
    ```
 
 2. **Merge directly to develop:**
+
    ```bash
    git checkout develop
    git pull origin develop
@@ -485,6 +495,7 @@ When all tasks in phase are complete, automatically update status:
    ```
 
 3. **Update post-merge documentation:**
+
    - Run `/post-pr --direct --phase N` to update status documents
    - This updates phase and feature status without PR number
 
@@ -782,7 +793,7 @@ Tasks are typically numbered in phase documents:
 
 **Testing:**
 
-- `docs/maintainers/planning/features/[feature-name]/testing/manual-testing.md` (if exists)
+- `docs/maintainers/planning/features/[feature-name]/manual-testing.md` (if exists)
 
 **Workflow:**
 

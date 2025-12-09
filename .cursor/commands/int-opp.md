@@ -728,7 +728,7 @@ This directory contains actionable improvement checklists based on learnings fro
 
 ---
 
-### 7. Commit and Push Changes
+### 8. Commit and Push Changes
 
 **IMPORTANT:** Always commit work before completing command.
 

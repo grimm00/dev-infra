@@ -166,7 +166,7 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 
 ---
 
-### 4. Identify Candidates
+### 3. Identify Candidates
 
 **Criteria for addressing:**
 
@@ -209,7 +209,7 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 
 ---
 
-### 5. Generate Review Report
+### 4. Generate Review Report
 
 **Report Location:**
 
@@ -313,7 +313,7 @@ This command supports multiple fix organization patterns, matching `/fix-plan` a
 
 ---
 
-### 6. Create Fix Plans (Optional)
+### 5. Create Fix Plans (Optional)
 
 **If issues are worth addressing:**
 

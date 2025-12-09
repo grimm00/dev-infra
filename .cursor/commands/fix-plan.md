@@ -11,6 +11,7 @@ Analyzes Sourcery review for a PR, batches issues by priority and effort, and cr
 This command supports multiple fix organization patterns. It will auto-detect the structure or use configuration:
 
 1. **Feature-Specific Fixes (default):**
+
    - Path: `docs/maintainers/planning/features/[feature-name]/fix/`
    - Feature name auto-detected from context or configuration
    - Example: `docs/maintainers/planning/features/my-feature/fix/pr##/`
@@ -114,20 +115,23 @@ This command supports multiple fix organization patterns. It will auto-detect th
 **Before proceeding, determine fix path structure:**
 
 1. **Check for feature structure:**
+
    ```bash
    # Check if features directory exists
    ls docs/maintainers/planning/features/ 2>/dev/null
-   
+
    # If exists, list features
    ls docs/maintainers/planning/features/
    ```
 
 2. **Determine feature name:**
+
    - If single feature exists → use that feature name
    - If multiple features exist → use configuration or prompt user
    - If no features exist → use project-wide structure
 
 3. **Set fix base path:**
+
    - Feature-specific: `docs/maintainers/planning/features/[feature-name]/fix/`
    - Project-wide: `docs/maintainers/planning/fix/`
 
@@ -242,7 +246,7 @@ ls docs/maintainers/feedback/sourcery/pr##.md
 
 ---
 
-### 5. Batch Issues by Priority and Effort
+### 4. Batch Issues by Priority and Effort
 
 **Batching Strategy:**
 
@@ -415,10 +419,10 @@ These issues are batched together because they:
 - Share similar priority and effort levels
 - May affect related code areas
 - Can be implemented together efficiently
-
 ````
 
 **Checklist:**
+
 - [ ] Fix plan file created for each batch
 - [ ] All issues documented in batch files
 - [ ] Implementation steps outlined
@@ -458,6 +462,7 @@ These issues are batched together because they:
 **Status:** 🟡 Planned
 
 **Priority Breakdown:**
+
 - 🟡 MEDIUM: [X] issues
 - 🟢 LOW: [Y] issues
 ```
@@ -773,7 +778,6 @@ This batch was created from fix-review report recommendations. These issues are 
 - Address related code quality improvements
 - Can be implemented together efficiently
 - Were identified as [batch type] in review report
-
 ````
 
 **Checklist:**
@@ -1044,4 +1048,3 @@ This batch was created from fix-review report recommendations. These issues are 
 **Last Updated:** 2025-12-07  
 **Status:** ✅ Active  
 **Next:** Use `/fix-implement` to implement batches, `/fix-review` to review old issues, or `--from-review-report` to create batches from review reports
-
