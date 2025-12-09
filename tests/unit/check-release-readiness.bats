@@ -165,3 +165,34 @@ teardown() {
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
 }
 
+# Task 1: Assessment Generator Tests (RED)
+
+@test "check-release-readiness.sh generates markdown assessment with --generate" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should output markdown format
+    [[ "$output" =~ "# Release Readiness Assessment" ]]
+}
+
+@test "check-release-readiness.sh generated assessment contains required sections" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Check for standard template sections
+    [[ "$output" =~ "## 📊 Release Criteria Evaluation" ]]
+    [[ "$output" =~ "### 🧪 1. Testing & Quality" ]]
+    [[ "$output" =~ "### 📄 2. Documentation" ]]
+    [[ "$output" =~ "### 💻 3. Code Quality" ]]
+    [[ "$output" =~ "### 🚀 4. Release Preparation" ]]
+}
+
+@test "check-release-readiness.sh assessment includes automated check results" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should map automated checks to criteria items
+    # Check for status indicators (✅ or ❌)
+    [[ "$output" =~ "Status:" ]] && ([[ "$output" =~ "✅" ]] || [[ "$output" =~ "❌" ]])
+}
+
