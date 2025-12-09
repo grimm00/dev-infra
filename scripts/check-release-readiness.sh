@@ -29,11 +29,13 @@ Options:
     -h, --help      Show this help message
     -v, --verbose   Verbose output
     --json          Output results in JSON format
+    --generate      Generate markdown assessment file
 
 Examples:
     $(basename "$0") v1.4.0
     $(basename "$0") --verbose v1.4.0
     $(basename "$0") --json v1.4.0
+    $(basename "$0") --generate v1.4.0
 
 EOF
 }
@@ -41,6 +43,7 @@ EOF
 # Parse arguments
 VERBOSE=false
 JSON_OUTPUT=false
+GENERATE=false
 VERSION=""
 
 while [[ $# -gt 0 ]]; do
@@ -55,6 +58,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --json)
             JSON_OUTPUT=true
+            shift
+            ;;
+        --generate)
+            GENERATE=true
             shift
             ;;
         -*)
@@ -319,10 +326,101 @@ gather_blocking_issues() {
 }
 
 # Main check function
+# Generate markdown assessment
+generate_assessment() {
+    local version="$1"
+    local date=$(date +%Y-%m-%d)
+    
+    # Run checks silently to collect results
+    check_release_branch "$version" > /dev/null 2>&1
+    local branch_status=$?
+    check_version_consistency "$version" > /dev/null 2>&1
+    local version_status=$?
+    check_ci_test_status "$version" > /dev/null 2>&1
+    local ci_status=$?
+    check_changelog_entry "$version" > /dev/null 2>&1
+    local changelog_status=$?
+    check_release_notes "$version" > /dev/null 2>&1
+    local notes_status=$?
+    
+    # Generate markdown output
+    cat <<EOF
+# Release Readiness Assessment - $version
+
+**Purpose:** Assess project readiness for $version release
+**Date:** $date
+**Status:** 🟠 Assessment in Progress
+
+---
+
+## 📊 Release Criteria Evaluation
+
+### 🧪 1. Testing & Quality (Blocking)
+**Status:** $([ $ci_status -eq 0 ] && echo "✅ PASS" || echo "❌ FAIL")
+**Evidence:**
+- CI/CD test status: $([ $ci_status -eq 0 ] && echo "All tests passing" || echo "Tests not passing or CI check skipped")
+
+---
+
+### 📄 2. Documentation (Blocking)
+**Status:** $([ $changelog_status -eq 0 ] && [ $notes_status -eq 0 ] && echo "✅ PASS" || echo "❌ FAIL")
+**Evidence:**
+- CHANGELOG updated: $([ $changelog_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
+- Release notes created: $([ $notes_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
+
+---
+
+### 💻 3. Code Quality (Blocking)
+**Status:** ⚠️ NEEDS MANUAL REVIEW
+**Evidence:**
+- Manual review required for:
+  - Critical bugs fixed
+  - No blocking issues
+  - Code review completed
+
+---
+
+### 🚀 4. Release Preparation (Blocking)
+**Status:** $([ $branch_status -eq 0 ] && [ $version_status -eq 0 ] && echo "✅ PASS" || echo "⚠️ NEEDS ATTENTION")
+**Evidence:**
+- Release branch created: $([ $branch_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
+- Version numbers updated: $([ $version_status -eq 0 ] && echo "✅ Yes" || echo "⚠️ Check format")
+
+---
+
+## 📊 Version Recommendation
+
+**Recommended Version:** $version
+
+**Rationale:** Automated checks $([ ${#FAILED_CHECKS[@]} -eq 0 ] && echo "passed" || echo "need attention")
+
+---
+
+## 🎯 Recommendation
+
+**Status:** $([ ${#FAILED_CHECKS[@]} -eq 0 ] && echo "🟢 READY FOR REVIEW" || echo "🔴 NOT READY")
+
+**Next Steps:**
+1. Review automated check results
+2. Complete manual review sections
+3. Address any failing checks
+
+---
+
+**Last Updated:** $date
+EOF
+}
+
 main() {
     log "Checking release readiness for $VERSION..."
     log "Project root: $PROJECT_ROOT"
     log ""
+    
+    # If generate flag is set, generate assessment and exit
+    if [[ "$GENERATE" == "true" ]]; then
+        generate_assessment "$VERSION"
+        exit 0
+    fi
     
     echo "Release Readiness Check: $VERSION"
     echo "=================================="
