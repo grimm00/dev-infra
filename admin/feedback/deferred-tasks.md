@@ -407,7 +407,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ### Deferred from PR #35 (Release Readiness Phase 3)
 
-- Task 23: Shell `&&`/`||` precedence bug (HIGH priority, LOW effort) - Deferred: edge case, not affecting core functionality
+- Task 23: Shell `&&`/`||` precedence bug (HIGH priority, LOW effort) - ✅ Fixed in PR #37
 - Task 24: Add comprehensive blocking vs non-blocking test cases (MEDIUM priority, MEDIUM effort)
 - Task 25: Remove duplicate `generate_assessment` function (MEDIUM priority, MEDIUM effort)
 - Task 26: Improve HTML tag test assertions (LOW priority, LOW effort) - ✅ Fixed in PR #36
@@ -423,3 +423,15 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 ### Deferred from PR #36 (Quick Wins Cross-PR Batch)
 
 - Task 28: Add negative test case for malformed HTML tags (LOW priority, LOW effort) - Nice-to-have improvement to test coverage
+
+---
+
+## PR #37 Additions
+
+**Date:** 2025-12-09  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #37 (Script Improvements Cross-PR Batch)
+
+- Task 29: Extract whitespace trimming/sanitization into helper function (LOW priority, MEDIUM effort) - Deferred: code duplication refactoring
+- Task 30: Use POSIX-compatible `=` instead of bash-specific `==` (LOW priority, LOW effort) - Deferred: POSIX compatibility improvement

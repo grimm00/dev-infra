@@ -67,6 +67,11 @@
   - Status: Test failure - same CI-specific git issue
   - Note: Local tests passing (26/26 check-release-readiness.bats)
   - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
+- PR #37: Script Improvements Cross-PR Batch (2025-12-09)
+  - Workflow Run: [20080094015](https://github.com/grimm00/dev-infra/actions/runs/20080094015)
+  - Status: Test failure - same CI-specific git issue
+  - Note: Local tests passing (26/26 check-release-readiness.bats)
+  - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
 
 ---
 

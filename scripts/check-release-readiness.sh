@@ -420,7 +420,7 @@ $([ $ci_status -ne 0 ] && echo "**Details:** Run \`gh run list --limit 1\` to ch
 - CHANGELOG updated: $([ $changelog_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
 - Release notes created: $([ $notes_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
 
-$([ $changelog_status -ne 0 ] || [ $notes_status -ne 0 ] && echo "**Details:** Check \`CHANGELOG.md\` and \`admin/planning/releases/$version/RELEASE-NOTES.md\`" || echo "")
+$( ([ $changelog_status -ne 0 ] || [ $notes_status -ne 0 ]) && echo "**Details:** Check \`CHANGELOG.md\` and \`admin/planning/releases/$version/RELEASE-NOTES.md\`" || echo "")
 </details>
 
 ---
@@ -569,7 +569,7 @@ $([ $ci_status -ne 0 ] && echo "**Details:** Run \`gh run list --limit 1\` to ch
 - CHANGELOG updated: $([ $changelog_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
 - Release notes created: $([ $notes_status -eq 0 ] && echo "✅ Yes" || echo "❌ No")
 
-$([ $changelog_status -ne 0 ] || [ $notes_status -ne 0 ] && echo "**Details:** Check \`CHANGELOG.md\` and \`admin/planning/releases/$version/RELEASE-NOTES.md\`" || echo "")
+$( ([ $changelog_status -ne 0 ] || [ $notes_status -ne 0 ]) && echo "**Details:** Check \`CHANGELOG.md\` and \`admin/planning/releases/$version/RELEASE-NOTES.md\`" || echo "")
 </details>
 
 ---
