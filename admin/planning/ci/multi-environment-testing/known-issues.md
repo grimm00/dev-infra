@@ -50,6 +50,11 @@
   - Status: ✅ All CI checks passing (full-tests-ubuntu, full-tests-macos)
   - Fix: Added `.gitkeep` files to empty stage directories
   - Fix Document: `admin/planning/ci/multi-environment-testing/fix/pr30-fix-plan.md`
+- PR #32: Release Readiness Phase 1 & 2 (2025-12-09)
+  - Workflow Run: [20050338867](https://github.com/grimm00/dev-infra/actions/runs/20050338867)
+  - Status: Test failure in check-release-readiness.sh (test #6: git branch creation in CI)
+  - Note: Local tests passing (16/16), CI-specific git issue
+  - Issue: Git branch creation fails in CI (status 128)
 
 ---
 
