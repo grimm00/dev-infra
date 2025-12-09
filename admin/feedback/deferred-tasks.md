@@ -10,10 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 22 (No new tasks from PR #10 - all items fixed/verified)
+**Total Tasks:** 27 (5 new from PR #35)
 
-- 🟡 **MEDIUM**: 17 tasks
-- 🟢 **LOW**: 5 tasks
+- 🟠 **HIGH**: 1 task (deferred - edge case)
+- 🟡 **MEDIUM**: 19 tasks
+- 🟢 **LOW**: 7 tasks
 
 ---
 
@@ -322,7 +323,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
-**Last Updated:** 2025-11-14  
+**Last Updated:** 2025-12-09  
 **Status:** 📋 Active Backlog
 
 ---
@@ -396,3 +397,18 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 ### Deferred from PR #10
 
 - None - All verification items were addressed (fixed or verified)
+
+---
+
+## PR #35 Additions
+
+**Date:** 2025-12-09  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #35 (Release Readiness Phase 3)
+
+- Task 23: Shell `&&`/`||` precedence bug (HIGH priority, LOW effort) - Deferred: edge case, not affecting core functionality
+- Task 24: Add comprehensive blocking vs non-blocking test cases (MEDIUM priority, MEDIUM effort)
+- Task 25: Remove duplicate `generate_assessment` function (MEDIUM priority, MEDIUM effort)
+- Task 26: Improve HTML tag test assertions (LOW priority, LOW effort)
+- Task 27: Refactor blocking criteria to use array iteration (LOW priority, MEDIUM effort)

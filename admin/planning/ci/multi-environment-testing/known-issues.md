@@ -56,6 +56,12 @@
   - Note: Local tests passing (17/17), CI-specific git issue
   - Issue: Git branch creation fails in CI (status 128)
   - Fixes included: gh CLI skipped check bug (PR32-#2), Phase 1 completion criteria (PR32-#6)
+- PR #35: Release Readiness Phase 3 (2025-12-09)
+  - Workflow Run: [20075363421](https://github.com/grimm00/dev-infra/actions/runs/20075363421)
+  - Status: Test failure in check-release-readiness.sh (test #6/81: git branch creation in CI)
+  - Note: Local tests passing (26/26), CI-specific git issue
+  - Issue: Git branch creation fails in CI (status 128) - same as PR #32
+  - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
 
 ---
 
