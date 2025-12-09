@@ -34,9 +34,9 @@ Implement the hybrid checklist format for release readiness assessments. This ph
 
 ### 1. Implement Assessment Generator (TDD)
 
-- [ ] **RED:** Write test for generating the full markdown document structure
-- [ ] **GREEN:** Implement markdown generation in `scripts/check-release-readiness.sh` (or separate gen script)
-- [ ] **REFACTOR:** Separate logic for template filling
+- [x] **RED:** Write test for generating the full markdown document structure
+- [x] **GREEN:** Implement markdown generation in `scripts/check-release-readiness.sh` (or separate gen script)
+- [x] **REFACTOR:** Separate logic for template filling
 
 ### 2. Implement Summary Calculation (TDD)
 
