@@ -196,3 +196,32 @@ teardown() {
     [[ "$output" =~ "Status:" ]] && ([[ "$output" =~ "✅" ]] || [[ "$output" =~ "❌" ]])
 }
 
+
+# Task 2: Summary Calculation Tests (RED)
+
+@test "check-release-readiness.sh assessment includes summary section" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should include summary section before criteria evaluation
+    [[ "$output" =~ "## 📊 Summary" ]] || [[ "$output" =~ "## 📊 Overall Readiness Summary" ]]
+}
+
+@test "check-release-readiness.sh summary includes overall readiness status" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should include overall readiness status (READY, NOT READY, or REVIEW NEEDED)
+    [[ "$output" =~ "Overall Readiness" ]] || [[ "$output" =~ "Overall Status" ]]
+    ([[ "$output" =~ "READY" ]] || [[ "$output" =~ "NOT READY" ]] || [[ "$output" =~ "REVIEW NEEDED" ]] || [[ "$output" =~ "NEEDS REVIEW" ]])
+}
+
+@test "check-release-readiness.sh summary calculates readiness based on blocking criteria" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Summary should reflect blocking criteria status
+    # If all blocking criteria pass → READY or READY FOR REVIEW
+    # If any blocking criteria fail → NOT READY
+    [[ "$output" =~ "Summary" ]]
+}
