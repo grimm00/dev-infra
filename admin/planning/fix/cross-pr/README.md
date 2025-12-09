@@ -45,7 +45,7 @@
 - **Status:** ✅ Complete
 - **Issues:** 4 issues (1 HIGH, 3 MEDIUM priority, all LOW effort)
 - **File:** [script-improvements-medium-low-01.md](script-improvements-medium-low-01.md)
-- **Completed:** 2025-12-09 via PR #[pending]
+- **Completed:** 2025-12-09 via PR #37
 - **Tasks:** 1, 3, 4, 23
 
 ### Test Improvements Batch (MEDIUM/LOW)
