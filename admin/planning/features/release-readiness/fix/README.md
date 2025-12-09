@@ -1,0 +1,48 @@
+# Release Readiness - Fix Tracking
+
+**Purpose:** Fix plans and tracking for Release Readiness feature  
+**Status:** ✅ Active  
+**Last Updated:** 2025-12-09
+
+---
+
+## 📋 Quick Links
+
+### Fix Batches
+
+- **[PR #32 Fixes](pr32/README.md)** - Fixes from PR #32 Sourcery review (🔴 Not Started)
+
+---
+
+## 📊 Summary
+
+**Total PRs:** 1  
+**Total Batches:** 3  
+**Status:** 🔴 Not Started
+
+**Priority Breakdown:**
+- 🟠 HIGH: 2 issues
+- 🟡 MEDIUM: 1 issue (quick fix)
+
+---
+
+## 🔴 Active PRs
+
+### PR #32 - Release Readiness Phase 1 & 2
+
+- **Status:** 🔴 Not Started
+- **Batches:** 3 batches
+  - batch-high-low-01 (1 issue) - Fix NOW
+  - batch-high-medium-01 (1 issue) - Can defer
+  - batch-medium-low-01 (1 issue) - Quick fix
+- **File:** [pr32/README.md](pr32/README.md)
+
+**Issues:**
+- PR32-#2: gh CLI skipped check bug (🟠 HIGH, 🟡 MEDIUM, 🟢 LOW) - **Fix NOW**
+- PR32-#3: Label filtering bug (🟠 HIGH, 🟡 MEDIUM, 🟡 MEDIUM) - Can defer
+- PR32-#6: Phase 1 checklist unchecked (🟡 MEDIUM, 🟢 LOW, 🟢 LOW) - Quick fix
+
+---
+
+**Last Updated:** 2025-12-09
+
