@@ -2,8 +2,27 @@
 
 **PR:** #32 - Release Readiness Phase 1 & 2 Complete  
 **Date:** 2025-12-09  
-**Status:** 🔴 Not Started  
+**Status:** ✅ Merged (2025-12-09)  
 **Last Updated:** 2025-12-09
+
+---
+
+## 📋 Deferred Issues
+
+**Date:** 2025-12-09  
+**Review:** PR #32 (Release Readiness Phase 1 & 2) Sourcery feedback  
+**Status:** 🟡 **DEFERRED** - 4 issues (1 HIGH, 3 MEDIUM priority), can be handled in future PRs
+
+**Deferred Issues:**
+
+- **PR32-#1:** JSON output flag unused (🟡 MEDIUM, 🟢 LOW) - Enhancement for future
+- **PR32-#3:** Label filtering uses AND not OR (🟠 HIGH, 🟡 MEDIUM) - Data gathering accuracy, can defer if not critical
+- **PR32-#4:** Missing branch test too permissive (🟡 MEDIUM, 🟢 LOW) - Test improvement PR
+- **PR32-#5:** Missing CHANGELOG test vacuous (🟡 MEDIUM, 🟢 LOW) - Test improvement PR
+
+**Action Plan:** 
+- Comment #3 (HIGH priority) can be deferred if data gathering not critical yet
+- Other issues (MEDIUM priority) can be handled opportunistically during future phases or in a dedicated test/code quality improvement PR
 
 ---
 
