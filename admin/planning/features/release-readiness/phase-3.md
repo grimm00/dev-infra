@@ -46,9 +46,9 @@ Implement the hybrid checklist format for release readiness assessments. This ph
 
 ### 3. Implement Evidence Sections (TDD)
 
-- [ ] **RED:** Write test for including command output/logs in evidence sections
-- [ ] **GREEN:** Capture validation details and embed in markdown (details/summary tags)
-- [ ] **REFACTOR:** Ensure readable formatting
+- [x] **RED:** Write test for including command output/logs in evidence sections
+- [x] **GREEN:** Capture validation details and embed in markdown (details/summary tags)
+- [x] **REFACTOR:** Ensure readable formatting
 
 ---
 
