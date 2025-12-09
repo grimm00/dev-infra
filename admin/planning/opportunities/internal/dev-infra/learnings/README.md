@@ -11,6 +11,7 @@
 
 ### Feature-Specific Learnings
 
+- **[Release Readiness Learnings](release-readiness/README.md)** - Phase learnings from Release Readiness feature (3 phases, 🟠 In Progress)
 - **[Templates Enhancement Learnings](templates-enhancement/README.md)** - Phase learnings from Templates Enhancement feature (5 phases, ✅ Complete)
 - **[Template Generation Testing Automation Learnings](template-generation-testing-automation/README.md)** - Phase learnings from Template Generation Testing Automation CI/CD improvement (1 phase)
 
@@ -38,11 +39,11 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 9  
-**Feature-Specific Learnings:** 2 features (6 phases total)  
+**Total Learning Documents:** 10  
+**Feature-Specific Learnings:** 3 features (7 phases total)  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2025-12-08
+**Last Updated:** 2025-12-09
 
