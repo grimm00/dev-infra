@@ -65,6 +65,33 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📊 Recent Updates
 
+### 2025-12-09: Task Phase Branch Validation (HIGH)
+
+**Branch:** `docs/task-phase-branch-validation`  
+**Status:** ✅ Applied to develop  
+**Commands Affected:** `task-phase`
+
+**Changes:**
+- **NEW:** Added "Pre-Task Branch Validation (BLOCKING)" section
+- Branch pattern validation before any work begins
+- Worktree conflict detection and handling
+- Auto-status update integration for task completion
+- Commit location verification (ensure on feature branch, not develop)
+
+**Impact:**
+- Prevents commits going to wrong branch
+- Ensures task checkboxes are marked complete automatically
+- Handles worktree scenarios gracefully
+
+**Root Cause:**
+- Phase 3 Task 3 commits went to `develop` instead of feature branch
+- Phase document not updated because working in wrong context
+- Worktree conflict prevented branch checkout
+
+**Details:** [2025-12-09-task-phase-branch-validation.md](updates/2025-12-09-task-phase-branch-validation.md)
+
+---
+
 ### 2025-12-09: Fix Implement PR Status Check (CRITICAL)
 
 **Branch:** `docs/fix-implement-pr-status-check`  
@@ -111,7 +138,7 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 2  
+**Total Updates:** 3  
 **Commands Maintained:** 4+  
 **Last Updated:** 2025-12-09
 

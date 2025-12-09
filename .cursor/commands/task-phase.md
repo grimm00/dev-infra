@@ -53,6 +53,52 @@ This command supports multiple phase organization patterns:
 
 ---
 
+## Pre-Task Branch Validation (BLOCKING)
+
+**CRITICAL:** This validation MUST pass before any work begins. Do NOT proceed if validation fails.
+
+### Validation Steps
+
+1. **Check Current Branch:**
+   ```bash
+   git branch --show-current
+   ```
+   
+2. **Expected Pattern:** `feat/[feature-name]-phase-N-*` or `feat/phase-N-*`
+
+3. **Validation Logic:**
+   - If on `develop` or `main` → **ERROR: Wrong branch**
+   - If on different feature branch → **ERROR: Wrong feature**
+   - If branch in worktree elsewhere → **ERROR: Worktree conflict**
+
+### Error Handling
+
+**Wrong Branch Error:**
+```
+❌ BLOCKING: Currently on 'develop', expected 'feat/[feature]-phase-N-*'
+   
+   Resolution:
+   1. Check out the correct feature branch: git checkout feat/[feature]-phase-N-[desc]
+   2. If branch exists in worktree, work from that worktree instead
+   3. If starting new phase, create branch: git checkout -b feat/[feature]-phase-N-[desc]
+```
+
+**Worktree Conflict Error:**
+```
+❌ BLOCKING: Branch 'feat/...' is checked out in worktree at '/path/to/worktree'
+   
+   Resolution:
+   1. Work from the worktree: cd /path/to/worktree
+   2. Or delete the worktree: git worktree remove /path/to/worktree
+   3. Then checkout: git checkout feat/...
+```
+
+### Enforcement
+
+- This check runs at the START of every `/task-phase` invocation
+- If validation fails, the command STOPS immediately
+- No code changes should be made until validation passes
+
 ## Workflow Overview
 
 **Pattern:**
@@ -371,6 +417,34 @@ git commit -m "feat(phase-3): add proj delete CLI command"
 - [ ] Task group fully implemented and tested
 - [ ] All commits made to feature branch
 - [ ] Tests passing
+
+**Auto-Status Update (MANDATORY):**
+
+After task implementation is complete, AUTOMATICALLY:
+
+1. **Update Phase Document:**
+   ```bash
+   # Mark task checkboxes as complete
+   # Change: - [ ] **RED:** ... → - [x] **RED:** ...
+   # Change: - [ ] **GREEN:** ... → - [x] **GREEN:** ...
+   # Update Last Updated field
+   ```
+
+2. **Commit Status Update:**
+   ```bash
+   git add [phase-document]
+   git commit -m "docs(phase-N): mark Task M complete"
+   ```
+
+3. **Verify Commit Location:**
+   ```bash
+   # Confirm commit is on feature branch, NOT develop
+   git branch --show-current  # Should be feat/...
+   git log --oneline -1       # Should show status commit
+   ```
+
+**Then STOP:**
+
 - [ ] **STOP - Do NOT proceed to next task group**
 - [ ] Present completion summary to user
 - [ ] Indicate which tasks were completed (e.g., "Tasks 1-2 complete: Filter tests + implementation")
