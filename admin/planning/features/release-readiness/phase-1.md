@@ -56,10 +56,10 @@ Standardize release readiness criteria based on current assessments (v1.2.0, v1.
 
 ## ✅ Completion Criteria
 
-- [ ] `admin/planning/releases/standard-criteria.md` created and complete
-- [ ] Criteria categorized and marked Blocking/Non-Blocking
-- [ ] `admin/planning/releases/TEMPLATE.md` created/updated
-- [ ] Documentation reviewed
+- [x] `admin/planning/releases/standard-criteria.md` created and complete
+- [x] Criteria categorized and marked Blocking/Non-Blocking
+- [x] `admin/planning/releases/TEMPLATE.md` created/updated
+- [x] Documentation reviewed
 
 ---
 
