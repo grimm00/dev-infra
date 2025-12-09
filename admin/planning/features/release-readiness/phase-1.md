@@ -33,23 +33,23 @@ Standardize release readiness criteria based on current assessments (v1.2.0, v1.
 
 ### 1. Document Standardized Criteria Set (Docs)
 
-- [ ] Extract criteria from v1.2.0 and v1.3.0 assessments
-- [ ] Create `admin/planning/releases/standard-criteria.md`
-- [ ] Define each criterion clearly
-- [ ] Add examples of passing/failing states
+- [x] Extract criteria from v1.2.0 and v1.3.0 assessments
+- [x] Create `admin/planning/releases/standard-criteria.md`
+- [x] Define each criterion clearly
+- [x] Add examples of passing/failing states
 
 ### 2. Categorize and Prioritize Criteria (Docs)
 
-- [ ] Group criteria into logical categories in the standards doc
-- [ ] Mark each as **Blocking** (Release cannot proceed) or **Informational** (Non-blocking)
-- [ ] Document rationale for blocking status
+- [x] Group criteria into logical categories in the standards doc
+- [x] Mark each as **Blocking** (Release cannot proceed) or **Informational** (Non-blocking)
+- [x] Document rationale for blocking status
 
 ### 3. Update Assessment Template (Docs)
 
-- [ ] Create `admin/planning/releases/TEMPLATE.md` (or update if exists)
-- [ ] Apply the new categorization structure
-- [ ] Add "Evidence" sections for each criterion
-- [ ] Add summary section template
+- [x] Create `admin/planning/releases/TEMPLATE.md` (or update if exists)
+- [x] Apply the new categorization structure
+- [x] Add "Evidence" sections for each criterion
+- [x] Add summary section template
 
 ---
 
