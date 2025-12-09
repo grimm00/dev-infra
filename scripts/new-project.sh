@@ -103,6 +103,11 @@ expand_env_vars() {
 }
 
 # Function to validate target directory
+# Return codes:
+#   0 - Directory exists and is writable
+#   1 - Parent directory doesn't exist (but path returned for creation attempt)
+#   2 - Directory or parent is not writable
+#   3 - Directory doesn't exist but parent exists and is writable (can be created)
 validate_target_directory() {
     local dir_path="$1"
     
@@ -207,7 +212,10 @@ validate_project_name() {
         # In non-interactive mode, fail immediately
         if [ "$NON_INTERACTIVE_MODE" = "true" ]; then
             local sanitized_name
-            sanitized_name="${name//[[:space:]]/-}"
+            # Trim leading/trailing whitespace before replacement
+            sanitized_name="${name#"${name%%[![:space:]]*}"}"
+            sanitized_name="${sanitized_name%"${sanitized_name##*[![:space:]]}"}"
+            sanitized_name="${sanitized_name//[[:space:]]/-}"
             print_error "Sanitized name would be: $sanitized_name"
             return 1
         fi
@@ -215,7 +223,10 @@ validate_project_name() {
         # Offer to replace all whitespace (spaces, tabs, newlines) with dashes
         # Use bash parameter expansion for cross-platform compatibility (no sed dependency)
         local sanitized_name
-        sanitized_name="${name//[[:space:]]/-}"
+        # Trim leading/trailing whitespace before replacement
+        sanitized_name="${name#"${name%%[![:space:]]*}"}"
+        sanitized_name="${sanitized_name%"${sanitized_name##*[![:space:]]}"}"
+        sanitized_name="${sanitized_name//[[:space:]]/-}"
         if prompt_yes_no "Would you like to use '$sanitized_name' instead?" "y"; then
             name="$sanitized_name"
             print_status "Using sanitized name: $name"
@@ -429,6 +440,9 @@ verify_github_auth() {
     github_login=$(gh api user --jq '.login // "unknown"' 2>/dev/null)
     if [ -n "$github_login" ] && [ "$github_login" != "unknown" ]; then
         print_status "Authenticated as: $github_login"
+    elif [ "$github_login" == "unknown" ]; then
+        print_warning "GitHub login returned 'unknown'. This may indicate authentication issues."
+        print_warning "Try running 'gh auth status' to verify your GitHub authentication."
     fi
     
     return 0
