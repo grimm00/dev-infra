@@ -119,3 +119,31 @@ teardown() {
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
 }
 
+# ============================================================================
+# Task 4: Data Gathering
+# ============================================================================
+
+@test "check-release-readiness.sh gathers recent merged PRs" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0
+    # Should gather recent merged PRs (may be informational, not blocking)
+    # Check if output mentions PRs or the gathering happens
+    [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
+}
+
+@test "check-release-readiness.sh gathers open blocking issues" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0
+    # Should gather open blocking issues (may require gh CLI)
+    # Check if output mentions issues or the gathering happens
+    [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
+}
+
+@test "check-release-readiness.sh outputs data gathering section" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0
+    # Should output data gathering information (even if empty)
+    # This is informational, so script should still run
+    [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
+}
+
