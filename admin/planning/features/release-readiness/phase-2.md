@@ -39,12 +39,12 @@ Implement a phased automation approach for release readiness checks. This phase 
 
 ### 2. Implement Fully Automated Checks (TDD)
 
-- [ ] **RED:** Write tests for detecting:
+- [x] **RED:** Write tests for detecting:
   - CI/CD test status (via gh cli)
   - Release branch existence
   - Version consistency
-- [ ] **GREEN:** Implement checks in script
-- [ ] **REFACTOR:** Modularize check functions
+- [x] **GREEN:** Implement checks in script
+- [x] **REFACTOR:** Modularize check functions
 
 ### 3. Implement Documentation Checks (TDD)
 
