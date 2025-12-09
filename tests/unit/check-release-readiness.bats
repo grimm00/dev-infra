@@ -233,7 +233,10 @@ teardown() {
     run "$SCRIPT" v1.4.0 --generate
     [ "$status" -eq 0 ]
     # Evidence sections should use HTML details/summary for collapsible content
-    [[ "$output" =~ "<details>" ]] || [[ "$output" =~ "<summary>" ]]
+    # Check for both opening tags (proper HTML structure)
+    [[ "$output" =~ "<details>" ]] && [[ "$output" =~ "<summary>" ]]
+    # Verify closing tags are present (proper HTML structure)
+    [[ "$output" =~ "</summary>" ]] && [[ "$output" =~ "</details>" ]]
 }
 
 @test "check-release-readiness.sh evidence sections include command output" {
