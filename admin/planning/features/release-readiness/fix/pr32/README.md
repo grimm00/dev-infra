@@ -13,6 +13,7 @@
 
 - **[batch-high-low-01.md](batch-high-low-01.md)** - HIGH priority, LOW effort (1 issue: gh CLI skipped check bug)
 - **[batch-high-medium-01.md](batch-high-medium-01.md)** - HIGH priority, MEDIUM effort (1 issue: label filtering bug - can defer)
+- **[batch-medium-low-01.md](batch-medium-low-01.md)** - MEDIUM priority, LOW effort (1 issue: Phase 1 checklist - quick fix)
 
 ---
 
@@ -20,12 +21,14 @@
 
 **Total Issues:** 6 (from Sourcery review)  
 **HIGH Priority Issues:** 2  
-**Batches Created:** 2 (HIGH priority only, as requested)  
+**Quick Fix Issues:** 1 (Comment #6 - trivial)  
+**Batches Created:** 3 (2 HIGH priority + 1 quick fix)  
 **Status:** 🔴 Not Started
 
 **Priority Breakdown:**
 - 🟠 HIGH: 2 issues (Comments #2, #3)
-- 🟡 MEDIUM: 4 issues (Comments #1, #4, #5, #6) - Not included in this fix plan
+- 🟡 MEDIUM: 4 issues (Comments #1, #4, #5, #6)
+  - Comment #6 included as quick fix batch
 
 ---
 
@@ -63,16 +66,31 @@
 
 ---
 
-## 🟡 MEDIUM Priority Issues (Not in This Fix Plan)
+## 🟡 Quick Fix Batch (MEDIUM priority, LOW effort)
 
-The following MEDIUM priority issues were identified but not included in this HIGH-priority fix plan:
+### Batch medium-low-01: Phase 1 checklist
 
-- **Comment #1:** JSON output flag unused (🟡 MEDIUM, 🟢 LOW)
-- **Comment #4:** Missing branch test too permissive (🟡 MEDIUM, 🟢 LOW)
-- **Comment #5:** Missing CHANGELOG test vacuous (🟡 MEDIUM, 🟢 LOW)
-- **Comment #6:** Phase 1 completion criteria unchecked (🟡 MEDIUM, 🟢 LOW)
+- **Status:** 🔴 Not Started
+- **Priority:** 🟡 MEDIUM
+- **Effort:** 🟢 LOW
+- **Issues:** 1 (PR32-#6)
+- **File:** [batch-medium-low-01.md](batch-medium-low-01.md)
+- **Estimated Time:** 2 minutes
 
-**Note:** Comment #6 (Phase 1 checklist) should be fixed quickly as it's trivial, but was marked MEDIUM priority in the review.
+**Issue:**
+- PR32-#6: Phase 1 completion criteria unchecked (🟡 MEDIUM, 🟢 LOW impact, 🟢 LOW effort)
+
+**Recommendation:** Fix this quickly - trivial change to check 4 boxes.
+
+---
+
+## 🟡 MEDIUM Priority Issues (Deferred)
+
+The following MEDIUM priority issues were deferred for future PRs:
+
+- **Comment #1:** JSON output flag unused (🟡 MEDIUM, 🟢 LOW) - Enhancement for future
+- **Comment #4:** Missing branch test too permissive (🟡 MEDIUM, 🟢 LOW) - Test improvement PR
+- **Comment #5:** Missing CHANGELOG test vacuous (🟡 MEDIUM, 🟢 LOW) - Test improvement PR
 
 ---
 
