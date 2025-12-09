@@ -30,7 +30,7 @@ This directory tracks project-wide fix batches that span multiple features or PR
 
 | Batch | Priority | Effort | Issues | Status |
 |-------|----------|--------|--------|--------|
-| [Quick Wins](cross-pr/quick-wins-low-low-01.md) | 🟢 LOW | 🟢 LOW | 3 | 🔴 Not Started |
+| [Quick Wins](cross-pr/quick-wins-low-low-01.md) | 🟢 LOW | 🟢 LOW | 3 | ✅ Complete |
 | [Script Improvements](cross-pr/script-improvements-medium-low-01.md) | 🟡 MEDIUM | 🟢 LOW | 4 | 🔴 Not Started |
 | [Test Improvements](cross-pr/test-improvements-medium-low-01.md) | 🟡 MEDIUM | 🟢 LOW | 4 | 🔴 Not Started |
 
