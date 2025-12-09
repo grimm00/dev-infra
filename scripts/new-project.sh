@@ -232,7 +232,8 @@ validate_project_name() {
     fi
     
     # Build full project path (normalize to prevent double slashes)
-    target_dir="${target_dir%/}"
+    # Remove all trailing slashes (greedy match)
+    target_dir="${target_dir%%/}"
     local full_path="$target_dir/$name"
     
     # Check if directory already exists in target location
