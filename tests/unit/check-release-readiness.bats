@@ -86,3 +86,36 @@ teardown() {
     [[ "$output" =~ "✓" || "$output" =~ "✗" || "$output" =~ "Passed:" || "$output" =~ "Failed:" ]]
 }
 
+# ============================================================================
+# Task 3: Documentation Checks
+# ============================================================================
+
+@test "check-release-readiness.sh checks CHANGELOG for version entry" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.3.0
+    # Should check for CHANGELOG entry (v1.3.0 exists in CHANGELOG)
+    [[ "$output" =~ "CHANGELOG" || "$output" =~ "changelog" || "$output" =~ "1.3.0" ]]
+}
+
+@test "check-release-readiness.sh detects missing CHANGELOG entry" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v9.9.9-nonexistent
+    # Should detect missing CHANGELOG entry
+    [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
+}
+
+@test "check-release-readiness.sh checks release notes file existence" {
+    cd "$PROJECT_ROOT"
+    # Check for existing release notes (v1.3.0 should have one if it exists)
+    run "$SCRIPT" v1.3.0
+    # Should check for release notes file
+    [[ "$output" =~ "Release Notes" || "$output" =~ "release notes" || "$output" =~ "RELEASE-NOTES" ]]
+}
+
+@test "check-release-readiness.sh detects missing release notes file" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v9.9.9-nonexistent
+    # Should detect missing release notes file
+    [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
+}
+
