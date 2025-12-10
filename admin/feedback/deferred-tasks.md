@@ -10,7 +10,7 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 28 (1 new from PR #36, 1 fixed in PR #36)
+**Total Tasks:** 25 (3 fixed in PR #39, 3 new from PR #39)
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
 - 🟡 **MEDIUM**: 19 tasks
@@ -445,6 +445,19 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ### Deferred from PR #38 (Test Improvements Cross-PR Batch)
 
-- Task 31: Tighten path expansion test assertion for undefined vars (MEDIUM priority, LOW effort) - Deferred: test assertion precision
-- Task 32: Clarify existing file collision test assertion (MEDIUM priority, LOW effort) - Deferred: test assertion clarity
-- Task 33: Tighten assertions in gh CLI and path expansion tests (MEDIUM priority, LOW effort) - Deferred: test assertion robustness
+- Task 31: Tighten path expansion test assertion for undefined vars (MEDIUM priority, LOW effort) - Deferred: test assertion precision - ✅ Fixed in PR #39
+- Task 32: Clarify existing file collision test assertion (MEDIUM priority, LOW effort) - Deferred: test assertion clarity - ✅ Fixed in PR #39
+- Task 33: Tighten assertions in gh CLI and path expansion tests (MEDIUM priority, LOW effort) - Deferred: test assertion robustness - ✅ Fixed in PR #39
+
+---
+
+## PR #39 Additions
+
+**Date:** 2025-12-10  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #39 (Test Assertion Precision Cross-PR Batch)
+
+- Task 34: Mock gh should not fall back to real binary (MEDIUM priority, LOW effort) - Deferred: test hermiticity improvement
+- Task 35: Clarify task count documentation mismatch (LOW priority, LOW effort) - Deferred: documentation clarity
+- Task 36: Improve skipped test assertion clarity (LOW priority, LOW effort) - Deferred: test documentation
