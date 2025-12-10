@@ -81,6 +81,7 @@ This command supports multiple project organization patterns, matching `/task-ph
 - `--no-push` - Create PR description but don't push branch or create PR
 - `--body-file [path]` - Use custom body file instead of generating
 - `--title [title]` - Override default PR title
+- `--force` - (Release mode only) Override blocking readiness checks with justification
 
 ---
 
@@ -944,6 +945,86 @@ gh pr create --title "fix: [Batch Description] ([batch-name])" \
 
 ---
 
+### 1a. Validate Release Readiness (NEW)
+
+**Purpose:** Ensure release is ready before creating PR. Critical checks must pass or be explicitly overridden.
+
+**Run readiness check:**
+
+```bash
+# Run the readiness check script
+./scripts/check-release-readiness.sh [version]
+
+# Example:
+./scripts/check-release-readiness.sh v1.4.0
+```
+
+**Evaluate results:**
+
+The script reports:
+- ✅ Passed checks (release branch exists, version format, etc.)
+- ❌ Failed checks (blocking criteria)
+- ⚠️ Warnings (non-blocking issues)
+
+**Blocking Criteria:**
+
+If any of these fail, **do NOT create PR** (unless overridden):
+- Release branch exists
+- CHANGELOG has version entry
+- Release notes file exists
+- No critical open issues blocking release (if configured)
+
+**Non-Blocking Criteria:**
+
+These generate warnings but don't block PR creation:
+- CI status (if temporarily failing)
+- Documentation gaps (if minor)
+
+**If blocking criteria fail:**
+
+```
+⚠️ RELEASE NOT READY - PR creation blocked
+
+Blocking failures:
+- ❌ [Failure 1]
+- ❌ [Failure 2]
+
+To proceed anyway, use: /pr --release [version] --force
+```
+
+**If all checks pass:**
+
+```
+✅ RELEASE READY - Proceeding with PR creation
+
+All blocking criteria passed:
+- ✅ Release branch exists
+- ✅ CHANGELOG has version entry
+- ✅ Release notes file exists
+```
+
+**Override option:**
+
+- `--force` flag allows PR creation despite blocking failures
+- Use with caution - document why override is acceptable
+- Add override justification to PR description
+
+**Generate assessment for PR:**
+
+```bash
+# Generate assessment to include in PR
+./scripts/check-release-readiness.sh [version] --generate > /tmp/readiness-assessment.md
+```
+
+**Checklist:**
+
+- [ ] Readiness check executed
+- [ ] Results evaluated
+- [ ] Blocking criteria passed (or override justified)
+- [ ] Ready to create PR
+
+---
+
 ### 2. Generate PR Description (Release)
 
 **PR Title:**
@@ -1361,7 +1442,7 @@ git branch --show-current
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active  
-**Next:** Use to create PRs for phases, fixes, and releases (supports feature-specific and project-wide structures)
+**Next:** Use to create PRs for phases, fixes, and releases (includes readiness validation for release PRs)
 
