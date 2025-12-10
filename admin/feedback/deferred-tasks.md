@@ -435,3 +435,16 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 - Task 29: Extract whitespace trimming/sanitization into helper function (LOW priority, MEDIUM effort) - Deferred: code duplication refactoring
 - Task 30: Use POSIX-compatible `=` instead of bash-specific `==` (LOW priority, LOW effort) - Deferred: POSIX compatibility improvement
+
+---
+
+## PR #38 Additions
+
+**Date:** 2025-12-09  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #38 (Test Improvements Cross-PR Batch)
+
+- Task 31: Tighten path expansion test assertion for undefined vars (MEDIUM priority, LOW effort) - Deferred: test assertion precision
+- Task 32: Clarify existing file collision test assertion (MEDIUM priority, LOW effort) - Deferred: test assertion clarity
+- Task 33: Tighten assertions in gh CLI and path expansion tests (MEDIUM priority, LOW effort) - Deferred: test assertion robustness

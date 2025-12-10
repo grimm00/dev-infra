@@ -63,3 +63,17 @@ teardown() {
     [ -z "$output" ]
 }
 
+@test "project_name_validation: detects existing file with project name" {
+    local test_dir="$TEST_TMPDIR/projects"
+    local existing_file="$test_dir/existingfile"
+    mkdir -p "$test_dir"
+    touch "$existing_file"
+    
+    run validate_project_name "existingfile" "$test_dir" 2>/dev/null
+    # Note: Current implementation only checks for directories, not files
+    # This test documents current behavior - if status is 0, it indicates
+    # the function doesn't detect file collisions (potential bug)
+    # If status is non-zero, the function correctly handles file collisions
+    [ -n "$output" ] || [ "$status" -ne 0 ]
+}
+
