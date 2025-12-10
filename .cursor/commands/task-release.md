@@ -35,7 +35,7 @@ This command supports multiple project organization patterns:
 - To implement release checklist items
 - Following TDD workflow for release tasks
 
-**Key principle:** Implement release tasks with TDD discipline, ensuring each task is tested and documented before moving to the next.
+**Key principle:** Implement release tasks with TDD discipline, ensuring each task is tested and documented before moving to the next. **Always run readiness check before starting tasks.**
 
 ---
 
@@ -91,6 +91,56 @@ ls docs/maintainers/planning/releases/[version]/checklist.md
 - [ ] Release documents found
 - [ ] Documents are readable
 - [ ] Current branch is release branch (if applicable)
+
+---
+
+### 1a. Run Readiness Check (NEW)
+
+**Purpose:** Validate release readiness before implementing tasks. Ensures critical criteria are met and provides visibility into release status.
+
+**Run readiness check:**
+
+```bash
+# Run the readiness check script
+./scripts/check-release-readiness.sh [version]
+
+# Example:
+./scripts/check-release-readiness.sh v1.4.0
+```
+
+**Review output:**
+
+The script will report:
+- ✅ Passed checks (release branch, version format, etc.)
+- ❌ Failed checks (blocking criteria)
+- ⚠️ Warnings (non-blocking issues)
+- 📊 Data gathered (recent PRs, open issues)
+
+**If critical checks fail:**
+
+- ⚠️ **Warning:** Release readiness has blocking failures
+- Review the failures before proceeding
+- Some tasks may address the failures (e.g., creating release notes)
+- Document any known issues that will be addressed during release
+
+**If all checks pass:**
+
+- ✅ Release is ready for task implementation
+- Proceed to load and implement tasks
+
+**Generate assessment (optional):**
+
+```bash
+# Generate full assessment document
+./scripts/check-release-readiness.sh [version] --generate > admin/planning/releases/[version]/RELEASE-READINESS.md
+```
+
+**Checklist:**
+
+- [ ] Readiness check executed
+- [ ] Output reviewed
+- [ ] Blocking failures identified (if any)
+- [ ] Decision made to proceed or address failures first
 
 ---
 
@@ -369,6 +419,7 @@ chore: Release [version]
 ### Before Starting
 
 - Ensure transition plan exists
+- **Run readiness check:** `./scripts/check-release-readiness.sh [version]`
 - Review release checklist
 - Understand task requirements
 - Check dependencies
@@ -405,7 +456,7 @@ chore: Release [version]
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active  
-**Next:** Use to implement release preparation tasks following TDD workflow
+**Next:** Use to implement release preparation tasks following TDD workflow (includes readiness check integration)
 

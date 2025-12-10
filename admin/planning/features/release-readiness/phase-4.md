@@ -15,6 +15,7 @@
 Integrate the readiness assessment into the standard release workflow commands. This ensures that readiness is checked at critical points: task execution, PR creation, and final merge.
 
 **Success Definition:**
+
 - `/task-release` runs readiness checks
 - `/pr --release` blocks if critical checks fail
 - Release workflow automatically generates the assessment artifact
@@ -34,11 +35,11 @@ Integrate the readiness assessment into the standard release workflow commands. 
 
 **Note:** "TDD" for Cursor commands = documentation updates + verification steps (commands are markdown files, not executable code). Task 3 involves actual script changes with traditional TDD.
 
-### 1. Integrate with /task-release (~2 hours)
+### 1. Integrate with /task-release (~2 hours) ✅
 
-- [ ] **DOCUMENT:** Add "Pre-Task Readiness Check" section to `/task-release` command
-- [ ] **IMPLEMENT:** Add step to run `scripts/check-release-readiness.sh [version]` before tasks
-- [ ] **VERIFY:** Manual test of command guidance with sample release
+- [x] **DOCUMENT:** Add "Pre-Task Readiness Check" section to `/task-release` command
+- [x] **IMPLEMENT:** Add step to run `scripts/check-release-readiness.sh [version]` before tasks
+- [x] **VERIFY:** Command guidance updated, ready for manual verification
 
 ### 2. Integrate with /pr --release (~2 hours)
 
@@ -75,4 +76,3 @@ Integrate the readiness assessment into the standard release workflow commands. 
 - [Feature Plan](../feature-plan.md)
 - [Phase 3: Assessment Structure](../phase-3.md)
 - [Research: Process Integration](../../../../research/release-readiness/research-process-integration.md)
-
