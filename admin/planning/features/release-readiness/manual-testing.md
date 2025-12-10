@@ -1,16 +1,18 @@
 # Release Readiness - Manual Testing Guide
 
 **Feature:** Release Readiness  
-**Phase:** 3  
+**Phases:** 3, 5  
 **Status:** 🟠 In Progress  
-**Last Updated:** 2025-12-09  
-**PR:** #35
+**Last Updated:** 2025-12-10  
+**PRs:** #35, #42
 
 ---
 
 ## 📋 Overview
 
-Manual testing guide for the Release Readiness feature, specifically Phase 3: Assessment Structure implementation.
+Manual testing guide for the Release Readiness feature:
+- Phase 3: Assessment Structure implementation
+- Phase 5: Historical Tracking implementation
 
 ---
 
@@ -125,6 +127,100 @@ Manual testing guide for the Release Readiness feature, specifically Phase 3: As
 
 ---
 
+### Scenario 6: Generate Assessment with Metadata (Phase 5)
+
+**Test:** Verify YAML frontmatter metadata in generated assessment
+
+**CLI Test:**
+
+```bash
+./scripts/check-release-readiness.sh --generate v1.4.0 | head -20
+```
+
+**Verification:**
+
+- [ ] Output starts with `---` (YAML frontmatter marker)
+- [ ] Contains `version: v1.4.0` field
+- [ ] Contains `date:` field with current date
+- [ ] Contains `readiness_score:` field
+- [ ] Contains `blocking_failures:` field
+- [ ] Contains `total_checks:`, `passed_checks:`, `warnings:` fields
+- [ ] Contains `status:` field (READY/NOT_READY/BLOCKED)
+- [ ] Ends frontmatter with closing `---`
+- [ ] Markdown content follows after frontmatter
+
+**Expected Result:** ✅ YAML metadata generated correctly
+
+---
+
+### Scenario 7: Analyze Historical Releases (Phase 5)
+
+**Test:** Verify historical analysis with test fixtures
+
+**CLI Test:**
+
+```bash
+./scripts/analyze-releases.sh --dir tests/fixtures/release-assessments
+```
+
+**Verification:**
+
+- [ ] Parses multiple assessment files
+- [ ] Displays "Release Readiness Analysis" header
+- [ ] Shows table with columns: Version, Date, Score, Fail, Total, Pass, Warn, Status
+- [ ] Lists releases in reverse chronological order (newest first)
+- [ ] Shows "Summary Metrics" section
+- [ ] Displays "Total Releases Analyzed"
+- [ ] Displays "Average Readiness Score"
+- [ ] Displays "Trend" with indicator (📈 Improving / 📉 Declining / ➡️ Stable)
+
+**Expected Result:** ✅ Historical analysis displays correctly
+
+---
+
+### Scenario 8: JSON Output Format (Phase 5)
+
+**Test:** Verify JSON output with metrics
+
+**CLI Test:**
+
+```bash
+./scripts/analyze-releases.sh --dir tests/fixtures/release-assessments --json
+```
+
+**Verification:**
+
+- [ ] Output is valid JSON
+- [ ] Contains `releases` array
+- [ ] Each release has `version`, `date`, `readiness_score`, `blocking_failures`, `total_checks`, `passed_checks`, `warnings`, `status` fields
+- [ ] Contains `metrics` object
+- [ ] Metrics includes `total_releases` field
+- [ ] Metrics includes `average_readiness_score` field
+
+**Expected Result:** ✅ JSON output formatted correctly
+
+---
+
+### Scenario 9: Last N Releases Filter (Phase 5)
+
+**Test:** Verify `--last N` option limits output
+
+**CLI Test:**
+
+```bash
+./scripts/analyze-releases.sh --dir tests/fixtures/release-assessments --last 2
+```
+
+**Verification:**
+
+- [ ] Shows only 2 most recent releases
+- [ ] Summary metrics calculated for 2 releases only
+- [ ] Trend compares the 2 shown releases
+
+**Expected Result:** ✅ Last N filter works correctly
+
+---
+
 ## ✅ Acceptance Criteria
 
 ### Phase 3 Requirements
@@ -135,26 +231,51 @@ Manual testing guide for the Release Readiness feature, specifically Phase 3: As
 - [x] Evidence sections use collapsible HTML tags
 - [x] All 26 unit tests passing
 
+### Phase 5 Requirements
+
+- [ ] YAML frontmatter metadata added to assessment generation
+- [ ] Historical analysis script (`analyze-releases.sh`) implemented
+- [ ] Metrics reporting with average score calculation
+- [ ] Trend analysis (improving/declining/stable)
+- [ ] JSON output format with metrics object
+- [ ] `--last N` option to limit releases
+- [ ] All 107 unit tests passing (21 new tests for Phase 5)
+
 ---
 
 ## 📝 Test Results
+
+### Phase 3 Testing (2025-12-09)
 
 **Tested:** 2025-12-09  
 **Tester:** AI Assistant  
 **Environment:** macOS (local)
 
-### Summary
-
-- **Scenarios Tested:** 5
+**Summary:**
+- **Scenarios Tested:** 5 (Scenarios 1-5)
 - **Scenarios Passed:** 5
 - **Scenarios Failed:** 0
 
-### Notes
-
-- All manual testing scenarios pass
+**Notes:**
+- All Phase 3 manual testing scenarios pass
 - Unit tests pass locally (26/26)
 - CI tests have known issue with git branch creation (Known Issue #1)
 
+### Phase 5 Testing (Pending)
+
+**Tested:** [To be run]  
+**Tester:** [To be assigned]  
+**Environment:** [To be tested]
+
+**Summary:**
+- **Scenarios Tested:** 0 (Scenarios 6-9)
+- **Scenarios Passed:** 0
+- **Scenarios Failed:** 0
+
+**Notes:**
+- Phase 5 scenarios added, ready for testing
+- Unit tests pass locally (107/107 including 21 new Phase 5 tests)
+
 ---
 
-**Last Updated:** 2025-12-09
+**Last Updated:** 2025-12-10
