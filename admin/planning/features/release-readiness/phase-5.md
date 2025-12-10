@@ -38,11 +38,11 @@ Implement tracking for release readiness metrics over time. This allows for anal
 - [x] **GREEN:** Update `check-release-readiness.sh --generate` to include YAML frontmatter
 - [x] **REFACTOR:** Removed duplicate function definition, standardized metadata fields
 
-### 2. Create Analysis Script (~1.5 hours) (TDD)
+### 2. Create Analysis Script (~1.5 hours) (TDD) ✅
 
-- [ ] **RED:** Write test for parsing multiple historical assessment files
-- [ ] **GREEN:** Create `scripts/analyze-releases.sh` (bash for consistency)
-- [ ] **REFACTOR:** Add `--json` and `--verbose` flags
+- [x] **RED:** Write test for parsing multiple historical assessment files (10 tests)
+- [x] **GREEN:** Create `scripts/analyze-releases.sh` (bash for consistency)
+- [x] **REFACTOR:** Added `--json`, `--verbose`, and `--last N` flags
 
 ### 3. Implement Metrics Reporting (~30 min) (TDD)
 
