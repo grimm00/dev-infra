@@ -65,32 +65,30 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📊 Recent Updates
 
-### 2025-12-10: Task Phase Pre-Review Integration (MEDIUM)
+### 2025-12-10: Address Review Command (MEDIUM)
 
-**Branch:** `docs/task-phase-review-integration`  
+**Branch:** `docs/address-review-command`  
 **Status:** ✅ Applied to develop  
-**Commands Affected:** `task-phase`
+**Commands Affected:** `address-review` (NEW), `task-phase` (MODIFIED)
 
 **Changes:**
-- **NEW:** Added `--from-review [path]` option
-- **NEW:** Added "Pre-Implementation Review Integration" section
-- Loads `/pre-phase-review` output and addresses gaps before implementation
-- Supports parsing blockers, action items, recommendations
-- Updates phase documents with recommended changes
-- Marks review items as addressed with audit trail
+- **NEW:** Created `/address-review` command for addressing pre-phase review gaps
+- **MODIFIED:** Removed `--from-review` from `/task-phase` (separation of concerns)
+- **MODIFIED:** Updated `/task-phase` with "Pre-Phase Review Workflow" section
+- Separates planning/documentation updates from implementation
 
 **Impact:**
-- Seamless workflow: Review → Address Gaps → Implement
-- Prevents starting work with missing requirements
-- Creates audit trail of addressed review items
-- Integrates smoothly with TDD workflow
+- Clearer workflow: `/pre-phase-review` → `/address-review` → `/task-phase`
+- Single responsibility: Each command does one thing well
+- Better control: Can address gaps without starting implementation
+- Supersedes the previous `--from-review` integration
 
 **Root Cause:**
-- Phase 5 pre-review identified gaps (missing estimates, undefined schema)
-- No way to systematically address review findings before implementation
-- Manual process was error-prone and didn't track what was addressed
+- User feedback: Implementation should be kept separate from planning/doc updating
+- `--from-review` combined two concerns into one command
+- Better design: Three separate commands for three separate steps
 
-**Details:** [2025-12-10-task-phase-review-integration.md](updates/2025-12-10-task-phase-review-integration.md)
+**Details:** [2025-12-10-address-review-command.md](updates/2025-12-10-address-review-command.md)
 
 ---
 
@@ -223,8 +221,8 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 6  
-**Commands Maintained:** 6+  
+**Total Updates:** 7  
+**Commands Maintained:** 7+  
 **Last Updated:** 2025-12-10
 
 ---

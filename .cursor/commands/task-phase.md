@@ -145,7 +145,6 @@ This command supports multiple phase organization patterns:
 - `/task-phase 4 5` - Implement Phase 4, Task 5 (CLI enhancement)
 - `/task-phase 4 1 --feature my-feature` - Specify feature name
 - `/task-phase 4 1 --project-wide` - Use project-wide phase structure
-- `/task-phase 5 1 --from-review phase-5-review.md` - Start with review integration
 
 **Task Grouping:**
 
@@ -159,7 +158,8 @@ This command supports multiple phase organization patterns:
 - `--project-wide` - Use project-wide phase structure
 - `--phase-type [type]` - Specify phase type (phase, milestone, sprint)
 - `--force-pr` - Force PR creation even for docs-only phases (overrides auto-detection)
-- `--from-review [path]` - Load pre-phase review document and address gaps before implementation
+
+**Note:** To address pre-phase review gaps before implementation, use `/address-review` command first.
 
 **Note:** For CI/CD improvements, use `/task-improvement` command instead.
 
@@ -198,81 +198,21 @@ A phase requires PR if:
 
 ---
 
-## Pre-Implementation Review Integration (`--from-review`)
+## Pre-Phase Review Workflow
 
-**When to use:** When a pre-phase review has been completed and action items need to be addressed before starting implementation.
+**Before starting implementation**, ensure phase plan is complete:
 
-**Purpose:** Load findings from `/pre-phase-review` and ensure all gaps are addressed before coding begins.
+1. **Run `/pre-phase-review [N]`** to identify gaps
+2. **Run `/address-review [review-path]`** to address gaps (if any found)
+3. **Run `/task-phase [N] [task]`** to start implementation (this command)
 
-**Workflow:**
+**Separation of Concerns:**
 
-1. **Run `/pre-phase-review [phase-number]` first** to identify issues
-2. **Review the findings** and decide which items to address
-3. **Run `/task-phase [phase] 1 --from-review [path]`** to start with review integration
+- **`/pre-phase-review`** - Identifies issues (creates review document)
+- **`/address-review`** - Addresses issues (updates phase document)
+- **`/task-phase`** - Implements work (writes code/tests)
 
-**Process:**
-
-When `--from-review` is provided:
-
-1. **Load review document:**
-   ```bash
-   # Review path examples:
-   # Feature-specific: docs/maintainers/planning/features/[feature]/phase-N-review.md
-   # Project-wide: docs/maintainers/planning/phases/phase-N-review.md
-   # Dev-infra: admin/planning/features/[feature]/phase-N-review.md
-   ```
-
-2. **Parse review findings:**
-   - Extract "Action Items" checklist
-   - Extract "Blockers" section
-   - Extract "Recommendations" sections
-   - Extract readiness status (Ready / Needs Work / Not Ready)
-
-3. **If review status is "Not Ready" or "Needs Work":**
-   - Display blockers and action items
-   - Ask user how to proceed:
-     - **Address now:** Update phase document with recommended changes
-     - **Skip item:** Mark as intentionally skipped with reason
-     - **Already addressed:** Confirm item was addressed externally
-
-4. **Update phase document:**
-   - Add recommended implementation details
-   - Add effort estimates (if missing)
-   - Add technical specifications (if missing)
-   - Add test data requirements (if missing)
-
-5. **Mark review items as addressed:**
-   - Update review document action items with ✅
-   - Add "Addressed:" date and notes
-   - Update review status to "✅ Ready" when all blockers resolved
-
-6. **Proceed with normal task-phase workflow** (Step 1+)
-
-**Example:**
-
-```bash
-# Run pre-phase review
-/pre-phase-review --feature release-readiness 5
-
-# Review shows "🟡 Needs Work" with action items
-
-# Start task-phase with review integration
-/task-phase 5 1 --feature release-readiness --from-review admin/planning/features/release-readiness/phase-5-review.md
-
-# Command will:
-# 1. Load phase-5-review.md
-# 2. Display action items and blockers
-# 3. Help address gaps in phase-5.md
-# 4. Update review status
-# 5. Proceed with Task 1 implementation
-```
-
-**Benefits:**
-
-- Ensures phase plans are complete before coding
-- Creates audit trail of what was addressed
-- Prevents starting work with missing requirements
-- Integrates smoothly with TDD workflow
+This keeps planning/documentation updates separate from implementation.
 
 ---
 
@@ -957,6 +897,7 @@ Tasks are typically numbered in phase documents:
 **Related Commands:**
 
 - `/pre-phase-review [N]` - Review phase plan before implementation
+- `/address-review [path]` - Address pre-phase review gaps (run before task-phase)
 - `/pr --phase [N]` - Create PR for completed phase
 - `/fix-plan` - Create fix plans from reviews
 - `/fix-implement` - Implement fixes from batches
