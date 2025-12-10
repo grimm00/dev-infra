@@ -12,18 +12,20 @@
 
 - **[PR #32 Fixes](pr32/README.md)** - Fixes from PR #32 Sourcery review (🟠 In Progress)
 - **[PR #35 Fixes](pr35/README.md)** - Fixes from PR #35 Sourcery review (🟡 Deferred)
+- **[PR #41 Fixes](pr41/README.md)** - Fixes from PR #41 Sourcery review (🟡 Deferred)
 
 ---
 
 ## 📊 Summary
 
-**Total PRs:** 2  
-**Total Batches:** 3 (PR #32) + 5 deferred (PR #35)  
+**Total PRs:** 3  
+**Total Batches:** 3 (PR #32) + 5 deferred (PR #35) + 5 deferred (PR #41)  
 **Status:** 🟠 In Progress
 
 **Priority Breakdown:**
 - 🟠 HIGH: 2 issues (1 fixed)
-- 🟡 MEDIUM: 1 issue (fixed)
+- 🟡 MEDIUM: 3 issues (1 fixed)
+- 🟢 LOW: 3 issues
 
 ---
 
@@ -60,5 +62,20 @@
 
 ---
 
-**Last Updated:** 2025-12-09
+### PR #41 - Release Readiness Phase 4
+
+- **Status:** 🟡 Deferred (all MEDIUM/LOW priority)
+- **Issues:** 5 deferred issues
+  - PR41-#1: Git repository check (🟡 MEDIUM) - 🟡 Deferred
+  - PR41-#2: Dry-run banner messaging (🟢 LOW) - 🟢 Document for future
+  - PR41-#3: Non-dry-run test coverage (🟡 MEDIUM) - 🟡 Deferred
+  - PR41-Overall-1: Dry-run simulation messaging (🟢 LOW) - Same as #2
+  - PR41-Overall-2: Argument order flexibility (🟢 LOW) - 🟢 Document for future
+- **File:** [pr41/README.md](pr41/README.md)
+
+**Note:** All issues from PR #41 are MEDIUM/LOW priority and tracked in `admin/feedback/deferred-tasks.md` (Tasks 39-43).
+
+---
+
+**Last Updated:** 2025-12-10
 
