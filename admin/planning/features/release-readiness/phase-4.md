@@ -41,11 +41,12 @@ Integrate the readiness assessment into the standard release workflow commands. 
 - [x] **IMPLEMENT:** Add step to run `scripts/check-release-readiness.sh [version]` before tasks
 - [x] **VERIFY:** Command guidance updated, ready for manual verification
 
-### 2. Integrate with /pr --release (~2 hours)
+### 2. Integrate with /pr --release (~2 hours) ✅
 
-- [ ] **DOCUMENT:** Add readiness validation step to `/pr` command's release mode
-- [ ] **IMPLEMENT:** Add blocking logic: "If critical checks fail, do not create PR"
-- [ ] **VERIFY:** Manual test of command guidance with sample release
+- [x] **DOCUMENT:** Add readiness validation step to `/pr` command's release mode
+- [x] **IMPLEMENT:** Add blocking logic: "If critical checks fail, do not create PR"
+- [x] **IMPLEMENT:** Add `--force` option to override blocking checks
+- [x] **VERIFY:** Command guidance updated, ready for manual verification
 
 ### 3. Release Branch Integration (~1 hour)
 
