@@ -145,6 +145,7 @@ This command supports multiple phase organization patterns:
 - `/task-phase 4 5` - Implement Phase 4, Task 5 (CLI enhancement)
 - `/task-phase 4 1 --feature my-feature` - Specify feature name
 - `/task-phase 4 1 --project-wide` - Use project-wide phase structure
+- `/task-phase 5 1 --from-review phase-5-review.md` - Start with review integration
 
 **Task Grouping:**
 
@@ -158,6 +159,7 @@ This command supports multiple phase organization patterns:
 - `--project-wide` - Use project-wide phase structure
 - `--phase-type [type]` - Specify phase type (phase, milestone, sprint)
 - `--force-pr` - Force PR creation even for docs-only phases (overrides auto-detection)
+- `--from-review [path]` - Load pre-phase review document and address gaps before implementation
 
 **Note:** For CI/CD improvements, use `/task-improvement` command instead.
 
@@ -193,6 +195,84 @@ A phase requires PR if:
 - Do NOT continue to next task group automatically
 - Use `/pr --phase [N]` command when all tasks are complete to create PR (for code phases)
 - Docs-only phases merge directly to develop (no PR needed)
+
+---
+
+## Pre-Implementation Review Integration (`--from-review`)
+
+**When to use:** When a pre-phase review has been completed and action items need to be addressed before starting implementation.
+
+**Purpose:** Load findings from `/pre-phase-review` and ensure all gaps are addressed before coding begins.
+
+**Workflow:**
+
+1. **Run `/pre-phase-review [phase-number]` first** to identify issues
+2. **Review the findings** and decide which items to address
+3. **Run `/task-phase [phase] 1 --from-review [path]`** to start with review integration
+
+**Process:**
+
+When `--from-review` is provided:
+
+1. **Load review document:**
+   ```bash
+   # Review path examples:
+   # Feature-specific: docs/maintainers/planning/features/[feature]/phase-N-review.md
+   # Project-wide: docs/maintainers/planning/phases/phase-N-review.md
+   # Dev-infra: admin/planning/features/[feature]/phase-N-review.md
+   ```
+
+2. **Parse review findings:**
+   - Extract "Action Items" checklist
+   - Extract "Blockers" section
+   - Extract "Recommendations" sections
+   - Extract readiness status (Ready / Needs Work / Not Ready)
+
+3. **If review status is "Not Ready" or "Needs Work":**
+   - Display blockers and action items
+   - Ask user how to proceed:
+     - **Address now:** Update phase document with recommended changes
+     - **Skip item:** Mark as intentionally skipped with reason
+     - **Already addressed:** Confirm item was addressed externally
+
+4. **Update phase document:**
+   - Add recommended implementation details
+   - Add effort estimates (if missing)
+   - Add technical specifications (if missing)
+   - Add test data requirements (if missing)
+
+5. **Mark review items as addressed:**
+   - Update review document action items with ✅
+   - Add "Addressed:" date and notes
+   - Update review status to "✅ Ready" when all blockers resolved
+
+6. **Proceed with normal task-phase workflow** (Step 1+)
+
+**Example:**
+
+```bash
+# Run pre-phase review
+/pre-phase-review --feature release-readiness 5
+
+# Review shows "🟡 Needs Work" with action items
+
+# Start task-phase with review integration
+/task-phase 5 1 --feature release-readiness --from-review admin/planning/features/release-readiness/phase-5-review.md
+
+# Command will:
+# 1. Load phase-5-review.md
+# 2. Display action items and blockers
+# 3. Help address gaps in phase-5.md
+# 4. Update review status
+# 5. Proceed with Task 1 implementation
+```
+
+**Benefits:**
+
+- Ensures phase plans are complete before coding
+- Creates audit trail of what was addressed
+- Prevents starting work with missing requirements
+- Integrates smoothly with TDD workflow
 
 ---
 
@@ -876,12 +956,13 @@ Tasks are typically numbered in phase documents:
 
 **Related Commands:**
 
+- `/pre-phase-review [N]` - Review phase plan before implementation
 - `/pr --phase [N]` - Create PR for completed phase
 - `/fix-plan` - Create fix plans from reviews
 - `/fix-implement` - Implement fixes from batches
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active  
-**Next:** Use to implement phase tasks following TDD workflow (supports feature-specific and project-wide phases)
+**Next:** Use to implement phase tasks following TDD workflow (supports feature-specific and project-wide phases, now with pre-phase review integration)

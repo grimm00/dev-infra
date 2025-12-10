@@ -65,6 +65,35 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📊 Recent Updates
 
+### 2025-12-10: Task Phase Pre-Review Integration (MEDIUM)
+
+**Branch:** `docs/task-phase-review-integration`  
+**Status:** ✅ Applied to develop  
+**Commands Affected:** `task-phase`
+
+**Changes:**
+- **NEW:** Added `--from-review [path]` option
+- **NEW:** Added "Pre-Implementation Review Integration" section
+- Loads `/pre-phase-review` output and addresses gaps before implementation
+- Supports parsing blockers, action items, recommendations
+- Updates phase documents with recommended changes
+- Marks review items as addressed with audit trail
+
+**Impact:**
+- Seamless workflow: Review → Address Gaps → Implement
+- Prevents starting work with missing requirements
+- Creates audit trail of addressed review items
+- Integrates smoothly with TDD workflow
+
+**Root Cause:**
+- Phase 5 pre-review identified gaps (missing estimates, undefined schema)
+- No way to systematically address review findings before implementation
+- Manual process was error-prone and didn't track what was addressed
+
+**Details:** [2025-12-10-task-phase-review-integration.md](updates/2025-12-10-task-phase-review-integration.md)
+
+---
+
 ### 2025-12-09: PR Validation Conditional Manual Testing (MEDIUM)
 
 **Branch:** `docs/pr-validation-conditional-manual-testing`  
@@ -194,9 +223,9 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 5  
-**Commands Maintained:** 5+  
-**Last Updated:** 2025-12-09
+**Total Updates:** 6  
+**Commands Maintained:** 6+  
+**Last Updated:** 2025-12-10
 
 ---
 
@@ -208,7 +237,7 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ---
 
-**Last Updated:** 2025-12-09  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active  
 **Next:** Track future command documentation updates here
 
