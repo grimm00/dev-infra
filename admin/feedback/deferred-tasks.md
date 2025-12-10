@@ -10,11 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 27 (3 fixed in PR #39, 5 new from PR #39 and PR #40)
+**Total Tasks:** 32 (3 fixed in PR #39, 10 new from PR #39, PR #40, PR #41)
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
-- 🟡 **MEDIUM**: 19 tasks
-- 🟢 **LOW**: 10 tasks (1 fixed)
+- 🟡 **MEDIUM**: 21 tasks
+- 🟢 **LOW**: 13 tasks (1 fixed)
 
 ---
 
@@ -473,3 +473,18 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 - Task 37: Remove fetch-depth from build-image job (LOW priority, LOW effort) - Performance optimization: build-image doesn't need full history
 - Task 38: Update status field timing in planning docs (LOW priority, LOW effort) - Documentation consistency: status marked complete before CI validation
+
+---
+
+## PR #41 Additions
+
+**Date:** 2025-12-10  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #41 (Release Readiness Phase 4 - Process Integration)
+
+- Task 39: Add git repository check before git commands (MEDIUM priority, LOW effort) - Defensive programming: script handles gracefully but explicit check would improve error messages
+- Task 40: Adjust dry-run banner messaging (LOW priority, LOW effort) - UX improvement: banner says "Created Successfully" even in dry-run mode
+- Task 41: Add non-dry-run test coverage for file creation (MEDIUM priority, MEDIUM effort) - Test coverage: tests only use --dry-run, don't verify actual file creation
+- Task 42: Flexible argument order in CLI (LOW priority, MEDIUM effort) - UX improvement: version must come before --dry-run
+- Task 43: Consistent dry-run simulation messaging (LOW priority, LOW effort) - Same as Task 40, overall comment
