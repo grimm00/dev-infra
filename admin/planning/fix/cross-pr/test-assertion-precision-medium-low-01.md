@@ -5,7 +5,7 @@
 **Effort:** 🟢 LOW  
 **Status:** ✅ Complete  
 **Completed:** 2025-12-10  
-**PR:** #[pending]  
+**PR:** #39  
 **Created:** 2025-12-10  
 **Source:** fix-review-report-2025-12-10.md  
 **Issues:** 4 issues from 1 PR (PR #38)
@@ -14,12 +14,12 @@
 
 ## Issues in This Batch
 
-| Issue | PR | Priority | Impact | Effort | Description |
-|-------|-----|----------|--------|--------|-------------|
-| PR38-#1 | 38 | 🟡 MEDIUM | 🟢 LOW | 🟢 LOW | Tighten path expansion test assertion for undefined vars |
-| PR38-#2 | 38 | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Clarify existing file collision test assertion |
-| PR38-Overall-1 | 38 | 🟡 MEDIUM | 🟢 LOW | 🟢 LOW | Same as #2 - tighten existing file assertion |
-| PR38-Overall-2 | 38 | 🟡 MEDIUM | 🟢 LOW | 🟢 LOW | Tighten assertions in gh CLI and path expansion tests |
+| Issue          | PR  | Priority  | Impact    | Effort | Description                                              |
+| -------------- | --- | --------- | --------- | ------ | -------------------------------------------------------- |
+| PR38-#1        | 38  | 🟡 MEDIUM | 🟢 LOW    | 🟢 LOW | Tighten path expansion test assertion for undefined vars |
+| PR38-#2        | 38  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Clarify existing file collision test assertion           |
+| PR38-Overall-1 | 38  | 🟡 MEDIUM | 🟢 LOW    | 🟢 LOW | Same as #2 - tighten existing file assertion             |
+| PR38-Overall-2 | 38  | 🟡 MEDIUM | 🟢 LOW    | 🟢 LOW | Tighten assertions in gh CLI and path expansion tests    |
 
 ---
 
@@ -29,11 +29,13 @@ This batch contains 4 MEDIUM priority issues with LOW effort from PR #38. These 
 
 **Estimated Time:** 1-2 hours  
 **Files Affected:**
+
 - `tests/unit/path-expansion.bats`
 - `tests/unit/project-name-validation.bats`
 - `tests/unit/github-auth.bats`
 
 **Source PR:**
+
 - PR #38: Test Improvements Cross-PR Batch (2025-12-09)
 
 **Common Theme:** All issues address loose test assertions that could allow unintended behavior changes to pass undetected.
@@ -59,11 +61,11 @@ The final assertion is too loose and could let regressions slip through (e.g., k
 @test "path_expansion: handles undefined environment variables" {
     # Ensure variable is undefined
     unset UNDEFINED_VAR 2>/dev/null || true
-    
+
     # Test with undefined variable in path
     local path_with_undefined="/home/\$UNDEFINED_VAR/projects"
     run expand_env_vars "$path_with_undefined"
-    
+
     # Should handle gracefully - either expand to literal or return error
     # Current implementation expands undefined vars to empty string
     [ "$status" -eq 0 ]
@@ -80,11 +82,11 @@ Replace loose substring checks with exact assertion:
 @test "path_expansion: handles undefined environment variables" {
     # Ensure variable is undefined
     unset UNDEFINED_VAR 2>/dev/null || true
-    
+
     # Test with undefined variable in path
     local path_with_undefined="/home/\$UNDEFINED_VAR/projects"
     run expand_env_vars "$path_with_undefined"
-    
+
     # Current implementation expands undefined vars to empty string
     [ "$status" -eq 0 ]
     # Assert exact expected output (undefined var becomes empty)
@@ -95,6 +97,7 @@ Replace loose substring checks with exact assertion:
 ```
 
 **Related Files:**
+
 - `tests/unit/path-expansion.bats` - Update test assertion
 
 ---
@@ -118,7 +121,7 @@ The current assertion (`[ -n "$output" ] || [ "$status" -ne 0 ]`) is too permiss
     local existing_file="$test_dir/existingfile"
     mkdir -p "$test_dir"
     touch "$existing_file"
-    
+
     run validate_project_name "existingfile" "$test_dir" 2>/dev/null
     # Note: Current implementation only checks for directories, not files
     # This test documents current behavior - if status is 0, it indicates
@@ -138,9 +141,9 @@ Split into two tests - one for current behavior, one for desired behavior:
     local existing_file="$test_dir/existingfile"
     mkdir -p "$test_dir"
     touch "$existing_file"
-    
+
     run validate_project_name "existingfile" "$test_dir" 2>/dev/null
-    
+
     # Current behavior: Only checks for directories, not files
     # So it returns 0 (success) and the path
     [ "$status" -eq 0 ]
@@ -150,14 +153,14 @@ Split into two tests - one for current behavior, one for desired behavior:
 
 @test "project_name_validation: should detect file collision (TODO - desired behavior)" {
     skip "TODO: Function should detect file collisions, not just directories"
-    
+
     local test_dir="$TEST_TMPDIR/projects"
     local existing_file="$test_dir/existingfile"
     mkdir -p "$test_dir"
     touch "$existing_file"
-    
+
     run validate_project_name "existingfile" "$test_dir" 2>/dev/null
-    
+
     # Desired behavior: Should return non-zero and error message
     [ "$status" -ne 0 ]
     [ -z "$output" ]
@@ -165,6 +168,7 @@ Split into two tests - one for current behavior, one for desired behavior:
 ```
 
 **Related Files:**
+
 - `tests/unit/project-name-validation.bats` - Split test into two
 
 ---
@@ -192,6 +196,7 @@ This is the same issue as PR38-#2, mentioned again in the overall comments. No a
 The new path expansion and gh CLI error tests use fairly loose assertions (e.g., checking only for `/home/` or `/projects`, or just non-zero exit) which could let unexpected outputs pass; consider asserting the complete expected output or error pattern to make these edge-case tests more robust and self-documenting.
 
 **Files to Review:**
+
 - `tests/unit/path-expansion.bats` - Already covered by PR38-#1
 - `tests/unit/github-auth.bats` - Tighten gh CLI unexpected error test
 
@@ -245,6 +250,7 @@ Make assertion more specific:
 ```
 
 **Related Files:**
+
 - `tests/unit/github-auth.bats` - Tighten assertion
 
 ---
@@ -252,12 +258,14 @@ Make assertion more specific:
 ## Implementation Steps
 
 1. **Issue PR38-#1: Path Expansion Test**
+
    - [ ] Update `tests/unit/path-expansion.bats`
    - [ ] Change assertion to exact match: `[ "$output" = "/home//projects" ]`
    - [ ] Add check that `$UNDEFINED_VAR` is not in output
    - [ ] Run test to verify
 
 2. **Issue PR38-#2: File Collision Test**
+
    - [ ] Update `tests/unit/project-name-validation.bats`
    - [ ] Rename existing test with "(current behavior)" suffix
    - [ ] Lock in current behavior with exact assertions
@@ -301,9 +309,9 @@ Make assertion more specific:
 **Batch Rationale:**
 
 These issues are batched together because they:
+
 - All came from PR #38's Sourcery review
 - Share the same priority (MEDIUM) and effort (LOW)
 - Address the same concern: test assertion quality
 - Can be implemented quickly in one focused session
 - Affect only test files (no production code changes)
-
