@@ -67,8 +67,9 @@ Integrate the readiness assessment into the standard release workflow commands. 
 
 ## 📦 Deliverables
 
-- Updated cursor commands (`task-release`, `pr`)
-- Updated release scripts
+- Updated cursor commands (`task-release`, `pr`) ✅
+- New script: `scripts/create-release-branch.sh` ✅
+- New tests: `tests/unit/create-release-branch.bats` (8 tests) ✅
 
 ---
 
