@@ -10,11 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 32 (3 fixed in PR #39, 10 new from PR #39, PR #40, PR #41)
+**Total Tasks:** 42 (3 fixed in PR #39, 20 new from PR #39, PR #40, PR #41, PR #42)
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
-- 🟡 **MEDIUM**: 21 tasks
-- 🟢 **LOW**: 13 tasks (1 fixed)
+- 🟡 **MEDIUM**: 26 tasks
+- 🟢 **LOW**: 18 tasks (1 fixed)
 
 ---
 
@@ -488,3 +488,22 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - Task 41: Add non-dry-run test coverage for file creation (MEDIUM priority, MEDIUM effort) - Test coverage: tests only use --dry-run, don't verify actual file creation
 - Task 42: Flexible argument order in CLI (LOW priority, MEDIUM effort) - UX improvement: version must come before --dry-run
 - Task 43: Consistent dry-run simulation messaging (LOW priority, LOW effort) - Same as Task 40, overall comment
+
+---
+
+## PR #42 Additions
+
+**Date:** 2025-12-10  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #42 (Release Readiness Phase 5 - Historical Tracking)
+
+- Task 44: Input validation for --last flag (MEDIUM priority, LOW effort) - Bug risk: non-numeric input could cause integer expression error (PR42-#1, Overall-1)
+- Task 45: Tests skipped in CI (MEDIUM priority, MEDIUM effort) - Testing gap: analyze-releases tests not run in CI automation (PR42-#3)
+- Task 46: Strengthen JSON test assertions (MEDIUM priority, LOW effort) - Test quality: validate JSON structure with jq and required fields (PR42-#5)
+- Task 47: Strengthen metrics test assertions (MEDIUM priority, LOW effort) - Test quality: validate exact output for metrics calculations (PR42-#6)
+- Task 48: Remove verbose logging suppression (LOW priority, LOW effort) - UX inconsistency: 2>/dev/null disables --verbose for discovery (PR42-#2)
+- Task 49: Strengthen backward compat test assertions (LOW priority, LOW effort) - Test quality: add explicit assertions for files without metadata (PR42-#4)
+- Task 50: Add --last N edge case tests (LOW priority, MEDIUM effort) - Test coverage: test boundary/invalid values (PR42-#7)
+- Task 51: Fix grammar typo in manual testing docs (LOW priority, LOW effort) - Documentation: "Metrics includes" → "Metrics include" (PR42-#8)
+- Task 52: Refactor generate_assessment variable dependencies (LOW priority, MEDIUM effort) - Code organization: keep computation within function (PR42-Overall-2)
