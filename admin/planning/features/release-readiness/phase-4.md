@@ -2,10 +2,11 @@
 
 **Feature:** Release Readiness  
 **Phase:** 4  
-**Status:** 🔴 Not Started  
-**Prerequisites:** Phase 3 Complete  
+**Status:** 🟠 In Progress  
+**Prerequisites:** Phase 3 Complete ✅  
+**Estimated:** 5 hours  
 **Created:** 2025-12-08  
-**Last Updated:** 2025-12-08
+**Last Updated:** 2025-12-10
 
 ---
 
@@ -31,23 +32,25 @@ Integrate the readiness assessment into the standard release workflow commands. 
 
 ## 🏗️ Tasks
 
-### 1. Integrate with /task-release (TDD)
+**Note:** "TDD" for Cursor commands = documentation updates + verification steps (commands are markdown files, not executable code). Task 3 involves actual script changes with traditional TDD.
 
-- [ ] **RED:** Write test ensuring `/task-release` calls the readiness check
-- [ ] **GREEN:** Update `/task-release` command to invoke validation script
-- [ ] **REFACTOR:** Improve user feedback during checks
+### 1. Integrate with /task-release (~2 hours)
 
-### 2. Integrate with /pr --release (TDD)
+- [ ] **DOCUMENT:** Add "Pre-Task Readiness Check" section to `/task-release` command
+- [ ] **IMPLEMENT:** Add step to run `scripts/check-release-readiness.sh [version]` before tasks
+- [ ] **VERIFY:** Manual test of command guidance with sample release
 
-- [ ] **RED:** Write test ensuring `/pr --release` fails if blocking criteria are unmet
-- [ ] **GREEN:** Update `/pr` command logic to run checks before creation
-- [ ] **REFACTOR:** Add override flag if needed
+### 2. Integrate with /pr --release (~2 hours)
 
-### 3. Release Branch Integration (TDD)
+- [ ] **DOCUMENT:** Add readiness validation step to `/pr` command's release mode
+- [ ] **IMPLEMENT:** Add blocking logic: "If critical checks fail, do not create PR"
+- [ ] **VERIFY:** Manual test of command guidance with sample release
 
-- [ ] **RED:** Write test for release branch creation hook
-- [ ] **GREEN:** Update release branch creation script to generate initial `RELEASE-READINESS.md`
-- [ ] **REFACTOR:** Clean up output
+### 3. Release Branch Integration (~1 hour)
+
+- [ ] **RED:** Write bats test for release branch creation generating `RELEASE-READINESS.md`
+- [ ] **GREEN:** Update release workflow to generate initial assessment on branch creation
+- [ ] **REFACTOR:** Clean up output and verify file placement
 
 ---
 
