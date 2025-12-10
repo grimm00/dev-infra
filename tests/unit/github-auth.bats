@@ -54,19 +54,22 @@ teardown() {
 }
 
 @test "github_auth: handles unexpected gh CLI error" {
-    # Create a mock gh that returns an unexpected error code
-    local mock_gh_script="$TEST_TMPDIR/gh"
-    cat > "$mock_gh_script" << 'MOCKEOF'
-#!/bin/bash
-echo "Unexpected error: network timeout" >&2
-exit 42  # Unusual error code
-MOCKEOF
-    chmod +x "$mock_gh_script"
-    export PATH="$TEST_TMPDIR:$PATH"
-    hash -r 2>/dev/null || true
+    # Mock gh to return unexpected error code for 'auth status' command
+    mock_gh() {
+        if [ "$1" = "auth" ] && [ "$2" = "status" ]; then
+            echo "Unexpected error: network timeout" >&2
+            return 42  # Unusual error code
+        fi
+        # Fall back to default mock behavior for other commands
+        command gh "$@"
+    }
+    export -f mock_gh
     
-    run verify_github_auth "testuser"
-    # Should handle the error gracefully (return non-zero)
-    [ "$status" -ne 0 ]
+    # Use mock_gh for gh command
+    GH_CMD=mock_gh run verify_github_auth "testuser"
+    
+    # Function returns 1 for any gh CLI error (doesn't propagate exact code)
+    # This test verifies that unexpected errors are handled gracefully
+    [ "$status" -eq 1 ]
 }
 
