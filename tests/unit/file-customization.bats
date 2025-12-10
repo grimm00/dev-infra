@@ -173,3 +173,44 @@ teardown() {
     [[ "$content" == *"New description"* ]]
 }
 
+@test "file_customization: preserves package.json additional fields" {
+    local project_dir="$TEST_TMPDIR/test-package-fields"
+    mkdir -p "$project_dir"
+    
+    # Create package.json with additional fields
+    cat > "$project_dir/package.json" << 'EOF'
+{
+  "name": "{{PROJECT_NAME}}",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
+EOF
+    
+    customize_project "$project_dir" "Regular Project" "My description" "Test Author" "2025-01-27"
+    
+    # Verify additional fields preserved (check that scripts and dependencies still exist)
+    local content=$(cat "$project_dir/package.json")
+    [[ "$content" == *"test-package-fields"* ]]
+    [[ "$content" == *"My description"* ]]
+    [[ "$content" == *"scripts"* ]]
+    [[ "$content" == *"dependencies"* ]]
+    [[ "$content" == *"jest"* ]]
+    [[ "$content" == *"lodash"* ]]
+    
+    # If jq is available, verify JSON structure
+    if command -v jq >/dev/null 2>&1; then
+        run jq -e '.scripts.test' "$project_dir/package.json"
+        [ "$status" -eq 0 ]
+        [ "$output" = '"jest"' ]
+        
+        run jq -e '.dependencies.lodash' "$project_dir/package.json"
+        [ "$status" -eq 0 ]
+    fi
+}
+

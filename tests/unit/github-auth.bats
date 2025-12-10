@@ -53,3 +53,20 @@ teardown() {
     [ "$status" -eq 0 ]
 }
 
+@test "github_auth: handles unexpected gh CLI error" {
+    # Create a mock gh that returns an unexpected error code
+    local mock_gh_script="$TEST_TMPDIR/gh"
+    cat > "$mock_gh_script" << 'MOCKEOF'
+#!/bin/bash
+echo "Unexpected error: network timeout" >&2
+exit 42  # Unusual error code
+MOCKEOF
+    chmod +x "$mock_gh_script"
+    export PATH="$TEST_TMPDIR:$PATH"
+    hash -r 2>/dev/null || true
+    
+    run verify_github_auth "testuser"
+    # Should handle the error gracefully (return non-zero)
+    [ "$status" -ne 0 ]
+}
+
