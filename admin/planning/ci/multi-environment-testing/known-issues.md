@@ -8,86 +8,34 @@
 
 ## 🔴 Active Known Issues
 
-### Issue #1: full-tests-ubuntu Intermittent Failures
-
-**Status:** 🟡 Known Issue - Under Investigation  
-**First Identified:** PR #30 (2025-12-08)  
-**Affected Jobs:** `full-tests-ubuntu`  
-**Platform:** Ubuntu (Docker container)  
-**Fix Status:** 🟡 Under Investigation  
-**Fix Tracking:** `admin/planning/ci/multi-environment-testing/fix/`
-
-**Symptoms:**
-- Job fails with test failures
-- Tests pass locally (58/58 passing)
-- Platform-specific or environment-specific issue
-- May be flaky tests or environment differences
-
-**Workaround:**
-- Local tests passing (58/58)
-- Can proceed with PR validation if local tests pass
-- Document failure but don't block PR merge
-- Fixes tracked in multi-environment-testing topic
-
-**Investigation:**
-- Review workflow run logs for root cause
-- Compare local vs CI environment differences
-- Check for flaky tests or timing issues
-- See: `admin/planning/ci/multi-environment-testing/fix/pr30-failures.md`
-
-**Fix Plan:**
-- See: `admin/planning/ci/multi-environment-testing/fix/known-issue-1-git-branch-ci-fix.md` (NEW)
-- **Recommended Solution:** Configure GitHub Actions for full clone (`fetch-depth: 0`)
-- **Fallback:** Skip git-dependent tests in CI
-- Priority: MEDIUM (tests pass locally, not blocking)
-- Estimated Fix: 1-2 hours
-
-**PRs Affected:**
-- PR #30: Documented failure (2025-12-08)
-  - Workflow Run: [20036474596](https://github.com/grimm00/dev-infra/actions/runs/20036474596)
-  - Status: Local tests passing (58/58), CI failure documented
-  - Failure Document: `admin/planning/ci/multi-environment-testing/fix/pr30-failures.md`
-- PR #31: Empty directory fix (2025-12-08)
-  - Workflow Run: [20041642506](https://github.com/grimm00/dev-infra/actions/runs/20041642506)
-  - Status: ✅ All CI checks passing (full-tests-ubuntu, full-tests-macos)
-  - Fix: Added `.gitkeep` files to empty stage directories
-  - Fix Document: `admin/planning/ci/multi-environment-testing/fix/pr30-fix-plan.md`
-- PR #32: Release Readiness Phase 1 & 2 (2025-12-09)
-  - Workflow Run: [20050338867](https://github.com/grimm00/dev-infra/actions/runs/20050338867)
-  - Status: Test failure in check-release-readiness.sh (test #6: git branch creation in CI)
-  - Note: Local tests passing (17/17), CI-specific git issue
-  - Issue: Git branch creation fails in CI (status 128)
-  - Fixes included: gh CLI skipped check bug (PR32-#2), Phase 1 completion criteria (PR32-#6)
-- PR #35: Release Readiness Phase 3 (2025-12-09)
-  - Workflow Run: [20075363421](https://github.com/grimm00/dev-infra/actions/runs/20075363421)
-  - Status: Test failure in check-release-readiness.sh (test #6/81: git branch creation in CI)
-  - Note: Local tests passing (26/26), CI-specific git issue
-  - Issue: Git branch creation fails in CI (status 128) - same as PR #32
-  - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
-- PR #36: Quick Wins Cross-PR Batch (2025-12-09)
-  - Workflow Run: [20079363685](https://github.com/grimm00/dev-infra/actions/runs/20079363685)
-  - Status: Test failure - same CI-specific git issue
-  - Note: Local tests passing (26/26 check-release-readiness.bats)
-  - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
-- PR #37: Script Improvements Cross-PR Batch (2025-12-09)
-  - Workflow Run: [20080094015](https://github.com/grimm00/dev-infra/actions/runs/20080094015)
-  - Status: Test failure - same CI-specific git issue
-  - Note: Local tests passing (26/26 check-release-readiness.bats)
-  - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
-- PR #38: Test Improvements Cross-PR Batch (2025-12-09)
-  - Workflow Run: [20104430022](https://github.com/grimm00/dev-infra/actions/runs/20104430022)
-  - Status: Test failure - same CI-specific git issue
-  - Note: Local tests passing (32/32 unit tests)
-  - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
-- PR #39: Test Assertion Precision Cross-PR Batch (2025-12-10)
-  - Workflow Run: [20108869667](https://github.com/grimm00/dev-infra/actions/runs/20108869667)
-  - Status: Test failure - same CI-specific git issue
-  - Note: Local tests passing (78/78 unit tests)
-  - Jobs: full-tests-ubuntu (❌), quick-checks (❌), full-tests-macos (✅)
+_No active known issues at this time._
 
 ---
 
 ## ✅ Resolved Issues
+
+### Issue #1: Git Branch Creation in CI (full-tests-ubuntu, quick-checks)
+
+**Status:** ✅ Resolved  
+**First Identified:** PR #30 (2025-12-08)  
+**Resolved:** PR #40 (2025-12-10)  
+**Fix:** Skip git branch test in CI due to detached HEAD state  
+**Fix Plan:** `admin/planning/ci/multi-environment-testing/fix/known-issue-1-git-branch-ci-fix.md`
+
+**Root Cause:** GitHub Actions checks out PRs in detached HEAD state, preventing branch creation (`git checkout -b`) even with full clone (`fetch-depth: 0`).
+
+**Solution Implemented:**
+- **Option A (Fallback):** Skip test in CI with clear message
+- **Option B (Attempted):** Configure full clone (`fetch-depth: 0`) - didn't resolve issue
+- Test still runs locally (maintains coverage)
+- No CI failures after fix
+
+**PRs Affected:**
+- PR #30, #32, #35, #36, #37, #38, #39: Test failures documented
+- PR #40: Fix implemented and merged (2025-12-10)
+  - Workflow Run: [20109441927](https://github.com/grimm00/dev-infra/actions/runs/20109441927)
+  - Status: ✅ All CI checks passing
+  - Jobs: full-tests-ubuntu (✅), quick-checks (✅), full-tests-macos (✅)
 
 ### Issue #1: Git Operations Test Failures
 
@@ -100,9 +48,9 @@
 
 ## 📊 Summary
 
-**Active Known Issues:** 1  
-**Resolved Issues:** 1  
-**Last Updated:** 2025-12-08
+**Active Known Issues:** 0  
+**Resolved Issues:** 2  
+**Last Updated:** 2025-12-10
 
 ---
 
@@ -125,5 +73,5 @@
 
 ---
 
-**Last Updated:** 2025-12-08
+**Last Updated:** 2025-12-10
 
