@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2025-12-09
+**Last Updated:** 2025-12-10
 
 ---
 
@@ -10,11 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 25 (3 fixed in PR #39, 3 new from PR #39)
+**Total Tasks:** 27 (3 fixed in PR #39, 5 new from PR #39 and PR #40)
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
 - 🟡 **MEDIUM**: 19 tasks
-- 🟢 **LOW**: 8 tasks (1 fixed)
+- 🟢 **LOW**: 10 tasks (1 fixed)
 
 ---
 
@@ -461,3 +461,15 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - Task 34: Mock gh should not fall back to real binary (MEDIUM priority, LOW effort) - Deferred: test hermiticity improvement
 - Task 35: Clarify task count documentation mismatch (LOW priority, LOW effort) - Deferred: documentation clarity
 - Task 36: Improve skipped test assertion clarity (LOW priority, LOW effort) - Deferred: test documentation
+
+---
+
+## PR #40 Additions
+
+**Date:** 2025-12-10  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #40 (Known Issue #1 - Git Branch CI Fix)
+
+- Task 37: Remove fetch-depth from build-image job (LOW priority, LOW effort) - Performance optimization: build-image doesn't need full history
+- Task 38: Update status field timing in planning docs (LOW priority, LOW effort) - Documentation consistency: status marked complete before CI validation
