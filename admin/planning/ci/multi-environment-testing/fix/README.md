@@ -2,16 +2,22 @@
 
 **Purpose:** Document failures, root causes, and fixes for multi-environment testing workflow implementation  
 **Status:** 🟠 In Progress  
-**Last Updated:** 2025-11-18  
-**PRs:** #16, #17 (both merged), #18 (workflow YAML syntax fixes - in progress)
+**Last Updated:** 2025-12-10  
+**PRs:** #16, #17 (both merged), #30-#39 (known issue #1)
 
 ---
 
 ## 🎯 Quick Links
 
-- **[Known Issues Registry](../known-issues.md)** - Active known issues with fixes pending (NEW)
+### Active Fix Plans
+
+- **[Known Issue #1 Fix Plan](known-issue-1-git-branch-ci-fix.md)** - Git branch creation in CI (🔴 Not Started)
+- **[Known Issues Registry](../known-issues.md)** - Active known issues with fixes pending
+
+### Historical Documentation
+
 - **[Failed Jobs](pr17-failures.md)** - Detailed documentation of all failed jobs and errors
-- **[PR #30 Failures](pr30-failures.md)** - Failed jobs documentation for PR #30 (NEW)
+- **[PR #30 Failures](pr30-failures.md)** - Failed jobs documentation for PR #30
 - **[Root Cause Analysis](root-cause-analysis.md)** - Analysis of why failures occurred
 - **[Prompt Interactive Analysis](prompt-interactive-analysis.md)** - Deep dive into prompt_yes_no detection issue
 - **[Fixes Needed](fixes-needed.md)** - Prioritized list of required fixes

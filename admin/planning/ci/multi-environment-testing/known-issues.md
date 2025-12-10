@@ -2,7 +2,7 @@
 
 **Purpose:** Track known CI/CD failures with fixes pending  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-08
+**Last Updated:** 2025-12-10
 
 ---
 
@@ -36,9 +36,11 @@
 - See: `admin/planning/ci/multi-environment-testing/fix/pr30-failures.md`
 
 **Fix Plan:**
-- See: `admin/planning/ci/multi-environment-testing/fix/next-steps.md`
+- See: `admin/planning/ci/multi-environment-testing/fix/known-issue-1-git-branch-ci-fix.md` (NEW)
+- **Recommended Solution:** Configure GitHub Actions for full clone (`fetch-depth: 0`)
+- **Fallback:** Skip git-dependent tests in CI
 - Priority: MEDIUM (tests pass locally, not blocking)
-- Estimated Fix: TBD
+- Estimated Fix: 1-2 hours
 
 **PRs Affected:**
 - PR #30: Documented failure (2025-12-08)
