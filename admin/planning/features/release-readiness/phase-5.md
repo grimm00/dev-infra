@@ -32,11 +32,11 @@ Implement tracking for release readiness metrics over time. This allows for anal
 
 ## 🏗️ Tasks
 
-### 1. Add Metadata Structure (~1 hour) (TDD)
+### 1. Add Metadata Structure (~1 hour) (TDD) ✅
 
-- [ ] **RED:** Write test for metadata extraction from YAML frontmatter
-- [ ] **GREEN:** Update `check-release-readiness.sh --generate` to include YAML frontmatter
-- [ ] **REFACTOR:** Standardize metadata fields (date, version, score, status)
+- [x] **RED:** Write test for metadata extraction from YAML frontmatter (7 tests)
+- [x] **GREEN:** Update `check-release-readiness.sh --generate` to include YAML frontmatter
+- [x] **REFACTOR:** Removed duplicate function definition, standardized metadata fields
 
 ### 2. Create Analysis Script (~1.5 hours) (TDD)
 
@@ -54,7 +54,7 @@ Implement tracking for release readiness metrics over time. This allows for anal
 
 ## ✅ Completion Criteria
 
-- [ ] Generated assessments include machine-readable metadata
+- [x] Generated assessments include machine-readable metadata
 - [ ] Analysis script can read past assessments
 - [ ] Trends are calculated correctly
 
@@ -62,7 +62,7 @@ Implement tracking for release readiness metrics over time. This allows for anal
 
 ## 📦 Deliverables
 
-- Updated `check-release-readiness.sh` with YAML frontmatter in `--generate` output
+- Updated `check-release-readiness.sh` with YAML frontmatter in `--generate` output ✅
 - New `scripts/analyze-releases.sh` script
 - Test fixtures in `tests/fixtures/release-assessments/`
 - Unit tests in `tests/unit/analyze-releases.bats`
@@ -119,4 +119,3 @@ status: READY  # READY, NOT_READY, BLOCKED
 - [Feature Plan](../feature-plan.md)
 - [Phase 4: Process Integration](../phase-4.md)
 - [Research: Historical Tracking](../../../../research/release-readiness/research-historical-tracking.md)
-

@@ -266,3 +266,69 @@ teardown() {
     # Check that evidence appears after status in each criteria section
     [[ "$output" =~ "Status:" ]] && [[ "$output" =~ "Evidence:" ]]
 }
+
+# ============================================================================
+# Phase 5, Task 1: Metadata Structure Tests (RED)
+# ============================================================================
+
+@test "check-release-readiness.sh --generate includes YAML frontmatter" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Output should start with YAML frontmatter delimiters
+    [[ "$output" =~ ^--- ]]
+    # Should have closing delimiter
+    [[ "$output" =~ "---" ]]
+}
+
+@test "check-release-readiness.sh metadata includes version field" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should include version in frontmatter
+    [[ "$output" =~ "version:" ]]
+    [[ "$output" =~ "v1.4.0" ]]
+}
+
+@test "check-release-readiness.sh metadata includes date field" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should include date in YYYY-MM-DD format
+    [[ "$output" =~ "date:" ]]
+    [[ "$output" =~ [0-9]{4}-[0-9]{2}-[0-9]{2} ]]
+}
+
+@test "check-release-readiness.sh metadata includes readiness_score field" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should include readiness_score (0-100)
+    [[ "$output" =~ "readiness_score:" ]]
+}
+
+@test "check-release-readiness.sh metadata includes status field" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should include status (READY, NOT_READY, or BLOCKED)
+    [[ "$output" =~ "status:" ]]
+    ([[ "$output" =~ "READY" ]] || [[ "$output" =~ "NOT_READY" ]] || [[ "$output" =~ "BLOCKED" ]])
+}
+
+@test "check-release-readiness.sh metadata includes check counts" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should include total_checks and passed_checks
+    [[ "$output" =~ "total_checks:" ]]
+    [[ "$output" =~ "passed_checks:" ]]
+}
+
+@test "check-release-readiness.sh metadata includes blocking_failures count" {
+    cd "$PROJECT_ROOT"
+    run "$SCRIPT" v1.4.0 --generate
+    [ "$status" -eq 0 ]
+    # Should include blocking_failures count
+    [[ "$output" =~ "blocking_failures:" ]]
+}
