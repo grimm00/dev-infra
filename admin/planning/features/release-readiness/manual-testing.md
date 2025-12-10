@@ -136,6 +136,28 @@ Manual testing guide for the Release Readiness feature:
 
 ```bash
 ./scripts/check-release-readiness.sh --generate v1.4.0 | head -20
+
+# Expected Output:
+# ---
+# version: v1.4.0
+# date: 2025-12-10
+# readiness_score: 40
+# blocking_failures: 3
+# total_checks: 5
+# passed_checks: 2
+# warnings: 1
+# status: BLOCKED
+# ---
+#
+# # Release Readiness Assessment - v1.4.0
+#
+# **Purpose:** Assess project readiness for v1.4.0 release
+# **Date:** 2025-12-10
+# **Status:** 🟠 Assessment in Progress
+#
+# ---
+#
+# ## 📊 Overall Readiness Summary
 ```
 
 **Verification:**
@@ -143,8 +165,8 @@ Manual testing guide for the Release Readiness feature:
 - [x] Output starts with `---` (YAML frontmatter marker)
 - [x] Contains `version: v1.4.0` field
 - [x] Contains `date:` field with current date
-- [x] Contains `readiness_score:` field
-- [x] Contains `blocking_failures:` field
+- [x] Contains `readiness_score:` field (integer 0-100)
+- [x] Contains `blocking_failures:` field (count of failed blocking checks)
 - [x] Contains `total_checks:`, `passed_checks:`, `warnings:` fields
 - [x] Contains `status:` field (READY/NOT_READY/BLOCKED)
 - [x] Ends frontmatter with closing `---`
@@ -162,18 +184,38 @@ Manual testing guide for the Release Readiness feature:
 
 ```bash
 ./scripts/analyze-releases.sh --dir tests/fixtures/release-assessments
+
+# Expected Output:
+#
+# ==========================================
+#   Release Readiness Analysis
+# ==========================================
+#
+# Version      Date         Score  Fail Total  Pass   Warn Status    
+# ------------------------------------------
+# v1.4.0       2025-12-10   60     2    5      3      1    BLOCKED   
+# v1.3.0       2025-12-05   100    0    5      5      1    READY     
+# v1.2.0       2025-12-01   80     1    5      4      1    NOT_READY 
+#
+# ==========================================
+#   Summary Metrics
+# ==========================================
+#
+# Total Releases Analyzed:  3
+# Average Readiness Score:  80
+# Trend:                    📉 Declining (-40)
 ```
 
 **Verification:**
 
-- [x] Parses multiple assessment files
+- [x] Parses multiple assessment files (3 files with metadata)
 - [x] Displays "Release Readiness Analysis" header
 - [x] Shows table with columns: Version, Date, Score, Fail, Total, Pass, Warn, Status
-- [x] Lists releases in reverse chronological order (newest first)
+- [x] Lists releases in reverse chronological order (newest first: v1.4.0, v1.3.0, v1.2.0)
 - [x] Shows "Summary Metrics" section
-- [x] Displays "Total Releases Analyzed"
-- [x] Displays "Average Readiness Score"
-- [x] Displays "Trend" with indicator (📈 Improving / 📉 Declining / ➡️ Stable)
+- [x] Displays "Total Releases Analyzed" (3)
+- [x] Displays "Average Readiness Score" (80 = (60+100+80)/3)
+- [x] Displays "Trend" with indicator (📉 Declining: v1.4.0=60 vs v1.3.0=100)
 
 **Expected Result:** ✅ Historical analysis displays correctly
 
@@ -187,16 +229,68 @@ Manual testing guide for the Release Readiness feature:
 
 ```bash
 ./scripts/analyze-releases.sh --dir tests/fixtures/release-assessments --json
+
+# Expected Output:
+# {
+#   "releases": [
+#     {
+#       "version": "v1.4.0",
+#       "date": "2025-12-10",
+#       "readiness_score": 60,
+#       "blocking_failures": 2,
+#       "total_checks": 5,
+#       "passed_checks": 3,
+#       "warnings": 1,
+#       "status": "BLOCKED"
+#     },
+#     {
+#       "version": "v1.3.0",
+#       "date": "2025-12-05",
+#       "readiness_score": 100,
+#       "blocking_failures": 0,
+#       "total_checks": 5,
+#       "passed_checks": 5,
+#       "warnings": 1,
+#       "status": "READY"
+#     },
+#     {
+#       "version": "v1.2.0",
+#       "date": "2025-12-01",
+#       "readiness_score": 80,
+#       "blocking_failures": 1,
+#       "total_checks": 5,
+#       "passed_checks": 4,
+#       "warnings": 1,
+#       "status": "NOT_READY"
+#     }
+#   ],
+#   "metrics": {
+#     "total_releases": 3,
+#     "average_readiness_score": 80
+#   }
+# }
+```
+
+**JSON Validation:**
+
+```bash
+# Validate JSON structure with jq
+./scripts/analyze-releases.sh --dir tests/fixtures/release-assessments --json | jq '.metrics'
+
+# Expected Output:
+# {
+#   "total_releases": 3,
+#   "average_readiness_score": 80
+# }
 ```
 
 **Verification:**
 
-- [x] Output is valid JSON
-- [x] Contains `releases` array
-- [x] Each release has `version`, `date`, `readiness_score`, `blocking_failures`, `total_checks`, `passed_checks`, `warnings`, `status` fields
-- [x] Contains `metrics` object
-- [x] Metrics includes `total_releases` field
-- [x] Metrics includes `average_readiness_score` field
+- [x] Output is valid JSON (parseable by jq)
+- [x] Contains `releases` array with 3 entries
+- [x] Each release has all required fields: `version`, `date`, `readiness_score`, `blocking_failures`, `total_checks`, `passed_checks`, `warnings`, `status`
+- [x] Contains `metrics` object at root level
+- [x] Metrics include `total_releases` (3) and `average_readiness_score` (80)
 
 **Expected Result:** ✅ JSON output formatted correctly
 
@@ -210,13 +304,34 @@ Manual testing guide for the Release Readiness feature:
 
 ```bash
 ./scripts/analyze-releases.sh --dir tests/fixtures/release-assessments --last 2
+
+# Expected Output:
+#
+# ==========================================
+#   Release Readiness Analysis
+# ==========================================
+#
+# Version      Date         Score  Fail Total  Pass   Warn Status    
+# ------------------------------------------
+# v1.4.0       2025-12-10   60     2    5      3      1    BLOCKED   
+# v1.3.0       2025-12-05   100    0    5      5      1    READY     
+#
+# ==========================================
+#   Summary Metrics
+# ==========================================
+#
+# Total Releases Analyzed:  2
+# Average Readiness Score:  80
+# Trend:                    📉 Declining (-40)
 ```
+
+**Note:** Average is (60+100)/2 = 80. Trend compares most recent (v1.4.0=60) to previous (v1.3.0=100).
 
 **Verification:**
 
-- [x] Shows only 2 most recent releases
-- [x] Summary metrics calculated for 2 releases only
-- [x] Trend compares the 2 shown releases
+- [x] Shows only 2 most recent releases (v1.4.0, v1.3.0 - v1.2.0 excluded)
+- [x] Summary metrics calculated for 2 releases only (Total: 2, Avg: 80)
+- [x] Trend compares the 2 shown releases (📉 Declining -40)
 
 **Expected Result:** ✅ Last N filter works correctly
 
