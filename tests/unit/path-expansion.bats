@@ -79,10 +79,12 @@ teardown() {
     local path_with_undefined="/home/\$UNDEFINED_VAR/projects"
     run expand_env_vars "$path_with_undefined"
     
-    # Should handle gracefully - either expand to literal or return error
-    # Current implementation expands undefined vars to empty string
+    # Current implementation only expands known vars (HOME, USER, PWD)
+    # Undefined variables are left as literal $VAR in the output
     [ "$status" -eq 0 ]
-    # Result should contain the literal path (undefined var becomes empty)
-    [[ "$output" == *"/home/"* ]] || [[ "$output" == *"/projects"* ]]
+    # Assert exact expected output (undefined var stays literal)
+    [ "$output" = "/home/\$UNDEFINED_VAR/projects" ]
+    # Verify variable is still present (not expanded)
+    [[ "$output" =~ \$UNDEFINED_VAR ]]
 }
 
