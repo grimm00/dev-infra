@@ -6,7 +6,7 @@
 **Status:** ✅ Complete  
 **Created:** 2025-12-10  
 **Completed:** 2025-12-10  
-**PR:** #[pending]  
+**PR:** #40  
 **Source:** admin/planning/ci/multi-environment-testing/known-issues.md
 
 ---
