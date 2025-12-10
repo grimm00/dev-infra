@@ -44,11 +44,11 @@ Implement tracking for release readiness metrics over time. This allows for anal
 - [x] **GREEN:** Create `scripts/analyze-releases.sh` (bash for consistency)
 - [x] **REFACTOR:** Added `--json`, `--verbose`, and `--last N` flags
 
-### 3. Implement Metrics Reporting (~30 min) (TDD)
+### 3. Implement Metrics Reporting (~30 min) (TDD) ✅
 
-- [ ] **RED:** Write test for calculating trends (avg score over last N releases)
-- [ ] **GREEN:** Add reporting logic to analysis script (text table output)
-- [ ] **REFACTOR:** Improve output format (human-readable tables)
+- [x] **RED:** Write test for calculating trends (avg score over last N releases) (4 tests)
+- [x] **GREEN:** Add reporting logic to analysis script (text table output)
+- [x] **REFACTOR:** Improved output format with trend indicators and better formatting
 
 ---
 

@@ -221,6 +221,37 @@ parse_frontmatter() {
     echo -e "${version}\t${date}\t${readiness_score}\t${blocking_failures}\t${total_checks}\t${passed_checks}\t${warnings}\t${status}"
 }
 
+# Calculate metrics from parsed data
+calculate_metrics() {
+    local data=("$@")
+    local total_score=0
+    local count=0
+    
+    for line in "${data[@]}"; do
+        if [ -z "$line" ]; then
+            continue
+        fi
+        
+        IFS=$'\t' read -r version date score failures total pass warn status <<< "$line"
+        
+        if [ -z "$version" ] || [ -z "$score" ]; then
+            continue
+        fi
+        
+        total_score=$((total_score + score))
+        count=$((count + 1))
+    done
+    
+    if [ $count -eq 0 ]; then
+        echo "0"
+        return
+    fi
+    
+    # Calculate average (integer division)
+    local avg=$((total_score / count))
+    echo "$avg"
+}
+
 # Format output as text table
 format_text_table() {
     local data=("$@")
@@ -249,13 +280,51 @@ format_text_table() {
     done
     
     echo ""
+    
+    # Add metrics section
+    local avg_score
+    avg_score=$(calculate_metrics "${data[@]}")
+    local count=${#data[@]}
+    
+    # Calculate trend (comparing two most recent releases)
+    # Data is sorted newest first, so compare data[0] (newest) to data[1] (previous)
+    local trend=""
+    if [ $count -ge 2 ]; then
+        local newest_score
+        local previous_score
+        newest_score=$(echo "${data[0]}" | cut -f3)
+        previous_score=$(echo "${data[1]}" | cut -f3)
+        
+        if [ -n "$newest_score" ] && [ -n "$previous_score" ]; then
+            local diff=$((newest_score - previous_score))
+            if [ $diff -gt 0 ]; then
+                trend="📈 Improving (+$diff)"
+            elif [ $diff -lt 0 ]; then
+                trend="📉 Declining ($diff)"
+            else
+                trend="➡️  Stable (no change)"
+            fi
+        fi
+    fi
+    
+    echo "=========================================="
+    echo "  Summary Metrics"
+    echo "=========================================="
+    echo ""
+    printf "%-25s %s\n" "Total Releases Analyzed:" "$count"
+    printf "%-25s %s\n" "Average Readiness Score:" "$avg_score"
+    if [ -n "$trend" ]; then
+        printf "%-25s %s\n" "Trend:" "$trend"
+    fi
+    echo ""
 }
 
 # Format output as JSON
 format_json() {
     local data=("$@")
     
-    echo "["
+    echo "{"
+    echo "  \"releases\": ["
     
     local first=true
     for line in "${data[@]}"; do
@@ -275,20 +344,31 @@ format_json() {
             echo ","
         fi
         
-        echo "  {"
-        echo "    \"version\": \"$version\","
-        echo "    \"date\": \"$date\","
-        echo "    \"readiness_score\": $score,"
-        echo "    \"blocking_failures\": $failures,"
-        echo "    \"total_checks\": $total,"
-        echo "    \"passed_checks\": $pass,"
-        echo "    \"warnings\": $warn,"
-        echo "    \"status\": \"$status\""
-        echo -n "  }"
+        echo "    {"
+        echo "      \"version\": \"$version\","
+        echo "      \"date\": \"$date\","
+        echo "      \"readiness_score\": $score,"
+        echo "      \"blocking_failures\": $failures,"
+        echo "      \"total_checks\": $total,"
+        echo "      \"passed_checks\": $pass,"
+        echo "      \"warnings\": $warn,"
+        echo "      \"status\": \"$status\""
+        echo -n "    }"
     done
     
     echo ""
-    echo "]"
+    echo "  ],"
+    
+    # Add metrics section
+    local avg_score
+    avg_score=$(calculate_metrics "${data[@]}")
+    local count=${#data[@]}
+    
+    echo "  \"metrics\": {"
+    echo "    \"total_releases\": $count,"
+    echo "    \"average_readiness_score\": $avg_score"
+    echo "  }"
+    echo "}"
 }
 
 # Main function
