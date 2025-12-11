@@ -13,19 +13,20 @@
 - **[PR #32 Fixes](pr32/README.md)** - Fixes from PR #32 Sourcery review (🟠 In Progress)
 - **[PR #35 Fixes](pr35/README.md)** - Fixes from PR #35 Sourcery review (🟡 Deferred)
 - **[PR #41 Fixes](pr41/README.md)** - Fixes from PR #41 Sourcery review (🟡 Deferred)
+- **[PR #42 Fixes](pr42/README.md)** - Fixes from PR #42 Sourcery review (🟡 Deferred)
 
 ---
 
 ## 📊 Summary
 
-**Total PRs:** 3  
-**Total Batches:** 3 (PR #32) + 5 deferred (PR #35) + 5 deferred (PR #41)  
+**Total PRs:** 4  
+**Total Batches:** 3 (PR #32) + 5 deferred (PR #35) + 5 deferred (PR #41) + 9 deferred (PR #42)  
 **Status:** 🟠 In Progress
 
 **Priority Breakdown:**
 - 🟠 HIGH: 2 issues (1 fixed)
-- 🟡 MEDIUM: 3 issues (1 fixed)
-- 🟢 LOW: 3 issues
+- 🟡 MEDIUM: 8 issues (1 fixed)
+- 🟢 LOW: 12 issues
 
 ---
 
@@ -74,6 +75,26 @@
 - **File:** [pr41/README.md](pr41/README.md)
 
 **Note:** All issues from PR #41 are MEDIUM/LOW priority and tracked in `admin/feedback/deferred-tasks.md` (Tasks 39-43).
+
+---
+
+### PR #42 - Release Readiness Phase 5
+
+- **Status:** 🟡 Deferred (all MEDIUM/LOW priority)
+- **Issues:** 9 deferred issues
+  - PR42-#1: Input validation for --last flag (🟡 MEDIUM) - Bug risk
+  - PR42-#2: Verbose logging suppression (🟢 LOW) - UX polish
+  - PR42-#3: Tests skipped in CI (🟡 MEDIUM) - Testing gap
+  - PR42-#4: Backward compat assertions (🟢 LOW) - Test quality
+  - PR42-#5: JSON test assertions (🟡 MEDIUM) - Test quality
+  - PR42-#6: Metrics test assertions (🟡 MEDIUM) - Test quality
+  - PR42-#7: --last N edge case tests (🟢 LOW) - Test quality
+  - PR42-#8: Grammar typo in docs (🟢 LOW) - Documentation
+  - PR42-Overall-1: Same as #1, plus duplicate check
+  - PR42-Overall-2: Variable dependency refactoring (🟢 LOW)
+- **File:** [pr42/README.md](pr42/README.md)
+
+**Note:** All issues from PR #42 are MEDIUM/LOW priority and tracked in `admin/feedback/deferred-tasks.md` (Tasks 44-52).
 
 ---
 
