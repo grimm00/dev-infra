@@ -39,10 +39,10 @@ Create GitHub Actions workflow to automatically create and push tags when releas
 
 **File:** `.github/workflows/create-release-tag.yml`
 
-- [ ] Create workflow file with appropriate name/description
-- [ ] Add trigger: `pull_request: types: [closed]` on main
-- [ ] Add conditions: PR merged AND head ref matches `release/*`
-- [ ] Set up job permissions for tag creation
+- [x] Create workflow file with appropriate name/description
+- [x] Add trigger: `pull_request: types: [closed]` on main
+- [x] Add conditions: PR merged AND head ref matches `release/*`
+- [x] Set up job permissions for tag creation
 
 **Estimated:** 30 minutes
 
