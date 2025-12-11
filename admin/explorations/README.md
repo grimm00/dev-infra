@@ -10,8 +10,12 @@
 
 ### Active Explorations
 
-- **[Release Readiness](release-readiness/README.md)** - Explore release readiness assessment and automation (🔴 Exploration)
-- **[Templates Enhancement](templates-enhancement/README.md)** - Explore enhancements to dev-infra templates (🔴 Exploration)
+- **[Command Branch Workflow](command-branch-workflow/README.md)** - Dedicated branch pattern and workflow for command management (🔴 Exploration)
+
+### Completed Explorations
+
+- **[Release Readiness](release-readiness/README.md)** - Release readiness assessment and automation (✅ Transitioned to Feature)
+- **[Templates Enhancement](templates-enhancement/README.md)** - Enhancements to dev-infra templates (✅ Transitioned to Feature)
 
 ---
 
@@ -27,5 +31,5 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2025-12-08
+**Last Updated:** 2025-12-10
 
