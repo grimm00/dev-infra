@@ -51,7 +51,7 @@ This command supports multiple project organization patterns:
 │                                     │
 │   1. Merge CHANGELOG draft          │
 │   2. Finalize release notes         │
-│   3. Scan version references        │
+│   3. Update version references      │  ◄── Automated
 │   4. Update readiness checklist     │
 │   5. Create release branch (if not) │
 └─────────────────────────────────────┘
@@ -79,6 +79,7 @@ This command supports multiple project organization patterns:
 - `--dry-run` - Show what would be done without executing
 - `--changelog-only` - Only merge CHANGELOG draft
 - `--skip-branch` - Skip release branch creation
+- `--skip-version-update` - Skip automatic version reference updates
 - `--date YYYY-MM-DD` - Set release date (default: today)
 - `--force` - Continue even with warnings
 
@@ -198,43 +199,77 @@ CHANGELOG.md
 
 ---
 
-### 4. Scan Version References
+### 4. Update Version References (Automated)
 
-**Scan files for version strings:**
+**Detect previous version:**
 
 ```bash
-# Files to scan
-grep -r "v1\.3\.0" --include="*.md" --include="*.sh" --include="*.json"
+# Get previous version from git tags
+PREVIOUS_VERSION=$(git describe --tags --abbrev=0 HEAD^)
+# e.g., v1.3.0
+
+# Current version from argument
+CURRENT_VERSION=v1.4.0
 ```
 
-**Common locations:**
+**Run update script:**
 
-| File | Field | Action |
-|------|-------|--------|
-| `README.md` | Version badge, examples | Update if present |
-| `package.json` | `version` field | Update if present |
-| `scripts/*.sh` | Version variables | Review |
-| `.cursor/rules/*.mdc` | Project state | Update |
+```bash
+# Dry-run first to preview changes
+./scripts/update-version-references.sh --dry-run \
+    --old-version "$PREVIOUS_VERSION" \
+    --new-version "$CURRENT_VERSION"
 
-**Report findings:**
+# If dry-run looks good, run for real
+./scripts/update-version-references.sh \
+    --old-version "$PREVIOUS_VERSION" \
+    --new-version "$CURRENT_VERSION"
+```
+
+**Files updated automatically:**
+
+| File | Pattern | Example |
+|------|---------|---------|
+| `.cursor/rules/main.mdc` | `**Version:** vX.Y.Z` | `**Version:** v1.4.0 (released...)` |
+| `README.md` | Version badge (if exists) | `version-v1.4.0` |
+| `package.json` | `"version": "X.Y.Z"` | `"version": "1.4.0"` |
+
+**Options:**
+
+- `--dry-run` - Preview changes without modifying files
+- `--verbose` - Show detailed output
+- `--skip-version-update` - Skip this step entirely (for `/release-finalize`)
+
+**Validation:**
+
+- Script validates old version is removed
+- Script validates new version is present
+- Backup created before modification
+- Backup restored on failure
+
+**Report changes:**
 
 ```markdown
-## Version Reference Scan
+## Version Reference Updates
 
-### Files with v1.3.0 references:
-- `README.md:15` - Version badge → Update to v1.4.0
-- `.cursor/rules/main.mdc:363` - Project state → Update to v1.4.0
+### Files Updated:
+✅ .cursor/rules/main.mdc - Updated v1.3.0 → v1.4.0
+✅ README.md - Updated version badge (if present)
+✅ package.json - Updated version field (if exists)
 
-### Recommended updates:
-1. Update README.md version badge
-2. Update main.mdc project state
+### Validation:
+✅ All updates successful
+✅ Old version removed from all files
+✅ New version present in all files
 ```
 
 **Checklist:**
 
-- [ ] Version references scanned
-- [ ] Files needing update identified
-- [ ] Updates applied (or documented for manual)
+- [ ] Previous version detected
+- [ ] Update script run (or dry-run)
+- [ ] Files updated automatically
+- [ ] Validation passed
+- [ ] Changes documented
 
 ---
 

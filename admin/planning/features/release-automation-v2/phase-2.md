@@ -156,11 +156,11 @@ fi
 
 **Updates to `.cursor/commands/release-finalize.md`:**
 
-- [ ] Add step: "Update Version References"
-- [ ] Detect previous version (from git tags)
-- [ ] Call `update-version-references.sh`
-- [ ] Handle dry-run passthrough
-- [ ] Add `--skip-version-update` flag
+- [x] Add step: "Update Version References"
+- [x] Detect previous version (from git tags)
+- [x] Call `update-version-references.sh`
+- [x] Handle dry-run passthrough
+- [x] Add `--skip-version-update` flag
 
 **Workflow Update:**
 
@@ -175,7 +175,10 @@ fi
 4. Report changes made
 ```
 
-**Estimated:** 1 hour
+**Estimated:** 1 hour  
+**Completed:** 2025-12-11
+
+**Note:** Documentation-only task. Updated `/release-finalize` command to include automated version reference updates using `update-version-references.sh` script.
 
 ---
 
