@@ -9,6 +9,7 @@
 
 ## 📋 Quick Links
 
+- **[Transition Plan](transition-plan.md)** - Implementation plan for all decisions ⭐ **NEW**
 - **[Decisions Summary](decisions-summary.md)** - Summary of all decisions
 - **[Research Hub](../../research/dev-infra-identity-and-focus/README.md)** - Related research
 - **[Requirements](../../research/dev-infra-identity-and-focus/requirements.md)** - 16 FRs, 14 NFRs
@@ -60,9 +61,13 @@ This creates complexity and confusion. The decisions below resolve this by estab
 
 ## 🚀 Next Steps
 
-1. Review ADR documents
-2. Approve or modify decisions
-3. Once approved, use `/transition-plan --from-adr` to update v1.5.0 planning
+1. ✅ ~~Review ADR documents~~
+2. Approve decisions (mark as Accepted)
+3. Follow [Transition Plan](transition-plan.md) to implement:
+   - Rescope Release Automation v2
+   - Update Cursor rules
+   - Add metadata to commands
+   - Create graduation checklist
 
 ---
 
