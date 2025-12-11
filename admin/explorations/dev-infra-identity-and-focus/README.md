@@ -1,7 +1,7 @@
 # Dev-Infra Identity & Focus - Exploration Hub
 
 **Purpose:** Explore what dev-infra should be and how to organize its development  
-**Status:** 🟡 Research Complete  
+**Status:** 🟠 Decisions Proposed  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-11
 
@@ -41,9 +41,10 @@ This exploration examines whether dev-infra should focus primarily on being a **
 
 ## 📊 Status
 
-**Current Phase:** Research Complete  
+**Current Phase:** Decisions Proposed  
 **Research:** [admin/research/dev-infra-identity-and-focus/](../../research/dev-infra-identity-and-focus/)  
-**Next Step:** Use `/decision dev-infra-identity-and-focus --from-research` to make decisions
+**Decisions:** [admin/decisions/dev-infra-identity-and-focus/](../../decisions/dev-infra-identity-and-focus/)  
+**Next Step:** Review and approve ADRs, then use `/transition-plan` to update v1.5.0 scope
 
 ---
 

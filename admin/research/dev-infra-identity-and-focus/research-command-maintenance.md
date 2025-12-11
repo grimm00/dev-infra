@@ -26,6 +26,7 @@ What's the appropriate maintenance model for AI commands vs traditional code? Co
 ## 📚 Research Methodology
 
 **Sources:**
+
 - [x] Source 1: Analysis of current command structure
 - [x] Source 2: Command update history (from git)
 - [x] Source 3: Comparison with traditional code maintenance
@@ -39,25 +40,27 @@ What's the appropriate maintenance model for AI commands vs traditional code? Co
 
 **Characteristics of AI commands:**
 
-| Aspect | Traditional Code | AI Commands |
-|--------|------------------|-------------|
-| **Execution** | Machine executes | AI interprets |
-| **Testing** | Unit tests, CI/CD | Manual verification |
-| **Versioning** | Semantic versioning | Document versioning? |
-| **Breaking Changes** | Compile errors | Silent behavior changes |
-| **Consumers** | Software systems | AI agents |
+| Aspect               | Traditional Code    | AI Commands             |
+| -------------------- | ------------------- | ----------------------- |
+| **Execution**        | Machine executes    | AI interprets           |
+| **Testing**          | Unit tests, CI/CD   | Manual verification     |
+| **Versioning**       | Semantic versioning | Document versioning?    |
+| **Breaking Changes** | Compile errors      | Silent behavior changes |
+| **Consumers**        | Software systems    | AI agents               |
 
 **Relevance:** Commands need documentation-style maintenance, not code-style maintenance.
 
 ### Finding 2: Command Maintenance Burden
 
 **Current state:**
+
 - Dev-infra: 23 commands
 - Standard template: 18 commands
 - Learning template: 18 commands
 - **Total: 59 command files**
 
 **Sync challenges:**
+
 - When dev-infra improves a command, templates may not get updated
 - No automated way to detect drift
 - No test suite for command behavior
@@ -68,25 +71,27 @@ What's the appropriate maintenance model for AI commands vs traditional code? Co
 
 **Command Categories by Stability:**
 
-| Category | Commands | Stability Need |
-|----------|----------|----------------|
-| **Core Workflow** | pr, task-phase, fix-plan, fix-implement | 🔴 Very Stable |
-| **Planning** | explore, research, decision, transition-plan | 🟡 Moderately Stable |
-| **Reflection** | reflect, reflection-artifacts, int-opp | 🟡 Moderately Stable |
-| **Review** | pre-phase-review, address-review, pr-validation | 🟢 Can Evolve |
-| **Release** | release-prep, release-finalize, post-release | 🔵 Dev-infra Only |
+| Category          | Commands                                        | Stability Need       |
+| ----------------- | ----------------------------------------------- | -------------------- |
+| **Core Workflow** | pr, task-phase, fix-plan, fix-implement         | 🔴 Very Stable       |
+| **Planning**      | explore, research, decision, transition-plan    | 🟡 Moderately Stable |
+| **Reflection**    | reflect, reflection-artifacts, int-opp          | 🟡 Moderately Stable |
+| **Review**        | pre-phase-review, address-review, pr-validation | 🟢 Can Evolve        |
+| **Release**       | release-prep, release-finalize, post-release    | 🔵 Dev-infra Only    |
 
 **Relevance:** Not all commands need the same maintenance approach.
 
 ### Finding 4: Testing Commands Is Different
 
 **Traditional code testing:**
+
 ```bash
 # Clear pass/fail
 bats tests/unit/script.bats
 ```
 
 **Command "testing":**
+
 - Manual execution with AI agent
 - Verify AI follows workflow correctly
 - Subjective evaluation of output quality
@@ -127,6 +132,7 @@ Commands should have explicit stability levels:
 ### Insight 2: Template Commands Should Be Stable Subset
 
 Templates should only include **Stable** commands:
+
 - Reduces maintenance burden
 - Provides reliable base for projects
 - Dev-infra can experiment without affecting templates
@@ -134,6 +140,7 @@ Templates should only include **Stable** commands:
 ### Insight 3: Command Sync Needs Process, Not Automation
 
 Instead of automated sync:
+
 - **Release checkpoint:** Review command changes during release prep
 - **Intentional graduation:** Explicitly promote commands to templates
 - **Changelog tracking:** Note command changes in releases
@@ -141,6 +148,7 @@ Instead of automated sync:
 ### Insight 4: "Testing" Commands Means Documentation Quality
 
 For AI commands, "testing" means:
+
 - [ ] Command document is complete
 - [ ] All steps are clear and actionable
 - [ ] Examples are accurate
@@ -182,4 +190,3 @@ For AI commands, "testing" means:
 ---
 
 **Last Updated:** 2025-12-11
-
