@@ -5,7 +5,7 @@
 **Status:** 🟠 In Progress  
 **Target:** v1.5.0  
 **Scope:** Internal only (Phase 3 deferred per ADR-002)  
-**Current Phase:** Phase 1 - Tag Creation Automation  
+**Current Phase:** Phase 1 Complete → Phase 2 Ready  
 **Last Updated:** 2025-12-11
 
 ---
@@ -30,7 +30,8 @@
 **Status:** ✅ Complete  
 **Priority:** 🔴 High  
 **Started:** 2025-12-11  
-**Completed:** 2025-12-11
+**Completed:** 2025-12-11  
+**Merged:** PR #44 (2025-12-11)
 
 **Tasks:**
 - [x] Create workflow file
@@ -45,6 +46,8 @@
 - `.github/workflows/README.md` - Workflow documentation
 - Updated release process documentation
 - Updated `/post-release` command documentation
+
+**Summary:** Automated GitHub release tag creation when release PRs are merged to `main`. Eliminates manual tag creation step, completing the release automation workflow. Workflow extracts version from branch name, validates format, creates annotated tag, and pushes to origin (triggering release distribution).
 
 **Next Phase:** Phase 2 - Version Reference Automation
 
@@ -88,30 +91,37 @@
 
 ## 🎯 Immediate Next Steps (v1.5.0 - Internal Only)
 
+### Completed Milestones
+
+- ✅ **Phase 1: Tag Creation Automation Complete** (PR #44, 2025-12-11)
+  - `.github/workflows/create-release-tag.yml` - Automatic tag creation workflow
+  - Workflow extracts version from branch name with validation
+  - Creates annotated tag and pushes to origin
+  - Triggers release distribution workflow automatically
+  - Dry-run mode available for testing
+  - Documentation updated (release process, commands, retrospective)
+
 ### This Week
 
-1. **Start Phase 1: Tag Creation Automation**
-   - Create workflow file
-   - Implement version extraction
-   - Test with dry-run
-   - **Deliverable:** Working workflow (dry-run tested)
-
-2. **Start Phase 2: Version Reference Automation** (parallel with Phase 1)
-   - Create update script
-   - Implement for `.cursor/rules/main.mdc`
-   - Add validation
-   - **Deliverable:** Working script for main locations
+1. **Start Phase 2: Version Reference Automation**
+   - Create update script (`scripts/update-version-references.sh`)
+   - Implement for `.cursor/rules/main.mdc` and other key locations
+   - Add validation and dry-run mode
+   - Integrate with `/release-finalize` command
+   - Add tests (TDD with Bats framework)
+   - **Deliverable:** Working script for automated version updates
 
 ### Next Week
 
-3. **Complete Phase 1 & 2**
-   - Full testing
+2. **Complete Phase 2**
+   - Full testing of version reference automation
    - Documentation updates
    - Ready for v1.5.0 use
 
-4. **v1.5.0 Release**
-   - Use new automation (internal)
-   - Validate end-to-end
+3. **v1.5.0 Release**
+   - Use new automation (internal) - both Phase 1 & 2
+   - Validate end-to-end workflow
+   - First production test of tag creation automation
 
 ### Deferred (v1.6.0+)
 
@@ -156,5 +166,5 @@
 ---
 
 **Last Updated:** 2025-12-11  
-**Next Update:** After Phase 1 begins
+**Next Update:** After Phase 2 begins
 
