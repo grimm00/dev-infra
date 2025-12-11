@@ -2,7 +2,7 @@
 
 **Purpose:** Track command documentation updates, command improvements, and command system maintenance  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-09  
+**Last Updated:** 2025-12-11  
 **Type:** CI/CD Enhancement
 
 ---
@@ -64,6 +64,45 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 ---
 
 ## 📊 Recent Updates
+
+### 2025-12-11: Release Finalize & Post-Release Commands (MEDIUM)
+
+**Branch:** `docs/release-commands`  
+**Status:** ✅ Applied to develop  
+**Commands Affected:** `release-finalize` (NEW), `post-release` (NEW)
+
+**Changes:**
+- **NEW:** Created `/release-finalize` command for finalizing release documents
+  - Merges CHANGELOG draft into CHANGELOG.md
+  - Finalizes release notes (updates status/date)
+  - Scans for version references
+  - Updates readiness checklist
+  - Options: `--dry-run`, `--changelog-only`, `--skip-branch`, `--date`
+
+- **NEW:** Created `/post-release` command for post-release cleanup
+  - Merges main back to develop
+  - Updates historical tracking (`analyze-releases.sh`)
+  - Archives release documents
+  - Cleans up release branch
+  - Creates retrospective (optional)
+  - Options: `--dry-run`, `--skip-retrospective`, `--keep-branch`
+
+**Impact:**
+- Complete release workflow: `/release-prep` → `/release-finalize` → `/pr --release` → `/post-release`
+- Fills gap between draft generation and PR creation
+- Adds post-release cleanup and tracking
+- Consistent release process across versions
+
+**Root Cause:**
+- Gap identified: CHANGELOG merge was manual step
+- Missing command: No post-release automation
+- User question: "Is there anything more we can do to guide AI through this process?"
+
+**Details:** 
+- [2025-12-11-release-finalize-command.md](updates/2025-12-11-release-finalize-command.md)
+- [2025-12-11-post-release-command.md](updates/2025-12-11-post-release-command.md)
+
+---
 
 ### 2025-12-10: Release Prep Command (MEDIUM)
 
@@ -247,9 +286,9 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 8  
-**Commands Maintained:** 8+  
-**Last Updated:** 2025-12-10
+**Total Updates:** 10  
+**Commands Maintained:** 10+  
+**Last Updated:** 2025-12-11
 
 ---
 
@@ -261,7 +300,7 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ---
 
-**Last Updated:** 2025-12-10  
+**Last Updated:** 2025-12-11  
 **Status:** ✅ Active  
 **Next:** Track future command documentation updates here
 
