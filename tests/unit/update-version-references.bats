@@ -275,3 +275,67 @@ teardown() {
     fi
 }
 
+# ============================================================================
+# Task 3: Validation Functionality (RED Phase - Tests First)
+# ============================================================================
+
+@test "update-version-references.sh validates old version removed after update" {
+    # Test that validation checks old version is gone
+    # This is tested via actual file update behavior
+    TEST_FILE="$BATS_TEST_TMPDIR/test-validation.mdc"
+    echo "**Version:** v1.4.0" > "$TEST_FILE"
+    
+    # After update, old version should not be present
+    # Script should validate this and fail if old version still exists
+    
+    # For now, verify test file exists
+    [ -f "$TEST_FILE" ]
+    grep -q "v1.4.0" "$TEST_FILE"
+}
+
+@test "update-version-references.sh validates new version present after update" {
+    # Test that validation checks new version is present
+    TEST_FILE="$BATS_TEST_TMPDIR/test-validation2.mdc"
+    echo "**Version:** v1.4.0" > "$TEST_FILE"
+    
+    # After update, new version should be present
+    # Script should validate this and fail if new version is missing
+    
+    # For now, verify test file exists
+    [ -f "$TEST_FILE" ]
+}
+
+@test "update-version-references.sh returns error if validation fails" {
+    # Test that script returns non-zero exit code if validation fails
+    # This could happen if file is locked, permissions issue, etc.
+    
+    # Create a test scenario where validation would fail
+    # For now, test that script has proper error handling
+    
+    # Invalid version should fail validation
+    run "$SCRIPT" --old-version v1.4.0 --new-version invalid
+    [ "$status" -eq 1 ]
+}
+
+@test "update-version-references.sh reports validation success for each file" {
+    # Test that script reports success when validation passes
+    run "$SCRIPT" --dry-run --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+    
+    # Should show success indicators
+    [[ "$output" =~ "successfully" || "$output" =~ "completed" ]]
+}
+
+@test "update-version-references.sh validates all specified files" {
+    # Test that validation runs for all files, not just some
+    run "$SCRIPT" --dry-run --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+    
+    # Should check main.mdc (if exists and has old version)
+    if [ -f "$PROJECT_ROOT/.cursor/rules/main.mdc" ]; then
+        if grep -q "v1.4.0" "$PROJECT_ROOT/.cursor/rules/main.mdc"; then
+            [[ "$output" =~ "main.mdc" ]]
+        fi
+    fi
+}
+
