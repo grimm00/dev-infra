@@ -84,8 +84,8 @@
 
 ### High Priority
 
-- [ ] **Document tag creation workflow** - Add clear instructions for creating and pushing tags after PR merge
-- [ ] **Automate tag creation** - Investigate GitHub Actions workflow to auto-create tag on release PR merge
+- [x] **Document tag creation workflow** - ✅ v1.5.0 - Added documentation in `PROCESS.md` and `/post-release` command
+- [x] **Automate tag creation** - ✅ v1.5.0 - Implemented in `.github/workflows/create-release-tag.yml` (Phase 1)
 - [ ] **Version reference automation** - Add automatic version replacement to `/release-finalize` for known locations
 
 ### Medium Priority
