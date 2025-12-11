@@ -37,12 +37,12 @@ Create script to automatically update version references across the codebase and
 
 ## 📍 Known Version Reference Locations
 
-| File | Pattern | Example |
-|------|---------|---------|
-| `.cursor/rules/main.mdc` | `**Version:** vX.Y.Z` | `**Version:** v1.4.0 (released...)` |
-| `README.md` | Version badge (if exists) | `![Version](https://img.shields.io/.../v1.4.0)` |
-| `package.json` | `"version": "X.Y.Z"` | `"version": "1.4.0"` |
-| Template files | May contain version examples | Various |
+| File                     | Pattern                      | Example                                         |
+| ------------------------ | ---------------------------- | ----------------------------------------------- |
+| `.cursor/rules/main.mdc` | `**Version:** vX.Y.Z`        | `**Version:** v1.4.0 (released...)`             |
+| `README.md`              | Version badge (if exists)    | `![Version](https://img.shields.io/.../v1.4.0)` |
+| `package.json`           | `"version": "X.Y.Z"`         | `"version": "1.4.0"`                            |
+| Template files           | May contain version examples | Various                                         |
 
 ---
 
@@ -52,11 +52,11 @@ Create script to automatically update version references across the codebase and
 
 **File:** `scripts/update-version-references.sh`
 
-- [ ] Create script with argument parsing
-- [ ] Accept: `--old-version v1.4.0 --new-version v1.5.0`
-- [ ] Accept: `--dry-run` flag
-- [ ] Validate version formats
-- [ ] Exit codes for success/failure
+- [x] Create script with argument parsing
+- [x] Accept: `--old-version v1.4.0 --new-version v1.5.0`
+- [x] Accept: `--dry-run` flag
+- [x] Validate version formats
+- [x] Exit codes for success/failure
 
 **Estimated:** 1 hour
 
@@ -65,13 +65,16 @@ Create script to automatically update version references across the codebase and
 ### Task 2: Implement File Updates
 
 - [ ] Update `.cursor/rules/main.mdc`
+
   - Pattern: `**Version:** vX.Y.Z`
   - Handle various status suffixes (released, pending, etc.)
 
 - [ ] Update `README.md` (if version badge exists)
+
   - Pattern: `version-vX.Y.Z` or `v=X.Y.Z`
 
 - [ ] Update `package.json` (if exists)
+
   - Pattern: `"version": "X.Y.Z"` (no 'v' prefix)
 
 - [ ] Add backup before modification
@@ -89,22 +92,23 @@ Create script to automatically update version references across the codebase and
 - [ ] Return appropriate exit code
 
 **Code:**
+
 ```bash
 validate_update() {
     local file=$1
     local old_version=$2
     local new_version=$3
-    
+
     if grep -q "$old_version" "$file"; then
         print_error "Update failed: $file still contains $old_version"
         return 1
     fi
-    
+
     if ! grep -q "$new_version" "$file"; then
         print_error "Update failed: $file doesn't contain $new_version"
         return 1
     fi
-    
+
     print_success "Updated: $file"
     return 0
 }
@@ -121,6 +125,7 @@ validate_update() {
 - [ ] Clear indication that dry-run is active
 
 **Code:**
+
 ```bash
 if [[ "$DRY_RUN" == true ]]; then
     print_info "[DRY RUN] Would update: $file"
@@ -146,10 +151,12 @@ fi
 - [ ] Add `--skip-version-update` flag
 
 **Workflow Update:**
+
 ```markdown
 ### Step 4: Update Version References
 
 **Process:**
+
 1. Detect previous version from git tags
 2. Run version reference update script
 3. Validate all updates successful
@@ -202,22 +209,24 @@ fi
 
 ### Unit Testing (Bats)
 
-| Test Case | Input | Expected |
-|-----------|-------|----------|
-| Valid versions | `v1.4.0 → v1.5.0` | Success |
-| Invalid old version | `1.4.0` (no v) | Error |
-| Invalid new version | `v1.5` (no patch) | Error |
-| Missing file | File doesn't exist | Warning, continue |
-| Dry-run | `--dry-run` | No changes, output only |
+| Test Case           | Input              | Expected                |
+| ------------------- | ------------------ | ----------------------- |
+| Valid versions      | `v1.4.0 → v1.5.0`  | Success                 |
+| Invalid old version | `1.4.0` (no v)     | Error                   |
+| Invalid new version | `v1.5` (no patch)  | Error                   |
+| Missing file        | File doesn't exist | Warning, continue       |
+| Dry-run             | `--dry-run`        | No changes, output only |
 
 ### Integration Testing
 
 1. **Script Standalone:**
+
    - Run on test files
    - Verify updates correct
    - Verify validation catches issues
 
 2. **With /release-finalize:**
+
    - Run full command
    - Verify version updates happen
    - Verify validation reports
@@ -248,4 +257,3 @@ VERSION_LOCATIONS=(
 
 **Migrated From:** `admin/planning/ci/version-reference-automation/improvement-plan.md`  
 **Last Updated:** 2025-12-11
-
