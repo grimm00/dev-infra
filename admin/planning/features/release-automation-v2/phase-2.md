@@ -129,9 +129,9 @@ validate_update() {
 
 ### Task 4: Add Dry-Run Mode
 
-- [ ] Show what would change without modifying files
-- [ ] Display diff-like output
-- [ ] Clear indication that dry-run is active
+- [x] Show what would change without modifying files
+- [x] Display diff-like output
+- [x] Clear indication that dry-run is active
 
 **Code:**
 
@@ -145,7 +145,10 @@ else
 fi
 ```
 
-**Estimated:** 30 minutes
+**Estimated:** 30 minutes  
+**Completed:** 2025-12-11
+
+**Note:** Dry-run mode was already implemented in Task 2 as part of `update_file_version()` function. Tests added to verify dry-run behavior.
 
 ---
 

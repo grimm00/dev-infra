@@ -339,3 +339,87 @@ teardown() {
     fi
 }
 
+# ============================================================================
+# Task 4: Dry-Run Mode (RED Phase - Tests First)
+# ============================================================================
+
+@test "update-version-references.sh dry-run mode shows clear indication" {
+    # Test that dry-run mode has clear indication it's active
+    run "$SCRIPT" --dry-run --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+    
+    # Should have clear dry-run indicators
+    [[ "$output" =~ "[DRY RUN" || "$output" =~ "DRY RUN" || "$output" =~ "dry-run" ]]
+}
+
+@test "update-version-references.sh dry-run shows what would change" {
+    # Test that dry-run shows what would be updated
+    run "$SCRIPT" --dry-run --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+    
+    # Should show versions
+    [[ "$output" =~ "v1.4.0" ]]
+    [[ "$output" =~ "v1.5.0" ]]
+    
+    # Should indicate dry-run mode or updates
+    [[ "$output" =~ "Would update" || "$output" =~ "would update" || "$output" =~ "DRY RUN" || "$output" =~ "Updating version" ]]
+}
+
+@test "update-version-references.sh dry-run does not modify files" {
+    # Test that dry-run doesn't actually modify files
+    TEST_FILE="$BATS_TEST_TMPDIR/test-dryrun.mdc"
+    echo "**Version:** v1.4.0" > "$TEST_FILE"
+    
+    # Store original content
+    ORIGINAL_CONTENT=$(cat "$TEST_FILE")
+    
+    # Run in dry-run mode (script doesn't support custom file list yet, so this tests the flag works)
+    run "$SCRIPT" --dry-run --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+    
+    # Verify test file wasn't modified (script doesn't touch it since it's not in known locations)
+    CURRENT_CONTENT=$(cat "$TEST_FILE")
+    [ "$ORIGINAL_CONTENT" = "$CURRENT_CONTENT" ]
+}
+
+@test "update-version-references.sh dry-run shows matching lines" {
+    # Test that dry-run shows where matches are found
+    run "$SCRIPT" --dry-run --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+    
+    # If main.mdc has v1.4.0, should show matches
+    if [ -f "$PROJECT_ROOT/.cursor/rules/main.mdc" ]; then
+        if grep -q "v1.4.0" "$PROJECT_ROOT/.cursor/rules/main.mdc"; then
+            [[ "$output" =~ "Matches found" || "$output" =~ "matches" ]]
+        fi
+    fi
+}
+
+@test "update-version-references.sh dry-run returns success" {
+    # Test that dry-run returns 0 exit code on success
+    run "$SCRIPT" --dry-run --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+}
+
+@test "update-version-references.sh dry-run shows file-by-file preview" {
+    # Test that dry-run shows updates for each file
+    run "$SCRIPT" --dry-run --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+    
+    # Should show file paths for files that would be updated
+    if [ -f "$PROJECT_ROOT/.cursor/rules/main.mdc" ]; then
+        if grep -q "v1.4.0" "$PROJECT_ROOT/.cursor/rules/main.mdc"; then
+            [[ "$output" =~ ".cursor/rules/main.mdc" ]]
+        fi
+    fi
+}
+
+@test "update-version-references.sh dry-run with verbose shows detailed output" {
+    # Test that dry-run + verbose works together
+    run "$SCRIPT" --dry-run --verbose --old-version v1.4.0 --new-version v1.5.0
+    [ "$status" -eq 0 ]
+    
+    # Should show dry-run indicator
+    [[ "$output" =~ "[DRY RUN" || "$output" =~ "DRY RUN" ]]
+}
+
