@@ -1,0 +1,90 @@
+name: Create Release Tag
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (no tag creation)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write  # Required to create and push tags
+    # Only run if PR was merged (not just closed) and head ref matches release/*
+    if: |
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release/') ||
+      github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history needed for tag operations
+
+      - name: Extract version from branch
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # For manual dispatch, use the default branch or prompt
+            BRANCH_NAME="main"
+            echo "::warning::Manual dispatch - using default branch"
+          else
+            BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          fi
+          
+          # Extract version from release/vX.Y.Z format
+          VERSION="${BRANCH_NAME#release/}"
+          
+          # Validate format (must be vMAJOR.MINOR.PATCH)
+          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Invalid version format: $VERSION (expected vMAJOR.MINOR.PATCH)"
+            echo "Branch name: $BRANCH_NAME"
+            exit 1
+          fi
+          
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "✅ Extracted version: $VERSION"
+
+      - name: Create annotated tag
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git tag -a "$VERSION" -m "Release $VERSION
+
+          See CHANGELOG.md for full release details."
+          
+          echo "✅ Created annotated tag: $VERSION"
+
+      - name: Dry-run mode (no tag creation)
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          echo "::notice::DRY RUN MODE - Tag would be created:"
+          echo "Tag: $VERSION"
+          echo "Message: Release $VERSION"
+          echo ""
+          echo "See CHANGELOG.md for full release details."
+
+      - name: Push tag
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          git push origin "$VERSION"
+          echo "✅ Pushed tag $VERSION to origin"
+          echo "::notice::This will trigger the release-distribution workflow"
+
