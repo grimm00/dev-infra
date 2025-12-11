@@ -10,6 +10,7 @@
 
 ### Active Explorations
 
+- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Explore what dev-infra should be: factory, laboratory, or reference implementation (🔴 Exploration) ⭐ **NEW**
 - **[Command Branch Workflow](command-branch-workflow/README.md)** - Dedicated branch pattern and workflow for command management (🔴 Exploration)
 
 ### Completed Explorations
@@ -31,5 +32,5 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2025-12-10
+**Last Updated:** 2025-12-11
 
