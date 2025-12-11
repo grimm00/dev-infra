@@ -10,10 +10,12 @@
 
 ### Active Features
 
-- **[Release Commands Template Integration](release-commands-template-integration/feature-plan.md)** - Integrate release commands into templates (🟡 Planned, 🟡 Medium Priority) ⭐ **NEW**
-  - Source: v1.4.0 release reflection
-  - Goal: Generated projects get release automation
-  - Estimated: 8-13 hours (1-2 days)
+- **[Release Automation v2](release-automation-v2/README.md)** - Complete release automation (🟡 Planned, 🔴 High Priority) ⭐ **v1.5.0 Target**
+  - Phase 1: Tag Creation Automation (eliminates manual tagging)
+  - Phase 2: Version Reference Automation (eliminates manual updates)
+  - Phase 3: Template Integration (generated projects get automation)
+  - Estimated: 13-22 hours (2-3 days)
+  - Source: v1.4.0 release retrospective
 
 - **[Release Readiness](release-readiness/README.md)** - Implement standardized release readiness assessment and automation (✅ Complete - v1.4.0)
 - **[Command Adaptation Template](command-adaptation-template/README.md)** - Document command adaptation pattern as reusable template (✅ Complete)

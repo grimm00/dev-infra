@@ -30,15 +30,11 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 ### Planned
 
-- **[Tag Creation Automation](tag-creation-automation/improvement-plan.md)** - Automate release tag creation on PR merge (🟡 Planned, 🔴 High Priority) ⭐ **NEW**
-  - Source: v1.4.0 release reflection
-  - Eliminates last manual step in release workflow
-  - Estimated: 2-4 hours
-  
-- **[Version Reference Automation](version-reference-automation/improvement-plan.md)** - Automate version reference updates (🟡 Planned, 🔴 High Priority) ⭐ **NEW**
-  - Source: v1.4.0 release reflection
-  - Automatic updates to all version references
-  - Estimated: 3-5 hours
+- **➡️ See [Release Automation v2](../features/release-automation-v2/README.md)** - Consolidated release automation improvements (🟡 Planned, 🔴 High Priority)
+  - Phase 1: Tag Creation Automation
+  - Phase 2: Version Reference Automation
+  - Phase 3: Template Integration
+  - Target: v1.5.0
 
 - **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Automate template generation testing (✅ Complete - 2025-12-08)
   - Phase 1 complete: Non-interactive mode added (PR #27)
