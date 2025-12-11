@@ -1,7 +1,7 @@
 # Dev-Infra Identity & Focus - Exploration Hub
 
 **Purpose:** Explore what dev-infra should be and how to organize its development  
-**Status:** 🔴 Exploration  
+**Status:** 🟡 Research Complete  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-11
 
@@ -41,8 +41,9 @@ This exploration examines whether dev-infra should focus primarily on being a **
 
 ## 📊 Status
 
-**Current Phase:** Exploration  
-**Next Step:** Conduct research on topics identified in research-topics.md
+**Current Phase:** Research Complete  
+**Research:** [admin/research/dev-infra-identity-and-focus/](../../research/dev-infra-identity-and-focus/)  
+**Next Step:** Use `/decision dev-infra-identity-and-focus --from-research` to make decisions
 
 ---
 
