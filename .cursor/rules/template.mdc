@@ -45,6 +45,7 @@ standard-project/
 ```
 
 **Key Features:**
+
 - Hub-and-spoke documentation pattern
 - Feature-based planning structure
 - Backend/frontend separation
@@ -76,6 +77,7 @@ learning-project/
 ```
 
 **Key Features:**
+
 - Stage-based learning progression
 - Fundamentals before implementation
 - Practice applications
@@ -139,20 +141,24 @@ learning-project/
 **Must Handle:**
 
 1. **Project Name Validation**
+
    - Check for valid characters
    - Handle spaces and special characters
    - Validate uniqueness
 
 2. **Template Selection**
+
    - Standard project vs Learning project
    - Confirm selection
 
 3. **Customization**
+
    - Project description
    - Technology stack (optional)
    - Git initialization (optional)
 
 4. **Template Copying**
+
    - Copy template directory
    - Replace placeholders
    - Set permissions
@@ -182,12 +188,14 @@ learning-project/
 ### Hub-and-Spoke Pattern
 
 **Hub Files (README.md):**
+
 - Navigation entry points
 - Quick links section
 - Overview content
 - Links to spoke documents
 
 **Spoke Documents:**
+
 - Single topic focus
 - Link back to hub
 - Descriptive filenames
@@ -196,6 +204,7 @@ learning-project/
 ### Status Indicators
 
 Use consistently:
+
 - 🔴 **Not Started**
 - 🟡 **Planned**
 - 🟠 **In Progress**
@@ -214,11 +223,13 @@ Always: `YYYY-MM-DD` (e.g., 2025-12-07)
 **After Template Generation:**
 
 1. **Update start.txt**
+
    - Add project-specific details
    - Document initial goals
    - Note technology choices
 
 2. **Update README.md**
+
    - Add technology stack
    - Update project description
    - Customize quick start guide
@@ -255,12 +266,14 @@ Always: `YYYY-MM-DD` (e.g., 2025-12-07)
 **When fixing template structure issues:**
 
 1. **Check All Similar Directories**
+
    - Don't stop at the first issue found
    - Review all similar directories (e.g., all `stage*-topic/` directories)
    - Check for patterns across template structure
    - Verify fix addresses all similar issues
 
 2. **Empty Directory Handling**
+
    - Git doesn't track empty directories
    - Use `.gitkeep` files to ensure directories are tracked
    - Check all empty directories in template structure
@@ -290,6 +303,7 @@ Always: `YYYY-MM-DD` (e.g., 2025-12-07)
 **Test Framework:** Bats (Bash Automated Testing System)
 
 **Running Tests:**
+
 ```bash
 # Run all tests
 bats tests/unit/*.bats
@@ -330,15 +344,15 @@ bats --verbose-run tests/unit/*.bats
 
 **Standard flags for template scripts:**
 
-| Flag | Purpose |
-|------|---------|
-| `--dry-run` | Show what would happen without doing it |
-| `--force` | Override blocking checks |
-| `--verbose` | Show detailed output |
-| `--json` | Output in JSON format |
-| `--generate` | Generate output file |
-| `--help` | Show usage information |
-| `--non-interactive` | Disable prompts (CI mode) |
+| Flag                | Purpose                                 |
+| ------------------- | --------------------------------------- |
+| `--dry-run`         | Show what would happen without doing it |
+| `--force`           | Override blocking checks                |
+| `--verbose`         | Show detailed output                    |
+| `--json`            | Output in JSON format                   |
+| `--generate`        | Generate output file                    |
+| `--help`            | Show usage information                  |
+| `--non-interactive` | Disable prompts (CI mode)               |
 
 **Principles:**
 

@@ -65,6 +65,32 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📊 Recent Updates
 
+### 2025-12-10: Release Prep Command (MEDIUM)
+
+**Branch:** `docs/release-prep-command`  
+**Status:** ✅ Applied to develop  
+**Commands Affected:** `release-prep` (NEW)
+
+**Changes:**
+- **NEW:** Created `/release-prep` command for release preparation orchestration
+- Automates: readiness check, assessment generation, CHANGELOG draft, release notes draft
+- Integrates with existing release scripts (`check-release-readiness.sh`, `create-release-branch.sh`)
+- Options: `--dry-run`, `--skip-branch`, `--assessment-only`, `--force`
+
+**Impact:**
+- Single command for release preparation (was manual multi-step process)
+- Consistent document generation across releases
+- Completes release command workflow: `/release-prep` → `/task-release` → `/pr --release`
+
+**Root Cause:**
+- Release preparation was manual and fragmented
+- Scripts existed but weren't orchestrated
+- Gap in command workflow between feature completion and release tasks
+
+**Details:** [2025-12-10-release-prep-command.md](updates/2025-12-10-release-prep-command.md)
+
+---
+
 ### 2025-12-10: Address Review Command (MEDIUM)
 
 **Branch:** `docs/address-review-command`  
@@ -221,8 +247,8 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 7  
-**Commands Maintained:** 7+  
+**Total Updates:** 8  
+**Commands Maintained:** 8+  
 **Last Updated:** 2025-12-10
 
 ---
