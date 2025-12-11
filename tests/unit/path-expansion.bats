@@ -71,3 +71,20 @@ teardown() {
     [ -z "$output" ]
 }
 
+@test "path_expansion: handles undefined environment variables" {
+    # Ensure variable is undefined
+    unset UNDEFINED_VAR 2>/dev/null || true
+    
+    # Test with undefined variable in path
+    local path_with_undefined="/home/\$UNDEFINED_VAR/projects"
+    run expand_env_vars "$path_with_undefined"
+    
+    # Current implementation only expands known vars (HOME, USER, PWD)
+    # Undefined variables are left as literal $VAR in the output
+    [ "$status" -eq 0 ]
+    # Assert exact expected output (undefined var stays literal)
+    [ "$output" = "/home/\$UNDEFINED_VAR/projects" ]
+    # Verify variable is still present (not expanded)
+    [[ "$output" =~ \$UNDEFINED_VAR ]]
+}
+

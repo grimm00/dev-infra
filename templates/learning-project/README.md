@@ -17,6 +17,88 @@ By the end of this project, you will understand:
 
 ---
 
+## 🔍 Exploration/Research/Decision Workflows
+
+This project supports structured workflows for exploring ideas, conducting research, and making architectural decisions before transitioning to feature planning.
+
+### Directory Structure
+
+**Hub Directories:**
+- `docs/maintainers/planning/explorations/` - Exploration hub (created by template)
+- `docs/maintainers/research/` - Research hub (created by template)
+- `docs/maintainers/decisions/` - Decisions hub (created by template)
+
+**Topic-Specific Directories:**
+- Commands (`/explore`, `/research`, `/decision`) create topic-specific directories automatically
+- Example: `/explore my-topic` creates `docs/maintainers/planning/explorations/my-topic/`
+- Example: `/research my-topic` creates `docs/maintainers/research/my-topic/`
+- Example: `/decision my-topic` creates `docs/maintainers/decisions/my-topic/`
+
+### Workflow: Exploration → Research → Decision → Planning
+
+1. **Exploration** (`/explore [topic]`)
+   - Organize abstract ideas and proof of concepts
+   - Identify research topics
+   - Creates: `docs/maintainers/planning/explorations/[topic]/`
+
+2. **Research** (`/research [topic]`)
+   - Conduct structured research on identified topics
+   - Extract functional and non-functional requirements
+   - Creates: `docs/maintainers/research/[topic]/` + `requirements.md`
+
+3. **Decision** (`/decision [topic]`)
+   - Make architectural decisions based on research
+   - Create Architecture Decision Records (ADRs)
+   - Creates: `docs/maintainers/decisions/[topic]/` + ADRs
+
+4. **Transition** (`/transition-plan --from-adr`)
+   - Transition from decisions to feature planning
+   - Creates feature plan and phase documents
+   - Ready for implementation with `/task-phase`
+
+### Hub vs Topic-Specific Directories
+
+**Hub Directories:**
+- Created by templates (already present in new projects)
+- Contain `README.md` files that serve as navigation hubs
+- Provide overview and workflow documentation
+- List active explorations/research/decisions
+
+**Topic-Specific Directories:**
+- Created by commands (`/explore`, `/research`, `/decision`)
+- Contain topic-specific documents
+- Automatically organized under hub directories
+- Commands populate these directories with structured content
+
+### Getting Started
+
+1. **Start exploration:** Use `/explore [topic]` for new ideas
+2. **Conduct research:** Use `/research [topic]` to investigate
+3. **Make decisions:** Use `/decision [topic]` to document decisions
+4. **Plan implementation:** Use `/transition-plan --from-adr` to create plans
+
+### Example Workflow
+
+```
+/explore new-feature
+  → Creates: docs/maintainers/planning/explorations/new-feature/
+  → Identifies research topics
+
+/research new-feature --from-explore new-feature
+  → Creates: docs/maintainers/research/new-feature/
+  → Extracts requirements
+
+/decision new-feature --from-research
+  → Creates: docs/maintainers/decisions/new-feature/
+  → Creates ADRs
+
+/transition-plan --from-adr docs/maintainers/decisions/new-feature/adr-001-*.md
+  → Creates: docs/maintainers/planning/features/new-feature/
+  → Ready for /task-phase
+```
+
+---
+
 ## 📚 Learning Path
 
 This project follows a **stage-based learning approach** with fundamentals before implementation:
@@ -183,6 +265,121 @@ This learning project uses a **stage-based organization** with progressive compl
 
 ---
 
+## 🤖 Workflow Automation Commands
+
+This learning project includes workflow automation commands to help organize learning, track progress, and plan learning stages. All commands are located in `.cursor/commands/` and can be used directly in Cursor IDE.
+
+### Quick Reference
+
+| Command | Purpose | Learning Use Case |
+|---------|---------|-------------------|
+| `/explore` | Start exploration cycles | Research learning topics |
+| `/research` | Conduct structured research | Investigate concepts |
+| `/decision` | Make learning decisions | Choose learning paths |
+| `/transition-plan` | Create transition plans | Plan learning stages |
+| `/reflect` | Analyze learning progress | After completing stages |
+| `/reflection-artifacts` | Extract planning artifacts | Plan next learning stages |
+| `/task-phase` | Implement learning tasks | Hands-on exercises |
+| `/pr` | Create pull requests | Document learning work |
+| `/post-pr` | Update docs after PR merge | Track learning progress |
+| `/cursor-rules` | Manage cursor rules | Update AI config |
+
+### Learning Workflow Commands
+
+#### Exploration and Research
+
+- **`/explore [topic]`** - Start exploration of learning topic
+  - Creates exploration documents
+  - Identifies research questions
+  - Output: `docs/maintainers/planning/explorations/[topic]/`
+
+- **`/research [topic] --from-explore [topic]`** - Research learning topic
+  - Reads research topics from exploration
+  - Creates research documents
+  - Extracts learning requirements
+  - Output: `docs/maintainers/research/[topic]/` + `requirements.md`
+
+- **`/decision [topic] --from-research`** - Make learning decisions
+  - Reads research documents
+  - Creates ADR documents for learning choices
+  - Output: `docs/maintainers/decisions/[topic]/` + ADRs
+
+#### Learning Planning
+
+- **`/transition-plan --from-adr`** - Plan learning stages
+  - Reads learning decisions
+  - Creates learning stage plans
+  - Output: Learning plan + stage documents
+
+- **`/task-phase [N]`** - Implement learning tasks
+  - Reads from `docs/maintainers/planning/features/[stage-name]/phase-N.md`
+  - Implements exercises and practice
+  - Tracks learning progress
+
+#### Reflection and Progress
+
+- **`/reflect`** - Reflect on learning progress
+  - Reviews completed stages
+  - Identifies learning gaps
+  - Suggests next steps
+
+- **`/reflection-artifacts --type [type]`** - Extract learning plans
+  - Creates plans for next learning stages
+  - From reflection documents
+  - Ready for implementation
+
+#### Project Management
+
+- **`/pr --phase [N]`** - Create PR for learning work
+  - Documents learning progress
+  - Creates comprehensive PR description
+
+- **`/post-pr`** - Update learning documentation
+  - Updates stage status
+  - Updates learning progress
+  - Tracks achievements
+
+- **`/cursor-rules`** - Manage cursor rules
+  - Updates AI assistant configuration
+  - Customizes learning support
+
+### Learning Workflow Examples
+
+**Research a Learning Topic:**
+```
+/explore python-fundamentals
+  → /research python-fundamentals --from-explore python-fundamentals
+  → /decision python-fundamentals --from-research
+  → /transition-plan --from-adr
+```
+
+**Plan Learning Stages:**
+```
+/reflect
+  → /reflection-artifacts --type feature
+  → /task-phase 1
+  → /pr --phase 1
+```
+
+**Track Learning Progress:**
+```
+/task-phase 1  # Complete exercises
+  → /pr --phase 1  # Document progress
+  → /post-pr  # Update learning status
+```
+
+### Command Documentation
+
+All commands have detailed documentation in `.cursor/commands/`. Each command includes:
+
+- Configuration and path detection
+- Workflow overview
+- Step-by-step process
+- Usage examples
+- Learning-specific patterns
+
+---
+
 ## 📚 Reference Materials
 
 ### Quick References
@@ -196,6 +393,47 @@ This learning project uses a **stage-based organization** with progressive compl
 - [External resource 1]
 - [External resource 2]
 - [External resource 3]
+
+---
+
+## 🔄 CI/CD Improvements
+
+This learning project supports CI/CD improvements for process enhancements and workflow automation.
+
+### CI/CD Improvement Structure
+
+**Location:** `docs/maintainers/planning/ci/[improvement-name]/`
+
+**Key Files:**
+- `README.md` - Improvement hub
+- `improvement-plan.md` - Improvement plan
+- `phase-N.md` - Phase documents
+
+**Key Differences from Features:**
+- Uses `improvement-plan.md` instead of `feature-plan.md`
+- No `status-and-next-steps.md` file (status tracked in README.md)
+- Similar phase structure to features
+- Use `/task-improvement` command instead of `/task-phase`
+
+### Creating CI/CD Improvements
+
+1. **Create improvement directory:**
+   ```bash
+   mkdir -p docs/maintainers/planning/ci/[improvement-name]
+   ```
+
+2. **Create improvement plan:**
+   - Copy `docs/maintainers/planning/ci/improvement-plan-template.md` as `improvement-plan.md`
+   - Fill in improvement details
+   - Define implementation steps
+
+3. **Create phase documents:**
+   - Create `phase-1.md`, `phase-2.md`, etc.
+   - Define tasks and deliverables
+
+4. **Implement improvements:**
+   - Use `/task-improvement [N]` to implement phases
+   - Use `/pr --ci-improvement [name]` to create PRs
 
 ---
 

@@ -12,7 +12,8 @@ Thumbs.db
 # Editor files
 .vscode/
 .idea/
-.cursor/rules/
+# Allow tracking cursor rules (they're useful for templates)
+# .cursor/rules/
 *.swp
 *.swo
 *~
@@ -65,3 +66,6 @@ admin/notes/opportunities/internal/cdwilson-docker-build-and-push.yaml
 !*.json
 !*.txt
 !*.mdc
+
+# Cursor worktree directories (keep worktrees.json for documentation)
+.cursor/worktrees/

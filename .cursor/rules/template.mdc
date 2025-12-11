@@ -1,0 +1,394 @@
+---
+alwaysApply: true
+---
+
+# Template Rules
+
+**Purpose:** Template structure, generation, and validation standards  
+**Last Updated:** 2025-12-10  
+**Applies To:** `templates/` directory and template generation
+
+---
+
+## 📋 Quick Links
+
+- **[Main Rules](main.mdc)** - Core project rules and standards
+- **[Workflow Rules](workflow.mdc)** - Development workflow and processes
+
+---
+
+## 🏗️ Template Structure Standards
+
+### Standard Project Template
+
+**Required Structure:**
+
+```
+standard-project/
+├── docs/
+│   └── maintainers/         # Project management hub
+│       ├── planning/         # Feature planning, releases
+│       │   ├── features/     # Feature-based development
+│       │   └── releases/     # Version management
+│       ├── feedback/         # Code reviews, external feedback
+│       ├── decisions/        # Architecture decisions (ADRs)
+│       └── archived/         # Historical documentation
+├── backend/                  # Backend application
+│   └── instance/            # Database instance (gitignored)
+├── frontend/                 # Frontend application
+├── tests/                    # Centralized testing
+├── scripts/                  # Automation scripts
+├── docs/                     # User documentation
+├── .github/workflows/        # CI/CD workflows
+├── README.md                 # Project hub
+└── start.txt                 # Project initialization notes
+```
+
+**Key Features:**
+
+- Hub-and-spoke documentation pattern
+- Feature-based planning structure
+- Backend/frontend separation
+- Centralized testing
+- CI/CD workflows included
+
+---
+
+### Learning Project Template
+
+**Required Structure:**
+
+```
+learning-project/
+├── docs/
+│   └── maintainers/         # Project management hub
+│       ├── planning/         # Learning planning
+│       │   └── features/     # Stage-based features
+│       ├── research/         # Learning research
+│       └── decisions/        # Learning decisions
+├── stage0-fundamentals/     # Foundation stage
+├── stage1-topic/            # Topic stages
+├── stage2-topic/
+├── stage3-topic/
+├── practice-apps/           # Practice applications
+├── reference/               # Reference materials
+├── README.md                # Project hub
+└── start.txt                # Project initialization notes
+```
+
+**Key Features:**
+
+- Stage-based learning progression
+- Fundamentals before implementation
+- Practice applications
+- Reference materials
+
+---
+
+## 📝 Template File Standards
+
+### README.md Hub Files
+
+**Every major directory MUST have a README.md:**
+
+```markdown
+# [Directory Name]
+
+**Purpose:** [One-line description]  
+**Status:** [Status Indicator]  
+**Last Updated:** [YYYY-MM-DD]
+
+---
+
+## 📋 Quick Links
+
+### [Category Name]
+
+- **[Link 1](path/to/doc.md)** - Brief description (🟠 Status)
+- **[Link 2](path/to/doc.md)** - Brief description (✅ Status)
+
+---
+
+## 🎯 Overview
+
+[Content here]
+```
+
+### Template Variables
+
+**Files that need customization:**
+
+- `start.txt` - Project initialization notes
+- `README.md` - Project overview (update with tech stack)
+- `.github/workflows/` - CI/CD workflows (configure as needed)
+- `docs/` - User documentation (customize for project)
+
+**Placeholder Patterns:**
+
+- `[PROJECT_NAME]` - Project name
+- `[PROJECT_DESCRIPTION]` - Project description
+- `[TECH_STACK]` - Technology stack
+- `[AUTHOR]` - Author name
+
+---
+
+## 🔧 Template Generation Standards
+
+### Generator Script Requirements
+
+**Script:** `scripts/new-project.sh`
+
+**Must Handle:**
+
+1. **Project Name Validation**
+
+   - Check for valid characters
+   - Handle spaces and special characters
+   - Validate uniqueness
+
+2. **Template Selection**
+
+   - Standard project vs Learning project
+   - Confirm selection
+
+3. **Customization**
+
+   - Project description
+   - Technology stack (optional)
+   - Git initialization (optional)
+
+4. **Template Copying**
+
+   - Copy template directory
+   - Replace placeholders
+   - Set permissions
+   - Initialize git (if requested)
+
+5. **Validation**
+   - Verify structure created correctly
+   - Check all required files present
+   - Validate documentation links
+
+### Template Validation
+
+**Script:** `scripts/validate-templates.sh`
+
+**Validates:**
+
+- Template structure completeness
+- README.md files present
+- Documentation links valid
+- Required directories exist
+- File permissions correct
+
+---
+
+## 📚 Documentation Template Standards
+
+### Hub-and-Spoke Pattern
+
+**Hub Files (README.md):**
+
+- Navigation entry points
+- Quick links section
+- Overview content
+- Links to spoke documents
+
+**Spoke Documents:**
+
+- Single topic focus
+- Link back to hub
+- Descriptive filenames
+- Status metadata
+
+### Status Indicators
+
+Use consistently:
+
+- 🔴 **Not Started**
+- 🟡 **Planned**
+- 🟠 **In Progress**
+- ✅ **Active/Complete**
+
+### Date Format
+
+Always: `YYYY-MM-DD` (e.g., 2025-12-07)
+
+---
+
+## 🎯 Template Customization Guidelines
+
+### Required Customization
+
+**After Template Generation:**
+
+1. **Update start.txt**
+
+   - Add project-specific details
+   - Document initial goals
+   - Note technology choices
+
+2. **Update README.md**
+
+   - Add technology stack
+   - Update project description
+   - Customize quick start guide
+
+3. **Configure CI/CD**
+   - Update workflow files
+   - Configure test commands
+   - Set up deployment (if applicable)
+
+### Optional Customization
+
+- Remove unused directories
+- Add project-specific directories
+- Customize admin structure
+- Add project-specific scripts
+
+---
+
+## 🔍 Template Testing Standards
+
+### Before Committing Template Changes
+
+**Test Checklist:**
+
+- [ ] Run `./scripts/new-project.sh` successfully
+- [ ] Verify generated project structure
+- [ ] Check all README.md files present
+- [ ] Validate documentation links
+- [ ] Test template validation script
+- [ ] Verify no broken references
+
+### Template Structure Issue Investigation
+
+**When fixing template structure issues:**
+
+1. **Check All Similar Directories**
+
+   - Don't stop at the first issue found
+   - Review all similar directories (e.g., all `stage*-topic/` directories)
+   - Check for patterns across template structure
+   - Verify fix addresses all similar issues
+
+2. **Empty Directory Handling**
+
+   - Git doesn't track empty directories
+   - Use `.gitkeep` files to ensure directories are tracked
+   - Check all empty directories in template structure
+   - Verify directories exist after Git checkout
+
+3. **Comprehensive Fix Verification**
+   - Test template generation after fix
+   - Verify all similar issues are resolved
+   - Check CI tests pass for all affected areas
+   - Document fix addresses all similar patterns
+
+**Example:** PR #31 fix discovered that `stage1-topic`, `stage2-topic`, and `stage3-topic` all needed `.gitkeep` files, not just the one causing immediate CI failures.
+
+**See:** `admin/planning/notes/chat-log-2025-12-08-pr31-fix-implementation.md` for complete example
+
+### Template Validation Tests
+
+**Location:** `tests/`
+
+**Test Types:**
+
+- Template structure validation
+- Documentation link checking
+- File presence verification
+- Placeholder replacement testing
+
+**Test Framework:** Bats (Bash Automated Testing System)
+
+**Running Tests:**
+
+```bash
+# Run all tests
+bats tests/unit/*.bats
+
+# Run specific test file
+bats tests/unit/new-project.bats
+
+# Verbose output
+bats --verbose-run tests/unit/*.bats
+```
+
+**Test Count:** 94+ tests as of v1.4.0
+
+---
+
+## 🧪 TDD for Template Scripts
+
+**Pattern:** Use RED-GREEN-REFACTOR cycle for shell scripts.
+
+**When to use:**
+
+- Creating new scripts (`scripts/*.sh`)
+- Modifying existing script behavior
+- Adding new script flags/options
+- Fixing script bugs
+
+**Process:**
+
+1. **RED:** Write failing test first
+2. **GREEN:** Implement minimum code to pass
+3. **REFACTOR:** Clean up while tests pass
+
+**Test Location:** `tests/unit/[script-name].bats`
+
+---
+
+## 🚩 Script Flag Conventions
+
+**Standard flags for template scripts:**
+
+| Flag                | Purpose                                 |
+| ------------------- | --------------------------------------- |
+| `--dry-run`         | Show what would happen without doing it |
+| `--force`           | Override blocking checks                |
+| `--verbose`         | Show detailed output                    |
+| `--json`            | Output in JSON format                   |
+| `--generate`        | Generate output file                    |
+| `--help`            | Show usage information                  |
+| `--non-interactive` | Disable prompts (CI mode)               |
+
+**Principles:**
+
+- `--dry-run` for state-modifying operations
+- `--non-interactive` / `--yes` for CI/automation
+- Positional args before optional flags
+- All flags should have `--help` documentation
+
+---
+
+## 🚀 Template Evolution Process
+
+### Learning from Real Projects
+
+**Process:**
+
+1. **Capture Learnings** - Document patterns from real projects
+2. **Prioritize** - Assess impact and effort
+3. **Plan** - Create feature plan in `admin/planning/features/`
+4. **Implement** - Update templates
+5. **Test** - Validate template generation
+6. **Release** - Include in next release
+
+**See:** `admin/planning/opportunities/` for learnings tracking
+
+---
+
+## 🔗 Related
+
+- **Main Rules:** [main.mdc](main.mdc) - Core project rules
+- **Workflow Rules:** [workflow.mdc](workflow.mdc) - Development workflow
+- **Template Usage:** `docs/TEMPLATE-USAGE.md`
+- **Project Types:** `docs/PROJECT-TYPES.md`
+
+---
+
+**Last Updated:** 2025-12-10  
+**Status:** ✅ Active  
+**Next:** Integrate release-readiness tools into templates

@@ -2,7 +2,7 @@
 
 **Purpose:** Feature-based planning and tracking using hub-and-spoke documentation  
 **Status:** ✅ Active  
-**Last Updated:** 2025-11-12
+**Last Updated:** 2025-12-08
 
 ---
 
@@ -10,6 +10,9 @@
 
 ### Active Features
 
+- **[Release Readiness](release-readiness/README.md)** - Implement standardized release readiness assessment and automation (🔴 Not Started)
+- **[Command Adaptation Template](command-adaptation-template/README.md)** - Document command adaptation pattern as reusable template (🟡 Planned)
+- **[Command Testing & Template Integration](command-testing-integration/README.md)** - Test and integrate cursor commands into templates (🟡 Planned)
 - **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (⚠️ **Status Discrepancy** - See [STATUS.md](STATUS.md) for details)
 - **[Template Restructure](template-restructure/README.md)** - Restructure templates (admin/ → docs/maintainers/, rename to standard-project) (✅ Complete)
 
@@ -150,6 +153,6 @@ None currently - all features are either complete or have status discrepancies t
 
 ---
 
-**Last Updated:** 2025-11-12  
+**Last Updated:** 2025-12-08  
 **Status:** ✅ Active  
 **Next:** See individual feature directories for current work

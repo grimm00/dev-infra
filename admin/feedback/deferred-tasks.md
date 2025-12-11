@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2025-11-12
+**Last Updated:** 2025-12-10
 
 ---
 
@@ -10,10 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 22 (No new tasks from PR #10 - all items fixed/verified)
+**Total Tasks:** 42 (3 fixed in PR #39, 20 new from PR #39, PR #40, PR #41, PR #42)
 
-- 🟡 **MEDIUM**: 17 tasks
-- 🟢 **LOW**: 5 tasks
+- 🟠 **HIGH**: 1 task (deferred - edge case)
+- 🟡 **MEDIUM**: 26 tasks
+- 🟢 **LOW**: 18 tasks (1 fixed)
 
 ---
 
@@ -322,7 +323,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
-**Last Updated:** 2025-11-14  
+**Last Updated:** 2025-12-09  
 **Status:** 📋 Active Backlog
 
 ---
@@ -396,3 +397,113 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 ### Deferred from PR #10
 
 - None - All verification items were addressed (fixed or verified)
+
+---
+
+## PR #35 Additions
+
+**Date:** 2025-12-09  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #35 (Release Readiness Phase 3)
+
+- Task 23: Shell `&&`/`||` precedence bug (HIGH priority, LOW effort) - ✅ Fixed in PR #37
+- Task 24: Add comprehensive blocking vs non-blocking test cases (MEDIUM priority, MEDIUM effort)
+- Task 25: Remove duplicate `generate_assessment` function (MEDIUM priority, MEDIUM effort)
+- Task 26: Improve HTML tag test assertions (LOW priority, LOW effort) - ✅ Fixed in PR #36
+- Task 27: Refactor blocking criteria to use array iteration (LOW priority, MEDIUM effort)
+
+---
+
+## PR #36 Additions
+
+**Date:** 2025-12-09  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #36 (Quick Wins Cross-PR Batch)
+
+- Task 28: Add negative test case for malformed HTML tags (LOW priority, LOW effort) - Nice-to-have improvement to test coverage
+
+---
+
+## PR #37 Additions
+
+**Date:** 2025-12-09  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #37 (Script Improvements Cross-PR Batch)
+
+- Task 29: Extract whitespace trimming/sanitization into helper function (LOW priority, MEDIUM effort) - Deferred: code duplication refactoring
+- Task 30: Use POSIX-compatible `=` instead of bash-specific `==` (LOW priority, LOW effort) - Deferred: POSIX compatibility improvement
+
+---
+
+## PR #38 Additions
+
+**Date:** 2025-12-09  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #38 (Test Improvements Cross-PR Batch)
+
+- Task 31: Tighten path expansion test assertion for undefined vars (MEDIUM priority, LOW effort) - Deferred: test assertion precision - ✅ Fixed in PR #39
+- Task 32: Clarify existing file collision test assertion (MEDIUM priority, LOW effort) - Deferred: test assertion clarity - ✅ Fixed in PR #39
+- Task 33: Tighten assertions in gh CLI and path expansion tests (MEDIUM priority, LOW effort) - Deferred: test assertion robustness - ✅ Fixed in PR #39
+
+---
+
+## PR #39 Additions
+
+**Date:** 2025-12-10  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #39 (Test Assertion Precision Cross-PR Batch)
+
+- Task 34: Mock gh should not fall back to real binary (MEDIUM priority, LOW effort) - Deferred: test hermiticity improvement
+- Task 35: Clarify task count documentation mismatch (LOW priority, LOW effort) - Deferred: documentation clarity
+- Task 36: Improve skipped test assertion clarity (LOW priority, LOW effort) - Deferred: test documentation
+
+---
+
+## PR #40 Additions
+
+**Date:** 2025-12-10  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #40 (Known Issue #1 - Git Branch CI Fix)
+
+- Task 37: Remove fetch-depth from build-image job (LOW priority, LOW effort) - Performance optimization: build-image doesn't need full history
+- Task 38: Update status field timing in planning docs (LOW priority, LOW effort) - Documentation consistency: status marked complete before CI validation
+
+---
+
+## PR #41 Additions
+
+**Date:** 2025-12-10  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #41 (Release Readiness Phase 4 - Process Integration)
+
+- Task 39: Add git repository check before git commands (MEDIUM priority, LOW effort) - Defensive programming: script handles gracefully but explicit check would improve error messages
+- Task 40: Adjust dry-run banner messaging (LOW priority, LOW effort) - UX improvement: banner says "Created Successfully" even in dry-run mode
+- Task 41: Add non-dry-run test coverage for file creation (MEDIUM priority, MEDIUM effort) - Test coverage: tests only use --dry-run, don't verify actual file creation
+- Task 42: Flexible argument order in CLI (LOW priority, MEDIUM effort) - UX improvement: version must come before --dry-run
+- Task 43: Consistent dry-run simulation messaging (LOW priority, LOW effort) - Same as Task 40, overall comment
+
+---
+
+## PR #42 Additions
+
+**Date:** 2025-12-10  
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #42 (Release Readiness Phase 5 - Historical Tracking)
+
+- Task 44: Input validation for --last flag (MEDIUM priority, LOW effort) - Bug risk: non-numeric input could cause integer expression error (PR42-#1, Overall-1)
+- Task 45: Tests skipped in CI (MEDIUM priority, MEDIUM effort) - Testing gap: analyze-releases tests not run in CI automation (PR42-#3)
+- Task 46: Strengthen JSON test assertions (MEDIUM priority, LOW effort) - Test quality: validate JSON structure with jq and required fields (PR42-#5)
+- Task 47: Strengthen metrics test assertions (MEDIUM priority, LOW effort) - Test quality: validate exact output for metrics calculations (PR42-#6)
+- Task 48: Remove verbose logging suppression (LOW priority, LOW effort) - UX inconsistency: 2>/dev/null disables --verbose for discovery (PR42-#2)
+- Task 49: Strengthen backward compat test assertions (LOW priority, LOW effort) - Test quality: add explicit assertions for files without metadata (PR42-#4)
+- Task 50: Add --last N edge case tests (LOW priority, MEDIUM effort) - Test coverage: test boundary/invalid values (PR42-#7)
+- Task 51: Fix grammar typo in manual testing docs (LOW priority, LOW effort) - Documentation: "Metrics includes" → "Metrics include" (PR42-#8)
+- Task 52: Refactor generate_assessment variable dependencies (LOW priority, MEDIUM effort) - Code organization: keep computation within function (PR42-Overall-2)

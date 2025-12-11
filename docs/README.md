@@ -16,6 +16,11 @@
 ### Advanced Usage
 - **[Best Practices Guide](BEST-PRACTICES.md)** - Comprehensive best practices
 - **[Customization Guide](CUSTOMIZATION.md)** - Advanced customization instructions
+- **[Command Adaptation Pattern](COMMAND-ADAPTATION-PATTERN.md)** - Pattern for adapting Cursor commands
+- **[Command Adaptation Template](COMMAND-ADAPTATION-TEMPLATE.md)** - Reusable template for command adaptation
+- **[Command Adaptation Checklist](COMMAND-ADAPTATION-CHECKLIST.md)** - Actionable checklist for command adaptation
+- **[Phase Document Template](PHASE-DOCUMENT-TEMPLATE.md)** - Template for detailed phase documents
+- **[Worktree Guide](WORKTREE-GUIDE.md)** - Multi-agent development with git worktrees
 
 ### Project Management
 - **[Admin Documentation](../admin/README.md)** - Dev-infra project management

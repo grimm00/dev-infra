@@ -1,0 +1,447 @@
+---
+alwaysApply: true
+---
+
+# Workflow Rules
+
+**Purpose:** Development workflow processes and commands for dev-infra  
+**Last Updated:** 2025-12-10  
+**Status:** ✅ Active
+
+---
+
+## 📋 Quick Links
+
+- **[Main Rules](main.mdc)** - Core project rules and standards
+- **[Template Rules](template.mdc)** - Template-specific standards
+
+---
+
+## 🚀 Git Flow Workflow
+
+### Branch Strategy
+
+**ALWAYS follow this branching model:**
+
+- `main` - Production releases ONLY (protected)
+- `develop` - Ongoing development (protected)
+- `feat/*` - Feature branches (e.g., `feat/new-template-type`)
+- `fix/*` - Bug fixes (e.g., `fix/generator-script-bug`)
+- `docs/*` - Documentation updates
+- `chore/*` - Maintenance tasks
+- `ci/*` - CI/CD changes
+- `release/*` - Release preparation branches
+
+### Commit Requirements
+
+1. **Feature/Fix/CI Branches**
+
+   - REQUIRE pull requests to develop/main
+   - Full testing and linting required
+   - External reviews on release branches
+   - Use conventional commits format
+
+2. **Documentation/Chore Branches**
+
+   - CAN push directly to develop/main
+   - Minimal validation required
+   - Focus on clarity and accuracy
+
+3. **Commit Message Format**
+
+   ```
+   type(scope): brief description
+
+   Longer explanation if needed
+   ```
+
+   Types: feat, fix, docs, chore, test, refactor, ci
+
+   Examples:
+   - `feat(templates): add CLI project template type`
+   - `fix(scripts): handle spaces in project names`
+   - `docs(planning): add command integration planning`
+   - `chore(ci): update Docker test image`
+
+---
+
+## 🔍 Pull Request Review Workflow
+
+### NEVER Merge Without Review
+
+**CRITICAL:** Do NOT merge pull requests automatically. Always follow this workflow:
+
+1. **Create PR** - Use `/pr --phase [N]` or `/pr --fix [batch]` command (when available)
+2. **Stop and Wait** - Present PR link to user, do NOT proceed to merge
+3. **External Review** - User will run `dt-review` (or use `/pr-validation` when available)
+   - **Note:** Missing reviews are acceptable - workflow continues without review
+4. **Sourcery Feedback** - Reviews saved to `admin/feedback/sourcery/pr##.md` (if applicable)
+   - **Note:** Missing reviews are acceptable - workflow continues without review
+5. **Priority Assessment** - Fill out priority matrix in Sourcery review file (if review available)
+6. **Fix Planning** - Use `/fix-plan` to create fix plans (when applicable)
+7. **Status Validation** - Verify status updates are included in PR (see Status Check Checklist below)
+   - **Note:** Status updates are mandatory but validation is lenient (warnings, not blockers) to start
+8. **User Approval** - Only merge after user explicitly approves
+9. **Post-Merge** - Use `/post-pr` to update documentation (when available)
+   - **Note:** `/post-pr` automatically updates phase and feature status after PR merge
+
+### Status Check Checklist
+
+**Before PR Approval, verify status updates:**
+
+- [ ] Phase document status is current
+  - Location: `docs/maintainers/planning/features/[feature-name]/phase-N.md` or `docs/maintainers/planning/phases/phase-N.md`
+  - Verify: Status reflects actual completion state
+  - Expected: `**Status:** ✅ Complete` (if phase is complete)
+- [ ] Feature status document is current (if applicable)
+  - Location: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+  - Verify: Phase marked appropriately, progress updated
+- [ ] Status updates are included in PR commits
+  - Verify: Status document changes are committed
+  - Verify: Status updates match actual work completed
+- [ ] Progress tracking is accurate
+  - Verify: Progress percentages reflect actual completion
+  - Verify: Task checkboxes match completed work
+
+**Status Update Requirements:**
+
+- **Mandatory:** Status updates are required for PR approval
+- **Lenient Approach:** Validation uses warnings, not blockers (to start)
+- **During Work:** Status should be updated during work (per `/task-phase` workflow)
+- **Before PR:** Status must be current before PR creation (per `/pr` command validation)
+- **After Merge:** Status automatically updated by `/post-pr` command
+
+**If Status Not Current:**
+
+- ⚠️ **Warning:** Status documents may be outdated
+- ⚠️ **Recommendation:** Update status documents before PR approval
+- ⚠️ **Note:** This is a warning, not a blocker - PR can proceed but status should be updated
+- Document the warning in PR review
+- Suggest updating status documents
+
+**See Also:**
+- [Status Update Workflow](../../docs/STATUS-UPDATE-WORKFLOW.md) - Complete status update guide
+- [Status Update Checklist](../../docs/STATUS-UPDATE-CHECKLIST.md) - Checklist for status updates
+- [Status Validation](../commands/pr.md#status-validation) - Status validation in `/pr` command
+
+### Priority Matrix Assessment
+
+For each Sourcery comment, assess:
+- **Priority:** CRITICAL 🔴 / HIGH 🟠 / MEDIUM 🟡 / LOW 🟢
+- **Impact:** CRITICAL 🔴 / HIGH 🟠 / MEDIUM 🟡 / LOW 🟢  
+- **Effort:** LOW 🟢 / MEDIUM 🟡 / HIGH 🟠 / VERY_HIGH 🔴
+
+---
+
+## 📊 Template Development Process
+
+### Creating New Template Features
+
+**ALWAYS follow this structure when creating template features:**
+
+1. **Create Feature Directory**
+
+   ```
+   admin/planning/features/[feature-name]/
+   ```
+
+2. **Required Files**
+
+   - `README.md` - Feature hub with quick links
+   - `feature-plan.md` - High-level overview and phases
+   - `status-and-next-steps.md` - Current progress tracking
+   - `phase-1.md` - First phase details (additional phases as needed)
+
+3. **Feature Plan Structure**
+
+   ```markdown
+   # [Feature Name] - Feature Plan
+
+   **Status:** [Status Indicator]
+   **Created:** [YYYY-MM-DD]
+   **Priority:** [High/Medium/Low]
+
+   ## 📋 Overview
+
+   [Template feature description]
+
+   ## 🎯 Success Criteria
+
+   - [ ] Measurable criterion 1
+   - [ ] Measurable criterion 2
+
+   ## 📅 Implementation Phases
+
+   ### Phase 1: [Name]
+
+   - [ ] Task 1
+   - [ ] Task 2
+
+   ## 🚀 Next Steps
+
+   [Immediate next actions]
+   ```
+
+### Template Development Lifecycle
+
+1. **Discovery** - Identify opportunity from real projects
+2. **Planning** - Write feature-plan.md, break into phases
+3. **Implementation** - Execute phases, update templates
+4. **Testing** - Test template generation
+5. **Documentation** - Update user docs and examples
+6. **Release** - Include in next release
+
+---
+
+## 🔄 CI/CD Integration
+
+### Testing Requirements
+
+- **Feature branches:** Full test suite, template validation, linting
+- **Documentation branches:** Markdown validation only
+- **Release branches:** Full validation + external reviews
+- **CI branches:** Full validation + workflow testing
+
+### Template Validation
+
+**Before committing template changes:**
+
+```bash
+# Test template generation
+./scripts/new-project.sh
+
+# Validate templates
+./scripts/validate-templates.sh
+```
+
+**Validation Checklist:**
+- [ ] Template generates successfully
+- [ ] All required directories created
+- [ ] All README.md files present
+- [ ] Documentation links work
+- [ ] No broken references
+
+---
+
+## 🔗 Command Integration Workflow
+
+### Core Commands (Complete)
+
+**All core workflow commands are now implemented and tested:**
+
+- `/fix-plan` - ✅ Create fix batches from reviews
+- `/fix-implement` - ✅ Implement fix batches
+- `/task-phase` - ✅ Phase implementation with TDD
+- `/pr` - ✅ Centralized PR creation
+- `/pr-validation` - ✅ PR validation workflow
+- `/post-pr` - ✅ Post-merge documentation
+- `/pre-phase-review` - ✅ Review phase plans before implementation
+- `/address-review` - ✅ Address gaps from pre-phase review
+
+**See:** `.cursor/commands/` for all command documentation
+
+---
+
+## 🔄 Pre-Phase Review Workflow
+
+**Best Practice:** Review phase plans before implementation to catch issues early.
+
+**Workflow:**
+
+```
+/pre-phase-review [phase-N]
+    → Identifies gaps, clarifications needed
+    → Creates review document
+    
+/address-review [review-path]
+    → Updates phase plan with recommendations
+    → Commits documentation changes only
+    
+/task-phase [phase-N] [task-N]
+    → Implements tasks with TDD
+    → Clean commits, separate from planning
+```
+
+**Benefits:**
+- Catch clarifications before implementation (saves time)
+- Separate planning updates from implementation commits
+- Better estimation accuracy
+- Cleaner git history
+
+---
+
+## 🧪 TDD for Bash Scripts
+
+**Pattern:** Use RED-GREEN-REFACTOR cycle for shell scripts.
+
+**Framework:** Bats (Bash Automated Testing System)
+
+**Workflow:**
+
+1. **RED:** Write failing test first
+   ```bash
+   @test "script generates assessment file" {
+       run "$SCRIPT" v1.4.0 --generate
+       [ "$status" -eq 0 ]
+       [[ "$output" =~ "Overall Readiness" ]]
+   }
+   ```
+
+2. **GREEN:** Implement minimum code to pass
+3. **REFACTOR:** Clean up while tests pass
+
+**Test Location:** `tests/unit/[script-name].bats`
+
+**Running Tests:**
+```bash
+bats tests/unit/[script-name].bats
+```
+
+**Evidence:** Release Readiness feature added 48 tests across 3 scripts.
+
+---
+
+## 🚩 Script Flag Conventions
+
+**Standard flags for all scripts:**
+
+| Flag | Purpose | Example |
+|------|---------|---------|
+| `--dry-run` | Show what would happen without doing it | `create-release-branch.sh v1.4.0 --dry-run` |
+| `--force` | Override blocking checks | `/pr --release --force` |
+| `--verbose` | Show detailed output | `analyze-releases.sh --verbose` |
+| `--json` | Output in JSON format | `analyze-releases.sh --json` |
+| `--generate` | Generate output file | `check-release-readiness.sh v1.4.0 --generate` |
+| `--help` | Show usage information | `create-release-branch.sh --help` |
+
+**Key Principles:**
+
+- `--dry-run` for any state-modifying operation
+- `--force` requires justification in commit/PR
+- `--generate` transforms validation into documentation
+- All flags after version/required arguments
+
+---
+
+## 📝 Release Process
+
+### Standard Release Workflow
+
+**Phase 1: Feature Development (on develop)**
+
+- Develop features on `develop` branch
+- Create feature branches from `develop`
+- Merge features to `develop` after review
+- Accumulate features over time
+
+**Phase 2: Release Preparation**
+
+**Step 1: Assess Readiness**
+```bash
+# Check release readiness
+./scripts/check-release-readiness.sh v1.4.0
+
+# Generate assessment document
+./scripts/check-release-readiness.sh v1.4.0 --generate > admin/planning/releases/v1.4.0/RELEASE-READINESS.md
+```
+
+**Step 2: Create Release Branch**
+```bash
+# Creates branch + initial assessment
+./scripts/create-release-branch.sh v1.4.0
+```
+
+**Step 3: On release/vX.Y.Z branch:**
+- Update CHANGELOG version
+- Update version numbers in files
+- Create release notes
+- Fix critical bugs found in testing
+- **Do not** add new features
+
+**Phase 3: Release Distribution**
+
+- Merge release branch to `main`
+- Create GitHub release
+- Tag release version
+- Distribution workflow runs automatically
+
+**Phase 4: Post-Release**
+```bash
+# Update historical tracking
+./scripts/analyze-releases.sh --last 5
+```
+
+**See:** `admin/planning/releases/PROCESS.md` for complete process
+
+---
+
+## 🎯 Template Maintenance Guidelines
+
+### When Modifying Templates
+
+1. **Test First**
+   - Always test with `./scripts/new-project.sh`
+   - Verify generated project structure
+   - Check all links and navigation
+
+2. **Update Documentation**
+   - Update template README files
+   - Update user documentation in `docs/`
+   - Update planning documents if feature-related
+
+3. **Maintain Consistency**
+   - Follow existing template patterns
+   - Keep structure consistent across template types
+   - Preserve proven patterns from real projects
+
+### Template Versioning
+
+- Templates evolve based on real project learnings
+- Capture learnings in `admin/planning/opportunities/`
+- Apply improvements in planned releases
+- Document changes in CHANGELOG.md
+
+---
+
+## 🔍 CI/CD Failure Investigation Best Practices
+
+### Comprehensive Root Cause Analysis
+
+**When investigating CI/CD failures:**
+
+1. **Check All Similar Patterns**
+   - Don't stop at the first issue found
+   - Look for similar directories, files, or patterns
+   - Check test failures for patterns (e.g., multiple stage directories)
+   - Verify fix addresses all similar issues
+
+2. **PR Validation Value**
+   - PR validation workflow (`/pr-validation`) is valuable for catching issues before merge
+   - CI environment may expose issues not visible locally
+   - Different test execution order may reveal additional failures
+   - Systematic validation catches edge cases
+
+3. **Workflow File Investigation**
+   - Always investigate workflow files when CI failures occur
+   - Check `.github/workflows/` files for configuration issues
+   - Verify Docker/test environment setup
+   - Even if root cause seems clear, verify workflow files are correct
+
+**Example:** PR #31 fix discovered that `stage1-topic`, `stage2-topic`, and `stage3-topic` all had the same empty directory issue, not just the one causing immediate failures.
+
+**See:** `admin/planning/notes/chat-log-2025-12-08-pr31-fix-implementation.md` for complete example
+
+---
+
+## 🔗 Related
+
+- **Main Rules:** [main.mdc](main.mdc) - Core project rules and standards
+- **Template Rules:** [template.mdc](template.mdc) - Template-specific standards
+- **Command Documentation:** `.cursor/commands/` - Detailed command workflows
+- **Release Process:** `admin/planning/releases/PROCESS.md`
+
+---
+
+**Last Updated:** 2025-12-10  
+**Status:** ✅ Active  
+**Next:** v1.4.0 release preparation

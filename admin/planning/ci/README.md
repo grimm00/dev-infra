@@ -21,14 +21,34 @@ This directory contains planning documentation for CI/CD improvements, workflows
 ## 📋 Active CI Projects
 
 ### In Progress
+
 - **[Release Distribution Workflow](release-distribution/README.md)** - Automated distribution package creation
 
-### Completed
-- **[Multi-Environment Testing](multi-environment-testing/README.md)** - Automated testing across Ubuntu and macOS ✅ (PR #17, merged 2025-11-18)
+### Active
+
+- **[Command Documentation & Maintenance](command-documentation-maintenance/README.md)** - Track command documentation updates and improvements (✅ Active)
 
 ### Planned
+
+- **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Automate template generation testing (✅ Complete - 2025-12-08)
+  - Phase 1 complete: Non-interactive mode added (PR #27)
+  - Phase 2 complete: Template validation test suite (PR #29)
+  - Fixes: PR #28, PR #30
+- **[CI/CD Failure Investigation](ci-cd-failure-investigation/README.md)** - Investigate PR #30 CI/CD failures (🔴 Not Started, 🔴 High Priority)
+- **[Test Suite Maintenance](test-suite-maintenance/improvement-plan.md)** - Centralize test setup/teardown (🔴 Not Started, 🟡 Medium Priority)
+- **[Command Testing Automation](command-testing-automation/README.md)** - Automated testing for cursor commands (🔴 Not Started)
+- **[Documentation Validation](documentation-validation/README.md)** - Documentation validation process for docs-only PRs (🔴 Not Started)
+- **[CI/CD Improvement Process Enhancements](cicd-improvement-process-enhancements/README.md)** - Enhance CI/CD improvement process based on learnings (🔴 Not Started)
+
+### Completed
+
+- **[Status Tracking Automation](status-tracking-automation/README.md)** - Improved status tracking process ✅ (PR #22, merged 2025-12-08)
 - CI/CD optimization and caching
 - Security scanning automation
+
+### Completed
+
+- **[Multi-Environment Testing](multi-environment-testing/README.md)** - Automated testing across Ubuntu and macOS ✅ (PR #17, merged 2025-11-18)
 
 ---
 
