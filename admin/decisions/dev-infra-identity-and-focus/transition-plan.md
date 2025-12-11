@@ -12,12 +12,12 @@
 
 This transition plan implements the 4 ADRs from the dev-infra identity and focus decisions:
 
-| ADR | Decision | Implementation |
-|-----|----------|----------------|
+| ADR     | Decision                  | Implementation                           |
+| ------- | ------------------------- | ---------------------------------------- |
 | ADR-001 | Template Factory Identity | Document identity, add category metadata |
-| ADR-002 | v1.5.0 Internal Only | Update Release Automation v2 scope |
-| ADR-003 | Command Tiers | Add tier/stability metadata to commands |
-| ADR-004 | Graduation Process | Create graduation checklist template |
+| ADR-002 | v1.5.0 Internal Only      | Update Release Automation v2 scope       |
+| ADR-003 | Command Tiers             | Add tier/stability metadata to commands  |
+| ADR-004 | Graduation Process        | Create graduation checklist template     |
 
 **Transition Type:** Governance/Process (documentation + metadata + rescoping)
 
@@ -49,6 +49,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 **Goal:** Officially accept the decisions
 
 **Tasks:**
+
 - [x] Change ADR-001 status: Proposed → Accepted ✅
 - [x] Change ADR-002 status: Proposed → Accepted ✅
 - [x] Change ADR-003 status: Proposed → Accepted ✅
@@ -57,6 +58,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 - [x] Update README.md status ✅
 
 **Deliverables:**
+
 - ✅ ADRs marked as Accepted
 - ✅ Decision hub updated
 
@@ -67,6 +69,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 **Goal:** Align Release Automation v2 with identity decision (ADR-002)
 
 **Tasks:**
+
 - [x] Update `admin/planning/features/release-automation-v2/feature-plan.md` ✅
   - Mark Phase 3 as "❌ Deferred (per ADR-002)"
   - Update success criteria to remove template integration
@@ -79,6 +82,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 - [ ] Update feature hub `admin/planning/features/README.md` (skipped - not needed)
 
 **Deliverables:**
+
 - ✅ Release Automation v2 scoped to Phase 1-2 only
 - ✅ Phase 3 marked as deferred with rationale
 - ✅ Documentation updated
@@ -90,6 +94,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 **Goal:** Document template factory identity in project rules (ADR-001)
 
 **Tasks:**
+
 - [x] Update `.cursor/rules/main.mdc` ✅
   - Add "Project Identity" section
   - Clarify template factory focus
@@ -99,6 +104,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 - [ ] Update project README.md with identity statement (deferred - rules sufficient)
 
 **Deliverables:**
+
 - ✅ Identity documented in Cursor rules
 - ✅ AI assistant has clear guidance
 
@@ -109,12 +115,14 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 **Goal:** Clarify work categorization (ADR-001, ADR-003)
 
 **Tasks:**
+
 - [x] Create category metadata standard (defined in Cursor rules) ✅
 - [x] Add category to Release Automation v2 → 🔧 Internal Tooling ✅
 - [ ] Add category to CI improvement plans (deferred - low priority)
 - [x] Document category convention in Cursor rules ✅
 
 **Deliverables:**
+
 - ✅ Category metadata standard defined (in main.mdc)
 - ✅ Key feature plan updated
 - 🟡 Full retroactive update deferred
@@ -128,21 +136,25 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 **Status:** Deferred to v1.5.0 implementation phase
 
 **Reason:** Adding metadata to 23 command files is substantial work that can be done incrementally during v1.5.0. The tier definitions are documented in:
+
 - ADR-003 (authoritative)
 - Cursor rules main.mdc (reference)
 
 **Tasks (for later):**
+
 - [ ] Define metadata format for commands
 - [ ] Update dev-infra commands with tier/stability
 - [ ] Document command tiers in template README
 
 **Tier Classification (documented):**
+
 - Essential (5): pr, task-phase, fix-plan, fix-implement, reflect
 - Valuable (6): explore, research, decision, pre-phase-review, pr-validation, post-pr
 - Advanced (7): transition-plan, reflection-artifacts, int-opp, address-review, task-release, cursor-rules, fix-review
 - Internal (5): release-prep, release-finalize, post-release, status, task-improvement
 
 **Deliverables:**
+
 - ✅ Tier classification documented in ADR-003
 - 🟡 Metadata in commands deferred
 
@@ -153,6 +165,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 **Goal:** Formalize graduation process (ADR-004)
 
 **Tasks:**
+
 - [x] Create `admin/planning/templates/graduation-checklist.md` ✅
   - Required criteria section
   - Recommended criteria section
@@ -163,6 +176,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 - [ ] Add graduation checklist to templatization workflow (deferred)
 
 **Deliverables:**
+
 - ✅ Graduation checklist template created
 - ✅ Process documented in template
 - ✅ Ready for use
@@ -174,6 +188,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 **Goal:** Complete the exploration → research → decision → transition workflow
 
 **Tasks:**
+
 - [x] Update `admin/explorations/dev-infra-identity-and-focus/README.md` ✅
   - Status: Decisions Proposed → ✅ Transitioned
   - Add transition plan link
@@ -181,6 +196,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
   - Updated status
 
 **Deliverables:**
+
 - ✅ Exploration marked complete
 - ✅ Full workflow documented
 
@@ -201,16 +217,16 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 
 ## Effort Summary
 
-| Step | Effort | Priority |
-|------|--------|----------|
-| 1. Approve ADRs | 5 mins | 🔴 High |
-| 2. Rescope v1.5.0 | 15-30 mins | 🔴 High |
-| 3. Update Cursor Rules | 15-30 mins | 🔴 High |
-| 4. Category Metadata | 30 mins | 🟡 Medium |
-| 5. Command Tiers | 30-45 mins | 🟡 Medium |
-| 6. Graduation Checklist | 30 mins | 🟡 Medium |
-| 7. Update Exploration | 5 mins | 🟢 Low |
-| **Total** | **~2-3 hours** | |
+| Step                    | Effort         | Priority  |
+| ----------------------- | -------------- | --------- |
+| 1. Approve ADRs         | 5 mins         | 🔴 High   |
+| 2. Rescope v1.5.0       | 15-30 mins     | 🔴 High   |
+| 3. Update Cursor Rules  | 15-30 mins     | 🔴 High   |
+| 4. Category Metadata    | 30 mins        | 🟡 Medium |
+| 5. Command Tiers        | 30-45 mins     | 🟡 Medium |
+| 6. Graduation Checklist | 30 mins        | 🟡 Medium |
+| 7. Update Exploration   | 5 mins         | 🟢 Low    |
+| **Total**               | **~2-3 hours** |           |
 
 ---
 
@@ -239,4 +255,3 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 ---
 
 **Last Updated:** 2025-12-11
-

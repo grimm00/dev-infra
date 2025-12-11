@@ -15,6 +15,7 @@ Dev-infra has organically grown to serve multiple purposes:
 3. **Reference Implementation** - Using what we build to build it (dogfooding)
 
 This creates complexity:
+
 - Every workflow improvement becomes a multi-phase feature
 - Confusion about where work belongs (`features/` vs `ci/` vs internal)
 - High maintenance burden (23 commands, extensive documentation)
@@ -23,11 +24,13 @@ This creates complexity:
 **The Core Question:** Should dev-infra be primarily a template factory?
 
 **Related Research:**
+
 - [Research Summary](../../research/dev-infra-identity-and-focus/research-summary.md)
 - [Template User Needs](../../research/dev-infra-identity-and-focus/research-template-user-needs.md)
 - [Other Projects' Patterns](../../research/dev-infra-identity-and-focus/research-other-projects.md)
 
 **Related Requirements:**
+
 - FR-15: Templates should not include dev-infra internal tooling
 - NFR-5: Templates should not grow more complex without clear user need
 - NFR-13: Template complexity should be appropriate for user projects
@@ -49,12 +52,12 @@ Internal tooling and workflow experimentation are secondary concerns that should
 
 ### Practical Implications
 
-| Before (Implicit) | After (Explicit) |
-|-------------------|------------------|
+| Before (Implicit)                    | After (Explicit)                |
+| ------------------------------------ | ------------------------------- |
 | Every improvement → template feature | Improvements require graduation |
-| All commands in templates | Essential commands in templates |
-| Complex templates | Simpler templates |
-| Workflow-centric planning | Template-centric planning |
+| All commands in templates            | Essential commands in templates |
+| Complex templates                    | Simpler templates               |
+| Workflow-centric planning            | Template-centric planning       |
 
 ---
 
@@ -89,11 +92,13 @@ Internal tooling and workflow experimentation are secondary concerns that should
 **Description:** Continue as laboratory + factory + reference implementation
 
 **Pros:**
+
 - No change needed
 - Everything gets templatized eventually
 - Dev-infra showcases all capabilities
 
 **Cons:**
+
 - Continued confusion about identity
 - Scope creep on every improvement
 - Templates grow increasingly complex
@@ -108,11 +113,13 @@ Internal tooling and workflow experimentation are secondary concerns that should
 **Description:** Focus on experimentation, minimal templates
 
 **Pros:**
+
 - Maximum innovation freedom
 - Templates stay simple
 - Fast iteration
 
 **Cons:**
+
 - Templates become bare-bones
 - Users don't benefit from innovations
 - Defeats purpose of having templates
@@ -126,11 +133,13 @@ Internal tooling and workflow experimentation are secondary concerns that should
 **Description:** Templates get everything dev-infra has
 
 **Pros:**
+
 - Single standard
 - No "two-tier" system
 - Users get all features
 
 **Cons:**
+
 - Templates become complex
 - All dev-infra-specific tooling in templates
 - High maintenance burden
@@ -153,6 +162,7 @@ Internal tooling and workflow experimentation are secondary concerns that should
 4. **Sustainability** - Maintaining 23+ commands across templates is unsustainable
 
 **Research Support:**
+
 - research-other-projects.md: "Templates are products, not process"
 - research-template-user-needs.md: "Natural separation already exists"
 - research-minimum-viable-tooling.md: "Templates may be over-featured"
@@ -162,6 +172,7 @@ Internal tooling and workflow experimentation are secondary concerns that should
 ## Requirements Impact
 
 **Requirements Affected:**
+
 - FR-7: Release automation should be internal tooling by default ✅
 - FR-15: Templates should not include dev-infra internal tooling ✅
 - NFR-5: Templates should not grow more complex without clear user need ✅
@@ -188,4 +199,3 @@ Internal tooling and workflow experimentation are secondary concerns that should
 ---
 
 **Last Updated:** 2025-12-11
-

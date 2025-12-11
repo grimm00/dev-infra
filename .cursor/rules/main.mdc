@@ -56,17 +56,18 @@ This is a development infrastructure template repository that provides standardi
 
 When planning work, classify it:
 
-| Category | Where It Goes | Template Impact |
-|----------|---------------|-----------------|
+| Category                | Where It Goes              | Template Impact         |
+| ----------------------- | -------------------------- | ----------------------- |
 | 🎯 **Template Feature** | `admin/planning/features/` | Yes - goes in templates |
-| 🔧 **Internal Tooling** | `admin/planning/features/` | No - dev-infra only |
-| ⚙️ **CI/CD** | `admin/planning/ci/` | Depends on type |
+| 🔧 **Internal Tooling** | `admin/planning/features/` | No - dev-infra only     |
+| ⚙️ **CI/CD**            | `admin/planning/ci/`       | Depends on type         |
 
 ### Graduation Criteria
 
 Before adding features to templates, they must meet:
 
 **Required (ALL):**
+
 - ≥1 release cycle in dev-infra
 - No major changes in 2+ weeks
 - Documentation 100% complete
