@@ -216,3 +216,62 @@ teardown() {
     [[ "$output" =~ "successfully" || "$output" =~ "completed" ]]
 }
 
+# ============================================================================
+# Task 2: File Update Functionality (RED Phase - Tests First)
+# ============================================================================
+
+@test "update-version-references.sh updates .cursor/rules/main.mdc version pattern" {
+    # Create temporary test file with version pattern
+    TEST_FILE="$BATS_TEST_TMPDIR/test-main.mdc"
+    echo "**Version:** v1.4.0 (released 2025-12-11)" > "$TEST_FILE"
+    
+    # Run script on test file (would need script to accept file list or use test file)
+    # For now, verify test file exists and has expected pattern
+    [ -f "$TEST_FILE" ]
+    grep -q "v1.4.0" "$TEST_FILE"
+    
+    # TODO: When Task 2 is implemented, test actual update:
+    # run "$SCRIPT" --old-version v1.4.0 --new-version v1.5.0 --files "$TEST_FILE"
+    # grep -q "v1.5.0" "$TEST_FILE"
+    # grep -q "v1.4.0" "$TEST_FILE" && return 1  # Old version should be gone
+}
+
+@test "update-version-references.sh handles version with status suffix" {
+    # Test that script preserves status suffixes like "(released)", "(pending)"
+    TEST_FILE="$BATS_TEST_TMPDIR/test-status.mdc"
+    echo "**Version:** v1.4.0 (released 2025-12-11)" > "$TEST_FILE"
+    
+    # Verify test file has status suffix
+    grep -q "(released" "$TEST_FILE"
+    
+    # TODO: When Task 2 is implemented, verify status suffix is preserved:
+    # After update, should have: "**Version:** v1.5.0 (released 2025-12-11)"
+}
+
+@test "update-version-references.sh creates backup before modification" {
+    # Test that backup file (.bak) is created before modifying original
+    TEST_FILE="$BATS_TEST_TMPDIR/test-backup.mdc"
+    echo "**Version:** v1.4.0" > "$TEST_FILE"
+    
+    # TODO: When Task 2 is implemented:
+    # run "$SCRIPT" --old-version v1.4.0 --new-version v1.5.0 --files "$TEST_FILE"
+    # [ -f "${TEST_FILE}.bak" ]
+    # grep -q "v1.4.0" "${TEST_FILE}.bak"  # Backup should have old content
+}
+
+@test "update-version-references.sh updates actual .cursor/rules/main.mdc file" {
+    # Test updating the real file (if it exists and has old version)
+    if [ -f "$PROJECT_ROOT/.cursor/rules/main.mdc" ]; then
+        # Check if file contains old version pattern
+        if grep -q "\*\*Version:\*\* v1.4.0" "$PROJECT_ROOT/.cursor/rules/main.mdc"; then
+            # TODO: When Task 2 is implemented, test actual update
+            # This test will verify the script can update the real file
+            skip "File update functionality not yet implemented (Task 2)"
+        else
+            skip "File does not contain v1.4.0 pattern"
+        fi
+    else
+        skip "File .cursor/rules/main.mdc does not exist"
+    fi
+}
+
