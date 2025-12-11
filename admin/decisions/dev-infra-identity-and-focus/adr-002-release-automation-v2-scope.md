@@ -1,6 +1,6 @@
 # ADR-002: Release Automation v2 Scope - Internal Tooling Only
 
-**Status:** 🟡 Proposed  
+**Status:** ✅ Accepted  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-11
 

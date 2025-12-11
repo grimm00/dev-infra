@@ -1,6 +1,6 @@
 # ADR-004: Graduation Process - Formal Criteria for Templatization
 
-**Status:** 🟡 Proposed  
+**Status:** ✅ Accepted  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-11
 

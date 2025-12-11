@@ -5,7 +5,8 @@ alwaysApply: true
 # Dev-Infra Template Repository - Cursor AI Rules
 
 **Purpose:** Guide AI assistance to align with dev-infra template best practices and workflows  
-**Last Updated:** 2025-12-10  
+**Identity:** 🏭 Template Factory ([ADR-001](../../../admin/decisions/dev-infra-identity-and-focus/adr-001-project-identity.md))  
+**Last Updated:** 2025-12-11  
 **Status:** ✅ Active
 
 ---
@@ -35,6 +36,43 @@ This is a development infrastructure template repository that provides standardi
 - **Git Flow** version control strategy
 - **Progressive disclosure** for documentation (Overview → Details → Analysis)
 - **Command-driven workflows** - Cursor commands automate complex processes
+
+---
+
+## 🏭 Project Identity: Template Factory
+
+**Decision:** [ADR-001: Project Identity](../../../admin/decisions/dev-infra-identity-and-focus/adr-001-project-identity.md)
+
+**Dev-infra's primary identity is "template factory."**
+
+### What This Means
+
+1. **Templates are products** - Treated as output, not reflections of dev-infra's internal process
+2. **Internal tooling stays internal** - Release automation, validation scripts remain dev-infra-only
+3. **Graduation required** - Features must prove themselves before templatization
+4. **Quality over quantity** - Fewer, more stable template features
+
+### Work Categories
+
+When planning work, classify it:
+
+| Category | Where It Goes | Template Impact |
+|----------|---------------|-----------------|
+| 🎯 **Template Feature** | `admin/planning/features/` | Yes - goes in templates |
+| 🔧 **Internal Tooling** | `admin/planning/features/` | No - dev-infra only |
+| ⚙️ **CI/CD** | `admin/planning/ci/` | Depends on type |
+
+### Graduation Criteria
+
+Before adding features to templates, they must meet:
+
+**Required (ALL):**
+- ≥1 release cycle in dev-infra
+- No major changes in 2+ weeks
+- Documentation 100% complete
+- Demonstrated use in dev-infra
+
+**See:** [ADR-004: Graduation Process](../../../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md)
 
 ---
 
@@ -361,9 +399,10 @@ When modifying templates:
 ## 🚧 Current Project State
 
 **Version:** v1.4.0 (released 2025-12-11)  
+**Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
 **Updated:** 2025-12-11  
-**Priority:** v1.5.0 planning
+**Priority:** v1.5.0 (Release Automation v2 - internal only)
 
 ### ✅ Completed
 
@@ -426,20 +465,29 @@ When modifying templates:
 
 ### 🟠 In Progress
 
-- 🟠 v1.4.0 Release Preparation
-  - CHANGELOG update needed
-  - Release notes needed
-  - Release branch creation
+- 🟠 Identity Transition Implementation
+  - ✅ ADRs accepted (ADR-001 through ADR-004)
+  - ✅ Release Automation v2 rescoped (Phase 3 deferred)
+  - ✅ Cursor rules updated
+  - 🟠 Command tier metadata (in progress)
+  - 🟡 Graduation checklist (planned)
 
 ### 🟡 Planned
 
-**Template Improvements:**
+**v1.5.0 - Release Automation v2 (Internal Only):**
 
-- 🟡 Cursor commands integration into templates
-- 🟡 Release-readiness tools into templates
+- 🟡 Phase 1: Tag Creation Automation
+- 🟡 Phase 2: Version Reference Automation
+- ❌ ~~Phase 3: Template Integration~~ (Deferred per ADR-002)
+
+**v1.6.0 - Considerations:**
+
+- 🟡 Experimental template (captured in exploration)
+- 🟡 Template Integration (if graduation criteria met)
 
 **Explorations:**
 
+- 🟡 Experimental Template (`experimental-project/`)
 - 🟡 Command branch workflow (`cmd/*` pattern)
 
 ---
@@ -470,6 +518,6 @@ When modifying templates:
 
 ---
 
-**Last Updated:** 2025-12-10  
+**Last Updated:** 2025-12-11  
 **Status:** ✅ Active  
-**Next:** v1.4.0 release preparation
+**Next:** Complete identity transition, then Release Automation v2 (internal)

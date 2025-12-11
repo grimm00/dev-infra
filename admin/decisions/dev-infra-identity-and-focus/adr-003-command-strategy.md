@@ -1,6 +1,6 @@
 # ADR-003: Command Strategy - Tiered Approach for Templates
 
-**Status:** 🟡 Proposed  
+**Status:** ✅ Accepted  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-11
 

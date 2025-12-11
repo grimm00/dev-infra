@@ -1,10 +1,26 @@
-# Phase 3: Template Integration
+# Phase 3: Template Integration ❌ DEFERRED
 
 **Phase:** 3 of 3  
-**Status:** 🟡 Planned  
-**Priority:** 🟡 Medium  
-**Effort:** 8-13 hours (1-2 days)  
+**Status:** ⏸️ Deferred  
+**Priority:** ~~🟡 Medium~~ → Deferred  
+**Effort:** ~~8-13 hours (1-2 days)~~ → N/A for v1.5.0  
 **Dependencies:** Phase 1 & 2 recommended (includes their outputs)
+
+---
+
+## ⏸️ Deferral Notice
+
+**Decision:** [ADR-002: Release Automation v2 Scope](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md)
+
+**Reason:** This phase conflicts with the template factory identity (ADR-001). Release automation is internal tooling that should not be automatically templatized.
+
+**Reconsideration:** v1.6.0+ after meeting graduation criteria:
+- [ ] ≥1 release cycle in dev-infra
+- [ ] No major changes in 2+ weeks
+- [ ] Documentation 100% complete
+- [ ] Demonstrated user need
+
+**Original scope preserved below for future reference.**
 
 ---
 

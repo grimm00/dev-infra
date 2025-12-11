@@ -1,8 +1,10 @@
 # Release Automation v2 - Status & Next Steps
 
 **Feature:** Release Automation v2  
+**Category:** 🔧 Internal Tooling  
 **Status:** 🟡 Planned  
 **Target:** v1.5.0  
+**Scope:** Internal only (Phase 3 deferred per ADR-002)  
 **Last Updated:** 2025-12-11
 
 ---
@@ -13,8 +15,10 @@
 |-------|--------|----------|
 | Phase 1: Tag Creation Automation | 🟡 Planned | 0% |
 | Phase 2: Version Reference Automation | 🟡 Planned | 0% |
-| Phase 3: Template Integration | 🟡 Planned | 0% |
-| **Overall** | **🟡 Planned** | **0%** |
+| Phase 3: Template Integration | ⏸️ Deferred | N/A |
+| **Overall (v1.5.0)** | **🟡 Planned** | **0%** |
+
+> **Note:** Phase 3 deferred per [ADR-002](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md). v1.5.0 scope is internal tooling only.
 
 ---
 
@@ -57,24 +61,24 @@
 
 ---
 
-### Phase 3: Template Integration (8-13 hours)
+### Phase 3: Template Integration ❌ DEFERRED
 
-**Status:** 🟡 Planned  
-**Priority:** 🟡 Medium
+**Status:** ⏸️ Deferred per [ADR-002](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md)  
+**Reason:** Conflicts with template factory identity (ADR-001)
 
-**Sub-Phases:**
+**Original Sub-Phases (preserved for v1.6.0+ consideration):**
 - [ ] 3.1: Script Integration
 - [ ] 3.2: Command Integration
 - [ ] 3.3: Test in Generated Project
 - [ ] 3.4: Documentation
 - [ ] 3.5: Validation Tests
 
-**Blockers:** None (but recommend completing Phase 1 & 2 first)  
-**Next Action:** Wait for Phase 1 & 2 completion
+**Reconsideration:** v1.6.0+ after graduation criteria met  
+**Next Action:** None for v1.5.0
 
 ---
 
-## 🎯 Immediate Next Steps
+## 🎯 Immediate Next Steps (v1.5.0 - Internal Only)
 
 ### This Week
 
@@ -97,25 +101,27 @@
    - Documentation updates
    - Ready for v1.5.0 use
 
-4. **Start Phase 3: Template Integration**
-   - Copy scripts and commands
-   - Update paths
-   - Begin testing
-
-### Following Week
-
-5. **Complete Phase 3**
-   - Full template testing
-   - Documentation
-   - Validation tests
-
-6. **v1.5.0 Release**
-   - Use new automation
+4. **v1.5.0 Release**
+   - Use new automation (internal)
    - Validate end-to-end
+
+### Deferred (v1.6.0+)
+
+5. ~~**Phase 3: Template Integration**~~ ❌ Deferred per ADR-002
+   - Reconsider after graduation criteria met
+   - See [ADR-002](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md)
 
 ---
 
 ## 📝 Notes & Decisions
+
+### 2025-12-11: Scope Reduced (ADR-002)
+
+- Phase 3 (Template Integration) deferred per identity decisions
+- v1.5.0 scope: Internal tooling only (Phase 1 & 2)
+- Reason: Template factory identity - release automation is internal tooling
+- Reconsideration: v1.6.0+ after graduation criteria met
+- See: [ADR-002](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md)
 
 ### 2025-12-11: Feature Created
 

@@ -18,10 +18,10 @@
 
 | ADR | Decision | Status |
 |-----|----------|--------|
-| [ADR-001](adr-001-project-identity.md) | Dev-infra should be a template factory | 🟡 Proposed |
-| [ADR-002](adr-002-release-automation-v2-scope.md) | v1.5.0: Internal tooling only | 🟡 Proposed |
-| [ADR-003](adr-003-command-strategy.md) | Tiered command approach for templates | 🟡 Proposed |
-| [ADR-004](adr-004-graduation-process.md) | Formal graduation criteria | 🟡 Proposed |
+| [ADR-001](adr-001-project-identity.md) | Dev-infra should be a template factory | ✅ Accepted |
+| [ADR-002](adr-002-release-automation-v2-scope.md) | v1.5.0: Internal tooling only | ✅ Accepted |
+| [ADR-003](adr-003-command-strategy.md) | Tiered command approach for templates | ✅ Accepted |
+| [ADR-004](adr-004-graduation-process.md) | Formal graduation criteria | ✅ Accepted |
 
 ---
 
@@ -37,7 +37,7 @@ The research revealed that dev-infra has been trying to serve multiple purposes:
 This creates complexity and confusion. The decisions below resolve this by establishing a clear identity and governance model.
 
 **Decision Points:** 4 decisions  
-**Status:** 🟡 Proposed (awaiting approval)
+**Status:** ✅ Accepted
 
 ---
 

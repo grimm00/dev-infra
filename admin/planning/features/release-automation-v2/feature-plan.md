@@ -2,10 +2,12 @@
 
 **Feature:** Release Automation v2  
 **Status:** 🟡 Planned  
+**Category:** 🔧 Internal Tooling  
 **Priority:** 🔴 High  
 **Target Release:** v1.5.0  
 **Created:** 2025-12-11  
-**Source:** v1.4.0 Release Retrospective and Reflection
+**Source:** v1.4.0 Release Retrospective and Reflection  
+**Scope:** Internal only (per [ADR-002](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md))
 
 ---
 
@@ -56,13 +58,15 @@ Three phased improvements that together deliver **zero-manual releases**.
 
 ## 🎯 Success Criteria
 
-### Must Have (MVP)
+### Must Have (MVP) - Updated per ADR-002
 
 - [ ] Tags created automatically when release PRs merge to main
 - [ ] Version references updated automatically by `/release-finalize`
-- [ ] Standard-project template includes release automation
+- [x] ~~Standard-project template includes release automation~~ ❌ Deferred
 - [ ] v1.5.0 released using the new automation
 - [ ] Documentation updated for all changes
+
+**Note:** Template integration (Phase 3) deferred per identity decision
 
 ### Should Have
 
@@ -111,33 +115,41 @@ Three phased improvements that together deliver **zero-manual releases**.
 
 ---
 
-### Phase 3: Template Integration (8-13 hours)
+### Phase 3: Template Integration ❌ DEFERRED
 
-**Goal:** Extend release automation to generated projects
+**Status:** ⏸️ Deferred per [ADR-002](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md)
 
-**Deliverables:**
+**Reason:** Conflicts with template factory identity (ADR-001). Release automation is internal tooling that should not be templatized without meeting graduation criteria.
+
+**Original Scope (preserved for future reference):**
 - Release scripts in standard-project template
 - Release commands in template `.cursor/commands/`
 - Path detection for template structure
 - Template validation tests
 - Documentation updates
 
-**Details:** See [phase-3.md](phase-3.md)
+**Reconsideration:** v1.6.0+ after graduation criteria met
+
+**Details:** See [phase-3.md](phase-3.md) (marked as deferred)
 
 ---
 
 ## 📊 Effort Estimates
 
-| Phase | Estimated | Dependencies |
-|-------|-----------|--------------|
-| Phase 1: Tag Creation | 2-4 hours | None |
-| Phase 2: Version References | 3-5 hours | None |
-| Phase 3: Template Integration | 8-13 hours | Phase 1 & 2 recommended |
-| **Total** | **13-22 hours** | |
+| Phase | Estimated | Dependencies | Status |
+|-------|-----------|--------------|--------|
+| Phase 1: Tag Creation | 2-4 hours | None | 🟡 Planned |
+| Phase 2: Version References | 3-5 hours | None | 🟡 Planned |
+| Phase 3: Template Integration | ~~8-13 hours~~ | ~~Phase 1 & 2~~ | ❌ Deferred |
+| **Total (v1.5.0)** | **5-9 hours** | | |
+
+**v1.5.0 Scope (per ADR-002):**
+- ✅ Phase 1 & 2: Internal tooling only
+- ❌ Phase 3: Deferred (doesn't align with template factory identity)
 
 **Recommended Approach:**
 - Phase 1 & 2 can be done in parallel (no dependencies)
-- Phase 3 should wait until Phase 1 & 2 complete (includes their outputs)
+- Phase 3 deferred to v1.6.0+ pending graduation criteria
 
 ---
 

@@ -1,6 +1,6 @@
 # ADR-001: Project Identity - Template Factory Focus
 
-**Status:** 🟡 Proposed  
+**Status:** ✅ Accepted  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-11
 
