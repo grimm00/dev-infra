@@ -2,9 +2,10 @@
 
 **Feature:** Release Automation v2  
 **Category:** 🔧 Internal Tooling  
-**Status:** 🟡 Planned  
+**Status:** 🟠 In Progress  
 **Target:** v1.5.0  
 **Scope:** Internal only (Phase 3 deferred per ADR-002)  
+**Current Phase:** Phase 1 - Tag Creation Automation  
 **Last Updated:** 2025-12-11
 
 ---
@@ -13,10 +14,10 @@
 
 | Phase | Status | Progress |
 |-------|--------|----------|
-| Phase 1: Tag Creation Automation | 🟡 Planned | 0% |
+| Phase 1: Tag Creation Automation | 🟠 In Progress | 0% |
 | Phase 2: Version Reference Automation | 🟡 Planned | 0% |
 | Phase 3: Template Integration | ⏸️ Deferred | N/A |
-| **Overall (v1.5.0)** | **🟡 Planned** | **0%** |
+| **Overall (v1.5.0)** | **🟠 In Progress** | **0%** |
 
 > **Note:** Phase 3 deferred per [ADR-002](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md). v1.5.0 scope is internal tooling only.
 
@@ -26,8 +27,9 @@
 
 ### Phase 1: Tag Creation Automation (2-4 hours)
 
-**Status:** 🟡 Planned  
-**Priority:** 🔴 High
+**Status:** 🟠 In Progress  
+**Priority:** 🔴 High  
+**Started:** 2025-12-11
 
 **Tasks:**
 - [ ] Create workflow file
