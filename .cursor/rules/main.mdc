@@ -5,7 +5,7 @@ alwaysApply: true
 # Dev-Infra Template Repository - Cursor AI Rules
 
 **Purpose:** Guide AI assistance to align with dev-infra template best practices and workflows  
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active
 
 ---
@@ -360,10 +360,10 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v1.3.0  
+**Version:** v1.3.0 → v1.4.0 (pending release)  
 **Stage:** Active Development  
-**Updated:** 2025-12-07  
-**Priority:** Phase 1 command integration in progress
+**Updated:** 2025-12-10  
+**Priority:** v1.4.0 release preparation
 
 ### ✅ Completed
 
@@ -380,6 +380,16 @@ When modifying templates:
 - ✅ Multi-environment testing workflow
 - ✅ Release distribution workflow
 - ✅ Docker test image builds
+- ✅ Template validation test suite (94+ tests)
+- ✅ Known issues tracking system
+
+**Release Readiness (NEW - v1.4.0):**
+
+- ✅ `check-release-readiness.sh` - Assessment and validation
+- ✅ `create-release-branch.sh` - Release branch creation helper
+- ✅ `analyze-releases.sh` - Historical release analysis
+- ✅ Standardized release criteria
+- ✅ Assessment template with YAML frontmatter
 
 **Documentation:**
 
@@ -387,6 +397,7 @@ When modifying templates:
 - ✅ Project types guide
 - ✅ Best practices guide
 - ✅ Customization guide
+- ✅ Reflection and exploration workflows
 
 **Planning:**
 
@@ -395,26 +406,41 @@ When modifying templates:
 - ✅ Opportunities tracking (external/internal)
 - ✅ Command integration planning
 
+**Commands (Core - Complete):**
+
+- ✅ `/fix-plan` - Create fix batches from reviews
+- ✅ `/fix-implement` - Implement fix batches
+- ✅ `/task-phase` - Phase implementation with TDD
+- ✅ `/pr` - Centralized PR creation
+- ✅ `/pr-validation` - PR validation workflow
+- ✅ `/post-pr` - Post-merge documentation
+- ✅ `/pre-phase-review` - Review phase plans before implementation
+- ✅ `/address-review` - Address gaps from pre-phase review
+- ✅ `/reflect` - Project reflection and suggestions
+- ✅ `/int-opp` - Internal opportunity capture
+- ✅ `/explore` - Exploration workflow
+- ✅ `/research` - Research workflow
+- ✅ `/decision` - ADR creation workflow
+- ✅ `/transition-plan` - Planning from artifacts/ADRs
+- ✅ `/task-release` - Release task implementation (with readiness check)
+
 ### 🟠 In Progress
 
-- 🟠 Phase 1: Core workflow commands integration
-  - `/fix-plan` command adapted (✅ Complete)
-  - `/fix-implement` command (🟡 Planned)
-  - `/task-phase` command (🟡 Planned)
-  - `/pr` command (🟡 Planned)
+- 🟠 v1.4.0 Release Preparation
+  - CHANGELOG update needed
+  - Release notes needed
+  - Release branch creation
 
 ### 🟡 Planned
 
 **Template Improvements:**
 
 - 🟡 Cursor commands integration into templates
-- 🟡 Documentation template improvements
-- 🟡 Process template improvements
+- 🟡 Release-readiness tools into templates
 
-**Command Integration:**
+**Explorations:**
 
-- 🟡 Phase 2: Supporting workflow commands
-- 🟡 Phase 3: Optional commands
+- 🟡 Command branch workflow (`cmd/*` pattern)
 
 ---
 
@@ -444,6 +470,6 @@ When modifying templates:
 
 ---
 
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active  
-**Next:** Continue Phase 1 command integration
+**Next:** v1.4.0 release preparation

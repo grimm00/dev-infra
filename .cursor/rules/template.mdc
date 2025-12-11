@@ -5,7 +5,7 @@ alwaysApply: true
 # Template Rules
 
 **Purpose:** Template structure, generation, and validation standards  
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-10  
 **Applies To:** `templates/` directory and template generation
 
 ---
@@ -287,6 +287,66 @@ Always: `YYYY-MM-DD` (e.g., 2025-12-07)
 - File presence verification
 - Placeholder replacement testing
 
+**Test Framework:** Bats (Bash Automated Testing System)
+
+**Running Tests:**
+```bash
+# Run all tests
+bats tests/unit/*.bats
+
+# Run specific test file
+bats tests/unit/new-project.bats
+
+# Verbose output
+bats --verbose-run tests/unit/*.bats
+```
+
+**Test Count:** 94+ tests as of v1.4.0
+
+---
+
+## 🧪 TDD for Template Scripts
+
+**Pattern:** Use RED-GREEN-REFACTOR cycle for shell scripts.
+
+**When to use:**
+
+- Creating new scripts (`scripts/*.sh`)
+- Modifying existing script behavior
+- Adding new script flags/options
+- Fixing script bugs
+
+**Process:**
+
+1. **RED:** Write failing test first
+2. **GREEN:** Implement minimum code to pass
+3. **REFACTOR:** Clean up while tests pass
+
+**Test Location:** `tests/unit/[script-name].bats`
+
+---
+
+## 🚩 Script Flag Conventions
+
+**Standard flags for template scripts:**
+
+| Flag | Purpose |
+|------|---------|
+| `--dry-run` | Show what would happen without doing it |
+| `--force` | Override blocking checks |
+| `--verbose` | Show detailed output |
+| `--json` | Output in JSON format |
+| `--generate` | Generate output file |
+| `--help` | Show usage information |
+| `--non-interactive` | Disable prompts (CI mode) |
+
+**Principles:**
+
+- `--dry-run` for state-modifying operations
+- `--non-interactive` / `--yes` for CI/automation
+- Positional args before optional flags
+- All flags should have `--help` documentation
+
 ---
 
 ## 🚀 Template Evolution Process
@@ -315,6 +375,6 @@ Always: `YYYY-MM-DD` (e.g., 2025-12-07)
 
 ---
 
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active  
-**Next:** Continue template evolution based on learnings
+**Next:** Integrate release-readiness tools into templates

@@ -5,7 +5,7 @@ alwaysApply: true
 # Workflow Rules
 
 **Purpose:** Development workflow processes and commands for dev-infra  
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active
 
 ---
@@ -225,24 +225,101 @@ For each Sourcery comment, assess:
 
 ## 🔗 Command Integration Workflow
 
-### Phase 1: Core Commands (In Progress)
+### Core Commands (Complete)
 
-**Commands Being Integrated:**
+**All core workflow commands are now implemented and tested:**
 
-- `/fix-plan` - ✅ Adapted and ready for testing
-- `/fix-implement` - 🟡 Planned
-- `/task-phase` - 🟡 Planned
-- `/pr` - 🟡 Planned
+- `/fix-plan` - ✅ Create fix batches from reviews
+- `/fix-implement` - ✅ Implement fix batches
+- `/task-phase` - ✅ Phase implementation with TDD
+- `/pr` - ✅ Centralized PR creation
+- `/pr-validation` - ✅ PR validation workflow
+- `/post-pr` - ✅ Post-merge documentation
+- `/pre-phase-review` - ✅ Review phase plans before implementation
+- `/address-review` - ✅ Address gaps from pre-phase review
 
-**Integration Process:**
+**See:** `.cursor/commands/` for all command documentation
 
-1. **Adapt Command** - Make paths generic, support multiple project structures
-2. **Test in Dev-Infra** - Test command in dev-infra project
-3. **Integrate into Templates** - Add command to template `.cursor/commands/`
-4. **Document** - Update template documentation with command usage
-5. **Validate** - Test with new project creation
+---
 
-**See:** `admin/planning/commands/` for detailed planning
+## 🔄 Pre-Phase Review Workflow
+
+**Best Practice:** Review phase plans before implementation to catch issues early.
+
+**Workflow:**
+
+```
+/pre-phase-review [phase-N]
+    → Identifies gaps, clarifications needed
+    → Creates review document
+    
+/address-review [review-path]
+    → Updates phase plan with recommendations
+    → Commits documentation changes only
+    
+/task-phase [phase-N] [task-N]
+    → Implements tasks with TDD
+    → Clean commits, separate from planning
+```
+
+**Benefits:**
+- Catch clarifications before implementation (saves time)
+- Separate planning updates from implementation commits
+- Better estimation accuracy
+- Cleaner git history
+
+---
+
+## 🧪 TDD for Bash Scripts
+
+**Pattern:** Use RED-GREEN-REFACTOR cycle for shell scripts.
+
+**Framework:** Bats (Bash Automated Testing System)
+
+**Workflow:**
+
+1. **RED:** Write failing test first
+   ```bash
+   @test "script generates assessment file" {
+       run "$SCRIPT" v1.4.0 --generate
+       [ "$status" -eq 0 ]
+       [[ "$output" =~ "Overall Readiness" ]]
+   }
+   ```
+
+2. **GREEN:** Implement minimum code to pass
+3. **REFACTOR:** Clean up while tests pass
+
+**Test Location:** `tests/unit/[script-name].bats`
+
+**Running Tests:**
+```bash
+bats tests/unit/[script-name].bats
+```
+
+**Evidence:** Release Readiness feature added 48 tests across 3 scripts.
+
+---
+
+## 🚩 Script Flag Conventions
+
+**Standard flags for all scripts:**
+
+| Flag | Purpose | Example |
+|------|---------|---------|
+| `--dry-run` | Show what would happen without doing it | `create-release-branch.sh v1.4.0 --dry-run` |
+| `--force` | Override blocking checks | `/pr --release --force` |
+| `--verbose` | Show detailed output | `analyze-releases.sh --verbose` |
+| `--json` | Output in JSON format | `analyze-releases.sh --json` |
+| `--generate` | Generate output file | `check-release-readiness.sh v1.4.0 --generate` |
+| `--help` | Show usage information | `create-release-branch.sh --help` |
+
+**Key Principles:**
+
+- `--dry-run` for any state-modifying operation
+- `--force` requires justification in commit/PR
+- `--generate` transforms validation into documentation
+- All flags after version/required arguments
 
 ---
 
@@ -257,15 +334,29 @@ For each Sourcery comment, assess:
 - Merge features to `develop` after review
 - Accumulate features over time
 
-**Phase 2: Release Preparation (on release/vX.Y.Z)**
+**Phase 2: Release Preparation**
 
-- Create release branch from `develop`
-- **Only** make release-specific changes:
-  - Update CHANGELOG version
-  - Update version numbers in files
-  - Create release notes
-  - Fix critical bugs found in testing
-- **Do not** add new features on release branch
+**Step 1: Assess Readiness**
+```bash
+# Check release readiness
+./scripts/check-release-readiness.sh v1.4.0
+
+# Generate assessment document
+./scripts/check-release-readiness.sh v1.4.0 --generate > admin/planning/releases/v1.4.0/RELEASE-READINESS.md
+```
+
+**Step 2: Create Release Branch**
+```bash
+# Creates branch + initial assessment
+./scripts/create-release-branch.sh v1.4.0
+```
+
+**Step 3: On release/vX.Y.Z branch:**
+- Update CHANGELOG version
+- Update version numbers in files
+- Create release notes
+- Fix critical bugs found in testing
+- **Do not** add new features
 
 **Phase 3: Release Distribution**
 
@@ -273,6 +364,12 @@ For each Sourcery comment, assess:
 - Create GitHub release
 - Tag release version
 - Distribution workflow runs automatically
+
+**Phase 4: Post-Release**
+```bash
+# Update historical tracking
+./scripts/analyze-releases.sh --last 5
+```
 
 **See:** `admin/planning/releases/PROCESS.md` for complete process
 
@@ -345,6 +442,6 @@ For each Sourcery comment, assess:
 
 ---
 
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active  
-**Next:** Continue Phase 1 command integration
+**Next:** v1.4.0 release preparation
