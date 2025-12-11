@@ -357,6 +357,111 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.0] - 2025-12-11
+
+### Added
+
+- **Release Readiness Feature** - Complete release assessment and automation system
+
+  - Standardized release criteria (`admin/planning/releases/standard-criteria.md`)
+  - Assessment template with YAML frontmatter
+  - `scripts/check-release-readiness.sh` - Automated readiness validation and assessment generation
+  - `scripts/create-release-branch.sh` - Release branch creation helper with dry-run mode
+  - `scripts/analyze-releases.sh` - Historical release analysis with trend tracking
+  - Integration with `/task-release` and `/pr --release` commands
+  - 48 new tests for release readiness scripts
+
+- **Templates Enhancement** - Improved templates with commands and workflows (PR #23-26)
+
+  - CI/CD Improvement Structure for templates
+  - Exploration/Research/Decision workflows
+  - Status tracking automation in commands
+  - Feature-based planning improvements
+
+- **Command Adaptation Template** - Pattern for adapting commands across projects (PR #21)
+
+  - Adaptation pattern documentation
+  - Template for command creation
+  - Checklist for command integration
+
+- **Template Generation Testing Automation** - Comprehensive CI/CD testing (PR #27, #29)
+
+  - Non-interactive mode (`--non-interactive` flag) for CI environments
+  - Template validation test suite (94+ tests total)
+  - Multi-platform testing (Ubuntu + macOS)
+
+- **New Cursor Commands**
+  - `/release-prep` - Orchestrate release preparation workflow
+  - `/release-finalize` - Finalize release documents and merge CHANGELOG
+  - `/post-release` - Post-release cleanup and historical tracking
+  - `/pre-phase-review` - Review phase plans before implementation
+  - `/address-review` - Address gaps from pre-phase review
+  - `/reflect` - Project reflection with cross-phase learnings
+  - `/explore` - Exploration workflow for new ideas
+  - `/research` - Research workflow for investigation
+  - `/decision` - ADR creation workflow
+  - `/transition-plan` - Planning from artifacts/ADRs
+  - Enhanced `/task-release` with readiness check integration
+  - Enhanced `/pr --release` with readiness validation and `--force` option
+
+### Changed
+
+- **Cursor Rules** - Updated with release readiness patterns and learnings
+  - Added TDD for bash scripts section
+  - Added script flag conventions (--dry-run, --force, --verbose, --json)
+  - Added pre-phase review workflow
+  - Updated command integration status (15+ commands complete)
+
+- **Test Suite** - Expanded from ~46 tests to 94+ tests
+  - Release readiness tests (48 new tests)
+  - Template validation improvements
+  - CI/CD environment handling
+
+### Fixed
+
+- **CI/CD Git Operations** - Fixed branch detection in CI environment (PR #40)
+  - Full git clone for branch operations
+  - Skip conditions for CI-problematic tests
+
+- **Script Improvements** - Multiple script enhancements (PR #37)
+  - Return code documentation
+  - Whitespace trimming
+  - Authentication warning improvements
+  - Operator precedence fixes
+
+- **Test Improvements** - Enhanced test coverage and assertions (PR #38, #39)
+  - Edge case coverage
+  - Assertion precision improvements
+  - CI environment handling
+
+- **Empty Directory Tracking** - Fixed Git not tracking empty directories (PR #31)
+  - Added `.gitkeep` files to stage directories in learning template
+
+- **Documentation Accuracy** - Fixed documentation inconsistencies (PR #28)
+
+### Documentation
+
+- **Release Process** - Comprehensive release workflow documentation
+  - Transition plans
+  - Release readiness assessments
+  - Standard criteria documentation
+
+- **Reflection Documents** - Project learnings and patterns
+  - Release Readiness reflection with cross-phase learnings
+  - Templates Enhancement reflection
+  - Template Generation Testing Automation reflection
+
+- **Command Documentation** - 15+ command markdown files
+  - Complete workflow documentation
+  - Examples and common scenarios
+  - Integration guides
+
+### Security
+
+- No security changes in this release.
+
+---
+
 ## [Unreleased]
 
 ### Planned
@@ -382,6 +487,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## Version History
+
+### 1.4.0 (2025-12-11)
+
+- **Release Readiness System** - Complete release assessment and automation
+- 3 new scripts for release validation, branch creation, and historical analysis
+- 15+ new Cursor commands for workflow automation
+- Template enhancements with CI/CD improvements
+- Test suite expanded to 94+ tests (48 new tests)
+- Command documentation maintenance system
+- Comprehensive reflection and exploration workflows
+
+### 1.3.0 (2025-11-18)
+
+- **Multi-Environment Testing** - Automated CI/CD testing on Ubuntu + macOS
+- Docker test images for consistent test environments
+- 63 tests (expanded from 33)
+- Comprehensive status documentation
+
+### 1.2.0 (2025-11-12)
+
+- **Directory Selection Feature** - Choose target directory for project generation
+- Automated testing suite (33 tests)
+- Project name validation improvements
+- GitHub authentication verification
+- Cross-platform compatibility fixes
 
 ### 1.1.0 (2025-11-10)
 
@@ -506,6 +636,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-**Last Updated:** 2025-11-10  
+**Last Updated:** 2025-12-11  
 **Status:** ✅ Active  
 **Next:** [Template Usage Guide](docs/TEMPLATE-USAGE.md)
