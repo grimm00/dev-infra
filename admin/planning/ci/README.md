@@ -35,11 +35,14 @@ This directory contains planning documentation for CI/CD improvements, workflows
   - Eliminates manual `gh release create` step
   - Effort: LOW (30 minutes)
 
-- **[CI Git Configuration](ci-git-configuration/README.md)** - Configure git identity in CI workflows (🔴 Not Started, 🟡 Medium Priority) ⭐ **NEW**
-  - Git tests fail due to missing user.name/user.email
-  - Effort: LOW (15 minutes)
-
 ### Completed
+
+- **[CI Git Configuration](ci-git-configuration/README.md)** - Configure git identity in CI workflows (✅ Complete - 2025-12-12, PR #47)
+  - Added git config to `release-distribution.yml` workflow
+  - Ensures git-related tests pass consistently in CI
+  - Completed: Phase 1 (identify workflows, update configs, verify)
+
+### Previously Completed
 
 - **➡️ See [Release Automation v2](../features/release-automation-v2/README.md)** - Consolidated release automation improvements (✅ Complete - v1.5.0)
   - Phase 1: Tag Creation Automation ✅
