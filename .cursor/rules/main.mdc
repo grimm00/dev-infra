@@ -399,7 +399,7 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v1.4.0 (released 2025-12-11)  
+**Version:** v1.5.0 (released 2025-12-11)  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
 **Updated:** 2025-12-11  
@@ -423,7 +423,7 @@ When modifying templates:
 - ✅ Template validation test suite (94+ tests)
 - ✅ Known issues tracking system
 
-**Release Readiness (NEW - v1.4.0):**
+**Release Readiness (NEW - v1.5.0):**
 
 - ✅ `check-release-readiness.sh` - Assessment and validation
 - ✅ `create-release-branch.sh` - Release branch creation helper
