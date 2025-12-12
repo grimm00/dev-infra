@@ -3,7 +3,7 @@
 **Purpose:** Learnings from dev-infra implementation  
 **Target:** Inform dev-infra template evolution and other projects  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-07
+**Last Updated:** 2025-12-12
 
 ---
 
@@ -11,7 +11,7 @@
 
 ### Feature-Specific Learnings
 
-- **[Release Automation v2 Learnings](release-automation-v2/README.md)** - Phase learnings from Release Automation v2 feature (1 of 2 phases, 🟠 In Progress)
+- **[Release Automation v2 Learnings](release-automation-v2/README.md)** - Phase and release learnings from Release Automation v2 feature (2 of 2 phases + v1.5.0 release, ✅ Complete)
 - **[Release Readiness Learnings](release-readiness/README.md)** - Phase and fix batch learnings from Release Readiness feature (4 phases + 5 fix batches, 🟠 In Progress)
 - **[Templates Enhancement Learnings](templates-enhancement/README.md)** - Phase learnings from Templates Enhancement feature (5 phases, ✅ Complete)
 - **[Template Generation Testing Automation Learnings](template-generation-testing-automation/README.md)** - Phase learnings from Template Generation Testing Automation CI/CD improvement (1 phase)
@@ -40,11 +40,13 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 13  
-**Feature-Specific Learnings:** 4 features (9 phases + 5 fix batches total)  
+**Total Learning Documents:** 14  
+**Feature-Specific Learnings:** 4 features (10 phases + 5 fix batches + 1 release total)  
 **Status:** ✅ Active
+
+**Recent Additions:**
+- v1.5.0 Release Learnings (2025-12-12) - First automated release learnings
 
 ---
 
-**Last Updated:** 2025-12-11
-
+**Last Updated:** 2025-12-12
