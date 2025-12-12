@@ -10,9 +10,13 @@
 
 ### Active Explorations
 
-- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Explore what dev-infra should be: factory, laboratory, or reference implementation (✅ Transitioned)
-- **[Experimental Template](experimental-template/README.md)** - Templates with evolving/experimental commands (🔴 Exploration → v1.6.0) ⭐ **NEW**
+- **[Template Architecture](template-architecture/README.md)** - Explore alternative directory structures beyond frontend/backend (🔴 Exploration) ⭐ **NEW**
+- **[Experimental Template](experimental-template/README.md)** - Templates with evolving/experimental commands (🔴 Exploration → v1.6.0)
 - **[Command Branch Workflow](command-branch-workflow/README.md)** - Dedicated branch pattern and workflow for command management (🔴 Exploration)
+
+### Transitioned Explorations
+
+- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Explore what dev-infra should be: factory, laboratory, or reference implementation (✅ Transitioned)
 
 ### Completed Explorations
 
@@ -33,5 +37,5 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-12
 
