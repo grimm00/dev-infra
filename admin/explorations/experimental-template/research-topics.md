@@ -1,10 +1,11 @@
 # Research Topics - Experimental Template
 
 **Purpose:** List of research topics/questions to investigate  
-**Status:** 🔴 Pending Research  
+**Status:** 🟡 Research Created  
 **Created:** 2025-12-11  
-**Last Updated:** 2025-12-11  
-**Target:** v1.6.0
+**Last Updated:** 2025-12-12  
+**Target:** v1.6.0  
+**Research:** [admin/research/experimental-template/](../../research/experimental-template/)
 
 ---
 

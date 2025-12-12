@@ -10,7 +10,11 @@
 
 ### Active Research
 
-- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Explore dev-infra identity: factory, laboratory, or reference implementation (✅ Complete) ⭐ **NEW**
+- **[Experimental Template](experimental-template/README.md)** - Research for experimental template with evolving commands (🟡 Research) ⭐ **NEW**
+
+### Completed Research
+
+- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Explore dev-infra identity: factory, laboratory, or reference implementation (✅ Complete)
 
 ### Previous Research
 
@@ -198,8 +202,8 @@ This research evaluates the current template structure against:
 
 ---
 
-**Last Updated:** 2025-12-11  
+**Last Updated:** 2025-12-12  
 **Status:** ✅ Active  
-**Latest Research:** [Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)
+**Latest Research:** [Experimental Template](experimental-template/README.md)
 
 
