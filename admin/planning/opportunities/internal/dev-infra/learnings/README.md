@@ -16,6 +16,10 @@
 - **[Templates Enhancement Learnings](templates-enhancement/README.md)** - Phase learnings from Templates Enhancement feature (5 phases, ✅ Complete)
 - **[Template Generation Testing Automation Learnings](template-generation-testing-automation/README.md)** - Phase learnings from Template Generation Testing Automation CI/CD improvement (1 phase)
 
+### CI/CD Improvement Learnings
+
+- **[CI Git Configuration Learnings](ci-git-configuration/README.md)** - Learnings from CI Git Configuration improvement (1 phase, ✅ Complete, PR #47) ⭐ **NEW**
+
 ### Learning Documents
 
 - **[Command Adaptation Template Learnings](command-adaptation-template-learnings.md)** - Learnings from creating the Command Adaptation Template feature
@@ -40,11 +44,13 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 14  
+**Total Learning Documents:** 15  
 **Feature-Specific Learnings:** 4 features (10 phases + 5 fix batches + 1 release total)  
+**CI/CD Improvement Learnings:** 1 improvement (1 phase)  
 **Status:** ✅ Active
 
 **Recent Additions:**
+- CI Git Configuration Phase 1 Learnings (2025-12-12) - CI workflow configuration learnings
 - v1.5.0 Release Learnings (2025-12-12) - First automated release learnings
 
 ---
