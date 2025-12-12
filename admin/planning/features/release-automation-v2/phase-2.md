@@ -7,7 +7,8 @@
 **Dependencies:** None (can run parallel with Phase 1)  
 **TDD Correction:** Task 1 implemented, then tests added retroactively. TDD followed for Task 2 onwards.  
 **Completed:** 2025-12-11  
-**Last Updated:** 2025-12-11
+**Merged:** PR #45 (2025-12-12)  
+**Last Updated:** 2025-12-12
 
 ---
 
