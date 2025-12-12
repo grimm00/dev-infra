@@ -35,11 +35,11 @@ This command supports multiple project organization patterns, matching `/pr` and
 
 **Sourcery Review:**
 
-- Review tool: `dt-review` (if available from dev-toolkit)
+- Review tool: `dt-review` (REQUIRED - always run this tool)
 - Review output:
   - Dev-infra project: `admin/feedback/sourcery/pr##.md` (current location)
   - Generated projects: `docs/maintainers/feedback/sourcery/pr##.md` (template structure)
-- **Note:** Missing reviews are acceptable - workflow continues without review
+- **IMPORTANT:** Always run `dt-review` explicitly - do NOT assume GitHub's Sourcery integration check is sufficient
 - **Note:** Dev-infra will migrate admin docs to `docs/maintainers/` structure (see admin docs migration note)
 
 ---
@@ -71,8 +71,9 @@ This command supports multiple project organization patterns, matching `/pr` and
 
 - `--feature [name]` - Specify feature name (overrides auto-detection)
 - `--skip-manual-testing` - Skip manual testing (auto-detected for non-feature PRs)
-- `--skip-review` - Skip Sourcery review (if review not available)
 - `--force-manual-testing` - Force manual testing even for non-feature PRs
+
+**Note:** There is no `--skip-review` option. Sourcery review via `dt-review` is REQUIRED.
 
 ---
 
@@ -724,13 +725,13 @@ cd [cli-directory]
 
 ---
 
-### 4. Run Sourcery Review (dt-review)
+### 4. Run Sourcery Review (dt-review) - REQUIRED
 
-**Important:**
+**IMPORTANT:** This step is REQUIRED. Always run `dt-review` explicitly.
 
-- Run from the project directory to ensure review is for the correct repository
-- Use the path parameter to save directly to the project's documentation structure
-- **Note:** If review is not available or fails, that's okay - continue without review
+- Do NOT assume GitHub's Sourcery integration check is sufficient
+- The GitHub check only indicates if Sourcery found issues, it does NOT generate the review file
+- You MUST run `dt-review` to create the review file and fill out the priority matrix
 
 **Process:**
 
@@ -743,62 +744,65 @@ cd [cli-directory]
 2. **Ensure output directory exists:**
 
    ```bash
+   # For dev-infra:
+   mkdir -p admin/feedback/sourcery
+   
+   # For generated projects:
    mkdir -p docs/maintainers/feedback/sourcery
    ```
 
-3. **Run review with custom path:**
+3. **Run review with custom path (ALWAYS RUN THIS):**
 
    ```bash
+   # For dev-infra:
+   dt-review [pr-number] admin/feedback/sourcery/pr##.md
+   
+   # For generated projects:
    dt-review [pr-number] docs/maintainers/feedback/sourcery/pr##.md
    ```
 
    **Example:**
 
    ```bash
-   dt-review 19 docs/maintainers/feedback/sourcery/pr19.md
+   dt-review 47 admin/feedback/sourcery/pr47.md
    ```
 
    **Note:** The `dt-review` command should be available in PATH. If not found, check if dev-toolkit is installed.
 
-   **If review fails or is not available:**
-
-   - This is acceptable - some PRs may not have reviews available
-   - Continue with validation workflow
-   - Note in summary that review was skipped
-   - Can run review manually later if needed
-
 4. **Review will be saved directly to:**
-   `docs/maintainers/feedback/sourcery/pr##.md`
+   - Dev-infra: `admin/feedback/sourcery/pr##.md`
+   - Generated projects: `docs/maintainers/feedback/sourcery/pr##.md`
 
 **Expected:**
 
-- Review file created/updated (if available)
-- Contains Sourcery comments and suggestions (if review succeeded)
+- Review file created/updated
+- Contains Sourcery comments and suggestions
 - Organized by file/line number
-- **If review not available:** Continue without review - this is acceptable
+- Ready for priority matrix assessment
+
+**If `dt-review` fails:**
+
+- Check if dev-toolkit is installed: `which dt-review`
+- Verify PR number is correct
+- Check network connectivity
+- Document the failure and investigate before proceeding
 
 **Checklist:**
 
-- [ ] Review attempted (if dt-review available)
-- [ ] Review file created (if review succeeded)
-- [ ] Review skipped noted (if review not available)
+- [ ] `dt-review` command executed (REQUIRED)
+- [ ] Review file created
+- [ ] Review file committed to PR branch (if on PR branch) or noted for later
 
 ---
 
-### 5. Fill Out Priority Matrix (If Review Available)
+### 5. Fill Out Priority Matrix - REQUIRED
 
 **File:**
 
 - Dev-infra: `admin/feedback/sourcery/pr##.md` (current location)
 - Generated projects: `docs/maintainers/feedback/sourcery/pr##.md` (template structure)
 
-**Skip this step if:**
-
-- Sourcery review file doesn't exist
-- Review failed to generate
-- No comments in review file
-
-**If review is available:**
+**IMPORTANT:** This step is REQUIRED after running `dt-review`. Fill out the priority matrix for all comments.
 
 **For each Sourcery comment:**
 
@@ -841,17 +845,12 @@ Add priority assessment after the comment:
 - Minor readability improvements
 - Optional enhancements
 
-**After priority matrix (if review available):**
+**After priority matrix:**
 
 - [ ] All comments assessed
 - [ ] CRITICAL/HIGH items identified
 - [ ] Action plan documented
 - [ ] Matrix committed to PR branch
-
-**If review not available:**
-
-- [ ] Note in summary that review was skipped
-- [ ] Continue with validation workflow
 
 ---
 
@@ -1047,12 +1046,13 @@ Update PR description to include:
 - **Reason:** [explanation from Step 1e]
 - **To test manually:** Re-run with `--force-manual-testing`
 
-### Code Review
+### Code Review (Sourcery - REQUIRED)
 
-- ✅ Sourcery review complete (or ⚠️ Review not available - skipped)
-- ✅ Priority matrix filled out (or ⚠️ Skipped - no review)
-- ⚠️ Critical issues: [N] (all addressed) or [None - no review]
-- ⚠️ Deferred issues: [N] or [None - no review]
+- ✅ `dt-review` executed
+- ✅ Review file created: `admin/feedback/sourcery/pr##.md`
+- ✅ Priority matrix filled out
+- ⚠️ Critical/High issues: [N] (all addressed)
+- ⚠️ Deferred issues (Medium/Low): [N]
 
 ### Status Validation
 
@@ -1154,7 +1154,7 @@ Verify with health check (project-specific):
 - [ ] GitHub Actions checks reviewed (NEW)
 - [ ] Known issues registry checked (NEW)
 - [ ] Backend server is running (if applicable, for feat/fix PRs)
-- [ ] dev-toolkit is available (optional, for Sourcery review)
+- [ ] dev-toolkit is available (REQUIRED for Sourcery review - `which dt-review`)
 - [ ] Status documents are current (checked during validation)
 
 **During execution:**
@@ -1174,8 +1174,8 @@ Verify with health check (project-specific):
 - [ ] All scenarios tested and passed (IF REQUIRED)
 - [ ] Checkboxes checked off (`- [ ]` → `- [x]`) for passing scenarios (IF REQUIRED)
 - [ ] Expected Result lines marked with ✅ for passing scenarios (IF REQUIRED)
-- [ ] Sourcery review completed (if available)
-- [ ] Priority matrix filled out (if review available)
+- [ ] `dt-review` executed (REQUIRED)
+- [ ] Priority matrix filled out (REQUIRED)
 - [ ] Deferred tasks collection updated (NEW)
 - [ ] Critical issues addressed (if any)
 
@@ -1197,9 +1197,10 @@ Verify with health check (project-specific):
 - Take screenshots if helpful
 - Note any unexpected behavior
 
-**Code Review:**
+**Code Review (Sourcery - REQUIRED):**
 
-- Be thorough with priority assessment (if review available)
+- ALWAYS run `dt-review` - do NOT assume GitHub's Sourcery check is sufficient
+- Be thorough with priority assessment for all comments
 - Don't skip LOW priority items (document them)
 - Address CRITICAL items before merge
 - Document deferred items clearly
