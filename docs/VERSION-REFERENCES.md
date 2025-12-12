@@ -16,7 +16,7 @@ Version references are automatically updated by the `update-version-references.s
 
 ## 📍 Version Reference Locations
 
-### 1. Cursor Rules (`cursor/rules/main.mdc`)
+### 1. Cursor Rules (`.cursor/rules/main.mdc`)
 
 **Pattern:** `**Version:** vX.Y.Z`
 

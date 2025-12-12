@@ -194,9 +194,15 @@ update_file_version() {
         return 0  # Not an error - file may not exist
     fi
     
-    # Check if file contains old version
-    if ! grep -q "$old_version" "$file"; then
-        log "File $file does not contain $old_version (skipping)"
+    # Check if file contains old version (use appropriate format for file type)
+    local search_version="$old_version"
+    if [[ "$file_type" == "package.json" ]]; then
+        # package.json uses bare semver (no 'v' prefix)
+        search_version=$(get_version_number "$old_version")
+    fi
+    
+    if ! grep -q "$search_version" "$file"; then
+        log "File $file does not contain $search_version (skipping)"
         return 0  # Not an error - version may not be in this file
     fi
     
