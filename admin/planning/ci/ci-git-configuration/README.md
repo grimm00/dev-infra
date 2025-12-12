@@ -1,6 +1,6 @@
-# CI Environment Fixes
+# CI Git Configuration
 
-**Purpose:** Fix CI environment issues affecting test reliability  
+**Purpose:** Configure git identity in CI workflows for reliable testing  
 **Status:** 🔴 Not Started  
 **Priority:** 🟡 MEDIUM  
 **Created:** 2025-12-12  
@@ -10,7 +10,9 @@
 
 ## 📋 Quick Links
 
-- **[Improvement Plan](improvement-plan.md)** - Detailed implementation plan
+- **[Transition Plan](transition-plan.md)** - Structured transition approach
+- **[Phase 1](phase-1.md)** - Implementation phase details
+- **[Improvement Plan](improvement-plan.md)** - Original improvement plan
 - **[Related: Multi-Environment Testing](../multi-environment-testing/)** - CI testing infrastructure
 
 ---

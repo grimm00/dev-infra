@@ -1,6 +1,6 @@
-# CI Environment Fixes - Improvement Plan
+# CI Git Configuration - Improvement Plan
 
-**Improvement:** Fix Git Configuration in CI  
+**Improvement:** Configure Git Identity in CI Workflows  
 **Priority:** 🟡 MEDIUM  
 **Effort:** 🟢 LOW (15 minutes)  
 **Status:** 🔴 Not Started  
@@ -99,8 +99,10 @@ Fix git initialization test failures in CI environments by either:
 
 ## 🔗 Related
 
+- **[Transition Plan](transition-plan.md)** - Structured transition approach
+- **[Phase 1](phase-1.md)** - Implementation phase details
 - **[Multi-Environment Testing Known Issues](../multi-environment-testing/known-issues.md)**
-- **[Release Distribution Workflow](/.github/workflows/release-distribution.yml)**
+- **[Release Distribution Workflow](../../../.github/workflows/release-distribution.yml)**
 - **[v1.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v1.5.0-release-learnings.md)**
 
 ---

@@ -35,7 +35,7 @@ This directory contains planning documentation for CI/CD improvements, workflows
   - Eliminates manual `gh release create` step
   - Effort: LOW (30 minutes)
 
-- **[CI Environment Fixes](ci-environment-fixes/README.md)** - Fix git configuration issues in CI (🔴 Not Started, 🟡 Medium Priority) ⭐ **NEW**
+- **[CI Git Configuration](ci-git-configuration/README.md)** - Configure git identity in CI workflows (🔴 Not Started, 🟡 Medium Priority) ⭐ **NEW**
   - Git tests fail due to missing user.name/user.email
   - Effort: LOW (15 minutes)
 
