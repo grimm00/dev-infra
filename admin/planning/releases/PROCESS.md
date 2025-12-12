@@ -2,7 +2,7 @@
 
 **Purpose:** Standardized release process for dev-infra  
 **Status:** ✅ Active  
-**Last Updated:** 2025-01-27
+**Last Updated:** 2025-12-11
 
 ---
 
@@ -119,25 +119,30 @@ gh pr create --base main --head release/v1.1.0 --title "Release v1.1.0: New temp
 **Goal:** Complete release following Git Flow
 
 **Process:**
-1. Merge release branch to `main` with --no-ff
-2. Tag release on `main`
-3. Create GitHub release
+1. Merge release branch to `main` (via PR merge)
+2. **Tag created automatically** - GitHub Actions workflow creates and pushes tag
+3. GitHub release published automatically (triggered by tag)
 4. Merge release branch back to `develop`
 5. Delete release branch
 
+**Note:** As of v1.5.0, tag creation is automated via `.github/workflows/create-release-tag.yml`. When a release PR is merged to `main`, the workflow automatically extracts the version from the branch name (`release/vX.Y.Z`) and creates/pushes an annotated tag. This triggers the release distribution workflow.
+
 **Example:**
 ```bash
-# Merge to main
+# Merge release PR to main (via GitHub UI or CLI)
+# After PR merge, the workflow automatically:
+# 1. Extracts version from branch (release/v1.1.0 → v1.1.0)
+# 2. Creates annotated tag: git tag -a v1.1.0 -m "Release v1.1.0..."
+# 3. Pushes tag: git push origin v1.1.0
+# 4. Triggers release-distribution workflow
+
+# If manual tag creation needed (fallback):
 git checkout main
 git pull origin main
-git merge --no-ff release/v1.1.0 -m "Release v1.1.0"
-
-# Tag release
 git tag -a v1.1.0 -m "Release v1.1.0: New template types and improvements"
-git push origin main
 git push origin v1.1.0
 
-# Create GitHub release
+# Create GitHub release (if not auto-created)
 gh release create v1.1.0 \
   --title "v1.1.0 - New Template Types and Improvements" \
   --notes-file admin/planning/releases/v1.1.0/RELEASE-NOTES.md

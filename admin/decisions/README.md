@@ -9,8 +9,13 @@
 ## 📋 Quick Links
 
 ### Architecture Decision Records (ADRs)
-- **[Release Readiness](release-readiness/README.md)** - Release readiness assessment and automation (🔴 Proposed)
-- **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Decisions for automating template generation testing (🔴 Proposed)
+
+**Active:**
+- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Project identity as template factory (🟡 Proposed) ⭐ **NEW**
+
+**Previous:**
+- **[Release Readiness](release-readiness/README.md)** - Release readiness assessment and automation (✅ Accepted)
+- **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Decisions for automating template generation testing (✅ Accepted)
 - **[Templates Enhancement](templates-enhancement/README.md)** - Template enhancements with workflow automation (✅ Accepted)
 - **[0001: Template Restructure](0001-template-restructure.md)** - Decision to restructure templates (admin/ → docs/maintainers/)
 - **[0002: CI/CD Workflow Improvements](0002-cicd-workflow-improvements.md)** - Decision to implement automated testing, workflow optimizations, and validation enhancements
@@ -53,6 +58,6 @@ admin/decisions/
 
 ---
 
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-11  
 **Status:** ✅ Active
 

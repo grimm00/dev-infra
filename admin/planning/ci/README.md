@@ -2,7 +2,7 @@
 
 **Purpose:** Central hub for all CI/CD related planning and documentation  
 **Status:** 🟠 In Progress  
-**Last Updated:** 2025-11-18
+**Last Updated:** 2025-12-11
 
 ---
 
@@ -29,6 +29,12 @@ This directory contains planning documentation for CI/CD improvements, workflows
 - **[Command Documentation & Maintenance](command-documentation-maintenance/README.md)** - Track command documentation updates and improvements (✅ Active)
 
 ### Planned
+
+- **➡️ See [Release Automation v2](../features/release-automation-v2/README.md)** - Consolidated release automation improvements (🟡 Planned, 🔴 High Priority)
+  - Phase 1: Tag Creation Automation
+  - Phase 2: Version Reference Automation
+  - Phase 3: Template Integration
+  - Target: v1.5.0
 
 - **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Automate template generation testing (✅ Complete - 2025-12-08)
   - Phase 1 complete: Non-interactive mode added (PR #27)
@@ -60,5 +66,5 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 ---
 
-**Last Updated:** 2025-01-27  
+**Last Updated:** 2025-12-11  
 **Status:** 🟠 Active Development

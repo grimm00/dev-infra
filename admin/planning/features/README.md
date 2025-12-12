@@ -2,7 +2,7 @@
 
 **Purpose:** Feature-based planning and tracking using hub-and-spoke documentation  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-08
+**Last Updated:** 2025-12-11
 
 ---
 
@@ -10,10 +10,17 @@
 
 ### Active Features
 
-- **[Release Readiness](release-readiness/README.md)** - Implement standardized release readiness assessment and automation (🔴 Not Started)
-- **[Command Adaptation Template](command-adaptation-template/README.md)** - Document command adaptation pattern as reusable template (🟡 Planned)
+- **[Release Automation v2](release-automation-v2/README.md)** - Complete release automation (🟡 Planned, 🔴 High Priority) ⭐ **v1.5.0 Target**
+  - Phase 1: Tag Creation Automation (eliminates manual tagging)
+  - Phase 2: Version Reference Automation (eliminates manual updates)
+  - Phase 3: Template Integration (generated projects get automation)
+  - Estimated: 13-22 hours (2-3 days)
+  - Source: v1.4.0 release retrospective
+
+- **[Release Readiness](release-readiness/README.md)** - Implement standardized release readiness assessment and automation (✅ Complete - v1.4.0)
+- **[Command Adaptation Template](command-adaptation-template/README.md)** - Document command adaptation pattern as reusable template (✅ Complete)
 - **[Command Testing & Template Integration](command-testing-integration/README.md)** - Test and integrate cursor commands into templates (🟡 Planned)
-- **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (⚠️ **Status Discrepancy** - See [STATUS.md](STATUS.md) for details)
+- **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (✅ Complete)
 - **[Template Restructure](template-restructure/README.md)** - Restructure templates (admin/ → docs/maintainers/, rename to standard-project) (✅ Complete)
 
 ### Template Features

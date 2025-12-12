@@ -29,11 +29,13 @@ This command supports multiple project organization patterns:
 
 **When to use:**
 
-- After release is merged to main and tagged
+- After release is merged to main (tag created automatically)
 - After GitHub release is published
 - To clean up and prepare for next development cycle
 
 **Key principle:** Complete the release cycle and prepare for the next iteration.
+
+**Note:** As of v1.5.0, tags are automatically created when release PRs are merged to `main` via `.github/workflows/create-release-tag.yml`.
 
 **Workflow Position:**
 
@@ -44,7 +46,7 @@ This command supports multiple project organization patterns:
    Merge to main
          │
          ▼
-   Create tag v1.4.0
+   Tag auto-created (v1.4.0)  ◄── Automated by GitHub Actions
          │
          ▼
    GitHub release published
