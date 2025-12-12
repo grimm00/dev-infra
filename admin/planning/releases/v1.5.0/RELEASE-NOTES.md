@@ -229,11 +229,11 @@ Special recognition for the thoughtful ADR process that formalized our "template
 **Full Changelog:** [v1.4.0...v1.5.0](https://github.com/grimm00/dev-infra/compare/v1.4.0...v1.5.0)
 
 **Related Documentation:**
-- [Release Automation v2 Feature Plan](../../admin/planning/features/release-automation-v2/feature-plan.md)
-- [Version References Guide](../../docs/VERSION-REFERENCES.md)
-- [Workflows README](../../.github/workflows/README.md)
-- [ADR-001: Project Identity](../../admin/decisions/dev-infra-identity-and-focus/adr-001-project-identity.md)
-- [ADR-002: Scope Decisions](../../admin/decisions/dev-infra-identity-and-focus/adr-002-scope-decisions.md)
+- [Release Automation v2 Feature Plan](../../features/release-automation-v2/feature-plan.md)
+- [Version References Guide](../../../docs/VERSION-REFERENCES.md)
+- [Workflows README](../../../.github/workflows/README.md)
+- [ADR-001: Project Identity](../../decisions/dev-infra-identity-and-focus/adr-001-project-identity.md)
+- [ADR-002: Scope Decisions](../../decisions/dev-infra-identity-and-focus/adr-002-scope-decisions.md)
 
 ---
 

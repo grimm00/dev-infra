@@ -271,8 +271,8 @@ The script automatically verifies updates:
 - **Script Source:** `scripts/update-version-references.sh`
 - **Tests:** `tests/unit/update-version-references.bats`
 - **Release Finalize Command:** `.cursor/commands/release-finalize.md`
-- **Release Process:** `admin/planning/releases/PROCESS.md`
-- **Phase 2 Plan:** `admin/planning/features/release-automation-v2/phase-2.md`
+- **Release Process:** `../admin/planning/releases/PROCESS.md`
+- **Phase 2 Plan:** `../admin/planning/features/release-automation-v2/phase-2.md`
 
 ---
 
