@@ -33,9 +33,9 @@ Update `scripts/new-project.sh` to support `experimental-project` as a template 
 
 **Process:**
 
-1. [ ] Find template type validation in `new-project.sh`
-2. [ ] Add `experimental-project` to valid types
-3. [ ] Verify validation accepts new type
+1. [x] Find template type validation in `new-project.sh`
+2. [x] Add `experimental-project` to valid types
+3. [x] Verify validation accepts new type
 
 **Expected Code Change:**
 
@@ -189,9 +189,11 @@ Examples:
 ## 🔗 Dependencies
 
 **Prerequisites:**
+
 - Phase 1 complete (template exists)
 
 **Blocks:**
+
 - Phase 3 depends on generator working
 
 ---
@@ -225,4 +227,3 @@ For CI/automation, the generator should accept experimental type without interac
 
 **Last Updated:** 2025-12-12  
 **Status:** 🟠 In Progress
-
