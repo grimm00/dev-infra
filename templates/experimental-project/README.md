@@ -9,14 +9,28 @@
 
 ## ⚠️ Experimental Template
 
-This template includes **experimental/evolving commands** that are not yet stable enough for the standard template. These commands:
+This template includes **experimental/evolving commands** that are not yet stable enough for the standard template.
+
+### Stability Levels
+
+| Indicator | Level | Meaning |
+| --------- | ----- | ------- |
+| 🟢 | Stable | Production-ready, included in standard template |
+| 🟠 | Experimental | May change, included only in experimental template |
+| 🔴 | Deprecated | Being removed, migration guide available |
+
+📖 **Learn More:** [Stability Levels Documentation](docs/STABILITY-LEVELS.md)
+
+### What Experimental Means
 
 - 🟠 May change without notice
 - 🟠 May have incomplete documentation
 - 🟠 May be removed or significantly modified
 - 🟠 Provide early access to new features
 
-**Use this template if:**
+### When to Use This Template
+
+**Use experimental-project if:**
 
 - You want early access to new commands
 - You're comfortable with potential breaking changes
@@ -28,11 +42,36 @@ This template includes **experimental/evolving commands** that are not yet stabl
 - You're building production systems
 - You prefer proven, stable commands
 
-**Evolving Commands Included:**
+### Experimental Commands
 
-- `/status` 🟠 - Project status tracking (experimental)
+| Command | Status | Description |
+| ------- | ------ | ----------- |
+| `/status` | 🟠 Experimental | Project status tracking and sync |
 
-**Graduation:** Commands graduate to standard-project when they meet [ADR-004 graduation criteria](../../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+### Graduation Process
+
+Commands graduate from Experimental (🟠) to Stable (🟢) when they meet the graduation criteria:
+
+- ≥1 release cycle in experimental
+- No major changes in 2+ weeks  
+- Documentation 100% complete
+- Demonstrated successful use
+
+📖 **Full Criteria:** [Graduation Checklist](docs/GRADUATION-CHECKLIST.md)
+
+### 💬 Provide Feedback
+
+Your feedback helps experimental features improve and graduate to stable!
+
+- **Report issues or suggestions:** [Create Feedback Issue](.github/ISSUE_TEMPLATE/experimental-feedback.yml)
+- **Share your experience** with experimental commands
+- **Vote on graduation readiness** in feedback issues
+
+**We especially want to know:**
+
+- What works well?
+- What needs improvement?
+- Is the feature ready to graduate?
 
 ---
 
