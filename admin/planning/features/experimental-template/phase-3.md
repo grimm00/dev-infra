@@ -230,6 +230,7 @@ jobs:
 8. [x] Add troubleshooting section
 
 **Documentation Created:** `docs/TEMPLATE-SYNC.md` with:
+
 - Overview and why sync matters
 - Shared file categories table
 - Intentionally different files table
