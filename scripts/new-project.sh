@@ -544,7 +544,7 @@ Non-Interactive Mode:
   
   Required:
     PROJECT_NAME         Project name
-    PROJECT_TYPE         Template type: standard-project or learning-project
+    PROJECT_TYPE         Template type: standard-project, learning-project, or experimental-project
   
   Optional:
     PROJECT_DESCRIPTION  Project description
@@ -575,8 +575,8 @@ validate_non_interactive_inputs() {
     if [[ -z "$PROJECT_TYPE" ]]; then
         print_error "PROJECT_TYPE environment variable is required in non-interactive mode"
         errors=$((errors + 1))
-    elif [[ "$PROJECT_TYPE" != "standard-project" && "$PROJECT_TYPE" != "learning-project" ]]; then
-        print_error "PROJECT_TYPE must be 'standard-project' or 'learning-project', got: $PROJECT_TYPE"
+    elif [[ "$PROJECT_TYPE" != "standard-project" && "$PROJECT_TYPE" != "learning-project" && "$PROJECT_TYPE" != "experimental-project" ]]; then
+        print_error "PROJECT_TYPE must be 'standard-project', 'learning-project', or 'experimental-project', got: $PROJECT_TYPE"
         errors=$((errors + 1))
     fi
     
@@ -855,6 +855,8 @@ main() {
             project_type="Standard Project"
         elif [ "$PROJECT_TYPE" = "learning-project" ]; then
             project_type="Learning Project"
+        elif [ "$PROJECT_TYPE" = "experimental-project" ]; then
+            project_type="Experimental Project"
         fi
         print_status "Using project type: $project_type"
     else
