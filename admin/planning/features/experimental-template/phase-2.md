@@ -55,9 +55,9 @@ VALID_TYPES=("standard-project" "learning-project" "experimental-project")
 
 **Process:**
 
-1. [ ] Find interactive menu in `new-project.sh`
-2. [ ] Add experimental-project option
-3. [ ] Include description indicating experimental nature
+1. [x] Find interactive menu in `new-project.sh`
+2. [x] Add experimental-project option
+3. [x] Include description indicating experimental nature
 
 **Expected Menu:**
 
