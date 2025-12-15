@@ -530,10 +530,21 @@ init_git_repo() {
 # Function to show help
 show_help() {
     cat << EOF
-Usage: $0 [--non-interactive] [--help]
+Usage: $0 [project-name] [template-type] [--non-interactive] [--help]
 
 Dev-Infra Project Template Generator
 Creates new projects from dev-infra templates
+
+Template Types:
+  standard-project     Full-featured stable template (default)
+  learning-project     Educational/tutorial focused template
+  experimental-project Includes experimental/evolving commands
+
+Examples:
+  $0 my-app
+  $0 my-app standard-project
+  $0 my-app learning-project
+  $0 my-app experimental-project
 
 Options:
   --non-interactive    Run in non-interactive mode (reads from environment variables)
