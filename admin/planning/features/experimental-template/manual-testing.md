@@ -222,7 +222,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 
 ### Scenario 2.3: Non-Interactive Mode with Experimental Type
 
-**Objective:** Verify generator accepts experimental type via command-line argument.
+**Objective:** Verify generator accepts experimental type via environment variables in non-interactive mode.
 
 **Steps:**
 
@@ -231,9 +231,13 @@ This guide provides step-by-step instructions for manually verifying the experim
    cd /tmp/manual-test-experimental
    ```
 
-2. Run generator with type argument:
+2. Run generator with environment variables and `--non-interactive` flag:
    ```bash
-   /path/to/dev-infra/scripts/new-project.sh test-nonint-exp experimental-project
+   PROJECT_NAME="test-nonint-exp" \
+   PROJECT_TYPE="experimental-project" \
+   TARGET_DIR="/tmp/manual-test-experimental" \
+   INIT_GIT="false" \
+   /path/to/dev-infra/scripts/new-project.sh --non-interactive
    ```
 
 3. Verify project was created:
@@ -241,7 +245,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    ls test-nonint-exp/
    ```
 
-**Expected Result:** ✅ Project generated without prompts when type provided
+**Expected Result:** ✅ Project generated without prompts when using `--non-interactive` mode with environment variables
 
 ---
 
@@ -272,11 +276,23 @@ This guide provides step-by-step instructions for manually verifying the experim
 
 **Steps:**
 
-1. Generate both types:
+1. Generate both types (using non-interactive mode):
    ```bash
    cd /tmp/manual-test-experimental
-   /path/to/dev-infra/scripts/new-project.sh test-standard standard-project
-   /path/to/dev-infra/scripts/new-project.sh test-experimental experimental-project
+   
+   # Generate standard project
+   PROJECT_NAME="test-standard" \
+   PROJECT_TYPE="standard-project" \
+   TARGET_DIR="/tmp/manual-test-experimental" \
+   INIT_GIT="false" \
+   /path/to/dev-infra/scripts/new-project.sh --non-interactive
+   
+   # Generate experimental project
+   PROJECT_NAME="test-experimental" \
+   PROJECT_TYPE="experimental-project" \
+   TARGET_DIR="/tmp/manual-test-experimental" \
+   INIT_GIT="false" \
+   /path/to/dev-infra/scripts/new-project.sh --non-interactive
    ```
 
 2. Compare command directories:
