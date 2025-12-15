@@ -5,7 +5,7 @@ alwaysApply: true
 # Workflow Rules
 
 **Purpose:** Development workflow processes and commands for dev-infra  
-**Last Updated:** 2025-12-10  
+**Last Updated:** 2025-12-15  
 **Status:** ✅ Active
 
 ---
@@ -297,7 +297,16 @@ For each Sourcery comment, assess:
 bats tests/unit/[script-name].bats
 ```
 
-**Evidence:** Release Readiness feature added 48 tests across 3 scripts.
+**Evidence:** 
+- Release Readiness feature: 48 tests across 3 scripts
+- Experimental Template: 18+ tests for generator and drift detection
+
+**Best Practices (from fix-management-workflow learnings):**
+
+- Use `bash "$SCRIPT"` not `source "$SCRIPT"` - `source` causes `exit` to terminate test runner
+- Use specific assertions (exact phrases, not keywords) - prevents false positives
+- Document shared fixtures clearly - tests should not depend on undocumented setup
+- Add setup verification step to tests for shared fixtures
 
 ---
 
@@ -442,6 +451,6 @@ bats tests/unit/[script-name].bats
 
 ---
 
-**Last Updated:** 2025-12-10  
+**Last Updated:** 2025-12-15  
 **Status:** ✅ Active  
-**Next:** v1.4.0 release preparation
+**Next:** v1.6.0 release (Experimental Template)

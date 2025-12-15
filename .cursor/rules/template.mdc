@@ -5,7 +5,7 @@ alwaysApply: true
 # Template Rules
 
 **Purpose:** Template structure, generation, and validation standards  
-**Last Updated:** 2025-12-10  
+**Last Updated:** 2025-12-15  
 **Applies To:** `templates/` directory and template generation
 
 ---
@@ -85,6 +85,55 @@ learning-project/
 
 ---
 
+### Experimental Project Template
+
+**Required Structure:**
+
+```
+experimental-project/
+├── docs/
+│   └── maintainers/         # Project management hub
+│       ├── planning/         # Feature planning, releases
+│       │   ├── features/     # Feature-based development
+│       │   └── releases/     # Version management
+│       ├── feedback/         # Code reviews, external feedback
+│       ├── decisions/        # Architecture decisions (ADRs)
+│       └── archived/         # Historical documentation
+├── backend/                  # Backend application
+├── frontend/                 # Frontend application
+├── tests/                    # Centralized testing
+├── scripts/                  # Automation scripts
+├── docs/                     # User documentation
+│   ├── EXPERIMENTAL.md       # Experimental features documentation
+│   ├── STABILITY-LEVELS.md   # Stability level definitions
+│   └── GRADUATION-CHECKLIST.md  # Graduation criteria
+├── .cursor/commands/         # Evolving tier commands
+│   └── status.md             # Example evolving command
+├── .github/
+│   ├── workflows/            # CI/CD workflows
+│   └── ISSUE_TEMPLATE/       # Issue templates
+│       └── experimental-feedback.yml  # Feedback template
+├── README.md                 # Project hub (with stability disclaimers)
+└── start.txt                 # Project initialization notes
+```
+
+**Key Features:**
+
+- Same structure as standard-project
+- Includes Evolving tier commands (e.g., `/status`)
+- Stability indicators (🟢 Stable, 🟠 Evolving, 🔴 Deprecated)
+- Feedback collection via GitHub issue templates
+- Graduation checklist based on ADR-004 criteria
+- Clear stability disclaimers in README
+
+**Stability Indicators:**
+
+- 🟢 **Stable** - Production-ready, follows semantic versioning
+- 🟠 **Evolving** - Under active development, may change
+- 🔴 **Deprecated** - Scheduled for removal
+
+---
+
 ## 📝 Template File Standards
 
 ### README.md Hub Files
@@ -148,8 +197,10 @@ learning-project/
 
 2. **Template Selection**
 
-   - Standard project vs Learning project
+   - Standard project, Learning project, or Experimental project
    - Confirm selection
+   - **Experimental warning:** Display stability warning with `[y/N]` confirmation
+   - **Non-interactive mode:** Skip warnings for CI/automation
 
 3. **Customization**
 
@@ -315,7 +366,43 @@ bats tests/unit/new-project.bats
 bats --verbose-run tests/unit/*.bats
 ```
 
-**Test Count:** 94+ tests as of v1.4.0
+**Test Count:** 110+ tests as of v1.6.0
+
+---
+
+## 🔄 Template Sync Validation
+
+**Purpose:** Ensure shared files stay in sync between `standard-project` and `experimental-project`.
+
+**Script:** `scripts/validate-template-sync.sh`
+
+**Manifest:** `scripts/template-sync-manifest.txt`
+
+**Process:**
+
+1. **Manifest defines shared files:**
+   ```txt
+   # Infrastructure
+   .gitignore
+   .editorconfig
+   # CI Workflows
+   .github/workflows/test.yml
+   # Stable Commands (18 total)
+   .cursor/commands/fix-plan.md
+   ...
+   ```
+
+2. **CI validates sync:**
+   - Compares files listed in manifest
+   - Reports drift with specific file paths
+   - Fails CI if templates diverge
+
+3. **Fix drift:**
+   - Copy file from source template to target
+   - Commit with descriptive message
+   - CI will pass on next run
+
+**Documentation:** `docs/TEMPLATE-SYNC.md`
 
 ---
 
@@ -389,6 +476,6 @@ bats --verbose-run tests/unit/*.bats
 
 ---
 
-**Last Updated:** 2025-12-10  
+**Last Updated:** 2025-12-15  
 **Status:** ✅ Active  
-**Next:** Integrate release-readiness tools into templates
+**Next:** v1.6.0 release (Experimental Template complete)
