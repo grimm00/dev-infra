@@ -25,6 +25,7 @@ This guide explains how to use the dev-infra templates to create new projects wi
 
 - **Standard Project**: For applications, tools, services
 - **Learning Project**: For tutorials, exercises, reference materials
+- **Experimental Project**: For early access to experimental/evolving commands
 
 ### 2. Generate Project
 
@@ -111,6 +112,56 @@ project-name/
 └── docs/maintainers/        # Learning management
 ```
 
+### Experimental Project Template
+
+**Best For:**
+
+- Internal team projects wanting early access to new features
+- Projects comfortable with potential breaking changes
+- Testing and providing feedback on evolving commands
+- Rapid prototyping with latest features
+
+**Key Features:**
+
+- All features from Standard Project template
+- Access to experimental/evolving commands
+- Early access to new features before stabilization
+- Clearly marked experimental commands with stability indicators
+- Explicit opt-in to experimental features
+
+**Structure:**
+
+Same as Standard Project, plus:
+
+```
+project-name/
+├── .cursor/
+│   └── commands/
+│       └── [evolving-tier commands]  # Experimental commands
+└── docs/
+    └── EXPERIMENTAL.md          # Experimental guide
+```
+
+**Important Notes:**
+
+- ⚠️ Commands may change without notice
+- ⚠️ May have incomplete documentation
+- ⚠️ Provides early access to new features
+- ⚠️ Best for internal team projects, not production-critical applications
+
+**When to Use:**
+
+- Starting new internal team projects
+- Want to leverage latest features
+- Comfortable with potential instability
+- Can provide feedback on evolving features
+
+**When NOT to Use:**
+
+- Production-critical applications requiring maximum stability
+- Projects where breaking changes cannot be tolerated
+- Learning projects (use `learning-project` instead)
+
 ---
 
 ## 🚀 Project Generator
@@ -143,6 +194,7 @@ The `new-project.sh` script provides an interactive way to create new projects:
 
 - Standard Project (1)
 - Learning Project (2)
+- Experimental Project (3) ⚠️
 
 **Git Integration:**
 
@@ -329,6 +381,22 @@ directory/
 - Focus on scripts/ directory
 - Remove frontend/ directory
 - Add CLI-specific documentation
+
+### Internal Team Project (with Experimental Features)
+
+```bash
+./scripts/new-project.sh
+# Choose: Experimental Project ⚠️
+# Name: my-team-app
+# Description: Internal team application
+```
+
+**Customizations:**
+
+- Access to evolving commands
+- Test experimental features
+- Provide feedback on new commands
+- Review `docs/EXPERIMENTAL.md` for command stability
 
 ---
 

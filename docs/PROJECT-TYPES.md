@@ -8,27 +8,29 @@
 
 ## 🎯 Overview
 
-Dev-infra provides two distinct project templates, each optimized for different use cases. This guide helps you choose the right template and understand the differences.
+Dev-infra provides three distinct project templates, each optimized for different use cases. This guide helps you choose the right template and understand the differences.
 
 ### Template Types
 
 - **Standard Project** - For applications, tools, and services
 - **Learning Project** - For tutorials, courses, and educational content
+- **Experimental Project** ⚠️ - For early access to experimental/evolving commands
 
 ---
 
-## 🔄 Standard vs Learning Projects
+## 🔄 Standard vs Learning vs Experimental Projects
 
 ### Quick Comparison
 
-| Aspect            | Standard Project          | Learning Project         |
-| ----------------- | ------------------------- | ------------------------ |
-| **Purpose**       | Build applications/tools  | Teach concepts/skills    |
-| **Structure**     | Feature-based development | Stage-based learning     |
-| **Documentation** | Technical specs, APIs     | Tutorials, exercises     |
-| **Workflow**      | Development cycles        | Learning progression     |
-| **Audience**      | End users, developers     | Students, learners       |
-| **Timeline**      | Ongoing development       | Structured learning path |
+| Aspect            | Standard Project          | Learning Project         | Experimental Project ⚠️   |
+| ----------------- | ------------------------- | ------------------------ | ------------------------- |
+| **Purpose**       | Build applications/tools  | Teach concepts/skills    | Early access to new features |
+| **Structure**     | Feature-based development | Stage-based learning     | Feature-based + experimental |
+| **Stability**     | Stable, proven commands   | Stable, proven commands  | Experimental/evolving commands |
+| **Documentation** | Technical specs, APIs     | Tutorials, exercises     | Technical specs + experimental guide |
+| **Workflow**      | Development cycles        | Learning progression     | Development + early testing |
+| **Audience**      | End users, developers     | Students, learners       | Internal team, early adopters |
+| **Timeline**      | Ongoing development       | Structured learning path | Ongoing + experimental features |
 
 ---
 
@@ -223,6 +225,16 @@ learning-project/
 - [ ] Creating tutorials or courses
 - [ ] Need stage-based organization
 
+**Choose Experimental Project If:**
+
+- [ ] Starting new internal team project
+- [ ] Want early access to new features
+- [ ] Comfortable with potential instability
+- [ ] Can provide feedback on evolving features
+- [ ] Need latest commands before stabilization
+- [ ] Rapid prototyping with cutting-edge features
+- [ ] Project is not production-critical
+
 ### Hybrid Approaches
 
 **Learning + Regular:**
@@ -350,6 +362,84 @@ learning-project/
 - New learning materials
 - Reference updates
 - Student feedback integration
+
+---
+
+## 🧪 Experimental Project Template
+
+### When to Use
+
+**Perfect For:**
+
+- Internal team projects
+- New projects wanting latest features
+- Projects comfortable with potential breaking changes
+- Testing and providing feedback on evolving commands
+- Rapid prototyping with cutting-edge features
+- Early adopter projects
+
+**Characteristics:**
+
+- Same as Standard Project, plus experimental commands
+- Explicit opt-in to experimental features
+- Access to "Evolving" tier commands
+- Clear stability communication
+- Early access before features stabilize
+
+### Structure Overview
+
+Same structure as Standard Project template, with additions:
+
+```
+experimental-project/
+├── .cursor/
+│   └── commands/
+│       ├── [stable commands]      # All standard commands
+│       └── [evolving commands]    # Experimental/evolving tier
+├── docs/
+│   └── EXPERIMENTAL.md           # Experimental guide
+└── README.md                     # Includes stability disclaimer
+```
+
+### Key Features
+
+**Experimental Access:**
+
+- Early access to evolving commands before stabilization
+- Clearly marked experimental features with stability indicators
+- Explicit opt-in during project generation
+- Regular stability warnings
+
+**Stability Communication:**
+
+- 🟢 Stable - Proven, reliable commands
+- 🟠 Experimental - May change without notice
+- Clear documentation of command status
+- Migration guides when commands graduate
+
+**Feedback Integration:**
+
+- Easy mechanism to provide feedback
+- Influence development of new commands
+- Help shape command evolution
+- Contribute to stabilization process
+
+### Important Considerations
+
+**Use Experimental Project When:**
+
+- Starting a new internal team project
+- Want to leverage latest features
+- Comfortable with potential instability
+- Can tolerate breaking changes
+- Want to provide feedback on evolving features
+
+**Avoid Experimental Project When:**
+
+- Building production-critical applications requiring maximum stability
+- Cannot tolerate breaking changes or bugs
+- Need fully documented, stable features only
+- Learning project (use `learning-project` template instead)
 
 ---
 
