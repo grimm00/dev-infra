@@ -168,12 +168,12 @@ Examples:
 
 ## ✅ Completion Criteria
 
-- [ ] Generator accepts `experimental-project` type
-- [ ] Interactive menu shows experimental option
-- [ ] Stability warning displays for experimental
-- [ ] Help text updated
-- [ ] User documentation updated
-- [ ] Tests pass for new template type
+- [x] Generator accepts `experimental-project` type
+- [x] Interactive menu shows experimental option
+- [x] Stability warning displays for experimental
+- [x] Help text updated
+- [x] User documentation updated
+- [x] Tests pass for new template type
 
 ---
 
