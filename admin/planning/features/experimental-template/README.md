@@ -19,6 +19,7 @@
 ### Phase Documents
 
 - **[Phase 1: Create Template](phase-1.md)** - Create experimental-project directory
+  - **[Phase 1 Review](phase-1-review.md)** - Pre-implementation review (🟡 Needs Work)
 - **[Phase 2: Update Generator](phase-2.md)** - Update new-project.sh script
 - **[Phase 3: CI Drift Detection](phase-3.md)** - Add template sync validation
 - **[Phase 4: Stability Indicators](phase-4.md)** - Add stability communication
