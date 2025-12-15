@@ -10,7 +10,7 @@
 
 ### Cross-PR Batches
 
-- **[Cross-PR Batches](cross-pr/README.md)** - Batches from fix-review reports (8 batches total, 6 complete, 2 active)
+- **[Cross-PR Batches](cross-pr/README.md)** - Batches from fix-review reports (8 batches total, all complete)
 
 ---
 
@@ -36,15 +36,14 @@ This directory tracks project-wide fix batches that span multiple features or PR
 | [Test Assertion Precision](cross-pr/test-assertion-precision-medium-low-01.md) | 🟡 MEDIUM | 🟢 LOW | 4 | ✅ Complete | #39 |
 | [Test Assertion Improvements LOW](cross-pr/test-assertion-improvements-medium-low-01.md) | 🟡 MEDIUM | 🟢 LOW | 4 | ✅ Complete | #50 |
 | [Test Assertion Improvements MED](cross-pr/test-assertion-improvements-medium-medium-01.md) | 🟡 MEDIUM | 🟡 MEDIUM | 3 | ✅ Complete | #51 |
+| [Quick Wins Round 2](cross-pr/quick-wins-low-low-02.md) | 🟢 LOW | 🟢 LOW | 2 | ✅ Complete | #52 |
+| [Quick Wins Round 3](cross-pr/quick-wins-low-low-03.md) | 🟢 LOW | 🟢 LOW | 4 | ✅ Complete | #52 |
 
 ---
 
 ## 🟡 Active Batches
 
-| Batch | Priority | Effort | Issues | Status |
-|-------|----------|--------|--------|--------|
-| [Quick Wins Round 2](cross-pr/quick-wins-low-low-02.md) | 🟢 LOW | 🟢 LOW | 2 | 🔴 Not Started |
-| [Quick Wins Round 3](cross-pr/quick-wins-low-low-03.md) | 🟢 LOW | 🟢 LOW | 4 | 🔴 Not Started |
+*No active batches - all batches complete*
 
 ---
 
@@ -59,5 +58,5 @@ This directory tracks project-wide fix batches that span multiple features or PR
 ---
 
 **Last Updated:** 2025-12-15  
-**Status:** 6 batches complete, 2 active
+**Status:** ✅ All 8 batches complete
 
