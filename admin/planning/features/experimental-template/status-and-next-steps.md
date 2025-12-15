@@ -2,7 +2,7 @@
 
 **Feature:** Experimental Template  
 **Status:** 🟠 In Progress  
-**Last Updated:** 2025-12-12  
+**Last Updated:** 2025-12-15  
 **Target:** v1.6.0
 
 ---
@@ -22,47 +22,54 @@
 
 | Phase | Status | Effort | Notes |
 |-------|--------|--------|-------|
-| Phase 1: Create Template | ✅ Complete | 2-3 hours | Completed 2025-12-12 |
-| Phase 2: Update Generator | ✅ Complete | 1-2 hours | Completed 2025-12-15 |
+| Phase 1: Create Template | ✅ Complete | 2-3 hours | PR #47 (2025-12-15) |
+| Phase 2: Update Generator | ✅ Complete | 1-2 hours | PR #48 (2025-12-15) |
 | Phase 3: CI Drift Detection | 🔴 Not Started | 2-3 hours | Ready to start |
-| Phase 4: Stability Indicators | 🔴 Not Started | 1-2 hours | Blocked by Phase 1 |
+| Phase 4: Stability Indicators | 🔴 Not Started | 1-2 hours | Ready after Phase 1 |
+
+---
+
+## ✅ Completed Milestones
+
+### Phase 1: Create Template (2025-12-15)
+- Created `templates/experimental-project/` directory
+- Copied standard-project as base
+- Added `/status` evolving command
+- Added `docs/EXPERIMENTAL.md` documentation
+- Updated README with stability disclaimer
+- Merged via PR #47
+
+### Phase 2: Update Generator (2025-12-15)
+- Updated `new-project.sh` to accept experimental-project type
+- Added interactive menu option with ⚠️ warning
+- Implemented stability warning for experimental selection
+- Updated help text and documentation
+- Added 8 comprehensive tests
+- Updated `docs/PROJECT-TYPES.md` and `docs/TEMPLATE-USAGE.md`
+- Merged via PR #48
 
 ---
 
 ## 🚀 Next Steps
 
-### Immediate (When Ready to Implement)
+### Immediate
 
-1. **Review and Approve ADRs**
-   - [ ] ADR-001: Experimental Template Creation
-   - [ ] ADR-002: Implementation Approach
+1. **Begin Phase 3: CI Drift Detection**
+   - Run: `/task-phase 3`
+   - Create drift detection script
+   - Integrate with CI workflow
 
-2. **Identify Evolving Commands**
-   - [ ] Review dev-infra commands
-   - [ ] Determine which commands are Evolving tier
-   - [ ] Document command list
-
-3. **Begin Phase 1**
-   - Run: `/task-phase 1`
-   - Create experimental-project template
-
-### Short-term (After Phase 1)
-
-4. **Continue with Phase 2**
-   - Run: `/task-phase 2`
-   - Update generator script
-
-5. **Parallel: Phase 3 & 4**
-   - Phase 3: CI drift detection
-   - Phase 4: Stability indicators
+2. **Begin Phase 4: Stability Indicators** (can run parallel)
+   - Run: `/task-phase 4`
+   - Add stability indicators to command docs
 
 ### Release (v1.6.0)
 
-6. **Create PR**
-   - Run: `/pr --feature experimental-template`
-   - Include all phases
+3. **Complete remaining phases**
+   - Phase 3: CI drift detection
+   - Phase 4: Stability indicators
 
-7. **Update Release Notes**
+4. **Update Release Notes**
    - Document new template availability
    - List included Evolving commands
 
@@ -74,18 +81,19 @@
 
 | Blocker | Impact | Resolution |
 |---------|--------|------------|
-| ADRs not yet accepted | Cannot begin | Review and approve ADRs |
-| Evolving commands unknown | Phase 1 blocked | Identify commands |
+| None | - | Phases 1-2 complete |
 
 ### Dependencies
 
 | Dependency | Status | Notes |
 |------------|--------|-------|
 | Standard template exists | ✅ Complete | Base for experimental |
-| Generator script works | ✅ Complete | Base for updates |
+| Generator script works | ✅ Complete | Updated in Phase 2 |
 | CI validation exists | ✅ Complete | Base for drift detection |
 | ADR-003 Command Tiers | ✅ Complete | Defines Evolving tier |
 | ADR-004 Graduation | ✅ Complete | Defines graduation criteria |
+| ADR-001 Experimental Template | ✅ Accepted | Template creation approved |
+| ADR-002 Implementation Approach | ✅ Accepted | Separate template approach |
 
 ---
 
@@ -114,5 +122,5 @@
 
 ---
 
-**Last Updated:** 2025-12-12
+**Last Updated:** 2025-12-15
 
