@@ -893,6 +893,22 @@ main() {
         done
     fi
     
+    # Show stability warning for experimental template
+    if [ "$template_type" = "experimental-project" ] && [ "$NON_INTERACTIVE_MODE" != "true" ]; then
+        echo
+        print_warning "⚠️  EXPERIMENTAL TEMPLATE SELECTED"
+        echo
+        echo "This template includes experimental/evolving commands that:"
+        echo "- May change without notice"
+        echo "- May have incomplete documentation"
+        echo "- Provide early access to new features"
+        echo
+        if ! prompt_yes_no "Are you sure you want to use the experimental template?" "n"; then
+            print_warning "Project creation cancelled"
+            exit 0
+        fi
+    fi
+    
     # Confirm project creation
     echo
     echo "Project Summary:"
