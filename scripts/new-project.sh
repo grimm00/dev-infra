@@ -440,7 +440,7 @@ verify_github_auth() {
     github_login=$(gh api user --jq '.login // "unknown"' 2>/dev/null)
     if [ -n "$github_login" ] && [ "$github_login" != "unknown" ]; then
         print_status "Authenticated as: $github_login"
-    elif [ "$github_login" == "unknown" ]; then
+    elif [ "$github_login" = "unknown" ]; then
         print_warning "GitHub login returned 'unknown'. This may indicate authentication issues."
         print_warning "Try running 'gh auth status' to verify your GitHub authentication."
     fi
