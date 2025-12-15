@@ -141,6 +141,13 @@ Run './scripts/sync-templates.sh' to fix (or manually sync)
 
 **File:** `tests/unit/validate-template-sync.bats`
 
+**Process:**
+
+1. [x] Write comprehensive test suite (10 tests)
+2. [x] Test basic functionality (sync pass, drift fail, ignore experimental)
+3. [x] Test edge cases (empty manifest, missing dirs, whitespace, comments)
+4. [x] Verify tests fail (RED phase - script doesn't exist yet)
+
 **Test Cases:**
 
 ```bash
@@ -163,6 +170,12 @@ Run './scripts/sync-templates.sh' to fix (or manually sync)
   [ "$status" -eq 0 ]
 }
 ```
+
+**Tests Written:** 10 comprehensive tests covering:
+- Basic functionality (sync pass, drift fail, ignore experimental)
+- Edge cases (empty manifest, missing directories, whitespace differences, directory differences)
+- Manifest parsing (comments, directory markers)
+- Error messaging
 
 ---
 
