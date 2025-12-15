@@ -169,6 +169,13 @@ bats tests/unit/validate-templates.bats
 - [ ] Template passes validation tests
 - [ ] No broken links in documentation
 
+### Test Coverage Goals
+
+- [ ] Template passes all existing `validate-templates.bats` tests
+- [ ] At least 1 test specific to experimental template structure
+- [ ] Documentation link validation passes
+- [ ] Evolving commands are present and have stability indicators
+
 ---
 
 ## 📦 Deliverables
@@ -184,8 +191,8 @@ bats tests/unit/validate-templates.bats
 ## 🔗 Dependencies
 
 **Prerequisites:**
-- ADRs approved (ADR-001, ADR-002)
-- Evolving tier commands identified
+- ADRs approved (ADR-001 ✅, ADR-002 ✅)
+- Evolving tier commands identified (see [Evolving Commands Inventory](evolving-commands-inventory.md))
 
 **Blocks:**
 - Phase 2: Generator script update
@@ -193,6 +200,21 @@ bats tests/unit/validate-templates.bats
 ---
 
 ## 💡 Implementation Notes
+
+### Intentionally Different Files
+
+These files will differ between `standard-project` and `experimental-project` by design:
+
+| File/Directory | Difference | Reason |
+|----------------|------------|--------|
+| `README.md` | Has experimental disclaimer | User awareness |
+| `.cursor/commands/` | Has additional Evolving commands | Core feature |
+| `docs/EXPERIMENTAL.md` | Experimental-only file | Documentation |
+| `start.txt` | May reference experimental nature | Initial setup |
+
+**All other files should be identical** and will be validated by CI drift detection (Phase 3).
+
+---
 
 ### Template Structure
 

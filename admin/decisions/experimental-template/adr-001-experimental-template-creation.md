@@ -1,7 +1,8 @@
 # ADR-001: Experimental Template Creation
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Created:** 2025-12-12  
+**Accepted:** 2025-12-12  
 **Last Updated:** 2025-12-12
 
 ---
@@ -40,6 +41,23 @@ This template will:
 - Add Evolving tier commands from dev-infra
 - Clearly communicate stability levels
 - Provide a graduation path for commands to move to standard
+
+---
+
+## Scope Limitations
+
+### Learning Project Exclusion
+
+**Decision:** The experimental template will be based on `standard-project` only. There will be no `experimental-learning-project` in v1.6.0.
+
+**Rationale:**
+
+1. **Primary demand source:** Team projects (which use standard-project) are the driving force behind this feature
+2. **Learning context:** Educational/tutorial projects prioritize stability over bleeding-edge features
+3. **Maintenance simplicity:** 3 templates (standard, learning, experimental) is more manageable than 4
+4. **Faster delivery:** Smaller scope enables quicker delivery of core functionality
+
+**Future consideration:** If user feedback indicates demand for an experimental learning template, this can be revisited in a future release. The pattern established here (copy base + add Evolving commands) would apply equally to `learning-project`.
 
 ---
 

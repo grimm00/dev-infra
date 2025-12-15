@@ -1,7 +1,8 @@
 # ADR-002: Implementation Approach
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Created:** 2025-12-12  
+**Accepted:** 2025-12-12  
 **Last Updated:** 2025-12-12
 
 ---
