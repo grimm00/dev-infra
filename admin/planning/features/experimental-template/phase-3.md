@@ -57,6 +57,14 @@ Implement CI validation that detects when shared files drift between standard-pr
 
 **File:** `scripts/template-sync-manifest.txt`
 
+**Process:**
+
+1. [x] Create manifest file with shared files list
+2. [x] Include all infrastructure files
+3. [x] Include all shared directories
+4. [x] Include all 18 stable commands
+5. [x] Add comments documenting intentionally different files
+
 ```
 # Files that must be identical between standard and experimental templates
 # Lines starting with # are comments
