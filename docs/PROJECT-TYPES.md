@@ -227,7 +227,7 @@ learning-project/
 
 **Choose Experimental Project If:**
 
-- [ ] Starting new internal team project
+- [ ] Starting a new internal team project
 - [ ] Want early access to new features
 - [ ] Comfortable with potential instability
 - [ ] Can provide feedback on evolving features
