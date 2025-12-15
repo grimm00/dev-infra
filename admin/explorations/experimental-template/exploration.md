@@ -1,11 +1,12 @@
 # Experimental Template - Exploration
 
-**Status:** ✅ Research Complete  
+**Status:** ✅ Decisions Complete  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-12  
 **Target:** v1.6.0  
 **Research:** [admin/research/experimental-template/](../../research/experimental-template/)  
-**Next:** `/decision experimental-template --from-research`
+**Decisions:** [admin/decisions/experimental-template/](../../decisions/experimental-template/)  
+**Next:** `/transition-plan --from-adr` when ready to implement
 
 ---
 
