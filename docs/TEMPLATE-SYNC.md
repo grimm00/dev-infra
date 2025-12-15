@@ -1,195 +1,275 @@
-# Template Synchronization Guide
+# Template Synchronization
 
-**Purpose:** Define shared file categories and sync requirements between `standard-project` and `experimental-project` templates  
+**Purpose:** Document sync requirements and process for shared template files  
 **Status:** ✅ Active  
-**Created:** 2025-12-15  
 **Last Updated:** 2025-12-15
 
 ---
 
 ## 📋 Overview
 
-The `standard-project` and `experimental-project` templates share common files that must stay in sync. This document defines which files are shared (must be identical) versus experimental-only (different by design).
+The `standard-project` and `experimental-project` templates share common files that must stay in sync. This document explains the sync requirements, process, and how to handle drift.
 
-**Sync Strategy:** Manual sync with CI-based drift detection to ensure consistency.
-
----
-
-## 📊 Shared File Categories
-
-### ✅ Must Be Identical (Shared Files)
-
-These files and directories must be identical between both templates:
-
-| Category | Examples | Sync Required | Notes |
-|----------|----------|---------------|-------|
-| **Infrastructure** | `.gitignore`, `.dockerignore` | ✅ Yes | Core project configuration |
-| **CI Workflows** | `.github/workflows/ci.yml` | ✅ Yes | CI/CD configuration |
-| **Core Structure** | `backend/`, `frontend/`, `tests/`, `scripts/` | ✅ Yes | Project structure directories |
-| **Stable Commands** | `.cursor/commands/[essential/valuable/advanced]` | ✅ Yes | All commands except Evolving tier |
-| **Documentation Structure** | `docs/maintainers/` | ✅ Yes | Planning, research, decision docs |
-| **Template Config** | `.cursor/rules/` | ✅ Yes | Cursor rules configuration |
-
-### ❌ Different by Design (Experimental-Only)
-
-These files are intentionally different or experimental-only:
-
-| Category | Examples | Sync Required | Notes |
-|----------|----------|---------------|-------|
-| **Evolving Commands** | `.cursor/commands/status.md` | ❌ No | Experimental template only |
-| **Template Identity** | `README.md` (stability section) | ❌ No | Different disclaimers |
-| **Template Identity** | `start.txt` | ❌ No | May reference experimental nature |
-| **Experimental Docs** | `docs/EXPERIMENTAL.md` | ❌ No | Experimental template only |
+**Why Sync Matters:**
+- Ensures consistent base functionality across templates
+- Prevents divergence of core features
+- Maintains upgrade path from experimental to standard
+- Reduces maintenance burden
 
 ---
 
-## 🔍 Detailed File Analysis
+## 📁 Shared File Categories
 
-### Shared Commands (18 commands)
+| Category | Files | Sync Requirement |
+|----------|-------|------------------|
+| **Infrastructure** | `.gitignore`, `.dockerignore` | Must be identical |
+| **CI/CD Workflows** | `.github/workflows/ci.yml` | Must be identical |
+| **Core Structure** | `backend/`, `frontend/`, `tests/`, `scripts/` | Must be identical |
+| **Maintainer Docs** | `docs/maintainers/` | Must be identical |
+| **Stable Commands** | `.cursor/commands/*.md` (Essential, Valuable, Advanced tiers) | Must be identical |
 
-All commands in `.cursor/commands/` are shared **except** Evolving tier commands:
+### Intentionally Different Files
 
-**Shared Commands:**
-- `cursor-rules.md`
-- `decision.md`
-- `explore.md`
-- `fix-implement.md`
-- `fix-plan.md`
-- `fix-review.md`
-- `int-opp.md`
-- `post-pr.md`
-- `pre-phase-review.md`
-- `pr-validation.md`
-- `pr.md`
-- `reflect.md`
-- `reflection-artifacts.md`
-- `research.md`
-- `task-improvement.md`
-- `task-phase.md`
-- `task-release.md`
-- `transition-plan.md`
+These files are **excluded** from sync and allowed to differ:
 
-**Experimental-Only Commands:**
-- `status.md` (Evolving tier)
-
-### Shared Directories
-
-**Must be identical:**
-- `backend/` - Backend application structure
-- `frontend/` - Frontend application structure
-- `tests/` - Test structure and helpers
-- `scripts/` - Automation scripts
-- `docs/maintainers/` - Planning, research, decision documentation structure
-- `.cursor/rules/` - Cursor rules configuration
-
-### Shared Files
-
-**Must be identical:**
-- `.gitignore` - Git ignore patterns
-- `.dockerignore` - Docker ignore patterns
-- `.github/workflows/ci.yml` - CI workflow configuration
-
-### Different Files
-
-**Intentionally different:**
-- `README.md` - Contains template-specific stability disclaimers
-- `start.txt` - May reference experimental nature
-- `docs/EXPERIMENTAL.md` - Only exists in experimental template
+| File | Reason |
+|------|--------|
+| `README.md` | Different stability disclaimers |
+| `start.txt` | May reference experimental nature |
+| `docs/EXPERIMENTAL.md` | Experimental-only documentation |
+| `.cursor/commands/status.md` | Evolving tier command (experimental-only) |
 
 ---
 
-## 🔄 Sync Process
+## 🔧 How Sync Works
 
-### How Sync Works
+### CI Validation
 
-1. **Manual Sync:** When updating shared files in `standard-project`, manually copy to `experimental-project`
-2. **CI Validation:** CI runs `validate-template-sync.sh` on every PR
-3. **Drift Detection:** Script compares shared files and fails if differences found
-4. **Fix Drift:** Copy correct file from source template to fix drift
+1. CI runs `validate-template-sync.sh` on every PR
+2. Script reads `scripts/template-sync-manifest.txt` for shared files
+3. Compares files between `standard-project` and `experimental-project`
+4. PR **fails** if drift is detected
 
-### Adding New Shared Files
+### Validation Script
 
-When adding a new shared file:
+```bash
+# Run manually to check sync status
+./scripts/validate-template-sync.sh
 
-1. Add file to `standard-project` template
-2. Copy file to `experimental-project` template
-3. Add file path to `scripts/template-sync-manifest.txt`
-4. CI will enforce sync going forward
+# Output on success:
+# ✅ Template sync validation PASSED
+# All shared files are in sync
 
-### Adding New Experimental-Only Files
-
-When adding experimental-only files:
-
-1. Add file to `experimental-project` template only
-2. Do NOT add to manifest (script ignores files not in manifest)
-3. Document in this guide if it's a new category
-
----
-
-## 📝 Manifest File Format
-
-The `scripts/template-sync-manifest.txt` file lists all shared files:
-
+# Output on failure:
+# ❌ DRIFT DETECTED in the following files:
+#   - .gitignore (content differs)
+#   - backend/app.py (missing in experimental)
 ```
+
+### Manifest File
+
+The manifest (`scripts/template-sync-manifest.txt`) defines which files must stay in sync:
+
+```txt
 # Files that must be identical between standard and experimental templates
 # Lines starting with # are comments
 # Use relative paths from template root
+# Directories ending with / will be recursively checked
 
+# Infrastructure files
 .gitignore
 .dockerignore
+
+# CI/CD workflows
 .github/workflows/ci.yml
+
+# Core directories (recursive)
 backend/
 frontend/
-tests/
-scripts/
-docs/maintainers/
-.cursor/rules/
-.cursor/commands/cursor-rules.md
-.cursor/commands/decision.md
-# ... (all shared commands)
 ```
 
 ---
 
-## 🚨 Common Drift Scenarios
+## 🔄 Fixing Drift
 
-### Scenario 1: Infrastructure File Updated
+When drift is detected, follow these steps:
 
-**Problem:** `.gitignore` updated in `standard-project` but not `experimental-project`
+### Step 1: Identify Source of Truth
 
-**Solution:**
-1. Copy `.gitignore` from `standard-project` to `experimental-project`
-2. Commit the sync
-3. CI will validate sync
+**Usually `standard-project`** is the source of truth because:
+- Core functionality originates there
+- Experimental extends standard, not replaces it
+- Graduation path goes from experimental → standard
 
-### Scenario 2: New Shared Command Added
+**Exception:** If the change was intentionally made to experimental first (e.g., testing a fix), use experimental as source.
 
-**Problem:** New stable command added to `standard-project` but missing in `experimental-project`
+### Step 2: Copy Files
 
-**Solution:**
-1. Copy command file to `experimental-project`
-2. Add command path to manifest
-3. Commit both changes
+```bash
+# Example: Sync .gitignore from standard to experimental
+cp templates/standard-project/.gitignore templates/experimental-project/.gitignore
 
-### Scenario 3: Shared Directory Structure Changed
+# Example: Sync entire directory
+cp -r templates/standard-project/backend/ templates/experimental-project/backend/
+```
 
-**Problem:** `docs/maintainers/` structure updated in one template
+### Step 3: Commit the Sync
 
-**Solution:**
-1. Sync entire directory structure
-2. Ensure manifest includes directory path
-3. Commit sync
+```bash
+git add templates/
+git commit -m "chore: sync templates (.gitignore, backend/)"
+```
+
+### Step 4: Verify
+
+```bash
+./scripts/validate-template-sync.sh
+# Should show: ✅ Template sync validation PASSED
+```
 
 ---
 
-## 🔗 Related
+## ➕ Adding New Shared Files
 
-- **CI Validation:** `scripts/validate-template-sync.sh`
-- **Manifest:** `scripts/template-sync-manifest.txt`
-- **Phase Plan:** `admin/planning/features/experimental-template/phase-3.md`
-- **Feature Hub:** `admin/planning/features/experimental-template/README.md`
+When adding a file that should be shared between templates:
+
+### Step 1: Add to Both Templates
+
+```bash
+# Create the file in standard-project first
+echo "content" > templates/standard-project/new-file.txt
+
+# Copy to experimental-project
+cp templates/standard-project/new-file.txt templates/experimental-project/new-file.txt
+```
+
+### Step 2: Update Manifest
+
+Add the file to `scripts/template-sync-manifest.txt`:
+
+```txt
+# Add under appropriate category
+new-file.txt
+```
+
+### Step 3: Verify
+
+```bash
+./scripts/validate-template-sync.sh
+# Ensures both templates have the file and they're identical
+```
+
+---
+
+## ➖ Removing Shared Files
+
+When removing a file from sync requirements:
+
+### Option A: Remove from Both Templates
+
+```bash
+rm templates/standard-project/old-file.txt
+rm templates/experimental-project/old-file.txt
+# Remove from manifest
+```
+
+### Option B: Make Experimental-Only
+
+If the file should only exist in experimental:
+
+1. Remove from `standard-project`
+2. Remove from manifest
+3. Add to "Intentionally Different" comment section in manifest
+
+---
+
+## 🆕 Adding New Commands
+
+### Stable Commands (Essential, Valuable, Advanced Tiers)
+
+1. Add to **both** templates
+2. Add to manifest under "Stable commands"
+3. CI enforces sync
+
+### Evolving Commands (Experimental Tier)
+
+1. Add to **experimental-project only**
+2. **Do NOT** add to manifest
+3. Document in `docs/EXPERIMENTAL.md`
+4. After graduation (ADR-004), promote to both templates
+
+---
+
+## 📊 Sync Workflow Diagram
+
+```
+Developer makes change to standard-project
+         │
+         ▼
+    ┌─────────────────┐
+    │ Is file in      │
+    │ manifest?       │
+    └────────┬────────┘
+             │
+    ┌────────┴────────┐
+    │ YES             │ NO
+    ▼                 ▼
+┌────────────────┐  ┌────────────────┐
+│ Also change    │  │ Only affects   │
+│ experimental   │  │ standard       │
+└────────────────┘  └────────────────┘
+         │
+         ▼
+    ┌─────────────────┐
+    │ Commit both     │
+    │ templates       │
+    └─────────────────┘
+         │
+         ▼
+    ┌─────────────────┐
+    │ CI validates    │
+    │ sync            │
+    └─────────────────┘
+```
+
+---
+
+## 🚨 Common Issues
+
+### Issue: CI Fails with Drift
+
+**Cause:** A shared file was changed in one template but not the other.
+
+**Solution:**
+1. Check which file(s) drifted
+2. Determine which version is correct
+3. Copy to the other template
+4. Commit and push
+
+### Issue: New File Not Being Checked
+
+**Cause:** File not added to manifest.
+
+**Solution:** Add the file path to `scripts/template-sync-manifest.txt`
+
+### Issue: False Positive on Intentionally Different File
+
+**Cause:** File is in manifest but should be different.
+
+**Solution:**
+1. Remove from manifest
+2. Add to "Intentionally Different" comment section
+3. Document why it's different
+
+---
+
+## 🔗 Related Documents
+
+- **Experimental Template Docs:** `docs/EXPERIMENTAL.md` (in experimental-project)
+- **Command Tiers:** ADR-003 Command Tiers
+- **Graduation Process:** ADR-004 Graduation Process
+- **Template Usage:** [docs/TEMPLATE-USAGE.md](TEMPLATE-USAGE.md)
 
 ---
 
 **Last Updated:** 2025-12-15
-
