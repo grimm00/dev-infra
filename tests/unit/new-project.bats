@@ -139,6 +139,25 @@ teardown() {
     [ -d "$TEST_PROJECT_DIR/frontend" ]
 }
 
+@test "new-project: non-interactive mode skips experimental warning" {
+    export PROJECT_NAME="test-experimental-nonint"
+    export PROJECT_TYPE="experimental-project"
+    export TARGET_DIR="$TEST_TMPDIR"
+    export INIT_GIT="false"
+    
+    # Run in non-interactive mode with timeout to prevent hanging if interactive
+    run timeout 10 "$SCRIPT" --non-interactive
+    
+    # Should complete successfully without hanging
+    [ "$status" -eq 0 ]
+    # Output should NOT contain interactive prompts
+    ! [[ "$output" == *"Press Enter"* ]]
+    ! [[ "$output" == *"Continue?"* ]]
+    ! [[ "$output" == *"Are you sure"* ]]
+    # Project should be created
+    [ -d "$TEST_TMPDIR/test-experimental-nonint" ]
+}
+
 @test "new-project: help text includes experimental-project" {
     run "$SCRIPT" --help
     
