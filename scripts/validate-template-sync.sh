@@ -122,6 +122,9 @@ main() {
     print_info "🔍 Validating template sync..."
     echo ""
     
+    # Initialize line variable to guard against set -u with empty manifest
+    local line=""
+    
     # Read manifest line by line
     while IFS= read -r line || [[ -n "$line" ]]; do
         # Skip empty lines and comments
