@@ -1,10 +1,11 @@
 # Experimental Template - Exploration
 
-**Status:** 🟡 Research  
+**Status:** ✅ Research Complete  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-12  
 **Target:** v1.6.0  
-**Research:** [admin/research/experimental-template/](../../research/experimental-template/)
+**Research:** [admin/research/experimental-template/](../../research/experimental-template/)  
+**Next:** `/decision experimental-template --from-research`
 
 ---
 
