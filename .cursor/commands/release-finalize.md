@@ -32,6 +32,7 @@ This command supports multiple project organization patterns:
 
 - After `/release-prep` has generated draft documents
 - After reviewing and approving draft content
+- After `/task-release` (if implementation tasks existed)
 - Before creating the release PR
 - To finalize all release documentation
 
@@ -45,7 +46,13 @@ This command supports multiple project organization patterns:
          ▼
    Review Drafts (manual)
          │
-         ▼
+         ├─── Has implementation tasks?
+         │         │
+         │         ├── YES → /task-release v1.4.0
+         │         │              │
+         │         └── NO ───────┤
+         │                        │
+         ▼                        ▼
 ┌─────────────────────────────────────┐
 │   /release-finalize v1.4.0          │  ◄── This command
 │                                     │
@@ -59,6 +66,8 @@ This command supports multiple project organization patterns:
          ▼
    /pr --release
 ```
+
+**Note:** `/task-release` is only needed when the `transition-plan.md` has implementation tasks (scripts, tests, features to build). For releases that bundle accumulated PR changes, skip directly from `/release-prep` → review → `/release-finalize`.
 
 ---
 

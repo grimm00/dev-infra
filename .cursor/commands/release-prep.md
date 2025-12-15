@@ -54,13 +54,38 @@ Feature Development Complete
 └─────────────────────────────────────┘
          │
          ▼
-   /task-release v1.4.0
-   (implement remaining tasks)
+   Manual review of drafts
+         │
+         ├─── Has implementation tasks in transition-plan.md?
+         │         │
+         │         ├── YES → /task-release v1.4.0
+         │         │         (implement tasks with TDD)
+         │         │              │
+         │         └── NO ───────┤
+         │                        │
+         ▼                        ▼
+   /release-finalize v1.4.0
+   (merge drafts, update versions)
          │
          ▼
    /pr --release
    (create release PR)
 ```
+
+### When to Use `/task-release`
+
+**Use `/task-release` when:**
+- The `transition-plan.md` has specific implementation tasks (scripts, tests, etc.)
+- Release includes new features that need to be built during release prep
+- Example: v1.4.0 (Release Readiness feature with 3 scripts)
+
+**Skip `/task-release` when:**
+- All features are already merged to develop via PRs
+- Release is just bundling accumulated changes
+- No additional implementation needed during release prep
+- Example: v1.6.0 (all work done in PRs #47-52)
+
+**Decision guide:** If your release just needs CHANGELOG and release notes merged, skip directly to `/release-finalize`. If you have a `transition-plan.md` with uncompleted implementation tasks, use `/task-release` first.
 
 ---
 

@@ -30,12 +30,21 @@ This command supports multiple project organization patterns:
 
 **When to use:**
 
-- When implementing release preparation tasks
-- After transition plan is created
-- To implement release checklist items
+- When implementing release preparation tasks from a `transition-plan.md`
+- After transition plan is created with specific implementation tasks
+- To implement release checklist items that require code/scripts/tests
 - Following TDD workflow for release tasks
 
+**When NOT to use (skip to `/release-finalize`):**
+
+- All features already merged to develop via PRs
+- Release is bundling accumulated changes (no new implementation)
+- `transition-plan.md` doesn't exist or has no implementation tasks
+- Example: v1.6.0 (all work done in PRs #47-52)
+
 **Key principle:** Implement release tasks with TDD discipline, ensuring each task is tested and documented before moving to the next. **Always run readiness check before starting tasks.**
+
+**Decision guide:** If your release just needs CHANGELOG and release notes merged, skip this command and go directly to `/release-finalize`. Use this command only when you have actual implementation work (scripts, tests, features) to build during release prep.
 
 ---
 
