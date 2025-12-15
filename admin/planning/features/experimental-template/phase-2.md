@@ -142,10 +142,10 @@ Examples:
 
 **Process:**
 
-1. [ ] Add test for experimental template generation
-2. [ ] Test template type validation
-3. [ ] Test stability warning (if interactive tests possible)
-4. [ ] Verify generated project structure
+1. [x] Add test for experimental template generation
+2. [x] Test template type validation
+3. [x] Test stability warning (if interactive tests possible)
+4. [x] Verify generated project structure
 
 **Test Cases:**
 
