@@ -23,6 +23,7 @@
 
 ### Learning Documents
 
+- **[Fix Management Workflow Learnings](fix-management-workflow-learnings.md)** - Learnings from completing all 8 cross-PR fix batches (28 issues) ⭐ **NEW**
 - **[Command Adaptation Template Learnings](command-adaptation-template-learnings.md)** - Learnings from creating the Command Adaptation Template feature
 - **[Cursor Commands Integration Learnings](cursor-commands-integration-learnings.md)** - Learnings from adapting 14 workflow automation commands
 - **[Status Tracking Automation Learnings](status-tracking-automation-learnings.md)** - Learnings from implementing Status Tracking Automation CI/CD improvement
@@ -45,15 +46,15 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 17  
+**Total Learning Documents:** 18  
 **Feature-Specific Learnings:** 5 features (12 phases + 5 fix batches + 1 release total)  
 **CI/CD Improvement Learnings:** 1 improvement (1 phase)  
 **Status:** ✅ Active
 
 **Recent Additions:**
+- Fix Management Workflow Learnings (2025-12-15) - Cross-PR fix batch workflow learnings (all 8 batches complete)
 - Experimental Template Phase 3 Learnings (2025-12-15) - CI drift detection learnings
 - Experimental Template Phase 2 Learnings (2025-12-15) - Generator script update learnings
-- CI Git Configuration Phase 1 Learnings (2025-12-12) - CI workflow configuration learnings
 
 ---
 
