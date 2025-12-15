@@ -52,15 +52,14 @@ teardown() {
     echo "dir content" > "$TEST_STANDARD_DIR/test-dir/file.txt"
     echo "dir content" > "$TEST_EXPERIMENTAL_DIR/test-dir/file.txt"
     
-    # Mock script to use test directories
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # If script doesn't exist yet (TDD), test should fail
-    # This is expected - we're writing tests first
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Templates in sync = success (no drift)
+    [ "$status" -eq 0 ]
 }
 
 @test "validate-template-sync: fails when shared file differs" {
@@ -68,15 +67,14 @@ teardown() {
     echo "content version 1" > "$TEST_STANDARD_DIR/test-file.txt"
     echo "content version 2" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
     
-    # Mock script execution
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Script should detect drift and fail
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # File differences detected = failure (drift detected)
+    [ "$status" -ne 0 ]
 }
 
 @test "validate-template-sync: ignores experimental-only files" {
@@ -87,15 +85,20 @@ teardown() {
     echo "shared content" > "$TEST_STANDARD_DIR/test-file.txt"
     echo "shared content" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
     
-    # Mock script execution
+    # Create identical shared directories (required by manifest)
+    mkdir -p "$TEST_STANDARD_DIR/test-dir"
+    mkdir -p "$TEST_EXPERIMENTAL_DIR/test-dir"
+    echo "dir content" > "$TEST_STANDARD_DIR/test-dir/file.txt"
+    echo "dir content" > "$TEST_EXPERIMENTAL_DIR/test-dir/file.txt"
+    
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Should pass (experimental-only file ignored)
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Experimental-only files ignored = success (no drift)
+    [ "$status" -eq 0 ]
 }
 
 # ============================================================================
@@ -123,30 +126,28 @@ teardown() {
     # Setup: Remove one template directory
     rm -rf "$TEST_EXPERIMENTAL_DIR"
     
-    # Mock script execution
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Should fail with clear error message
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Missing template directory = failure (error condition)
+    [ "$status" -ne 0 ]
 }
 
 @test "validate-template-sync: handles missing manifest file" {
     # Setup: Remove manifest
     rm -f "$TEST_TMPDIR/scripts/template-sync-manifest.txt"
     
-    # Mock script execution
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Should fail with clear error message
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Missing manifest file = failure (error condition)
+    [ "$status" -ne 0 ]
 }
 
 @test "validate-template-sync: handles whitespace-only differences" {
@@ -154,15 +155,14 @@ teardown() {
     echo "content" > "$TEST_STANDARD_DIR/test-file.txt"
     echo -e "content\n" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
     
-    # Mock script execution
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Should detect difference (whitespace matters for exact match)
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Whitespace differences detected = failure (drift detected)
+    [ "$status" -ne 0 ]
 }
 
 @test "validate-template-sync: handles directory differences" {
@@ -172,15 +172,14 @@ teardown() {
     echo "file1" > "$TEST_STANDARD_DIR/test-dir/file.txt"
     echo "file2" > "$TEST_EXPERIMENTAL_DIR/test-dir/file.txt"
     
-    # Mock script execution
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Should detect difference in directory contents
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Directory differences detected = failure (drift detected)
+    [ "$status" -ne 0 ]
 }
 
 @test "validate-template-sync: handles comments in manifest" {
@@ -192,19 +191,74 @@ test-file.txt
 test-dir/
 EOF
     
-    # Create identical files
+    # Create identical files and directories
     echo "content" > "$TEST_STANDARD_DIR/test-file.txt"
     echo "content" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    mkdir -p "$TEST_STANDARD_DIR/test-dir"
+    mkdir -p "$TEST_EXPERIMENTAL_DIR/test-dir"
+    echo "dir content" > "$TEST_STANDARD_DIR/test-dir/file.txt"
+    echo "dir content" > "$TEST_EXPERIMENTAL_DIR/test-dir/file.txt"
     
-    # Mock script execution
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Should ignore comment lines and validate files
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Comments ignored, files validated = success (no drift)
+    [ "$status" -eq 0 ]
+}
+
+@test "validate-template-sync: detects file missing in experimental" {
+    # Setup: File exists in standard but not experimental
+    echo "content" > "$TEST_STANDARD_DIR/test-file.txt"
+    # (don't create in experimental)
+    
+    # Run script with test directories
+    cd "$TEST_TMPDIR"
+    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
+    run bash "$SCRIPT" 2>&1
+    
+    # Should fail - drift detected (file missing in experimental)
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"missing"* ]] || [[ "$output" == *"DRIFT"* ]] || \
+    [[ "$output" == *"test-file.txt"* ]]
+}
+
+@test "validate-template-sync: detects file missing in standard" {
+    # Setup: File exists in experimental but not standard
+    echo "content" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    # (don't create in standard)
+    
+    # Run script with test directories
+    cd "$TEST_TMPDIR"
+    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
+    run bash "$SCRIPT" 2>&1
+    
+    # Should fail - drift detected (file missing in standard)
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"missing"* ]] || [[ "$output" == *"DRIFT"* ]] || \
+    [[ "$output" == *"test-file.txt"* ]]
+}
+
+@test "validate-template-sync: detects directory missing in experimental" {
+    # Setup: Directory exists in standard but not experimental
+    mkdir -p "$TEST_STANDARD_DIR/test-dir"
+    echo "file" > "$TEST_STANDARD_DIR/test-dir/file.txt"
+    # (don't create in experimental)
+    
+    # Run script with test directories
+    cd "$TEST_TMPDIR"
+    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
+    run bash "$SCRIPT" 2>&1
+    
+    # Should fail - drift detected (directory missing in experimental)
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"missing"* ]] || [[ "$output" == *"DRIFT"* ]] || \
+    [[ "$output" == *"test-dir"* ]]
 }
 
 @test "validate-template-sync: outputs clear error messages" {
