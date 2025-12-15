@@ -129,10 +129,10 @@ Examples:
 
 **Process:**
 
-1. [ ] Update `docs/TEMPLATE-USAGE.md`
-2. [ ] Add experimental template section
-3. [ ] Document when to use experimental vs standard
-4. [ ] Update `docs/PROJECT-TYPES.md` if exists
+1. [x] Update `docs/TEMPLATE-USAGE.md`
+2. [x] Add experimental template section
+3. [x] Document when to use experimental vs standard
+4. [x] Update `docs/PROJECT-TYPES.md` if exists
 
 ---
 
