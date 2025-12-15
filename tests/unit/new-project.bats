@@ -18,12 +18,10 @@ setup() {
 }
 
 teardown() {
+    # cleanup_test_env removes TEST_TMPDIR entirely, which includes all subdirectories
+    # (TEST_PROJECT_DIR, TEST_STANDARD_DIR, TEST_LEARNING_DIR are all under TEST_TMPDIR)
+    # No need for manual cleanup of individual directories
     cleanup_test_env
-    
-    # Clean up test project directories
-    rm -rf "$TEST_PROJECT_DIR" 2>/dev/null || true
-    rm -rf "$TEST_STANDARD_DIR" 2>/dev/null || true
-    rm -rf "$TEST_LEARNING_DIR" 2>/dev/null || true
 }
 
 # ============================================================================

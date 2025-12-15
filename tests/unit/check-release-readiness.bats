@@ -246,6 +246,17 @@ teardown() {
     [[ "$output" =~ "</summary>" ]] && [[ "$output" =~ "</details>" ]]
 }
 
+@test "check-release-readiness.sh does not validate HTML structure" {
+    cd "$PROJECT_ROOT"
+    # This test documents that the script does not currently validate HTML structure
+    # If HTML validation is added in the future, this test should be updated
+    # to verify that malformed HTML is detected and reported
+    
+    # For now, we document that the script doesn't enforce HTML structure
+    # The script generates HTML but doesn't validate it
+    skip "Script does not currently validate HTML structure in output"
+}
+
 @test "check-release-readiness.sh evidence sections include command output" {
     cd "$PROJECT_ROOT"
     run "$SCRIPT" v1.4.0 --generate
