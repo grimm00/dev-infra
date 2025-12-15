@@ -864,11 +864,12 @@ main() {
         echo "Select project type:"
         echo "1) Standard Project (application, tool, service)"
         echo "2) Learning Project (tutorial, exercises, reference)"
+        echo "3) Experimental Project - Includes experimental/evolving commands ⚠️"
         echo
         
         local project_type_choice
         while true; do
-            read -p "Enter choice [1-2]: " project_type_choice
+            read -p "Enter choice [1-3]: " project_type_choice
             case $project_type_choice in
                 1)
                     project_type="Standard Project"
@@ -880,8 +881,13 @@ main() {
                     template_type="learning-project"
                     break
                     ;;
+                3)
+                    project_type="Experimental Project"
+                    template_type="experimental-project"
+                    break
+                    ;;
                 *)
-                    echo "Please enter 1 or 2"
+                    echo "Please enter 1, 2, or 3"
                     ;;
             esac
         done
