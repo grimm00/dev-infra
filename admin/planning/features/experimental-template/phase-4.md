@@ -44,10 +44,16 @@ Implement clear stability communication for experimental commands using visual i
 
 **Objective:** Update Evolving tier commands with stability indicators
 
+**Note:** The `/status` command already has a stability header from Phase 1. This task focuses on:
+- Verifying existing header matches template format
+- Adding the **feedback link** (currently missing)
+- Ensuring consistency across all Evolving commands
+
 **Process:**
 
-1. [ ] Identify all Evolving tier commands in experimental template
-2. [ ] Add stability header to each command
+1. [ ] Identify all Evolving tier commands in experimental template (currently: `/status`)
+2. [ ] Verify existing headers match template format
+3. [ ] Add feedback link to command headers
 
 **Stability Header Template:**
 
@@ -69,7 +75,9 @@ Implement clear stability communication for experimental commands using visual i
 
 **Objective:** Create comprehensive stability documentation
 
-**File:** `docs/STABILITY-LEVELS.md`
+**File:** `templates/experimental-project/docs/STABILITY-LEVELS.md`
+
+**Note:** This goes in the experimental template so generated projects have it. Dev-infra already has ADR-003/ADR-004 for internal reference.
 
 **Contents:**
 
@@ -125,7 +133,9 @@ Experimental features graduate to Stable when they meet the
 
 **Objective:** Document process for promoting commands from experimental to stable
 
-**File:** `docs/GRADUATION-CHECKLIST.md`
+**File:** `templates/experimental-project/docs/GRADUATION-CHECKLIST.md`
+
+**Note:** Based on ADR-004 graduation criteria. Goes in template for generated projects.
 
 **Contents (based on ADR-004):**
 
@@ -190,13 +200,16 @@ Body:
 
 **Objective:** Create clear path for users to provide feedback
 
+**Note:** The `.github/ISSUE_TEMPLATE/` directory does not exist yet in the experimental template. Create it as part of this task.
+
 **Process:**
 
-1. [ ] Create GitHub issue template for experimental feedback
-2. [ ] Document feedback process in template README
-3. [ ] Link feedback mechanism in command headers
+1. [ ] Create `.github/ISSUE_TEMPLATE/` directory in experimental template
+2. [ ] Create GitHub issue template for experimental feedback
+3. [ ] Document feedback process in template README
+4. [ ] Link feedback mechanism in command headers (via Task 2)
 
-**Issue Template:** `.github/ISSUE_TEMPLATE/experimental-feedback.yml`
+**Issue Template:** `templates/experimental-project/.github/ISSUE_TEMPLATE/experimental-feedback.yml`
 
 ```yaml
 name: Experimental Feature Feedback
@@ -265,9 +278,28 @@ body:
 
 ## 💡 Implementation Notes
 
+### Recommended Task Order
+
+Based on pre-phase review, recommended implementation order:
+
+1. **Task 1** (Define levels) - Foundation for all other tasks
+2. **Task 3** (STABILITY-LEVELS.md) - Create main documentation
+3. **Task 4** (GRADUATION-CHECKLIST.md) - Create checklist based on ADR-004
+4. **Task 5** (Issue template) - Create feedback mechanism
+5. **Task 2** (Update commands) - Add feedback links to existing headers
+6. **Task 6** (Update README) - Final integration with links
+
 ### Consistency
 
 All Evolving commands should use identical stability header format for consistency.
+
+### Existing Work
+
+The `/status` command already has a stability header from Phase 1:
+- ✅ Has `**Status:** 🟠 Evolving` 
+- ✅ Has `**Stability:** Experimental - may change without notice`
+- ✅ Has warning block
+- ❌ Missing feedback link (add in Task 2)
 
 ### Automation Opportunity
 
@@ -289,6 +321,7 @@ Graduation checklist should be updated as process is refined based on actual gra
 
 ---
 
-**Last Updated:** 2025-12-12  
-**Status:** 🔴 Not Started
+**Last Updated:** 2025-12-15  
+**Status:** 🔴 Not Started  
+**Review:** [phase-4-review.md](phase-4-review.md) - ✅ Ready
 
