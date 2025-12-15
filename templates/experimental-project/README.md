@@ -7,6 +7,35 @@
 
 ---
 
+## ⚠️ Experimental Template
+
+This template includes **experimental/evolving commands** that are not yet stable enough for the standard template. These commands:
+
+- 🟠 May change without notice
+- 🟠 May have incomplete documentation
+- 🟠 May be removed or significantly modified
+- 🟠 Provide early access to new features
+
+**Use this template if:**
+
+- You want early access to new commands
+- You're comfortable with potential breaking changes
+- You can provide feedback on evolving features
+
+**Use standard-project if:**
+
+- You need maximum stability
+- You're building production systems
+- You prefer proven, stable commands
+
+**Evolving Commands Included:**
+
+- `/status` 🟠 - Project status tracking (experimental)
+
+**Graduation:** Commands graduate to standard-project when they meet [ADR-004 graduation criteria](../../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+
+---
+
 ## 🎯 Quick Start
 
 ### Prerequisites
