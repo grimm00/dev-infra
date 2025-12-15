@@ -32,11 +32,11 @@ Implement clear stability communication for experimental commands using visual i
 
 **Stability Levels:**
 
-| Level | Indicator | Meaning |
-|-------|-----------|---------|
-| **Stable** | 🟢 | Production-ready, API stable, fully documented |
-| **Experimental** | 🟠 | May change, actively evolving, feedback welcome |
-| **Deprecated** | 🔴 | Will be removed, migration path provided |
+| Level            | Indicator | Meaning                                         |
+| ---------------- | --------- | ----------------------------------------------- |
+| **Stable**       | 🟢        | Production-ready, API stable, fully documented  |
+| **Experimental** | 🟠        | May change, actively evolving, feedback welcome |
+| **Deprecated**   | 🔴        | Will be removed, migration path provided        |
 
 ---
 
@@ -45,6 +45,7 @@ Implement clear stability communication for experimental commands using visual i
 **Objective:** Update Evolving tier commands with stability indicators
 
 **Note:** The `/status` command already has a stability header from Phase 1. This task focuses on:
+
 - Verifying existing header matches template format
 - Adding the **feedback link** (currently missing)
 - Ensuring consistency across all Evolving commands
@@ -64,8 +65,8 @@ Implement clear stability communication for experimental commands using visual i
 **Stability:** Evolving - may change without notice  
 **Feedback:** [Create issue](link-to-issues)
 
-> ⚠️ **Experimental Command**: This command is under active development 
-> and may change significantly between releases. Use in production with 
+> ⚠️ **Experimental Command**: This command is under active development
+> and may change significantly between releases. Use in production with
 > caution and please provide feedback!
 ```
 
@@ -86,20 +87,21 @@ Implement clear stability communication for experimental commands using visual i
 
 ## Overview
 
-Dev-infra uses stability levels to communicate the maturity of features 
+Dev-infra uses stability levels to communicate the maturity of features
 and commands. This helps users make informed decisions about adoption.
 
 ## Stability Indicators
 
-| Indicator | Level | Meaning |
-|-----------|-------|---------|
-| 🟢 | Stable | Production-ready |
-| 🟠 | Experimental | May change |
-| 🔴 | Deprecated | Being removed |
+| Indicator | Level        | Meaning          |
+| --------- | ------------ | ---------------- |
+| 🟢        | Stable       | Production-ready |
+| 🟠        | Experimental | May change       |
+| 🔴        | Deprecated   | Being removed    |
 
 ## Stable (🟢)
 
 Features marked as Stable:
+
 - Have been tested in production
 - Have complete documentation
 - Follow semantic versioning for changes
@@ -108,6 +110,7 @@ Features marked as Stable:
 ## Experimental (🟠)
 
 Features marked as Experimental:
+
 - Are under active development
 - May change without notice
 - May have incomplete documentation
@@ -117,13 +120,14 @@ Features marked as Experimental:
 ## Deprecated (🔴)
 
 Features marked as Deprecated:
+
 - Will be removed in a future release
 - Have migration guides available
 - Should be replaced with alternatives
 
 ## Graduation Process
 
-Experimental features graduate to Stable when they meet the 
+Experimental features graduate to Stable when they meet the
 [graduation criteria](link-to-graduation-checklist).
 ```
 
@@ -144,7 +148,7 @@ Experimental features graduate to Stable when they meet the
 
 ## Overview
 
-This checklist defines the criteria for graduating commands from 
+This checklist defines the criteria for graduating commands from
 Experimental (🟠) to Stable (🟢).
 
 ## Required Criteria (ALL must be met)
@@ -165,15 +169,18 @@ Experimental (🟠) to Stable (🟢).
 ## Graduation Process
 
 1. **Identify Candidate**
+
    - Command meets required criteria
    - Maintainer proposes graduation
 
 2. **Review Period** (1 week)
+
    - Document any final changes
    - Ensure tests pass
    - Update documentation
 
 3. **Graduation PR**
+
    - Move command to standard template
    - Update stability indicator to 🟢
    - Add to release notes
@@ -188,6 +195,7 @@ Experimental (🟠) to Stable (🟢).
 Title: `feat(templates): graduate [command-name] to stable`
 
 Body:
+
 - Command being graduated
 - Link to graduation criteria checklist
 - Summary of time in experimental
@@ -268,10 +276,12 @@ body:
 ## 🔗 Dependencies
 
 **Prerequisites:**
+
 - Phase 1 complete (commands exist)
 - ADR-004 for graduation criteria
 
 **Blocks:**
+
 - None (final phase)
 
 ---
@@ -296,7 +306,8 @@ All Evolving commands should use identical stability header format for consisten
 ### Existing Work
 
 The `/status` command already has a stability header from Phase 1:
-- ✅ Has `**Status:** 🟠 Evolving` 
+
+- ✅ Has `**Status:** 🟠 Evolving`
 - ✅ Has `**Stability:** Experimental - may change without notice`
 - ✅ Has warning block
 - ❌ Missing feedback link (add in Task 2)
@@ -324,4 +335,3 @@ Graduation checklist should be updated as process is refined based on actual gra
 **Last Updated:** 2025-12-15  
 **Status:** 🟠 In Progress  
 **Review:** [phase-4-review.md](phase-4-review.md) - ✅ Ready
-
