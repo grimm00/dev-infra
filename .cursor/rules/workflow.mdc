@@ -58,6 +58,7 @@ alwaysApply: true
    Types: feat, fix, docs, chore, test, refactor, ci
 
    Examples:
+
    - `feat(templates): add CLI project template type`
    - `fix(scripts): handle spaces in project names`
    - `docs(planning): add command integration planning`
@@ -120,6 +121,7 @@ alwaysApply: true
 - Suggest updating status documents
 
 **See Also:**
+
 - [Status Update Workflow](../../docs/STATUS-UPDATE-WORKFLOW.md) - Complete status update guide
 - [Status Update Checklist](../../docs/STATUS-UPDATE-CHECKLIST.md) - Checklist for status updates
 - [Status Validation](../commands/pr.md#status-validation) - Status validation in `/pr` command
@@ -127,8 +129,9 @@ alwaysApply: true
 ### Priority Matrix Assessment
 
 For each Sourcery comment, assess:
+
 - **Priority:** CRITICAL 🔴 / HIGH 🟠 / MEDIUM 🟡 / LOW 🟢
-- **Impact:** CRITICAL 🔴 / HIGH 🟠 / MEDIUM 🟡 / LOW 🟢  
+- **Impact:** CRITICAL 🔴 / HIGH 🟠 / MEDIUM 🟡 / LOW 🟢
 - **Effort:** LOW 🟢 / MEDIUM 🟡 / HIGH 🟠 / VERY_HIGH 🔴
 
 ---
@@ -215,6 +218,7 @@ For each Sourcery comment, assess:
 ```
 
 **Validation Checklist:**
+
 - [ ] Template generates successfully
 - [ ] All required directories created
 - [ ] All README.md files present
@@ -252,17 +256,18 @@ For each Sourcery comment, assess:
 /pre-phase-review [phase-N]
     → Identifies gaps, clarifications needed
     → Creates review document
-    
+
 /address-review [review-path]
     → Updates phase plan with recommendations
     → Commits documentation changes only
-    
+
 /task-phase [phase-N] [task-N]
     → Implements tasks with TDD
     → Clean commits, separate from planning
 ```
 
 **Benefits:**
+
 - Catch clarifications before implementation (saves time)
 - Separate planning updates from implementation commits
 - Better estimation accuracy
@@ -279,6 +284,7 @@ For each Sourcery comment, assess:
 **Workflow:**
 
 1. **RED:** Write failing test first
+
    ```bash
    @test "script generates assessment file" {
        run "$SCRIPT" v1.4.0 --generate
@@ -293,11 +299,13 @@ For each Sourcery comment, assess:
 **Test Location:** `tests/unit/[script-name].bats`
 
 **Running Tests:**
+
 ```bash
 bats tests/unit/[script-name].bats
 ```
 
-**Evidence:** 
+**Evidence:**
+
 - Release Readiness feature: 48 tests across 3 scripts
 - Experimental Template: 18+ tests for generator and drift detection
 
@@ -314,14 +322,14 @@ bats tests/unit/[script-name].bats
 
 **Standard flags for all scripts:**
 
-| Flag | Purpose | Example |
-|------|---------|---------|
-| `--dry-run` | Show what would happen without doing it | `create-release-branch.sh v1.4.0 --dry-run` |
-| `--force` | Override blocking checks | `/pr --release --force` |
-| `--verbose` | Show detailed output | `analyze-releases.sh --verbose` |
-| `--json` | Output in JSON format | `analyze-releases.sh --json` |
-| `--generate` | Generate output file | `check-release-readiness.sh v1.4.0 --generate` |
-| `--help` | Show usage information | `create-release-branch.sh --help` |
+| Flag         | Purpose                                 | Example                                        |
+| ------------ | --------------------------------------- | ---------------------------------------------- |
+| `--dry-run`  | Show what would happen without doing it | `create-release-branch.sh v1.4.0 --dry-run`    |
+| `--force`    | Override blocking checks                | `/pr --release --force`                        |
+| `--verbose`  | Show detailed output                    | `analyze-releases.sh --verbose`                |
+| `--json`     | Output in JSON format                   | `analyze-releases.sh --json`                   |
+| `--generate` | Generate output file                    | `check-release-readiness.sh v1.4.0 --generate` |
+| `--help`     | Show usage information                  | `create-release-branch.sh --help`              |
 
 **Key Principles:**
 
@@ -346,6 +354,7 @@ bats tests/unit/[script-name].bats
 **Phase 2: Release Preparation**
 
 **Step 1: Assess Readiness**
+
 ```bash
 # Check release readiness
 ./scripts/check-release-readiness.sh v1.4.0
@@ -355,12 +364,14 @@ bats tests/unit/[script-name].bats
 ```
 
 **Step 2: Create Release Branch**
+
 ```bash
 # Creates branch + initial assessment
 ./scripts/create-release-branch.sh v1.4.0
 ```
 
 **Step 3: On release/vX.Y.Z branch:**
+
 - Update CHANGELOG version
 - Update version numbers in files
 - Create release notes
@@ -375,6 +386,7 @@ bats tests/unit/[script-name].bats
 - Distribution workflow runs automatically
 
 **Phase 4: Post-Release**
+
 ```bash
 # Update historical tracking
 ./scripts/analyze-releases.sh --last 5
@@ -389,11 +401,13 @@ bats tests/unit/[script-name].bats
 ### When Modifying Templates
 
 1. **Test First**
+
    - Always test with `./scripts/new-project.sh`
    - Verify generated project structure
    - Check all links and navigation
 
 2. **Update Documentation**
+
    - Update template README files
    - Update user documentation in `docs/`
    - Update planning documents if feature-related
@@ -419,12 +433,14 @@ bats tests/unit/[script-name].bats
 **When investigating CI/CD failures:**
 
 1. **Check All Similar Patterns**
+
    - Don't stop at the first issue found
    - Look for similar directories, files, or patterns
    - Check test failures for patterns (e.g., multiple stage directories)
    - Verify fix addresses all similar issues
 
 2. **PR Validation Value**
+
    - PR validation workflow (`/pr-validation`) is valuable for catching issues before merge
    - CI environment may expose issues not visible locally
    - Different test execution order may reveal additional failures
