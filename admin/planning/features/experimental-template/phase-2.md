@@ -76,9 +76,9 @@ Select a template type:
 
 **Process:**
 
-1. [ ] Detect when experimental-project selected
-2. [ ] Display clear stability warning
-3. [ ] Require confirmation before proceeding
+1. [x] Detect when experimental-project selected
+2. [x] Display clear stability warning
+3. [x] Require confirmation before proceeding
 
 **Expected Warning:**
 
