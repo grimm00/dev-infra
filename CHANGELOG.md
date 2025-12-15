@@ -462,6 +462,156 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.6.0] - 2025-12-15
+
+### Added
+
+- **Experimental Project Template** - New template type for testing evolving commands (PR #48, #49)
+
+  - `templates/experimental-project/` - Same structure as standard-project with additional features
+  - Includes `/status` as example Evolving tier command
+  - Stability indicators (🟢 Stable, 🟠 Evolving, 🔴 Deprecated)
+  - `docs/EXPERIMENTAL.md` - Experimental features documentation
+  - `docs/STABILITY-LEVELS.md` - Stability level definitions
+  - `docs/GRADUATION-CHECKLIST.md` - Graduation criteria based on ADR-004
+  - GitHub issue template for experimental feedback
+
+- **CI Drift Detection** - Automated validation to keep templates in sync (PR #49)
+
+  - `scripts/validate-template-sync.sh` - Compares shared files between templates
+  - `scripts/template-sync-manifest.txt` - Machine-readable list of shared files
+  - CI integration in `.github/workflows/test.yml`
+  - `docs/TEMPLATE-SYNC.md` - Comprehensive sync documentation
+  - 10 comprehensive bats tests
+
+- **Generator Script Updates** - Support for experimental template (PR #48)
+
+  - Added `experimental-project` as third template type
+  - Interactive menu with ⚠️ stability warning
+  - `[y/N]` confirmation for experimental selection
+  - Non-interactive mode skips warning for CI/automation
+  - 8 new tests for experimental template generation
+
+- **Stability Indicators** - Documentation for command maturity levels (Phase 4)
+
+  - Three-tier system: 🟢 Stable, 🟠 Evolving, 🔴 Deprecated
+  - Graduation checklist based on ADR-004 criteria
+  - Feedback collection via GitHub issue templates
+  - Stability section in template README
+
+### Fixed
+
+- **Test Assertion Improvements** - Strengthened test assertions across test suites (PR #50, #51)
+
+  - More specific assertions (exact phrases vs keywords)
+  - Added edge case tests for template sync
+  - Fixed TDD placeholder assertions
+  - Improved non-interactive mode testing
+  - 8 tests improved total
+
+- **Quick Wins Batch** - Various code quality improvements (PR #52)
+
+  - POSIX-compatible string comparison in `new-project.sh`
+  - Grammar fixes in documentation
+  - Removed redundant test cleanup code
+  - 4 issues fixed total
+
+### Changed
+
+- **Test Count** - Expanded from 94+ tests to 110+ tests
+
+  - Generator script tests: 8 new
+  - Template sync tests: 10 new
+  - Test assertion improvements: 8 enhanced
+
+- **Cursor Rules** - Updated with experimental template patterns
+
+  - Added experimental template structure
+  - Added stability indicators documentation
+  - Added template sync validation section
+  - Updated Bats TDD best practices
+
+### CI/CD
+
+- **CI Git Configuration** - Fixed git identity in CI workflows (PR #47)
+
+  - Configured git user.name and user.email in test workflow
+  - Enables commits in CI environment
+  - Required for scripts that perform git operations
+
+- **Template Sync Validation** - Added to CI pipeline
+
+  - Validates shared files stay in sync
+  - Fails CI on template drift
+  - Clear error messages with fix instructions
+
+### Security
+
+- No security changes in this release.
+
+---
+
+## [1.5.0] - 2025-12-12
+
+### Added
+
+**Release Automation v2 (Internal Only)**
+
+This release focuses on internal tooling to streamline the release process. Per ADR-002 (Template Factory identity), these improvements remain dev-infra-only and are not included in templates.
+
+- **Automatic Tag Creation (Phase 1)** - GitHub Actions workflow automatically creates release tags when release PRs merge to main (PR #44)
+  - Workflow: `.github/workflows/create-release-tag.yml`
+  - Triggers on release PR merge to main
+  - Extracts version from branch name
+  - Creates annotated tag with release message
+  - Pushes tag to trigger release distribution
+  - Supports dry-run mode for testing
+  - Updated release process documentation
+  - Updated workflows README with tag creation details
+  - Marked v1.4.0 retrospective action items as complete
+
+- **Version Reference Automation (Phase 2)** - Script to automatically update version references across codebase during releases (PR #45)
+  - Script: `scripts/update-version-references.sh`
+  - Updates `.cursor/rules/main.mdc` (AI rules)
+  - Updates `README.md` badges (if exist)
+  - Updates `package.json` version (if exists)
+  - Validation and error handling with rollback
+  - Dry-run mode for safe previews
+  - Comprehensive test suite (42 tests)
+  - Documentation: `docs/VERSION-REFERENCES.md`
+  - Integrated with `/release-finalize` command
+
+### Changed
+
+**Identity and Focus**
+
+- **Template Factory Identity** - Formalized dev-infra's identity as a "template factory" with clear graduation criteria for template features (ADR-001, ADR-002, ADR-003, ADR-004)
+  - Work classification (template features vs internal tooling vs CI/CD)
+  - Graduation process for template features
+  - Template integration criteria
+  - Release Automation v2 Phase 3 deferred (template integration)
+  - Updated Cursor rules and documentation
+  - Implemented transition plan
+
+### Documentation
+
+- **Command Documentation** - Created command integration workflows
+  - `/release-prep` - Streamlined release preparation
+  - `/release-finalize` - Release finalization tasks
+  - `/post-release` - Post-release documentation
+  - `/address-review` - Address pre-phase review findings
+
+- **Release Process** - Updated release process documentation
+  - Tag creation now automated via GitHub Actions
+  - Version reference updates automated via script
+  - Release readiness tools integrated
+
+### Security
+
+- No security changes in this release.
+
+---
+
 ## [Unreleased]
 
 ### Planned
@@ -487,6 +637,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## Version History
+
+### 1.6.0 (2025-12-15)
+
+- **Experimental Project Template** - New template type for testing evolving commands
+- CI drift detection with `validate-template-sync.sh`
+- Stability indicators (🟢 Stable, 🟠 Evolving, 🔴 Deprecated)
+- Generator script updated for 3 template types
+- Test suite expanded to 110+ tests
+- 8 cross-PR fix batches completed (28 issues)
+
+### 1.5.0 (2025-12-12)
+
+- **Release Automation v2 (Internal Only)** - Automated tag creation and version updates
+- Phase 1: Automatic Tag Creation via GitHub Actions
+- Phase 2: Version Reference Automation script
+- Template Factory identity formalized (ADR-001 through ADR-004)
 
 ### 1.4.0 (2025-12-11)
 

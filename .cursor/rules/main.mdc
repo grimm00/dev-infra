@@ -400,7 +400,7 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v1.5.0 (released 2025-12-12)  
+**Version:** v1.6.0 (releasing 2025-12-15)  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
 **Updated:** 2025-12-15  
@@ -435,7 +435,7 @@ When modifying templates:
 - ✅ Standardized release criteria
 - ✅ Assessment template with YAML frontmatter
 
-**Release Automation v2 (v1.5.0):**
+**Release Automation v2 (v1.6.0):**
 
 - ✅ Phase 1: Tag Creation Automation
 - ✅ Phase 2: Version Reference Automation
