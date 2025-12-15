@@ -21,7 +21,7 @@
 
 ### Active Batches
 
-*No active batches - all batches complete*
+_No active batches - all batches complete_
 
 ---
 
@@ -40,7 +40,7 @@
 
 **Active Priority Breakdown:**
 
-- *No active issues - all batches complete*
+- _No active issues - all batches complete_
 
 ---
 
@@ -118,7 +118,7 @@
 
 ## 🟡 Active Batches
 
-*No active batches - all batches complete*
+_No active batches - all batches complete_
 
 ---
 
