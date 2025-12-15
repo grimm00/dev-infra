@@ -1,9 +1,10 @@
 # Status Command
 
 **Status:** 🟠 Evolving  
-**Stability:** Experimental - may change without notice
+**Stability:** Experimental - may change without notice  
+**Feedback:** [Provide feedback](../../.github/ISSUE_TEMPLATE/experimental-feedback.yml)
 
-> ⚠️ **Experimental Command**: This command is under active development and may change significantly between releases. Use in production with caution and please provide feedback!
+> ⚠️ **Experimental Command**: This command is under active development and may change significantly between releases. Use in production with caution and please [provide feedback](../../.github/ISSUE_TEMPLATE/experimental-feedback.yml)!
 
 Use this command to view, update, and sync project status tracking across features and phases.
 
