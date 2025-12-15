@@ -66,6 +66,9 @@ teardown() {
     
     [ "$status" -eq 0 ]
     [ -f "$TEST_PROJECT_DIR/docs/EXPERIMENTAL.md" ]
+    # Verify key content exists
+    grep -q "Experimental Commands" "$TEST_PROJECT_DIR/docs/EXPERIMENTAL.md" || \
+    grep -q "experimental" "$TEST_PROJECT_DIR/docs/EXPERIMENTAL.md"
 }
 
 @test "new-project: experimental-project includes evolving commands" {
@@ -92,9 +95,10 @@ teardown() {
     run "$SCRIPT" --non-interactive
     
     [ "$status" -eq 0 ]
-    # Check README contains experimental template warning
-    grep -q "Experimental Template" "$TEST_PROJECT_DIR/README.md" || \
-    grep -q "experimental" "$TEST_PROJECT_DIR/README.md"
+    # Check README contains specific experimental template disclaimer
+    grep -q "## ⚠️ Experimental Template" "$TEST_PROJECT_DIR/README.md"
+    # Verify stability levels section exists
+    grep -q "### Stability Levels" "$TEST_PROJECT_DIR/README.md"
 }
 
 @test "new-project: rejects invalid template type" {
