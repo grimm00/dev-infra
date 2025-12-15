@@ -535,6 +535,27 @@ gh pr view [pr-number] --json state,title,headRefName
 - **If `--force-manual-testing` provided:** Proceed with this step regardless of determination
 - **If `--skip-manual-testing` provided:** Skip to Step 4 (Sourcery Review)
 
+---
+
+#### ⚠️ IMPORTANT: Manual Testing Guides Are for HUMAN Users
+
+**Manual testing guides are written for HUMAN team members to follow, NOT for the AI agent to run tests locally.**
+
+**Purpose of manual testing guides:**
+- 📖 **Documentation for humans** - Step-by-step instructions any team member can follow
+- 🔍 **User verification** - Allows humans to manually verify features work as expected
+- 📝 **Reference material** - Persists in the repo as a testing reference for the feature
+- 🎓 **Knowledge transfer** - New team members can understand how to test the feature
+
+**Manual testing guides are NOT:**
+- ❌ Tests the AI agent runs during PR validation
+- ❌ A checklist only the AI uses internally
+- ❌ Automated test scripts (those go in `tests/`)
+
+---
+
+#### 2a. Check if Manual Testing Guide Exists
+
 **Detect feature name:**
 
 - Use `--feature` option if provided
@@ -544,10 +565,141 @@ gh pr view [pr-number] --json state,title,headRefName
   - If multiple features exist, search for manual testing guide
   - If no features exist, use project-wide structure
 
-**File:**
+**File locations:**
 
 - Feature-specific: `docs/maintainers/planning/features/[feature-name]/manual-testing.md`
 - Project-wide: `docs/maintainers/planning/manual-testing.md` (if exists)
+- Dev-infra: `admin/planning/features/[feature-name]/manual-testing.md`
+
+**Check if guide exists:**
+
+```bash
+# Feature-specific (adjust path for project structure)
+ls docs/maintainers/planning/features/[feature-name]/manual-testing.md
+
+# Or for dev-infra
+ls admin/planning/features/[feature-name]/manual-testing.md
+```
+
+**If guide does NOT exist:**
+
+1. **STOP and create the guide first** - A feature PR with user-facing changes MUST have a manual testing guide
+2. **Create the guide using the template below** (Section 2b)
+3. **Add scenarios for ALL phases completed so far** (not just current phase)
+4. **Commit the guide to the feature branch** before proceeding
+
+**If guide exists:**
+
+- Proceed to Section 2c (Add scenarios for current phase)
+
+---
+
+#### 2b. Create Manual Testing Guide (If Missing)
+
+**When to create:** When manual testing is required (feat/fix PR) but no guide exists.
+
+**Template:**
+
+```markdown
+# Manual Testing Guide - [Feature Name]
+
+**Feature:** [Feature Name]  
+**Phases Covered:** [List phases, e.g., 1, 2, 3]  
+**Last Updated:** [YYYY-MM-DD]  
+**Status:** ✅ Active
+
+---
+
+## 📋 Overview
+
+This guide provides step-by-step instructions for manually verifying the [feature name] feature. These tests are designed for **human testers** to validate functionality beyond what automated tests cover.
+
+**Purpose:**
+- Verify user-facing functionality works as expected
+- Test edge cases and error handling
+- Validate documentation and user experience
+- [Feature-specific purpose]
+
+**Prerequisites:**
+- [List prerequisites: server running, dependencies, etc.]
+- [Access requirements]
+- [Test data requirements]
+
+---
+
+## 🧪 Phase N: [Phase Name]
+
+### Scenario N.1: [Scenario Name]
+
+**Objective:** [What this test verifies]
+
+**Steps:**
+
+1. [Step 1]
+   ```bash
+   [Command or action]
+   ```
+
+2. [Step 2]
+
+3. [Step 3]
+
+**Expected Result:** ✅ [What success looks like]
+
+---
+
+[Additional scenarios...]
+
+---
+
+## 🧹 Cleanup
+
+After completing manual testing:
+
+```bash
+[Cleanup commands]
+```
+
+---
+
+## ✅ Acceptance Criteria Checklist
+
+### Phase N: [Phase Name]
+- [ ] Scenario N.1 passes
+- [ ] Scenario N.2 passes
+- [ ] [etc.]
+
+---
+
+## 📝 Notes for Testers
+
+1. [Important note 1]
+2. [Important note 2]
+3. **Report Issues:** If any scenario fails, document exact steps, expected vs actual results, and error messages.
+
+---
+
+## 🔗 Related Documents
+
+- **Feature Plan:** [link]
+- **Phase Documents:** [links]
+
+---
+
+**Last Updated:** [YYYY-MM-DD]
+```
+
+**Key principles for the guide:**
+
+1. **Write for humans** - Clear, step-by-step instructions anyone can follow
+2. **Include context** - Explain what each scenario verifies and why
+3. **Provide cleanup** - Show how to reset after testing
+4. **Cover all phases** - Include scenarios for ALL completed phases, not just current
+5. **Be specific** - Include exact commands, expected outputs, and success criteria
+
+---
+
+#### 2c. Add Scenarios for Current Phase
 
 **When this step applies:** Only for PRs with new user-facing functionality (determined in Step 1e).
 
@@ -1247,6 +1399,6 @@ Verify with health check (project-specific):
 
 ---
 
-**Last Updated:** 2025-12-09  
+**Last Updated:** 2025-12-15  
 **Status:** ✅ Active  
-**Next:** Use when PR is open to validate features, run reviews, and update documentation (supports feature-specific and project-wide structures, includes known issues checking, conditional manual testing based on PR type)
+**Next:** Use when PR is open to validate features, run reviews, and update documentation (supports feature-specific and project-wide structures, includes known issues checking, conditional manual testing based on PR type, enforces manual testing guide creation for human users)

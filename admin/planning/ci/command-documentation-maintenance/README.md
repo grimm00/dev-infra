@@ -65,6 +65,34 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📊 Recent Updates
 
+### 2025-12-15: PR Validation Manual Testing Guide Enforcement (MEDIUM)
+
+**Branch:** `docs/pr-validation-manual-testing`  
+**Status:** ✅ Applied to develop  
+**Commands Affected:** `pr-validation`
+
+**Changes:**
+- **NEW:** Added clear purpose statement - manual testing guides are for HUMAN users, not AI
+- **NEW:** Added Section 2a: Check if manual testing guide exists (STOP if missing)
+- **NEW:** Added Section 2b: Complete template for creating manual testing guides
+- **NEW:** Added key principles for writing human-readable guides
+- **MODIFIED:** Restructured Step 2 into 2a/2b/2c sub-sections
+
+**Impact:**
+- Manual testing guides now enforced for feature PRs
+- Clear distinction: guides are for HUMANS, not AI agent checklists
+- Template provided for creating new guides
+- Guides must cover ALL completed phases, not just current
+
+**Root Cause:**
+- User feedback: "Manual testing guide must be done so the user can use it, not just the AI agent running tests locally"
+- Command treated manual testing as AI-run local tests
+- No check for guide existence, no template for creation
+
+**Details:** [2025-12-15-pr-validation-manual-testing-guide-enforcement.md](updates/2025-12-15-pr-validation-manual-testing-guide-enforcement.md)
+
+---
+
 ### 2025-12-11: Release Finalize & Post-Release Commands (MEDIUM)
 
 **Branch:** `docs/release-commands`  
@@ -286,9 +314,9 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 10  
+**Total Updates:** 11  
 **Commands Maintained:** 10+  
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-15
 
 ---
 
@@ -300,7 +328,7 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ---
 
-**Last Updated:** 2025-12-11  
+**Last Updated:** 2025-12-15  
 **Status:** ✅ Active  
 **Next:** Track future command documentation updates here
 
