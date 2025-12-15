@@ -101,9 +101,9 @@ Are you sure you want to use the experimental template? [y/N]
 
 **Process:**
 
-1. [ ] Find help text in `new-project.sh`
-2. [ ] Add experimental-project to usage examples
-3. [ ] Describe experimental template purpose
+1. [x] Find help text in `new-project.sh`
+2. [x] Add experimental-project to usage examples
+3. [x] Describe experimental template purpose
 
 **Expected Help:**
 
