@@ -10,7 +10,8 @@
 
 ### Reflection Documents
 
-- **[Release Automation v2 Reflection](reflection-release-automation-v2-2025-12-12.md)** - Complete feature reflection with cross-phase learnings and fix analysis (2025-12-12) ⭐ **NEW**
+- **[Experimental Template Reflection](reflection-experimental-template-2025-12-15.md)** - Complete feature reflection (4 phases) with learnings and fix analysis (2025-12-15) ⭐ **NEW**
+- **[Release Automation v2 Reflection](reflection-release-automation-v2-2025-12-12.md)** - Complete feature reflection with cross-phase learnings and fix analysis (2025-12-12)
 - **[v1.4.0 Release Cycle Reflection](reflection-v1.4.0-release-cycle-2025-12-11.md)** - Post-release analysis with actionable suggestions for v1.5.0 (2025-12-11)
 - **[Release Readiness Reflection](reflection-release-readiness-2025-12-10.md)** - Complete feature reflection with all phase learnings (2025-12-10)
 - **[Recent Work Reflection](reflection-recent-work-2025-12-08.md)** - Reflection on recent work (last 7 days) focusing on CI/CD improvements and fix implementations (2025-12-08)
@@ -31,10 +32,10 @@ This directory contains project-wide reflection documents that analyze project s
 
 ## 📊 Summary
 
-**Total Reflection Documents:** 10  
+**Total Reflection Documents:** 11  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2025-12-12
+**Last Updated:** 2025-12-15
 
