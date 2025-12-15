@@ -48,7 +48,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 **Occurrences:** 8 times  
 **PRs:** #48, #49  
 **Total Effort:** 🟢 LOW to 🟡 MEDIUM  
-**Status:** 4 fixed in PR #50 (test-assertion-improvements-medium-low-01), 4 remaining in test-assertion-improvements-medium-medium-01
+**Status:** ✅ All 7 issues fixed - PR #50 (4 LOW effort) + PR #51 (3 MEDIUM effort)
 
 **Issues:**
 
