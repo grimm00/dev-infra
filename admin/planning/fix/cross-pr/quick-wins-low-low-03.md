@@ -6,7 +6,7 @@
 **Status:** ✅ Complete  
 **Created:** 2025-12-15  
 **Completed:** 2025-12-15  
-**PR:** #52  
+**PR:** [#52](https://github.com/grimm00/dev-infra/pull/52)  
 **Source:** fix-review-report-2025-12-15.md  
 **Issues:** 4 issues from 2 PRs
 
