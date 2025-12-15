@@ -12,6 +12,7 @@
 ### Phase Learnings
 
 - **[Phase 2](phase-2-learnings.md)** - Update Generator Script (PR #48)
+- **[Phase 3](phase-3-learnings.md)** - CI Drift Detection (PR #49)
 
 ---
 
@@ -29,8 +30,8 @@ This directory contains phase-specific learnings from the experimental template 
 
 ## 📊 Summary
 
-**Total Phase Learnings:** 1  
-**Phases Complete:** 2 of 4  
+**Total Phase Learnings:** 2  
+**Phases Complete:** 3 of 4  
 **Status:** ✅ Active
 
 ---
