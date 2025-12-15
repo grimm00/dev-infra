@@ -12,12 +12,14 @@
 This guide provides step-by-step instructions for manually verifying the experimental template feature. These tests are designed for **human testers** to validate functionality beyond what automated tests cover.
 
 **Purpose:**
+
 - Verify user-facing functionality works as expected
 - Test edge cases and error handling
 - Validate documentation and user experience
 - Ensure stability warnings are clear and visible
 
 **Prerequisites:**
+
 - Access to the dev-infra repository
 - Terminal/command line access
 - Temporary directory for test projects (will be created during testing)
@@ -33,6 +35,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Navigate to the templates directory:
+
    ```bash
    cd /path/to/dev-infra/templates
    ls -la
@@ -41,6 +44,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 2. Verify `experimental-project/` directory exists alongside `standard-project/` and `learning-project/`.
 
 **Expected Result:** ✅ Three template directories visible:
+
 - `standard-project/`
 - `learning-project/`
 - `experimental-project/`
@@ -54,10 +58,11 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Compare directory structure:
+
    ```bash
    # List standard-project structure
    find templates/standard-project -type d | head -20
-   
+
    # List experimental-project structure
    find templates/experimental-project -type d | head -20
    ```
@@ -68,6 +73,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    ```
 
 **Expected Result:** ✅ Both templates should have matching structure:
+
 - `.cursor/commands/`
 - `backend/`
 - `frontend/`
@@ -84,6 +90,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Check for status command in experimental:
+
    ```bash
    ls templates/experimental-project/.cursor/commands/ | grep status
    ```
@@ -93,7 +100,8 @@ This guide provides step-by-step instructions for manually verifying the experim
    ls templates/standard-project/.cursor/commands/ | grep status
    ```
 
-**Expected Result:** 
+**Expected Result:**
+
 - ✅ `status.md` exists in `experimental-project/.cursor/commands/`
 - ✅ `status.md` does NOT exist in `standard-project/.cursor/commands/`
 
@@ -106,6 +114,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Read the experimental template README:
+
    ```bash
    cat templates/experimental-project/README.md | head -50
    ```
@@ -116,6 +125,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    - Explanation of what "experimental" means
 
 **Expected Result:** ✅ README should contain:
+
 - Clear "Experimental Template" or "⚠️" indicator
 - Warning about potential breaking changes
 - Guidance on when to use experimental vs standard
@@ -129,6 +139,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Check EXPERIMENTAL.md exists:
+
    ```bash
    cat templates/experimental-project/docs/EXPERIMENTAL.md
    ```
@@ -139,6 +150,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    - Feedback mechanism information
 
 **Expected Result:** ✅ Documentation clearly explains:
+
 - What commands are experimental
 - What stability levels mean (🟢/🟠/🔴)
 - How users can provide feedback
@@ -156,12 +168,14 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Create test directory:
+
    ```bash
    mkdir -p /tmp/manual-test-experimental
    cd /tmp/manual-test-experimental
    ```
 
 2. Run generator in interactive mode:
+
    ```bash
    /path/to/dev-infra/scripts/new-project.sh
    ```
@@ -169,18 +183,21 @@ This guide provides step-by-step instructions for manually verifying the experim
 3. When prompted for project name, enter: `test-exp-project`
 
 4. When prompted for template type, observe the options:
+
    - Should see numbered options including "experimental-project"
    - Option should include ⚠️ warning indicator
 
 5. Select the experimental-project option.
 
 6. Observe:
+
    - A stability warning should be displayed
    - User should be asked to confirm their choice
 
 7. Confirm the selection.
 
-**Expected Result:** ✅ 
+**Expected Result:** ✅
+
 - Template type menu shows experimental with ⚠️ warning
 - Stability warning displayed when experimental selected
 - Confirmation requested before proceeding
@@ -195,15 +212,17 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. After generating (from Scenario 2.1), check the project:
+
    ```bash
    ls test-exp-project/
    ```
 
 2. Verify experimental-specific files exist:
+
    ```bash
    # Check for status command
    ls test-exp-project/.cursor/commands/ | grep status
-   
+
    # Check for EXPERIMENTAL.md
    ls test-exp-project/docs/ | grep -i experimental
    ```
@@ -214,6 +233,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    ```
 
 **Expected Result:** ✅ Generated project contains:
+
 - `/status` command (evolving tier)
 - `docs/EXPERIMENTAL.md`
 - Stability disclaimer in README
@@ -227,11 +247,13 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Navigate to test directory:
+
    ```bash
    cd /tmp/manual-test-experimental
    ```
 
 2. Run generator with environment variables and `--non-interactive` flag:
+
    ```bash
    PROJECT_NAME="test-nonint-exp" \
    PROJECT_TYPE="experimental-project" \
@@ -256,6 +278,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Run generator with help flag:
+
    ```bash
    /path/to/dev-infra/scripts/new-project.sh --help
    ```
@@ -265,6 +288,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    - Warning about experimental features
 
 **Expected Result:** ✅ Help text includes:
+
 - `experimental-project` as valid template type
 - Note about experimental/evolving commands
 
@@ -277,16 +301,17 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Generate both types (using non-interactive mode):
+
    ```bash
    cd /tmp/manual-test-experimental
-   
+
    # Generate standard project
    PROJECT_NAME="test-standard" \
    PROJECT_TYPE="standard-project" \
    TARGET_DIR="/tmp/manual-test-experimental" \
    INIT_GIT="false" \
    /path/to/dev-infra/scripts/new-project.sh --non-interactive
-   
+
    # Generate experimental project
    PROJECT_NAME="test-experimental" \
    PROJECT_TYPE="experimental-project" \
@@ -296,6 +321,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    ```
 
 2. Compare command directories:
+
    ```bash
    # Count commands in each
    ls test-standard/.cursor/commands/ | wc -l
@@ -307,7 +333,8 @@ This guide provides step-by-step instructions for manually verifying the experim
    diff <(ls test-standard/.cursor/commands/) <(ls test-experimental/.cursor/commands/)
    ```
 
-**Expected Result:** ✅ 
+**Expected Result:** ✅
+
 - Experimental has MORE commands than standard
 - Difference should be the evolving tier commands (e.g., `status.md`)
 
@@ -322,6 +349,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Navigate to dev-infra root:
+
    ```bash
    cd /path/to/dev-infra
    ```
@@ -332,6 +360,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    ```
 
 **Expected Result:** ✅ Output shows:
+
 ```
 ℹ️ 🔍 Validating template sync...
 
@@ -350,16 +379,19 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Backup a shared file:
+
    ```bash
    cp templates/standard-project/.gitignore /tmp/gitignore.backup
    ```
 
 2. Modify the file in one template only:
+
    ```bash
    echo "# Test drift" >> templates/standard-project/.gitignore
    ```
 
 3. Run drift detection:
+
    ```bash
    ./scripts/validate-template-sync.sh
    ```
@@ -370,6 +402,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    ```
 
 **Expected Result:** ✅ Script should:
+
 - Exit with non-zero status
 - Display "DRIFT DETECTED" message
 - List the file(s) that differ (`.gitignore`)
@@ -383,6 +416,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Read the manifest file:
+
    ```bash
    cat scripts/template-sync-manifest.txt
    ```
@@ -394,6 +428,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    - Comments explaining exclusions
 
 **Expected Result:** ✅ Manifest clearly documents:
+
 - Which files must stay in sync
 - Which files are intentionally different (in comments)
 - File categories for organization
@@ -407,6 +442,7 @@ This guide provides step-by-step instructions for manually verifying the experim
 **Steps:**
 
 1. Read the sync documentation:
+
    ```bash
    cat docs/TEMPLATE-SYNC.md
    ```
@@ -418,6 +454,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    - Common issues and solutions
 
 **Expected Result:** ✅ Documentation provides clear guidance for:
+
 - Understanding sync requirements
 - Fixing drift when detected
 - Maintaining templates going forward
@@ -436,6 +473,7 @@ This guide provides step-by-step instructions for manually verifying the experim
    ```
 
 **Expected Result:** ✅ Workflow includes:
+
 ```yaml
 - name: Validate Template Sync
   run: ./scripts/validate-template-sync.sh
@@ -457,6 +495,7 @@ rm -f /tmp/gitignore.backup
 ## ✅ Acceptance Criteria Checklist
 
 ### Phase 1: Template Structure
+
 - [ ] Experimental template directory exists
 - [ ] Structure matches standard-project base
 - [ ] Evolving command(s) present in experimental only
@@ -464,6 +503,7 @@ rm -f /tmp/gitignore.backup
 - [ ] EXPERIMENTAL.md documentation complete
 
 ### Phase 2: Generator Script
+
 - [ ] Interactive mode shows experimental option with warning
 - [ ] Stability warning displayed when selecting experimental
 - [ ] Non-interactive mode accepts experimental type
@@ -471,6 +511,7 @@ rm -f /tmp/gitignore.backup
 - [ ] Generated projects have correct content
 
 ### Phase 3: Drift Detection
+
 - [ ] Script passes when templates are in sync
 - [ ] Script fails and reports when drift exists
 - [ ] Manifest file is clear and complete
@@ -486,6 +527,7 @@ rm -f /tmp/gitignore.backup
 2. **Clean Test Environment:** Use `/tmp` or another temporary location for generated test projects.
 
 3. **Report Issues:** If any scenario fails unexpectedly, document:
+
    - The exact steps you followed
    - The expected vs actual result
    - Any error messages
@@ -504,4 +546,3 @@ rm -f /tmp/gitignore.backup
 ---
 
 **Last Updated:** 2025-12-15
-
