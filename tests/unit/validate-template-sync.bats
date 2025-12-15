@@ -106,15 +106,17 @@ teardown() {
     # Setup: Create empty manifest
     echo "" > "$TEST_TMPDIR/scripts/template-sync-manifest.txt"
     
-    # Mock script execution
+    # Run script with empty manifest
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Should handle empty manifest (pass or fail gracefully)
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Empty manifest should succeed (no files to check = no drift)
+    [ "$status" -eq 0 ]
+    # Verify output indicates successful validation
+    [[ "$output" == *"Template sync validation PASSED"* ]] || \
+    [[ "$output" == *"All shared files are in sync"* ]]
 }
 
 @test "validate-template-sync: handles missing template directory" {
@@ -210,14 +212,16 @@ EOF
     echo "content1" > "$TEST_STANDARD_DIR/test-file.txt"
     echo "content2" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
     
-    # Mock script execution
+    # Run script with test directories
     cd "$TEST_TMPDIR"
     STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
-    run bash -c 'source "$SCRIPT" 2>&1 || echo "Script not found, test setup"'
+    run bash "$SCRIPT" 2>&1
     
-    # Expected: Output should contain "DRIFT DETECTED" or similar
-    # If script doesn't exist yet, this test documents expected behavior
-    [ "$status" -ne 0 ] || [ -f "$SCRIPT" ]
+    # Assert specific exit status (drift detected = failure)
+    [ "$status" -ne 0 ]
+    # Verify output contains drift detection message
+    [[ "$output" == *"DRIFT DETECTED"* ]] || \
+    [[ "$output" == *"Template sync validation FAILED"* ]]
 }
 

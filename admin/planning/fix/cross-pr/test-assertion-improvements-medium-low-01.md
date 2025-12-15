@@ -3,7 +3,8 @@
 **Batch:** test-assertion-improvements-medium-low-01  
 **Priority:** 🟡 MEDIUM  
 **Effort:** 🟢 LOW  
-**Status:** 🔴 Not Started  
+**Status:** ✅ Complete  
+**Completed:** 2025-12-15  
 **Created:** 2025-12-15  
 **Source:** fix-review-report-2025-12-15.md  
 **Issues:** 4 issues from 2 PRs
@@ -12,12 +13,12 @@
 
 ## Issues in This Batch
 
-| Issue   | PR  | Priority  | Impact    | Effort | Description                                     |
-| ------- | --- | --------- | --------- | ------ | ----------------------------------------------- |
-| PR48-#1 | 48  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Strengthen README disclaimer test assertion     |
-| PR48-#2 | 48  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Add content check to EXPERIMENTAL.md test       |
-| PR49-#3 | 49  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Test doesn't check output content               |
-| PR49-#6 | 49  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Empty manifest behavior assertion unclear       |
+| Issue   | PR  | Priority  | Impact    | Effort | Description                                 |
+| ------- | --- | --------- | --------- | ------ | ------------------------------------------- |
+| PR48-#1 | 48  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Strengthen README disclaimer test assertion |
+| PR48-#2 | 48  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Add content check to EXPERIMENTAL.md test   |
+| PR49-#3 | 49  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Test doesn't check output content           |
+| PR49-#6 | 49  | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | Empty manifest behavior assertion unclear   |
 
 ---
 
@@ -27,10 +28,12 @@ This batch contains 4 MEDIUM priority issues with LOW effort from PR #48 and #49
 
 **Estimated Time:** 1-2 hours  
 **Files Affected:**
+
 - `tests/unit/new-project.bats`
 - `tests/unit/validate-template-sync.bats`
 
 **Source PRs:**
+
 - PR #48: Experimental Template Phase 2 (Update Generator)
 - PR #49: Experimental Template Phase 3 (CI Drift Detection)
 
@@ -49,6 +52,7 @@ This batch contains 4 MEDIUM priority issues with LOW effort from PR #48 and #49
 The test currently passes if README contains any `experimental` mention, even if the intended disclaimer text is missing or altered. This is a weak regression guard.
 
 **Current Code:**
+
 ```bash
 @test "new-project: experimental-project README includes stability disclaimer" {
     # ... setup ...
@@ -60,6 +64,7 @@ The test currently passes if README contains any `experimental` mention, even if
 ```
 
 **Proposed Solution:**
+
 ```bash
     [ "$status" -eq 0 ]
     # Check README contains specific experimental template disclaimer
@@ -81,6 +86,7 @@ The test currently passes if README contains any `experimental` mention, even if
 The test currently only asserts that `docs/EXPERIMENTAL.md` exists. An empty or incomplete file would still pass. Should verify key content.
 
 **Current Code:**
+
 ```bash
 @test "new-project: experimental-project includes EXPERIMENTAL.md" {
     # ... setup ...
@@ -90,6 +96,7 @@ The test currently only asserts that `docs/EXPERIMENTAL.md` exists. An empty or 
 ```
 
 **Proposed Solution:**
+
 ```bash
     [ "$status" -eq 0 ]
     [ -f "$TEST_PROJECT_DIR/docs/EXPERIMENTAL.md" ]
@@ -111,6 +118,7 @@ The test currently only asserts that `docs/EXPERIMENTAL.md` exists. An empty or 
 The "outputs clear error messages" test only checks exit status with placeholder assertion and never inspects `$output`. Should assert on specific substrings like "DRIFT DETECTED".
 
 **Current Code:**
+
 ```bash
 @test "validate-template-sync: outputs clear error messages" {
     # ... setup ...
@@ -120,6 +128,7 @@ The "outputs clear error messages" test only checks exit status with placeholder
 ```
 
 **Proposed Solution:**
+
 ```bash
     # Assert specific exit status
     [ "$status" -ne 0 ]
@@ -141,6 +150,7 @@ The "outputs clear error messages" test only checks exit status with placeholder
 The "handles empty manifest gracefully" test doesn't define what "gracefully" means. Should specify whether empty manifest is success (no-op) or error, with concrete assertions.
 
 **Current Code:**
+
 ```bash
 @test "validate-template-sync: handles empty manifest gracefully" {
     echo "" > "$TEST_TMPDIR/scripts/template-sync-manifest.txt"
@@ -150,6 +160,7 @@ The "handles empty manifest gracefully" test doesn't define what "gracefully" me
 ```
 
 **Proposed Solution:**
+
 ```bash
     # Empty manifest should succeed (no files to check = no drift)
     [ "$status" -eq 0 ]
@@ -162,15 +173,18 @@ The "handles empty manifest gracefully" test doesn't define what "gracefully" me
 ## Implementation Steps
 
 1. **Issue PR48-#1: Strengthen README test**
+
    - [ ] Update assertion to check for specific heading `## ⚠️ Experimental Template`
    - [ ] Add check for `### Stability Levels` section
    - [ ] Run test to verify
 
 2. **Issue PR48-#2: Add EXPERIMENTAL.md content check**
+
    - [ ] Add grep check for key phrase in EXPERIMENTAL.md
    - [ ] Run test to verify
 
 3. **Issue PR49-#3: Add output content assertion**
+
    - [ ] Replace placeholder assertion with `[ "$status" -ne 0 ]`
    - [ ] Add assertion for "DRIFT DETECTED" in output
    - [ ] Run test to verify
@@ -201,10 +215,10 @@ The "handles empty manifest gracefully" test doesn't define what "gracefully" me
 
 ## Definition of Done
 
-- [ ] All 4 issues fixed
-- [ ] Tests passing
-- [ ] No regressions
-- [ ] Ready for PR
+- [x] All 4 issues fixed
+- [x] Tests passing
+- [x] No regressions
+- [x] Ready for PR
 
 ---
 
@@ -219,5 +233,3 @@ This batch was created from fix-review report recommendations. These issues are 
 ---
 
 **Last Updated:** 2025-12-15
-
-
