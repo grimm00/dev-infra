@@ -60,6 +60,7 @@ ls -la templates/experimental-project/
 4. [ ] Create list of commands to add
 
 **Expected Commands:**
+
 - Commands in development but not yet stable
 - Commands with `Status: 🟠 Evolving` or similar
 - Commands explicitly excluded from standard template
@@ -96,7 +97,7 @@ ls -la templates/experimental-project/
 ```markdown
 ## ⚠️ Experimental Template
 
-This template includes **experimental/evolving commands** that are not yet 
+This template includes **experimental/evolving commands** that are not yet
 stable enough for the standard template. These commands:
 
 - 🟠 May change without notice
@@ -105,19 +106,22 @@ stable enough for the standard template. These commands:
 - 🟠 Provide early access to new features
 
 **Use this template if:**
+
 - You want early access to new commands
 - You're comfortable with potential breaking changes
 - You can provide feedback on evolving features
 
 **Use standard-project if:**
+
 - You need maximum stability
 - You're building production systems
 - You prefer proven, stable commands
 
 **Evolving Commands Included:**
+
 - [List of commands with 🟠 indicator]
 
-**Graduation:** Commands graduate to standard-project when they meet 
+**Graduation:** Commands graduate to standard-project when they meet
 [ADR-004 graduation criteria](link-to-adr-004).
 ```
 
@@ -191,10 +195,12 @@ bats tests/unit/validate-templates.bats
 ## 🔗 Dependencies
 
 **Prerequisites:**
+
 - ADRs approved (ADR-001 ✅, ADR-002 ✅)
 - Evolving tier commands identified (see [Evolving Commands Inventory](evolving-commands-inventory.md))
 
 **Blocks:**
+
 - Phase 2: Generator script update
 
 ---
@@ -205,12 +211,12 @@ bats tests/unit/validate-templates.bats
 
 These files will differ between `standard-project` and `experimental-project` by design:
 
-| File/Directory | Difference | Reason |
-|----------------|------------|--------|
-| `README.md` | Has experimental disclaimer | User awareness |
-| `.cursor/commands/` | Has additional Evolving commands | Core feature |
-| `docs/EXPERIMENTAL.md` | Experimental-only file | Documentation |
-| `start.txt` | May reference experimental nature | Initial setup |
+| File/Directory         | Difference                        | Reason         |
+| ---------------------- | --------------------------------- | -------------- |
+| `README.md`            | Has experimental disclaimer       | User awareness |
+| `.cursor/commands/`    | Has additional Evolving commands  | Core feature   |
+| `docs/EXPERIMENTAL.md` | Experimental-only file            | Documentation  |
+| `start.txt`            | May reference experimental nature | Initial setup  |
 
 **All other files should be identical** and will be validated by CI drift detection (Phase 3).
 
@@ -261,4 +267,3 @@ Commands should include stability in their header:
 
 **Last Updated:** 2025-12-12  
 **Status:** 🔴 Not Started
-

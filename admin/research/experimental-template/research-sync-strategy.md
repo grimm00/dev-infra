@@ -15,6 +15,7 @@
 How do we keep the experimental template in sync with the standard template to prevent drift and minimize maintenance burden?
 
 **The problem:**
+
 - Standard template evolves over time
 - Experimental template must include standard changes PLUS experimental features
 - Manual sync is error-prone and time-consuming
@@ -35,6 +36,7 @@ How do we keep the experimental template in sync with the standard template to p
 **Note:** Research based on established patterns and dev-infra context.
 
 **Sources:**
+
 - [x] Current dev-infra template structure
 - [x] Git submodules/subtrees patterns
 - [x] Symbolic links for shared files
@@ -49,14 +51,14 @@ How do we keep the experimental template in sync with the standard template to p
 
 Analysis of `standard-project` shows files fall into categories:
 
-| Category | Examples | Sync Approach |
-|----------|----------|---------------|
-| **Shared Infrastructure** | `.gitignore`, `README.md` structure | Should be identical |
-| **Shared Workflows** | CI/CD base configs | Should be identical |
-| **Shared Documentation** | `docs/` structure | Should be identical |
-| **Commands (Stable)** | Essential/Valuable/Advanced | Should be identical |
-| **Commands (Experimental)** | Evolving tier | Experimental only |
-| **Template Identity** | Template name, description | Different by design |
+| Category                    | Examples                            | Sync Approach       |
+| --------------------------- | ----------------------------------- | ------------------- |
+| **Shared Infrastructure**   | `.gitignore`, `README.md` structure | Should be identical |
+| **Shared Workflows**        | CI/CD base configs                  | Should be identical |
+| **Shared Documentation**    | `docs/` structure                   | Should be identical |
+| **Commands (Stable)**       | Essential/Valuable/Advanced         | Should be identical |
+| **Commands (Experimental)** | Evolving tier                       | Experimental only   |
+| **Template Identity**       | Template name, description          | Different by design |
 
 **Source:** Analysis of `templates/standard-project/`
 
@@ -67,6 +69,7 @@ Analysis of `standard-project` shows files fall into categories:
 ### Finding 2: Symbolic Links Have Platform Limitations
 
 **Symbolic Links:**
+
 - ✅ Simple to implement
 - ✅ Single source of truth
 - ❌ Windows compatibility issues
@@ -74,6 +77,7 @@ Analysis of `standard-project` shows files fall into categories:
 - ❌ Can confuse some tools
 
 **Git Behavior:**
+
 ```bash
 # Git can store symlinks, but Windows may have issues
 git config core.symlinks true
@@ -88,6 +92,7 @@ git config core.symlinks true
 ### Finding 3: Git Submodules Add Complexity
 
 **Git Submodules:**
+
 - ✅ Clear separation of concerns
 - ✅ Version pinning
 - ❌ Complex update workflow
@@ -130,20 +135,23 @@ done
 ### Finding 5: Manual Sync with Checklist is Simple and Effective
 
 **Workflow:**
+
 1. Make change to standard template
 2. Check if file is in "shared" category
 3. If shared, copy to experimental template
 4. CI validates sync
 
 **Checklist Document:**
+
 ```markdown
 ## Shared Files (Must Sync)
+
 - [ ] .gitignore
 - [ ] .github/workflows/test.yml
 - [ ] docs/CONTRIBUTING.md
-- [ ] .cursor/commands/essential-*.md
-- [ ] .cursor/commands/valuable-*.md
-- [ ] .cursor/commands/advanced-*.md
+- [ ] .cursor/commands/essential-\*.md
+- [ ] .cursor/commands/valuable-\*.md
+- [ ] .cursor/commands/advanced-\*.md
 ```
 
 **Source:** Best practice for low-volume sync needs
@@ -154,13 +162,13 @@ done
 
 ## 📊 Sync Approach Comparison (Updated)
 
-| Approach | Complexity | Reliability | Automation | Dev-Infra Fit |
-|----------|------------|-------------|------------|---------------|
-| **Manual Sync** | 🟢 Low | 🟠 Medium | 🔴 None | 🟡 Acceptable |
-| **Manual + CI Check** | 🟢 Low | 🟢 High | 🟢 Detection | ⭐ Best |
-| **Symbolic Links** | 🟢 Low | 🟠 Medium | 🟢 High | 🔴 Windows issues |
-| **Git Submodules** | 🟠 High | 🟢 High | 🟡 Medium | 🔴 Overkill |
-| **Script Sync** | 🟡 Medium | 🟡 Medium | 🟢 High | 🟡 Acceptable |
+| Approach              | Complexity | Reliability | Automation   | Dev-Infra Fit     |
+| --------------------- | ---------- | ----------- | ------------ | ----------------- |
+| **Manual Sync**       | 🟢 Low     | 🟠 Medium   | 🔴 None      | 🟡 Acceptable     |
+| **Manual + CI Check** | 🟢 Low     | 🟢 High     | 🟢 Detection | ⭐ Best           |
+| **Symbolic Links**    | 🟢 Low     | 🟠 Medium   | 🟢 High      | 🔴 Windows issues |
+| **Git Submodules**    | 🟠 High    | 🟢 High     | 🟡 Medium    | 🔴 Overkill       |
+| **Script Sync**       | 🟡 Medium  | 🟡 Medium   | 🟢 High      | 🟡 Acceptable     |
 
 ---
 
@@ -169,12 +177,14 @@ done
 **Recommended Approach: Manual Sync + CI Drift Detection**
 
 **Why:**
+
 1. **Low complexity** - No new tooling required
 2. **High reliability** - CI catches mistakes
 3. **Explicit** - Developers know what's shared
 4. **Fits workflow** - Integrates with existing PR process
 
 **Workflow:**
+
 ```
 Developer updates standard-project
     ↓
@@ -190,6 +200,7 @@ Developer fixes drift
 ```
 
 **Key Insights:**
+
 - [x] Insight 1: Not all files need syncing; categorization is key
 - [x] Insight 2: CI drift detection is most practical for dev-infra scale
 - [x] Insight 3: Symbolic links cause cross-platform issues
