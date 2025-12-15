@@ -19,9 +19,6 @@ scripts/
 # Documentation structure
 docs/maintainers/
 
-# Cursor configuration
-.cursor/rules/
-
 # Stable commands (all commands except Evolving tier)
 .cursor/commands/cursor-rules.md
 .cursor/commands/decision.md

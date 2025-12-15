@@ -187,9 +187,10 @@ Run './scripts/sync-templates.sh' to fix (or manually sync)
 
 **Process:**
 
-1. [ ] Add drift detection step to template validation workflow
-2. [ ] Run after checkout, before other tests
-3. [ ] Fail fast if drift detected
+1. [x] Add drift detection step to template validation workflow
+2. [x] Run after checkout, before other tests
+3. [x] Fail fast if drift detected
+4. [x] Fixed manifest (removed non-existent .cursor/rules/)
 
 **CI Workflow Update:**
 
