@@ -14,6 +14,7 @@
 
 - **[Learnings Hub](learnings/README.md)** - Learnings from work-prod development
 - **[Command Inventory](learnings/command-inventory.md)** - Current state of commands in both projects
+- **[Documentation Structure Gaps](learnings/documentation-structure-gaps.md)** - Analysis of docs/maintainers structure gaps
 
 ### Improvements
 
@@ -66,11 +67,11 @@ Work-Prod (Application Project)
 
 ## 📊 Summary
 
-**Learnings Documents:** 1  
+**Learnings Documents:** 2  
 **Improvement Documents:** 1  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2025-12-15
+**Last Updated:** 2025-12-16
 
