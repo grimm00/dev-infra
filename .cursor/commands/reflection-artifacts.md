@@ -650,7 +650,28 @@ Similar to CI/CD artifacts, focused on infrastructure improvements.
 
 ---
 
-**Last Updated:** 2025-12-07  
+## 📊 Log Usage (Final Step)
+
+**After successful command completion, update the usage tracker:**
+
+1. **Update:** `admin/planning/commands/usage-tracker.md`
+2. **Add entry to "Recent Usage" table:**
+   ```markdown
+   | YYYY-MM-DD | `/reflection-artifacts` | [Context] | ✅ Success | [Evidence] |
+   ```
+3. **Increment usage count** in summary table
+4. **Commit with message:**
+   ```
+   docs(commands): update usage tracker - /reflection-artifacts
+   ```
+
+**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+
+**Note:** This command needs ≥3 uses before graduation consideration. Current uses: 2.
+
+---
+
+**Last Updated:** 2025-12-16  
 **Status:** ✅ Active  
 **Next:** Use `/transition-plan` to create transition plans from artifacts, or use artifacts directly for planning (supports feature-specific and project-wide reflection structures)
 

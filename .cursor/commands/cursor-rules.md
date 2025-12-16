@@ -427,6 +427,27 @@ alwaysApply: [true/false]
 - `template.mdc` - Template standards
 - `[custom].mdc` - Custom domain rules
 
+---
+
+## 📊 Log Usage (Final Step)
+
+**After successful command completion, update the usage tracker:**
+
+1. **Update:** `admin/planning/commands/usage-tracker.md`
+2. **Add entry to "Recent Usage" table:**
+   ```markdown
+   | YYYY-MM-DD | `/cursor-rules` | [Context] | ✅ Success | [Evidence] |
+   ```
+3. **Increment usage count** in summary table
+4. **Commit with message:**
+   ```
+   docs(commands): update usage tracker - /cursor-rules
+   ```
+
+**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+
+**Note:** This command needs ≥3 uses before graduation consideration. Current uses: 1.
+
 **Learning Sources:**
 
 - Feature-specific: `docs/maintainers/planning/features/[feature-name]/learnings/` (if exists)

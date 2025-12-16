@@ -465,7 +465,28 @@ chore: Release [version]
 
 ---
 
-**Last Updated:** 2025-12-10  
+## 📊 Log Usage (Final Step)
+
+**After successful command completion, update the usage tracker:**
+
+1. **Update:** `admin/planning/commands/usage-tracker.md`
+2. **Add entry to "Recent Usage" table:**
+   ```markdown
+   | YYYY-MM-DD | `/task-release` | [Context] | ✅ Success | [Evidence] |
+   ```
+3. **Increment usage count** in summary table
+4. **Commit with message:**
+   ```
+   docs(commands): update usage tracker - /task-release
+   ```
+
+**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+
+**Note:** This command needs ≥3 uses before graduation consideration. Current uses: 2.
+
+---
+
+**Last Updated:** 2025-12-16  
 **Status:** ✅ Active  
 **Next:** Use to implement release preparation tasks following TDD workflow (includes readiness check integration)
 
