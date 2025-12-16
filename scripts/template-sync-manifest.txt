@@ -1,0 +1,47 @@
+# Files that must be identical between standard and experimental templates
+# Lines starting with # are comments
+# Use relative paths from template root
+# Directories ending with / will be recursively checked
+
+# Infrastructure files
+.gitignore
+.dockerignore
+
+# CI/CD workflows
+.github/workflows/ci.yml
+
+# Core project structure directories
+backend/
+frontend/
+tests/
+scripts/
+
+# Documentation structure
+docs/maintainers/
+
+# Stable commands (all commands except Evolving tier)
+.cursor/commands/cursor-rules.md
+.cursor/commands/decision.md
+.cursor/commands/explore.md
+.cursor/commands/fix-implement.md
+.cursor/commands/fix-plan.md
+.cursor/commands/fix-review.md
+.cursor/commands/int-opp.md
+.cursor/commands/post-pr.md
+.cursor/commands/pre-phase-review.md
+.cursor/commands/pr-validation.md
+.cursor/commands/pr.md
+.cursor/commands/reflect.md
+.cursor/commands/reflection-artifacts.md
+.cursor/commands/research.md
+.cursor/commands/task-improvement.md
+.cursor/commands/task-phase.md
+.cursor/commands/task-release.md
+.cursor/commands/transition-plan.md
+
+# Note: The following files are intentionally different:
+# - .cursor/commands/status.md (experimental-only, Evolving tier)
+# - README.md (different stability disclaimers)
+# - start.txt (may reference experimental nature)
+# - docs/EXPERIMENTAL.md (experimental-only)
+

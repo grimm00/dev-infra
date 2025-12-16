@@ -10,12 +10,17 @@
 
 ### Active Features
 
-- **[Release Automation v2](release-automation-v2/README.md)** - Complete release automation (🟡 Planned, 🔴 High Priority) ⭐ **v1.5.0 Target**
+- **[Experimental Template](experimental-template/README.md)** - Create experimental template with Evolving commands (🔴 Not Started) ⭐ **v1.6.0 Target**
+  - Phase 1: Create experimental-project template
+  - Phase 2: Update generator script
+  - Phase 3: CI drift detection
+  - Phase 4: Stability indicators
+  - Estimated: 6-10 hours
+  - Source: Team project demand + ADR-001/002
+
+- **[Release Automation v2](release-automation-v2/README.md)** - Complete release automation (✅ Complete - v1.5.0)
   - Phase 1: Tag Creation Automation (eliminates manual tagging)
   - Phase 2: Version Reference Automation (eliminates manual updates)
-  - Phase 3: Template Integration (generated projects get automation)
-  - Estimated: 13-22 hours (2-3 days)
-  - Source: v1.4.0 release retrospective
 
 - **[Release Readiness](release-readiness/README.md)** - Implement standardized release readiness assessment and automation (✅ Complete - v1.4.0)
 - **[Command Adaptation Template](command-adaptation-template/README.md)** - Document command adaptation pattern as reusable template (✅ Complete)
@@ -160,6 +165,6 @@ None currently - all features are either complete or have status discrepancies t
 
 ---
 
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-12  
 **Status:** ✅ Active  
 **Next:** See individual feature directories for current work

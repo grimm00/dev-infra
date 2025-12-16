@@ -6,7 +6,7 @@ alwaysApply: true
 
 **Purpose:** Guide AI assistance to align with dev-infra template best practices and workflows  
 **Identity:** 🏭 Template Factory ([ADR-001](../../../admin/decisions/dev-infra-identity-and-focus/adr-001-project-identity.md))  
-**Last Updated:** 2025-12-11  
+**Last Updated:** 2025-12-15  
 **Status:** ✅ Active
 
 ---
@@ -135,7 +135,8 @@ Always use: `YYYY-MM-DD` format (e.g., 2025-12-07)
 dev-infra/
 ├── templates/              # Project templates
 │   ├── standard-project/   # Standard application template
-│   └── learning-project/   # Learning/tutorial template
+│   ├── learning-project/   # Learning/tutorial template
+│   └── experimental-project/ # Experimental template (Evolving commands)
 ├── scripts/                # Automation scripts
 │   ├── new-project.sh      # Template generator
 │   └── validate-templates.sh
@@ -399,11 +400,11 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v1.5.0 (released 2025-12-11)  
+**Version:** v1.6.0 (releasing 2025-12-15)  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
-**Updated:** 2025-12-11  
-**Priority:** v1.5.0 (Release Automation v2 - internal only)
+**Updated:** 2025-12-15  
+**Priority:** v1.6.0 (Experimental Template - complete, ready for release)
 
 ### ✅ Completed
 
@@ -411,8 +412,10 @@ When modifying templates:
 
 - ✅ Standard project template
 - ✅ Learning project template
-- ✅ Template generator script
+- ✅ Experimental project template (v1.6.0) - NEW
+- ✅ Template generator script (supports 3 template types)
 - ✅ Template validation script
+- ✅ CI drift detection (`validate-template-sync.sh`) - NEW
 - ✅ Hub-and-spoke documentation pattern
 
 **CI/CD:**
@@ -420,16 +423,22 @@ When modifying templates:
 - ✅ Multi-environment testing workflow
 - ✅ Release distribution workflow
 - ✅ Docker test image builds
-- ✅ Template validation test suite (94+ tests)
+- ✅ Template validation test suite (110+ tests)
 - ✅ Known issues tracking system
+- ✅ Template sync validation in CI - NEW
 
-**Release Readiness (NEW - v1.5.0):**
+**Release Readiness (v1.4.0):**
 
 - ✅ `check-release-readiness.sh` - Assessment and validation
 - ✅ `create-release-branch.sh` - Release branch creation helper
 - ✅ `analyze-releases.sh` - Historical release analysis
 - ✅ Standardized release criteria
 - ✅ Assessment template with YAML frontmatter
+
+**Release Automation v2 (v1.6.0):**
+
+- ✅ Phase 1: Tag Creation Automation
+- ✅ Phase 2: Version Reference Automation
 
 **Documentation:**
 
@@ -464,31 +473,32 @@ When modifying templates:
 - ✅ `/transition-plan` - Planning from artifacts/ADRs
 - ✅ `/task-release` - Release task implementation (with readiness check)
 
-### 🟠 In Progress
+### ✅ Recently Completed
 
-- 🟠 Identity Transition Implementation
-  - ✅ ADRs accepted (ADR-001 through ADR-004)
-  - ✅ Release Automation v2 rescoped (Phase 3 deferred)
-  - ✅ Cursor rules updated
-  - 🟠 Command tier metadata (in progress)
-  - 🟡 Graduation checklist (planned)
+**Experimental Template (v1.6.0) - NEW:**
+
+- ✅ Phase 1: Create Template (`templates/experimental-project/`)
+- ✅ Phase 2: Update Generator Script (3 template types)
+- ✅ Phase 3: CI Drift Detection (`validate-template-sync.sh`)
+- ✅ Phase 4: Stability Indicators (stability levels, graduation checklist)
+
+**Fix Management:**
+
+- ✅ 8 cross-PR fix batches complete (28 issues fixed)
+- ✅ `/fix-review` → `/fix-plan` → `/fix-implement` workflow validated
 
 ### 🟡 Planned
 
-**v1.5.0 - Release Automation v2 (Internal Only):**
+**v1.6.0 - Experimental Template:**
 
-- 🟡 Phase 1: Tag Creation Automation
-- 🟡 Phase 2: Version Reference Automation
-- ❌ ~~Phase 3: Template Integration~~ (Deferred per ADR-002)
+- ✅ All phases complete - Ready for release
+- 🟡 Update CHANGELOG
+- 🟡 Create release notes
 
-**v1.6.0 - Considerations:**
+**v1.7.0 - Considerations:**
 
-- 🟡 Experimental template (captured in exploration)
-- 🟡 Template Integration (if graduation criteria met)
-
-**Explorations:**
-
-- 🟡 Experimental Template (`experimental-project/`)
+- 🟡 Template Integration (if graduation criteria met per ADR-004)
+- 🟡 Additional Evolving commands for experimental template
 - 🟡 Command branch workflow (`cmd/*` pattern)
 
 ---
@@ -519,6 +529,6 @@ When modifying templates:
 
 ---
 
-**Last Updated:** 2025-12-11  
+**Last Updated:** 2025-12-15  
 **Status:** ✅ Active  
-**Next:** Complete identity transition, then Release Automation v2 (internal)
+**Next:** v1.6.0 release (Experimental Template)

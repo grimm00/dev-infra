@@ -11,7 +11,8 @@
 ### Architecture Decision Records (ADRs)
 
 **Active:**
-- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Project identity as template factory (🟡 Proposed) ⭐ **NEW**
+- **[Experimental Template](experimental-template/README.md)** - Create experimental template with evolving commands (🟡 Proposed) ⭐ **NEW**
+- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Project identity as template factory (✅ Accepted)
 
 **Previous:**
 - **[Release Readiness](release-readiness/README.md)** - Release readiness assessment and automation (✅ Accepted)
@@ -58,6 +59,6 @@ admin/decisions/
 
 ---
 
-**Last Updated:** 2025-12-11  
+**Last Updated:** 2025-12-12  
 **Status:** ✅ Active
 

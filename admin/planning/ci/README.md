@@ -2,7 +2,7 @@
 
 **Purpose:** Central hub for all CI/CD related planning and documentation  
 **Status:** 🟠 In Progress  
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-12
 
 ---
 
@@ -28,13 +28,26 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 - **[Command Documentation & Maintenance](command-documentation-maintenance/README.md)** - Track command documentation updates and improvements (✅ Active)
 
-### Planned
+### Planned (v1.6.0)
 
-- **➡️ See [Release Automation v2](../features/release-automation-v2/README.md)** - Consolidated release automation improvements (🟡 Planned, 🔴 High Priority)
-  - Phase 1: Tag Creation Automation
-  - Phase 2: Version Reference Automation
-  - Phase 3: Template Integration
-  - Target: v1.5.0
+- **[GitHub Release Automation](github-release-automation/README.md)** - Auto-create GitHub Releases from tags (🔴 Not Started, 🔴 High Priority) ⭐ **NEW**
+  - Discovered in v1.5.0 release
+  - Eliminates manual `gh release create` step
+  - Effort: LOW (30 minutes)
+
+### Completed
+
+- **[CI Git Configuration](ci-git-configuration/README.md)** - Configure git identity in CI workflows (✅ Complete - 2025-12-12, PR #47)
+  - Added git config to `release-distribution.yml` workflow
+  - Ensures git-related tests pass consistently in CI
+  - Completed: Phase 1 (identify workflows, update configs, verify)
+
+### Previously Completed
+
+- **➡️ See [Release Automation v2](../features/release-automation-v2/README.md)** - Consolidated release automation improvements (✅ Complete - v1.5.0)
+  - Phase 1: Tag Creation Automation ✅
+  - Phase 2: Version Reference Automation ✅
+  - Phase 3: Template Integration (deferred per ADR-002)
 
 - **[Template Generation Testing Automation](template-generation-testing-automation/README.md)** - Automate template generation testing (✅ Complete - 2025-12-08)
   - Phase 1 complete: Non-interactive mode added (PR #27)
@@ -66,5 +79,5 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 ---
 
-**Last Updated:** 2025-12-11  
+**Last Updated:** 2025-12-12  
 **Status:** 🟠 Active Development
