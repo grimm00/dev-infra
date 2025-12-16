@@ -1,14 +1,14 @@
 # Internal Opportunities
 
 **Purpose:** Learnings to export from dev-infra to other projects  
-**Status:** 🟡 Future  
-**Last Updated:** 2025-12-04
+**Status:** ✅ Active  
+**Last Updated:** 2025-12-15
 
 ---
 
 ## 🎯 Overview
 
-This directory will capture learnings and improvements discovered during dev-infra template development that can be exported to other projects.
+This directory captures learnings and improvements discovered during dev-infra template development that can be exported to other projects.
 
 ### Purpose
 
@@ -19,35 +19,50 @@ This directory will capture learnings and improvements discovered during dev-inf
 
 ---
 
-## 📋 Current Status
+## 📋 Project Tracking
 
-**Status:** ✅ Active - Internal opportunities being documented
+| Project | Learnings | Improvements | Status |
+|---------|-----------|--------------|--------|
+| dev-infra | 3 | 0 | ✅ Active |
+| work-prod | 1 | 1 | ✅ Active |
+
+---
+
+## 📁 Projects
 
 ### Dev-Infra Opportunities
 
 - **[Dev-Infra Hub](dev-infra/README.md)** - Learnings and improvements from dev-infra development
-  - Learnings: 1 document
+  - Learnings: 3 documents
   - Improvements: 0 documents
+
+### Work-Prod Opportunities
+
+- **[Work-Prod Hub](work-prod/README.md)** - Learnings and sync opportunities for work-prod
+  - Learnings: 1 document (Command Inventory)
+  - Improvements: 1 document (Command Sync Opportunities)
 
 ---
 
-## 🔄 Future Process
+## 🔄 Process
 
 **When to Document:**
 - After implementing template improvements
 - After validating improvements with test projects
 - When patterns prove successful across multiple projects
+- When syncing changes between projects
 
 **What to Document:**
 - Template improvements that worked well
 - Patterns that accelerated development
 - Documentation structures that scaled
 - Workflow improvements that reduced friction
+- Command updates and new commands
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-15  
 **Status:** ✅ Active  
-**Next:** Continue capturing learnings from dev-infra development
+**Next:** Implement work-prod command sync from v1.6.0
 
 
