@@ -25,7 +25,7 @@ This document tracks command usage in dev-infra to support graduation decisions.
 | `/task-phase` | 20+ | 2025-12-15 | ~95% | ✅ Graduated |
 | `/fix-plan` | 8+ | 2025-12-15 | 100% | ✅ Graduated |
 | `/fix-implement` | 8+ | 2025-12-15 | 100% | ✅ Graduated |
-| `/reflect` | 5+ | 2025-12-15 | 100% | ✅ Graduated |
+| `/reflect` | 6+ | 2025-12-15 | 100% | ✅ Graduated |
 
 ### Tier 2 - Valuable Commands
 
@@ -68,6 +68,7 @@ This document tracks command usage in dev-infra to support graduation decisions.
 
 | Date | Command | Context | Result | Evidence |
 |------|---------|---------|--------|----------|
+| 2025-12-16 | `/reflect` | Work-prod integration reflection | ✅ Success | new doc created |
 | 2025-12-16 | `/int-opp` | Work-prod docs gap analysis | ✅ Success | commit 5df0bd9 |
 | 2025-12-16 | `/int-opp` | Documentation structure learnings | ✅ Success | new doc created |
 | 2025-12-15 | `/cursor-rules` | Update all rules | ✅ Success | v1.6.0 release |
