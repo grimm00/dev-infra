@@ -65,34 +65,6 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📊 Recent Updates
 
-### 2025-12-15: Release Workflow Clarification (MEDIUM)
-
-**Branch:** `docs/release-workflow-clarification`  
-**Status:** ✅ Applied to develop  
-**Commands Affected:** `release-prep`, `release-finalize`, `task-release`
-
-**Changes:**
-- **CLARIFIED:** When `/task-release` is needed vs when to skip to `/release-finalize`
-- **UPDATED:** Workflow diagrams in all three commands show conditional path
-- **NEW:** Added "When to Use" and "When NOT to Use" sections to `/task-release`
-- **NEW:** Added decision guides for the branch point
-
-**Impact:**
-- Clearer release workflow documentation
-- Saves time on releases that don't need `/task-release`
-- Prevents confusion about command purpose
-- Examples: v1.4.0 used `/task-release`, v1.6.0 skipped it
-
-**Root Cause:**
-- User question: "Is task-release obsolete?"
-- v1.6.0 completed without using `/task-release`
-- Original docs implied `/task-release` was always required
-- In practice, only needed for releases with implementation work
-
-**Details:** [2025-12-15-release-workflow-clarification.md](updates/2025-12-15-release-workflow-clarification.md)
-
----
-
 ### 2025-12-15: Transition Plan TDD Task Ordering (MEDIUM)
 
 **Branch:** `docs/transition-plan-tdd-ordering`  
@@ -369,7 +341,7 @@ This topic tracks improvements and maintenance to the Cursor command system. Thi
 
 ## 📈 Summary
 
-**Total Updates:** 13  
+**Total Updates:** 12  
 **Commands Maintained:** 11+  
 **Last Updated:** 2025-12-15
 

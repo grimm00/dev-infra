@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.5.0] - 2025-12-12
+
+### Added
+
+**Release Automation v2 (Internal Only)**
+
+This release focuses on internal tooling to streamline the release process. Per ADR-002 (Template Factory identity), these improvements remain dev-infra-only and are not included in templates.
+
+- **Automatic Tag Creation (Phase 1)** - GitHub Actions workflow automatically creates release tags when release PRs merge to main (PR #44)
+  - Workflow: `.github/workflows/create-release-tag.yml`
+  - Triggers on release PR merge to main
+  - Extracts version from branch name
+  - Creates annotated tag with release message
+  - Pushes tag to trigger release distribution
+  - Supports dry-run mode for testing
+  - Updated release process documentation
+  - Updated workflows README with tag creation details
+  - Marked v1.4.0 retrospective action items as complete
+
+- **Version Reference Automation (Phase 2)** - Script to automatically update version references across codebase during releases (PR #45)
+  - Script: `scripts/update-version-references.sh`
+  - Updates `.cursor/rules/main.mdc` (AI rules)
+  - Updates `README.md` badges (if exist)
+  - Updates `package.json` version (if exists)
+  - Validation and error handling with rollback
+  - Dry-run mode for safe previews
+  - Comprehensive test suite (42 tests)
+  - Documentation: `docs/VERSION-REFERENCES.md`
+  - Integrated with `/release-finalize` command
+
+### Changed
+
+**Identity and Focus**
+
+- **Template Factory Identity** - Formalized dev-infra's identity as a "template factory" with clear graduation criteria for template features (ADR-001, ADR-002, ADR-003, ADR-004)
+  - Work classification (template features vs internal tooling vs CI/CD)
+  - Graduation process for template features
+  - Template integration criteria
+  - Release Automation v2 Phase 3 deferred (template integration)
+  - Updated Cursor rules and documentation
+  - Implemented transition plan
+
+### Documentation
+
+- **Command Documentation** - Created command integration workflows
+  - `/release-prep` - Streamlined release preparation
+  - `/release-finalize` - Release finalization tasks
+  - `/post-release` - Post-release documentation
+  - `/address-review` - Address pre-phase review findings
+
+- **Release Process** - Updated release process documentation
+  - Tag creation now automated via GitHub Actions
+  - Version reference updates automated via script
+  - Release readiness tools integrated
+
+- **Workflows Documentation** - Created `.github/workflows/README.md` hub
+  - Documented all active workflows
+  - Detailed tag creation workflow
+  - Workflow dependencies diagram
+
+- **Learning Capture** - Captured Phase 1 learnings
+  - Release Automation v2 Phase 1 learnings documented
+  - Feature-specific learnings hub created
+  - Time investment and metrics tracked
+
+- **Post-Merge Documentation** - Updated feature status after PR merges
+  - Phase 1 marked complete with PR reference
+  - Phase 2 marked complete with PR reference
+  - Deferred issues tracked (2 from PR #44, 5 from PR #45)
+  - Fix tracking system established
+
+---
+
 ## [1.0.0] - 2025-01-27
 
 ### Added
