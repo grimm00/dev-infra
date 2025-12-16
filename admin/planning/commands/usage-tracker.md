@@ -44,7 +44,7 @@ This document tracks command usage in dev-infra to support graduation decisions.
 |---------|------|----------|--------------|-------------------|
 | `/transition-plan` | 3+ | 2025-12-11 | 100% | ✅ Graduated |
 | `/reflection-artifacts` | 2 | 2025-12-07 | 100% | ⚠️ Needs more use |
-| `/int-opp` | 5+ | 2025-12-16 | 100% | ✅ Graduated |
+| `/int-opp` | 6+ | 2025-12-16 | 100% | ✅ Graduated |
 | `/address-review` | 3+ | 2025-12-15 | 100% | ✅ Graduated |
 | `/task-release` | 2 | 2025-12-15 | 100% | ⚠️ Needs more use |
 | `/cursor-rules` | 1 | 2025-12-15 | 100% | ❌ Not ready |
@@ -69,6 +69,7 @@ This document tracks command usage in dev-infra to support graduation decisions.
 | Date | Command | Context | Result | Evidence |
 |------|---------|---------|--------|----------|
 | 2025-12-16 | `/int-opp` | Work-prod docs gap analysis | ✅ Success | commit 5df0bd9 |
+| 2025-12-16 | `/int-opp` | Documentation structure learnings | ✅ Success | new doc created |
 | 2025-12-15 | `/cursor-rules` | Update all rules | ✅ Success | v1.6.0 release |
 | 2025-12-15 | `/reflect` | Experimental template | ✅ Success | reflection doc |
 | 2025-12-15 | `/fix-implement` | Quick wins batch | ✅ Success | PR #52 |

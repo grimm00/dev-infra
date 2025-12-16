@@ -13,6 +13,7 @@
 
 - **[Command Inventory](command-inventory.md)** - Full inventory of commands in dev-infra vs work-prod
 - **[Documentation Structure Gaps](documentation-structure-gaps.md)** - Analysis of docs/maintainers structure vs dev-infra admin structure
+- **[Documentation Structure Learnings](documentation-structure-learnings.md)** - Key learnings from the gap analysis
 
 ---
 
@@ -29,7 +30,7 @@ This directory contains learnings from work-prod that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 2  
+**Total Learning Documents:** 3  
 **Status:** ✅ Active
 
 ---

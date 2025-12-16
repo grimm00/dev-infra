@@ -67,7 +67,7 @@ Work-Prod (Application Project)
 
 ## 📊 Summary
 
-**Learnings Documents:** 2  
+**Learnings Documents:** 3  
 **Improvement Documents:** 1  
 **Status:** ✅ Active
 
