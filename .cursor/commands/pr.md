@@ -103,7 +103,7 @@ This command supports multiple project organization patterns, matching `/task-ph
 
 **For Release PRs (`--release [version]`):**
 - Expected pattern: `release/[version]`
-- Example: `release/v1.4.0`
+- Example: `release/v0.4.0`
 
 #### 2. Check Current Branch
 
@@ -956,7 +956,7 @@ gh pr create --title "fix: [Batch Description] ([batch-name])" \
 ./scripts/check-release-readiness.sh [version]
 
 # Example:
-./scripts/check-release-readiness.sh v1.4.0
+./scripts/check-release-readiness.sh v0.4.0
 ```
 
 **Evaluate results:**

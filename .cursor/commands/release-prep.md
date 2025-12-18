@@ -22,7 +22,7 @@ This command supports multiple project organization patterns:
 **Version Detection:**
 
 - Use version argument (required)
-- Format: `v1.4.0` or `1.4.0` (normalized to `vX.Y.Z`)
+- Format: `v0.4.0` or `0.4.0` (normalized to `vX.Y.Z`)
 
 ---
 
@@ -44,7 +44,7 @@ Feature Development Complete
          │
          ▼
 ┌─────────────────────────────────────┐
-│   /release-prep v1.4.0              │  ◄── This command
+│   /release-prep v0.4.0              │  ◄── This command
 │                                     │
 │   1. Run readiness check            │
 │   2. Generate assessment            │
@@ -58,13 +58,13 @@ Feature Development Complete
          │
          ├─── Has implementation tasks in transition-plan.md?
          │         │
-         │         ├── YES → /task-release v1.4.0
+         │         ├── YES → /task-release v0.4.0
          │         │         (implement tasks with TDD)
          │         │              │
          │         └── NO ───────┤
          │                        │
          ▼                        ▼
-   /release-finalize v1.4.0
+   /release-finalize v0.4.0
    (merge drafts, update versions)
          │
          ▼
@@ -77,13 +77,13 @@ Feature Development Complete
 **Use `/task-release` when:**
 - The `transition-plan.md` has specific implementation tasks (scripts, tests, etc.)
 - Release includes new features that need to be built during release prep
-- Example: v1.4.0 (Release Readiness feature with 3 scripts)
+- Example: v0.4.0 (Release Readiness feature with 3 scripts)
 
 **Skip `/task-release` when:**
 - All features are already merged to develop via PRs
 - Release is just bundling accumulated changes
 - No additional implementation needed during release prep
-- Example: v1.6.0 (all work done in PRs #47-52)
+- Example: v0.6.0 (all work done in PRs #47-52)
 
 **Decision guide:** If your release just needs CHANGELOG and release notes merged, skip directly to `/release-finalize`. If you have a `transition-plan.md` with uncompleted implementation tasks, use `/task-release` first.
 
@@ -95,11 +95,11 @@ Feature Development Complete
 
 **Examples:**
 
-- `/release-prep v1.4.0` - Full release preparation
-- `/release-prep v1.4.0 --dry-run` - Show what would be done
-- `/release-prep v1.4.0 --skip-branch` - Prepare but don't create branch
-- `/release-prep v1.4.0 --assessment-only` - Only generate assessment
-- `/release-prep v1.4.0 --force` - Continue despite blocking issues
+- `/release-prep v0.4.0` - Full release preparation
+- `/release-prep v0.4.0 --dry-run` - Show what would be done
+- `/release-prep v0.4.0 --skip-branch` - Prepare but don't create branch
+- `/release-prep v0.4.0 --assessment-only` - Only generate assessment
+- `/release-prep v0.4.0 --force` - Continue despite blocking issues
 
 **Options:**
 
@@ -118,8 +118,8 @@ Feature Development Complete
 **Normalize version:**
 
 ```bash
-# Accept v1.4.0 or 1.4.0
-VERSION="v1.4.0"  # Normalize to vX.Y.Z format
+# Accept v0.4.0 or 0.4.0
+VERSION="v0.4.0"  # Normalize to vX.Y.Z format
 ```
 
 **Verify version format:**
@@ -131,7 +131,7 @@ VERSION="v1.4.0"  # Normalize to vX.Y.Z format
 
 ```bash
 # Check if release already exists
-git tag -l "v1.4.0"
+git tag -l "v0.4.0"
 ```
 
 **Checklist:**
@@ -148,12 +148,12 @@ git tag -l "v1.4.0"
 
 **Dev-Infra:**
 ```bash
-mkdir -p admin/planning/releases/v1.4.0/
+mkdir -p admin/planning/releases/v0.4.0/
 ```
 
 **Template Structure:**
 ```bash
-mkdir -p docs/maintainers/planning/releases/v1.4.0/
+mkdir -p docs/maintainers/planning/releases/v0.4.0/
 ```
 
 **Checklist:**
@@ -169,7 +169,7 @@ mkdir -p docs/maintainers/planning/releases/v1.4.0/
 
 **Dev-Infra (with script):**
 ```bash
-./scripts/check-release-readiness.sh v1.4.0
+./scripts/check-release-readiness.sh v0.4.0
 ```
 
 **Template Structure (manual):**
@@ -218,7 +218,7 @@ Options:
 
 **Dev-Infra (with script):**
 ```bash
-./scripts/check-release-readiness.sh v1.4.0 --generate > admin/planning/releases/v1.4.0/RELEASE-READINESS.md
+./scripts/check-release-readiness.sh v0.4.0 --generate > admin/planning/releases/v0.4.0/RELEASE-READINESS.md
 ```
 
 **Template Structure (manual):**
@@ -270,17 +270,17 @@ gh pr list --state merged --limit 50 --json number,title,mergedAt
 
 **Create CHANGELOG draft:**
 
-**File:** `admin/planning/releases/v1.4.0/CHANGELOG-DRAFT.md`
+**File:** `admin/planning/releases/v0.4.0/CHANGELOG-DRAFT.md`
 
 ```markdown
-# CHANGELOG Draft - v1.4.0
+# CHANGELOG Draft - v0.4.0
 
 **Draft Created:** YYYY-MM-DD  
 **Status:** 🔴 Draft - Needs Review
 
 ---
 
-## [1.4.0] - YYYY-MM-DD
+## [0.4.0] - YYYY-MM-DD
 
 ### Added
 
@@ -332,12 +332,12 @@ gh pr list --state merged --limit 50 --json number,title,mergedAt
 
 **Create release notes:**
 
-**File:** `admin/planning/releases/v1.4.0/RELEASE-NOTES.md`
+**File:** `admin/planning/releases/v0.4.0/RELEASE-NOTES.md`
 
 ```markdown
-# Release Notes - v1.4.0
+# Release Notes - v0.4.0
 
-**Version:** v1.4.0  
+**Version:** v0.4.0  
 **Release Date:** YYYY-MM-DD  
 **Status:** 🔴 Draft - Needs Review
 
@@ -415,7 +415,7 @@ Thanks to all contributors!
 
 ---
 
-**Full Changelog:** [v1.3.0...v1.4.0](https://github.com/[org]/[repo]/compare/v1.3.0...v1.4.0)
+**Full Changelog:** [v0.3.0...v0.4.0](https://github.com/[org]/[repo]/compare/v0.3.0...v0.4.0)
 ```
 
 **Checklist:**
@@ -436,25 +436,25 @@ Thanks to all contributors!
 
 **Dev-Infra (with script):**
 ```bash
-./scripts/create-release-branch.sh v1.4.0
+./scripts/create-release-branch.sh v0.4.0
 ```
 
 **Manual:**
 ```bash
 git checkout develop
 git pull origin develop
-git checkout -b release/v1.4.0
+git checkout -b release/v0.4.0
 ```
 
 **Initial commit:**
 
 ```bash
-git add admin/planning/releases/v1.4.0/
-git commit -m "docs(release): initialize v1.4.0 release preparation
+git add admin/planning/releases/v0.4.0/
+git commit -m "docs(release): initialize v0.4.0 release preparation
 
 Created release preparation documents:
 - RELEASE-READINESS.md (generated assessment)
-- CHANGELOG-DRAFT.md (changes since v1.3.0)
+- CHANGELOG-DRAFT.md (changes since v0.3.0)
 - RELEASE-NOTES.md (draft release notes)
 
 Next: Review and finalize documents, then merge to main"
@@ -475,16 +475,16 @@ Next: Review and finalize documents, then merge to main"
 ```markdown
 ## ✅ Release Preparation Complete
 
-**Version:** v1.4.0
+**Version:** v0.4.0
 **Date:** YYYY-MM-DD
 
 ### Documents Created
 
 | Document | Location | Status |
 |----------|----------|--------|
-| RELEASE-READINESS.md | `admin/planning/releases/v1.4.0/` | ✅ Generated |
-| CHANGELOG-DRAFT.md | `admin/planning/releases/v1.4.0/` | 📝 Draft |
-| RELEASE-NOTES.md | `admin/planning/releases/v1.4.0/` | 📝 Draft |
+| RELEASE-READINESS.md | `admin/planning/releases/v0.4.0/` | ✅ Generated |
+| CHANGELOG-DRAFT.md | `admin/planning/releases/v0.4.0/` | 📝 Draft |
+| RELEASE-NOTES.md | `admin/planning/releases/v0.4.0/` | 📝 Draft |
 
 ### Readiness Status
 
@@ -494,7 +494,7 @@ Next: Review and finalize documents, then merge to main"
 
 ### Release Branch
 
-**Branch:** `release/v1.4.0` [Created / Skipped]
+**Branch:** `release/v0.4.0` [Created / Skipped]
 **Base:** `develop`
 
 ### Next Steps
@@ -502,7 +502,7 @@ Next: Review and finalize documents, then merge to main"
 1. Review CHANGELOG-DRAFT.md and merge into CHANGELOG.md
 2. Review and finalize RELEASE-NOTES.md
 3. Address any blocking issues in assessment
-4. Use `/task-release v1.4.0` for remaining tasks
+4. Use `/task-release v0.4.0` for remaining tasks
 5. Use `/pr --release` to create PR to main
 ```
 
@@ -516,7 +516,7 @@ Next: Review and finalize documents, then merge to main"
 
 **Action:**
 ```bash
-/release-prep v1.4.0
+/release-prep v0.4.0
 ```
 
 **Result:**
@@ -533,7 +533,7 @@ Next: Review and finalize documents, then merge to main"
 
 **Action:**
 ```bash
-/release-prep v1.4.0 --assessment-only
+/release-prep v0.4.0 --assessment-only
 ```
 
 **Result:**
@@ -549,7 +549,7 @@ Next: Review and finalize documents, then merge to main"
 
 **Action:**
 ```bash
-/release-prep v1.4.0 --dry-run
+/release-prep v0.4.0 --dry-run
 ```
 
 **Result:**
@@ -565,7 +565,7 @@ Next: Review and finalize documents, then merge to main"
 
 **Action:**
 ```bash
-/release-prep v1.4.0 --force
+/release-prep v0.4.0 --force
 ```
 
 **Result:**
@@ -580,15 +580,15 @@ Next: Review and finalize documents, then merge to main"
 ### Release Workflow
 
 ```
-/release-prep v1.4.0
+/release-prep v0.4.0
     │
     ├── Creates: RELEASE-READINESS.md
     ├── Creates: CHANGELOG-DRAFT.md
     ├── Creates: RELEASE-NOTES.md
-    └── Creates: release/v1.4.0 branch
+    └── Creates: release/v0.4.0 branch
          │
          ▼
-/task-release v1.4.0 [task]
+/task-release v0.4.0 [task]
     │
     ├── Implements remaining tasks
     ├── Updates checklist

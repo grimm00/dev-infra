@@ -39,10 +39,10 @@ Clarified when `/task-release` is needed vs when to skip directly to `/release-f
 **User question:** "Is task-release obsolete?"
 
 **Analysis:**
-- v1.6.0 release completed without using `/task-release`
+- v0.6.0 release completed without using `/task-release`
 - All work was in PRs #47-52, merged to develop
 - Release just needed to bundle accumulated changes
-- `/task-release` was designed for v1.4.0-style releases with implementation work
+- `/task-release` was designed for v0.4.0-style releases with implementation work
 
 **Conclusion:** `/task-release` is NOT obsolete, but serves a specific purpose that wasn't clearly documented.
 
@@ -52,14 +52,14 @@ Clarified when `/task-release` is needed vs when to skip directly to `/release-f
 
 ### When to USE `/task-release`:
 
-**v1.4.0 (Release Readiness feature):**
+**v0.4.0 (Release Readiness feature):**
 - Had `transition-plan.md` with implementation tasks
 - Needed to build 3 scripts with TDD
 - Tasks required implementation during release prep
 
 ### When to SKIP `/task-release`:
 
-**v1.6.0 (Experimental Template):**
+**v0.6.0 (Experimental Template):**
 - All features already merged via PRs #47-52
 - No implementation tasks during release prep
 - Just needed CHANGELOG and release notes merged

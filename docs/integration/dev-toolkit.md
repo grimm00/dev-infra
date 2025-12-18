@@ -26,7 +26,7 @@ This guide provides specific examples and implementation details for integrating
 **Create `config/dev-infra.conf`:**
 ```bash
 # Dev-infra configuration for dev-toolkit
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="0.1.0"
 DEVINFRA_REPO="grimm00/dev-infra"
 DEVINFRA_URL="https://github.com/${DEVINFRA_REPO}/archive/v${DEVINFRA_VERSION}.tar.gz"
 DEVINFRA_CACHE_DIR="./cache/dev-infra"
@@ -184,7 +184,7 @@ fi
 
 case "$1" in
     "install-templates")
-        VERSION="${2:-1.0.0}"
+        VERSION="${2:-0.1.0}"
         ./scripts/download-devinfra.sh "$VERSION"
         ;;
     "new-project")
@@ -209,7 +209,7 @@ esac
 
 ```bash
 # Install specific version
-dev-toolkit install-templates 1.0.0
+dev-toolkit install-templates 0.1.0
 
 # Create new standard project
 dev-toolkit new-project regular
@@ -255,13 +255,13 @@ dev-toolkit/
 **Configuration:**
 ```bash
 # config/dev-infra.conf
-DEVINFRA_VERSION="1.0.0"  # Change this to update
+DEVINFRA_VERSION="0.1.0"  # Change this to update
 ```
 
 **Update Process:**
 ```bash
 # Update version in config
-sed -i 's/DEVINFRA_VERSION="1.0.0"/DEVINFRA_VERSION="1.1.0"/' config/dev-infra.conf
+sed -i 's/DEVINFRA_VERSION="0.1.0"/DEVINFRA_VERSION="0.1.1"/' config/dev-infra.conf
 
 # Re-download templates
 ./scripts/download-devinfra.sh
@@ -289,13 +289,13 @@ fi
 **Environment Configuration:**
 ```bash
 # Development environment
-DEVINFRA_VERSION="1.1.0-beta"
+DEVINFRA_VERSION="0.1.1-beta"
 
 # Staging environment  
-DEVINFRA_VERSION="1.1.0"
+DEVINFRA_VERSION="0.1.1"
 
 # Production environment
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="0.1.0"
 ```
 
 ---

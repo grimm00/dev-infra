@@ -61,7 +61,7 @@ Currently, when users download a dev-infra release, they get everything includin
 - **Implementation:** 1-2 sessions
 - **Testing:** 1 session
 - **Review:** External review via PR
-- **Deployment:** Activates on next release (v1.1.0)
+- **Deployment:** Activates on next release (v0.1.1)
 
 ---
 

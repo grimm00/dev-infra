@@ -102,7 +102,7 @@ These are LOW effort issues that can be fixed quickly:
 
 **Recommendation:**
 - Create `docs-improvements-low-effort` batch for Tasks 5, 10 (LOW effort)
-- Defer Tasks 6, 22 (MEDIUM effort) to v1.1.0
+- Defer Tasks 6, 22 (MEDIUM effort) to v0.1.1
 
 ---
 
@@ -116,11 +116,11 @@ These issues have been deferred since PRs #1-#8 (2025-11-12 to 2025-11-14):
 | Task 2 | 🟡 MEDIUM | 🟡 MEDIUM | PR #5 | Path resolution duplication | ✅ Yes |
 | Task 3 | 🟡 MEDIUM | 🟢 LOW | PR #5 | Whitespace trimming | ✅ Yes |
 | Task 4 | 🟡 MEDIUM | 🟢 LOW | PR #5 | Unknown login warning | ✅ Yes |
-| Task 5 | 🟡 MEDIUM | 🟢 LOW | PR #1 | Consolidate README sections | ⚠️ Review for v1.1.0 |
-| Task 6 | 🟡 MEDIUM | 🟡 MEDIUM | PR #1 | Split Integration Guide | ⚠️ Review for v1.1.0 |
+| Task 5 | 🟡 MEDIUM | 🟢 LOW | PR #1 | Consolidate README sections | ⚠️ Review for v0.1.1 |
+| Task 6 | 🟡 MEDIUM | 🟡 MEDIUM | PR #1 | Split Integration Guide | ⚠️ Review for v0.1.1 |
 | Task 8 | 🟢 LOW | 🟢 LOW | PR #5 | Multiple trailing slashes | ✅ Yes |
 | Task 10 | 🟢 LOW | 🟢 LOW | PR #6 | Duplicate Status fields | ✅ Yes |
-| Task 11 | 🟢 LOW | 🟡 MEDIUM | PR #1 | Automate CURRENT_DATE | ⚠️ Review for v1.1.0 |
+| Task 11 | 🟢 LOW | 🟡 MEDIUM | PR #1 | Automate CURRENT_DATE | ⚠️ Review for v0.1.1 |
 | Task 12 | 🟡 MEDIUM | 🟢 LOW | PR #7 | Test existing file | ✅ Yes |
 | Task 13 | 🟡 MEDIUM | 🟠 HIGH | PR #7 | Portable path utilities | ⏸️ Defer (HIGH effort) |
 | Task 14 | 🟡 MEDIUM | 🟢 LOW | PR #8 | Test gh CLI errors | ✅ Yes |
@@ -131,7 +131,7 @@ These issues have been deferred since PRs #1-#8 (2025-11-12 to 2025-11-14):
 **Recommendation:** 
 - Address LOW effort old issues (Tasks 1, 3, 4, 8, 10, 12, 14) as quick wins
 - Defer MEDIUM/HIGH effort issues to future releases
-- Review v1.1.0 deferred items (Tasks 5, 6, 11) during release planning
+- Review v0.1.1 deferred items (Tasks 5, 6, 11) during release planning
 
 ---
 
@@ -205,9 +205,9 @@ These issues have been deferred since PRs #1-#8 (2025-11-12 to 2025-11-14):
 
 ---
 
-### 4. Future: v1.1.0 Release Planning
+### 4. Future: v0.1.1 Release Planning
 
-**Review for v1.1.0:**
+**Review for v0.1.1:**
 - Task 5: Consolidate README sections
 - Task 6: Split Integration Guide
 - Task 11: Automate CURRENT_DATE placeholder

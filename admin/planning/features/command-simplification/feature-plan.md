@@ -70,6 +70,7 @@ Templates:
 **Create:** `admin/decisions/command-simplification/adr-001-commands-as-guides.md`
 
 **Key points:**
+
 - Commands are AI guidance, not CLI tools
 - Internal projects only - no public users
 - Graduation process was over-engineering
@@ -83,16 +84,19 @@ Templates:
 ### Phase 2: Template Updates
 
 **Add to standard-project:**
+
 ```
 templates/standard-project/.cursor/commands/status.md
 ```
 
 **Add to learning-project:**
+
 ```
 templates/learning-project/.cursor/commands/status.md
 ```
 
 **Update:** `scripts/template-sync-manifest.txt`
+
 ```
 # Add status.md to stable commands
 .cursor/commands/status.md
@@ -101,6 +105,7 @@ templates/learning-project/.cursor/commands/status.md
 ```
 
 **Remove from experimental-project:**
+
 ```
 docs/STABILITY-LEVELS.md
 docs/GRADUATION-CHECKLIST.md
@@ -110,12 +115,14 @@ docs/EXPERIMENTAL.md
 ### Phase 3: Template Consolidation (Decision Required)
 
 **Option A: Merge experimental → standard**
+
 - Remove `templates/experimental-project/`
 - Update `scripts/new-project.sh` to offer 2 types
 - Update CI scripts
 - Migration guide for existing users
 
 **Option B: Keep experimental, same commands**
+
 - Keep as template option
 - Same command set as standard
 - Different README messaging (more experimental-friendly)
@@ -123,10 +130,12 @@ docs/EXPERIMENTAL.md
 ### Phase 4: CI & Validation
 
 **Update:** `scripts/validate-template-sync.sh`
+
 - Remove experimental-specific validation
 - Or update to validate all templates have same commands
 
 **Update:** CI workflows
+
 - Remove experimental-specific testing (if any)
 - Ensure all templates validated equally
 
@@ -136,30 +145,30 @@ docs/EXPERIMENTAL.md
 
 ### New Files
 
-| File | Purpose |
-|------|---------|
-| `admin/decisions/command-simplification/adr-001-commands-as-guides.md` | New ADR |
-| `admin/planning/features/command-simplification/README.md` | Feature hub |
-| `admin/planning/features/command-simplification/feature-plan.md` | This file |
+| File                                                                   | Purpose     |
+| ---------------------------------------------------------------------- | ----------- |
+| `admin/decisions/command-simplification/adr-001-commands-as-guides.md` | New ADR     |
+| `admin/planning/features/command-simplification/README.md`             | Feature hub |
+| `admin/planning/features/command-simplification/feature-plan.md`       | This file   |
 
 ### Modified Files
 
-| File | Change |
-|------|--------|
-| `admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md` | Mark superseded |
-| `templates/standard-project/.cursor/commands/status.md` | Add |
-| `templates/learning-project/.cursor/commands/status.md` | Add |
-| `scripts/template-sync-manifest.txt` | Add status.md, update comments |
-| `.cursor/rules/main.mdc` | Update command documentation |
+| File                                                                         | Change                         |
+| ---------------------------------------------------------------------------- | ------------------------------ |
+| `admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md` | Mark superseded                |
+| `templates/standard-project/.cursor/commands/status.md`                      | Add                            |
+| `templates/learning-project/.cursor/commands/status.md`                      | Add                            |
+| `scripts/template-sync-manifest.txt`                                         | Add status.md, update comments |
+| `.cursor/rules/main.mdc`                                                     | Update command documentation   |
 
 ### Deleted/Archived Files
 
-| File | Action |
-|------|--------|
-| `templates/experimental-project/docs/STABILITY-LEVELS.md` | Delete |
-| `templates/experimental-project/docs/GRADUATION-CHECKLIST.md` | Delete |
-| `templates/experimental-project/docs/EXPERIMENTAL.md` | Delete |
-| `templates/experimental-project/` (optional) | Delete if merging |
+| File                                                          | Action            |
+| ------------------------------------------------------------- | ----------------- |
+| `templates/experimental-project/docs/STABILITY-LEVELS.md`     | Delete            |
+| `templates/experimental-project/docs/GRADUATION-CHECKLIST.md` | Delete            |
+| `templates/experimental-project/docs/EXPERIMENTAL.md`         | Delete            |
+| `templates/experimental-project/` (optional)                  | Delete if merging |
 
 ---
 
@@ -168,6 +177,7 @@ docs/EXPERIMENTAL.md
 ### For experimental-project users
 
 If we merge templates:
+
 - Existing `experimental-project` based repos keep working
 - New projects use `standard-project`
 - Migration: None required (files don't change)
@@ -182,12 +192,12 @@ If we merge templates:
 
 ## 📅 Timeline
 
-| Phase | Estimated Effort | Priority |
-|-------|------------------|----------|
-| Phase 1: ADR | 30 min | High |
-| Phase 2: Template Updates | 1 hour | High |
-| Phase 3: Template Consolidation | 2 hours | Medium |
-| Phase 4: CI Updates | 30 min | Medium |
+| Phase                           | Estimated Effort | Priority |
+| ------------------------------- | ---------------- | -------- |
+| Phase 1: ADR                    | 30 min           | High     |
+| Phase 2: Template Updates       | 1 hour           | High     |
+| Phase 3: Template Consolidation | 2 hours          | Medium   |
+| Phase 4: CI Updates             | 30 min           | Medium   |
 
 **Total:** ~4 hours
 
@@ -202,5 +212,3 @@ If we merge templates:
 ---
 
 **Last Updated:** 2025-12-17
-
-

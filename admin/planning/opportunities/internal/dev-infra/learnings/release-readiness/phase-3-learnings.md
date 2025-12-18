@@ -43,7 +43,7 @@ The RED-GREEN-REFACTOR cycle worked remarkably well for bash script development,
 ```bash
 # Test first (RED)
 @test "assessment includes summary section" {
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     [[ "$output" =~ "Overall Readiness Summary" ]]
 }
@@ -173,7 +173,7 @@ Test #6 (`check release branch existence`) consistently fails in CI but passes l
 ### 3. Worktree Branch Confusion
 
 **What the problem was:**
-During the session, the implementation worktree somehow switched to a test branch (`release/v1.4.0-test`) instead of the feature branch.
+During the session, the implementation worktree somehow switched to a test branch (`release/v0.4.0-test`) instead of the feature branch.
 
 **Why it occurred:**
 - Test runs may have switched branches

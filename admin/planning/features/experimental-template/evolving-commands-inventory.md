@@ -103,23 +103,23 @@ Based on ADR-003, the standard template includes:
 
 ## ✅ Implementation Decision
 
-**For v1.6.0 Phase 1:**
+**For v0.6.0 Phase 1:**
 
 1. **Start minimal:** Add only `/status` as Evolving command
 2. **Document clearly:** Mark as 🟠 Experimental in command header
-3. **Evaluate:** After v1.6.0, assess if release commands should be added
+3. **Evaluate:** After v0.6.0, assess if release commands should be added
 
 **Rationale:**
 - Lower risk with minimal additions
 - `/status` is non-destructive (read-only)
 - Release commands need more evaluation (team workflows vary)
-- Can always add more in v1.7.0
+- Can always add more in v0.7.0
 
 ---
 
 ## 🔄 Future Considerations
 
-**Commands to potentially add in v1.7.0+:**
+**Commands to potentially add in v0.7.0+:**
 
 1. Release workflow commands (if team demand emerges)
 2. Any new commands developed in dev-infra

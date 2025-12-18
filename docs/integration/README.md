@@ -41,7 +41,7 @@ This guide provides comprehensive instructions for integrating dev-infra templat
 **Quick Start:**
 ```bash
 # Download specific version
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="0.1.0"
 curl -L "https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz" | tar -xz
 ```
 
@@ -80,7 +80,7 @@ Dev-infra is designed for seamless integration with dev-toolkit projects:
 ### Configuration
 ```bash
 # config/dev-infra.conf
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="0.1.0"
 DEVINFRA_REPO="grimm00/dev-infra"
 DEVINFRA_URL="https://github.com/${DEVINFRA_REPO}/archive/v${DEVINFRA_VERSION}.tar.gz"
 ```

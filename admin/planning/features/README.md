@@ -10,7 +10,7 @@
 
 ### Active Features
 
-- **[Experimental Template](experimental-template/README.md)** - Create experimental template with Evolving commands (🔴 Not Started) ⭐ **v1.6.0 Target**
+- **[Experimental Template](experimental-template/README.md)** - Create experimental template with Evolving commands (🔴 Not Started) ⭐ **v0.6.0 Target**
   - Phase 1: Create experimental-project template
   - Phase 2: Update generator script
   - Phase 3: CI drift detection
@@ -18,11 +18,11 @@
   - Estimated: 6-10 hours
   - Source: Team project demand + ADR-001/002
 
-- **[Release Automation v2](release-automation-v2/README.md)** - Complete release automation (✅ Complete - v1.5.0)
+- **[Release Automation v2](release-automation-v2/README.md)** - Complete release automation (✅ Complete - v0.5.0)
   - Phase 1: Tag Creation Automation (eliminates manual tagging)
   - Phase 2: Version Reference Automation (eliminates manual updates)
 
-- **[Release Readiness](release-readiness/README.md)** - Implement standardized release readiness assessment and automation (✅ Complete - v1.4.0)
+- **[Release Readiness](release-readiness/README.md)** - Implement standardized release readiness assessment and automation (✅ Complete - v0.4.0)
 - **[Command Adaptation Template](command-adaptation-template/README.md)** - Document command adaptation pattern as reusable template (✅ Complete)
 - **[Command Testing & Template Integration](command-testing-integration/README.md)** - Test and integrate cursor commands into templates (🟡 Planned)
 - **[Directory Selection](directory-selection/README.md)** - Allow users to choose target directory for project generation (✅ Complete)

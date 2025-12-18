@@ -28,7 +28,7 @@ This exploration examines whether dev-infra should focus primarily on being a **
 
 ## 📊 Context
 
-**Trigger:** During v1.4.0 post-release reflection, realized:
+**Trigger:** During v0.4.0 post-release reflection, realized:
 - Every improvement to dev-infra's workflow could become a template feature
 - But not every experiment should go into templates
 - There's confusion about what belongs in `features/` vs `ci/` vs internal tooling
@@ -45,7 +45,7 @@ This exploration examines whether dev-infra should focus primarily on being a **
 **Research:** [admin/research/dev-infra-identity-and-focus/](../../research/dev-infra-identity-and-focus/)  
 **Decisions:** [admin/decisions/dev-infra-identity-and-focus/](../../decisions/dev-infra-identity-and-focus/)  
 **Transition:** [admin/decisions/dev-infra-identity-and-focus/transition-plan.md](../../decisions/dev-infra-identity-and-focus/transition-plan.md)  
-**Outcome:** Identity established, v1.5.0 rescoped to internal tooling only
+**Outcome:** Identity established, v0.5.0 rescoped to internal tooling only
 
 ---
 

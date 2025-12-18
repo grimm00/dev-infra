@@ -21,8 +21,8 @@ This document compares version management approaches for dev-infra:
 ### Current Approach: Tag-Based Versioning
 
 **Version Storage:**
-- Version in `README.md`: `**Version:** v1.2.0`
-- Release tags: `v1.0.0`, `v1.1.0`, `v1.2.0`
+- Version in `README.md`: `**Version:** v0.2.0`
+- Release tags: `v0.1.0`, `v0.1.1`, `v0.2.0`
 - No `.version` file
 
 **Version Extraction:**
@@ -57,14 +57,14 @@ This document compares version management approaches for dev-infra:
 
 **Structure:**
 - `.version` file in repository root
-- Contains version string: `1.2.0` (no 'v' prefix)
+- Contains version string: `0.2.0` (no 'v' prefix)
 - Workflow reads version from file
 - Automated version bumping based on conventional commits
 
 **Implementation:**
 ```bash
 # .version file
-1.2.0
+0.2.0
 
 # Workflow reads version
 VERSION=$(cat .version | tr -d '\n')
@@ -262,7 +262,7 @@ git push
 
 1. **Create `.version` file:**
    ```bash
-   echo "1.2.0" > .version
+   echo "0.2.0" > .version
    ```
 
 2. **Update workflow to read from file:**
@@ -285,9 +285,9 @@ git push
 ### Current Practice
 
 **Version Format:** `vMAJOR.MINOR.PATCH`
-- `v1.0.0` - Initial release
-- `v1.1.0` - Minor release (new features)
-- `v1.2.0` - Minor release (new features)
+- `v0.1.0` - Initial release
+- `v0.1.1` - Minor release (new features)
+- `v0.2.0` - Minor release (new features)
 - `v2.0.0` - Major release (breaking changes)
 
 **Version Bumping:**
@@ -300,9 +300,9 @@ git push
 **If Implementing `.version` File Approach:**
 
 **Conventional Commits:**
-- `feat:` → Bump MINOR (1.2.0 → 1.3.0)
-- `fix:` → Bump PATCH (1.2.0 → 1.2.1)
-- `BREAKING CHANGE:` → Bump MAJOR (1.2.0 → 2.0.0)
+- `feat:` → Bump MINOR (0.2.0 → 0.3.0)
+- `fix:` → Bump PATCH (0.2.0 → 1.2.1)
+- `BREAKING CHANGE:` → Bump MAJOR (0.2.0 → 2.0.0)
 
 **Implementation (from reference example):**
 ```javascript

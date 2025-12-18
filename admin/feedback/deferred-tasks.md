@@ -88,7 +88,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - **Impact:** 🟡 MEDIUM
 - **Effort:** 🟢 LOW
 - **Description:** Consolidate the Installation and Quick Start sections in README to avoid duplication and streamline onboarding.
-- **Status:** ⏸️ Deferred to v1.1.0
+- **Status:** ⏸️ Deferred to v0.1.1
 
 ---
 
@@ -100,7 +100,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - **Impact:** 🟡 MEDIUM
 - **Effort:** 🟡 MEDIUM
 - **Description:** The integration guide is very large (600+ lines). Splitting it into focused sub-documents or sections could improve readability and maintainability.
-- **Status:** ⏸️ Deferred to v1.1.0
+- **Status:** ⏸️ Deferred to v0.1.1
 
 ---
 
@@ -166,7 +166,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - **Impact:** 🟢 LOW
 - **Effort:** 🟡 MEDIUM
 - **Description:** Evaluate automating the `{{CURRENT_DATE}}` placeholder in templates to avoid manual updates and ensure consistency.
-- **Status:** ⏸️ Deferred to v1.1.0
+- **Status:** ⏸️ Deferred to v0.1.1
 
 ---
 

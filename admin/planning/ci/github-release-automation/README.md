@@ -21,7 +21,7 @@
 **Problem:**
 The `create-release-tag.yml` workflow creates a Git tag but not a GitHub Release. The `release-distribution.yml` workflow triggers on `release: [published]`, not tag push. This creates a manual gap in the release process.
 
-**Discovered:** v1.5.0 release (2025-12-12) - required manual `gh release create` command
+**Discovered:** v0.5.0 release (2025-12-12) - required manual `gh release create` command
 
 **Impact:**
 - Manual step required to create GitHub Release after tag
@@ -45,14 +45,14 @@ Update the tag creation workflow to also create a GitHub Release using `gh relea
 
 ## 📅 Timeline
 
-**Target:** Before v1.6.0 release
+**Target:** Before v0.6.0 release
 
 ---
 
 ## 🔗 Related
 
 - **[Improvement Plan](improvement-plan.md)** - Implementation details
-- **[v1.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v1.5.0-release-learnings.md)**
+- **[v0.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v0.5.0-release-learnings.md)**
 - **[Release Automation v2 Reflection](../../notes/reflections/reflection-release-automation-v2-2025-12-12.md)**
 
 ---

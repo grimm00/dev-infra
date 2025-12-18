@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-This document defines the standardized release process for dev-infra, ensuring consistent, professional releases while avoiding the feature+release conflation that occurred in v1.0.0.
+This document defines the standardized release process for dev-infra, ensuring consistent, professional releases while avoiding the feature+release conflation that occurred in v0.1.0.
 
 ### Key Principles
 1. **Separation of Concerns** - Features developed separately from release preparation
@@ -18,7 +18,7 @@ This document defines the standardized release process for dev-infra, ensuring c
 
 ---
 
-## 📋 Standard Release Process (v1.1.0+)
+## 📋 Standard Release Process (v0.1.1+)
 
 ### Phase 1: Feature Development (on develop)
 
@@ -72,7 +72,7 @@ git push origin develop
 # Create release branch
 git checkout develop
 git pull origin develop
-git checkout -b release/v1.1.0
+git checkout -b release/v0.1.1
 
 # Make ONLY release-specific changes
 # - Update CHANGELOG.md version
@@ -82,9 +82,9 @@ git checkout -b release/v1.1.0
 
 # Commit release changes
 git add .
-git commit -m "docs: Prepare v1.1.0 release
+git commit -m "docs: Prepare v0.1.1 release
 
-- Update CHANGELOG from 1.0.0 to 1.1.0
+- Update CHANGELOG from 0.1.0 to 0.1.1
 - Update version numbers in documentation
 - Create release notes
 - Fix critical bug in template validation"
@@ -104,14 +104,14 @@ git commit -m "docs: Prepare v1.1.0 release
 **Example:**
 ```bash
 # Push release branch
-git push origin release/v1.1.0
+git push origin release/v0.1.1
 
 # Create PR for review
-gh pr create --base main --head release/v1.1.0 --title "Release v1.1.0: New template types and improvements"
+gh pr create --base main --head release/v0.1.1 --title "Release v0.1.1: New template types and improvements"
 
 # Document review in admin/feedback/sourcery/pr02.md
 # Address only critical feedback
-# Defer medium/low priority items to v1.2.0
+# Defer medium/low priority items to v0.2.0
 ```
 
 ### Phase 4: Release Merge
@@ -125,37 +125,37 @@ gh pr create --base main --head release/v1.1.0 --title "Release v1.1.0: New temp
 4. Merge release branch back to `develop`
 5. Delete release branch
 
-**Note:** As of v1.5.0, tag creation is automated via `.github/workflows/create-release-tag.yml`. When a release PR is merged to `main`, the workflow automatically extracts the version from the branch name (`release/vX.Y.Z`) and creates/pushes an annotated tag. This triggers the release distribution workflow.
+**Note:** As of v0.5.0, tag creation is automated via `.github/workflows/create-release-tag.yml`. When a release PR is merged to `main`, the workflow automatically extracts the version from the branch name (`release/vX.Y.Z`) and creates/pushes an annotated tag. This triggers the release distribution workflow.
 
 **Example:**
 ```bash
 # Merge release PR to main (via GitHub UI or CLI)
 # After PR merge, the workflow automatically:
-# 1. Extracts version from branch (release/v1.1.0 → v1.1.0)
-# 2. Creates annotated tag: git tag -a v1.1.0 -m "Release v1.1.0..."
-# 3. Pushes tag: git push origin v1.1.0
+# 1. Extracts version from branch (release/v0.1.1 → v0.1.1)
+# 2. Creates annotated tag: git tag -a v0.1.1 -m "Release v0.1.1..."
+# 3. Pushes tag: git push origin v0.1.1
 # 4. Triggers release-distribution workflow
 
 # If manual tag creation needed (fallback):
 git checkout main
 git pull origin main
-git tag -a v1.1.0 -m "Release v1.1.0: New template types and improvements"
-git push origin v1.1.0
+git tag -a v0.1.1 -m "Release v0.1.1: New template types and improvements"
+git push origin v0.1.1
 
 # Create GitHub release (if not auto-created)
-gh release create v1.1.0 \
-  --title "v1.1.0 - New Template Types and Improvements" \
-  --notes-file admin/planning/releases/v1.1.0/RELEASE-NOTES.md
+gh release create v0.1.1 \
+  --title "v0.1.1 - New Template Types and Improvements" \
+  --notes-file admin/planning/releases/v0.1.1/RELEASE-NOTES.md
 
 # Merge back to develop
 git checkout develop
 git pull origin develop
-git merge --no-ff release/v1.1.0 -m "Merge release v1.1.0 back to develop"
+git merge --no-ff release/v0.1.1 -m "Merge release v0.1.1 back to develop"
 git push origin develop
 
 # Clean up
-git branch -d release/v1.1.0
-git push origin --delete release/v1.1.0
+git branch -d release/v0.1.1
+git push origin --delete release/v0.1.1
 ```
 
 ### Phase 5: Automated Distribution (GitHub Actions)
@@ -193,7 +193,7 @@ The workflow automatically:
 
 ## ⚠️ Special Cases
 
-### Initial Release (v1.0.0)
+### Initial Release (v0.1.0)
 
 **What Happened:**
 - All features created during release prep (no prior develop history)
@@ -324,7 +324,7 @@ gh pr create --base main --head hotfix/v1.0.1 --title "hotfix: Fix critical temp
 - **Tool Updates** - Update tools and automation
 - **Documentation Updates** - Keep process docs current
 
-### Learning from v1.0.0
+### Learning from v0.1.0
 - **Feature+Release Conflation** - Avoid mixing feature development with release prep
 - **External Review Integration** - Properly document and track reviews
 - **Process Documentation** - Create clear process for future releases
@@ -334,7 +334,7 @@ gh pr create --base main --head hotfix/v1.0.1 --title "hotfix: Fix critical temp
 
 ## 📚 Related Documentation
 
-- **[Release v1.0.0](../v1.0.0/README.md)** - Initial release documentation
+- **[Release v0.1.0](../v0.1.0/README.md)** - Initial release documentation
 - **[Sourcery Review Process](../../feedback/sourcery/README.md)** - External review process
 - **[Git Flow Guidelines](../../../.cursor/rules/main.mdc)** - Git Flow best practices
 
@@ -342,4 +342,4 @@ gh pr create --base main --head hotfix/v1.0.1 --title "hotfix: Fix critical temp
 
 **Last Updated:** 2025-01-27  
 **Status:** ✅ Active  
-**Next:** [Release v1.1.0 Planning](../v1.1.0/README.md)
+**Next:** [Release v0.1.1 Planning](../v0.1.1/README.md)

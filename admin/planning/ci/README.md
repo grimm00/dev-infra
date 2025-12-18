@@ -28,10 +28,10 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 - **[Command Documentation & Maintenance](command-documentation-maintenance/README.md)** - Track command documentation updates and improvements (✅ Active)
 
-### Planned (v1.6.0)
+### Planned (v0.6.0)
 
 - **[GitHub Release Automation](github-release-automation/README.md)** - Auto-create GitHub Releases from tags (🔴 Not Started, 🔴 High Priority) ⭐ **NEW**
-  - Discovered in v1.5.0 release
+  - Discovered in v0.5.0 release
   - Eliminates manual `gh release create` step
   - Effort: LOW (30 minutes)
 
@@ -44,7 +44,7 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 ### Previously Completed
 
-- **➡️ See [Release Automation v2](../features/release-automation-v2/README.md)** - Consolidated release automation improvements (✅ Complete - v1.5.0)
+- **➡️ See [Release Automation v2](../features/release-automation-v2/README.md)** - Consolidated release automation improvements (✅ Complete - v0.5.0)
   - Phase 1: Tag Creation Automation ✅
   - Phase 2: Version Reference Automation ✅
   - Phase 3: Template Integration (deferred per ADR-002)

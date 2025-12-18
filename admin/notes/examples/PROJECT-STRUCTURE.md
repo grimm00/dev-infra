@@ -1,7 +1,7 @@
 # Pokehub Project Structure
 
 **Purpose:** Comprehensive documentation of the Pokehub full-stack Pokemon application structure  
-**Version:** v1.0.0  
+**Version:** v0.1.0  
 **Last Updated:** January 20, 2025  
 **Pattern:** Hub-and-Spoke Documentation Architecture
 

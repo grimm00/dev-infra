@@ -1,6 +1,6 @@
 # Command Sync Opportunities - Work-Prod
 
-**Source:** Dev-infra v1.6.0  
+**Source:** Dev-infra v0.6.0  
 **Target:** Work-prod project  
 **Status:** ✅ Complete  
 **Created:** 2025-12-15  

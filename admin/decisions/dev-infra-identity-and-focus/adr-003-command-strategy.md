@@ -201,7 +201,7 @@ Templates currently include 18 AI commands. Research raised questions:
 
 ## Implementation
 
-### Phase 1: Add Metadata (v1.5.0)
+### Phase 1: Add Metadata (v0.5.0)
 
 1. **Add tier metadata to commands:**
    ```markdown

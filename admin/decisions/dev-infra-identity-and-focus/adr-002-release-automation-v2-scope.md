@@ -27,13 +27,13 @@ With the identity decision (ADR-001) establishing dev-infra as a template factor
 **Related Requirements:**
 - FR-7: Release automation should be internal tooling by default
 - FR-8: Template integration requires explicit graduation decision
-- C-1: v1.5.0 scope must align with template-centric identity
+- C-1: v0.5.0 scope must align with template-centric identity
 
 ---
 
 ## Decision
 
-**v1.5.0 will complete Release Automation v2 as internal tooling only.**
+**v0.5.0 will complete Release Automation v2 as internal tooling only.**
 
 | Phase | Decision | Rationale |
 |-------|----------|-----------|
@@ -56,7 +56,7 @@ With the identity decision (ADR-001) establishing dev-infra as a template factor
 
 - **Aligns with identity** - Consistent with template factory focus
 - **Simpler templates** - No meta-project tooling added
-- **Faster v1.5.0** - Reduced scope (skip Phase 3)
+- **Faster v0.5.0** - Reduced scope (skip Phase 3)
 - **Internal improvement** - Dev-infra gets better release workflow
 - **Validates pattern** - Tests automation before any templatization
 
@@ -81,7 +81,7 @@ With the identity decision (ADR-001) establishing dev-infra as a template factor
 
 **Pros:**
 - Templates get full release workflow
-- Consistent with v1.4.0 Release Readiness work
+- Consistent with v0.4.0 Release Readiness work
 - Some projects might benefit
 
 **Cons:**
@@ -113,7 +113,7 @@ With the identity decision (ADR-001) establishing dev-infra as a template factor
 
 ### Alternative C: Defer Entirely
 
-**Description:** No Release Automation v2 work in v1.5.0
+**Description:** No Release Automation v2 work in v0.5.0
 
 **Pros:**
 - Maximum template focus
@@ -123,7 +123,7 @@ With the identity decision (ADR-001) establishing dev-infra as a template factor
 **Cons:**
 - Misses opportunity to improve dev-infra workflow
 - Phase 1-2 are valuable internal improvements
-- v1.4.0 release showed gaps
+- v0.4.0 release showed gaps
 
 **Why not chosen:** Internal improvements still valuable
 
@@ -171,7 +171,7 @@ With the identity decision (ADR-001) establishing dev-infra as a template factor
 **Requirements Affected:**
 - FR-7: Release automation should be internal tooling by default ✅
 - FR-8: Template integration requires explicit graduation decision ✅
-- C-1: v1.5.0 scope must align with template-centric identity ✅
+- C-1: v0.5.0 scope must align with template-centric identity ✅
 
 **Release Automation v2 Feature Plan Update:**
 - Phase 3 should be removed or marked as "Deferred - Pending Graduation"
@@ -185,7 +185,7 @@ With the identity decision (ADR-001) establishing dev-infra as a template factor
 2. **Complete Phase 1** - Tag creation automation
 3. **Complete Phase 2** - Version reference automation
 4. **Document as internal tooling** - Not for templates
-5. **Revisit after v1.6.0** - Evaluate if graduation criteria met
+5. **Revisit after v0.6.0** - Evaluate if graduation criteria met
 
 ---
 

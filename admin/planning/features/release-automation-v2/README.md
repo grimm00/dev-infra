@@ -3,7 +3,7 @@
 **Purpose:** Complete the release automation system by eliminating remaining manual steps  
 **Status:** 🟡 Planned  
 **Priority:** 🔴 High  
-**Target:** v1.5.0  
+**Target:** v0.5.0  
 **Last Updated:** 2025-12-11
 
 ---
@@ -20,15 +20,15 @@
 
 ### Related
 
-- **[v1.4.0 Retrospective](../../releases/v1.4.0/retrospective.md)** - Source of these improvements
-- **[v1.4.0 Reflection](../../notes/reflections/reflection-v1.4.0-release-cycle-2025-12-11.md)** - Detailed analysis
-- **[Release Readiness Feature](../release-readiness/README.md)** - v1.4.0 foundation (✅ Complete)
+- **[v0.4.0 Retrospective](../../releases/v0.4.0/retrospective.md)** - Source of these improvements
+- **[v0.4.0 Reflection](../../notes/reflections/reflection-v0.4.0-release-cycle-2025-12-11.md)** - Detailed analysis
+- **[Release Readiness Feature](../release-readiness/README.md)** - v0.4.0 foundation (✅ Complete)
 
 ---
 
 ## 🎯 Overview
 
-v1.4.0 introduced the Release Readiness system with automation for release assessment, but discovered several manual steps remain:
+v0.4.0 introduced the Release Readiness system with automation for release assessment, but discovered several manual steps remain:
 
 1. **Tag Creation** - Manual `git tag` and `git push` required
 2. **Version References** - Manual scanning and updating of version numbers
@@ -40,7 +40,7 @@ v1.4.0 introduced the Release Readiness system with automation for release asses
 
 ## 📊 Current vs. Target State
 
-| Step | v1.4.0 (Current) | v1.5.0 (Target) |
+| Step | v0.4.0 (Current) | v0.5.0 (Target) |
 |------|------------------|-----------------|
 | Assessment | ✅ Automated | ✅ Automated |
 | CHANGELOG | ✅ Automated | ✅ Automated |
@@ -70,14 +70,14 @@ v1.4.0 introduced the Release Readiness system with automation for release asses
 - [ ] Version references automatically updated by `/release-finalize`
 - [ ] Generated projects include release automation
 - [ ] Zero manual steps in release workflow
-- [ ] v1.5.0 released using the new automation
+- [ ] v0.5.0 released using the new automation
 
 ---
 
 ## 🔗 Dependencies
 
 **Builds On:**
-- Release Readiness (v1.4.0) - Scripts and commands
+- Release Readiness (v0.4.0) - Scripts and commands
 - Command System (15+ commands) - Workflow automation
 - Template System - Project generation
 

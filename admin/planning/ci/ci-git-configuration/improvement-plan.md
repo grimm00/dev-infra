@@ -111,7 +111,7 @@ Fix git initialization test failures in CI environments by either:
 - **[Phase 1](phase-1.md)** - Implementation phase details
 - **[Multi-Environment Testing Known Issues](../multi-environment-testing/known-issues.md)**
 - **[Release Distribution Workflow](../../../.github/workflows/release-distribution.yml)**
-- **[v1.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v1.5.0-release-learnings.md)**
+- **[v0.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v0.5.0-release-learnings.md)**
 
 ---
 

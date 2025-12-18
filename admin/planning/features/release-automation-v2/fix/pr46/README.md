@@ -1,6 +1,6 @@
 # PR #46 Fix Tracking
 
-**PR:** #46 - chore: Release v1.5.0  
+**PR:** #46 - chore: Release v0.5.0  
 **Type:** Release PR  
 **Merged:** TBD  
 **Status:** 🟡 **DEFERRED** - 1 HIGH, 5 MEDIUM priority issues deferred
@@ -17,7 +17,7 @@
 ## 📋 Deferred Issues
 
 **Date:** 2025-12-12  
-**Review:** PR #46 (Release v1.5.0) Sourcery feedback  
+**Review:** PR #46 (Release v0.5.0) Sourcery feedback  
 **Status:** 🟡 **DEFERRED** - 1 HIGH, 5 MEDIUM priority issues
 
 ### HIGH Priority Issues (Deferred)
@@ -50,11 +50,11 @@
   - **Description:** Tests like "accepts valid version formats" allow both exit codes 0 and 1 for valid invocations. This means tests still pass if valid input is incorrectly treated as an error.
   - **Action:** Tighten test assertions to expect specific exit codes per case. Split tests if needed for pre/post implementation states.
 
-- **PR46-#6:** Tests depend on real repo state (v1.4.0) - brittle
+- **PR46-#6:** Tests depend on real repo state (v0.4.0) - brittle
   - **Priority:** 🟡 MEDIUM
   - **Impact:** 🟡 MEDIUM
   - **Effort:** 🟡 MEDIUM
-  - **Description:** Several tests (dry-run, validation) assert behavior based on real repo files containing `v1.4.0`. This couples test outcomes to current repo state, making them brittle. Tests will become no-ops when version changes.
+  - **Description:** Several tests (dry-run, validation) assert behavior based on real repo files containing `v0.4.0`. This couples test outcomes to current repo state, making them brittle. Tests will become no-ops when version changes.
   - **Action:** Use mock files or test fixtures under `$BATS_TEST_TMPDIR` instead of real repo files. Control file contents independently of repo version.
 
 - **PR46-#7:** Missing rollback/restore tests - feature exists but not tested

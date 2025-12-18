@@ -43,7 +43,7 @@ teardown() {
     
     # Should parse multiple files
     # Should show version information
-    [[ "$output" =~ "v1.2.0" ]] || [[ "$output" =~ "v1.3.0" ]] || [[ "$output" =~ "v1.4.0" ]]
+    [[ "$output" =~ "v0.2.0" ]] || [[ "$output" =~ "v0.3.0" ]] || [[ "$output" =~ "v0.4.0" ]]
 }
 
 @test "analyze-releases.sh extracts metadata from YAML frontmatter" {
@@ -65,7 +65,7 @@ teardown() {
         skip "May need CI-specific adjustments"
     fi
     
-    # v1.1.0 fixture has no frontmatter
+    # v0.1.1 fixture has no frontmatter
     run "$SCRIPT" --dir "$FIXTURES_DIR"
     [ "$status" -eq 0 ]
     
@@ -111,7 +111,7 @@ teardown() {
     [ "$status" -eq 0 ]
     
     # Should limit to last 2 releases
-    # May show v1.3.0 and v1.4.0 (most recent)
+    # May show v0.3.0 and v0.4.0 (most recent)
 }
 
 @test "analyze-releases.sh discovers assessment files automatically" {
@@ -139,7 +139,7 @@ teardown() {
     [ "$status" -eq 0 ]
     
     # Should show average score calculation
-    # With fixtures: v1.2.0=80, v1.3.0=100, v1.4.0=60 → avg = 80
+    # With fixtures: v0.2.0=80, v0.3.0=100, v0.4.0=60 → avg = 80
     [[ "$output" =~ "Average" ]] || [[ "$output" =~ "avg" ]] || [[ "$output" =~ "80" ]]
 }
 
@@ -162,7 +162,7 @@ teardown() {
         skip "May need CI-specific adjustments"
     fi
     
-    # Test with --last 2 (should average v1.3.0=100 and v1.4.0=60 = 80)
+    # Test with --last 2 (should average v0.3.0=100 and v0.4.0=60 = 80)
     run "$SCRIPT" --dir "$FIXTURES_DIR" --last 2
     [ "$status" -eq 0 ]
     

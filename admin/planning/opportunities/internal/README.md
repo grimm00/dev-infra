@@ -63,6 +63,6 @@ This directory captures learnings and improvements discovered during dev-infra t
 
 **Last Updated:** 2025-12-15  
 **Status:** ✅ Active  
-**Next:** Implement work-prod command sync from v1.6.0
+**Next:** Implement work-prod command sync from v0.6.0
 
 

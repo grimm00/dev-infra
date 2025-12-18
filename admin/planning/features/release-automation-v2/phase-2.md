@@ -42,9 +42,9 @@ Create script to automatically update version references across the codebase and
 
 | File                     | Pattern                      | Example                                         |
 | ------------------------ | ---------------------------- | ----------------------------------------------- |
-| `.cursor/rules/main.mdc` | `**Version:** vX.Y.Z`        | `**Version:** v1.4.0 (released...)`             |
-| `README.md`              | Version badge (if exists)    | `![Version](https://img.shields.io/.../v1.4.0)` |
-| `package.json`           | `"version": "X.Y.Z"`         | `"version": "1.4.0"`                            |
+| `.cursor/rules/main.mdc` | `**Version:** vX.Y.Z`        | `**Version:** v0.4.0 (released...)`             |
+| `README.md`              | Version badge (if exists)    | `![Version](https://img.shields.io/.../v0.4.0)` |
+| `package.json`           | `"version": "X.Y.Z"`         | `"version": "0.4.0"`                            |
 | Template files           | May contain version examples | Various                                         |
 
 ---
@@ -56,7 +56,7 @@ Create script to automatically update version references across the codebase and
 **File:** `scripts/update-version-references.sh`
 
 - [x] Create script with argument parsing
-- [x] Accept: `--old-version v1.4.0 --new-version v1.5.0`
+- [x] Accept: `--old-version v0.4.0 --new-version v0.5.0`
 - [x] Accept: `--dry-run` flag
 - [x] Validate version formats
 - [x] Exit codes for success/failure
@@ -235,7 +235,7 @@ fi
 - [x] Integration with `/release-finalize` complete
 - [x] Tests pass (Bats tests) - 42 tests passing
 - [x] Documentation updated
-- [ ] Tested with v1.5.0 release (pending next release)
+- [ ] Tested with v0.5.0 release (pending next release)
 
 ---
 
@@ -245,8 +245,8 @@ fi
 
 | Test Case           | Input              | Expected                |
 | ------------------- | ------------------ | ----------------------- |
-| Valid versions      | `v1.4.0 → v1.5.0`  | Success                 |
-| Invalid old version | `1.4.0` (no v)     | Error                   |
+| Valid versions      | `v0.4.0 → v0.5.0`  | Success                 |
+| Invalid old version | `0.4.0` (no v)     | Error                   |
 | Invalid new version | `v1.5` (no patch)  | Error                   |
 | Missing file        | File doesn't exist | Warning, continue       |
 | Dry-run             | `--dry-run`        | No changes, output only |
@@ -265,7 +265,7 @@ fi
    - Verify version updates happen
    - Verify validation reports
 
-3. **v1.5.0 Release:**
+3. **v0.5.0 Release:**
    - First real use
    - Verify all references updated
 

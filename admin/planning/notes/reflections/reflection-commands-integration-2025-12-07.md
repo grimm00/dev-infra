@@ -11,7 +11,7 @@
 ### Recent Activity
 
 - **Commits:** 13 commits in last 7 days
-- **PRs Merged:** 10 PRs (most recent: #20 - Release v1.3.0)
+- **PRs Merged:** 10 PRs (most recent: #20 - Release v0.3.0)
 - **Current Focus:** Cursor Commands Integration
 - **Documentation:** Comprehensive planning and status tracking
 - **Commands Adapted:** 14/14 (100% complete)

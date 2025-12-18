@@ -1,6 +1,6 @@
 # Project Reflection - Release Automation v2
 
-**Scope:** Feature Complete + First Release (v1.5.0)  
+**Scope:** Feature Complete + First Release (v0.5.0)  
 **Period:** 2025-12-11 to 2025-12-12 (2 days)  
 **Generated:** 2025-12-12
 
@@ -11,9 +11,9 @@
 ### Recent Activity
 
 - **Commits:** 20+ commits in 2 days
-- **PRs Merged:** 4 (#43-v1.4.0, #44-Phase 1, #45-Phase 2, #46-v1.5.0)
+- **PRs Merged:** 4 (#43-v0.4.0, #44-Phase 1, #45-Phase 2, #46-v0.5.0)
 - **Current Feature:** Release Automation v2 (✅ Complete)
-- **Release:** v1.5.0 (✅ Released)
+- **Release:** v0.5.0 (✅ Released)
 - **Test Coverage:** 42 new tests (Phase 2)
 
 ### Key Metrics
@@ -21,7 +21,7 @@
 - **Phases Complete:** 2/2 (100%, Phase 3 deferred)
 - **PRs Created:** 3 feature/release PRs
 - **Deferred Issues:** 13 total (1 HIGH, 12 MEDIUM)
-- **Learnings Captured:** 2 documents (Phase 1 + v1.5.0 Release)
+- **Learnings Captured:** 2 documents (Phase 1 + v0.5.0 Release)
 - **Time Invested:** ~10-12 hours total
 
 ---
@@ -31,7 +31,7 @@
 ### GitHub Actions Workflow Automation
 
 **Pattern:** Using GitHub Actions for release automation with clear trigger conditions and validation logic  
-**Evidence:** Tag creation workflow worked perfectly on first production use (v1.5.0)  
+**Evidence:** Tag creation workflow worked perfectly on first production use (v0.5.0)  
 **Recommendation:** Continue using this pattern for future automation; excellent documentation and testability
 
 ### TDD for Bash Scripts
@@ -43,7 +43,7 @@
 ### Dogfooding / Self-Validation
 
 **Pattern:** Using new features to complete the release that introduces them  
-**Evidence:** Phase 2 script used to finalize v1.5.0 release; immediate validation  
+**Evidence:** Phase 2 script used to finalize v0.5.0 release; immediate validation  
 **Recommendation:** Continue dogfooding before template graduation; builds confidence
 
 ### Fix Tracking System
@@ -71,10 +71,10 @@
 ### GitHub Release Auto-Creation
 
 **Issue:** Tag creation workflow creates tag but not GitHub Release; release-distribution.yml triggers on `release: [published]`, not tag push  
-**Impact:** Manual step required to create GitHub Release; discovered during v1.5.0 release  
+**Impact:** Manual step required to create GitHub Release; discovered during v0.5.0 release  
 **Suggestion:** Update `create-release-tag.yml` to also create GitHub Release via `gh release create`  
 **Effort:** LOW (30 minutes)  
-**Priority:** 🔴 HIGH - Should fix before v1.6.0
+**Priority:** 🔴 HIGH - Should fix before v0.6.0
 
 ### Workflow Manual Dispatch Testing
 
@@ -130,7 +130,7 @@
 
 **Risk:** Phase 3 (Template Integration) deferred indefinitely  
 **Impact:** Templates don't get release automation benefits  
-**Mitigation:** Review graduation criteria at v1.6.0; track graduation checklist  
+**Mitigation:** Review graduation criteria at v0.6.0; track graduation checklist  
 **Priority:** 🟢 LOW (intentional deferral, not oversight)
 
 ---
@@ -167,7 +167,7 @@ Update `create-release-tag.yml` to create GitHub Release after tag creation:
 1. Create fix branch for workflow update
 2. Test with dry-run or test release branch
 3. Update workflow documentation
-4. Track as HIGH priority fix from v1.5.0
+4. Track as HIGH priority fix from v0.5.0
 
 **Related:**
 - `admin/planning/features/release-automation-v2/fix/pr46/README.md`
@@ -188,7 +188,7 @@ Add explicit version input for manual dispatch testing:
 workflow_dispatch:
   inputs:
     version:
-      description: 'Version to create (e.g., v1.5.0)'
+      description: 'Version to create (e.g., v0.5.0)'
       required: true
       type: string
     dry_run:
@@ -297,7 +297,7 @@ Configure git user in CI or skip git initialization tests.
 **Effort:** LOW (ongoing)
 
 **Suggestion:**
-Create graduation checklist tracking for Phase 3 consideration at v1.6.0.
+Create graduation checklist tracking for Phase 3 consideration at v0.6.0.
 
 **Benefits:**
 - Clear criteria for template integration
@@ -305,7 +305,7 @@ Create graduation checklist tracking for Phase 3 consideration at v1.6.0.
 - Supports identity decision
 
 **Next Steps:**
-1. Review graduation criteria at v1.6.0 planning
+1. Review graduation criteria at v0.6.0 planning
 2. Check off criteria as met
 3. Plan Phase 3 if criteria satisfied
 
@@ -317,12 +317,12 @@ Create graduation checklist tracking for Phase 3 consideration at v1.6.0.
 
 ## 🎯 Recommended Next Steps
 
-1. **Immediate (Before v1.6.0):**
+1. **Immediate (Before v0.6.0):**
    - Fix GitHub Release auto-creation (HIGH priority)
    - Add workflow version input for testing (HIGH priority)
    - Fix CI git configuration issue (MEDIUM priority)
 
-2. **Short-term (v1.6.0 planning):**
+2. **Short-term (v0.6.0 planning):**
    - Review Phase 3 graduation criteria
    - Complete placeholder tests (MEDIUM priority)
    - Use test fixtures (MEDIUM priority)
@@ -353,7 +353,7 @@ Create graduation checklist tracking for Phase 3 consideration at v1.6.0.
 
 ### Emerging Patterns
 
-- **Release automation as foundation:** v1.5.0 establishes automated release baseline
+- **Release automation as foundation:** v0.5.0 establishes automated release baseline
 - **Fix tracking scales:** Hub-and-spoke works for tracking many issues
 - **Documentation-as-code:** Commands and processes fully documented
 - **Sourcery catches real bugs:** Priority matrix helps triage effectively
@@ -382,7 +382,7 @@ Document workflow patterns in template; include dry-run mode in all state-modify
 
 #### Documentation Completeness
 
-**Phases:** Phase 1, Phase 2, v1.5.0 Release  
+**Phases:** Phase 1, Phase 2, v0.5.0 Release  
 **Frequency:** All phases emphasized documentation
 
 **Observation:**
@@ -400,7 +400,7 @@ Maintain documentation update habit; create documentation checklists.
 
 #### Workflow Testing Gap
 
-**Phases:** Phase 1, v1.5.0 Release  
+**Phases:** Phase 1, v0.5.0 Release  
 **Frequency:** 2/2 workflow-related phases  
 **Priority:** 🔴 HIGH (recurring issue)
 
@@ -418,7 +418,7 @@ Risks discovered during actual releases, not testing.
 
 **Related Phases:**
 - Phase 1: workflow_dispatch bug identified
-- v1.5.0: GitHub Release gap discovered
+- v0.5.0: GitHub Release gap discovered
 
 ---
 
@@ -446,9 +446,9 @@ False sense of coverage; may miss regressions.
 #### Feature → Dogfood → Graduate
 
 **Evolution:**
-- Phase 1: Created automation, used in v1.5.0
+- Phase 1: Created automation, used in v0.5.0
 - Phase 2: Created script, used immediately
-- v1.5.0: First release using both automations
+- v0.5.0: First release using both automations
 
 **Insight:**
 Features should be used in dev-infra before template graduation. Immediate use validates design and catches issues.
@@ -488,7 +488,7 @@ Consider `/fix-review` command or periodic fix batch planning.
 | ADRs Created | 4 |
 | Deferred Issues | 13 (1 HIGH, 12 MEDIUM) |
 | Time Saved/Release | 10-15 minutes |
-| First Release | v1.5.0 ✅ |
+| First Release | v0.5.0 ✅ |
 
 ### ROI Analysis
 
@@ -504,5 +504,5 @@ Consider `/fix-review` command or periodic fix batch planning.
 ---
 
 **Last Updated:** 2025-12-12  
-**Next Reflection:** After v1.6.0 planning or next significant feature
+**Next Reflection:** After v0.6.0 planning or next significant feature
 

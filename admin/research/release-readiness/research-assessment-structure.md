@@ -34,7 +34,7 @@ How should release readiness assessment be structured and presented?
 ## 📚 Research Methodology
 
 **Sources:**
-- [x] Review existing assessment formats (v1.2.0, v1.3.0)
+- [x] Review existing assessment formats (v0.2.0, v0.3.0)
 - [x] Analyze current structure and presentation
 - [ ] Web search: Best practices for release readiness assessment formats
 
@@ -46,7 +46,7 @@ How should release readiness assessment be structured and presented?
 
 **Description:** Current assessments use structured sections with YES/NO evaluation.
 
-**Source:** `admin/planning/releases/v1.2.0/RELEASE-READINESS.md`, `admin/planning/releases/v1.3.0/RELEASE-READINESS.md`
+**Source:** `admin/planning/releases/v0.2.0/RELEASE-READINESS.md`, `admin/planning/releases/v0.3.0/RELEASE-READINESS.md`
 
 **Current Structure:**
 - Criteria sections with YES/NO status

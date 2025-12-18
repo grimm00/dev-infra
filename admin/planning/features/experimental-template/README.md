@@ -4,7 +4,7 @@
 **Status:** ✅ Complete  
 **Created:** 2025-12-12  
 **Last Updated:** 2025-12-15  
-**Target:** v1.6.0
+**Target:** v0.6.0
 
 ---
 
@@ -67,7 +67,7 @@ Create an experimental template (`templates/experimental-project/`) that exposes
 ## 🚀 Next Steps
 
 1. ✅ All phases complete!
-2. Include in v1.6.0 release
+2. Include in v0.6.0 release
 3. Update CHANGELOG with experimental template feature
 4. Capture learnings with `/int-opp --phase 4`
 

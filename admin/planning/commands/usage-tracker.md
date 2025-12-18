@@ -71,7 +71,7 @@ This document tracks command usage in dev-infra to support graduation decisions.
 | 2025-12-16 | `/reflect` | Work-prod integration reflection | ✅ Success | new doc created |
 | 2025-12-16 | `/int-opp` | Work-prod docs gap analysis | ✅ Success | commit 5df0bd9 |
 | 2025-12-16 | `/int-opp` | Documentation structure learnings | ✅ Success | new doc created |
-| 2025-12-15 | `/cursor-rules` | Update all rules | ✅ Success | v1.6.0 release |
+| 2025-12-15 | `/cursor-rules` | Update all rules | ✅ Success | v0.6.0 release |
 | 2025-12-15 | `/reflect` | Experimental template | ✅ Success | reflection doc |
 | 2025-12-15 | `/fix-implement` | Quick wins batch | ✅ Success | PR #52 |
 | 2025-12-15 | `/fix-implement` | Test assertions batch | ✅ Success | PR #51 |
@@ -82,8 +82,8 @@ This document tracks command usage in dev-infra to support graduation decisions.
 | 2025-12-15 | `/task-phase` | Exp. Template Phase 4 | ✅ Success | 6 tasks |
 | 2025-12-15 | `/address-review` | Phase 4 gaps | ✅ Success | phase doc |
 | 2025-12-15 | `/pre-phase-review` | Phase 4 | ✅ Success | review doc |
-| 2025-12-15 | `/release-finalize` | v1.6.0 | ✅ Success | PR #53 |
-| 2025-12-15 | `/post-release` | v1.6.0 | ✅ Success | cleanup done |
+| 2025-12-15 | `/release-finalize` | v0.6.0 | ✅ Success | PR #53 |
+| 2025-12-15 | `/post-release` | v0.6.0 | ✅ Success | cleanup done |
 
 ---
 
@@ -93,13 +93,13 @@ Commands below graduation threshold (< 3 uses):
 
 | Command | Current Uses | Gap | Priority |
 |---------|-------------|-----|----------|
-| `/cursor-rules` | 1 | 2 more needed | HIGH - v1.7.0 |
+| `/cursor-rules` | 1 | 2 more needed | HIGH - v0.7.0 |
 | `/task-release` | 2 | 1 more needed | MEDIUM |
 | `/reflection-artifacts` | 2 | 1 more needed | LOW |
 
 **Next Actions:**
 - Use `/cursor-rules` during next rule update cycle
-- Use `/task-release` if v1.7.0 has release tasks
+- Use `/task-release` if v0.7.0 has release tasks
 - Use `/reflection-artifacts` after next major feature
 
 ---

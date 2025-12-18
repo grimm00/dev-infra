@@ -58,7 +58,7 @@ sudo apt-get update && sudo apt-get install ca-certificates
 brew install ca-certificates
 
 # Skip SSL verification (not recommended for production)
-curl -k -L "https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz"
+curl -k -L "https://github.com/grimm00/dev-infra/archive/v0.1.0.tar.gz"
 ```
 
 **Issue: Download fails with 404 error**
@@ -73,7 +73,7 @@ curl: (22) The requested URL returned error: 404
 curl -s "https://api.github.com/repos/grimm00/dev-infra/releases" | grep '"tag_name"'
 
 # Check for typos in version
-echo "Checking version: v1.0.0"
+echo "Checking version: v0.1.0"
 
 # Use latest version
 LATEST=$(curl -s "https://api.github.com/repos/grimm00/dev-infra/releases/latest" | grep '"tag_name"' | sed -E 's/.*"v([^"]+)".*/\1/')
@@ -91,16 +91,16 @@ tar: Error is not recoverable: exiting now
 **Solutions:**
 ```bash
 # Check file integrity
-file dev-infra-1.0.0.tar.gz
+file dev-infra-0.1.0.tar.gz
 
 # Test archive
-tar -tzf dev-infra-1.0.0.tar.gz | head -10
+tar -tzf dev-infra-0.1.0.tar.gz | head -10
 
 # Check disk space
 df -h
 
 # Check permissions
-ls -la dev-infra-1.0.0.tar.gz
+ls -la dev-infra-0.1.0.tar.gz
 ```
 
 **Issue: Permission denied during extraction**
@@ -135,10 +135,10 @@ ls: cannot access './templates/dev-infra/': No such file or directory
 find /tmp -name "dev-infra-*" -type d
 
 # Verify template structure
-ls -la /tmp/dev-infra-1.0.0/templates/
+ls -la /tmp/dev-infra-0.1.0/templates/
 
 # Check copy command
-cp -r "/tmp/dev-infra-1.0.0/templates/"* "./templates/"
+cp -r "/tmp/dev-infra-0.1.0/templates/"* "./templates/"
 ```
 
 **Issue: Template validation fails**
@@ -165,7 +165,7 @@ bash ./scripts/validate-templates.sh
 ```bash
 # Symptoms
 Current version: 0.0.0
-Latest version: 1.0.0
+Latest version: 0.1.0
 ```
 
 **Solutions:**
@@ -174,10 +174,10 @@ Latest version: 1.0.0
 cat ./templates/dev-infra/.version
 
 # Re-download templates
-./scripts/download-devinfra.sh 1.0.0
+./scripts/download-devinfra.sh 0.1.0
 
 # Verify version file
-echo "1.0.0" > ./templates/dev-infra/.version
+echo "0.1.0" > ./templates/dev-infra/.version
 ```
 
 **Issue: Version check fails**
@@ -214,10 +214,10 @@ set -e  # Exit on error
 **Verbose Download:**
 ```bash
 # Verbose curl output
-curl -L -v "https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz" -o dev-infra.tar.gz
+curl -L -v "https://github.com/grimm00/dev-infra/archive/v0.1.0.tar.gz" -o dev-infra.tar.gz
 
 # Check download progress
-curl -L --progress-bar "https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz" -o dev-infra.tar.gz
+curl -L --progress-bar "https://github.com/grimm00/dev-infra/archive/v0.1.0.tar.gz" -o dev-infra.tar.gz
 ```
 
 **File System Debug:**

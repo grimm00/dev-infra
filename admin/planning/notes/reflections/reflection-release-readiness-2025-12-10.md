@@ -412,13 +412,13 @@ Address 9 deferred tasks from PR #42 (Tasks 44-52) in next fix cycle.
 1. ✅ **Complete feature:** All 5 phases merged
 2. ✅ **Capture learnings:** Phase learnings documented
 3. **Run `/int-opp`:** Capture final feature learnings
-4. **Consider v1.5.0 release:** Feature complete, ready for release
+4. **Consider v0.5.0 release:** Feature complete, ready for release
 
 ### Short-term (Next 2 Weeks)
 
-1. **Use release-readiness for v1.5.0:**
-   - Run `./scripts/check-release-readiness.sh v1.5.0`
-   - Use `./scripts/create-release-branch.sh v1.5.0`
+1. **Use release-readiness for v0.5.0:**
+   - Run `./scripts/check-release-readiness.sh v0.5.0`
+   - Use `./scripts/create-release-branch.sh v0.5.0`
    - Generate first real assessment
 2. **Monthly fix review:** Run `/fix-review` and create batches
 3. **Update templates:** Include new patterns (flags, estimation)
@@ -428,7 +428,7 @@ Address 9 deferred tasks from PR #42 (Tasks 44-52) in next fix cycle.
 1. **Fix batch cycle:** Address 5-10 deferred tasks
 2. **Refine estimation guidelines:** Based on more data
 3. **Command testing automation:** CI/CD improvement topic
-4. **Historical analysis:** Use `analyze-releases.sh` after v1.5.0
+4. **Historical analysis:** Use `analyze-releases.sh` after v0.5.0
 
 ---
 
@@ -613,5 +613,5 @@ Prefer separate commands over combined flags for different workflow stages.
 ---
 
 **Last Updated:** 2025-12-10  
-**Next Reflection:** After v1.5.0 release or next major feature
+**Next Reflection:** After v0.5.0 release or next major feature
 

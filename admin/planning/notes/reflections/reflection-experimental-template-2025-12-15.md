@@ -303,13 +303,13 @@ DRIFT DETECTED in the following files:
 3. [ ] Update manual testing guide for Phase 4
 4. [ ] Update feature learnings README with final stats
 
-### Short-term (v1.6.0 Release)
+### Short-term (v0.6.0 Release)
 
 1. [ ] Update CHANGELOG with Experimental Template feature
 2. [ ] Add to release highlights
 3. [ ] Consider template type centralization fix batch
 
-### Long-term (Post v1.6.0)
+### Long-term (Post v0.6.0)
 
 1. [ ] Monitor experimental template usage
 2. [ ] Gather feedback on stability indicators
@@ -447,10 +447,10 @@ Apply this pattern to future features - invest in ADRs and transition plans.
 3. **PR49-Overall-1:** TDD placeholders (same as #2)
 4. **PR49-Overall-2:** Directory drift reporting (LOW/MEDIUM)
 
-**Recommendation:** Create single fix batch for remaining 4 issues after v1.6.0 release.
+**Recommendation:** Create single fix batch for remaining 4 issues after v0.6.0 release.
 
 ---
 
 **Last Updated:** 2025-12-15  
-**Next Reflection:** After v1.6.0 release (evaluate feature in production)
+**Next Reflection:** After v0.6.0 release (evaluate feature in production)
 

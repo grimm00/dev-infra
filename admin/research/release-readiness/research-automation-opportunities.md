@@ -51,7 +51,7 @@ Which release readiness checks can be automated, and how?
 
 **Description:** Analysis of release readiness assessments reveals many manual checks.
 
-**Source:** `admin/planning/releases/v1.2.0/RELEASE-READINESS.md`, `admin/planning/releases/v1.3.0/RELEASE-READINESS.md`
+**Source:** `admin/planning/releases/v0.2.0/RELEASE-READINESS.md`, `admin/planning/releases/v0.3.0/RELEASE-READINESS.md`
 
 **Manual Checks Identified:**
 

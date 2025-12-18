@@ -23,7 +23,7 @@
 - **Commands Adapted:** 14/14 (100% adapted, ready for testing)
 - **Learnings Captured:** 3 documents
 - **Reflections Created:** 4 documents
-- **Version:** v1.3.0
+- **Version:** v0.3.0
 
 ---
 

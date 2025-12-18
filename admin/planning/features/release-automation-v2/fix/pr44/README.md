@@ -22,7 +22,7 @@
   - **Issue:** Manual dispatch hardcodes `BRANCH_NAME="main"`, which doesn't match version regex
   - **Impact:** Dry-run mode cannot be tested manually
   - **Recommendation:** Add `version` or `branch` input parameter for manual testing
-  - **Action:** Address before v1.5.0 release (needed for testing)
+  - **Action:** Address before v0.5.0 release (needed for testing)
 
 ### MEDIUM Priority
 
@@ -37,7 +37,7 @@
 ## 🎯 Action Plan
 
 **HIGH Priority (#1):**
-- **When:** Before v1.5.0 release
+- **When:** Before v0.5.0 release
 - **Why:** Need to test dry-run mode before production use
 - **How:** Add workflow input parameter for version/branch, update extraction logic
 
@@ -53,7 +53,7 @@
 **Workflow Status:**
 - Automated PR merge path works correctly (primary use case)
 - Manual dispatch path needs fix for testing
-- First production use: v1.5.0 release
+- First production use: v0.5.0 release
 
 **Related:**
 - **Sourcery Review:** `admin/feedback/sourcery/pr44.md`

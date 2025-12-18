@@ -80,7 +80,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 | PR48-Overall-1 | 🟡 MEDIUM | 🟡 MEDIUM | Centralize template types in single constant              |
 | Task 16        | 🟡 MEDIUM | 🟠 HIGH   | Extract test implementations to dedicated fixture library |
 
-**Recommendation:** Defer to v1.7.0 - maintainability improvements, not urgent
+**Recommendation:** Defer to v0.7.0 - maintainability improvements, not urgent
 
 ---
 
@@ -129,7 +129,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
 | Task     | Age      | Description                            | Recommendation                  |
 | -------- | -------- | -------------------------------------- | ------------------------------- |
-| Task 5-6 | 30+ days | README/Integration guide consolidation | Still relevant, defer to v1.7.0 |
+| Task 5-6 | 30+ days | README/Integration guide consolidation | Still relevant, defer to v0.7.0 |
 | Task 13  | 30+ days | Use portable path utilities            | HIGH effort, defer              |
 | Task 16  | 30+ days | Extract test fixtures                  | HIGH effort, defer              |
 
@@ -172,7 +172,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
    - Bug risk was addressed proactively during script creation
    - No action needed
 
-### Next Sprint (v1.6.0 or v1.7.0)
+### Next Sprint (v0.6.0 or v0.7.0)
 
 2. **Create Cross-PR Batch: Test Assertion Improvements**
 
@@ -186,7 +186,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
    - Effort: Single PR, ~1 hour
    - Use `/fix-plan --from-review-report --quick-wins`
 
-### Future (v1.7.0+)
+### Future (v0.7.0+)
 
 4. **DRY/Refactoring Batch**
 
@@ -215,4 +215,4 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 ---
 
 **Last Updated:** 2025-12-15  
-**Next Review:** After v1.6.0 release
+**Next Review:** After v0.6.0 release

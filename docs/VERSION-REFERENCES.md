@@ -22,7 +22,7 @@ Version references are automatically updated by the `update-version-references.s
 
 **Example:**
 ```markdown
-**Version:** v1.4.0 (released 2025-12-11)
+**Version:** v0.4.0 (released 2025-12-11)
 ```
 
 **Purpose:** Project state tracking in Cursor AI rules
@@ -40,7 +40,7 @@ Version references are automatically updated by the `update-version-references.s
 
 **Example:**
 ```markdown
-![Version](https://img.shields.io/badge/version-v1.4.0-blue)
+![Version](https://img.shields.io/badge/version-v0.4.0-blue)
 ```
 
 **Purpose:** Display current version in repository README
@@ -59,7 +59,7 @@ Version references are automatically updated by the `update-version-references.s
 **Example:**
 ```json
 {
-  "version": "1.4.0"
+  "version": "0.4.0"
 }
 ```
 
@@ -79,22 +79,22 @@ Version references are automatically updated by the `update-version-references.s
 **Manual execution:**
 ```bash
 ./scripts/update-version-references.sh \
-    --old-version v1.3.0 \
-    --new-version v1.4.0
+    --old-version v0.3.0 \
+    --new-version v0.4.0
 ```
 
 **Dry-run (preview changes):**
 ```bash
 ./scripts/update-version-references.sh --dry-run \
-    --old-version v1.3.0 \
-    --new-version v1.4.0
+    --old-version v0.3.0 \
+    --new-version v0.4.0
 ```
 
 **Verbose mode:**
 ```bash
 ./scripts/update-version-references.sh --verbose \
-    --old-version v1.3.0 \
-    --new-version v1.4.0
+    --old-version v0.3.0 \
+    --new-version v0.4.0
 ```
 
 ### Automated via /release-finalize
@@ -102,7 +102,7 @@ Version references are automatically updated by the `update-version-references.s
 The script is automatically invoked during release finalization:
 
 ```bash
-/release-finalize v1.4.0
+/release-finalize v0.4.0
 ```
 
 **Process:**
@@ -278,5 +278,5 @@ The script automatically verifies updates:
 
 **Last Updated:** 2025-12-11  
 **Maintained By:** Release Automation v2 (Phase 2)  
-**Script Version:** 1.0.0
+**Script Version:** 0.1.0
 

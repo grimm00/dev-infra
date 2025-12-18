@@ -22,7 +22,7 @@
 
 **PRs Affected:** #30, #32, #35, #36, #37, #38, #39
 
-**Root Cause:** Git branch creation (`git checkout -b release/v1.4.0-test`) fails in GitHub Actions CI environment due to:
+**Root Cause:** Git branch creation (`git checkout -b release/v0.4.0-test`) fails in GitHub Actions CI environment due to:
 1. **Detached HEAD state** (primary cause) - GitHub Actions checks out PRs in detached HEAD, preventing branch creation
 2. Shallow clone (GitHub Actions default) - Addressed with `fetch-depth: 0` but didn't resolve issue
 3. Limited git permissions in CI
@@ -39,15 +39,15 @@
 @test "check-release-readiness.sh checks release branch existence" {
     # Create a test release branch
     cd "$PROJECT_ROOT"
-    git checkout -b release/v1.4.0-test 2>/dev/null || git checkout release/v1.4.0-test 2>/dev/null
+    git checkout -b release/v0.4.0-test 2>/dev/null || git checkout release/v0.4.0-test 2>/dev/null
     
-    run "$SCRIPT" v1.4.0-test
+    run "$SCRIPT" v0.4.0-test
     # Should check for release branch
-    [[ "$output" =~ "release branch" || "$output" =~ "Release Branch" || "$output" =~ "release/v1.4.0-test" ]]
+    [[ "$output" =~ "release branch" || "$output" =~ "Release Branch" || "$output" =~ "release/v0.4.0-test" ]]
     
     # Cleanup
     git checkout develop 2>/dev/null || git checkout main 2>/dev/null || true
-    git branch -D release/v1.4.0-test 2>/dev/null || true
+    git branch -D release/v0.4.0-test 2>/dev/null || true
 }
 ```
 
@@ -72,14 +72,14 @@
     
     # Create a test release branch
     cd "$PROJECT_ROOT"
-    git checkout -b release/v1.4.0-test 2>/dev/null || git checkout release/v1.4.0-test 2>/dev/null
+    git checkout -b release/v0.4.0-test 2>/dev/null || git checkout release/v0.4.0-test 2>/dev/null
     
-    run "$SCRIPT" v1.4.0-test
-    [[ "$output" =~ "release branch" || "$output" =~ "Release Branch" || "$output" =~ "release/v1.4.0-test" ]]
+    run "$SCRIPT" v0.4.0-test
+    [[ "$output" =~ "release branch" || "$output" =~ "Release Branch" || "$output" =~ "release/v0.4.0-test" ]]
     
     # Cleanup
     git checkout develop 2>/dev/null || git checkout main 2>/dev/null || true
-    git branch -D release/v1.4.0-test 2>/dev/null || true
+    git branch -D release/v0.4.0-test 2>/dev/null || true
 }
 ```
 

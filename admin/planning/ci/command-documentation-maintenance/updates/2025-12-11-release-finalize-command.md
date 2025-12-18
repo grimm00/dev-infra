@@ -46,10 +46,10 @@ Created new `/release-finalize` command to bridge the gap between draft generati
 **Usage Examples:**
 
 ```bash
-/release-finalize v1.4.0                    # Full finalization
-/release-finalize v1.4.0 --dry-run          # Preview mode
-/release-finalize v1.4.0 --changelog-only   # CHANGELOG only
-/release-finalize v1.4.0 --date 2025-12-15  # Set date
+/release-finalize v0.4.0                    # Full finalization
+/release-finalize v0.4.0 --dry-run          # Preview mode
+/release-finalize v0.4.0 --changelog-only   # CHANGELOG only
+/release-finalize v0.4.0 --date 2025-12-15  # Set date
 ```
 
 ---
@@ -60,13 +60,13 @@ Created new `/release-finalize` command to bridge the gap between draft generati
 
 **Gap Filled:**
 ```
-/release-prep v1.4.0
+/release-prep v0.4.0
       │
       ▼
 (Review Drafts - manual)
       │
       ▼
-/release-finalize v1.4.0    ◄── NEW (fills gap)
+/release-finalize v0.4.0    ◄── NEW (fills gap)
       │
       ▼
 /pr --release

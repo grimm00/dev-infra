@@ -107,12 +107,12 @@
 
 ---
 
-### 8. Manual Backfill: v1.0.0
+### 8. Manual Backfill: v0.1.0
 
-**Decision:** Manually create distribution for v1.0.0
+**Decision:** Manually create distribution for v0.1.0
 
 **Rationale:**
-- v1.0.0 already released
+- v0.1.0 already released
 - Can't trigger workflow retroactively
 - Provides complete set of distributions
 - Tests manual process as backup

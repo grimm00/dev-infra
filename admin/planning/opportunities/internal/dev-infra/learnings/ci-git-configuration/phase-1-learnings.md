@@ -10,7 +10,7 @@
 
 ## 📋 Overview
 
-Phase 1 configured git user identity in CI workflows to eliminate test failures caused by missing `user.name` and `user.email` configuration. The improvement was discovered during v1.5.0 release when the `release-distribution.yml` workflow failed.
+Phase 1 configured git user identity in CI workflows to eliminate test failures caused by missing `user.name` and `user.email` configuration. The improvement was discovered during v0.5.0 release when the `release-distribution.yml` workflow failed.
 
 **PR:** #47  
 **Duration:** ~15 minutes (matched estimate)  

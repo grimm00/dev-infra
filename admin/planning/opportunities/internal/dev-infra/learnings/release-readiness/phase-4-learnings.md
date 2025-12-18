@@ -80,7 +80,7 @@ The new `create-release-branch.sh` script was developed with TDD and includes a 
     fi
     
     # Run with --dry-run to see what would be created
-    run "$SCRIPT" v1.5.0 --dry-run
+    run "$SCRIPT" v0.5.0 --dry-run
     [ "$status" -eq 0 ]
     
     # Should mention generating RELEASE-READINESS.md

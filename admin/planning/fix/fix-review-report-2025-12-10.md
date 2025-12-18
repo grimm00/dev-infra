@@ -112,7 +112,7 @@
 | 15 | 🟡 MEDIUM | 🟡 MEDIUM | PR #8 | ~27 days | Test for template directory permissions |
 | 16 | 🟡 MEDIUM | 🟠 HIGH | PR #8 | ~27 days | Extract test implementations to fixture library |
 
-**Recommendation:** Review Tasks 5, 6 for v1.1.0 release planning. Task 13, 16 are HIGH effort - defer unless doing major refactoring.
+**Recommendation:** Review Tasks 5, 6 for v0.1.1 release planning. Task 13, 16 are HIGH effort - defer unless doing major refactoring.
 
 ---
 
@@ -148,9 +148,9 @@
 - Priority: 🟢 LOW | Effort: 🟢 LOW
 - Why: True quick wins, minimal effort
 
-### 3. v1.1.0 Planning
+### 3. v0.1.1 Planning
 
-**Consider for v1.1.0:**
+**Consider for v0.1.1:**
 - Task 5: Consolidate README sections
 - Task 6: Split integration guide
 - Task 11: Automate CURRENT_DATE placeholder

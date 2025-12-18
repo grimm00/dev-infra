@@ -392,10 +392,10 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v1.7.0-dev  
+**Version:** v0.7.0-dev  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
-**Updated:** 2025-12-17  
+**Updated:** 2025-12-18  
 **Priority:** Command simplification complete
 
 ### ✅ Completed
@@ -417,7 +417,7 @@ When modifying templates:
 - ✅ Known issues tracking system
 - ✅ Template sync validation in CI - NEW
 
-**Release Readiness (v1.4.0):**
+**Release Readiness (v0.5.0):**
 
 - ✅ `check-release-readiness.sh` - Assessment and validation
 - ✅ `create-release-branch.sh` - Release branch creation helper
@@ -425,7 +425,7 @@ When modifying templates:
 - ✅ Standardized release criteria
 - ✅ Assessment template with YAML frontmatter
 
-**Release Automation v2 (v1.6.0):**
+**Release Automation v2 (v0.5.0):**
 
 - ✅ Phase 1: Tag Creation Automation
 - ✅ Phase 2: Version Reference Automation
@@ -465,7 +465,7 @@ When modifying templates:
 
 ### ✅ Recently Completed
 
-**Command Simplification (v1.7.0):**
+**Command Simplification (v0.7.0):**
 
 - ✅ All templates now have all 19 commands
 - ✅ Removed experimental-project template (merged into standard)
@@ -479,10 +479,10 @@ When modifying templates:
 
 ### 🟡 Planned
 
-**v1.7.0 - Command Simplification:**
+**v0.7.0 - Command Simplification:**
 
 - ✅ All phases complete
-- 🟡 Update CHANGELOG
+- ✅ Update CHANGELOG (migrated to 0.x.x versioning)
 - 🟡 Create release notes
 
 **Future Considerations:**
@@ -517,6 +517,6 @@ When modifying templates:
 
 ---
 
-**Last Updated:** 2025-12-17  
+**Last Updated:** 2025-12-18  
 **Status:** ✅ Active  
-**Next:** v1.7.0 release (Command Simplification)
+**Next:** v0.7.0 release (Command Simplification)

@@ -38,7 +38,7 @@ admin/planning/
 │   ├── command-documentation-maintenance/
 │   └── command-testing-automation/
 ├── releases/                    # Release management
-│   ├── v1.4.0/
+│   ├── v0.4.0/
 │   └── PROCESS.md
 └── opportunities/              # Learnings from projects
     ├── external/
@@ -163,7 +163,7 @@ Recommended approach:
 1. Add category metadata to existing plans
 2. New features go in `admin/planning/templates/features/`
 3. New internal tools go in `admin/planning/internal/tooling/`
-4. Evaluate full restructure after v1.5.0
+4. Evaluate full restructure after v0.5.0
 
 ---
 
@@ -185,7 +185,7 @@ Recommended approach:
 
 1. Add category metadata to existing plans
 2. Create `admin/planning/templates/` structure
-3. Use new structure for v1.5.0 work
+3. Use new structure for v0.5.0 work
 
 ---
 

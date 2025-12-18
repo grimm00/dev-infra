@@ -104,7 +104,7 @@ This document lists research topics and questions that need investigation before
 
 ### Research Topic 6: Release Automation v2 Scope
 
-**Question:** Should v1.5.0's Release Automation v2 proceed as planned, be rescoped, or deferred?
+**Question:** Should v0.5.0's Release Automation v2 proceed as planned, be rescoped, or deferred?
 
 **Why:** This is an immediate decision point that depends on the identity question.
 
@@ -114,7 +114,7 @@ This document lists research topics and questions that need investigation before
 3. **Defer:** Focus on template stability, defer automation improvements
 4. **Split:** Internal automation now, template integration later
 
-**Priority:** 🔴 High (blocking v1.5.0 planning)
+**Priority:** 🔴 High (blocking v0.5.0 planning)
 
 **Status:** 🔴 Not Started
 

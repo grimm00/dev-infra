@@ -11,7 +11,7 @@
 
 ## 📋 Overview
 
-Update the `create-release-tag.yml` workflow to automatically create a GitHub Release after creating the Git tag. This eliminates the manual step discovered during the v1.5.0 release.
+Update the `create-release-tag.yml` workflow to automatically create a GitHub Release after creating the Git tag. This eliminates the manual step discovered during the v0.5.0 release.
 
 ---
 
@@ -100,7 +100,7 @@ Update the `create-release-tag.yml` workflow to automatically create a GitHub Re
 - [ ] GitHub Release created automatically on release PR merge
 - [ ] Dry-run mode updated to show release creation
 - [ ] Documentation updated
-- [ ] Tested on v1.6.0 release (or earlier test)
+- [ ] Tested on v0.6.0 release (or earlier test)
 
 ---
 
@@ -109,7 +109,7 @@ Update the `create-release-tag.yml` workflow to automatically create a GitHub Re
 - **[PR #44 Fix Tracking](../../features/release-automation-v2/fix/pr44/README.md)** - Related workflow fixes
 - **[create-release-tag.yml](/.github/workflows/create-release-tag.yml)** - Workflow to update
 - **[release-distribution.yml](/.github/workflows/release-distribution.yml)** - Dependent workflow
-- **[v1.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v1.5.0-release-learnings.md)**
+- **[v0.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v0.5.0-release-learnings.md)**
 
 ---
 

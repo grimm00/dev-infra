@@ -168,7 +168,7 @@ Users don't need:
 
 1. Research command maintenance model (see research-command-maintenance.md)
 2. Define essential vs advanced command tiers
-3. Inform v1.5.0 scope decision
+3. Inform v0.5.0 scope decision
 
 ---
 

@@ -95,9 +95,9 @@ See [TESTING.md](TESTING.md) for complete testing strategy.
 - `docs/integration/version-pinned.md` - Download options
 - `README.md` - Updated Quick Start
 
-### Manual Backfill (v1.0.0)
-- Create distribution for v1.0.0 manually
-- Upload to existing v1.0.0 release
+### Manual Backfill (v0.1.0)
+- Create distribution for v0.1.0 manually
+- Upload to existing v0.1.0 release
 - Test user download experience
 
 ---

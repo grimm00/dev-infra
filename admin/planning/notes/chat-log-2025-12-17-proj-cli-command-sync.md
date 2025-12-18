@@ -8,7 +8,7 @@
 
 ## 📋 Summary
 
-Synchronized 12 command files from dev-infra v1.6.0 to proj-cli, implementing all collected diffs across three phases.
+Synchronized 12 command files from dev-infra v0.6.0 to proj-cli, implementing all collected diffs across three phases.
 
 ---
 
@@ -116,7 +116,7 @@ Phase 3 - TDD/Process Updates:
 - cursor-rules.md: Add Log Usage section
 - reflection-artifacts.md: Add Log Usage section
 
-Synced 12 commands from dev-infra v1.6.0
+Synced 12 commands from dev-infra v0.6.0
 ```
 
 ---
@@ -127,7 +127,7 @@ Synced 12 commands from dev-infra v1.6.0
 
 This sync followed work on:
 1. work-prod command sync (separate session)
-2. dev-infra v1.6.0 release
+2. dev-infra v0.6.0 release
 3. Experimental Template feature completion
 
 ### Path Adaptations

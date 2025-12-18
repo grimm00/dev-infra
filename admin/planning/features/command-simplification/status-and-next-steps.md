@@ -68,7 +68,7 @@
 
 ## 🚀 Next Steps
 
-1. Update CHANGELOG for v1.7.0
+1. Update CHANGELOG for v0.7.0
 2. Create release notes
 3. Test template generation
 

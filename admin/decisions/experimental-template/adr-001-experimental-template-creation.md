@@ -48,7 +48,7 @@ This template will:
 
 ### Learning Project Exclusion
 
-**Decision:** The experimental template will be based on `standard-project` only. There will be no `experimental-learning-project` in v1.6.0.
+**Decision:** The experimental template will be based on `standard-project` only. There will be no `experimental-learning-project` in v0.6.0.
 
 **Rationale:**
 

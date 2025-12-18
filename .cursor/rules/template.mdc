@@ -317,7 +317,7 @@ bats tests/unit/new-project.bats
 bats --verbose-run tests/unit/*.bats
 ```
 
-**Test Count:** 110+ tests as of v1.6.0
+**Test Count:** 110+ tests as of v0.6.0
 
 ---
 
@@ -427,4 +427,4 @@ bats --verbose-run tests/unit/*.bats
 
 **Last Updated:** 2025-12-17  
 **Status:** ✅ Active  
-**Next:** v1.7.0 release (Command Simplification)
+**Next:** v0.7.0 release (Command Simplification)

@@ -4,7 +4,7 @@
 **Status:** 🟡 Research Created  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-12  
-**Target:** v1.6.0  
+**Target:** v0.6.0  
 **Research:** [admin/research/experimental-template/](../../research/experimental-template/)
 
 ---
@@ -112,7 +112,7 @@ This document lists research topics and questions that need investigation before
 ## ⏸️ Blocked Until
 
 - [ ] Identity transition complete
-- [ ] v1.5.0 released
+- [ ] v0.5.0 released
 - [ ] Command tiers implemented
 
 ---

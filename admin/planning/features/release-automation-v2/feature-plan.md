@@ -4,20 +4,20 @@
 **Status:** 🟡 Planned  
 **Category:** 🔧 Internal Tooling  
 **Priority:** 🔴 High  
-**Target Release:** v1.5.0  
+**Target Release:** v0.5.0  
 **Created:** 2025-12-11  
-**Source:** v1.4.0 Release Retrospective and Reflection  
+**Source:** v0.4.0 Release Retrospective and Reflection  
 **Scope:** Internal only (per [ADR-002](../../../decisions/dev-infra-identity-and-focus/adr-002-release-automation-v2-scope.md))
 
 ---
 
 ## 📋 Overview
 
-Complete the release automation system by eliminating the remaining manual steps discovered during the v1.4.0 release cycle. This feature groups three related improvements into a cohesive release automation enhancement.
+Complete the release automation system by eliminating the remaining manual steps discovered during the v0.4.0 release cycle. This feature groups three related improvements into a cohesive release automation enhancement.
 
 **Problem Statement:**
 
-v1.4.0 introduced excellent release automation (`/release-prep`, `/release-finalize`, `/post-release`), but revealed gaps:
+v0.4.0 introduced excellent release automation (`/release-prep`, `/release-finalize`, `/post-release`), but revealed gaps:
 
 1. **Tag creation is manual** - After PR merge, must run `git tag` and `git push` manually
 2. **Version references need manual updates** - Must grep and update version strings across codebase
@@ -63,7 +63,7 @@ Three phased improvements that together deliver **zero-manual releases**.
 - [ ] Tags created automatically when release PRs merge to main
 - [ ] Version references updated automatically by `/release-finalize`
 - [x] ~~Standard-project template includes release automation~~ ❌ Deferred
-- [ ] v1.5.0 released using the new automation
+- [ ] v0.5.0 released using the new automation
 - [ ] Documentation updated for all changes
 
 **Note:** Template integration (Phase 3) deferred per identity decision
@@ -128,7 +128,7 @@ Three phased improvements that together deliver **zero-manual releases**.
 - Template validation tests
 - Documentation updates
 
-**Reconsideration:** v1.6.0+ after graduation criteria met
+**Reconsideration:** v0.6.0+ after graduation criteria met
 
 **Details:** See [phase-3.md](phase-3.md) (marked as deferred)
 
@@ -141,15 +141,15 @@ Three phased improvements that together deliver **zero-manual releases**.
 | Phase 1: Tag Creation | 2-4 hours | None | 🟡 Planned |
 | Phase 2: Version References | 3-5 hours | None | 🟡 Planned |
 | Phase 3: Template Integration | ~~8-13 hours~~ | ~~Phase 1 & 2~~ | ❌ Deferred |
-| **Total (v1.5.0)** | **5-9 hours** | | |
+| **Total (v0.5.0)** | **5-9 hours** | | |
 
-**v1.5.0 Scope (per ADR-002):**
+**v0.5.0 Scope (per ADR-002):**
 - ✅ Phase 1 & 2: Internal tooling only
 - ❌ Phase 3: Deferred (doesn't align with template factory identity)
 
 **Recommended Approach:**
 - Phase 1 & 2 can be done in parallel (no dependencies)
-- Phase 3 deferred to v1.6.0+ pending graduation criteria
+- Phase 3 deferred to v0.6.0+ pending graduation criteria
 
 ---
 
@@ -161,7 +161,7 @@ Three phased improvements that together deliver **zero-manual releases**.
 **Impact:** Tags created incorrectly or not at all  
 **Mitigation:**
 - Comprehensive testing with dry-run mode
-- Test with mock release PRs before v1.5.0
+- Test with mock release PRs before v0.5.0
 - Clear error messages and validation
 
 ### Risk 2: Version Reference Locations Change
@@ -207,10 +207,10 @@ Three phased improvements that together deliver **zero-manual releases**.
 ## 🔗 Related
 
 **Source Documents:**
-- `admin/planning/releases/v1.4.0/retrospective.md` - Identified gaps
-- `admin/planning/notes/reflections/reflection-v1.4.0-release-cycle-2025-12-11.md` - Detailed analysis
+- `admin/planning/releases/v0.4.0/retrospective.md` - Identified gaps
+- `admin/planning/notes/reflections/reflection-v0.4.0-release-cycle-2025-12-11.md` - Detailed analysis
 
-**Foundation (v1.4.0):**
+**Foundation (v0.4.0):**
 - `admin/planning/features/release-readiness/` - Original feature
 - `scripts/check-release-readiness.sh` - Assessment script
 - `scripts/create-release-branch.sh` - Branch creation
@@ -228,16 +228,16 @@ Three phased improvements that together deliver **zero-manual releases**.
 ### Why Group These Improvements?
 
 1. **Same Goal:** All three close gaps in release automation
-2. **Same Release:** All target v1.5.0
+2. **Same Release:** All target v0.5.0
 3. **Related Workflow:** All part of release process
 4. **Better Story:** "Release Automation v2" vs 3 separate changes
 5. **Easier Tracking:** Single feature vs scattered CI improvements
 
 ### Deferred Issues Integration
 
-During implementation, review the 22 deferred issues from v1.4.0:
+During implementation, review the 22 deferred issues from v0.4.0:
 - Fix any related to release workflow
-- Bundle appropriate fixes into v1.5.0
+- Bundle appropriate fixes into v0.5.0
 - Document what was addressed
 
 ---
