@@ -392,11 +392,11 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v0.7.0-dev  
+**Version:** v0.7.0  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
 **Updated:** 2025-12-18  
-**Priority:** Command simplification complete
+**Priority:** v0.7.0 released
 
 ### ✅ Completed
 
@@ -477,13 +477,16 @@ When modifying templates:
 - ✅ 8 cross-PR fix batches complete (28 issues fixed)
 - ✅ `/fix-review` → `/fix-plan` → `/fix-implement` workflow validated
 
+### ✅ Recently Released
+
+**v0.7.0 - Command Simplification (2025-12-18):**
+
+- ✅ All templates now have all 19 commands
+- ✅ Removed experimental-project template
+- ✅ Migrated to 0.x.x versioning
+- ✅ ADR-001: Commands as Guides
+
 ### 🟡 Planned
-
-**v0.7.0 - Command Simplification:**
-
-- ✅ All phases complete
-- ✅ Update CHANGELOG (migrated to 0.x.x versioning)
-- 🟡 Create release notes
 
 **Future Considerations:**
 
@@ -519,4 +522,4 @@ When modifying templates:
 
 **Last Updated:** 2025-12-18  
 **Status:** ✅ Active  
-**Next:** v0.7.0 release (Command Simplification)
+**Next:** v0.8.0 planning
