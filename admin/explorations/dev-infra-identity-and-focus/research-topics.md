@@ -1,171 +1,177 @@
-# Research Topics - Dev-Infra Identity & Focus
+# Research Topics - Dev-Infra Identity & Focus (v2)
 
 **Purpose:** List of research topics/questions to investigate  
-**Status:** 🔴 Pending Research  
+**Status:** 🟡 Active Research  
 **Created:** 2025-12-11  
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-18
 
 ---
 
 ## 📋 Research Topics
 
-This document lists research topics and questions that need investigation before making decisions about dev-infra's identity and focus.
+### Research Topic 1: Template Metadata System
 
----
+**Question:** What metadata should dev-infra projects carry to enable sync and version tracking?
 
-### Research Topic 1: Template User Needs
+**Why:** Without metadata, we can't know what version a project was generated from or what sync rules apply.
 
-**Question:** What do template users actually need from dev-infra templates?
-
-**Why:** Understanding user needs should drive what gets templatized. We may be over-engineering for our own workflow rather than user needs.
-
-**Sub-questions:**
-- What's the minimum viable template?
-- Which commands do generated projects actually use?
-- What patterns from dev-infra have proven valuable in real projects?
-
-**Priority:** 🔴 High
+**Priority:** High
 
 **Status:** 🔴 Not Started
 
+**Sub-questions:**
+- What file format? (YAML, JSON, TOML)
+- What information is essential vs nice-to-have?
+- How to handle migration from projects without metadata?
+- Where should the file live? (root, `.dev-infra/`, etc.)
+
 ---
 
-### Research Topic 2: Command Maintenance Model
+### Research Topic 2: Sync System Architecture
 
-**Question:** What's the appropriate maintenance model for AI commands vs traditional code?
+**Question:** How should dev-infra sync updates to generated projects?
 
-**Why:** Commands are guides for agents, not compiled code. They may need different versioning, testing, and maintenance approaches.
+**Why:** Currently no way to push template improvements to existing projects.
 
-**Sub-questions:**
-- How do we version AI commands?
-- How do we test AI commands?
-- Should templates have fewer, more stable commands?
-- What's the cost of maintaining 15+ commands vs 5 essential ones?
-
-**Priority:** 🔴 High
+**Priority:** High
 
 **Status:** 🔴 Not Started
 
+**Sub-questions:**
+- Push vs pull model?
+- Granularity: file-level, directory-level, or pattern-level?
+- How to handle conflicts with user customizations?
+- CLI tool vs script vs manual process?
+
+**Options to explore:**
+1. **Diff-based:** Show differences, user applies
+2. **Merge-based:** Attempt automatic merge, flag conflicts
+3. **Replace-based:** Replace syncable files entirely
+4. **Checklist-based:** Generate checklist, user follows
+
 ---
 
-### Research Topic 3: Graduation Criteria
+### Research Topic 3: Customization Preservation
 
-**Question:** What criteria should determine when an internal improvement becomes a template feature?
+**Question:** How do we preserve intentional customizations during sync?
 
-**Why:** Need clear process to prevent premature templatization and reduce scope creep.
+**Why:** Users will customize generated projects. Sync shouldn't destroy their work.
 
-**Sub-questions:**
-- Time-based criteria (use for N releases before templatizing)?
-- Value-based criteria (measurable benefit to users)?
-- Stability criteria (no major changes in N weeks)?
-- Complexity criteria (simple enough to maintain in templates)?
-
-**Priority:** 🟡 Medium
+**Priority:** High
 
 **Status:** 🔴 Not Started
 
+**Sub-questions:**
+- How to detect intentional vs accidental changes?
+- Should users mark files as "do not sync"?
+- Should we track what was synced vs what was customized?
+- How do other tools handle this? (e.g., Yeoman, create-react-app eject)
+
 ---
 
-### Research Topic 4: Organizational Structure
+### Research Topic 4: External Project Adoption
 
-**Question:** How should we restructure planning to reflect a template-centric identity?
+**Question:** Is it worth supporting "adopt dev-infra in existing project"?
 
-**Why:** Current structure (`features/`, `ci/`, scattered) creates confusion about where things belong.
+**Why:** Could expand dev-infra's usefulness, but may be complex.
 
-**Sub-questions:**
-- Should we have `internal/` vs `template/` split?
-- Should all template-bound work go through `features/`?
-- Should CI/CD improvements be subordinate to template goals?
-- How do we track internal-only tooling?
-
-**Priority:** 🟡 Medium
+**Priority:** Medium
 
 **Status:** 🔴 Not Started
 
+**Sub-questions:**
+- What's the complexity vs value trade-off?
+- Could we do "scaffold mode" that's non-destructive?
+- Should we just provide a migration guide instead?
+- What existing projects would benefit? (work-prod, proj-cli, etc.)
+
 ---
 
-### Research Topic 5: Minimum Viable Tooling
+### Research Topic 5: Version Compatibility
 
-**Question:** What is the minimum dev-infra needs to be an excellent template factory?
+**Question:** How should we handle version compatibility between dev-infra and generated projects?
 
-**Why:** Helps identify what to cut and what's essential.
+**Why:** Breaking changes in templates could affect many projects.
 
-**Sub-questions:**
-- Which scripts are essential?
-- Which commands are essential?
-- What documentation is essential?
-- What automation is essential vs nice-to-have?
-
-**Priority:** 🟡 Medium
+**Priority:** Medium
 
 **Status:** 🔴 Not Started
 
+**Sub-questions:**
+- Semantic versioning for templates?
+- How to communicate breaking changes?
+- Should old projects auto-upgrade or stay at version?
+- Migration scripts for major versions?
+
 ---
 
-### Research Topic 6: Release Automation v2 Scope
+### Research Topic 6: CLI vs Script Approach
 
-**Question:** Should v0.5.0's Release Automation v2 proceed as planned, be rescoped, or deferred?
+**Question:** Should sync be a dedicated CLI tool or bash scripts?
 
-**Why:** This is an immediate decision point that depends on the identity question.
+**Why:** Affects implementation complexity and user experience.
+
+**Priority:** Low
+
+**Status:** 🔴 Not Started
 
 **Options:**
-1. **Proceed as planned:** Complete all 3 phases
-2. **Rescope:** Focus on Phase 3 (template integration) only
-3. **Defer:** Focus on template stability, defer automation improvements
-4. **Split:** Internal automation now, template integration later
-
-**Priority:** 🔴 High (blocking v0.5.0 planning)
-
-**Status:** 🔴 Not Started
+1. **Bash scripts:** Simple, no dependencies, matches current pattern
+2. **Python CLI:** Better UX, but adds dependency
+3. **Node CLI:** Good tooling, but adds dependency
+4. **Manual process:** Just documentation, no tooling
 
 ---
 
-### Research Topic 7: Other Projects' Patterns
+## 🏁 Resolved Topics
 
-**Question:** How do similar meta-projects (template generators, boilerplates) handle this?
+### ~~Research Topic: Graduation Process~~
 
-**Why:** Learn from how others have solved the laboratory/factory/reference tension.
+**Question:** What criteria should determine when something becomes a template feature?
 
-**Examples to Research:**
-- Create React App
-- Vue CLI
-- Cookiecutter
-- Yeoman generators
-- GitHub template repositories
+**Resolution:** Superseded by ADR-001 (Commands as Guides). No graduation - all templates get all commands.
 
-**Priority:** 🟢 Low
+**Status:** ✅ Resolved (2025-12-18)
 
-**Status:** 🔴 Not Started
+---
+
+### ~~Research Topic: Template Types~~
+
+**Question:** How many template types should dev-infra support?
+
+**Resolution:** Two types: `standard-project` and `learning-project`. Experimental template removed in v0.7.0.
+
+**Status:** ✅ Resolved (2025-12-18)
 
 ---
 
 ## 🎯 Research Workflow
 
 1. Use `/research [topic] --from-explore dev-infra-identity-and-focus` to conduct research
-2. Research will create documents in `admin/research/[topic]/`
+2. Research will create documents in `admin/research/dev-infra-identity-and-focus/`
 3. After research complete, use `/decision [topic] --from-research` to make decisions
 
 ---
 
-## 📊 Priority Summary
+## 📊 Priority Matrix
 
-| Priority | Topics |
-|----------|--------|
-| 🔴 High | Template User Needs, Command Maintenance, Release Automation v2 Scope |
-| 🟡 Medium | Graduation Criteria, Organizational Structure, Minimum Viable Tooling |
-| 🟢 Low | Other Projects' Patterns |
+| Topic | Priority | Complexity | Value |
+|-------|----------|------------|-------|
+| Template Metadata | High | Low | High |
+| Sync System | High | High | High |
+| Customization | High | Medium | High |
+| External Adoption | Medium | High | Medium |
+| Version Compat | Medium | Medium | Medium |
+| CLI vs Script | Low | Low | Low |
+
+**Recommended Order:**
+1. Template Metadata (foundational)
+2. Sync System (depends on metadata)
+3. Customization (depends on sync)
+4. Version Compatibility (can parallelize)
+5. External Adoption (optional, deferred)
+6. CLI vs Script (implementation detail)
 
 ---
 
-## 🚀 Recommended Research Order
-
-1. **Template User Needs** - Foundation for all decisions
-2. **Release Automation v2 Scope** - Immediate decision needed
-3. **Command Maintenance Model** - Affects template command strategy
-4. **Graduation Criteria** - Process improvement
-5. **Organizational Structure** - Implementation of decisions
-
----
-
-**Last Updated:** 2025-12-11
-
+**Last Updated:** 2025-12-18

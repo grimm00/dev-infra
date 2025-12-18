@@ -1,8 +1,8 @@
 # Dev-Infra Identity & Focus - Exploration
 
-**Status:** 🔴 Exploration  
+**Status:** 🟠 Active Exploration (v2)  
 **Created:** 2025-12-11  
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-18
 
 ---
 
@@ -10,178 +10,215 @@
 
 The fundamental question: **What should dev-infra be?**
 
-Currently, dev-infra is trying to be three things:
+### v2 Refinement (2025-12-18)
 
-### 1. Laboratory (Workflow Experimentation)
-- Experimenting with release automation
-- Creating new commands for AI agents
-- Testing CI/CD improvements
-- Building tooling for our own development
+After completing the command simplification (v0.7.0) and migrating to 0.x.x versioning, we have new clarity:
 
-### 2. Factory (Template Production)
-- Producing templates for other projects
-- Maintaining template quality
-- Ensuring templates are stable and useful
-- The actual `templates/` directory
+**Key Realization:** There are no external users yet. The only user is the creator, and what's learned from using these templates informs further development. This changes everything.
 
-### 3. Reference Implementation (Dogfooding)
-- Using what we build to build it
-- Proving patterns work in practice
-- Eating our own dog food
-
-**The Problem:** These goals create feedback loops that multiply complexity.
+**New Focus:** Infrastructure management for multiple scenarios, not pleasing a broad developer audience.
 
 ---
 
-## 🤔 Why Explore This?
+## 🎯 The Four Scenarios
 
-### Immediate Triggers
+### Scenario 1: New Projects (Primary)
 
-1. **Planning Confusion:** Difficulty deciding if improvements belong in `features/`, `ci/`, or internal tooling
-2. **Scope Creep:** Every workflow idea becomes a multi-phase feature with template integration
-3. **Maintenance Burden:** 15+ commands, extensive documentation, high overhead
-4. **Identity Crisis:** Is tag automation a CI improvement? A feature? Internal tooling?
+**Need:** Projects that need an easily recognizable and familiar structure with workflow and pattern guidance.
 
-### Deeper Questions
+**Current Support:** ✅ `./scripts/new-project.sh` generates from templates
 
-1. **Value Delivery:** Are we delivering value to template users, or optimizing our own workflow?
-2. **Sustainability:** Can we maintain this complexity long-term?
-3. **Focus:** What would dev-infra look like if it only focused on template quality?
+**Opportunity:** Enhanced - tagging, better customization
+
+---
+
+### Scenario 2: External Project Sync (New)
+
+**Need:** Projects NOT generated with dev-infra that want to adopt structure/patterns.
+
+**Current Support:** ❌ None
+
+**Approach Options:**
+- "Scaffolding mode" - Add structure to existing project
+- "Best effort" script - Compare and suggest additions
+- "Adoption guide" - Manual checklist for migration
+
+**Complexity:** High - must handle arbitrary existing structures
+
+---
+
+### Scenario 3: Dev-Infra Project Updates (New)
+
+**Need:** Projects generated with dev-infra that need to sync new files/folders.
+
+**Current Support:** ⚠️ Partial (template-sync validates, but doesn't update)
+
+**Approach Options:**
+- Automatic sync (triggered by version bump or manually)
+- CLI patterns (`dev-infra sync`, `dev-infra update`)
+- Diff-based update (show what changed, let user apply)
+
+**Key Questions:**
+- How to handle customizations in generated projects?
+- What files should sync vs stay local?
+- How to handle breaking structure changes?
+
+---
+
+### Scenario 4: Template Tagging (New)
+
+**Need:** Each template needs metadata to help dev-infra and other dev-infra projects understand what kind of project it is.
+
+**Current Support:** ❌ None
+
+**Approach:**
+- `.dev-infra.yml` or similar config file in generated projects
+- Tags like: `template: standard-project`, `version: 0.7.0`, `type: application`
+- Enables smart sync, version tracking, compatibility checks
+
+---
+
+## 🤔 Why This Shift?
+
+### What We Learned
+
+1. **Single User Reality**
+   - No external users to satisfy
+   - No need for complex graduation processes (removed in v0.7.0)
+   - Can iterate quickly based on personal learnings
+
+2. **Learning Loop**
+   - Using templates reveals gaps
+   - Gaps inform template improvements
+   - Improvements enable better projects
+   - Better projects reveal more gaps
+
+3. **Infrastructure vs Features**
+   - Less focus on "features for developers"
+   - More focus on "infrastructure for project management"
+   - The value is in structure and guidance, not tooling
 
 ---
 
 ## 💡 Initial Thoughts
 
-### The Maturity Lifecycle Model
+### Template Metadata System
 
-Not everything should become a template feature. There should be a graduation process:
+```yaml
+# .dev-infra.yml (in generated projects)
+template: standard-project
+version: 0.7.0
+created: 2025-12-18
+last_sync: 2025-12-18
 
-```
-IDEA → EXPERIMENT → PROVEN → TEMPLATE
-```
+# What files to sync automatically
+sync:
+  always:
+    - .cursor/commands/
+    - .gitignore
+  ask:
+    - docs/maintainers/planning/
+  never:
+    - README.md
+    - backend/
+    - frontend/
 
-**Current state:** We treat every idea as needing planning, phases, and template integration immediately.
-
-**Better state:** Ideas should prove themselves in dev-infra before being templatized.
-
-### Template-Centric vs Workflow-Centric
-
-**Workflow-Centric (Current):**
-```
-"How can we improve our development workflow?"
-└── New feature idea
-└── Plan it
-└── Build it
-└── Also put it in templates
-```
-
-**Template-Centric (Proposed):**
-```
-"What do template users need?"
-└── Identify template gap
-└── Build minimal solution
-└── Use it for 1-2 releases
-└── If valuable, templatize
-└── If not, keep as dev-infra-only
+# Project-specific overrides
+customizations:
+  - removed: .cursor/commands/status.md  # User removed intentionally
 ```
 
-### The Layers of Complexity
+### Sync CLI Concept
 
-1. **Code** - Scripts, actual functionality (`scripts/*.sh`)
-2. **AI Commands** - Guides for agents, not hard-coded (`.cursor/commands/*.md`)
-3. **Templates** - What gets generated for users (`templates/`)
-4. **Dev-infra Workflow** - How we develop dev-infra itself
+```bash
+# Check what's new in dev-infra
+dev-infra status
 
-Each layer has different maintenance models and value propositions.
+# Sync specific files/patterns
+dev-infra sync --commands  # Just commands
+dev-infra sync --structure # Just directory structure
+dev-infra sync --all       # Everything syncable
 
-### Potential Organizational Changes
-
-**Option 1: Separate Internal from Template**
-```
-admin/planning/
-├── internal/              # Dev-infra-only improvements
-│   └── workflow-experiments/
-├── features/              # Things that WILL become template features
-└── templates/             # Template-specific planning
+# Adopt dev-infra in existing project
+dev-infra adopt --template standard-project --dry-run
+dev-infra adopt --template standard-project --apply
 ```
 
-**Option 2: Graduation Process**
-- Explicit criteria for when something moves from internal to template
-- Time-boxed experimentation (use for 1-2 releases before templatizing)
-- Smaller, more stable template command set
+### Version Compatibility Matrix
 
-**Option 3: Focus Shift**
-- De-emphasize workflow optimization
-- Prioritize template quality and stability
-- Accept some manual steps as acceptable
+| Project Version | Dev-Infra Version | Sync Status |
+|-----------------|-------------------|-------------|
+| 0.6.0 | 0.7.0 | ⚠️ Breaking changes - manual review |
+| 0.7.0 | 0.7.0 | ✅ In sync |
+| 0.7.0 | 0.8.0 | 🔄 Updates available |
 
 ---
 
 ## 🔍 Key Questions
 
-- [ ] **Identity:** Should dev-infra be primarily a template factory?
-- [ ] **Scope:** What is the minimum dev-infra needs to be an excellent template factory?
-- [ ] **Commands:** Which commands are essential for templates vs dev-infra-only?
-- [ ] **Graduation:** What criteria should determine when something becomes a template feature?
-- [ ] **Organization:** How should we restructure planning to reflect the chosen identity?
-- [ ] **Maintenance:** How do we reduce overhead while maintaining quality?
+### Identity
+- [x] Should dev-infra be primarily a template factory? **YES - decided in ADR-001**
+- [ ] Should it also be an infrastructure manager? **Exploring**
+
+### Sync System
+- [ ] What's the minimum viable sync system?
+- [ ] How to handle conflicts/customizations?
+- [ ] Should sync be automatic or always manual?
+
+### Template Metadata
+- [ ] What metadata is essential?
+- [ ] Where should it live? (`.dev-infra.yml`, `package.json`, etc.)
+- [ ] How to handle version migrations?
+
+### External Adoption
+- [ ] Is "adopt existing project" worth the complexity?
+- [ ] Or just focus on new projects + updates?
 
 ---
 
-## 🎭 The Peculiarity of Dev-Infra
+## 🎭 Identity Clarification
 
-### Meta-Project Challenge
+### What Dev-Infra IS (Confirmed)
 
-Dev-infra is a **meta-project** - improvements to its own workflow become features in the templates it produces. This creates unique challenges:
+1. **Template Factory** - Produces project templates
+2. **Infrastructure Manager** - Helps projects stay in sync (exploring)
+3. **Pattern Library** - Encodes workflow patterns in commands
 
-1. **No Clear Line:** Workflow improvement ≈ Template feature
-2. **Self-Referential:** We use our templates' patterns to build the templates
-3. **AI Commands:** Guides for agents that can be templatized, but aren't "code"
+### What Dev-Infra is NOT
 
-### The Tag Automation Example
-
-Tag automation was explored because:
-1. It's a gap in **our own workflow** (dev-infra internal)
-2. It would be valuable in **templates** (user feature)
-3. It involves **CI/CD workflow** (infrastructure)
-4. It integrates with **AI commands** (guides for agents)
-
-**Where does it belong?** All four places, which is the problem.
+1. ~~Feature Platform~~ - Not trying to build features for broad audiences
+2. ~~Workflow Optimizer~~ - Not optimizing for complex scenarios
+3. ~~Multi-User System~~ - Single user (for now), can scale later
 
 ---
 
 ## 🚀 Next Steps
 
-1. Review research topics in `research-topics.md`
-2. Consider if this exploration should lead to:
-   - An ADR (Architecture Decision Record)
-   - A restructuring chore
-   - A new project philosophy document
-3. Decide if v0.5.0 should proceed as planned or be rescoped
+1. **Research:** Investigate sync system approaches
+2. **Prototype:** Simple `.dev-infra.yml` metadata file
+3. **Decision:** ADR for sync system approach
+4. **Implementation:** Minimum viable sync in v0.8.0 or v0.9.0
 
 ---
 
-## 📝 Notes
+## 📝 Historical Notes
 
-### From the v0.4.0 Post-Release Discussion
+### v1 Exploration (2025-12-11)
 
-> "I have a hard time figuring out how to handle certain features and improvements. Should enhancements be tracked in ci, or should that topic remain the hub for improvements on that feature?"
+The original exploration identified three identities:
+1. Laboratory (Workflow Experimentation)
+2. Factory (Template Production)
+3. Reference Implementation (Dogfooding)
 
-This question reveals the organizational confusion stemming from unclear identity.
+**Resolution:** v0.7.0 simplified to "Template Factory" with "Commands as Guides" philosophy.
 
-### From the Restructuring Discussion
+### From v0.7.0 Command Simplification
 
-> "There's also the extra layer of AI commands, which are guides for agents that aren't actually hard-coded commands, so there's differentiation between code and guides there."
-
-Commands are a unique artifact type - they're documentation that functions as code for AI agents. This creates a maintenance model that doesn't fit traditional software patterns.
-
-### The Templatizer Insight
-
-> "It seems like I need to maybe use dev-infra as a templatizer more so than handling so many development ideas at once."
-
-This suggests focusing on **output quality** (templates) rather than **process optimization** (workflow).
+- Removed experimental template
+- All templates get all commands
+- Graduation process archived
+- ADR-001: Commands as Guides established
 
 ---
 
-**Last Updated:** 2025-12-11
-
+**Last Updated:** 2025-12-18
