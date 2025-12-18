@@ -1,8 +1,11 @@
 # ADR-004: Graduation Process - Formal Criteria for Templatization
 
-**Status:** ✅ Accepted  
+**Status:** ⚠️ Superseded  
 **Created:** 2025-12-11  
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-17  
+**Superseded By:** [ADR-001: Commands as Guides](../command-simplification/adr-001-commands-as-guides.md)
+
+> **Note:** This ADR has been superseded. Commands are now distributed to all templates without graduation gates. See the superseding ADR for rationale.
 
 ---
 
@@ -174,7 +177,7 @@ Features must meet explicit criteria before being added to templates.
 
 ## Implementation
 
-### Phase 1: Create Checklist Template (v1.5.0)
+### Phase 1: Create Checklist Template (v0.5.0)
 
 **File:** `admin/planning/templates/graduation-checklist.md`
 
@@ -215,13 +218,13 @@ Features must meet explicit criteria before being added to templates.
 **Reviewer:** [Name]
 ```
 
-### Phase 2: Apply to New Features (v1.5.0+)
+### Phase 2: Apply to New Features (v0.5.0+)
 
 1. All new templatization decisions must use checklist
 2. Document graduation decisions in feature planning
 3. Track graduation status in release notes
 
-### Phase 3: Review Past Decisions (v1.6.0)
+### Phase 3: Review Past Decisions (v0.6.0)
 
 1. Retroactively document why existing template features were included
 2. Identify any that should be reconsidered

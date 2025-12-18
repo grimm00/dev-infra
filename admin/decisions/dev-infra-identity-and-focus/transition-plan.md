@@ -15,7 +15,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 | ADR     | Decision                  | Implementation                           |
 | ------- | ------------------------- | ---------------------------------------- |
 | ADR-001 | Template Factory Identity | Document identity, add category metadata |
-| ADR-002 | v1.5.0 Internal Only      | Update Release Automation v2 scope       |
+| ADR-002 | v0.5.0 Internal Only      | Update Release Automation v2 scope       |
 | ADR-003 | Command Tiers             | Add tier/stability metadata to commands  |
 | ADR-004 | Graduation Process        | Create graduation checklist template     |
 
@@ -133,9 +133,9 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 
 **Goal:** Classify commands by tier and stability (ADR-003)
 
-**Status:** Deferred to v1.5.0 implementation phase
+**Status:** Deferred to v0.5.0 implementation phase
 
-**Reason:** Adding metadata to 23 command files is substantial work that can be done incrementally during v1.5.0. The tier definitions are documented in:
+**Reason:** Adding metadata to 23 command files is substantial work that can be done incrementally during v0.5.0. The tier definitions are documented in:
 
 - ADR-003 (authoritative)
 - Cursor rules main.mdc (reference)
@@ -211,7 +211,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 - [x] Command tiers documented (in ADR-003) ✅
 - [x] Graduation checklist created ✅
 - [x] Exploration completed ✅
-- [x] Ready to proceed with v1.5.0 (Phase 1-2 only) ✅
+- [x] Ready to proceed with v0.5.0 (Phase 1-2 only) ✅
 
 ---
 
@@ -220,7 +220,7 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 | Step                    | Effort         | Priority  |
 | ----------------------- | -------------- | --------- |
 | 1. Approve ADRs         | 5 mins         | 🔴 High   |
-| 2. Rescope v1.5.0       | 15-30 mins     | 🔴 High   |
+| 2. Rescope v0.5.0       | 15-30 mins     | 🔴 High   |
 | 3. Update Cursor Rules  | 15-30 mins     | 🔴 High   |
 | 4. Category Metadata    | 30 mins        | 🟡 Medium |
 | 5. Command Tiers        | 30-45 mins     | 🟡 Medium |
@@ -234,19 +234,19 @@ This transition plan implements the 4 ADRs from the dev-infra identity and focus
 
 - [x] All 7 steps complete (core items) ✅
 - [x] ADRs accepted ✅
-- [x] v1.5.0 scope clear (internal only) ✅
+- [x] v0.5.0 scope clear (internal only) ✅
 - [x] Identity documented ✅
 - [x] Governance tools created (graduation checklist) ✅
 - [x] Ready for Release Automation v2 implementation ✅
 
-**Note:** Command tier metadata in individual commands deferred to incremental updates during v1.5.0
+**Note:** Command tier metadata in individual commands deferred to incremental updates during v0.5.0
 
 ---
 
 ## References
 
 - [ADR-001: Project Identity](adr-001-project-identity.md)
-- [ADR-002: v1.5.0 Scope](adr-002-release-automation-v2-scope.md)
+- [ADR-002: v0.5.0 Scope](adr-002-release-automation-v2-scope.md)
 - [ADR-003: Command Strategy](adr-003-command-strategy.md)
 - [ADR-004: Graduation Process](adr-004-graduation-process.md)
 - [Research Summary](../../research/dev-infra-identity-and-focus/research-summary.md)

@@ -36,7 +36,7 @@ This research addresses fundamental questions about dev-infra's identity:
 4. **What's the minimum?** Essential vs nice-to-have tooling?
 
 **Research Topics:** 7 topics (all complete)  
-**High Priority:** 3 topics (Template User Needs, Command Maintenance, v1.5.0 Scope)  
+**High Priority:** 3 topics (Template User Needs, Command Maintenance, v0.5.0 Scope)  
 **Status:** ✅ Complete
 
 ---
@@ -72,7 +72,7 @@ This research addresses fundamental questions about dev-infra's identity:
 1. ✅ ~~Complete high-priority research documents~~
 2. ✅ ~~Review findings and extract requirements~~
 3. Use `/decision dev-infra-identity-and-focus --from-research` to make decisions
-4. Decisions will create ADR and inform v1.5.0 scope
+4. Decisions will create ADR and inform v0.5.0 scope
 
 ---
 

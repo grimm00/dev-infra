@@ -48,7 +48,7 @@ teardown() {
         skip "Git branch operations may fail in CI"
     fi
     
-    run "$SCRIPT" v1.5.0 --dry-run
+    run "$SCRIPT" v0.5.0 --dry-run
     [ "$status" -eq 0 ]
 }
 
@@ -59,11 +59,11 @@ teardown() {
     fi
     
     # Create a test directory structure
-    local test_releases="$TEST_TMPDIR/releases/v1.5.0"
+    local test_releases="$TEST_TMPDIR/releases/v0.5.0"
     mkdir -p "$test_releases"
     
     # Run with --dry-run to see what would be created
-    run "$SCRIPT" v1.5.0 --dry-run
+    run "$SCRIPT" v0.5.0 --dry-run
     [ "$status" -eq 0 ]
     
     # Should mention generating RELEASE-READINESS.md
@@ -76,7 +76,7 @@ teardown() {
         skip "Git branch operations may fail in CI"
     fi
     
-    run "$SCRIPT" v1.5.0 --dry-run
+    run "$SCRIPT" v0.5.0 --dry-run
     [ "$status" -eq 0 ]
     
     # Should mention creating directory

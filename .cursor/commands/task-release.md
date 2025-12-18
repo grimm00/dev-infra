@@ -20,7 +20,7 @@ This command supports multiple project organization patterns:
 
 **Version Detection:**
 
-- Extract version from current branch (e.g., `release/v1.0.0`)
+- Extract version from current branch (e.g., `release/v0.1.0`)
 - Or use `--version` option to specify version
 - Or auto-detect from release directory structure
 
@@ -30,12 +30,21 @@ This command supports multiple project organization patterns:
 
 **When to use:**
 
-- When implementing release preparation tasks
-- After transition plan is created
-- To implement release checklist items
+- When implementing release preparation tasks from a `transition-plan.md`
+- After transition plan is created with specific implementation tasks
+- To implement release checklist items that require code/scripts/tests
 - Following TDD workflow for release tasks
 
+**When NOT to use (skip to `/release-finalize`):**
+
+- All features already merged to develop via PRs
+- Release is bundling accumulated changes (no new implementation)
+- `transition-plan.md` doesn't exist or has no implementation tasks
+- Example: v0.6.0 (all work done in PRs #47-52)
+
 **Key principle:** Implement release tasks with TDD discipline, ensuring each task is tested and documented before moving to the next. **Always run readiness check before starting tasks.**
+
+**Decision guide:** If your release just needs CHANGELOG and release notes merged, skip this command and go directly to `/release-finalize`. Use this command only when you have actual implementation work (scripts, tests, features) to build during release prep.
 
 ---
 
@@ -46,14 +55,14 @@ This command supports multiple project organization patterns:
 **Examples:**
 
 - `/task-release 1` - Implement release task 1
-- `/task-release 2 --version v1.0.0` - Implement task 2 for specific version
+- `/task-release 2 --version v0.1.0` - Implement task 2 for specific version
 - `/task-release 3 --checklist-only` - Only update checklist, don't implement
 - `/task-release 1 --dry-run` - Show what would be done without implementing
 
 **Options:**
 
 - `--task NUMBER` - Task number to implement (required)
-- `--version VERSION` - Specify version (e.g., v1.0.0)
+- `--version VERSION` - Specify version (e.g., v0.1.0)
 - `--checklist-only` - Only update checklist, don't implement
 - `--dry-run` - Show implementation plan without executing
 
@@ -65,7 +74,7 @@ This command supports multiple project organization patterns:
 
 **Detect version:**
 
-- Extract from current branch: `release/v1.0.0` → `v1.0.0`
+- Extract from current branch: `release/v0.1.0` → `v0.1.0`
 - Or use `--version` option
 - Or find latest release directory: `docs/maintainers/planning/releases/v*/`
 
@@ -105,7 +114,7 @@ ls docs/maintainers/planning/releases/[version]/checklist.md
 ./scripts/check-release-readiness.sh [version]
 
 # Example:
-./scripts/check-release-readiness.sh v1.4.0
+./scripts/check-release-readiness.sh v0.4.0
 ```
 
 **Review output:**
@@ -456,7 +465,28 @@ chore: Release [version]
 
 ---
 
-**Last Updated:** 2025-12-10  
+## 📊 Log Usage (Final Step)
+
+**After successful command completion, update the usage tracker:**
+
+1. **Update:** `admin/planning/commands/usage-tracker.md`
+2. **Add entry to "Recent Usage" table:**
+   ```markdown
+   | YYYY-MM-DD | `/task-release` | [Context] | ✅ Success | [Evidence] |
+   ```
+3. **Increment usage count** in summary table
+4. **Commit with message:**
+   ```
+   docs(commands): update usage tracker - /task-release
+   ```
+
+**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+
+**Note:** This command needs ≥3 uses before graduation consideration. Current uses: 2.
+
+---
+
+**Last Updated:** 2025-12-16  
 **Status:** ✅ Active  
 **Next:** Use to implement release preparation tasks following TDD workflow (includes readiness check integration)
 

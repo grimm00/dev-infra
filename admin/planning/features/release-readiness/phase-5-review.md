@@ -167,7 +167,7 @@
 2. **Define Metadata Schema**
    ```yaml
    ---
-   version: v1.4.0
+   version: v0.4.0
    date: 2025-12-10
    readiness_score: 85
    blocking_failures: 0
@@ -244,7 +244,7 @@
 ### Metadata Schema
 \`\`\`yaml
 ---
-version: v1.4.0
+version: v0.4.0
 date: 2025-12-10
 readiness_score: 85
 blocking_failures: 0

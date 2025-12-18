@@ -37,7 +37,7 @@ teardown() {
 }
 
 @test "check-release-readiness.sh accepts version argument" {
-    run "$SCRIPT" v1.4.0
+    run "$SCRIPT" v0.4.0
     # May fail checks, but should accept the argument
     # Status 0 (all pass) or 1 (some fail) are both acceptable
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
@@ -57,15 +57,15 @@ teardown() {
     
     # Create a test release branch
     cd "$PROJECT_ROOT"
-    git checkout -b release/v1.4.0-test 2>/dev/null || git checkout release/v1.4.0-test 2>/dev/null
+    git checkout -b release/v0.4.0-test 2>/dev/null || git checkout release/v0.4.0-test 2>/dev/null
     
-    run "$SCRIPT" v1.4.0-test
+    run "$SCRIPT" v0.4.0-test
     # Should check for release branch
-    [[ "$output" =~ "release branch" || "$output" =~ "Release Branch" || "$output" =~ "release/v1.4.0-test" ]]
+    [[ "$output" =~ "release branch" || "$output" =~ "Release Branch" || "$output" =~ "release/v0.4.0-test" ]]
     
     # Cleanup
     git checkout develop 2>/dev/null || git checkout main 2>/dev/null || true
-    git branch -D release/v1.4.0-test 2>/dev/null || true
+    git branch -D release/v0.4.0-test 2>/dev/null || true
 }
 
 @test "check-release-readiness.sh detects missing release branch" {
@@ -80,15 +80,15 @@ teardown() {
 
 @test "check-release-readiness.sh checks version format" {
     # Valid version formats
-    run "$SCRIPT" v1.4.0
+    run "$SCRIPT" v0.4.0
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
     
-    run "$SCRIPT" v1.4.0-test
+    run "$SCRIPT" v0.4.0-test
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
 }
 
 @test "check-release-readiness.sh outputs check results" {
-    run "$SCRIPT" v1.4.0
+    run "$SCRIPT" v0.4.0
     # Should output check results (pass/fail indicators)
     [[ "$output" =~ "✓" || "$output" =~ "✗" || "$output" =~ "Passed:" || "$output" =~ "Failed:" ]]
 }
@@ -100,7 +100,7 @@ teardown() {
     # - Unauthenticated gh CLI returns 0 (not 1)
     # - "skipping" message is displayed with green checkmark
     
-    run "$SCRIPT" v1.4.0
+    run "$SCRIPT" v0.4.0
     
     # Script should complete (exit 0 or 1, not crash)
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
@@ -117,9 +117,9 @@ teardown() {
 
 @test "check-release-readiness.sh checks CHANGELOG for version entry" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.3.0
-    # Should check for CHANGELOG entry (v1.3.0 exists in CHANGELOG)
-    [[ "$output" =~ "CHANGELOG" || "$output" =~ "changelog" || "$output" =~ "1.3.0" ]]
+    run "$SCRIPT" v0.3.0
+    # Should check for CHANGELOG entry (v0.3.0 exists in CHANGELOG)
+    [[ "$output" =~ "CHANGELOG" || "$output" =~ "changelog" || "$output" =~ "0.3.0" ]]
 }
 
 @test "check-release-readiness.sh detects missing CHANGELOG entry" {
@@ -131,8 +131,8 @@ teardown() {
 
 @test "check-release-readiness.sh checks release notes file existence" {
     cd "$PROJECT_ROOT"
-    # Check for existing release notes (v1.3.0 should have one if it exists)
-    run "$SCRIPT" v1.3.0
+    # Check for existing release notes (v0.3.0 should have one if it exists)
+    run "$SCRIPT" v0.3.0
     # Should check for release notes file
     [[ "$output" =~ "Release Notes" || "$output" =~ "release notes" || "$output" =~ "RELEASE-NOTES" ]]
 }
@@ -150,7 +150,7 @@ teardown() {
 
 @test "check-release-readiness.sh gathers recent merged PRs" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0
+    run "$SCRIPT" v0.4.0
     # Should gather recent merged PRs (may be informational, not blocking)
     # Check if output mentions PRs or the gathering happens
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
@@ -158,7 +158,7 @@ teardown() {
 
 @test "check-release-readiness.sh gathers open blocking issues" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0
+    run "$SCRIPT" v0.4.0
     # Should gather open blocking issues (may require gh CLI)
     # Check if output mentions issues or the gathering happens
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
@@ -166,7 +166,7 @@ teardown() {
 
 @test "check-release-readiness.sh outputs data gathering section" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0
+    run "$SCRIPT" v0.4.0
     # Should output data gathering information (even if empty)
     # This is informational, so script should still run
     [ "$status" -eq 0 ] || [ "$status" -eq 1 ]
@@ -176,7 +176,7 @@ teardown() {
 
 @test "check-release-readiness.sh generates markdown assessment with --generate" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should output markdown format
     [[ "$output" =~ "# Release Readiness Assessment" ]]
@@ -184,7 +184,7 @@ teardown() {
 
 @test "check-release-readiness.sh generated assessment contains required sections" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Check for standard template sections
     [[ "$output" =~ "## 📊 Release Criteria Evaluation" ]]
@@ -196,7 +196,7 @@ teardown() {
 
 @test "check-release-readiness.sh assessment includes automated check results" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should map automated checks to criteria items
     # Check for status indicators (✅ or ❌)
@@ -208,7 +208,7 @@ teardown() {
 
 @test "check-release-readiness.sh assessment includes summary section" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should include summary section before criteria evaluation
     [[ "$output" =~ "## 📊 Summary" ]] || [[ "$output" =~ "## 📊 Overall Readiness Summary" ]]
@@ -216,7 +216,7 @@ teardown() {
 
 @test "check-release-readiness.sh summary includes overall readiness status" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should include overall readiness status (READY, NOT READY, or REVIEW NEEDED)
     [[ "$output" =~ "Overall Readiness" ]] || [[ "$output" =~ "Overall Status" ]]
@@ -225,7 +225,7 @@ teardown() {
 
 @test "check-release-readiness.sh summary calculates readiness based on blocking criteria" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Summary should reflect blocking criteria status
     # If all blocking criteria pass → READY or READY FOR REVIEW
@@ -237,7 +237,7 @@ teardown() {
 
 @test "check-release-readiness.sh evidence sections include details/summary tags" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Evidence sections should use HTML details/summary for collapsible content
     # Check for both opening tags (proper HTML structure)
@@ -259,7 +259,7 @@ teardown() {
 
 @test "check-release-readiness.sh evidence sections include command output" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Evidence should include validation details or command output
     # Check for evidence section content beyond simple status messages
@@ -271,7 +271,7 @@ teardown() {
 
 @test "check-release-readiness.sh evidence sections are readable and formatted" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Evidence sections should be well-formatted
     # Check that evidence appears after status in each criteria section
@@ -284,7 +284,7 @@ teardown() {
 
 @test "check-release-readiness.sh --generate includes YAML frontmatter" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Output should start with YAML frontmatter delimiters
     [[ "$output" =~ ^--- ]]
@@ -294,16 +294,16 @@ teardown() {
 
 @test "check-release-readiness.sh metadata includes version field" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should include version in frontmatter
     [[ "$output" =~ "version:" ]]
-    [[ "$output" =~ "v1.4.0" ]]
+    [[ "$output" =~ "v0.4.0" ]]
 }
 
 @test "check-release-readiness.sh metadata includes date field" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should include date in YYYY-MM-DD format
     [[ "$output" =~ "date:" ]]
@@ -312,7 +312,7 @@ teardown() {
 
 @test "check-release-readiness.sh metadata includes readiness_score field" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should include readiness_score (0-100)
     [[ "$output" =~ "readiness_score:" ]]
@@ -320,7 +320,7 @@ teardown() {
 
 @test "check-release-readiness.sh metadata includes status field" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should include status (READY, NOT_READY, or BLOCKED)
     [[ "$output" =~ "status:" ]]
@@ -329,7 +329,7 @@ teardown() {
 
 @test "check-release-readiness.sh metadata includes check counts" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should include total_checks and passed_checks
     [[ "$output" =~ "total_checks:" ]]
@@ -338,7 +338,7 @@ teardown() {
 
 @test "check-release-readiness.sh metadata includes blocking_failures count" {
     cd "$PROJECT_ROOT"
-    run "$SCRIPT" v1.4.0 --generate
+    run "$SCRIPT" v0.4.0 --generate
     [ "$status" -eq 0 ]
     # Should include blocking_failures count
     [[ "$output" =~ "blocking_failures:" ]]

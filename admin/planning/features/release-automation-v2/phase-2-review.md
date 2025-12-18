@@ -85,7 +85,7 @@
 
 ### Test Scenarios
 
-- [x] Happy path scenarios defined (Valid versions: v1.4.0 → v1.5.0)
+- [x] Happy path scenarios defined (Valid versions: v0.4.0 → v0.5.0)
 - [x] Edge cases identified (Invalid formats, missing files)
 - [x] Error cases covered (Validation failures, backup restoration)
 - [x] Integration scenarios specified (Standalone + `/release-finalize` integration)
@@ -93,8 +93,8 @@
 ### Test Cases
 
 - [x] Unit tests planned (Task 6: Bats test file specified)
-- [x] Integration tests planned (Standalone script, `/release-finalize`, v1.5.0 release)
-- [x] Manual tests identified (v1.5.0 first real use)
+- [x] Integration tests planned (Standalone script, `/release-finalize`, v0.5.0 release)
+- [x] Manual tests identified (v0.5.0 first real use)
 - [x] Test data requirements clear (Test files, version pairs)
 
 ### Test Coverage

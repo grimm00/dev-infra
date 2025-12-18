@@ -18,6 +18,7 @@
 ### Status & Tracking
 
 - **[Status Tracking](STATUS.md)** - Complete command status and progress
+- **[Usage Tracker](usage-tracker.md)** - Command usage for graduation assessment
 - **[Command Coverage](../../opportunities/external/work-prod/cursor-commands/adaptations/command-coverage.md)** - Adaptation documentation status
 
 ### Source Materials
@@ -102,6 +103,7 @@ This directory plans the integration of 14 sophisticated workflow automation com
 commands/
 ├── README.md                    # 📍 HUB - This file
 ├── STATUS.md                    # Status tracking for all commands
+├── usage-tracker.md             # Usage tracking for graduation
 ├── phase-1-core/                # CRITICAL commands
 │   ├── PLAN.md                  # Phase 1 implementation plan
 │   ├── pr-command.md            # PR command planning
@@ -156,6 +158,6 @@ commands/
 
 ---
 
-**Last Updated:** 2025-12-07  
-**Status:** 🟡 Planned  
-**Next:** Create Phase 1 planning documents
+**Last Updated:** 2025-12-16  
+**Status:** ✅ Active  
+**Next:** Track command usage for graduation decisions

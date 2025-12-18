@@ -16,11 +16,11 @@ setup() {
     
     # Test template directories
     TEST_STANDARD_DIR="$TEST_TMPDIR/standard-project"
-    TEST_EXPERIMENTAL_DIR="$TEST_TMPDIR/experimental-project"
+    TEST_LEARNING_DIR="$TEST_TMPDIR/learning-project"
     
     # Create test template directories
     mkdir -p "$TEST_STANDARD_DIR"
-    mkdir -p "$TEST_EXPERIMENTAL_DIR"
+    mkdir -p "$TEST_LEARNING_DIR"
     
     # Create test manifest
     mkdir -p "$TEST_TMPDIR/scripts"
@@ -34,7 +34,7 @@ teardown() {
     
     # Clean up test directories
     rm -rf "$TEST_STANDARD_DIR" 2>/dev/null || true
-    rm -rf "$TEST_EXPERIMENTAL_DIR" 2>/dev/null || true
+    rm -rf "$TEST_LEARNING_DIR" 2>/dev/null || true
     rm -rf "$TEST_TMPDIR/scripts" 2>/dev/null || true
 }
 
@@ -45,16 +45,16 @@ teardown() {
 @test "validate-template-sync: passes when templates are in sync" {
     # Setup: Create identical files in both templates
     echo "identical content" > "$TEST_STANDARD_DIR/test-file.txt"
-    echo "identical content" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    echo "identical content" > "$TEST_LEARNING_DIR/test-file.txt"
     
     mkdir -p "$TEST_STANDARD_DIR/test-dir"
-    mkdir -p "$TEST_EXPERIMENTAL_DIR/test-dir"
+    mkdir -p "$TEST_LEARNING_DIR/test-dir"
     echo "dir content" > "$TEST_STANDARD_DIR/test-dir/file.txt"
-    echo "dir content" > "$TEST_EXPERIMENTAL_DIR/test-dir/file.txt"
+    echo "dir content" > "$TEST_LEARNING_DIR/test-dir/file.txt"
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -65,11 +65,11 @@ teardown() {
 @test "validate-template-sync: fails when shared file differs" {
     # Setup: Create different content in one template
     echo "content version 1" > "$TEST_STANDARD_DIR/test-file.txt"
-    echo "content version 2" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    echo "content version 2" > "$TEST_LEARNING_DIR/test-file.txt"
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -77,27 +77,27 @@ teardown() {
     [ "$status" -ne 0 ]
 }
 
-@test "validate-template-sync: ignores experimental-only files" {
-    # Setup: Create experimental-only file (not in manifest)
-    echo "experimental content" > "$TEST_EXPERIMENTAL_DIR/experimental-only.txt"
+@test "validate-template-sync: ignores template-specific files" {
+    # Setup: Create template-specific file (not in manifest)
+    echo "learning content" > "$TEST_LEARNING_DIR/learning-only.txt"
     
     # Create identical shared files
     echo "shared content" > "$TEST_STANDARD_DIR/test-file.txt"
-    echo "shared content" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    echo "shared content" > "$TEST_LEARNING_DIR/test-file.txt"
     
     # Create identical shared directories (required by manifest)
     mkdir -p "$TEST_STANDARD_DIR/test-dir"
-    mkdir -p "$TEST_EXPERIMENTAL_DIR/test-dir"
+    mkdir -p "$TEST_LEARNING_DIR/test-dir"
     echo "dir content" > "$TEST_STANDARD_DIR/test-dir/file.txt"
-    echo "dir content" > "$TEST_EXPERIMENTAL_DIR/test-dir/file.txt"
+    echo "dir content" > "$TEST_LEARNING_DIR/test-dir/file.txt"
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
-    # Experimental-only files ignored = success (no drift)
+    # Template-specific files ignored = success (no drift)
     [ "$status" -eq 0 ]
 }
 
@@ -111,7 +111,7 @@ teardown() {
     
     # Run script with empty manifest
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -124,11 +124,11 @@ teardown() {
 
 @test "validate-template-sync: handles missing template directory" {
     # Setup: Remove one template directory
-    rm -rf "$TEST_EXPERIMENTAL_DIR"
+    rm -rf "$TEST_LEARNING_DIR"
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -142,7 +142,7 @@ teardown() {
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -153,11 +153,11 @@ teardown() {
 @test "validate-template-sync: handles whitespace-only differences" {
     # Setup: Create files with only whitespace differences
     echo "content" > "$TEST_STANDARD_DIR/test-file.txt"
-    echo -e "content\n" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    echo -e "content\n" > "$TEST_LEARNING_DIR/test-file.txt"
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -168,13 +168,13 @@ teardown() {
 @test "validate-template-sync: handles directory differences" {
     # Setup: Create directories with different files
     mkdir -p "$TEST_STANDARD_DIR/test-dir"
-    mkdir -p "$TEST_EXPERIMENTAL_DIR/test-dir"
+    mkdir -p "$TEST_LEARNING_DIR/test-dir"
     echo "file1" > "$TEST_STANDARD_DIR/test-dir/file.txt"
-    echo "file2" > "$TEST_EXPERIMENTAL_DIR/test-dir/file.txt"
+    echo "file2" > "$TEST_LEARNING_DIR/test-dir/file.txt"
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -193,15 +193,15 @@ EOF
     
     # Create identical files and directories
     echo "content" > "$TEST_STANDARD_DIR/test-file.txt"
-    echo "content" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    echo "content" > "$TEST_LEARNING_DIR/test-file.txt"
     mkdir -p "$TEST_STANDARD_DIR/test-dir"
-    mkdir -p "$TEST_EXPERIMENTAL_DIR/test-dir"
+    mkdir -p "$TEST_LEARNING_DIR/test-dir"
     echo "dir content" > "$TEST_STANDARD_DIR/test-dir/file.txt"
-    echo "dir content" > "$TEST_EXPERIMENTAL_DIR/test-dir/file.txt"
+    echo "dir content" > "$TEST_LEARNING_DIR/test-dir/file.txt"
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -209,31 +209,31 @@ EOF
     [ "$status" -eq 0 ]
 }
 
-@test "validate-template-sync: detects file missing in experimental" {
-    # Setup: File exists in standard but not experimental
+@test "validate-template-sync: detects file missing in learning" {
+    # Setup: File exists in standard but not learning
     echo "content" > "$TEST_STANDARD_DIR/test-file.txt"
-    # (don't create in experimental)
+    # (don't create in learning)
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
-    # Should fail - drift detected (file missing in experimental)
+    # Should fail - drift detected (file missing in learning)
     [ "$status" -ne 0 ]
     [[ "$output" == *"missing"* ]] || [[ "$output" == *"DRIFT"* ]] || \
     [[ "$output" == *"test-file.txt"* ]]
 }
 
 @test "validate-template-sync: detects file missing in standard" {
-    # Setup: File exists in experimental but not standard
-    echo "content" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    # Setup: File exists in learning but not standard
+    echo "content" > "$TEST_LEARNING_DIR/test-file.txt"
     # (don't create in standard)
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -243,19 +243,19 @@ EOF
     [[ "$output" == *"test-file.txt"* ]]
 }
 
-@test "validate-template-sync: detects directory missing in experimental" {
-    # Setup: Directory exists in standard but not experimental
+@test "validate-template-sync: detects directory missing in learning" {
+    # Setup: Directory exists in standard but not learning
     mkdir -p "$TEST_STANDARD_DIR/test-dir"
     echo "file" > "$TEST_STANDARD_DIR/test-dir/file.txt"
-    # (don't create in experimental)
+    # (don't create in learning)
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
-    # Should fail - drift detected (directory missing in experimental)
+    # Should fail - drift detected (directory missing in learning)
     [ "$status" -ne 0 ]
     [[ "$output" == *"missing"* ]] || [[ "$output" == *"DRIFT"* ]] || \
     [[ "$output" == *"test-dir"* ]]
@@ -264,11 +264,11 @@ EOF
 @test "validate-template-sync: outputs clear error messages" {
     # Setup: Create different content
     echo "content1" > "$TEST_STANDARD_DIR/test-file.txt"
-    echo "content2" > "$TEST_EXPERIMENTAL_DIR/test-file.txt"
+    echo "content2" > "$TEST_LEARNING_DIR/test-file.txt"
     
     # Run script with test directories
     cd "$TEST_TMPDIR"
-    STANDARD_DIR="$TEST_STANDARD_DIR" EXPERIMENTAL_DIR="$TEST_EXPERIMENTAL_DIR" \
+    STANDARD_DIR="$TEST_STANDARD_DIR" LEARNING_DIR="$TEST_LEARNING_DIR" \
     MANIFEST="$TEST_TMPDIR/scripts/template-sync-manifest.txt" \
     run bash "$SCRIPT" 2>&1
     
@@ -278,4 +278,3 @@ EOF
     [[ "$output" == *"DRIFT DETECTED"* ]] || \
     [[ "$output" == *"Template sync validation FAILED"* ]]
 }
-

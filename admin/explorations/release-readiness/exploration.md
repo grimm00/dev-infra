@@ -46,7 +46,7 @@ We're exploring how to improve and potentially automate the release readiness as
 ## 💡 Initial Thoughts
 
 **Current State:**
-- Release readiness assessments exist for v1.0.0, v1.1.0, v1.2.0, v1.3.0
+- Release readiness assessments exist for v0.1.0, v0.1.1, v0.2.0, v0.3.0
 - Assessments include: Significant functionality, bug fixes, documentation, testing, blocking issues
 - Manual checklists and evaluation
 - Release process documented in `admin/planning/releases/PROCESS.md`
@@ -109,10 +109,10 @@ We're exploring how to improve and potentially automate the release readiness as
 ## 📝 Notes
 
 **Current Release Readiness Documents:**
-- `admin/planning/releases/v1.0.0/CHECKLIST.md` - Initial release checklist
-- `admin/planning/releases/v1.1.0/CHECKLIST.md` - Release checklist with validation
-- `admin/planning/releases/v1.2.0/RELEASE-READINESS.md` - Release readiness assessment
-- `admin/planning/releases/v1.3.0/RELEASE-READINESS.md` - Release readiness assessment
+- `admin/planning/releases/v0.1.0/CHECKLIST.md` - Initial release checklist
+- `admin/planning/releases/v0.1.1/CHECKLIST.md` - Release checklist with validation
+- `admin/planning/releases/v0.2.0/RELEASE-READINESS.md` - Release readiness assessment
+- `admin/planning/releases/v0.3.0/RELEASE-READINESS.md` - Release readiness assessment
 
 **Related Commands:**
 - `/task-release` - Release task management

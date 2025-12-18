@@ -147,7 +147,7 @@ on:
 - [x] Update release process docs
 - [x] Update `/post-release` command (note tags are automatic)
 - [x] Add workflow to `.github/workflows/README.md` (created)
-- [x] Update v1.4.0 retrospective action items (mark complete)
+- [x] Update v0.4.0 retrospective action items (mark complete)
 
 **Estimated:** 30 minutes
 
@@ -161,7 +161,7 @@ on:
 - [x] Dry-run mode works
 - [x] Documentation updated
 - [ ] Tested with mock release PR (to be tested in PR validation)
-- [ ] Workflow merged to develop (ready for v1.5.0) (pending PR)
+- [ ] Workflow merged to develop (ready for v0.5.0) (pending PR)
 
 ---
 
@@ -171,10 +171,10 @@ on:
 
 | Test Case      | Input            | Expected           |
 | -------------- | ---------------- | ------------------ |
-| Valid version  | `release/v1.5.0` | Extract `v1.5.0`   |
+| Valid version  | `release/v0.5.0` | Extract `v0.5.0`   |
 | Valid version  | `release/v2.0.0` | Extract `v2.0.0`   |
 | Invalid branch | `feat/something` | Skip (not release) |
-| Invalid format | `release/1.5.0`  | Error (no 'v')     |
+| Invalid format | `release/0.5.0`  | Error (no 'v')     |
 | Invalid format | `release/v1.5`   | Error (no patch)   |
 
 ### Integration Testing
@@ -192,7 +192,7 @@ on:
    - Verify tag created
    - Verify format correct
 
-3. **v1.5.0 Release:**
+3. **v0.5.0 Release:**
    - First real use of automation
    - Verify end-to-end flow
 

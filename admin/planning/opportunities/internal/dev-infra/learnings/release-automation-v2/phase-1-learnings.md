@@ -11,7 +11,7 @@
 
 ## 📋 Overview
 
-Phase 1 automated GitHub release tag creation when release PRs are merged to `main`. This eliminates the manual step of creating and pushing tags, completing the release automation workflow introduced in v1.4.0.
+Phase 1 automated GitHub release tag creation when release PRs are merged to `main`. This eliminates the manual step of creating and pushing tags, completing the release automation workflow introduced in v0.4.0.
 
 **Deliverables:**
 - `.github/workflows/create-release-tag.yml` - Automatic tag creation workflow
@@ -183,7 +183,7 @@ Initial implementation focused on automated PR merge path (primary use case), an
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to tag (e.g., v1.5.0)'
+        description: 'Version to tag (e.g., v0.5.0)'
         required: false
         type: string
       branch:
@@ -194,7 +194,7 @@ Initial implementation focused on automated PR merge path (primary use case), an
 - Document workflow testing procedures
 - Include manual testing checklist
 
-**Priority:** 🟠 HIGH - Should be fixed before v1.5.0 release (needed for testing)
+**Priority:** 🟠 HIGH - Should be fixed before v0.5.0 release (needed for testing)
 
 ---
 
@@ -234,7 +234,7 @@ Focused on happy path (first-time tag creation) and didn't consider re-run scena
 ### Limited Workflow Testing
 
 **What the problem was:**
-Workflow was validated syntactically but not tested end-to-end before merge. Testing will occur during v1.5.0 release (first real use).
+Workflow was validated syntactically but not tested end-to-end before merge. Testing will occur during v0.5.0 release (first real use).
 
 **Why it occurred:**
 - No test environment for release workflows
@@ -255,7 +255,7 @@ Workflow was validated syntactically but not tested end-to-end before merge. Tes
 **Template changes needed:**
 - Add workflow testing guide
 - Document how to test workflows safely
-- Include test branch patterns (e.g., `test-release/v1.0.0-test`)
+- Include test branch patterns (e.g., `test-release/v0.1.0-test`)
 - Provide workflow validation checklist
 
 **Priority:** 🟡 MEDIUM - Testing strategy should be improved for future workflows

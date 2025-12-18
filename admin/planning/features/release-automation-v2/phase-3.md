@@ -3,7 +3,7 @@
 **Phase:** 3 of 3  
 **Status:** ⏸️ Deferred  
 **Priority:** ~~🟡 Medium~~ → Deferred  
-**Effort:** ~~8-13 hours (1-2 days)~~ → N/A for v1.5.0  
+**Effort:** ~~8-13 hours (1-2 days)~~ → N/A for v0.5.0  
 **Dependencies:** Phase 1 & 2 recommended (includes their outputs)
 
 ---
@@ -14,7 +14,7 @@
 
 **Reason:** This phase conflicts with the template factory identity (ADR-001). Release automation is internal tooling that should not be automatically templatized.
 
-**Reconsideration:** v1.6.0+ after meeting graduation criteria:
+**Reconsideration:** v0.6.0+ after meeting graduation criteria:
 - [ ] ≥1 release cycle in dev-infra
 - [ ] No major changes in 2+ weeks
 - [ ] Documentation 100% complete

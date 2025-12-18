@@ -536,15 +536,13 @@ Dev-Infra Project Template Generator
 Creates new projects from dev-infra templates
 
 Template Types:
-  standard-project     Full-featured stable template (default)
+  standard-project     Full-featured template with all commands (default)
   learning-project     Educational/tutorial focused template
-  experimental-project Includes experimental/evolving commands
 
 Examples:
   $0 my-app
   $0 my-app standard-project
   $0 my-app learning-project
-  $0 my-app experimental-project
 
 Options:
   --non-interactive    Run in non-interactive mode (reads from environment variables)
@@ -555,7 +553,7 @@ Non-Interactive Mode:
   
   Required:
     PROJECT_NAME         Project name
-    PROJECT_TYPE         Template type: standard-project, learning-project, or experimental-project
+    PROJECT_TYPE         Template type: standard-project or learning-project
   
   Optional:
     PROJECT_DESCRIPTION  Project description
@@ -586,8 +584,8 @@ validate_non_interactive_inputs() {
     if [[ -z "$PROJECT_TYPE" ]]; then
         print_error "PROJECT_TYPE environment variable is required in non-interactive mode"
         errors=$((errors + 1))
-    elif [[ "$PROJECT_TYPE" != "standard-project" && "$PROJECT_TYPE" != "learning-project" && "$PROJECT_TYPE" != "experimental-project" ]]; then
-        print_error "PROJECT_TYPE must be 'standard-project', 'learning-project', or 'experimental-project', got: $PROJECT_TYPE"
+    elif [[ "$PROJECT_TYPE" != "standard-project" && "$PROJECT_TYPE" != "learning-project" ]]; then
+        print_error "PROJECT_TYPE must be 'standard-project' or 'learning-project', got: $PROJECT_TYPE"
         errors=$((errors + 1))
     fi
     
@@ -866,8 +864,6 @@ main() {
             project_type="Standard Project"
         elif [ "$PROJECT_TYPE" = "learning-project" ]; then
             project_type="Learning Project"
-        elif [ "$PROJECT_TYPE" = "experimental-project" ]; then
-            project_type="Experimental Project"
         fi
         print_status "Using project type: $project_type"
     else
@@ -875,12 +871,11 @@ main() {
         echo "Select project type:"
         echo "1) Standard Project (application, tool, service)"
         echo "2) Learning Project (tutorial, exercises, reference)"
-        echo "3) Experimental Project - Includes experimental/evolving commands ⚠️"
         echo
         
         local project_type_choice
         while true; do
-            read -p "Enter choice [1-3]: " project_type_choice
+            read -p "Enter choice [1-2]: " project_type_choice
             case $project_type_choice in
                 1)
                     project_type="Standard Project"
@@ -892,32 +887,11 @@ main() {
                     template_type="learning-project"
                     break
                     ;;
-                3)
-                    project_type="Experimental Project"
-                    template_type="experimental-project"
-                    break
-                    ;;
                 *)
-                    echo "Please enter 1, 2, or 3"
+                    echo "Please enter 1 or 2"
                     ;;
             esac
         done
-    fi
-    
-    # Show stability warning for experimental template
-    if [ "$template_type" = "experimental-project" ] && [ "$NON_INTERACTIVE_MODE" != "true" ]; then
-        echo
-        print_warning "⚠️  EXPERIMENTAL TEMPLATE SELECTED"
-        echo
-        echo "This template includes experimental/evolving commands that:"
-        echo "- May change without notice"
-        echo "- May have incomplete documentation"
-        echo "- Provide early access to new features"
-        echo
-        if ! prompt_yes_no "Are you sure you want to use the experimental template?" "n"; then
-            print_warning "Project creation cancelled"
-            exit 0
-        fi
     fi
     
     # Confirm project creation

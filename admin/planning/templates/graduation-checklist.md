@@ -117,10 +117,10 @@ Fill out all sections and make a decision.
 
 | Criterion | Pass? | Reason |
 |-----------|-------|--------|
-| Time in dev-infra | ✅ | v1.4.0 |
+| Time in dev-infra | ✅ | v0.4.0 |
 | Stability | ✅ | Stable 2+ weeks |
 | Documentation | ✅ | Complete |
-| Demonstrated use | ✅ | Used for v1.4.0 release |
+| Demonstrated use | ✅ | Used for v0.4.0 release |
 | User request | ❌ | No external demand |
 | Low complexity | ❌ | Requires meta-project context |
 | Self-contained | ❌ | Needs release-specific tooling |
@@ -132,10 +132,10 @@ Fill out all sections and make a decision.
 
 | Criterion | Pass? | Reason |
 |-----------|-------|--------|
-| Time in dev-infra | ✅ | v1.3.0 |
+| Time in dev-infra | ✅ | v0.3.0 |
 | Stability | ✅ | Stable 4+ weeks |
 | Documentation | ✅ | Complete |
-| Demonstrated use | ✅ | Used throughout v1.4.0 cycle |
+| Demonstrated use | ✅ | Used throughout v0.4.0 cycle |
 | User request | ✅ | Valuable for any project |
 | Low complexity | ✅ | Simple workflow |
 | Self-contained | ✅ | No dev-infra dependencies |

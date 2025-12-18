@@ -409,13 +409,13 @@ This document captures requirements discovered during research on dev-infra's id
 
 ## ⚠️ Constraints
 
-### C-1: v1.5.0 Scope Alignment
+### C-1: v0.5.0 Scope Alignment
 
-**Description:** v1.5.0 scope must align with template-centric identity decision.
+**Description:** v0.5.0 scope must align with template-centric identity decision.
 
 **Source:** [research-release-automation-scope.md](research-release-automation-scope.md)
 
-**Impact:** Blocks v1.5.0 planning until identity decision made
+**Impact:** Blocks v0.5.0 planning until identity decision made
 
 ---
 

@@ -13,7 +13,7 @@
 
 ## 🎯 Overview
 
-Standardize release readiness criteria based on current assessments (v1.2.0, v1.3.0) to ensure consistency and clarity for future releases. This phase establishes the "rules of the road" for release readiness.
+Standardize release readiness criteria based on current assessments (v0.2.0, v0.3.0) to ensure consistency and clarity for future releases. This phase establishes the "rules of the road" for release readiness.
 
 **Success Definition:**
 - A standardized criteria reference document exists
@@ -35,7 +35,7 @@ Standardize release readiness criteria based on current assessments (v1.2.0, v1.
 
 ### 1. Document Standardized Criteria Set (Docs)
 
-- [x] Extract criteria from v1.2.0 and v1.3.0 assessments
+- [x] Extract criteria from v0.2.0 and v0.3.0 assessments
 - [x] Create `admin/planning/releases/standard-criteria.md`
 - [x] Define each criterion clearly
 - [x] Add examples of passing/failing states

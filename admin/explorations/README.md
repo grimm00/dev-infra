@@ -11,7 +11,7 @@
 ### Active Explorations
 
 - **[Template Architecture](template-architecture/README.md)** - Explore alternative directory structures beyond frontend/backend (🔴 Exploration) ⭐ **NEW**
-- **[Experimental Template](experimental-template/README.md)** - Templates with evolving/experimental commands (✅ Decisions Complete → v1.6.0)
+- **[Experimental Template](experimental-template/README.md)** - Templates with evolving/experimental commands (✅ Decisions Complete → v0.6.0)
 - **[Command Branch Workflow](command-branch-workflow/README.md)** - Dedicated branch pattern and workflow for command management (🔴 Exploration)
 
 ### Transitioned Explorations

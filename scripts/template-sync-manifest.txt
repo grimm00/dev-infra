@@ -1,25 +1,11 @@
-# Files that must be identical between standard and experimental templates
+# Files that must be identical between standard-project and learning-project templates
 # Lines starting with # are comments
 # Use relative paths from template root
-# Directories ending with / will be recursively checked
+#
+# Note: experimental-project was merged into standard-project (ADR-001: Commands as Guides)
+# All templates now receive all commands - no stable/experimental distinction
 
-# Infrastructure files
-.gitignore
-.dockerignore
-
-# CI/CD workflows
-.github/workflows/ci.yml
-
-# Core project structure directories
-backend/
-frontend/
-tests/
-scripts/
-
-# Documentation structure
-docs/maintainers/
-
-# Stable commands (all commands except Evolving tier)
+# All commands (19 total)
 .cursor/commands/cursor-rules.md
 .cursor/commands/decision.md
 .cursor/commands/explore.md
@@ -34,14 +20,13 @@ docs/maintainers/
 .cursor/commands/reflect.md
 .cursor/commands/reflection-artifacts.md
 .cursor/commands/research.md
+.cursor/commands/status.md
 .cursor/commands/task-improvement.md
 .cursor/commands/task-phase.md
 .cursor/commands/task-release.md
 .cursor/commands/transition-plan.md
 
-# Note: The following files are intentionally different:
-# - .cursor/commands/status.md (experimental-only, Evolving tier)
-# - README.md (different stability disclaimers)
-# - start.txt (may reference experimental nature)
-# - docs/EXPERIMENTAL.md (experimental-only)
-
+# Note: The following files are intentionally different between templates:
+# - README.md (different project type descriptions)
+# - start.txt (different initialization guidance)
+# - docs/ structure (learning-project has stages, standard has backend/frontend)

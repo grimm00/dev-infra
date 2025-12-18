@@ -94,7 +94,7 @@
 
 **Status:** ✅ Addressed 2025-12-12
 
-**Resolution:** ADR-001 updated with "Scope Limitations" section documenting that experimental template is intentionally based only on `standard-project` for v1.6.0.
+**Resolution:** ADR-001 updated with "Scope Limitations" section documenting that experimental template is intentionally based only on `standard-project` for v0.6.0.
 
 **Rationale documented:**
 - Learning projects prioritize stability for educational purposes
@@ -111,7 +111,7 @@
 - Current command distribution (18 standard, 5 internal)
 - `/status` identified as definite addition for experimental
 - Release commands marked as TBD for future consideration
-- Clear implementation decision for v1.6.0
+- Clear implementation decision for v0.6.0
 
 ---
 

@@ -1,7 +1,7 @@
 # Research: Release Automation v2 Scope
 
 **Research Topic:** Dev-Infra Identity & Focus  
-**Question:** Should v1.5.0's Release Automation v2 proceed as planned, be rescoped, or deferred?  
+**Question:** Should v0.5.0's Release Automation v2 proceed as planned, be rescoped, or deferred?  
 **Status:** ✅ Complete  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-11
@@ -10,7 +10,7 @@
 
 ## 🎯 Research Question
 
-Should v1.5.0's Release Automation v2 proceed as planned, be rescoped, or deferred? This is an immediate decision point that depends on the identity question.
+Should v0.5.0's Release Automation v2 proceed as planned, be rescoped, or deferred? This is an immediate decision point that depends on the identity question.
 
 ---
 
@@ -19,7 +19,7 @@ Should v1.5.0's Release Automation v2 proceed as planned, be rescoped, or deferr
 - [x] Goal 1: Review Release Automation v2 planned scope
 - [x] Goal 2: Assess alignment with template-centric identity
 - [x] Goal 3: Evaluate each phase's value to template users
-- [x] Goal 4: Recommend scope for v1.5.0
+- [x] Goal 4: Recommend scope for v0.5.0
 
 ---
 
@@ -29,7 +29,7 @@ Should v1.5.0's Release Automation v2 proceed as planned, be rescoped, or deferr
 - [x] Source 1: Release Automation v2 feature plan
 - [x] Source 2: Template user needs research
 - [x] Source 3: Command maintenance research
-- [x] Source 4: Current v1.4.0 capabilities
+- [x] Source 4: Current v0.4.0 capabilities
 
 ---
 
@@ -136,7 +136,7 @@ Tag and version automation:
 Should release commands graduate to templates?
 
 **Arguments FOR:**
-- Consistent with v1.4.0 Release Readiness feature
+- Consistent with v0.4.0 Release Readiness feature
 - Some projects might benefit
 - Commands are "guides" not code
 
@@ -166,14 +166,14 @@ If we DO proceed, Phase 3 should come LAST:
 - Improves dev-infra's release workflow
 - Doesn't add complexity to templates
 - Aligns with "template factory" identity
-- Can revisit Phase 3 in v1.6.0 if there's demand
+- Can revisit Phase 3 in v0.6.0 if there's demand
 
 **Alternative Recommendation: Option C (Defer)**
 
 If the goal is maximum template focus:
 - Defer all Release Automation v2
-- Focus v1.5.0 on template quality/stability
-- Use v1.4.0 release tooling as-is
+- Focus v0.5.0 on template quality/stability
+- Use v0.4.0 release tooling as-is
 
 ---
 
@@ -191,14 +191,14 @@ If the goal is maximum template focus:
 
 ### Constraints
 
-- **C-1:** v1.5.0 scope must align with template-centric identity
+- **C-1:** v0.5.0 scope must align with template-centric identity
 - **C-2:** Template additions require demonstrated user need
 
 ---
 
 ## 🚀 Next Steps
 
-1. Decide on v1.5.0 scope (recommend Option D)
+1. Decide on v0.5.0 scope (recommend Option D)
 2. If proceeding: Complete Phase 1-2 as internal tooling
 3. Track template integration as separate future consideration
 

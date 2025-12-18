@@ -165,7 +165,7 @@ From the ADRs and research:
 - [ ] Template generation tested end-to-end
 - [ ] CI drift detection operational
 - [ ] Documentation complete
-- [ ] Release notes prepared for v1.6.0
+- [ ] Release notes prepared for v0.6.0
 - [ ] Team notified of availability
 
 ---
@@ -178,7 +178,7 @@ From the ADRs and research:
 - [ ] Stability indicators visible
 - [ ] Documentation complete
 - [ ] Tests passing
-- [ ] Ready for v1.6.0 release
+- [ ] Ready for v0.6.0 release
 
 ---
 

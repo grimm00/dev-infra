@@ -4,7 +4,7 @@
 **Status:** 🔴 Not Started  
 **Created:** 2025-12-12  
 **Last Updated:** 2025-12-12  
-**Target:** v1.6.0  
+**Target:** v0.6.0  
 **Priority:** Medium
 
 ---

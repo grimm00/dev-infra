@@ -4,7 +4,7 @@
 **Status:** 🔴 Exploration  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-11  
-**Target:** v1.6.0 (after identity established)
+**Target:** v0.6.0 (after identity established)
 
 ---
 
@@ -31,7 +31,7 @@ This allows users who want cutting-edge features to opt-in while keeping the sta
 
 **Current Phase:** Exploration (captured for later)  
 **Blocked By:** Identity transition must complete first  
-**Target Release:** v1.6.0
+**Target Release:** v0.6.0
 
 ---
 

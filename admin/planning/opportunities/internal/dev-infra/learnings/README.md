@@ -12,7 +12,7 @@
 ### Feature-Specific Learnings
 
 - **[Experimental Template Learnings](experimental-template/README.md)** - Phase learnings from Experimental Template feature (3 of 4 phases, 🟠 In Progress) ⭐ **NEW**
-- **[Release Automation v2 Learnings](release-automation-v2/README.md)** - Phase and release learnings from Release Automation v2 feature (2 of 2 phases + v1.5.0 release, ✅ Complete)
+- **[Release Automation v2 Learnings](release-automation-v2/README.md)** - Phase and release learnings from Release Automation v2 feature (2 of 2 phases + v0.5.0 release, ✅ Complete)
 - **[Release Readiness Learnings](release-readiness/README.md)** - Phase and fix batch learnings from Release Readiness feature (4 phases + 5 fix batches, 🟠 In Progress)
 - **[Templates Enhancement Learnings](templates-enhancement/README.md)** - Phase learnings from Templates Enhancement feature (5 phases, ✅ Complete)
 - **[Template Generation Testing Automation Learnings](template-generation-testing-automation/README.md)** - Phase learnings from Template Generation Testing Automation CI/CD improvement (1 phase)

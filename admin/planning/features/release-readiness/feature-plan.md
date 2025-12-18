@@ -37,7 +37,7 @@ Implement standardized release readiness assessment and automation for dev-infra
 - [ ] Assessment structure (checklist format) implemented
 - [ ] Process integration with `/task-release` and `/pr --release` commands
 - [ ] Historical tracking system implemented
-- [ ] Release readiness assessment used for v1.4.0 release
+- [ ] Release readiness assessment used for v0.4.0 release
 - [ ] Documentation complete
 
 ---

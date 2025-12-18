@@ -81,7 +81,7 @@ fi
 After comprehensive investigation (see [Platform Differences Investigation](platform-differences-investigation.md)), the following differences were identified:
 
 1. **Tool Versions:**
-   - Ubuntu: BATS 1.2.0-1.3.0 (apt-get)
+   - Ubuntu: BATS 0.2.0-0.3.0 (apt-get)
    - macOS: BATS 1.8.0+ (Homebrew)
    - **Impact:** Low - Both versions work, but may have subtle differences
 

@@ -23,7 +23,7 @@ Usage: $(basename "$0") [OPTIONS] VERSION
 Check release readiness for a given version.
 
 Arguments:
-    VERSION         Version to check (e.g., v1.4.0)
+    VERSION         Version to check (e.g., v0.4.0)
 
 Options:
     -h, --help      Show this help message
@@ -32,10 +32,10 @@ Options:
     --generate      Generate markdown assessment file
 
 Examples:
-    $(basename "$0") v1.4.0
-    $(basename "$0") --verbose v1.4.0
-    $(basename "$0") --json v1.4.0
-    $(basename "$0") --generate v1.4.0
+    $(basename "$0") v0.4.0
+    $(basename "$0") --verbose v0.4.0
+    $(basename "$0") --json v0.4.0
+    $(basename "$0") --generate v0.4.0
 
 EOF
 }

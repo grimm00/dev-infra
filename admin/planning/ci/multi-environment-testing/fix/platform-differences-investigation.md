@@ -81,7 +81,7 @@ This document investigates the differences between Ubuntu and macOS testing envi
 **Ubuntu (apt-get install bats):**
 
 - Package: `bats` (Ubuntu package)
-- Version: Typically 1.2.0 or 1.3.0 (varies by Ubuntu version)
+- Version: Typically 0.2.0 or 0.3.0 (varies by Ubuntu version)
 - Installation: `sudo apt-get install -y bats`
 - Location: `/usr/bin/bats`
 
@@ -450,7 +450,7 @@ jobs:
 
 | Tool     | Ubuntu      | macOS        | Impact                    |
 | -------- | ----------- | ------------ | ------------------------- |
-| BATS     | 1.2.0-1.3.0 | 1.8.0+       | Low (tests work on both)  |
+| BATS     | 0.2.0-0.3.0 | 1.8.0+       | Low (tests work on both)  |
 | Git      | 2.34+       | Varies       | Low (configured in tests) |
 | Bash     | 5.1+        | 3.2 (system) | Low (CI uses bash)        |
 | `gh` CLI | N/A         | N/A          | None (mocked in tests)    |

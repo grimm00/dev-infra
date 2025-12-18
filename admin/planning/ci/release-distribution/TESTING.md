@@ -76,9 +76,9 @@ git push origin :refs/tags/v1.0.1-test
 **Linux/Mac:**
 ```bash
 # Download tar.gz
-curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.1.0/dev-infra-1.1.0.tar.gz" -o dev-infra.tar.gz
+curl -L "https://github.com/grimm00/dev-infra/releases/download/v0.1.1/dev-infra-0.1.1.tar.gz" -o dev-infra.tar.gz
 tar -xzf dev-infra.tar.gz
-cd dev-infra-1.1.0
+cd dev-infra-0.1.1
 
 # Verify structure
 ls -la
@@ -89,9 +89,9 @@ ls -la
 **Windows:**
 ```powershell
 # Download zip
-curl -L "https://github.com/grimm00/dev-infra/releases/download/v1.1.0/dev-infra-1.1.0.zip" -o dev-infra.zip
+curl -L "https://github.com/grimm00/dev-infra/releases/download/v0.1.1/dev-infra-0.1.1.zip" -o dev-infra.zip
 Expand-Archive dev-infra.zip
-cd dev-infra-1.1.0
+cd dev-infra-0.1.1
 
 # Verify structure
 dir

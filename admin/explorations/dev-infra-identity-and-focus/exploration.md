@@ -157,13 +157,13 @@ Tag automation was explored because:
    - An ADR (Architecture Decision Record)
    - A restructuring chore
    - A new project philosophy document
-3. Decide if v1.5.0 should proceed as planned or be rescoped
+3. Decide if v0.5.0 should proceed as planned or be rescoped
 
 ---
 
 ## 📝 Notes
 
-### From the v1.4.0 Post-Release Discussion
+### From the v0.4.0 Post-Release Discussion
 
 > "I have a hard time figuring out how to handle certain features and improvements. Should enhancements be tracked in ci, or should that topic remain the hub for improvements on that feature?"
 

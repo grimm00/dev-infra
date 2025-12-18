@@ -8,7 +8,7 @@
 
 ## Context
 
-Release readiness assessments currently use manual checklists with consistent criteria across releases (v1.2.0, v1.3.0), but these criteria are not standardized or documented. This makes it difficult to automate checks, ensure consistency, and improve the assessment process over time.
+Release readiness assessments currently use manual checklists with consistent criteria across releases (v0.2.0, v0.3.0), but these criteria are not standardized or documented. This makes it difficult to automate checks, ensure consistency, and improve the assessment process over time.
 
 **Related Research:**
 - [Research Summary](../../research/release-readiness/research-summary.md)
@@ -155,7 +155,7 @@ Release readiness assessments currently use manual checklists with consistent cr
 - Release type support provides flexibility
 
 **Research Support:**
-- Research found consistent criteria across v1.2.0 and v1.3.0 assessments
+- Research found consistent criteria across v0.2.0 and v0.3.0 assessments
 - Categorization helps understand automation opportunities
 - Blocking vs. non-blocking distinction helps prioritize automation
 - Release type differences identified in research
@@ -183,7 +183,7 @@ Release readiness assessments currently use manual checklists with consistent cr
 - [Research Summary](../../research/release-readiness/research-summary.md)
 - [Criteria Analysis Research](../../research/release-readiness/research-criteria-analysis.md)
 - [Requirements Document](../../research/release-readiness/requirements.md)
-- [Release Readiness Assessments](../../planning/releases/v1.2.0/RELEASE-READINESS.md), [v1.3.0](../../planning/releases/v1.3.0/RELEASE-READINESS.md)
+- [Release Readiness Assessments](../../planning/releases/v0.2.0/RELEASE-READINESS.md), [v0.3.0](../../planning/releases/v0.3.0/RELEASE-READINESS.md)
 
 ---
 

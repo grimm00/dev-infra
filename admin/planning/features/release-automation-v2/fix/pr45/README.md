@@ -46,11 +46,11 @@
   - **Description:** The PR calls out "Backup and restore on failure" / "rollback on failure", but current tests only sketch backup creation (and even that is a TODO) and don't exercise rollback behavior.
   - **Action:** Add tests covering rollback/restore behavior when an update fails
 
-- **PR45-#5:** Tests depend on real repo state (v1.4.0) - brittle
+- **PR45-#5:** Tests depend on real repo state (v0.4.0) - brittle
   - **Priority:** 🟡 MEDIUM
   - **Impact:** 🟡 MEDIUM
   - **Effort:** 🟡 MEDIUM
-  - **Description:** Several dry-run tests (e.g. `dry-run shows matching lines`, `dry-run shows file-by-file preview`, and some validation tests) assert behavior based on the real repo files (like `$PROJECT_ROOT/.cursor/rules/main.mdc`) containing `v1.4.0`. This couples test outcomes to the current repo state and release version, making them brittle.
+  - **Description:** Several dry-run tests (e.g. `dry-run shows matching lines`, `dry-run shows file-by-file preview`, and some validation tests) assert behavior based on the real repo files (like `$PROJECT_ROOT/.cursor/rules/main.mdc`) containing `v0.4.0`. This couples test outcomes to the current repo state and release version, making them brittle.
   - **Action:** Use mock files or test fixtures instead of real repo files
 
 - **PR45-Overall-#2:** Argument parser allows flags as values - minor robustness issue

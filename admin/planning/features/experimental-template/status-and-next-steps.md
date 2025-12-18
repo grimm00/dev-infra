@@ -3,7 +3,7 @@
 **Feature:** Experimental Template  
 **Status:** ✅ Complete  
 **Last Updated:** 2025-12-15  
-**Target:** v1.6.0
+**Target:** v0.6.0
 
 ---
 
@@ -74,9 +74,9 @@
 
 1. **Feature Complete!** 🎉
    - All 4 phases of Experimental Template feature complete
-   - Ready for v1.6.0 release
+   - Ready for v0.6.0 release
 
-### Release (v1.6.0)
+### Release (v0.6.0)
 
 2. **Update Release Notes**
    - Document new experimental template availability
@@ -122,7 +122,7 @@
 ### Open Questions (Resolved)
 
 1. ✅ Which specific commands are currently Evolving tier? → `/status` command
-2. ✅ Should experimental template be in v1.6.0 or later? → v1.6.0
+2. ✅ Should experimental template be in v0.6.0 or later? → v0.6.0
 3. ✅ Any additional stability indicators needed? → 🟢/🟠/🔴 system implemented
 
 ---

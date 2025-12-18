@@ -20,7 +20,7 @@ This command supports multiple project organization patterns:
 
 **Version Detection:**
 
-- Extract version from current branch (e.g., `release/v1.0.0`)
+- Extract version from current branch (e.g., `release/v0.1.0`)
 - Or use `--version` option to specify version
 - Or auto-detect from release directory structure
 
@@ -46,14 +46,14 @@ This command supports multiple project organization patterns:
 **Examples:**
 
 - `/task-release 1` - Implement release task 1
-- `/task-release 2 --version v1.0.0` - Implement task 2 for specific version
+- `/task-release 2 --version v0.1.0` - Implement task 2 for specific version
 - `/task-release 3 --checklist-only` - Only update checklist, don't implement
 - `/task-release 1 --dry-run` - Show what would be done without implementing
 
 **Options:**
 
 - `--task NUMBER` - Task number to implement (required)
-- `--version VERSION` - Specify version (e.g., v1.0.0)
+- `--version VERSION` - Specify version (e.g., v0.1.0)
 - `--checklist-only` - Only update checklist, don't implement
 - `--dry-run` - Show implementation plan without executing
 
@@ -65,7 +65,7 @@ This command supports multiple project organization patterns:
 
 **Detect version:**
 
-- Extract from current branch: `release/v1.0.0` → `v1.0.0`
+- Extract from current branch: `release/v0.1.0` → `v0.1.0`
 - Or use `--version` option
 - Or find latest release directory: `docs/maintainers/planning/releases/v*/`
 

@@ -3,7 +3,7 @@
 **Status:** ✅ Decisions Complete  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-12  
-**Target:** v1.6.0  
+**Target:** v0.6.0  
 **Research:** [admin/research/experimental-template/](../../research/experimental-template/)  
 **Decisions:** [admin/decisions/experimental-template/](../../decisions/experimental-template/)  
 **Next:** `/transition-plan --from-adr` when ready to implement
@@ -112,8 +112,8 @@ templates/
 ## 🚀 Next Steps
 
 1. **Complete identity transition** (current focus)
-2. **Implement v1.5.0** (Release Automation v2 internal)
-3. **Return to this exploration** for v1.6.0
+2. **Implement v0.5.0** (Release Automation v2 internal)
+3. **Return to this exploration** for v0.6.0
 4. Use `/research experimental-template --from-explore` to investigate
 
 ---
@@ -127,7 +127,7 @@ This exploration directly implements the "template factory" identity:
 - Experimental template = beta product
 - Clear product tiers for users
 
-### Potential v1.6.0 Scope
+### Potential v0.6.0 Scope
 
 If this exploration leads to a feature:
 - Generator updates (`new-project.sh`)

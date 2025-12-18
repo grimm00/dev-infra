@@ -287,7 +287,7 @@ For each Sourcery comment, assess:
 
    ```bash
    @test "script generates assessment file" {
-       run "$SCRIPT" v1.4.0 --generate
+       run "$SCRIPT" v0.4.0 --generate
        [ "$status" -eq 0 ]
        [[ "$output" =~ "Overall Readiness" ]]
    }
@@ -324,11 +324,11 @@ bats tests/unit/[script-name].bats
 
 | Flag         | Purpose                                 | Example                                        |
 | ------------ | --------------------------------------- | ---------------------------------------------- |
-| `--dry-run`  | Show what would happen without doing it | `create-release-branch.sh v1.4.0 --dry-run`    |
+| `--dry-run`  | Show what would happen without doing it | `create-release-branch.sh v0.4.0 --dry-run`    |
 | `--force`    | Override blocking checks                | `/pr --release --force`                        |
 | `--verbose`  | Show detailed output                    | `analyze-releases.sh --verbose`                |
 | `--json`     | Output in JSON format                   | `analyze-releases.sh --json`                   |
-| `--generate` | Generate output file                    | `check-release-readiness.sh v1.4.0 --generate` |
+| `--generate` | Generate output file                    | `check-release-readiness.sh v0.4.0 --generate` |
 | `--help`     | Show usage information                  | `create-release-branch.sh --help`              |
 
 **Key Principles:**
@@ -357,17 +357,17 @@ bats tests/unit/[script-name].bats
 
 ```bash
 # Check release readiness
-./scripts/check-release-readiness.sh v1.4.0
+./scripts/check-release-readiness.sh v0.4.0
 
 # Generate assessment document
-./scripts/check-release-readiness.sh v1.4.0 --generate > admin/planning/releases/v1.4.0/RELEASE-READINESS.md
+./scripts/check-release-readiness.sh v0.4.0 --generate > admin/planning/releases/v0.4.0/RELEASE-READINESS.md
 ```
 
 **Step 2: Create Release Branch**
 
 ```bash
 # Creates branch + initial assessment
-./scripts/create-release-branch.sh v1.4.0
+./scripts/create-release-branch.sh v0.4.0
 ```
 
 **Step 3: On release/vX.Y.Z branch:**
@@ -469,4 +469,4 @@ bats tests/unit/[script-name].bats
 
 **Last Updated:** 2025-12-15  
 **Status:** ✅ Active  
-**Next:** v1.6.0 release (Experimental Template)
+**Next:** v0.6.0 release (Experimental Template)

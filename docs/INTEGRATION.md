@@ -99,7 +99,7 @@ This is the main hub for dev-infra integration documentation. It provides quick 
 **Configuration:**
 ```bash
 # config/dev-infra.conf
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="0.1.0"
 DEVINFRA_REPO="grimm00/dev-infra"
 DEVINFRA_URL="https://github.com/${DEVINFRA_REPO}/archive/v${DEVINFRA_VERSION}.tar.gz"
 DEVINFRA_CACHE_DIR="./cache/dev-infra"
@@ -114,7 +114,7 @@ DEVINFRA_TEMPLATES_DIR="./templates/dev-infra"
 set -e
 
 # Configuration
-DEVINFRA_VERSION="${1:-1.0.0}"
+DEVINFRA_VERSION="${1:-0.1.0}"
 DOWNLOAD_URL="https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz"
 TEMP_DIR="/tmp/dev-infra-$$"
 TARGET_DIR="./templates/dev-infra"
@@ -242,7 +242,7 @@ fi
 #!/bin/bash
 # Simple integration example
 
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="0.1.0"
 DOWNLOAD_URL="https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz"
 TEMP_DIR="/tmp/dev-infra-$$"
 TARGET_DIR="./templates"
@@ -268,7 +268,7 @@ echo "✅ Dev-infra templates v${DEVINFRA_VERSION} installed"
 # Version-pinned installation
 
 # Configuration
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="0.1.0"
 DEVINFRA_REPO="grimm00/dev-infra"
 DEVINFRA_URL="https://github.com/${DEVINFRA_REPO}/archive/v${DEVINFRA_VERSION}.tar.gz"
 CACHE_DIR="./cache"
@@ -304,7 +304,7 @@ echo "✅ Dev-infra templates v${DEVINFRA_VERSION} installed"
 
 # Get latest version from GitHub API
 LATEST_VERSION=$(curl -s "https://api.github.com/repos/grimm00/dev-infra/releases/latest" | grep '"tag_name"' | sed -E 's/.*"v([^"]+)".*/\1/')
-CURRENT_VERSION="1.0.0"  # Your current version
+CURRENT_VERSION="0.1.0"  # Your current version
 
 echo "Current version: ${CURRENT_VERSION}"
 echo "Latest version: ${LATEST_VERSION}"
@@ -336,7 +336,7 @@ fi
 **Implementation:**
 ```bash
 # Update version in config
-DEVINFRA_VERSION="1.1.0"
+DEVINFRA_VERSION="0.1.1"
 
 # Re-download templates
 ./scripts/download-devinfra.sh "$DEVINFRA_VERSION"
@@ -384,13 +384,13 @@ fi
 **Implementation:**
 ```bash
 # Development environment
-DEVINFRA_VERSION="1.1.0-beta"
+DEVINFRA_VERSION="0.1.1-beta"
 
 # Staging environment
-DEVINFRA_VERSION="1.1.0"
+DEVINFRA_VERSION="0.1.1"
 
 # Production environment
-DEVINFRA_VERSION="1.0.0"
+DEVINFRA_VERSION="0.1.0"
 ```
 
 ---
@@ -414,7 +414,7 @@ curl -s "https://api.github.com/repos/grimm00/dev-infra/releases" | grep '"tag_n
 tar --version
 
 # Verify archive integrity
-tar -tzf dev-infra-1.0.0.tar.gz | head -10
+tar -tzf dev-infra-0.1.0.tar.gz | head -10
 ```
 
 **Issue: Templates not found**
@@ -450,7 +450,7 @@ set -e  # Exit on error
 **Verbose download:**
 ```bash
 # Verbose curl output
-curl -L -v "https://github.com/grimm00/dev-infra/archive/v1.0.0.tar.gz" -o dev-infra.tar.gz
+curl -L -v "https://github.com/grimm00/dev-infra/archive/v0.1.0.tar.gz" -o dev-infra.tar.gz
 ```
 
 **Check file permissions:**

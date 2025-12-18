@@ -21,7 +21,7 @@ These decisions establish dev-infra's identity and governance model, addressing 
 | Decision | Summary | Impact |
 |----------|---------|--------|
 | **Identity** | Dev-infra is a template factory | Foundational |
-| **v1.5.0 Scope** | Internal tooling only | Immediate |
+| **v0.5.0 Scope** | Internal tooling only | Immediate |
 | **Command Strategy** | Tiered approach | Near-term |
 | **Graduation Process** | Formal criteria | Process |
 
@@ -49,7 +49,7 @@ These decisions establish dev-infra's identity and governance model, addressing 
 
 **ADR:** [adr-002-release-automation-v2-scope.md](adr-002-release-automation-v2-scope.md)
 
-**Decision:** v1.5.0 will complete Release Automation v2 as internal tooling only.
+**Decision:** v0.5.0 will complete Release Automation v2 as internal tooling only.
 
 | Phase | Decision |
 |-------|----------|
@@ -111,14 +111,14 @@ These decisions affect 10+ requirements from research:
 
 ## 🚀 Implementation Timeline
 
-### Immediate (v1.5.0)
+### Immediate (v0.5.0)
 
 1. ✅ Document identity decision (update Cursor rules, README)
 2. ✅ Rescope Release Automation v2 (Phase 3 → Deferred)
 3. Add category metadata to planning documents
 4. Add tier metadata to commands
 
-### Near-Term (v1.6.0)
+### Near-Term (v0.6.0)
 
 5. Implement graduation checklist template
 6. Apply to new templatization decisions
@@ -145,7 +145,7 @@ These decisions affect 10+ requirements from research:
 1. **Review & Approve** - Review all 4 ADRs
 2. **Accept Decisions** - Change status to "Accepted"
 3. **Update Planning** - Apply decisions to Release Automation v2 feature plan
-4. **Transition** - Use `/transition-plan` to update v1.5.0 scope
+4. **Transition** - Use `/transition-plan` to update v0.5.0 scope
 
 ---
 

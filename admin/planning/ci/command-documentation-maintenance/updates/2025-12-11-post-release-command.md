@@ -47,10 +47,10 @@ Created new `/post-release` command to handle post-release tasks and complete th
 **Usage Examples:**
 
 ```bash
-/post-release v1.4.0                      # Full post-release
-/post-release v1.4.0 --dry-run            # Preview mode
-/post-release v1.4.0 --skip-retrospective # No retrospective
-/post-release v1.4.0 --keep-branch        # Keep branch
+/post-release v0.4.0                      # Full post-release
+/post-release v0.4.0 --dry-run            # Preview mode
+/post-release v0.4.0 --skip-retrospective # No retrospective
+/post-release v0.4.0 --keep-branch        # Keep branch
 ```
 
 ---
@@ -61,10 +61,10 @@ Created new `/post-release` command to handle post-release tasks and complete th
 
 **Completes Release Cycle:**
 ```
-/release-prep v1.4.0
+/release-prep v0.4.0
       │
       ▼
-/release-finalize v1.4.0
+/release-finalize v0.4.0
       │
       ▼
 /pr --release
@@ -73,10 +73,10 @@ Created new `/post-release` command to handle post-release tasks and complete th
 (Merge & Tag)
       │
       ▼
-/post-release v1.4.0    ◄── NEW (completes cycle)
+/post-release v0.4.0    ◄── NEW (completes cycle)
       │
       ▼
-Ready for v1.5.0
+Ready for v0.5.0
 ```
 
 **Before:** Manual cleanup, no historical tracking update  

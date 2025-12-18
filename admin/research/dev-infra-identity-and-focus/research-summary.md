@@ -162,7 +162,7 @@ Not all projects need all commands. Consider:
 
 ## 🎯 Recommendations
 
-### Immediate (v1.5.0)
+### Immediate (v0.5.0)
 
 1. **Rescope Release Automation v2**
    - Complete Phase 1-2 as internal tooling
@@ -177,7 +177,7 @@ Not all projects need all commands. Consider:
    - Identify 5-7 essential commands for templates
    - Mark stability levels on all commands
 
-### Near-Term (v1.6.0)
+### Near-Term (v0.6.0)
 
 4. **Implement Graduation Checklist**
    - Create formal process for templatization decisions
@@ -223,7 +223,7 @@ Not all projects need all commands. Consider:
 1. ✅ Review research summary
 2. Use `/decision dev-infra-identity-and-focus --from-research` to make decisions
 3. Decisions will create ADR documents
-4. Transition to v1.5.0 planning with new scope
+4. Transition to v0.5.0 planning with new scope
 
 ---
 

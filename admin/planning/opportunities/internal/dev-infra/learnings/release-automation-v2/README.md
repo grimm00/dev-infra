@@ -17,7 +17,7 @@
 
 ### Release Learnings
 
-- **[v1.5.0 Release Learnings](v1.5.0-release-learnings.md)** - First automated release (✅ Complete, 2025-12-12)
+- **[v0.5.0 Release Learnings](v0.5.0-release-learnings.md)** - First automated release (✅ Complete, 2025-12-12)
 
 ---
 
@@ -26,7 +26,7 @@
 This directory contains phase-specific and release learnings from Release Automation v2 implementation.
 
 **Feature Overview:**
-Release Automation v2 completes the release automation system by eliminating remaining manual steps discovered during v1.4.0 release cycle.
+Release Automation v2 completes the release automation system by eliminating remaining manual steps discovered during v0.4.0 release cycle.
 
 **Phases:**
 1. **Phase 1 (Complete):** Tag Creation Automation - Automated tag creation on release PR merge
@@ -39,7 +39,7 @@ Release Automation v2 completes the release automation system by eliminating rem
 
 ## 📊 Summary
 
-**Total Learnings Documents:** 2 (Phase 1 + v1.5.0 Release)  
+**Total Learnings Documents:** 2 (Phase 1 + v0.5.0 Release)  
 **Phases Complete:** 2 of 2 (100%, Phase 3 deferred)  
 **Status:** ✅ Complete
 

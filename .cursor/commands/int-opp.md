@@ -1128,6 +1128,25 @@ Related: Fix Management Workflow"
 
 ---
 
-**Last Updated:** 2025-12-07  
+## 📊 Log Usage (Final Step)
+
+**After successful command completion, update the usage tracker:**
+
+1. **Update:** `admin/planning/commands/usage-tracker.md`
+2. **Add entry to "Recent Usage" table:**
+   ```markdown
+   | YYYY-MM-DD | `/int-opp` | [Context] | ✅ Success | [Evidence] |
+   ```
+3. **Increment usage count** in summary table
+4. **Commit with message:**
+   ```
+   docs(commands): update usage tracker - /int-opp
+   ```
+
+**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+
+---
+
+**Last Updated:** 2025-12-16  
 **Status:** ✅ Active  
 **Next:** Use to capture learnings, create project directories, or document command adaptations (supports any project with automatic discovery)

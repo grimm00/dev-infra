@@ -31,7 +31,7 @@ This document lists research topics and questions that need investigation before
 - How should criteria be prioritized?
 
 **Research Areas:**
-- Review existing release readiness documents (v1.0.0, v1.1.0, v1.2.0, v1.3.0)
+- Review existing release readiness documents (v0.1.0, v0.1.1, v0.2.0, v0.3.0)
 - Analyze patterns across releases
 - Identify common criteria
 - Categorize by type (testing, documentation, code quality, etc.)

@@ -19,7 +19,7 @@
 | ADR | Decision | Status |
 |-----|----------|--------|
 | [ADR-001](adr-001-project-identity.md) | Dev-infra should be a template factory | ✅ Accepted |
-| [ADR-002](adr-002-release-automation-v2-scope.md) | v1.5.0: Internal tooling only | ✅ Accepted |
+| [ADR-002](adr-002-release-automation-v2-scope.md) | v0.5.0: Internal tooling only | ✅ Accepted |
 | [ADR-003](adr-003-command-strategy.md) | Tiered command approach for templates | ✅ Accepted |
 | [ADR-004](adr-004-graduation-process.md) | Formal graduation criteria | ✅ Accepted |
 
@@ -46,7 +46,7 @@ This creates complexity and confusion. The decisions below resolve this by estab
 | Decision | Description | Status | Impact |
 |----------|-------------|--------|--------|
 | Project Identity | Template factory focus | 🟡 Proposed | Foundational |
-| v1.5.0 Scope | Internal tooling only | 🟡 Proposed | Immediate |
+| v0.5.0 Scope | Internal tooling only | 🟡 Proposed | Immediate |
 | Command Strategy | Tiered approach | 🟡 Proposed | Near-term |
 | Graduation Process | Formal criteria | 🟡 Proposed | Process |
 

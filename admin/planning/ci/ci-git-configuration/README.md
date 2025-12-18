@@ -24,7 +24,7 @@
 **Problem:**
 Git initialization tests fail in CI due to missing `user.name` and `user.email` configuration. This causes the release-distribution workflow to fail on certain tests.
 
-**Discovered:** v1.5.0 release (2025-12-12) - release-distribution workflow failed
+**Discovered:** v0.5.0 release (2025-12-12) - release-distribution workflow failed
 
 **Impact:**
 - CI tests inconsistently fail
@@ -48,7 +48,7 @@ Configure git user in CI workflows or skip tests that require git identity.
 
 ## 📅 Timeline
 
-**Target:** Opportunistic / before v1.6.0
+**Target:** Opportunistic / before v0.6.0
 
 ---
 
@@ -56,7 +56,7 @@ Configure git user in CI workflows or skip tests that require git identity.
 
 - **[Improvement Plan](improvement-plan.md)** - Implementation details
 - **[Multi-Environment Testing](../multi-environment-testing/)** - CI infrastructure
-- **[v1.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v1.5.0-release-learnings.md)**
+- **[v0.5.0 Release Learnings](../../opportunities/internal/dev-infra/learnings/release-automation-v2/v0.5.0-release-learnings.md)**
 
 ---
 

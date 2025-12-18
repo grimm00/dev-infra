@@ -4,7 +4,7 @@
 # Creates a release branch and generates initial RELEASE-READINESS.md assessment
 #
 # Usage: ./scripts/create-release-branch.sh <version> [options]
-# Example: ./scripts/create-release-branch.sh v1.5.0
+# Example: ./scripts/create-release-branch.sh v0.5.0
 #
 # Options:
 #   --dry-run     Show what would be done without making changes
@@ -48,15 +48,15 @@ Usage: $(basename "$0") <version> [options]
 Creates a release branch from develop and generates initial RELEASE-READINESS.md assessment.
 
 Arguments:
-  version     Version to release (e.g., v1.5.0)
+  version     Version to release (e.g., v0.5.0)
 
 Options:
   --dry-run   Show what would be done without making changes
   --help, -h  Show this help message
 
 Examples:
-  $(basename "$0") v1.5.0
-  $(basename "$0") v1.5.0 --dry-run
+  $(basename "$0") v0.5.0
+  $(basename "$0") v0.5.0 --dry-run
 
 Process:
   1. Validates version format (vX.Y.Z)
@@ -74,7 +74,7 @@ validate_version() {
     # Must start with 'v' followed by semantic version
     if [[ ! "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.-]+)?$ ]]; then
         print_error "Invalid version format: $version"
-        echo "Expected format: vX.Y.Z (e.g., v1.5.0) or vX.Y.Z-suffix (e.g., v1.5.0-rc1)"
+        echo "Expected format: vX.Y.Z (e.g., v0.5.0) or vX.Y.Z-suffix (e.g., v0.5.0-rc1)"
         return 1
     fi
     

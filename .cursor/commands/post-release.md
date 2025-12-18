@@ -21,7 +21,7 @@ This command supports multiple project organization patterns:
 **Version Detection:**
 
 - Use version argument (required)
-- Format: `v1.4.0` or `1.4.0` (normalized to `vX.Y.Z`)
+- Format: `v0.4.0` or `0.4.0` (normalized to `vX.Y.Z`)
 
 ---
 
@@ -35,7 +35,7 @@ This command supports multiple project organization patterns:
 
 **Key principle:** Complete the release cycle and prepare for the next iteration.
 
-**Note:** As of v1.5.0, tags are automatically created when release PRs are merged to `main` via `.github/workflows/create-release-tag.yml`.
+**Note:** As of v0.5.0, tags are automatically created when release PRs are merged to `main` via `.github/workflows/create-release-tag.yml`.
 
 **Workflow Position:**
 
@@ -46,14 +46,14 @@ This command supports multiple project organization patterns:
    Merge to main
          │
          ▼
-   Tag auto-created (v1.4.0)  ◄── Automated by GitHub Actions
+   Tag auto-created (v0.4.0)  ◄── Automated by GitHub Actions
          │
          ▼
    GitHub release published
          │
          ▼
 ┌─────────────────────────────────────┐
-│   /post-release v1.4.0              │  ◄── This command
+│   /post-release v0.4.0              │  ◄── This command
 │                                     │
 │   1. Merge main to develop          │
 │   2. Update historical tracking     │
@@ -74,10 +74,10 @@ This command supports multiple project organization patterns:
 
 **Examples:**
 
-- `/post-release v1.4.0` - Full post-release workflow
-- `/post-release v1.4.0 --dry-run` - Preview changes
-- `/post-release v1.4.0 --skip-retrospective` - Skip retrospective creation
-- `/post-release v1.4.0 --keep-branch` - Don't delete release branch
+- `/post-release v0.4.0` - Full post-release workflow
+- `/post-release v0.4.0 --dry-run` - Preview changes
+- `/post-release v0.4.0 --skip-retrospective` - Skip retrospective creation
+- `/post-release v0.4.0 --keep-branch` - Don't delete release branch
 
 **Options:**
 
@@ -97,21 +97,21 @@ This command supports multiple project organization patterns:
 
 ```bash
 # Check tag exists
-git tag -l "v1.4.0"
+git tag -l "v0.4.0"
 
 # Check tag is on main
-git branch -a --contains v1.4.0 | grep main
+git branch -a --contains v0.4.0 | grep main
 ```
 
 **Check GitHub release (if applicable):**
 
 ```bash
-gh release view v1.4.0
+gh release view v0.4.0
 ```
 
 **Checklist:**
 
-- [ ] Tag v1.4.0 exists
+- [ ] Tag v0.4.0 exists
 - [ ] Tag is on main branch
 - [ ] GitHub release exists (if applicable)
 - [ ] Release distribution workflow completed
@@ -167,9 +167,9 @@ Release History Analysis
 ========================
 
 Recent Releases:
-  v1.4.0 (2025-12-11) - Score: 85%, Status: READY
-  v1.3.0 (2025-11-18) - Score: 90%, Status: READY
-  v1.2.0 (2025-11-12) - Score: 88%, Status: READY
+  v0.4.0 (2025-12-11) - Score: 85%, Status: READY
+  v0.3.0 (2025-11-18) - Score: 90%, Status: READY
+  v0.2.0 (2025-11-12) - Score: 88%, Status: READY
 
 Trends:
   Average Readiness Score: 87.7%
@@ -185,9 +185,9 @@ Trends:
 
 | Version | Date | Score | PRs | Highlights |
 |---------|------|-------|-----|------------|
-| v1.4.0 | 2025-12-11 | 85% | 22 | Release Readiness Feature |
-| v1.3.0 | 2025-11-18 | 90% | 8 | Multi-Environment Testing |
-| v1.2.0 | 2025-11-12 | 88% | 5 | Directory Selection |
+| v0.4.0 | 2025-12-11 | 85% | 22 | Release Readiness Feature |
+| v0.3.0 | 2025-11-18 | 90% | 8 | Multi-Environment Testing |
+| v0.2.0 | 2025-11-12 | 88% | 5 | Directory Selection |
 ```
 
 **Checklist:**
@@ -210,7 +210,7 @@ Trends:
 **Status:** 🟢 READY FOR RELEASE
 
 # After
-**Status:** ✅ RELEASED (v1.4.0 - 2025-12-11)
+**Status:** ✅ RELEASED (v0.4.0 - 2025-12-11)
 ```
 
 **RELEASE-NOTES.md:**
@@ -226,8 +226,8 @@ Trends:
 
 If using archive structure:
 ```bash
-mkdir -p admin/planning/releases/archived/v1.4.0/
-mv admin/planning/releases/v1.4.0/* admin/planning/releases/archived/v1.4.0/
+mkdir -p admin/planning/releases/archived/v0.4.0/
+mv admin/planning/releases/v0.4.0/* admin/planning/releases/archived/v0.4.0/
 ```
 
 **Alternative:** Keep in place with updated status (recommended for easy reference).
@@ -246,16 +246,16 @@ mv admin/planning/releases/v1.4.0/* admin/planning/releases/archived/v1.4.0/
 
 ```bash
 # Delete local branch
-git branch -d release/v1.4.0
+git branch -d release/v0.4.0
 
 # Delete remote branch
-git push origin --delete release/v1.4.0
+git push origin --delete release/v0.4.0
 ```
 
 **Verify cleanup:**
 
 ```bash
-git branch -a | grep release/v1.4.0
+git branch -a | grep release/v0.4.0
 # Should return nothing
 ```
 
@@ -273,12 +273,12 @@ git branch -a | grep release/v1.4.0
 
 **Create retrospective document:**
 
-**File:** `admin/planning/releases/v1.4.0/retrospective.md`
+**File:** `admin/planning/releases/v0.4.0/retrospective.md`
 
 ```markdown
-# Release Retrospective - v1.4.0
+# Release Retrospective - v0.4.0
 
-**Version:** v1.4.0  
+**Version:** v0.4.0  
 **Release Date:** 2025-12-11  
 **Created:** 2025-12-11
 
@@ -307,7 +307,7 @@ git branch -a | grep release/v1.4.0
 ## 🟡 What Could Be Improved
 
 - [To be filled by team]
-- Missing v1.3.0 tag (discovered during prep)
+- Missing v0.3.0 tag (discovered during prep)
 - Manual CHANGELOG merge step
 
 ---
@@ -345,11 +345,11 @@ git branch -a | grep release/v1.4.0
 
 ```markdown
 # Before
-**Version:** v1.3.0 → v1.4.0 (pending release)
+**Version:** v0.3.0 → v0.4.0 (pending release)
 
 # After
-**Version:** v1.4.0 (released 2025-12-11)
-**Next:** v1.5.0 planning
+**Version:** v0.4.0 (released 2025-12-11)
+**Next:** v0.5.0 planning
 ```
 
 **Update README.md (if version badge exists):**
@@ -371,7 +371,7 @@ Check for version references and update.
 ```markdown
 ## ✅ Post-Release Complete
 
-**Version:** v1.4.0
+**Version:** v0.4.0
 **Released:** 2025-12-11
 
 ### Actions Completed
@@ -396,7 +396,7 @@ Check for version references and update.
 ### Next Steps
 
 1. Review retrospective with team
-2. Start planning v1.5.0 features
+2. Start planning v0.5.0 features
 3. Address deferred issues (22 tasks)
 4. Run `/reflect` for post-release learnings
 
@@ -413,11 +413,11 @@ Check for version references and update.
 
 ### Scenario 1: Standard Post-Release
 
-**Situation:** Release v1.4.0 just published
+**Situation:** Release v0.4.0 just published
 
 **Action:**
 ```bash
-/post-release v1.4.0
+/post-release v0.4.0
 ```
 
 **Result:**
@@ -432,7 +432,7 @@ Check for version references and update.
 
 **Action:**
 ```bash
-/post-release v1.4.0 --skip-retrospective
+/post-release v0.4.0 --skip-retrospective
 ```
 
 **Result:**
@@ -447,7 +447,7 @@ Check for version references and update.
 
 **Action:**
 ```bash
-/post-release v1.4.0 --dry-run
+/post-release v0.4.0 --dry-run
 ```
 
 **Result:**
@@ -462,7 +462,7 @@ Check for version references and update.
 
 **Action:**
 ```bash
-/post-release v1.4.0 --keep-branch
+/post-release v0.4.0 --keep-branch
 ```
 
 **Result:**
@@ -479,13 +479,13 @@ Check for version references and update.
 Feature Development
          │
          ▼
-/release-prep v1.4.0
+/release-prep v0.4.0
          │
          ▼
 (Manual Review)
          │
          ▼
-/release-finalize v1.4.0
+/release-finalize v0.4.0
          │
          ▼
 /pr --release
@@ -494,10 +494,10 @@ Feature Development
 (Merge & Tag)
          │
          ▼
-/post-release v1.4.0    ◄── This command
+/post-release v0.4.0    ◄── This command
          │
          ▼
-Ready for v1.5.0
+Ready for v0.5.0
 ```
 
 ---

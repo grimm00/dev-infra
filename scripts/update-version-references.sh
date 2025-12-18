@@ -24,8 +24,8 @@ Usage: $(basename "$0") [OPTIONS] --old-version OLD_VERSION --new-version NEW_VE
 Update version references across the codebase.
 
 Required Arguments:
-    --old-version OLD_VERSION    Old version to replace (e.g., v1.4.0)
-    --new-version NEW_VERSION    New version to use (e.g., v1.5.0)
+    --old-version OLD_VERSION    Old version to replace (e.g., v0.4.0)
+    --new-version NEW_VERSION    New version to use (e.g., v0.5.0)
 
 Options:
     -h, --help                   Show this help message
@@ -33,9 +33,9 @@ Options:
     -v, --verbose                Verbose output
 
 Examples:
-    $(basename "$0") --old-version v1.4.0 --new-version v1.5.0
-    $(basename "$0") --dry-run --old-version v1.4.0 --new-version v1.5.0
-    $(basename "$0") --verbose --old-version v1.4.0 --new-version v1.5.0
+    $(basename "$0") --old-version v0.4.0 --new-version v0.5.0
+    $(basename "$0") --dry-run --old-version v0.4.0 --new-version v0.5.0
+    $(basename "$0") --verbose --old-version v0.4.0 --new-version v0.5.0
 
 EOF
 }
@@ -122,7 +122,7 @@ if [[ -z "$NEW_VERSION" ]]; then
 fi
 
 # Validate version formats
-# Expected format: vMAJOR.MINOR.PATCH (e.g., v1.4.0)
+# Expected format: vMAJOR.MINOR.PATCH (e.g., v0.4.0)
 validate_version_format() {
     local version=$1
     local version_name=$2
@@ -232,7 +232,7 @@ update_file_version() {
         # Use sed to replace version
         # Handle different file types
         if [[ "$file_type" == "package.json" ]]; then
-            # package.json uses version without 'v' prefix: "version": "1.4.0"
+            # package.json uses version without 'v' prefix: "version": "0.4.0"
             local old_num=$(get_version_number "$old_version")
             local new_num=$(get_version_number "$new_version")
             # Use temporary file for sed (macOS sed doesn't support -i without extension)
@@ -241,10 +241,10 @@ update_file_version() {
             mv "$temp_file" "$file"
         else
             # Other files use version with 'v' prefix
-            # For main.mdc: **Version:** v1.4.0 (released...) - preserve status suffix
+            # For main.mdc: **Version:** v0.4.0 (released...) - preserve status suffix
             # Use pattern that matches vX.Y.Z but preserves surrounding text
             local temp_file=$(mktemp)
-            # Replace v1.4.0 with v1.5.0, preserving everything else on the line
+            # Replace v0.4.0 with v0.5.0, preserving everything else on the line
             sed "s|$old_version|$new_version|g" "$file" > "$temp_file"
             mv "$temp_file" "$file"
         fi

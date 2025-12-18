@@ -68,7 +68,7 @@ Add a negative test case to verify malformed HTML detection (if applicable):
 ```bash
 @test "check_release_readiness: detects malformed HTML in output" {
     # Setup: Create release directory with proper structure
-    local version="v1.0.0"
+    local version="v0.1.0"
     mkdir -p "admin/planning/releases/$version"
     echo "# Release Notes" > "admin/planning/releases/$version/RELEASE-NOTES.md"
     echo "# Changelog" > "CHANGELOG.md"

@@ -53,14 +53,14 @@ This directory contains GitHub Actions workflows that automate testing, release 
 
 **Duration:** ~1-2 minutes
 
-**Introduced:** v1.5.0 (Phase 1 of Release Automation v2)
+**Introduced:** v0.5.0 (Phase 1 of Release Automation v2)
 
 **Example:**
 ```yaml
-# When PR from release/v1.5.0 is merged to main:
-# 1. Workflow extracts version: v1.5.0
-# 2. Creates annotated tag: git tag -a v1.5.0 -m "Release v1.5.0..."
-# 3. Pushes tag: git push origin v1.5.0
+# When PR from release/v0.5.0 is merged to main:
+# 1. Workflow extracts version: v0.5.0
+# 2. Creates annotated tag: git tag -a v0.5.0 -m "Release v0.5.0..."
+# 3. Pushes tag: git push origin v0.5.0
 # 4. Triggers release-distribution.yml
 ```
 
@@ -245,5 +245,5 @@ Each workflow declares required permissions:
 
 **Last Updated:** 2025-12-11  
 **Workflows:** 4 active  
-**Next:** Phase 2 - Version Reference Automation (v1.5.0)
+**Next:** Phase 2 - Version Reference Automation (v0.5.0)
 

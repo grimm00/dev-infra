@@ -46,10 +46,10 @@ Created new `/release-prep` command to orchestrate release preparation workflow.
 **Usage Examples:**
 
 ```bash
-/release-prep v1.4.0                    # Full preparation
-/release-prep v1.4.0 --dry-run          # Preview mode
-/release-prep v1.4.0 --assessment-only  # Assessment only
-/release-prep v1.4.0 --skip-branch      # No branch creation
+/release-prep v0.4.0                    # Full preparation
+/release-prep v0.4.0 --dry-run          # Preview mode
+/release-prep v0.4.0 --assessment-only  # Assessment only
+/release-prep v0.4.0 --skip-branch      # No branch creation
 ```
 
 ---
@@ -69,7 +69,7 @@ Created new `/release-prep` command to orchestrate release preparation workflow.
 
 **After:** Single command orchestration
 ```
-/release-prep v1.4.0
+/release-prep v0.4.0
   → All steps automated
   → Consistent document generation
   → Integrated with other release commands
@@ -81,10 +81,10 @@ Created new `/release-prep` command to orchestrate release preparation workflow.
 Feature Complete
       │
       ▼
-/release-prep v1.4.0      ◄── NEW
+/release-prep v0.4.0      ◄── NEW
       │
       ▼
-/task-release v1.4.0
+/task-release v0.4.0
       │
       ▼
 /pr --release
@@ -130,7 +130,7 @@ Merge & Tag
 
 - Release process: `admin/planning/releases/PROCESS.md`
 - Standard criteria: `admin/planning/releases/standard-criteria.md`
-- Transition plan: `admin/planning/releases/v1.4.0/transition-plan.md`
+- Transition plan: `admin/planning/releases/v0.4.0/transition-plan.md`
 
 ---
 
