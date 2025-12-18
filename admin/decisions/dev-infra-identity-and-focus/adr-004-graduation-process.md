@@ -1,8 +1,11 @@
 # ADR-004: Graduation Process - Formal Criteria for Templatization
 
-**Status:** ✅ Accepted  
+**Status:** ⚠️ Superseded  
 **Created:** 2025-12-11  
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-17  
+**Superseded By:** [ADR-001: Commands as Guides](../command-simplification/adr-001-commands-as-guides.md)
+
+> **Note:** This ADR has been superseded. Commands are now distributed to all templates without graduation gates. See the superseding ADR for rationale.
 
 ---
 

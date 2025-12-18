@@ -49,7 +49,7 @@ This is a development infrastructure template repository that provides standardi
 
 1. **Templates are products** - Treated as output, not reflections of dev-infra's internal process
 2. **Internal tooling stays internal** - Release automation, validation scripts remain dev-infra-only
-3. **Graduation required** - Features must prove themselves before templatization
+3. **Commands are guides** - All templates get all commands (no graduation gates)
 4. **Quality over quantity** - Fewer, more stable template features
 
 ### Work Categories
@@ -62,18 +62,11 @@ When planning work, classify it:
 | 🔧 **Internal Tooling** | `admin/planning/features/` | No - dev-infra only     |
 | ⚙️ **CI/CD**            | `admin/planning/ci/`       | Depends on type         |
 
-### Graduation Criteria
+### Command Distribution
 
-Before adding features to templates, they must meet:
+All templates receive all 19 workflow commands. Only dev-infra internal commands (release automation) stay internal.
 
-**Required (ALL):**
-
-- ≥1 release cycle in dev-infra
-- No major changes in 2+ weeks
-- Documentation 100% complete
-- Demonstrated use in dev-infra
-
-**See:** [ADR-004: Graduation Process](../../../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md)
+**See:** [ADR-001: Commands as Guides](../../../admin/decisions/command-simplification/adr-001-commands-as-guides.md)
 
 ---
 
@@ -134,9 +127,8 @@ Always use: `YYYY-MM-DD` format (e.g., 2025-12-07)
 ```
 dev-infra/
 ├── templates/              # Project templates
-│   ├── standard-project/   # Standard application template
-│   ├── learning-project/   # Learning/tutorial template
-│   └── experimental-project/ # Experimental template (Evolving commands)
+│   ├── standard-project/   # Standard application template (all commands)
+│   └── learning-project/   # Learning/tutorial template (all commands)
 ├── scripts/                # Automation scripts
 │   ├── new-project.sh      # Template generator
 │   └── validate-templates.sh
@@ -400,22 +392,20 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v1.6.0 (released 2025-12-15)  
+**Version:** v1.7.0-dev  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
-**Updated:** 2025-12-15  
-**Priority:** v1.6.0 (Experimental Template - complete, ready for release)
+**Updated:** 2025-12-17  
+**Priority:** Command simplification complete
 
 ### ✅ Completed
 
 **Template System:**
 
-- ✅ Standard project template
-- ✅ Learning project template
-- ✅ Experimental project template (v1.6.0) - NEW
-- ✅ Template generator script (supports 3 template types)
+- ✅ Standard project template (all 19 commands)
+- ✅ Learning project template (all 19 commands)
+- ✅ Template generator script (2 template types)
 - ✅ Template validation script
-- ✅ CI drift detection (`validate-template-sync.sh`) - NEW
 - ✅ Hub-and-spoke documentation pattern
 
 **CI/CD:**
@@ -475,12 +465,12 @@ When modifying templates:
 
 ### ✅ Recently Completed
 
-**Experimental Template (v1.6.0) - NEW:**
+**Command Simplification (v1.7.0):**
 
-- ✅ Phase 1: Create Template (`templates/experimental-project/`)
-- ✅ Phase 2: Update Generator Script (3 template types)
-- ✅ Phase 3: CI Drift Detection (`validate-template-sync.sh`)
-- ✅ Phase 4: Stability Indicators (stability levels, graduation checklist)
+- ✅ All templates now have all 19 commands
+- ✅ Removed experimental-project template (merged into standard)
+- ✅ Removed graduation process (ADR-004 superseded)
+- ✅ ADR-001: Commands as Guides created
 
 **Fix Management:**
 
@@ -489,16 +479,14 @@ When modifying templates:
 
 ### 🟡 Planned
 
-**v1.6.0 - Experimental Template:**
+**v1.7.0 - Command Simplification:**
 
-- ✅ All phases complete - Ready for release
+- ✅ All phases complete
 - 🟡 Update CHANGELOG
 - 🟡 Create release notes
 
-**v1.7.0 - Considerations:**
+**Future Considerations:**
 
-- 🟡 Template Integration (if graduation criteria met per ADR-004)
-- 🟡 Additional Evolving commands for experimental template
 - 🟡 Command branch workflow (`cmd/*` pattern)
 
 ---
@@ -529,6 +517,6 @@ When modifying templates:
 
 ---
 
-**Last Updated:** 2025-12-15  
+**Last Updated:** 2025-12-17  
 **Status:** ✅ Active  
-**Next:** v1.6.0 release (Experimental Template)
+**Next:** v1.7.0 release (Command Simplification)

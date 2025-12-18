@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Validate Template Sync Script
-# Validates that shared files are in sync between standard and experimental templates
+# Validates that shared files are in sync between standard and learning templates
 
 set -uo pipefail
 
@@ -18,7 +18,7 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Default paths (can be overridden by environment variables)
 STANDARD_DIR="${STANDARD_DIR:-$PROJECT_ROOT/templates/standard-project}"
-EXPERIMENTAL_DIR="${EXPERIMENTAL_DIR:-$PROJECT_ROOT/templates/experimental-project}"
+LEARNING_DIR="${LEARNING_DIR:-$PROJECT_ROOT/templates/learning-project}"
 MANIFEST="${MANIFEST:-$PROJECT_ROOT/scripts/template-sync-manifest.txt}"
 
 # Print functions
@@ -44,8 +44,8 @@ if [[ ! -d "$STANDARD_DIR" ]]; then
     exit 1
 fi
 
-if [[ ! -d "$EXPERIMENTAL_DIR" ]]; then
-    print_error "Experimental template directory not found: $EXPERIMENTAL_DIR"
+if [[ ! -d "$LEARNING_DIR" ]]; then
+    print_error "Learning template directory not found: $LEARNING_DIR"
     exit 1
 fi
 
@@ -63,7 +63,7 @@ DRIFT_FILES=()
 compare_file() {
     local file_path="$1"
     local standard_file="$STANDARD_DIR/$file_path"
-    local experimental_file="$EXPERIMENTAL_DIR/$file_path"
+    local learning_file="$LEARNING_DIR/$file_path"
     
     # Check if both files exist
     if [[ ! -f "$standard_file" ]]; then
@@ -72,14 +72,14 @@ compare_file() {
         return 1
     fi
     
-    if [[ ! -f "$experimental_file" ]]; then
+    if [[ ! -f "$learning_file" ]]; then
         DRIFT_DETECTED=true
-        DRIFT_FILES+=("$file_path (missing in experimental)")
+        DRIFT_FILES+=("$file_path (missing in learning)")
         return 1
     fi
     
     # Compare files using diff
-    if ! diff -q "$standard_file" "$experimental_file" > /dev/null 2>&1; then
+    if ! diff -q "$standard_file" "$learning_file" > /dev/null 2>&1; then
         DRIFT_DETECTED=true
         DRIFT_FILES+=("$file_path")
         return 1
@@ -92,7 +92,7 @@ compare_file() {
 compare_directory() {
     local dir_path="$1"
     local standard_dir="$STANDARD_DIR/$dir_path"
-    local experimental_dir="$EXPERIMENTAL_DIR/$dir_path"
+    local learning_dir="$LEARNING_DIR/$dir_path"
     
     # Check if both directories exist
     if [[ ! -d "$standard_dir" ]]; then
@@ -101,14 +101,14 @@ compare_directory() {
         return 1
     fi
     
-    if [[ ! -d "$experimental_dir" ]]; then
+    if [[ ! -d "$learning_dir" ]]; then
         DRIFT_DETECTED=true
-        DRIFT_FILES+=("$dir_path/ (missing in experimental)")
+        DRIFT_FILES+=("$dir_path/ (missing in learning)")
         return 1
     fi
     
     # Compare directory contents recursively
-    if ! diff -rq "$standard_dir" "$experimental_dir" > /dev/null 2>&1; then
+    if ! diff -rq "$standard_dir" "$learning_dir" > /dev/null 2>&1; then
         DRIFT_DETECTED=true
         DRIFT_FILES+=("$dir_path/")
         return 1
@@ -164,4 +164,3 @@ main() {
 
 # Run main function
 main "$@"
-
