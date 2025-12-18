@@ -2,7 +2,7 @@
 
 **Purpose:** Research and analysis for dev-infra and template improvements  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-18
 
 ---
 
@@ -10,11 +10,11 @@
 
 ### Active Research
 
-- **[Experimental Template](experimental-template/README.md)** - Research for experimental template with evolving commands (✅ Complete) ⭐ **NEW**
+- **[Template Metadata System](template-metadata/README.md)** - Research metadata for project sync and version tracking (🔴 Research) ⭐ **NEW**
 
 ### Completed Research
 
-- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Explore dev-infra identity: factory, laboratory, or reference implementation (✅ Complete)
+- **[Dev-Infra Identity & Focus v1](dev-infra-identity-and-focus/README.md)** - Explore dev-infra identity: factory, laboratory, or reference implementation (✅ Complete)
 
 ### Previous Research
 

@@ -17,7 +17,7 @@
 
 **Priority:** High
 
-**Status:** 🔴 Not Started
+**Status:** 🟡 Research Created → [admin/research/template-metadata/](../../research/template-metadata/README.md)
 
 **Sub-questions:**
 - What file format? (YAML, JSON, TOML)
