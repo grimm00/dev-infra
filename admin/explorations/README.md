@@ -2,7 +2,7 @@
 
 **Purpose:** Active explorations and proof of concepts  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-07
+**Last Updated:** 2025-12-19
 
 ---
 
@@ -10,7 +10,8 @@
 
 ### Active Explorations
 
-- **[Template Architecture](template-architecture/README.md)** - Explore alternative directory structures beyond frontend/backend (🔴 Exploration) ⭐ **NEW**
+- **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Exploration) ⭐ **NEW**
+- **[Template Architecture](template-architecture/README.md)** - Explore alternative directory structures beyond frontend/backend (🔴 Exploration)
 - **[Experimental Template](experimental-template/README.md)** - Templates with evolving/experimental commands (✅ Decisions Complete → v0.6.0)
 - **[Command Branch Workflow](command-branch-workflow/README.md)** - Dedicated branch pattern and workflow for command management (🔴 Exploration)
 
@@ -37,5 +38,5 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2025-12-12
+**Last Updated:** 2025-12-19
 
