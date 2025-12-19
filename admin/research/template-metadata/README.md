@@ -1,7 +1,7 @@
 # Template Metadata System - Research Hub
 
 **Purpose:** Research metadata system for dev-infra generated projects  
-**Status:** 🔴 Research  
+**Status:** ✅ Complete  
 **Created:** 2025-12-18  
 **Last Updated:** 2025-12-18
 
@@ -9,18 +9,18 @@
 
 ## 📋 Quick Links
 
-- **[Research Summary](research-summary.md)** - Summary of all research findings
-- **[Requirements](requirements.md)** - Requirements discovered during research
+- **[Research Summary](research-summary.md)** - Summary of all research findings ⭐
+- **[Requirements](requirements.md)** - 13 FRs, 6 NFRs discovered
 - **[Research Documents](#research-documents)** - Individual research documents
 
 ### Research Documents
 
 | Priority | Topic | Document | Status |
 |----------|-------|----------|--------|
-| 🔴 High | File Format | [research-file-format.md](research-file-format.md) | 🔴 Not Started |
-| 🔴 High | Essential Fields | [research-essential-fields.md](research-essential-fields.md) | 🔴 Not Started |
-| 🟡 Medium | Migration Strategy | [research-migration-strategy.md](research-migration-strategy.md) | 🔴 Not Started |
-| 🟡 Medium | File Location | [research-file-location.md](research-file-location.md) | 🔴 Not Started |
+| 🔴 High | File Format | [research-file-format.md](research-file-format.md) | ✅ Complete |
+| 🔴 High | Essential Fields | [research-essential-fields.md](research-essential-fields.md) | ✅ Complete |
+| 🟡 Medium | File Location | [research-file-location.md](research-file-location.md) | ✅ Complete |
+| 🟡 Medium | Migration Strategy | [research-migration-strategy.md](research-migration-strategy.md) | ✅ Complete |
 
 ---
 
@@ -39,22 +39,22 @@ This research supports the template metadata system, which is foundational to en
 
 ---
 
-## 📊 Research Status
+## 📊 Key Decisions
 
-| Research Topic | Priority | Status | Document |
-|----------------|----------|--------|----------|
-| File Format | High | 🔴 Not Started | [research-file-format.md](research-file-format.md) |
-| Essential Fields | High | 🔴 Not Started | [research-essential-fields.md](research-essential-fields.md) |
-| Migration Strategy | Medium | 🔴 Not Started | [research-migration-strategy.md](research-migration-strategy.md) |
-| File Location | Medium | 🔴 Not Started | [research-file-location.md](research-file-location.md) |
+| Question | Answer |
+|----------|--------|
+| File Format | YAML (`.dev-infra.yml`) |
+| Essential Fields | `template`, `version`, `created` |
+| Location | Project root (dotfile) |
+| Migration | Manual for v1, init command for v2 |
 
 ---
 
 ## 🚀 Next Steps
 
-1. Use `/research template-metadata --conduct` to perform research
-2. Review requirements in `requirements.md`
-3. Use `/decision template-metadata --from-research` to make decisions
+1. Use `/decision template-metadata --from-research` to create ADR
+2. Implement metadata in upcoming release
+3. Update `new-project.sh` to generate metadata file
 
 ---
 
@@ -66,4 +66,3 @@ This research supports the template metadata system, which is foundational to en
 ---
 
 **Last Updated:** 2025-12-18
-
