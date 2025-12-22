@@ -1,14 +1,37 @@
 # Dev-Infra Identity & Focus - Exploration
 
-**Status:** 🟠 Active Exploration (v2)  
+**Status:** 🟠 Active Exploration (v3)  
 **Created:** 2025-12-11  
-**Last Updated:** 2025-12-18
+**Last Updated:** 2025-12-22
 
 ---
 
 ## 🎯 What Are We Exploring?
 
 The fundamental question: **What should dev-infra be?**
+
+### v3 Refinement (2025-12-22)
+
+**Key Insight:** proj-cli should be the unified CLI that consumes dev-infra as a "template layer."
+
+Rather than building CLI tooling into dev-infra, we leverage the existing `proj-cli` project which already provides:
+- Project management: `proj list`, `proj get`, `proj create` (work-prod API)
+- Inventory management: `proj inv scan`, `proj inv analyze`
+- Python CLI with Typer + Pydantic + XDG configuration
+
+**New Architecture:**
+```
+proj-cli (CLI)        →    dev-infra (Templates)
+                      →    work-prod (API)
+                      →    ~/.dev-infra/ (Local Registry)
+```
+
+**Implications:**
+- Dev-infra does NOT need to become a CLI tool
+- Dev-infra focuses on: templates, sync rules, metadata format
+- proj-cli implements: `proj new`, `proj sync`, registry operations
+
+---
 
 ### v2 Refinement (2025-12-18)
 
@@ -78,6 +101,45 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 
 ---
 
+### Scenario 5: proj-cli Integration (v3 - 2025-12-22)
+
+**Need:** Unified CLI for all project operations instead of separate tools.
+
+**Current Support:** ✅ proj-cli exists with work-prod integration
+
+**Approach:**
+- `proj new [name]` creates project from dev-infra template
+- `proj sync` syncs template updates to existing projects
+- Local registry at `~/.dev-infra/registry.json` tracks all projects
+- Projects automatically registered on creation
+
+**Architecture:**
+```
+┌─────────────────────────────────────────────────────────┐
+│                      proj-cli                            │
+│         (User-Facing CLI - installed globally)           │
+│                                                          │
+│  Commands:                                               │
+│  • proj new [name] --template standard                   │
+│  • proj list / get / create (work-prod API)              │
+│  • proj inv scan / analyze                               │
+│  • proj sync                                             │
+└─────────────────────────────────────────────────────────┘
+                          │
+           ┌──────────────┼──────────────┐
+           ▼              ▼              ▼
+┌─────────────────┐ ┌─────────────┐ ┌─────────────────┐
+│ dev-infra       │ │ work-prod   │ │ ~/.dev-infra/   │
+│ (Templates)     │ │ (API)       │ │ (Local Registry)│
+└─────────────────┘ └─────────────┘ └─────────────────┘
+```
+
+**Key Insight:** Dev-infra doesn't need its own CLI. proj-cli is the CLI layer; dev-infra is the template layer.
+
+**Related:** [proj-cli-architecture exploration](https://github.com/grimm00/proj-cli/blob/develop/docs/maintainers/planning/explorations/proj-cli-architecture/exploration.md)
+
+---
+
 ## 🤔 Why This Shift?
 
 ### What We Learned
@@ -128,21 +190,26 @@ customizations:
   - removed: .cursor/commands/status.md  # User removed intentionally
 ```
 
-### Sync CLI Concept
+### Sync CLI Concept (Updated for proj-cli)
 
 ```bash
+# Create new project from template
+proj new myapp --template standard
+
 # Check what's new in dev-infra
-dev-infra status
+proj sync --check
 
 # Sync specific files/patterns
-dev-infra sync --commands  # Just commands
-dev-infra sync --structure # Just directory structure
-dev-infra sync --all       # Everything syncable
+proj sync --commands  # Just commands
+proj sync --structure # Just directory structure
+proj sync --all       # Everything syncable
 
 # Adopt dev-infra in existing project
-dev-infra adopt --template standard-project --dry-run
-dev-infra adopt --template standard-project --apply
+proj adopt --template standard-project --dry-run
+proj adopt --template standard-project --apply
 ```
+
+**Note:** These commands are implemented in proj-cli, which consumes dev-infra templates.
 
 ### Version Compatibility Matrix
 
@@ -181,23 +248,28 @@ dev-infra adopt --template standard-project --apply
 ### What Dev-Infra IS (Confirmed)
 
 1. **Template Factory** - Produces project templates
-2. **Infrastructure Manager** - Helps projects stay in sync (exploring)
+2. **Template Layer** - Source consumed by proj-cli (v3 insight)
 3. **Pattern Library** - Encodes workflow patterns in commands
+4. **Sync Rules Provider** - Defines what/how to sync (metadata, manifests)
 
 ### What Dev-Infra is NOT
 
-1. ~~Feature Platform~~ - Not trying to build features for broad audiences
-2. ~~Workflow Optimizer~~ - Not optimizing for complex scenarios
-3. ~~Multi-User System~~ - Single user (for now), can scale later
+1. ~~CLI Tool~~ - proj-cli is the CLI; dev-infra provides templates
+2. ~~Feature Platform~~ - Not trying to build features for broad audiences
+3. ~~Workflow Optimizer~~ - Not optimizing for complex scenarios
+4. ~~Multi-User System~~ - Single user (for now), can scale later
 
 ---
 
 ## 🚀 Next Steps
 
-1. **Research:** Investigate sync system approaches
-2. **Prototype:** Simple `.dev-infra.yml` metadata file
-3. **Decision:** ADR for sync system approach
-4. **Implementation:** Minimum viable sync in v0.8.0 or v0.9.0
+1. **Coordinate with proj-cli:** Align on template integration architecture
+2. **Research:** Complete template metadata research (in progress)
+3. **Prototype:** Simple `.dev-infra.yml` metadata file
+4. **Decision:** ADR for proj-cli + dev-infra integration
+5. **Implementation:** `proj new` command in proj-cli
+
+**See also:** [proj-cli-architecture exploration](https://github.com/grimm00/proj-cli/blob/develop/docs/maintainers/planning/explorations/proj-cli-architecture/exploration.md)
 
 ---
 
@@ -219,6 +291,13 @@ The original exploration identified three identities:
 - Graduation process archived
 - ADR-001: Commands as Guides established
 
+### From v3 proj-cli Integration (2025-12-22)
+
+- Realized proj-cli should be the CLI layer
+- Dev-infra becomes "template layer" consumed by proj-cli
+- No need for dev-infra to build its own CLI
+- Research Topic 6 (CLI vs Script) resolved: use proj-cli
+
 ---
 
-**Last Updated:** 2025-12-18
+**Last Updated:** 2025-12-22

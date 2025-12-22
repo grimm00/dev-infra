@@ -1,16 +1,17 @@
 # Dev-Infra Identity & Focus - Exploration Hub
 
 **Purpose:** Define dev-infra's identity and focus areas for future development  
-**Status:** 🟠 Active Exploration (v2)  
+**Status:** 🟠 Active Exploration (v3)  
 **Created:** 2025-12-11  
-**Last Updated:** 2025-12-18
+**Last Updated:** 2025-12-22
 
 ---
 
 ## 📋 Quick Links
 
-- **[Exploration Document](exploration.md)** - Main exploration with four scenarios
+- **[Exploration Document](exploration.md)** - Main exploration with five scenarios
 - **[Research Topics](research-topics.md)** - Research questions to investigate
+- **[proj-cli Architecture Exploration](https://github.com/grimm00/proj-cli/blob/develop/docs/maintainers/planning/explorations/proj-cli-architecture/exploration.md)** - Related: CLI integration design
 
 ---
 
@@ -18,13 +19,24 @@
 
 This exploration defines what dev-infra should be and what problems it should solve.
 
+### v3 Focus (2025-12-22)
+
+**Key Insight:** proj-cli should be the unified CLI; dev-infra is the "template layer."
+
+Rather than building CLI tooling into dev-infra, we extend proj-cli with:
+- `proj new [name]` - Create project from dev-infra template
+- `proj sync` - Sync template updates to existing projects
+- Local registry at `~/.dev-infra/registry.json`
+
+**Research Topic 6 (CLI vs Script) is now RESOLVED:** Use proj-cli.
+
 ### v2 Focus (2025-12-18)
 
 After completing v0.7.0 (Command Simplification), we have new clarity:
 
 **Key Insight:** There are no external users yet. Dev-infra serves its creator, and learnings from project creation inform template improvements.
 
-**New Direction:** Infrastructure management for four scenarios:
+**New Direction:** Infrastructure management for five scenarios:
 
 | Scenario | Status | Description |
 |----------|--------|-------------|
@@ -32,22 +44,34 @@ After completing v0.7.0 (Command Simplification), we have new clarity:
 | External Sync | 🔴 Not Supported | Adopt dev-infra in existing projects |
 | Update Sync | ⚠️ Partial | Push template updates to projects |
 | Template Tagging | 🔴 Not Supported | Metadata for project identification |
+| proj-cli Integration | 🔴 Exploring | Unified CLI via proj-cli (NEW v3) |
 
 ---
 
 ## 📊 Status
 
-**Current Phase:** v2 Exploration  
-**Previous Phase:** v1 Exploration → ADR-001 (Commands as Guides)  
-**Next Step:** Research sync system and metadata approaches
+**Current Phase:** v3 Exploration  
+**Previous Phases:**
+- v1 Exploration → ADR-001 (Commands as Guides)
+- v2 Exploration → Four scenarios defined
+**Next Step:** Coordinate with proj-cli architecture exploration
 
 ---
 
 ## 🔗 Related
 
+### In This Project
+
 - [ADR-001: Commands as Guides](../../decisions/command-simplification/adr-001-commands-as-guides.md) - Result of v1 exploration
 - [ADR-001: Project Identity](../../decisions/dev-infra-identity-and-focus/adr-001-project-identity.md) - Template Factory identity
+- [Template Metadata Research](../../research/template-metadata/README.md) - Metadata format research
+- [Work-Prod Integration Research](../../research/work-prod-integration/README.md) - Local registry research
+
+### In proj-cli
+
+- [proj-cli Architecture Exploration](https://github.com/grimm00/proj-cli/blob/develop/docs/maintainers/planning/explorations/proj-cli-architecture/exploration.md) - CLI integration design
+- [ADR-0007: Unified CLI Architecture](https://github.com/grimm00/proj-cli/blob/develop/docs/maintainers/decisions/ADR-0007-unified-cli-architecture.md) - Existing proj-cli architecture
 
 ---
 
-**Last Updated:** 2025-12-18
+**Last Updated:** 2025-12-22

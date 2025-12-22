@@ -3,7 +3,7 @@
 **Purpose:** List of research topics/questions to investigate  
 **Status:** 🟡 Active Research  
 **Created:** 2025-12-11  
-**Last Updated:** 2025-12-18
+**Last Updated:** 2025-12-22
 
 ---
 
@@ -105,25 +105,28 @@
 
 ---
 
-### Research Topic 6: CLI vs Script Approach
+## 🏁 Resolved Topics
+
+### ~~Research Topic 6: CLI vs Script Approach~~
 
 **Question:** Should sync be a dedicated CLI tool or bash scripts?
 
-**Why:** Affects implementation complexity and user experience.
+**Resolution:** Use proj-cli. The existing proj-cli project (Python/Typer) already has:
+- Work-prod API integration
+- XDG-compliant configuration
+- Rich terminal output
+- Extensible command structure
 
-**Priority:** Low
+New commands will be added to proj-cli:
+- `proj new` - Create project from dev-infra template
+- `proj sync` - Sync template updates
+- `proj adopt` - Adopt dev-infra in existing project
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Resolved (2025-12-22)
 
-**Options:**
-1. **Bash scripts:** Simple, no dependencies, matches current pattern
-2. **Python CLI:** Better UX, but adds dependency
-3. **Node CLI:** Good tooling, but adds dependency
-4. **Manual process:** Just documentation, no tooling
+**See:** [proj-cli-architecture exploration](https://github.com/grimm00/proj-cli/blob/develop/docs/maintainers/planning/explorations/proj-cli-architecture/exploration.md)
 
 ---
-
-## 🏁 Resolved Topics
 
 ### ~~Research Topic: Graduation Process~~
 
@@ -155,23 +158,24 @@
 
 ## 📊 Priority Matrix
 
-| Topic | Priority | Complexity | Value |
-|-------|----------|------------|-------|
-| Template Metadata | High | Low | High |
-| Sync System | High | High | High |
-| Customization | High | Medium | High |
-| External Adoption | Medium | High | Medium |
-| Version Compat | Medium | Medium | Medium |
-| CLI vs Script | Low | Low | Low |
+| Topic | Priority | Complexity | Value | Status |
+|-------|----------|------------|-------|--------|
+| Template Metadata | High | Low | High | 🟡 Research Created |
+| Sync System | High | High | High | 🔴 Not Started |
+| Customization | High | Medium | High | 🔴 Not Started |
+| External Adoption | Medium | High | Medium | 🔴 Not Started |
+| Version Compat | Medium | Medium | Medium | 🔴 Not Started |
+| ~~CLI vs Script~~ | ~~Low~~ | ~~Low~~ | ~~Low~~ | ✅ Resolved |
 
 **Recommended Order:**
-1. Template Metadata (foundational)
+1. Template Metadata (foundational) - in progress
 2. Sync System (depends on metadata)
 3. Customization (depends on sync)
 4. Version Compatibility (can parallelize)
 5. External Adoption (optional, deferred)
-6. CLI vs Script (implementation detail)
+
+**Note:** CLI vs Script resolved - using proj-cli as the CLI layer.
 
 ---
 
-**Last Updated:** 2025-12-18
+**Last Updated:** 2025-12-22
