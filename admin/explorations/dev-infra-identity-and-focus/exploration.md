@@ -1,6 +1,6 @@
 # Dev-Infra Identity & Focus - Exploration
 
-**Status:** 🟠 Active Exploration (v3)  
+**Status:** 🟠 Active Exploration (v4)  
 **Created:** 2025-12-11  
 **Last Updated:** 2025-12-22
 
@@ -9,6 +9,40 @@
 ## 🎯 What Are We Exploring?
 
 The fundamental question: **What should dev-infra be?**
+
+### v4 Discovery (2025-12-22) — Global Commands! 🎉
+
+**Key Discovery:** Cursor supports global commands from `~/.cursor/commands/`!
+
+**Validation Test:**
+1. Created `~/.cursor/commands/foobar.md` with test content
+2. Invoked `/foobar` from a workspace
+3. ✅ Command executed successfully!
+
+**What This Means:**
+
+```
+~/.cursor/commands/           # Global - available in ALL projects
+├── task-phase.md
+├── pr.md
+├── fix-plan.md
+└── ... (19 commands from dev-infra)
+
+project/.cursor/commands/     # Local - project-specific overrides
+└── custom-command.md
+```
+
+**Implications:**
+1. **Templates become lighter** — Commands optional, not embedded
+2. **Single source of truth** — Update once globally, all projects benefit
+3. **Dev-infra evolves** — From "Template Factory" to "Command Hub + Template Factory"
+4. **Feedback loop** — Usage patterns inform command improvements
+
+**New Identity:**
+```
+dev-infra (v1): Template Factory → produces templates with commands
+dev-infra (v2): Command Hub + Template Factory → provides global commands + templates
+```
 
 ### v3 Refinement (2025-12-22)
 
@@ -140,6 +174,91 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 
 ---
 
+### Scenario 6: Global Command Distribution (v4 - 2025-12-22) 🎉
+
+**Need:** Commands that are shared across all projects without duplication.
+
+**Current Support:** ✅ Validated! Cursor reads from `~/.cursor/commands/`
+
+**Discovery:** A test command (`foobar.md`) was created at `~/.cursor/commands/` and successfully invoked from a multi-project workspace.
+
+**Architecture:**
+```
+┌─────────────────────────────────────────────────────────┐
+│                     ~/.cursor/                          │
+│                                                         │
+│  commands/                 # Global commands            │
+│  ├── task-phase.md         # From dev-infra             │
+│  ├── pr.md                                              │
+│  ├── fix-plan.md                                        │
+│  └── ... (19 workflow commands)                         │
+│                                                         │
+│  rules/                    # Global rules (TBD)         │
+│  └── shared-patterns.mdc   # Common patterns            │
+│                                                         │
+│  workspaces/               # Workspace files            │
+│  └── proj-management.code-workspace                     │
+└─────────────────────────────────────────────────────────┘
+              │
+              ▼ (overrides)
+┌─────────────────────────────────────────────────────────┐
+│                  project/.cursor/                       │
+│                                                         │
+│  commands/                 # Project-specific only      │
+│  └── custom-command.md     # Override or extend         │
+│                                                         │
+│  rules/                    # Project-specific rules     │
+│  └── main.mdc              # Project context            │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Installation Options:**
+
+1. **Global Install (Recommended):**
+   ```bash
+   # From dev-infra repository
+   ./scripts/install-commands.sh --global
+   # Copies commands to ~/.cursor/commands/
+   ```
+
+2. **Project Install (Opt-in):**
+   ```bash
+   ./scripts/install-commands.sh --local
+   # Copies commands to ./.cursor/commands/
+   ```
+
+3. **Template Generation:**
+   ```bash
+   ./scripts/new-project.sh
+   # Option: Include commands? [y/N]
+   # N = rely on global commands
+   # y = copy to project
+   ```
+
+**Implications:**
+
+| Aspect | Before (v1) | After (v2) |
+|--------|-------------|------------|
+| Command Location | Embedded in templates | Global + optional project |
+| Updates | Sync per-project | Update globally once |
+| Feedback Loop | Per-project learnings | Centralized analytics |
+| Template Size | Heavy (~20 command files) | Light (optional) |
+| New Projects | Get commands automatically | Rely on global or opt-in |
+
+**Research Results (2025-12-22):**
+
+| Question | Answer | Test |
+|----------|--------|------|
+| Do project commands override global? | ✅ YES | Project `/status` overrode global |
+| Is agent aware of global when project exists? | ❌ NO (good!) | Clean isolation |
+| Do global rules work? | ❌ NO | `~/.cursor/rules/` not loaded |
+
+**Confirmed Architecture:**
+- Commands: Two-tier (global fallback, project override) ✅
+- Rules: Project-only (no global support) ❌
+
+---
+
 ## 🤔 Why This Shift?
 
 ### What We Learned
@@ -245,16 +364,18 @@ proj adopt --template standard-project --apply
 
 ## 🎭 Identity Clarification
 
-### What Dev-Infra IS (Confirmed)
+### What Dev-Infra IS (Updated v4)
 
-1. **Template Factory** - Produces project templates
-2. **Template Layer** - Source consumed by proj-cli (v3 insight)
-3. **Pattern Library** - Encodes workflow patterns in commands
-4. **Sync Rules Provider** - Defines what/how to sync (metadata, manifests)
+1. **Command Hub** - Provides global commands installable to `~/.cursor/commands/` (NEW!)
+2. **Template Factory** - Produces project templates
+3. **Template Layer** - Source consumed by proj-cli (v3 insight)
+4. **Pattern Library** - Encodes workflow patterns in commands
+5. **Sync Rules Provider** - Defines what/how to sync (metadata, manifests)
+6. **Feedback Collector** - Gathers usage patterns to improve commands/templates
 
 ### What Dev-Infra is NOT
 
-1. ~~CLI Tool~~ - proj-cli is the CLI; dev-infra provides templates
+1. ~~CLI Tool~~ - proj-cli is the CLI; dev-infra provides templates and commands
 2. ~~Feature Platform~~ - Not trying to build features for broad audiences
 3. ~~Workflow Optimizer~~ - Not optimizing for complex scenarios
 4. ~~Multi-User System~~ - Single user (for now), can scale later
@@ -263,11 +384,13 @@ proj adopt --template standard-project --apply
 
 ## 🚀 Next Steps
 
-1. **Coordinate with proj-cli:** Align on template integration architecture
-2. **Research:** Complete template metadata research (in progress)
-3. **Prototype:** Simple `.dev-infra.yml` metadata file
-4. **Decision:** ADR for proj-cli + dev-infra integration
-5. **Implementation:** `proj new` command in proj-cli
+1. **Test command override:** Verify project commands override global commands
+2. **Test global rules:** See if `~/.cursor/rules/` works like commands
+3. **Create install script:** `scripts/install-commands.sh` for global installation
+4. **Update template generator:** Add "Include commands?" option
+5. **Research:** Complete template metadata research (in progress)
+6. **Coordinate with proj-cli:** Align on template integration architecture
+7. **Decision:** ADR for global command distribution
 
 **See also:** [proj-cli-architecture exploration](https://github.com/grimm00/proj-cli/blob/develop/docs/maintainers/planning/explorations/proj-cli-architecture/exploration.md)
 
@@ -297,6 +420,15 @@ The original exploration identified three identities:
 - Dev-infra becomes "template layer" consumed by proj-cli
 - No need for dev-infra to build its own CLI
 - Research Topic 6 (CLI vs Script) resolved: use proj-cli
+
+### From v4 Global Commands Discovery (2025-12-22)
+
+- **Discovery:** Cursor reads commands from `~/.cursor/commands/` globally
+- **Validation:** Created `~/.cursor/commands/foobar.md`, invoked `/foobar` successfully
+- **Implication:** Dev-infra can provide commands installable globally, not just per-template
+- **New Identity:** Dev-infra is now "Command Hub + Template Factory"
+- **New Scenario:** Scenario 6 (Global Command Distribution) added
+- **Context:** Discovery made during workspace exploration session
 
 ---
 

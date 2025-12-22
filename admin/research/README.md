@@ -2,7 +2,7 @@
 
 **Purpose:** Research and analysis for dev-infra and template improvements  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-18
+**Last Updated:** 2025-12-22
 
 ---
 
@@ -10,7 +10,8 @@
 
 ### Active Research
 
-- **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Research) ⭐ **NEW**
+- **[Global Command Distribution](global-command-distribution/README.md)** - Distributing dev-infra commands via `~/.cursor/commands/` (🟡 Research) ⭐ **NEW**
+- **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Research)
 - **[Template Metadata System](template-metadata/README.md)** - Research metadata for project sync and version tracking (✅ Complete)
 
 ### Completed Research
@@ -203,8 +204,8 @@ This research evaluates the current template structure against:
 
 ---
 
-**Last Updated:** 2025-12-19  
+**Last Updated:** 2025-12-22  
 **Status:** ✅ Active  
-**Latest Research:** [Work-prod Integration](work-prod-integration/README.md)
+**Latest Research:** [Global Command Distribution](global-command-distribution/README.md)
 
 

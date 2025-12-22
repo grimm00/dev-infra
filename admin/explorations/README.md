@@ -2,7 +2,7 @@
 
 **Purpose:** Active explorations and proof of concepts  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-19
+**Last Updated:** 2025-12-22
 
 ---
 
@@ -10,14 +10,11 @@
 
 ### Active Explorations
 
-- **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Exploration) ⭐ **NEW**
+- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Evolved to v4: Global Commands Discovery! (🟠 Active v4) ⭐ **UPDATED**
+- **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Exploration)
 - **[Template Architecture](template-architecture/README.md)** - Explore alternative directory structures beyond frontend/backend (🔴 Exploration)
 - **[Experimental Template](experimental-template/README.md)** - Templates with evolving/experimental commands (✅ Decisions Complete → v0.6.0)
 - **[Command Branch Workflow](command-branch-workflow/README.md)** - Dedicated branch pattern and workflow for command management (🔴 Exploration)
-
-### Transitioned Explorations
-
-- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Explore what dev-infra should be: factory, laboratory, or reference implementation (✅ Transitioned)
 
 ### Completed Explorations
 
@@ -38,5 +35,5 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2025-12-19
+**Last Updated:** 2025-12-22
 

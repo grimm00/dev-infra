@@ -1,4 +1,4 @@
-# Research Topics - Dev-Infra Identity & Focus (v2)
+# Research Topics - Dev-Infra Identity & Focus (v3)
 
 **Purpose:** List of research topics/questions to investigate  
 **Status:** 🟡 Active Research  
@@ -8,6 +8,71 @@
 ---
 
 ## 📋 Research Topics
+
+### Research Topic 7: Global Command Distribution (v4) ✅ RESEARCHED
+
+**Question:** How should dev-infra distribute commands globally via `~/.cursor/commands/`?
+
+**Why:** Validated that Cursor supports global commands. This enables a new distribution model.
+
+**Priority:** High
+
+**Status:** ✅ Research Complete (2025-12-22)
+
+**Validated Facts:**
+
+- ✅ Cursor reads commands from `~/.cursor/commands/`
+- ✅ Commands work from any project (single folder, not just workspace)
+- ✅ Project commands OVERRIDE global commands of same name
+- ✅ Agent is unaware of global when project version exists (clean isolation)
+- ❌ Global rules (`~/.cursor/rules/`) do NOT work - rules must be per-project
+
+**Test Results (2025-12-22):**
+
+| Test                        | Result    | Notes                                             |
+| --------------------------- | --------- | ------------------------------------------------- |
+| Global command in workspace | ✅ Works  | `/foobar` worked                                  |
+| Project overrides global    | ✅ Works  | Project `/status` used, not global                |
+| Global fallback             | ✅ Works  | Pokedex (no project cmd) used global `/status`    |
+| Global rules                | ❌ Failed | `~/.cursor/rules/test-global-rule.mdc` not loaded |
+
+**Architecture Confirmed:**
+
+```
+~/.cursor/commands/          ← Fallback (global)
+project/.cursor/commands/    ← Priority (overrides global)
+
+~/.cursor/rules/             ← NOT SUPPORTED
+project/.cursor/rules/       ← Required (no global fallback)
+```
+
+**Remaining Sub-questions:**
+
+- How to install commands globally? (script, proj-cli, manual)
+- How to version global commands?
+- Should templates still include commands as an option?
+- How to handle command updates?
+- **NEW:** Should install script support `--project` flag for workspace context?
+
+**User Insight (2025-12-22):**
+
+> "It may be helpful to include a flag for projects if we're in a workspace context or we want to be extra careful. Most likely, someone in the project directory would trust that the IDE knows where to apply it to."
+
+This suggests:
+
+- `--global` (default): Install to `~/.cursor/commands/`
+- `--project`: Install to `./.cursor/commands/` (current project)
+- Workspace users may want project-level for extra control
+
+**Recommended Approach:**
+
+1. **Install Script:** `scripts/install-commands.sh [--global|--project]`
+   - `--global` (default): Install to `~/.cursor/commands/`
+   - `--project`: Install to `./.cursor/commands/` in current directory
+2. **Template Option:** "Include commands locally? [y/N]" (default: no, use global)
+3. **Version Tracking:** `.cursor/commands/.version` file with dev-infra version
+
+---
 
 ### Research Topic 1: Template Metadata System
 
@@ -20,6 +85,7 @@
 **Status:** 🟡 Research Created → [admin/research/template-metadata/](../../research/template-metadata/README.md)
 
 **Sub-questions:**
+
 - What file format? (YAML, JSON, TOML)
 - What information is essential vs nice-to-have?
 - How to handle migration from projects without metadata?
@@ -38,12 +104,14 @@
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - Push vs pull model?
 - Granularity: file-level, directory-level, or pattern-level?
 - How to handle conflicts with user customizations?
 - CLI tool vs script vs manual process?
 
 **Options to explore:**
+
 1. **Diff-based:** Show differences, user applies
 2. **Merge-based:** Attempt automatic merge, flag conflicts
 3. **Replace-based:** Replace syncable files entirely
@@ -62,6 +130,7 @@
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - How to detect intentional vs accidental changes?
 - Should users mark files as "do not sync"?
 - Should we track what was synced vs what was customized?
@@ -80,6 +149,7 @@
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - What's the complexity vs value trade-off?
 - Could we do "scaffold mode" that's non-destructive?
 - Should we just provide a migration guide instead?
@@ -98,6 +168,7 @@
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - Semantic versioning for templates?
 - How to communicate breaking changes?
 - Should old projects auto-upgrade or stay at version?
@@ -112,12 +183,14 @@
 **Question:** Should sync be a dedicated CLI tool or bash scripts?
 
 **Resolution:** Use proj-cli. The existing proj-cli project (Python/Typer) already has:
+
 - Work-prod API integration
 - XDG-compliant configuration
 - Rich terminal output
 - Extensible command structure
 
 New commands will be added to proj-cli:
+
 - `proj new` - Create project from dev-infra template
 - `proj sync` - Sync template updates
 - `proj adopt` - Adopt dev-infra in existing project
@@ -158,23 +231,30 @@ New commands will be added to proj-cli:
 
 ## 📊 Priority Matrix
 
-| Topic | Priority | Complexity | Value | Status |
-|-------|----------|------------|-------|--------|
-| Template Metadata | High | Low | High | 🟡 Research Created |
-| Sync System | High | High | High | 🔴 Not Started |
-| Customization | High | Medium | High | 🔴 Not Started |
-| External Adoption | Medium | High | Medium | 🔴 Not Started |
-| Version Compat | Medium | Medium | Medium | 🔴 Not Started |
-| ~~CLI vs Script~~ | ~~Low~~ | ~~Low~~ | ~~Low~~ | ✅ Resolved |
+| Topic               | Priority | Complexity | Value    | Status               |
+| ------------------- | -------- | ---------- | -------- | -------------------- |
+| **Global Commands** | **High** | **Low**    | **High** | ✅ Research Complete |
+| Template Metadata   | High     | Low        | High     | 🟡 Research Created  |
+| Sync System         | High     | High       | High     | 🔴 Not Started       |
+| Customization       | High     | Medium     | High     | 🔴 Not Started       |
+| External Adoption   | Medium   | High       | Medium   | 🔴 Not Started       |
+| Version Compat      | Medium   | Medium     | Medium   | 🔴 Not Started       |
+| ~~CLI vs Script~~   | ~~Low~~  | ~~Low~~    | ~~Low~~  | ✅ Resolved          |
 
 **Recommended Order:**
-1. Template Metadata (foundational) - in progress
-2. Sync System (depends on metadata)
-3. Customization (depends on sync)
-4. Version Compatibility (can parallelize)
-5. External Adoption (optional, deferred)
 
-**Note:** CLI vs Script resolved - using proj-cli as the CLI layer.
+1. ~~Global Commands~~ - ✅ Research complete, ready for implementation
+2. Template Metadata (foundational) - in progress
+3. Sync System (depends on metadata)
+4. Customization (depends on sync)
+5. Version Compatibility (can parallelize)
+6. External Adoption (optional, deferred)
+
+**Key Findings:**
+
+- ✅ Global commands work with project override
+- ❌ Global rules do NOT work (must remain per-project)
+- Next: Create `scripts/install-commands.sh` for global installation
 
 ---
 
