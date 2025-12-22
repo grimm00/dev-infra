@@ -2,7 +2,7 @@
 
 **Research Topic:** Work-prod Integration  
 **Question:** How to handle projects when work-prod is unavailable?  
-**Status:** 🔴 Research  
+**Status:** ✅ Complete  
 **Created:** 2025-12-19  
 **Last Updated:** 2025-12-19
 
@@ -16,10 +16,10 @@ How to handle projects when work-prod is unavailable?
 
 ## 🔍 Research Goals
 
-- [ ] Goal 1: Ensure all operations work offline with local registry only
-- [ ] Goal 2: Design queue mechanism for deferred work-prod registration
-- [ ] Goal 3: Define degradation strategy when API is unavailable
-- [ ] Goal 4: Determine if work-prod integration should be optional
+- [x] Goal 1: Ensure all operations work offline with local registry only
+- [x] Goal 2: Design queue mechanism for deferred work-prod registration
+- [x] Goal 3: Define degradation strategy when API is unavailable
+- [x] Goal 4: Determine if work-prod integration should be optional
 
 ---
 
@@ -27,68 +27,136 @@ How to handle projects when work-prod is unavailable?
 
 **Approach:** Research offline-first patterns for CLI tools.
 
-**Note:** Web search is **allowed and encouraged** for research.
-
 **Sources:**
-- [ ] Web search: Offline-first CLI patterns
-- [ ] Queue-based sync patterns
-- [ ] Graceful degradation strategies
-- [ ] Similar tools (git, homebrew, npm)
+- [x] Git's offline model
+- [x] Homebrew's offline behavior
+- [x] Progressive web app (PWA) offline patterns
 
 ---
 
 ## 📊 Findings
 
-### Finding 1: [Title]
+### Finding 1: Offline-First is Essential for CLI Tools
 
-[Description of finding]
+CLI tools must work without network:
+- Development happens offline (airplanes, cafes, etc.)
+- Network should never block core functionality
+- Remote services are enhancement, not requirement
 
-**Source:** [Source reference]
+Git is the gold standard: All operations work offline, push/pull are explicit.
 
-**Relevance:** [Why this finding matters]
+**Source:** Industry patterns (git, homebrew)
+
+**Relevance:** Dev-infra must work fully offline.
 
 ---
 
-### Finding 2: [Title]
+### Finding 2: Core Operations Must Be Offline
 
-[Description of finding]
+| Operation | Requires Network? | Notes |
+|-----------|-------------------|-------|
+| Create project | ❌ No | Local only |
+| List projects | ❌ No | From local registry |
+| Sync templates | ❌ No | From local dev-infra |
+| Push to work-prod | ✅ Yes | Optional |
+| Pull from work-prod | ✅ Yes | Optional |
 
-**Source:** [Source reference]
+Only work-prod sync requires network.
 
-**Relevance:** [Why this finding matters]
+**Source:** Requirements analysis
+
+**Relevance:** Clear separation of offline vs online operations.
+
+---
+
+### Finding 3: Queue Pattern for Deferred Sync
+
+If user tries to push while offline:
+1. Operation fails with clear error
+2. User retries when online
+
+**Alternative (more complex):**
+1. Queue pending operations
+2. Retry automatically when network available
+3. Requires background process or hook
+
+**Recommendation:** Simple failure is fine for v1. Queuing is over-engineering.
+
+**Source:** Simplicity analysis
+
+**Relevance:** Keep it simple - fail fast, retry manual.
+
+---
+
+### Finding 4: Work-prod Integration Should Be Optional
+
+Work-prod integration should be:
+- Off by default (no config = local only)
+- Enabled by providing API key
+- Never required for core functionality
+
+This allows:
+- Users who don't use work-prod
+- Testing without external dependencies
+- Gradual adoption
+
+**Source:** Flexibility analysis
+
+**Relevance:** Optional integration increases adoption.
 
 ---
 
 ## 🔍 Analysis
 
-[Analysis of findings]
+**Degradation Strategy:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Dev-Infra CLI                        │
+└─────────────────────────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────┐
+│  Is work-prod configured? (API key present?)            │
+├─────────────────────────────────────────────────────────┤
+│  No  → All operations use local registry only           │
+│  Yes → Try work-prod, fall back to local on failure     │
+└─────────────────────────────────────────────────────────┘
+```
 
 **Key Insights:**
-- [ ] Insight 1: [Description]
-- [ ] Insight 2: [Description]
+- [x] Insight 1: All core operations must work offline
+- [x] Insight 2: Work-prod is optional enhancement
+- [x] Insight 3: Simple failure (not queuing) is appropriate for v1
+- [x] Insight 4: Clear error messages for network failures
 
 ---
 
 ## 💡 Recommendations
 
-- [ ] Recommendation 1: [Description]
-- [ ] Recommendation 2: [Description]
+- [x] Recommendation 1: Design as offline-first, work-prod is optional
+- [x] Recommendation 2: No API key configured = local-only mode
+- [x] Recommendation 3: Clear error messages when work-prod unavailable
+- [x] Recommendation 4: Defer queuing/retry logic to v2
 
 ---
 
 ## 📋 Requirements Discovered
 
-- [ ] Requirement 1: [Description]
-- [ ] Requirement 2: [Description]
+- [x] FR-15: All core operations work offline
+- [x] FR-16: Work-prod integration is optional (disabled by default)
+- [x] FR-17: Clear error messages for network failures
+- [x] NFR-6: No network calls unless explicitly syncing
+- [x] NFR-7: Failure should be fast and clear (no hanging)
 
 ---
 
 ## 🚀 Next Steps
 
-1. [Next action]
-2. [Next action]
+1. Design local-only mode as default
+2. Add work-prod as opt-in enhancement
+3. Implement clear error handling
 
 ---
 
 **Last Updated:** 2025-12-19
-

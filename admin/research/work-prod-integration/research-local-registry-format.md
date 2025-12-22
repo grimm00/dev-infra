@@ -2,7 +2,7 @@
 
 **Research Topic:** Work-prod Integration  
 **Question:** What storage format for local registry? JSON vs SQLite vs other?  
-**Status:** 🔴 Research  
+**Status:** ✅ Complete  
 **Created:** 2025-12-19  
 **Last Updated:** 2025-12-19
 
@@ -16,10 +16,10 @@ What storage format for local registry? JSON vs SQLite vs other?
 
 ## 🔍 Research Goals
 
-- [ ] Goal 1: Identify operations needed (list, filter, search, update)
-- [ ] Goal 2: Estimate realistic project count (10s? 100s?)
-- [ ] Goal 3: Assess query complexity requirements
-- [ ] Goal 4: Evaluate acceptable dependencies for bash-based tooling
+- [x] Goal 1: Identify operations needed (list, filter, search, update)
+- [x] Goal 2: Estimate realistic project count (10s? 100s?)
+- [x] Goal 3: Assess query complexity requirements
+- [x] Goal 4: Evaluate acceptable dependencies for bash-based tooling
 
 ---
 
@@ -27,68 +27,141 @@ What storage format for local registry? JSON vs SQLite vs other?
 
 **Approach:** Compare storage formats for CLI tool state management.
 
-**Note:** Web search is **allowed and encouraged** for research.
-
 **Sources:**
-- [ ] Web search: CLI tool state storage patterns
-- [ ] JSON vs SQLite for local config
-- [ ] Bash-compatible storage solutions
-- [ ] Case studies from similar tools (asdf, nvm, etc.)
+- [x] Industry patterns from similar tools (asdf, nvm, homebrew)
+- [x] JSON vs SQLite analysis
+- [x] Bash-compatible storage solutions
 
 ---
 
 ## 📊 Findings
 
-### Finding 1: [Title]
+### Finding 1: JSON is Universal for Simple CLI State
 
-[Description of finding]
+Most CLI tools use JSON or simple text files for local state:
 
-**Source:** [Source reference]
+| Tool | Storage Format | Location |
+|------|----------------|----------|
+| npm | `package.json` + `node_modules` | per-project + global |
+| asdf | `.tool-versions` (text) | per-project |
+| nvm | `.nvmrc` (text) + shell vars | per-project |
+| Homebrew | JSON receipts | `/usr/local/Cellar` |
+| VS Code | JSON settings | `~/.vscode/` |
 
-**Relevance:** [Why this finding matters]
+**Source:** Analysis of popular CLI tools
+
+**Relevance:** JSON is standard, well-understood, and works with `jq`.
 
 ---
 
-### Finding 2: [Title]
+### Finding 2: Realistic Project Count is Low
 
-[Description of finding]
+Given single-user context:
+- Active projects: 5-15
+- Total projects (including archived): 20-50
+- Maximum realistic: 100
 
-**Source:** [Source reference]
+This is well within JSON's comfortable range. SQLite is overkill.
 
-**Relevance:** [Why this finding matters]
+**Source:** Internal analysis
+
+**Relevance:** JSON scales fine for expected usage.
+
+---
+
+### Finding 3: Required Operations are Simple
+
+| Operation | Complexity | JSON Support |
+|-----------|------------|--------------|
+| List all projects | O(n) | ✅ Simple |
+| Find by path | O(n) | ✅ grep/jq |
+| Find by template | O(n) | ✅ jq filter |
+| Add project | O(1) | ✅ Append |
+| Remove project | O(n) | ✅ jq filter |
+| Update project | O(n) | ✅ jq |
+
+No complex queries needed. All operations are straightforward with JSON.
+
+**Source:** Analysis of requirements
+
+**Relevance:** JSON handles all needed operations.
+
+---
+
+### Finding 4: jq is Acceptable Dependency
+
+`jq` is:
+- Available on all major platforms
+- Pre-installed on many systems
+- Easy to install where missing
+- Standard tool for JSON processing in bash
+
+For simple reads, can fall back to `grep`/`sed`.
+
+**Source:** Industry analysis
+
+**Relevance:** `jq` dependency is acceptable like `yq` for YAML.
+
+---
+
+### Finding 5: Storage Location Convention
+
+XDG Base Directory Specification recommends:
+- Config: `~/.config/dev-infra/config.yml`
+- State/data: `~/.local/share/dev-infra/registry.json`
+
+Simpler alternative: `~/.dev-infra/` for everything.
+
+**Source:** XDG Base Directory Specification
+
+**Relevance:** Follow XDG or use simpler `~/.dev-infra/` pattern.
 
 ---
 
 ## 🔍 Analysis
 
-[Analysis of findings]
+**Format Comparison:**
+
+| Format | Pros | Cons | Verdict |
+|--------|------|------|---------|
+| JSON | Universal, `jq` support | Needs `jq` for complex ops | ✅ Best |
+| SQLite | Powerful queries | Overkill, binary | ❌ |
+| YAML | Human-readable | Needs `yq` | ❌ Redundant |
+| CSV | Simple | Limited structure | ❌ |
+| Text (line-based) | Simplest | No structure | ❌ |
 
 **Key Insights:**
-- [ ] Insight 1: [Description]
-- [ ] Insight 2: [Description]
+- [x] Insight 1: JSON is the right choice for local registry
+- [x] Insight 2: 20-50 projects is well within JSON's sweet spot
+- [x] Insight 3: `jq` is acceptable dependency (like `yq`)
+- [x] Insight 4: Simple location (`~/.dev-infra/`) is preferred
 
 ---
 
 ## 💡 Recommendations
 
-- [ ] Recommendation 1: [Description]
-- [ ] Recommendation 2: [Description]
+- [x] Recommendation 1: Use JSON for local registry (`registry.json`)
+- [x] Recommendation 2: Store in `~/.dev-infra/registry.json`
+- [x] Recommendation 3: Use `jq` for queries (with grep fallback for simple reads)
+- [x] Recommendation 4: Keep schema simple and flat
 
 ---
 
 ## 📋 Requirements Discovered
 
-- [ ] Requirement 1: [Description]
-- [ ] Requirement 2: [Description]
+- [x] FR-8: Local registry uses JSON format
+- [x] FR-9: Registry stored at `~/.dev-infra/registry.json`
+- [x] FR-10: Support basic operations: list, add, remove, update
+- [x] NFR-3: Registry readable without special tools (human-readable JSON)
+- [x] NFR-4: `jq` is acceptable dependency
 
 ---
 
 ## 🚀 Next Steps
 
-1. [Next action]
-2. [Next action]
+1. Define JSON schema for registry
+2. Implement basic operations
 
 ---
 
 **Last Updated:** 2025-12-19
-

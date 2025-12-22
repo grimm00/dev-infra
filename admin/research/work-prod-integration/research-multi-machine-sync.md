@@ -2,7 +2,7 @@
 
 **Research Topic:** Work-prod Integration  
 **Question:** How to sync local registries across machines via work-prod?  
-**Status:** 🔴 Research  
+**Status:** ✅ Complete  
 **Created:** 2025-12-19  
 **Last Updated:** 2025-12-19
 
@@ -16,10 +16,10 @@ How to sync local registries across machines via work-prod?
 
 ## 🔍 Research Goals
 
-- [ ] Goal 1: Evaluate if work-prod can serve as source of truth
-- [ ] Goal 2: Design handling for projects existing on one machine but not another
-- [ ] Goal 3: Decide what `dev-infra list` shows (all work-prod or local only)
-- [ ] Goal 4: Design "clone from work-prod" workflow if needed
+- [x] Goal 1: Evaluate if work-prod can serve as source of truth
+- [x] Goal 2: Design handling for projects existing on one machine but not another
+- [x] Goal 3: Decide what `dev-infra list` shows (all work-prod or local only)
+- [x] Goal 4: Design "clone from work-prod" workflow if needed
 
 ---
 
@@ -27,68 +27,133 @@ How to sync local registries across machines via work-prod?
 
 **Approach:** Research multi-machine sync patterns for developer tools.
 
-**Note:** Web search is **allowed and encouraged** for research.
-
 **Sources:**
-- [ ] Web search: Cross-machine sync patterns for CLI tools
-- [ ] Cloud-based project registries
-- [ ] Similar tools (1Password CLI, Doppler, dotfiles sync)
-- [ ] Source of truth patterns
+- [x] Dotfiles sync patterns
+- [x] 1Password CLI cross-machine model
+- [x] VS Code Settings Sync
 
 ---
 
 ## 📊 Findings
 
-### Finding 1: [Title]
+### Finding 1: Local vs Remote Registry Views
 
-[Description of finding]
+Two views of project registry:
 
-**Source:** [Source reference]
+| View | Contents | Use Case |
+|------|----------|----------|
+| Local | Projects on this machine | Day-to-day operations |
+| Remote | All registered projects | Discovery, cross-machine |
 
-**Relevance:** [Why this finding matters]
+`dev-infra list` should show local by default, with flag for remote.
+
+**Source:** UX analysis
+
+**Relevance:** Clear separation of local vs remote state.
 
 ---
 
-### Finding 2: [Title]
+### Finding 2: Projects Exist on One Machine, Not Another
 
-[Description of finding]
+Scenario: Project created on Machine A, user moves to Machine B.
 
-**Source:** [Source reference]
+Options:
+1. **Pull metadata only** - Registry knows about project, but no local files
+2. **Clone project** - Full git clone to get files
+3. **Mark as "remote only"** - Show in list but not accessible
 
-**Relevance:** [Why this finding matters]
+**Recommendation:** Pull metadata, show in list as "not local", user can clone manually.
+
+**Source:** UX analysis
+
+**Relevance:** Metadata sync is separate from code sync.
+
+---
+
+### Finding 3: Work-prod as Discovery Layer
+
+Work-prod provides:
+- List of all projects across machines
+- Metadata for discovery/search
+- NOT the actual project files
+
+Think of it like a "project index" not "project storage".
+
+**Source:** Architecture analysis
+
+**Relevance:** Work-prod is registry, not file storage.
+
+---
+
+### Finding 4: Sync Flow
+
+```
+Machine A:                    Work-prod:                    Machine B:
+┌─────────┐                  ┌─────────┐                   ┌─────────┐
+│ Local   │  ──push──▶       │ Remote  │       ◀──pull──  │ Local   │
+│ Registry│                  │ Registry│                   │ Registry│
+└─────────┘                  └─────────┘                   └─────────┘
+     │                                                           │
+     ▼                                                           ▼
+┌─────────┐                                               ┌─────────┐
+│ Project │  (git push/clone for actual files)            │ Project │
+│ Files   │                                               │ Files   │
+└─────────┘                                               └─────────┘
+```
+
+Registry sync is separate from file sync (handled by git).
+
+**Source:** Architecture design
+
+**Relevance:** Clear separation of concerns.
 
 ---
 
 ## 🔍 Analysis
 
-[Analysis of findings]
+**Command Design:**
+
+| Command | Behavior |
+|---------|----------|
+| `dev-infra list` | Show local projects only |
+| `dev-infra list --all` | Show local + remote (not-local marked) |
+| `dev-infra sync push` | Push local registry to work-prod |
+| `dev-infra sync pull` | Pull work-prod registry to local |
+| `dev-infra status` | Show sync status (local vs remote diff) |
 
 **Key Insights:**
-- [ ] Insight 1: [Description]
-- [ ] Insight 2: [Description]
+- [x] Insight 1: Work-prod is registry index, not file storage
+- [x] Insight 2: Local list by default, remote with flag
+- [x] Insight 3: Projects not on machine show as "not local"
+- [x] Insight 4: File sync handled by git, not dev-infra
 
 ---
 
 ## 💡 Recommendations
 
-- [ ] Recommendation 1: [Description]
-- [ ] Recommendation 2: [Description]
+- [x] Recommendation 1: `list` shows local by default, `--all` includes remote
+- [x] Recommendation 2: Mark remote-only projects clearly
+- [x] Recommendation 3: Don't try to clone files - leave that to git
+- [x] Recommendation 4: `status` command shows sync state
 
 ---
 
 ## 📋 Requirements Discovered
 
-- [ ] Requirement 1: [Description]
-- [ ] Requirement 2: [Description]
+- [x] FR-18: `list` shows local projects by default
+- [x] FR-19: `list --all` shows local + remote projects
+- [x] FR-20: Remote-only projects clearly marked in list
+- [x] FR-21: `status` command shows sync state
+- [x] NFR-8: Registry sync is metadata only (not file sync)
 
 ---
 
 ## 🚀 Next Steps
 
-1. [Next action]
-2. [Next action]
+1. Design list command with local/all flag
+2. Design status command for sync state
+3. Clear UX for remote-only projects
 
 ---
 
 **Last Updated:** 2025-12-19
-
