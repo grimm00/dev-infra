@@ -10,7 +10,8 @@
 
 ### Active Explorations
 
-- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Evolved to v4: Global Commands Discovery! (🟠 Active v4) ⭐ **UPDATED**
+- **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - Dev-infra as infrastructure manager with state tracking and CI/CD push updates (🔴 Exploration) ⭐ **NEW**
+- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Evolved to v4: Global Commands Discovery! (🟠 Active v4)
 - **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Exploration)
 - **[Template Architecture](template-architecture/README.md)** - Explore alternative directory structures beyond frontend/backend (🔴 Exploration)
 - **[Experimental Template](experimental-template/README.md)** - Templates with evolving/experimental commands (✅ Decisions Complete → v0.6.0)
