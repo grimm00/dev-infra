@@ -44,7 +44,7 @@ Researching the unified project model that enables proj-cli and work-prod to wor
 
 | Research Topic | Priority | Tier | Status | Document |
 |----------------|----------|------|--------|----------|
-| Tier 1 API Contract | 🔴 High | 1 | 🔴 Not Started | [research-tier-1-api-contract.md](research-tier-1-api-contract.md) |
+| Tier 1 API Contract | 🔴 High | 1 | ✅ Complete | [research-tier-1-api-contract.md](research-tier-1-api-contract.md) |
 | Classification Enum | 🔴 High | 2 | 🔴 Not Started | [research-classification-enum.md](research-classification-enum.md) |
 | Learning Taxonomy | 🔴 High | 3 | 🔴 Not Started | [research-learning-taxonomy.md](research-learning-taxonomy.md) |
 | Organization Implementation | 🟡 Medium | 2 | 🔴 Not Started | [research-organization-implementation.md](research-organization-implementation.md) |

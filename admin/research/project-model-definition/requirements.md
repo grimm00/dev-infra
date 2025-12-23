@@ -3,7 +3,7 @@
 **Source:** Research on project model definition  
 **Status:** Draft  
 **Created:** 2025-12-22  
-**Last Updated:** 2025-12-22
+**Last Updated:** 2025-12-23
 
 ---
 
@@ -17,7 +17,7 @@ This document captures requirements discovered during research on the unified pr
 
 ## ✅ Functional Requirements
 
-### FR-1: Tier 1 API Contract
+### FR-1: Tier 1 API Contract ✅ VALIDATED
 
 **Description:** proj-cli must be able to create, list, get, update, and delete projects using the work-prod API with Tier 1 fields.
 
@@ -25,7 +25,49 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** High
 
-**Status:** 🔴 Pending
+**Status:** ✅ Validated - API already complete, no changes needed
+
+**Details:**
+- Only `name` field is required on create
+- All CRUD operations implemented
+- Bulk import via `/projects/import` ready
+- Query filtering supported (status, organization, classification, search)
+
+---
+
+### FR-1a: Required Fields on Create
+
+**Description:** proj-cli must send `name` field when creating projects (only required field).
+
+**Source:** [research-tier-1-api-contract.md](research-tier-1-api-contract.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated
+
+---
+
+### FR-1b: HTTP Status Code Handling
+
+**Description:** proj-cli must handle all HTTP status codes returned by work-prod: 200, 201, 204, 400, 404, 409, 500.
+
+**Source:** [research-tier-1-api-contract.md](research-tier-1-api-contract.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated - Already implemented via APIError, BackendConnectionError, TimeoutError
+
+---
+
+### FR-1c: Deduplication Awareness
+
+**Description:** proj-cli `import_projects` must be aware that work-prod deduplicates by `remote_url`.
+
+**Source:** [research-tier-1-api-contract.md](research-tier-1-api-contract.md)
+
+**Priority:** Medium
+
+**Status:** ✅ Validated
 
 ---
 
@@ -37,7 +79,7 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** High
 
-**Status:** 🔴 Pending
+**Status:** 🔴 Pending Research
 
 ---
 
@@ -49,7 +91,7 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** High
 
-**Status:** 🔴 Pending
+**Status:** 🔴 Pending Research
 
 ---
 
@@ -61,7 +103,7 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** Medium
 
-**Status:** 🔴 Pending
+**Status:** 🔴 Pending Research
 
 ---
 
@@ -73,7 +115,7 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** Medium
 
-**Status:** 🔴 Pending
+**Status:** 🔴 Pending Research
 
 ---
 
@@ -85,13 +127,13 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** Low
 
-**Status:** 🔴 Pending
+**Status:** 🔴 Pending Research
 
 ---
 
 ## 🎯 Non-Functional Requirements
 
-### NFR-1: API Compatibility
+### NFR-1: API Compatibility ✅ VALIDATED
 
 **Description:** proj-cli and work-prod must use compatible API contracts.
 
@@ -99,7 +141,31 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** High
 
-**Status:** 🔴 Pending
+**Status:** ✅ Validated - Full compatibility confirmed
+
+---
+
+### NFR-1a: OpenAPI as Source of Truth
+
+**Description:** work-prod OpenAPI specification must be updated when API changes (single source of truth).
+
+**Source:** [research-tier-1-api-contract.md](research-tier-1-api-contract.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated
+
+---
+
+### NFR-1b: Configurable API URL
+
+**Description:** proj-cli must support configurable `api_url` for different environments.
+
+**Source:** [research-tier-1-api-contract.md](research-tier-1-api-contract.md)
+
+**Priority:** Medium
+
+**Status:** ✅ Validated - Already implemented via `PROJ_API_URL` env var and config file
 
 ---
 
@@ -111,7 +177,7 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** High
 
-**Status:** 🔴 Pending
+**Status:** 🔴 Pending Research
 
 ---
 
@@ -123,7 +189,7 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** Medium
 
-**Status:** 🔴 Pending
+**Status:** 🔴 Pending Research
 
 ---
 
@@ -145,13 +211,23 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
+### C-3: Classification Enum Already in Use
+
+**Description:** work-prod uses `primary`, `secondary`, `archive`, `maintenance` - change requires migration.
+
+**Source:** [research-tier-1-api-contract.md](research-tier-1-api-contract.md)
+
+---
+
 ## 💭 Assumptions
 
-### A-1: Tier 1 Fields Are Ready
+### A-1: Tier 1 Fields Are Ready ✅ CONFIRMED
 
 **Description:** The 7 Tier 1 fields in work-prod are ready to use without modification.
 
-**Source:** [tier-1-core-registry.md](../../explorations/project-model-definition/tier-1-core-registry.md)
+**Source:** [research-tier-1-api-contract.md](research-tier-1-api-contract.md)
+
+**Confirmed:** Yes - id, name, path, description, remote_url, created_at, updated_at all ready.
 
 ---
 
@@ -173,11 +249,11 @@ This document captures requirements discovered during research on the unified pr
 
 ## 🚀 Next Steps
 
-1. Complete research to validate/refine requirements
-2. Use `/decision project-model-definition --from-research` to make decisions
-3. Decisions may refine requirements
+1. ✅ Tier 1 API Contract requirements validated
+2. ➡️ Continue research to validate/refine remaining requirements
+3. After research: `/decision project-model-definition --from-research`
+4. Decisions may refine requirements
 
 ---
 
-**Last Updated:** 2025-12-22
-
+**Last Updated:** 2025-12-23
