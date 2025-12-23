@@ -10,7 +10,8 @@
 
 ### Active Research
 
-- **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - State tracking, plan/apply workflow, CI/CD push updates (✅ Complete) ⭐ **NEW**
+- **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Research) ⭐ **NEW**
+- **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - State tracking, plan/apply workflow, CI/CD push updates (✅ Complete)
 - **[Global Command Distribution](global-command-distribution/README.md)** - Distributing dev-infra commands via `~/.cursor/commands/` (🟡 Research)
 - **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Research)
 - **[Template Metadata System](template-metadata/README.md)** - Research metadata for project sync and version tracking (✅ Complete)
