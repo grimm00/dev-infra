@@ -28,6 +28,7 @@ This document captures requirements discovered during research on the unified pr
 **Status:** ✅ Validated - API already complete, no changes needed
 
 **Details:**
+
 - Only `name` field is required on create
 - All CRUD operations implemented
 - Bulk import via `/projects/import` ready
@@ -71,15 +72,88 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
-### FR-2: Classification Support
+### FR-2: Project Type Classification ✅ VALIDATED (requires new field)
 
-**Description:** Projects must be classifiable as Work, Personal, Learning, or Inactive.
+**Description:** Projects must be classifiable by TYPE as Work, Personal, Learning, or Inactive.
 
 **Source:** [research-classification-enum.md](research-classification-enum.md)
 
 **Priority:** High
 
-**Status:** 🔴 Pending Research
+**Status:** ✅ Validated - Requires NEW `project_type` field (not migration of `classification`)
+
+**Details:**
+
+- Current `classification` field is PRIORITY, not TYPE
+- Add new `project_type` enum: `Work`, `Personal`, `Learning`, `Inactive`
+- Keep `classification` as-is (or rename to `priority` later)
+
+---
+
+### FR-2a: Project Type Field Addition
+
+**Description:** work-prod must add `project_type` field with enum values `Work`, `Personal`, `Learning`, `Inactive`.
+
+**Source:** [research-classification-enum.md](research-classification-enum.md)
+
+**Priority:** High
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-2b: Project Type Required for New Projects
+
+**Description:** `project_type` should be required (non-nullable) for new projects going forward.
+
+**Source:** [research-classification-enum.md](research-classification-enum.md)
+
+**Priority:** High
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-2c: Mapping Script Update
+
+**Description:** Mapping script must populate BOTH `classification` AND `project_type` fields.
+
+**Source:** [research-classification-enum.md](research-classification-enum.md)
+
+**Priority:** High
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-2d: API Filtering by Project Type
+
+**Description:** API must support filtering projects by `project_type` parameter.
+
+**Source:** [research-classification-enum.md](research-classification-enum.md)
+
+**Priority:** High
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-2e: Data Backfill
+
+**Description:** Existing data must be backfilled with inferred `project_type` values using heuristics.
+
+**Source:** [research-classification-enum.md](research-classification-enum.md)
+
+**Priority:** Medium
+
+**Status:** 🟡 Validated - Needs Implementation
+
+**Heuristics:**
+
+- `organization = 'DRW'` → `project_type = 'Work'`
+- `path LIKE '%/Learning/%'` → `project_type = 'Learning'`
+- `classification = 'archive'` → `project_type = 'Inactive'`
+- Remaining → `project_type = 'Personal'` (default assumption)
 
 ---
 
@@ -169,7 +243,7 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
-### NFR-2: Migration Safety
+### NFR-2: Migration Safety ✅ VALIDATED
 
 **Description:** Schema changes must not break existing data.
 
@@ -177,19 +251,25 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** High
 
-**Status:** 🔴 Pending Research
+**Status:** ✅ Validated - Two-field solution avoids breaking changes
+
+**Details:**
+
+- Adding `project_type` is additive (no data loss)
+- Keeping `classification` maintains backward compatibility
+- Optional rename to `priority` deferred to later release
 
 ---
 
-### NFR-3: Backward Compatibility
+### NFR-3: Backward Compatibility ✅ VALIDATED
 
 **Description:** API changes should maintain backward compatibility where possible.
 
-**Source:** Multiple research documents
+**Source:** [research-classification-enum.md](research-classification-enum.md)
 
 **Priority:** Medium
 
-**Status:** 🔴 Pending Research
+**Status:** ✅ Validated - Two-field solution is non-breaking
 
 ---
 
@@ -211,11 +291,23 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
-### C-3: Classification Enum Already in Use
+### C-3: Classification Enum Already in Use ✅ ADDRESSED
 
-**Description:** work-prod uses `primary`, `secondary`, `archive`, `maintenance` - change requires migration.
+**Description:** work-prod uses `primary`, `secondary`, `archive`, `maintenance` - represents PRIORITY not TYPE.
 
-**Source:** [research-tier-1-api-contract.md](research-tier-1-api-contract.md)
+**Source:** [research-classification-enum.md](research-classification-enum.md)
+
+**Resolution:** Keep as-is, add new `project_type` field for TYPE classification.
+
+---
+
+### C-4: Data Loss Already Occurred
+
+**Description:** Current mapping conflates Work, Personal, Apprenti to `primary` - type information lost.
+
+**Source:** [research-classification-enum.md](research-classification-enum.md)
+
+**Impact:** Backfill will use heuristics but cannot perfectly recover original types.
 
 ---
 
@@ -239,6 +331,16 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
+### A-3: Two Dimensions Needed ✅ CONFIRMED
+
+**Description:** Projects need both TYPE (Work/Personal/Learning/Inactive) and PRIORITY (primary/secondary/archive/maintenance).
+
+**Source:** [research-classification-enum.md](research-classification-enum.md)
+
+**Confirmed:** Yes - these answer different questions about projects.
+
+---
+
 ## 🔗 Related Documents
 
 - [Research Summary](research-summary.md)
@@ -250,9 +352,10 @@ This document captures requirements discovered during research on the unified pr
 ## 🚀 Next Steps
 
 1. ✅ Tier 1 API Contract requirements validated
-2. ➡️ Continue research to validate/refine remaining requirements
-3. After research: `/decision project-model-definition --from-research`
-4. Decisions may refine requirements
+2. ✅ Classification Enum requirements validated (two-field solution)
+3. ➡️ Continue research to validate/refine remaining requirements
+4. After research: `/decision project-model-definition --from-research`
+5. Decisions may refine requirements
 
 ---
 

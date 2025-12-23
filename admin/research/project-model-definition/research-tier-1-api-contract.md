@@ -15,6 +15,7 @@
 What exact API contract does proj-cli need from work-prod for Tier 1?
 
 This research will define the minimum viable API contract that allows proj-cli to:
+
 - Create project records
 - List and retrieve projects
 - Update project information
@@ -36,6 +37,7 @@ This research will define the minimum viable API contract that allows proj-cli t
 **Approach:** Audit existing work-prod API implementation and document contract.
 
 **Sources:**
+
 - [x] work-prod OpenAPI specification (`backend/openapi.yaml`) - 691 lines
 - [x] work-prod API routes (`backend/app/api/projects.py`)
 - [x] work-prod project model (`backend/app/models/project.py`) - 66 lines
@@ -123,7 +125,7 @@ work-prod uses a consistent error response format:
 
 ```json
 {
-    "error": "Human-readable error message"
+  "error": "Human-readable error message"
 }
 ```
 
@@ -149,6 +151,7 @@ work-prod uses a consistent error response format:
 The `/api/projects/import` endpoint supports proj-cli's inventory export needs:
 
 **Request:**
+
 ```json
 {
     "projects": [
@@ -159,11 +162,12 @@ The `/api/projects/import` endpoint supports proj-cli's inventory export needs:
 ```
 
 **Response:**
+
 ```json
 {
-    "imported": 2,
-    "skipped": 0,
-    "errors": []
+  "imported": 2,
+  "skipped": 0,
+  "errors": []
 }
 ```
 
@@ -179,12 +183,12 @@ The `/api/projects/import` endpoint supports proj-cli's inventory export needs:
 
 The GET `/api/projects` endpoint supports these query parameters:
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `status` | Enum | Filter by status |
-| `organization` | String | Filter by organization |
-| `classification` | Enum | Filter by classification |
-| `search` | String | Case-insensitive name/description search |
+| Parameter        | Type   | Description                              |
+| ---------------- | ------ | ---------------------------------------- |
+| `status`         | Enum   | Filter by status                         |
+| `organization`   | String | Filter by organization                   |
+| `classification` | Enum   | Filter by classification                 |
+| `search`         | String | Case-insensitive name/description search |
 
 **Source:** `work-prod/backend/openapi.yaml`
 
@@ -197,6 +201,7 @@ The GET `/api/projects` endpoint supports these query parameters:
 The Tier 1 API contract is **fully implemented and operational**. Both work-prod and proj-cli are ready for integration.
 
 **Key Insights:**
+
 - [x] Insight 1: **API is complete** - All CRUD operations plus import/archive are implemented
 - [x] Insight 2: **Client is complete** - proj-cli API client matches work-prod exactly
 - [x] Insight 3: **Contract is documented** - OpenAPI spec provides authoritative reference
@@ -205,17 +210,17 @@ The Tier 1 API contract is **fully implemented and operational**. Both work-prod
 
 **Gap Analysis:**
 
-| Capability | work-prod | proj-cli | Gap |
-|------------|-----------|----------|-----|
-| Create project | ✅ | ✅ | None |
-| List projects | ✅ | ✅ | None |
-| Get project | ✅ | ✅ | None |
-| Update project | ✅ | ✅ | None |
-| Delete project | ✅ | ✅ | None |
-| Archive project | ✅ | ✅ | None |
-| Bulk import | ✅ | ✅ | None |
-| Search | ✅ | ✅ | None |
-| Filter by status | ✅ | ✅ | None |
+| Capability       | work-prod | proj-cli | Gap  |
+| ---------------- | --------- | -------- | ---- |
+| Create project   | ✅        | ✅       | None |
+| List projects    | ✅        | ✅       | None |
+| Get project      | ✅        | ✅       | None |
+| Update project   | ✅        | ✅       | None |
+| Delete project   | ✅        | ✅       | None |
+| Archive project  | ✅        | ✅       | None |
+| Bulk import      | ✅        | ✅       | None |
+| Search           | ✅        | ✅       | None |
+| Filter by status | ✅        | ✅       | None |
 
 ---
 
@@ -245,6 +250,7 @@ The Tier 1 API contract is **fully implemented and operational**. Both work-prod
 **Base URL:** `http://localhost:5000/api` (configurable via `PROJ_API_URL`)
 
 **Create Project:**
+
 ```
 POST /projects
 Content-Type: application/json
@@ -260,6 +266,7 @@ Response: 201 Created + Project JSON
 ```
 
 **List Projects:**
+
 ```
 GET /projects
 GET /projects?search=query
@@ -270,6 +277,7 @@ Response: 200 OK + Array of Project JSON
 ```
 
 **Get Project:**
+
 ```
 GET /projects/{id}
 
@@ -278,6 +286,7 @@ Response: 404 Not Found + {"error": "Project not found"}
 ```
 
 **Update Project:**
+
 ```
 PATCH /projects/{id}
 Content-Type: application/json
@@ -291,6 +300,7 @@ Response: 200 OK + Updated Project JSON
 ```
 
 **Delete Project:**
+
 ```
 DELETE /projects/{id}
 
@@ -299,6 +309,7 @@ Response: 404 Not Found
 ```
 
 **Import Projects (Inventory):**
+
 ```
 POST /projects/import
 Content-Type: application/json
