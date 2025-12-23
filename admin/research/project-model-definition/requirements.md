@@ -169,7 +169,7 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
-### FR-4: Organization Association
+### FR-4: Organization Association ✅ VALIDATED
 
 **Description:** Projects should be associatable with organizations (DRW, Apprenti, Personal).
 
@@ -177,7 +177,37 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** Medium
 
-**Status:** 🔴 Pending Research
+**Status:** ✅ Validated - String field sufficient for current needs
+
+**Details:**
+
+- String field already implemented and working
+- Only 3 organization values expected (DRW, Apprenti, Personal)
+- FK migration deferred until metadata needs arise
+
+---
+
+### FR-4a: Organization Validation
+
+**Description:** Organization field values should be validated against known values (DRW, Apprenti, Personal, null).
+
+**Source:** [research-organization-implementation.md](research-organization-implementation.md)
+
+**Priority:** Medium
+
+**Status:** 🟡 Recommended Enhancement
+
+---
+
+### FR-4b: Organization FK Migration (Deferred)
+
+**Description:** Organizations table and FK relationship is an optional future enhancement for when organization metadata (colors, logos) is needed.
+
+**Source:** [research-organization-implementation.md](research-organization-implementation.md)
+
+**Priority:** Low (Tier 4+)
+
+**Status:** 🟡 Deferred - Not needed for current requirements
 
 ---
 
@@ -311,6 +341,16 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
+### C-5: No Organizations Table Exists ✅ DOCUMENTED
+
+**Description:** work-prod has no `organizations` table - only a string field on projects.
+
+**Source:** [research-organization-implementation.md](research-organization-implementation.md)
+
+**Impact:** FK approach requires creating table first; deferred until needed.
+
+---
+
 ## 💭 Assumptions
 
 ### A-1: Tier 1 Fields Are Ready ✅ CONFIRMED
@@ -353,9 +393,10 @@ This document captures requirements discovered during research on the unified pr
 
 1. ✅ Tier 1 API Contract requirements validated
 2. ✅ Classification Enum requirements validated (two-field solution)
-3. ➡️ Continue research to validate/refine remaining requirements
-4. After research: `/decision project-model-definition --from-research`
-5. Decisions may refine requirements
+3. ✅ Organization Implementation requirements validated (string sufficient)
+4. ➡️ Continue with Learning Taxonomy research
+5. After research: `/decision project-model-definition --from-research`
+6. Decisions may refine requirements
 
 ---
 

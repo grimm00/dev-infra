@@ -13,7 +13,7 @@ Research to establish a unified project model across the four-arm architecture (
 
 **Research Topics:** 6 topics  
 **Research Documents:** 6 documents  
-**Status:** 🟠 In Progress (2/6 complete)
+**Status:** 🟠 In Progress (3/6 complete)
 
 ---
 
@@ -68,6 +68,18 @@ The current mapping script conflates Work, Personal, and Apprenti all to `primar
 
 ---
 
+### Finding 5: Organization String Field is Sufficient
+
+No organizations table exists in work-prod, and the string field (`organization`) is working fine. Only 3 values expected: `DRW`, `Apprenti`, `Personal`.
+
+**Key Discovery:** FK migration is optional enhancement - defer until organization metadata (colors, logos) is needed.
+
+**Current usage:** 18 projects have "DRW", 35 have null.
+
+**Source:** [research-organization-implementation.md](research-organization-implementation.md)
+
+---
+
 ## 💡 Key Insights
 
 - [x] Insight 1: **API already complete** - Both work-prod and proj-cli are implementation-ready
@@ -75,7 +87,8 @@ The current mapping script conflates Work, Personal, and Apprenti all to `primar
 - [x] Insight 3: **Deduplication uses `remote_url`** - Bulk import skips duplicates by remote URL
 - [x] Insight 4: **Two-field solution needed** - Keep `classification` (priority), add `project_type` (type)
 - [x] Insight 5: **`maintenance` value unused** - Never used in 48 projects
-- [ ] Insight 6: _Pending - Learning taxonomy research_
+- [x] Insight 6: **String organization works** - FK is optional, defer until metadata needed
+- [ ] Insight 7: _Pending - Learning taxonomy research_
 
 ---
 
@@ -97,6 +110,12 @@ The current mapping script conflates Work, Personal, and Apprenti all to `primar
 - REQ-9: API must support filtering by `project_type`
 - REQ-10: Existing data must be backfilled with inferred `project_type` values
 
+**From Organization Implementation Research:**
+
+- REQ-11: Organization field may remain a string (no FK required for Tier 2)
+- REQ-12: Organization values should be validated (DRW, Apprenti, Personal, null)
+- REQ-13: Organization FK migration deferred until metadata is needed
+
 **See:** [requirements.md](requirements.md) for complete requirements document
 
 ---
@@ -108,7 +127,8 @@ The current mapping script conflates Work, Personal, and Apprenti all to `primar
 - [x] Recommendation 3: **Add `project_type` field** - Don't migrate classification
 - [x] Recommendation 4: **Keep `classification` as-is** - Rename to `priority` later if desired
 - [x] Recommendation 5: **Backfill existing data** - Use heuristics (organization, path)
-- [ ] Recommendation 6: _Pending - Learning taxonomy research_
+- [x] Recommendation 6: **Keep organization as string** - Defer FK to Tier 4+
+- [ ] Recommendation 7: _Pending - Learning taxonomy research_
 
 ---
 
@@ -118,8 +138,8 @@ The current mapping script conflates Work, Personal, and Apprenti all to `primar
 | --------------------------- | --------- | -------------- |
 | Tier 1 API Contract         | 🔴 High   | ✅ Complete    |
 | Classification Enum         | 🔴 High   | ✅ Complete    |
+| Organization Implementation | 🟡 Medium | ✅ Complete    |
 | Learning Taxonomy           | 🔴 High   | 🔴 Not Started |
-| Organization Implementation | 🟡 Medium | 🔴 Not Started |
 | Skills Matrix Integration   | 🟡 Medium | 🔴 Not Started |
 | Analysis Field Requirements | 🟢 Low    | 🔴 Not Started |
 
@@ -129,8 +149,9 @@ The current mapping script conflates Work, Personal, and Apprenti all to `primar
 
 1. ✅ Complete Tier 1 API Contract research
 2. ✅ Complete Classification Enum research
-3. ➡️ Continue with Learning Taxonomy research (Topic 3)
-4. After all research complete: `/decision project-model-definition --from-research`
+3. ✅ Complete Organization Implementation research
+4. ➡️ Continue with Learning Taxonomy research (Topic 4)
+5. After all research complete: `/decision project-model-definition --from-research`
 
 ---
 

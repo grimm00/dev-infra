@@ -11,7 +11,7 @@
 
 - **[Exploration Document](exploration.md)** - Main exploration with tier definitions
 - **[Tier 1: Core Registry](tier-1-core-registry.md)** - Detailed Tier 1 field definitions
-- **[Research Topics](research-topics.md)** - Questions needing research (2/6 complete)
+- **[Research Topics](research-topics.md)** - Questions needing research (3/6 complete)
 - **[Research Hub](../../research/project-model-definition/README.md)** - Research documents
 
 ---
@@ -23,7 +23,7 @@ This exploration defines what a "project" is across the four-arm architecture (d
 | Tier | Scope | Timeline | Status |
 |------|-------|----------|--------|
 | **Tier 1** | Core Registry (MVP) | Immediate | ✅ Research Complete |
-| **Tier 2** | Classification & Organization | Near-term | 🟠 Partial (1/2) |
+| **Tier 2** | Classification & Organization | Near-term | ✅ Research Complete |
 | **Tier 3** | Learning Sub-Classification | Near-term | 🔴 Not Started |
 | **Tier 4** | Skills Matrix Integration | Medium-term | 🔴 Not Started |
 | **Tier 5** | Analysis & Metrics | Longer-term | 🔴 Not Started |
@@ -33,6 +33,7 @@ This exploration defines what a "project" is across the four-arm architecture (d
 - 7 fields are already implemented in work-prod and ready for Tier 1
 - API contract is complete - proj-cli can integrate immediately
 - Classification needs two-field solution (`classification` + `project_type`)
+- Organization string field is sufficient (FK deferred until metadata needed)
 
 ---
 
@@ -47,7 +48,7 @@ This exploration defines what a "project" is across the four-arm architecture (d
 
 ## 📊 Status
 
-**Current Phase:** Research (2/6 topics complete)  
+**Current Phase:** Research (3/6 topics complete)  
 **Next Step:** Continue with Learning Taxonomy research (Topic 4)
 
 ---
