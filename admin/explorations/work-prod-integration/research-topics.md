@@ -37,6 +37,7 @@ This document lists research topics and questions that need investigation before
 > **⚠️ SUPERSEDED** - This topic has been superseded by the [Project Model Definition Research](../../research/project-model-definition/README.md), which audited the actual work-prod implementation.
 >
 > **See instead:**
+>
 > - [Tier 1 API Contract](../../research/project-model-definition/research-tier-1-api-contract.md)
 > - [Classification Enum](../../research/project-model-definition/research-classification-enum.md)
 
@@ -135,14 +136,14 @@ This document lists research topics and questions that need investigation before
 
 ## 📊 Research Priority Summary
 
-| Priority | Topics | Status |
-|----------|--------|--------|
-| 🔴 High | Work-prod Auth Model | ✅ Complete |
-| 🔴 High | Work-prod Project Model | ⚠️ Superseded |
-| 🔴 High | Local Registry Format | ✅ Complete |
-| 🟡 Medium | Sync Strategy | ✅ Complete |
-| 🟡 Medium | Offline Support | ✅ Complete |
-| 🟢 Low | Multi-machine Sync | ✅ Complete |
+| Priority  | Topics                  | Status        |
+| --------- | ----------------------- | ------------- |
+| 🔴 High   | Work-prod Auth Model    | ✅ Complete   |
+| 🔴 High   | Work-prod Project Model | ⚠️ Superseded |
+| 🔴 High   | Local Registry Format   | ✅ Complete   |
+| 🟡 Medium | Sync Strategy           | ✅ Complete   |
+| 🟡 Medium | Offline Support         | ✅ Complete   |
+| 🟢 Low    | Multi-machine Sync      | ✅ Complete   |
 
 ---
 
