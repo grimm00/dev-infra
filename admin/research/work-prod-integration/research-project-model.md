@@ -1,10 +1,23 @@
 # Research: Work-prod Project Model
 
+> **⚠️ SUPERSEDED**
+>
+> This research was based on **assumptions** about work-prod's API. It has been superseded by the [Project Model Definition Research](../project-model-definition/README.md), which audited the **actual work-prod implementation**.
+>
+> **For authoritative information, see:**
+> - [Tier 1 API Contract](../project-model-definition/research-tier-1-api-contract.md) - Complete API documentation (691-line OpenAPI spec)
+> - [Classification Enum](../project-model-definition/research-classification-enum.md) - Two-field solution for project types
+>
+> This document is retained for historical reference only.
+
+---
+
 **Research Topic:** Work-prod Integration  
 **Question:** What fields does work-prod use for projects? How do we map dev-infra projects?  
-**Status:** ✅ Complete  
+**Status:** ⚠️ Superseded  
 **Created:** 2025-12-19  
-**Last Updated:** 2025-12-19
+**Last Updated:** 2025-12-23  
+**Superseded By:** [project-model-definition/research-tier-1-api-contract.md](../project-model-definition/research-tier-1-api-contract.md)
 
 ---
 
@@ -28,6 +41,7 @@ What fields does work-prod use for projects? How do we map dev-infra projects?
 **Approach:** Design project model based on work-prod needs and dev-infra metadata.
 
 **Sources:**
+
 - [x] Dev-infra metadata fields (from template-metadata research)
 - [x] Common project registry patterns
 - [x] Internal analysis of what work-prod likely needs
@@ -97,6 +111,7 @@ created: 2025-12-19
 ### Finding 4: Custom Metadata Support is Key
 
 For the mapping to work, work-prod must support:
+
 1. A `metadata` or `custom_fields` object for arbitrary data
 2. Ability to filter/query by metadata fields
 
@@ -113,6 +128,7 @@ Without this, dev-infra can't distinguish its projects from others.
 ## 🔍 Analysis
 
 **Key Insights:**
+
 - [x] Insight 1: Work-prod needs flexible metadata field for dev-infra data
 - [x] Insight 2: Mapping is straightforward if metadata support exists
 - [x] Insight 3: Tags/naming convention is fallback if no metadata support
@@ -141,10 +157,10 @@ Without this, dev-infra can't distinguish its projects from others.
 
 ## 🚀 Next Steps
 
-1. Confirm work-prod project model with actual API
-2. Verify metadata/custom_fields support
-3. Implement registration logic
+1. ~~Confirm work-prod project model with actual API~~ → See [project-model-definition research](../project-model-definition/README.md)
+2. ~~Verify metadata/custom_fields support~~ → Superseded
+3. ~~Implement registration logic~~ → Superseded
 
 ---
 
-**Last Updated:** 2025-12-19
+**Last Updated:** 2025-12-23

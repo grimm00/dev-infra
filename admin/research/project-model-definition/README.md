@@ -1,9 +1,9 @@
 # Project Model Definition - Research Hub
 
 **Purpose:** Research for unified project model across the four-arm ecosystem  
-**Status:** 🔴 Research  
+**Status:** 🟠 In Progress  
 **Created:** 2025-12-22  
-**Last Updated:** 2025-12-22
+**Last Updated:** 2025-12-23
 
 ---
 
@@ -34,7 +34,7 @@ Researching the unified project model that enables proj-cli and work-prod to wor
 - **Tier 5:** Analysis & Metrics
 
 **Research Topics:** 6 topics  
-**Status:** 🔴 Research
+**Status:** 🟠 In Progress (2/6 complete)
 
 **Source:** [Project Model Definition Exploration](../../explorations/project-model-definition/README.md)
 
@@ -53,10 +53,28 @@ Researching the unified project model that enables proj-cli and work-prod to wor
 
 ---
 
+## 🔀 Scope Boundaries
+
+This research is **authoritative** for:
+- Project schema fields (implemented and proposed)
+- work-prod API contract documentation
+- Classification enum alignment
+- Learning taxonomy implementation
+- Skills matrix integration
+- Analysis field requirements
+
+For **auth, sync, and local registry topics**, see [Work-Prod Integration Research](../work-prod-integration/README.md):
+- Authentication model (API key pattern)
+- Local registry format (`~/.dev-infra/registry.json`)
+- Sync strategy (manual push/pull)
+- Offline support
+
+---
+
 ## 🚀 Recommended Research Order
 
-1. **Tier 1 API Contract** - Enables proj-cli work immediately
-2. **Classification Enum** - Foundational decision for Tier 2
+1. ✅ **Tier 1 API Contract** - Enables proj-cli work immediately
+2. ✅ **Classification Enum** - Foundational decision for Tier 2
 3. **Learning Taxonomy** - MVP-critical per work-prod research
 4. **Organization Implementation** - Can defer, less urgent
 5. **Skills Matrix Integration** - Depends on Skills feature
@@ -68,17 +86,17 @@ Researching the unified project model that enables proj-cli and work-prod to wor
 
 - **[work-prod Projects Data Model](../../../work-prod/docs/maintainers/research/data-models/projects-data-model.md)** - Existing comprehensive research
 - **[work-prod Learning Taxonomy](../../../work-prod/docs/maintainers/research/data-models/learning-project-taxonomy.md)** - Learning classification details
-- **[Work-Prod Integration Research](../work-prod-integration/README.md)** - API integration patterns
+- **[Work-Prod Integration Research](../work-prod-integration/README.md)** - Auth, sync, and local registry patterns
 
 ---
 
 ## 🚀 Next Steps
 
-1. Use `/research project-model-definition --conduct` to research all topics
-2. Or use `/research project-model-definition --conduct --topic-num 1` for incremental research
-3. After research complete, use `/decision project-model-definition --from-research` to make decisions
+1. ✅ Complete Tier 1 API Contract research
+2. ✅ Complete Classification Enum research
+3. Use `/research project-model-definition --conduct --topic-num 3` for Learning Taxonomy
+4. After research complete, use `/decision project-model-definition --from-research` to make decisions
 
 ---
 
-**Last Updated:** 2025-12-22
-
+**Last Updated:** 2025-12-23

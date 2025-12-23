@@ -48,6 +48,7 @@ The work-prod project model has 10 fields, with 7 immediately usable for Tier 1:
 **Critical Discovery:** Current `classification` enum represents **priority/importance** (`primary`, `secondary`, `archive`, `maintenance`), NOT **project type** (`Work`, `Personal`, `Learning`, `Inactive`).
 
 These are two different dimensions that both need to exist:
+
 - **Priority:** How important is this project?
 - **Type:** What kind of project is this?
 
