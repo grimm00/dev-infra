@@ -1,7 +1,7 @@
 # Research Topics - Project Model Definition
 
 **Purpose:** List of research topics/questions to investigate  
-**Status:** 🟠 Research In Progress (3/6 complete)  
+**Status:** 🟠 Research In Progress (4/6 complete)  
 **Created:** 2025-12-22  
 **Last Updated:** 2025-12-23
 
@@ -98,14 +98,16 @@ This document lists research topics and questions that need investigation for th
 
 **Priority:** High (Tier 3, but marked MVP-critical)
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Complete - See [research-learning-taxonomy.md](../../research/project-model-definition/research-learning-taxonomy.md)
+
+**Key Finding:** Three-type taxonomy validated: `work_related`, `personal_dev`, `hybrid`. Work-related learning counts toward work metrics (apprenticeship reality). Hybrid projects visible in both work and personal views. Tier 3 depends on Tier 2 (`project_type`) being implemented first.
 
 **Sub-questions:**
 
-- Are the three learning types sufficient? (work_related, personal_dev, hybrid)
-- Should learning_type be required for Learning classification?
-- How to handle existing Learning projects without sub-classification?
-- UI implications?
+- Are the three learning types sufficient? ✅ Yes - covers all scenarios
+- Should learning_type be required for Learning classification? ✅ Yes, only non-NULL when project_type = 'Learning'
+- How to handle existing Learning projects without sub-classification? ✅ Migration with path-based heuristics
+- UI implications? ✅ Filtering interface and badges designed
 
 **Reference:** [work-prod Learning Project Taxonomy](../../../../work-prod/docs/maintainers/research/data-models/learning-project-taxonomy.md) (429 lines of detailed research)
 
@@ -160,7 +162,7 @@ This document lists research topics and questions that need investigation for th
 | Tier 1 API Contract         | High     | 1    | ✅ Complete    |
 | Classification Enum         | High     | 2    | ✅ Complete    |
 | Organization Implementation | Medium   | 2    | ✅ Complete    |
-| Learning Taxonomy           | High     | 3    | 🔴 Not Started |
+| Learning Taxonomy           | High     | 3    | ✅ Complete    |
 | Skills Matrix Integration   | Medium   | 4    | 🔴 Not Started |
 | Analysis Field Requirements | Low      | 5    | 🔴 Not Started |
 
@@ -169,7 +171,7 @@ This document lists research topics and questions that need investigation for th
 1. ✅ Tier 1 API Contract (enables proj-cli work immediately)
 2. ✅ Classification Enum (foundational decision)
 3. ✅ Organization Implementation (string field sufficient)
-4. Learning Taxonomy (MVP-critical per work-prod)
+4. ✅ Learning Taxonomy (three-type system validated)
 5. Skills Matrix Integration (depends on Skills feature)
 6. Analysis Field Requirements (depends on Analysis service)
 
@@ -179,8 +181,9 @@ This document lists research topics and questions that need investigation for th
 
 1. ✅ Used `/research project-model-definition --conduct` to conduct research
 2. ✅ Research documents created in `admin/research/project-model-definition/`
-3. 🟠 3/6 topics complete
-4. After research complete, use `/decision project-model-definition --from-research` to make decisions
+3. 🟠 4/6 topics complete
+4. ➡️ Next: Skills Matrix Integration (Topic 5)
+5. After research complete, use `/decision project-model-definition --from-research` to make decisions
 
 ---
 

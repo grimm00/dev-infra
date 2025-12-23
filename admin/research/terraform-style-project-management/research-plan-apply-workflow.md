@@ -28,6 +28,7 @@ How should the plan/apply workflow work in practice? What user experience provid
 ## 📚 Research Methodology
 
 **Sources:**
+
 - [x] Terraform CLI documentation (plan, apply commands)
 - [x] Web search: Infrastructure-as-code diff visualization
 - [x] Web search: Safe deployment patterns with preview
@@ -40,6 +41,7 @@ How should the plan/apply workflow work in practice? What user experience provid
 ### Finding 1: Terraform's Plan/Apply Separation is Key to Safety
 
 Terraform separates planning from execution:
+
 1. `terraform plan` - Shows what WOULD change (no side effects)
 2. User reviews the plan
 3. `terraform apply` - Executes the plan
@@ -55,6 +57,7 @@ This two-phase approach prevents surprises and enables review.
 ### Finding 2: Diff Visualization Should Be Familiar
 
 Terraform uses color-coded output:
+
 - `+` Green for additions
 - `-` Red for deletions
 - `~` Yellow for modifications
@@ -70,6 +73,7 @@ This mirrors git diff, which developers already understand.
 ### Finding 3: Selective Apply via Target Flag
 
 Terraform supports `terraform apply -target=resource` for:
+
 - Applying specific resources only
 - Useful for incremental updates
 - Reduces blast radius
@@ -83,6 +87,7 @@ Terraform supports `terraform apply -target=resource` for:
 ### Finding 4: Plan Can Be Saved for Later Apply
 
 Terraform's `terraform plan -out=plan.tfplan` saves plan for:
+
 - Review by others before apply
 - Audit trail of what was approved
 - Guarantee apply matches plan
@@ -108,6 +113,7 @@ This respects user's git workflow.
 ## 🔍 Analysis
 
 **Plan Command Flow:**
+
 ```
 proj plan
   → Read .dev-infra.yml (state)
@@ -119,6 +125,7 @@ proj plan
 ```
 
 **Apply Command Flow:**
+
 ```
 proj apply
   → Run plan internally
@@ -133,6 +140,7 @@ proj apply
 ```
 
 **Key Insights:**
+
 - [x] Insight 1: Plan must be non-destructive (read-only operation)
 - [x] Insight 2: Apply should confirm before any changes
 - [x] Insight 3: Use familiar git-style diff output
@@ -165,9 +173,9 @@ Changes to apply:
   ~ .cursor/commands/task-phase.md    (modified)
   + .cursor/commands/new-command.md   (added)
   = .cursor/commands/status.md        (unchanged)
-  
+
   Files: 1 modified, 1 added, 15 unchanged
-  
+
 To apply changes: proj apply
 ```
 

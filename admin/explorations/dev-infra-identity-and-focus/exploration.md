@@ -15,6 +15,7 @@ The fundamental question: **What should dev-infra be?**
 **Key Discovery:** Cursor supports global commands from `~/.cursor/commands/`!
 
 **Validation Test:**
+
 1. Created `~/.cursor/commands/foobar.md` with test content
 2. Invoked `/foobar` from a workspace
 3. ✅ Command executed successfully!
@@ -33,12 +34,14 @@ project/.cursor/commands/     # Local - project-specific overrides
 ```
 
 **Implications:**
+
 1. **Templates become lighter** — Commands optional, not embedded
 2. **Single source of truth** — Update once globally, all projects benefit
 3. **Dev-infra evolves** — From "Template Factory" to "Command Hub + Template Factory"
 4. **Feedback loop** — Usage patterns inform command improvements
 
 **New Identity:**
+
 ```
 dev-infra (v1): Template Factory → produces templates with commands
 dev-infra (v2): Command Hub + Template Factory → provides global commands + templates
@@ -49,11 +52,13 @@ dev-infra (v2): Command Hub + Template Factory → provides global commands + te
 **Key Insight:** proj-cli should be the unified CLI that consumes dev-infra as a "template layer."
 
 Rather than building CLI tooling into dev-infra, we leverage the existing `proj-cli` project which already provides:
+
 - Project management: `proj list`, `proj get`, `proj create` (work-prod API)
 - Inventory management: `proj inv scan`, `proj inv analyze`
 - Python CLI with Typer + Pydantic + XDG configuration
 
 **New Architecture:**
+
 ```
 proj-cli (CLI)        →    dev-infra (Templates)
                       →    work-prod (API)
@@ -61,6 +66,7 @@ proj-cli (CLI)        →    dev-infra (Templates)
 ```
 
 **Implications:**
+
 - Dev-infra does NOT need to become a CLI tool
 - Dev-infra focuses on: templates, sync rules, metadata format
 - proj-cli implements: `proj new`, `proj sync`, registry operations
@@ -96,6 +102,7 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 **Current Support:** ❌ None
 
 **Approach Options:**
+
 - "Scaffolding mode" - Add structure to existing project
 - "Best effort" script - Compare and suggest additions
 - "Adoption guide" - Manual checklist for migration
@@ -111,11 +118,13 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 **Current Support:** ⚠️ Partial (template-sync validates, but doesn't update)
 
 **Approach Options:**
+
 - Automatic sync (triggered by version bump or manually)
 - CLI patterns (`dev-infra sync`, `dev-infra update`)
 - Diff-based update (show what changed, let user apply)
 
 **Key Questions:**
+
 - How to handle customizations in generated projects?
 - What files should sync vs stay local?
 - How to handle breaking structure changes?
@@ -129,6 +138,7 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 **Current Support:** ❌ None
 
 **Approach:**
+
 - `.dev-infra.yml` or similar config file in generated projects
 - Tags like: `template: standard-project`, `version: 0.7.0`, `type: application`
 - Enables smart sync, version tracking, compatibility checks
@@ -142,12 +152,14 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 **Current Support:** ✅ proj-cli exists with work-prod integration
 
 **Approach:**
+
 - `proj new [name]` creates project from dev-infra template
 - `proj sync` syncs template updates to existing projects
 - Local registry at `~/.dev-infra/registry.json` tracks all projects
 - Projects automatically registered on creation
 
 **Architecture:**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                      proj-cli                            │
@@ -183,6 +195,7 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 **Discovery:** A test command (`foobar.md`) was created at `~/.cursor/commands/` and successfully invoked from a multi-project workspace.
 
 **Architecture:**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                     ~/.cursor/                          │
@@ -215,6 +228,7 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 **Installation Options:**
 
 1. **Global Install (Recommended):**
+
    ```bash
    # From dev-infra repository
    ./scripts/install-commands.sh --global
@@ -222,6 +236,7 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
    ```
 
 2. **Project Install (Opt-in):**
+
    ```bash
    ./scripts/install-commands.sh --local
    # Copies commands to ./.cursor/commands/
@@ -237,23 +252,24 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 
 **Implications:**
 
-| Aspect | Before (v1) | After (v2) |
-|--------|-------------|------------|
-| Command Location | Embedded in templates | Global + optional project |
-| Updates | Sync per-project | Update globally once |
-| Feedback Loop | Per-project learnings | Centralized analytics |
-| Template Size | Heavy (~20 command files) | Light (optional) |
-| New Projects | Get commands automatically | Rely on global or opt-in |
+| Aspect           | Before (v1)                | After (v2)                |
+| ---------------- | -------------------------- | ------------------------- |
+| Command Location | Embedded in templates      | Global + optional project |
+| Updates          | Sync per-project           | Update globally once      |
+| Feedback Loop    | Per-project learnings      | Centralized analytics     |
+| Template Size    | Heavy (~20 command files)  | Light (optional)          |
+| New Projects     | Get commands automatically | Rely on global or opt-in  |
 
 **Research Results (2025-12-22):**
 
-| Question | Answer | Test |
-|----------|--------|------|
-| Do project commands override global? | ✅ YES | Project `/status` overrode global |
-| Is agent aware of global when project exists? | ❌ NO (good!) | Clean isolation |
-| Do global rules work? | ❌ NO | `~/.cursor/rules/` not loaded |
+| Question                                      | Answer        | Test                              |
+| --------------------------------------------- | ------------- | --------------------------------- |
+| Do project commands override global?          | ✅ YES        | Project `/status` overrode global |
+| Is agent aware of global when project exists? | ❌ NO (good!) | Clean isolation                   |
+| Do global rules work?                         | ❌ NO         | `~/.cursor/rules/` not loaded     |
 
 **Confirmed Architecture:**
+
 - Commands: Two-tier (global fallback, project override) ✅
 - Rules: Project-only (no global support) ❌
 
@@ -264,11 +280,13 @@ After completing the command simplification (v0.7.0) and migrating to 0.x.x vers
 ### What We Learned
 
 1. **Single User Reality**
+
    - No external users to satisfy
    - No need for complex graduation processes (removed in v0.7.0)
    - Can iterate quickly based on personal learnings
 
 2. **Learning Loop**
+
    - Using templates reveals gaps
    - Gaps inform template improvements
    - Improvements enable better projects
@@ -306,7 +324,7 @@ sync:
 
 # Project-specific overrides
 customizations:
-  - removed: .cursor/commands/status.md  # User removed intentionally
+  - removed: .cursor/commands/status.md # User removed intentionally
 ```
 
 ### Sync CLI Concept (Updated for proj-cli)
@@ -332,31 +350,35 @@ proj adopt --template standard-project --apply
 
 ### Version Compatibility Matrix
 
-| Project Version | Dev-Infra Version | Sync Status |
-|-----------------|-------------------|-------------|
-| 0.6.0 | 0.7.0 | ⚠️ Breaking changes - manual review |
-| 0.7.0 | 0.7.0 | ✅ In sync |
-| 0.7.0 | 0.8.0 | 🔄 Updates available |
+| Project Version | Dev-Infra Version | Sync Status                         |
+| --------------- | ----------------- | ----------------------------------- |
+| 0.6.0           | 0.7.0             | ⚠️ Breaking changes - manual review |
+| 0.7.0           | 0.7.0             | ✅ In sync                          |
+| 0.7.0           | 0.8.0             | 🔄 Updates available                |
 
 ---
 
 ## 🔍 Key Questions
 
 ### Identity
+
 - [x] Should dev-infra be primarily a template factory? **YES - decided in ADR-001**
 - [ ] Should it also be an infrastructure manager? **Exploring**
 
 ### Sync System
+
 - [ ] What's the minimum viable sync system?
 - [ ] How to handle conflicts/customizations?
 - [ ] Should sync be automatic or always manual?
 
 ### Template Metadata
+
 - [ ] What metadata is essential?
 - [ ] Where should it live? (`.dev-infra.yml`, `package.json`, etc.)
 - [ ] How to handle version migrations?
 
 ### External Adoption
+
 - [ ] Is "adopt existing project" worth the complexity?
 - [ ] Or just focus on new projects + updates?
 
@@ -401,6 +423,7 @@ proj adopt --template standard-project --apply
 ### v1 Exploration (2025-12-11)
 
 The original exploration identified three identities:
+
 1. Laboratory (Workflow Experimentation)
 2. Factory (Template Production)
 3. Reference Implementation (Dogfooding)

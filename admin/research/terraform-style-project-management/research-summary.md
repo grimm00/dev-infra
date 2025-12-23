@@ -33,6 +33,7 @@ This research builds on completed work:
 ### Finding 1: State File Should Extend Template Metadata
 
 Building on template-metadata, the state file needs additional fields for sync:
+
 - `last_sync` - When last synced with template
 - `sync` - Rules for always/ask/never files
 - `customizations` - Tracked intentional modifications
@@ -44,6 +45,7 @@ Building on template-metadata, the state file needs additional fields for sync:
 ### Finding 2: Plan/Apply Separation is Essential for Safety
 
 Terraform's two-phase approach prevents surprises:
+
 1. `proj plan` - Shows changes (read-only)
 2. `proj apply` - Executes changes (with confirmation)
 
@@ -56,6 +58,7 @@ Use git-style colored diff output for familiarity.
 ### Finding 3: Three-Tier Sync Rules Handle Customizations
 
 Sync rules mirror familiar patterns:
+
 - `always` - Always sync (commands, gitignore)
 - `ask` - Prompt user (workflows, planning docs)
 - `never` - Never touch (README, backend, frontend)
@@ -69,6 +72,7 @@ Combined with customizations list, prevents most conflicts.
 ### Finding 4: Work-prod is the Natural Registry
 
 Work-prod already tracks projects with metadata. Use it as:
+
 - Source of truth for managed projects
 - Sync source for local registry cache
 - Query endpoint for CI/CD automation
@@ -80,6 +84,7 @@ Work-prod already tracks projects with metadata. Use it as:
 ### Finding 5: Drift Detection Integrates with Plan
 
 Drift detection should be part of `proj plan`, not separate:
+
 - Show template updates available
 - Show local modifications (recorded vs unrecorded)
 - Suggest adding unrecorded modifications to customizations
@@ -91,6 +96,7 @@ Drift detection should be part of `proj plan`, not separate:
 ### Finding 6: CI/CD Push Updates Use Dependabot Pattern
 
 Automated PRs on release:
+
 - Opt-in via `auto_update: true` in state file
 - Dependabot-style PR with changelog
 - V1: PAT-based auth, V2: GitHub App
@@ -119,31 +125,31 @@ Automated PRs on release:
 
 ### Essential for V1
 
-| ID | Requirement | Source |
-|----|-------------|--------|
-| FR-1 | State file includes `last_sync` | State File Format |
-| FR-2 | State file supports sync rules | State File Format |
-| FR-5 | `proj plan` shows diff without modifying | Plan/Apply |
-| FR-6 | `proj apply` confirms before changes | Plan/Apply |
-| FR-10 | Three-tier sync rules | Conflict Resolution |
-| FR-15 | Local registry cache | Registry Architecture |
-| FR-19 | Plan shows version comparison | Drift Detection |
+| ID    | Requirement                              | Source                |
+| ----- | ---------------------------------------- | --------------------- |
+| FR-1  | State file includes `last_sync`          | State File Format     |
+| FR-2  | State file supports sync rules           | State File Format     |
+| FR-5  | `proj plan` shows diff without modifying | Plan/Apply            |
+| FR-6  | `proj apply` confirms before changes     | Plan/Apply            |
+| FR-10 | Three-tier sync rules                    | Conflict Resolution   |
+| FR-15 | Local registry cache                     | Registry Architecture |
+| FR-19 | Plan shows version comparison            | Drift Detection       |
 
 ### Recommended for V1
 
-| ID | Requirement | Source |
-|----|-------------|--------|
-| FR-8 | Selective apply with `--file` | Plan/Apply |
-| FR-11 | `proj customize` command | Conflict Resolution |
-| FR-17 | `proj registry sync` | Registry Architecture |
-| FR-22 | Suggest `proj customize` in plan | Drift Detection |
+| ID    | Requirement                      | Source                |
+| ----- | -------------------------------- | --------------------- |
+| FR-8  | Selective apply with `--file`    | Plan/Apply            |
+| FR-11 | `proj customize` command         | Conflict Resolution   |
+| FR-17 | `proj registry sync`             | Registry Architecture |
+| FR-22 | Suggest `proj customize` in plan | Drift Detection       |
 
 ### Future (V2+)
 
-| ID | Requirement | Source |
-|----|-------------|--------|
-| FR-23 | Auto-update opt-in field | CI/CD Push |
-| FR-24 | GitHub Actions workflow | CI/CD Push |
+| ID    | Requirement               | Source     |
+| ----- | ------------------------- | ---------- |
+| FR-23 | Auto-update opt-in field  | CI/CD Push |
+| FR-24 | GitHub Actions workflow   | CI/CD Push |
 | NFR-7 | GitHub App authentication | CI/CD Push |
 
 **See:** [requirements.md](requirements.md) for complete requirements document

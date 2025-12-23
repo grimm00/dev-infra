@@ -14,8 +14,9 @@
 **Timeline:** Immediate (fields already exist in work-prod)
 
 **Use Cases:**
+
 - `proj create "My Project"` - Create project record
-- `proj list` - List all projects  
+- `proj list` - List all projects
 - `proj get <id>` - Get project details
 - `proj inv export api` - Push inventory to registry
 
@@ -27,15 +28,15 @@
 
 All 7 Tier 1 fields are **already implemented and ready**:
 
-| Field | Status | Changes Needed |
-|-------|--------|----------------|
-| `id` | ✅ Ready | None |
-| `name` | ✅ Ready | None |
-| `path` | ✅ Ready | None |
-| `description` | ✅ Ready | None |
-| `remote_url` | ✅ Ready | None |
-| `created_at` | ✅ Ready | None |
-| `updated_at` | ✅ Ready | None |
+| Field         | Status   | Changes Needed |
+| ------------- | -------- | -------------- |
+| `id`          | ✅ Ready | None           |
+| `name`        | ✅ Ready | None           |
+| `path`        | ✅ Ready | None           |
+| `description` | ✅ Ready | None           |
+| `remote_url`  | ✅ Ready | None           |
+| `created_at`  | ✅ Ready | None           |
+| `updated_at`  | ✅ Ready | None           |
 
 **Conclusion:** No schema changes needed for Tier 1. proj-cli can use work-prod API immediately.
 
@@ -53,6 +54,7 @@ All 7 Tier 1 fields are **already implemented and ready**:
 Unique identifier for the project. Auto-generated on creation.
 
 **API Behavior:**
+
 - Create: Not provided (auto-generated)
 - Read: Always returned
 - Update: Cannot modify
@@ -71,16 +73,19 @@ Unique identifier for the project. Auto-generated on creation.
 Display name for the project. Should be human-readable.
 
 **Validation:**
+
 - Required (cannot be null or empty)
 - Max 200 characters
 - Indexed for search
 
 **API Behavior:**
+
 - Create: Required
 - Read: Always returned
 - Update: Can modify
 
 **Examples:**
+
 - `"work-prod"`
 - `"Python ML Tutorial"`
 - `"React Portfolio Site"`
@@ -97,21 +102,25 @@ Display name for the project. Should be human-readable.
 Local filesystem path to the project directory. Optional - not all projects have a local clone.
 
 **Validation:**
+
 - Optional (can be null)
 - Max 500 characters
 - Unique constraint (no two projects can have same path)
 
 **API Behavior:**
+
 - Create: Optional
 - Read: Always returned (may be null)
 - Update: Can modify
 
 **Examples:**
+
 - `"/Users/cdwilson/Projects/work-prod"`
 - `"~/Projects/dev-infra"`
 - `null` (for remote-only projects)
 
 **Notes:**
+
 - Used by `proj inv scan local` to detect projects
 - Used to link local projects to registry records
 
@@ -127,15 +136,18 @@ Local filesystem path to the project directory. Optional - not all projects have
 Optional description of the project. Can be synced from GitHub repository description.
 
 **Validation:**
+
 - Optional (can be null or empty)
 - No length limit
 
 **API Behavior:**
+
 - Create: Optional
 - Read: Always returned (may be null)
 - Update: Can modify
 
 **Examples:**
+
 - `"Work productivity and engagement management system"`
 - `"Learning Python machine learning with scikit-learn"`
 - `null`
@@ -150,26 +162,31 @@ Optional description of the project. Can be synced from GitHub repository descri
 
 **Description:**  
 URL of the remote repository (GitHub, GitLab, etc.). Used for:
+
 - Deduplication (same remote = same project)
 - GitHub API sync
 - Opening in browser
 
 **Validation:**
+
 - Optional (can be null)
 - Max 500 characters
 - Should be a valid URL (starts with http/https)
 
 **API Behavior:**
+
 - Create: Optional
 - Read: Always returned (may be null)
 - Update: Can modify
 
 **Examples:**
+
 - `"https://github.com/grimm00/work-prod"`
 - `"https://github.com/grimm00/dev-infra"`
 - `null` (for local-only projects)
 
 **Notes:**
+
 - Used by `proj inv scan github` to discover projects
 - Used as deduplication key in `proj inv export api`
 
@@ -185,10 +202,12 @@ URL of the remote repository (GitHub, GitLab, etc.). Used for:
 Timestamp when the project record was created in the registry.
 
 **Validation:**
+
 - Required (auto-populated on insert)
 - Cannot be modified after creation
 
 **API Behavior:**
+
 - Create: Not provided (auto-generated)
 - Read: Always returned (ISO 8601 format)
 - Update: Cannot modify
@@ -207,10 +226,12 @@ Timestamp when the project record was created in the registry.
 Timestamp when the project record was last modified.
 
 **Validation:**
+
 - Required (auto-populated on insert and update)
 - Auto-updated on any modification
 
 **API Behavior:**
+
 - Create: Not provided (auto-generated)
 - Read: Always returned (ISO 8601 format)
 - Update: Auto-updated (cannot manually set)
@@ -226,6 +247,7 @@ Timestamp when the project record was last modified.
 **Endpoint:** `POST /api/projects`
 
 **Request Body:**
+
 ```json
 {
   "name": "My Project",
@@ -239,6 +261,7 @@ Timestamp when the project record was last modified.
 **Optional Fields:** `path`, `description`, `remote_url`
 
 **Response (201 Created):**
+
 ```json
 {
   "id": 42,
@@ -258,6 +281,7 @@ Timestamp when the project record was last modified.
 **Endpoint:** `GET /api/projects`
 
 **Response (200 OK):**
+
 ```json
 [
   {
@@ -288,6 +312,7 @@ Timestamp when the project record was last modified.
 **Endpoint:** `GET /api/projects/:id`
 
 **Response (200 OK):**
+
 ```json
 {
   "id": 42,
@@ -301,6 +326,7 @@ Timestamp when the project record was last modified.
 ```
 
 **Response (404 Not Found):**
+
 ```json
 {
   "error": "Project not found"
@@ -312,6 +338,7 @@ Timestamp when the project record was last modified.
 ## ✅ Tier 1 Checklist
 
 **work-prod (Server):**
+
 - [x] `id` field exists
 - [x] `name` field exists (required)
 - [x] `path` field exists (optional)
@@ -322,6 +349,7 @@ Timestamp when the project record was last modified.
 - [x] API endpoints exist (`POST`, `GET /`, `GET /:id`)
 
 **proj-cli (Client):**
+
 - [ ] `proj create` uses Tier 1 fields
 - [ ] `proj list` displays Tier 1 fields
 - [ ] `proj get` displays Tier 1 fields
@@ -339,4 +367,3 @@ Timestamp when the project record was last modified.
 ---
 
 **Last Updated:** 2025-12-22
-

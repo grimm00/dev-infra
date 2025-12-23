@@ -11,11 +11,13 @@
 The concept of dev-infra evolving from a **template factory** (produces projects, then done) to a **project infrastructure manager** (maintains ongoing relationship with managed projects).
 
 **Current Model (Factory):**
+
 ```
 dev-infra → generates → project → project is on its own
 ```
 
 **Proposed Model (Infrastructure Manager):**
+
 ```
 dev-infra → manages → projects → continuous relationship
                  ↑
@@ -31,12 +33,14 @@ dev-infra → manages → projects → continuous relationship
 **Problem:** Projects generated from dev-infra templates currently have no way to receive updates when templates improve. Each project is an island.
 
 **Opportunity:** If dev-infra maintains a relationship with projects it creates, it can:
+
 1. Push template improvements automatically
 2. Detect when projects drift from best practices
 3. Provide a unified view of all managed projects
 4. Enable consistent infrastructure across a portfolio
 
 **User Insight (2025-12-22):**
+
 > "I described dev-infra-created projects as being managed by dev-infra. My first thought is a CI/CD workflow that pushes updates to projects that are managed."
 
 ---
@@ -47,21 +51,21 @@ This is the core insight: **Terraform's model maps remarkably well to project ma
 
 ### Concept Mapping
 
-| Terraform Concept | Dev-Infra Equivalent |
-|-------------------|----------------------|
-| **Provider** | dev-infra (source of templates/commands) |
-| **Resource definitions** | Templates (standard-project, learning-project) |
-| **terraform.tfstate** | `.dev-infra.yml` (tracks version, config, what was synced) |
-| **`terraform init`** | `proj init` (initialize project as managed) |
-| **`terraform plan`** | `proj plan` (show what would change) |
-| **`terraform apply`** | `proj apply` (make the changes) |
-| **`terraform refresh`** | `proj sync --refresh` (update state without changes) |
-| **`terraform import`** | `proj adopt` (bring existing project under management) |
-| **State drift** | Project files diverging from template |
+| Terraform Concept        | Dev-Infra Equivalent                                       |
+| ------------------------ | ---------------------------------------------------------- |
+| **Provider**             | dev-infra (source of templates/commands)                   |
+| **Resource definitions** | Templates (standard-project, learning-project)             |
+| **terraform.tfstate**    | `.dev-infra.yml` (tracks version, config, what was synced) |
+| **`terraform init`**     | `proj init` (initialize project as managed)                |
+| **`terraform plan`**     | `proj plan` (show what would change)                       |
+| **`terraform apply`**    | `proj apply` (make the changes)                            |
+| **`terraform refresh`**  | `proj sync --refresh` (update state without changes)       |
+| **`terraform import`**   | `proj adopt` (bring existing project under management)     |
+| **State drift**          | Project files diverging from template                      |
 
 ### Why This Model Works
 
-1. **Declarative:** You say *what* you want, not *how* to get there
+1. **Declarative:** You say _what_ you want, not _how_ to get there
 2. **Predictable:** `plan` before `apply` - see changes before making them
 3. **Trackable:** State file knows exactly what's deployed
 4. **Recoverable:** State history enables rollback
@@ -83,18 +87,18 @@ last_sync: 2025-12-22
 
 # What to sync (declarative)
 sync:
-  commands: global              # Use ~/.cursor/commands/
-  rules: project                # Keep rules in project
+  commands: global # Use ~/.cursor/commands/
+  rules: project # Keep rules in project
   structure:
-    - docs/maintainers/         # Sync planning structure
-    - .github/workflows/        # Sync CI/CD
-  
+    - docs/maintainers/ # Sync planning structure
+    - .github/workflows/ # Sync CI/CD
+
 # What to ignore (like .gitignore or terraform lifecycle ignore)
 ignore:
-  - backend/                    # Never touch application code
+  - backend/ # Never touch application code
   - frontend/
-  - README.md                   # Project customizes this
-  
+  - README.md # Project customizes this
+
 # Track intentional customizations
 customizations:
   - file: .cursor/rules/main.mdc
@@ -150,7 +154,7 @@ jobs:
         run: |
           # Read from registry (GitHub-based or local)
           projects=$(curl -s $REGISTRY_URL/projects.json)
-          
+
       - name: Create PRs for each project
         run: |
           for project in $projects; do
@@ -167,6 +171,7 @@ jobs:
 ### 4. Registry Architecture
 
 **Option A: Local Registry**
+
 ```
 ~/.dev-infra/
 ├── registry.json        # List of managed projects
@@ -175,11 +180,13 @@ jobs:
 ```
 
 **Option B: GitHub-Based Registry**
+
 - Projects with `.dev-infra.yml` are discoverable
 - GitHub API queries for repos with the file
 - No central registry needed
 
 **Option C: Hybrid**
+
 - Local registry for fast access
 - GitHub sync for discovery
 - work-prod API for analytics
@@ -207,7 +214,7 @@ This exploration suggests a further evolution of dev-infra's identity:
 v0.x: Template Factory
   └── Produces templates with commands embedded
 
-v1.x: Command Hub + Template Factory  
+v1.x: Command Hub + Template Factory
   └── Global commands + templates
   └── (Current direction from v4 exploration)
 
@@ -232,11 +239,13 @@ v2.x: Project Infrastructure Manager
 ## 📝 Notes
 
 **Connection to existing work:**
+
 - Template Metadata research already exploring `.dev-infra.yml` format
 - Global Command Distribution validated `~/.cursor/commands/` approach
 - proj-cli could be the CLI interface for these commands
 
 **Terraform learnings to consider:**
+
 - Terraform's state locking prevents concurrent modifications
 - Terraform workspaces allow multiple environments
 - Terraform modules enable composition
@@ -245,4 +254,3 @@ v2.x: Project Infrastructure Manager
 ---
 
 **Last Updated:** 2025-12-22
-

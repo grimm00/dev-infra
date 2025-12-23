@@ -42,6 +42,7 @@ This research extends template-metadata to address Terraform-specific needs.
 ## 📚 Research Methodology
 
 **Sources:**
+
 - [x] Template Metadata research findings
 - [x] Terraform tfstate documentation and structure
 - [x] Web search: State file patterns in infrastructure-as-code tools
@@ -54,6 +55,7 @@ This research extends template-metadata to address Terraform-specific needs.
 ### Finding 1: Terraform State Tracks Resource Metadata + Checksums
 
 Terraform's tfstate is JSON-based and tracks:
+
 - Resource identifiers (type, name, provider)
 - Current attribute values
 - Dependencies between resources
@@ -69,6 +71,7 @@ Terraform's tfstate is JSON-based and tracks:
 ### Finding 2: Remote State Enables Collaboration
 
 Terraform uses remote backends (S3, Terraform Cloud) for:
+
 - Team collaboration on shared state
 - State locking to prevent conflicts
 - State versioning for rollback
@@ -82,6 +85,7 @@ Terraform uses remote backends (S3, Terraform Cloud) for:
 ### Finding 3: Sync Rules Should Follow Ignore Pattern
 
 Template sync tools (like cruft for cookiecutter) use:
+
 - `always` - Always sync these files
 - `ask` - Prompt user before syncing
 - `never` - Never sync (project customizes these)
@@ -97,6 +101,7 @@ This mirrors `.gitignore` patterns users already understand.
 ### Finding 4: Customization Tracking Enables Smart Merging
 
 Recording intentional customizations:
+
 - Which files were modified intentionally
 - When and why (optional reason)
 - Allows plan/apply to skip or warn on these files
@@ -112,16 +117,19 @@ Recording intentional customizations:
 Combining template-metadata foundations with Terraform patterns, the state file needs:
 
 **Core Fields (from template-metadata):**
+
 - `template` - Which template type
 - `version` - Dev-infra version at creation
 - `created` - Creation timestamp
 
 **Extended Fields (new for plan/apply):**
+
 - `last_sync` - When last synced with template
 - `sync` - Sync configuration rules
 - `customizations` - Tracked intentional changes
 
 **Key Insights:**
+
 - [x] Insight 1: YAML remains the right format (human-readable, supports comments, aligns with template-metadata decision)
 - [x] Insight 2: Sync rules should use `always/ask/never` pattern (familiar to users)
 - [x] Insight 3: Customizations should record file, date, and optional reason

@@ -84,11 +84,11 @@ No organizations table exists in work-prod, and the string field (`organization`
 
 17 Learning projects (29% of total) need sub-classification. Three types are sufficient:
 
-| Learning Type | Description | Estimated Count |
-| ------------- | ----------- | --------------- |
-| `work_related` | Job/career learning | 8-10 |
-| `personal_dev` | Hobby/interest learning | 5-7 |
-| `hybrid` | Serves both purposes | 2-3 |
+| Learning Type  | Description             | Estimated Count |
+| -------------- | ----------------------- | --------------- |
+| `work_related` | Job/career learning     | 8-10            |
+| `personal_dev` | Hobby/interest learning | 5-7             |
+| `hybrid`       | Serves both purposes    | 2-3             |
 
 **Key Discovery:** Work-related learning should count toward work metrics (apprenticeship reality). Hybrid projects need visibility in both work and personal views.
 

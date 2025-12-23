@@ -28,6 +28,7 @@ How to handle conflicts between template updates and local customizations? What 
 ## 📚 Research Methodology
 
 **Sources:**
+
 - [x] Terraform lifecycle blocks documentation
 - [x] Web search: Git merge strategies and conflict resolution
 - [x] Web search: Configuration management conflict patterns
@@ -40,6 +41,7 @@ How to handle conflicts between template updates and local customizations? What 
 ### Finding 1: Terraform's Lifecycle Ignore Pattern
 
 Terraform uses `lifecycle { ignore_changes = [...] }` to:
+
 - Prevent specific attribute changes from triggering updates
 - Allow infrastructure to be modified outside Terraform
 - Essential for user-managed resources
@@ -53,6 +55,7 @@ Terraform uses `lifecycle { ignore_changes = [...] }` to:
 ### Finding 2: Template Sync Tools Use Git Merge
 
 Tools like cruft (for cookiecutter templates) use:
+
 - Git three-way merge for updates
 - Template original → Template updated → Project current
 - Shows conflicts for manual resolution
@@ -66,6 +69,7 @@ Tools like cruft (for cookiecutter templates) use:
 ### Finding 3: Customization Recording Prevents Surprise Conflicts
 
 Recording when users intentionally modify files:
+
 - System knows which files have been customized
 - Can warn or skip during apply
 - Reduces merge conflicts
@@ -79,6 +83,7 @@ Recording when users intentionally modify files:
 ### Finding 4: Interactive vs Automatic Resolution
 
 **Options:**
+
 1. **Ours (keep local):** Safe but may miss important updates
 2. **Theirs (take template):** Dangerous, loses customizations
 3. **Interactive:** Prompt for each conflict
@@ -93,6 +98,7 @@ Recording when users intentionally modify files:
 ### Finding 5: Section-Level Customization is Complex
 
 Tracking partial file customizations (some sections custom, some not) requires:
+
 - Content parsing (YAML, markdown, etc.)
 - Section markers or checksums
 - Significantly more complexity
@@ -108,15 +114,18 @@ Tracking partial file customizations (some sections custom, some not) requires:
 **Conflict Resolution Strategy:**
 
 1. **Prevention via Sync Rules:**
+
    - `sync.never` - Files that should never sync (README.md, backend/, frontend/)
    - User explicitly marks files as "do not touch"
 
 2. **Tracking via Customizations:**
+
    - When user modifies a synced file, they can record it
    - `proj customize <file>` command to add to customizations list
    - Plan shows warning for customized files
 
 3. **Resolution via Prompts:**
+
    - For `sync.ask` files, prompt during apply
    - Options: Skip, Apply (overwrite), Show diff, Merge (future)
    - User makes the decision with full context
@@ -126,6 +135,7 @@ Tracking partial file customizations (some sections custom, some not) requires:
    - Prevents repeated prompting
 
 **Key Insights:**
+
 - [x] Insight 1: Prevention is better than resolution - use sync.never for known customizations
 - [x] Insight 2: File-level granularity is sufficient for V1
 - [x] Insight 3: Interactive prompts for `ask` files give user control
@@ -157,14 +167,14 @@ $ proj apply
 .github/workflows/ci.yml
   This file was modified locally but not in customizations.
   [S]kip / [V]iew diff / [A]pply / [R]emember skip? V
-  
+
   --- template version
   +++ your version
   @@ -10,6 +10,7 @@
      - name: Test
        run: npm test
   +    timeout-minutes: 30
-  
+
   [S]kip / [A]pply / [R]emember skip? R
   → Skipped and added to customizations
 

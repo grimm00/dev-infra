@@ -57,12 +57,12 @@ classification = Enum('Work', 'Personal', 'Learning', 'Inactive')
 
 **Critical Discovery:** The current enum and research enum are not alternative representations of the same concept - they represent fundamentally different dimensions:
 
-| Aspect            | Current Enum                                             | Research Enum                          |
-| ----------------- | -------------------------------------------------------- | -------------------------------------- |
-| **Concept**       | Priority/Importance                                      | Project Type                           |
-| **Values**        | `primary`, `secondary`, `archive`, `maintenance`         | `Work`, `Personal`, `Learning`, `Inactive` |
-| **Answers**       | "How important is this project?"                         | "What kind of project is this?"        |
-| **Use Case**      | Prioritization, time allocation                          | Categorization, filtering, metrics     |
+| Aspect       | Current Enum                                     | Research Enum                              |
+| ------------ | ------------------------------------------------ | ------------------------------------------ |
+| **Concept**  | Priority/Importance                              | Project Type                               |
+| **Values**   | `primary`, `secondary`, `archive`, `maintenance` | `Work`, `Personal`, `Learning`, `Inactive` |
+| **Answers**  | "How important is this project?"                 | "What kind of project is this?"            |
+| **Use Case** | Prioritization, time allocation                  | Categorization, filtering, metrics         |
 
 **Source:** `work-prod/docs/maintainers/research/data-models/projects-data-model.md`, `backend/app/models/project.py`
 
@@ -77,7 +77,7 @@ The current mapping script (`map_inventory_to_projects.py`) loses project type i
 ```python
 CLASSIFICATION_MAP = {
     'Personal': 'primary',      # ❌ Loses "Personal" type
-    'Work (DRW)': 'primary',    # ❌ Loses "Work" type  
+    'Work (DRW)': 'primary',    # ❌ Loses "Work" type
     'Apprenti': 'primary',      # ❌ Loses "Apprenti" type
     'Learning': 'secondary',    # ✅ Preserved (sort of)
     'Inactive/Archived': 'archive',  # ✅ Preserved
@@ -85,6 +85,7 @@ CLASSIFICATION_MAP = {
 ```
 
 **Problem:** After mapping, you cannot distinguish:
+
 - Is a `primary` project Work, Personal, or Apprenti?
 - Is the `primary` DRW project a learning project or a work project?
 
@@ -98,14 +99,15 @@ CLASSIFICATION_MAP = {
 
 Analysis of `projects.json` (48 projects):
 
-| Classification | Count | Usage |
-| -------------- | ----- | ----- |
-| `primary` | 40 | Personal, Work, DRW Learning all mixed |
-| `secondary` | 6 | Learning projects without organization |
-| `archive` | 7 | Inactive/Archived projects |
-| `maintenance` | 0 | Never used |
+| Classification | Count | Usage                                  |
+| -------------- | ----- | -------------------------------------- |
+| `primary`      | 40    | Personal, Work, DRW Learning all mixed |
+| `secondary`    | 6     | Learning projects without organization |
+| `archive`      | 7     | Inactive/Archived projects             |
+| `maintenance`  | 0     | Never used                             |
 
 **Key Problem:**
+
 - 40 "primary" projects include Work, Personal, AND Learning projects
 - No way to filter "show me all Work projects" or "show me all Personal projects"
 - The `organization` field partially helps (DRW vs null) but isn't sufficient
@@ -121,6 +123,7 @@ Analysis of `projects.json` (48 projects):
 The research document explicitly requires type classification for:
 
 1. **Metrics Separation:**
+
    ```
    Work Projects: 20
    Work-Related Learning: 8
@@ -132,6 +135,7 @@ The research document explicitly requires type classification for:
    ```
 
 2. **Learning Sub-Classification (Tier 3):**
+
    - `learning_type` field requires knowing if project is `Learning` type first
    - Current schema has no way to identify Learning projects reliably
 
@@ -162,7 +166,7 @@ UPDATE projects SET classification = 'Personal' WHERE classification = 'primary'
 **Option B: Add New Field, Keep Old (Recommended)**
 
 ```sql
-ALTER TABLE projects ADD COLUMN project_type TEXT 
+ALTER TABLE projects ADD COLUMN project_type TEXT
     CHECK (project_type IN ('Work', 'Personal', 'Learning', 'Inactive'));
 -- Keep classification for backward compatibility (or rename to 'priority')
 ```
@@ -190,19 +194,19 @@ ALTER TABLE projects ADD COLUMN project_type TEXT;
 
 Based on research, projects need BOTH dimensions:
 
-| Field           | Purpose                  | Values                                     |
-| --------------- | ------------------------ | ------------------------------------------ |
-| `project_type`  | What kind of project?    | `Work`, `Personal`, `Learning`, `Inactive` |
-| `priority`      | How important?           | `primary`, `secondary`, `archive`, `maintenance` |
+| Field          | Purpose               | Values                                           |
+| -------------- | --------------------- | ------------------------------------------------ |
+| `project_type` | What kind of project? | `Work`, `Personal`, `Learning`, `Inactive`       |
+| `priority`     | How important?        | `primary`, `secondary`, `archive`, `maintenance` |
 
 **Example Usage:**
 
-| Project           | project_type | priority     | Meaning                              |
-| ----------------- | ------------ | ------------ | ------------------------------------ |
-| work-prod         | Work         | primary      | Primary work project                 |
-| pokehub           | Personal     | primary      | Main personal project                |
-| containers-learning | Learning   | secondary    | Secondary learning project           |
-| B-IT              | Inactive     | archive      | Archived inactive project            |
+| Project             | project_type | priority  | Meaning                    |
+| ------------------- | ------------ | --------- | -------------------------- |
+| work-prod           | Work         | primary   | Primary work project       |
+| pokehub             | Personal     | primary   | Main personal project      |
+| containers-learning | Learning     | secondary | Secondary learning project |
+| B-IT                | Inactive     | archive   | Archived inactive project  |
 
 **Source:** Analysis of research requirements and current schema limitations
 
@@ -222,11 +226,11 @@ Based on research, projects need BOTH dimensions:
 
 **Migration Options Summary:**
 
-| Option                 | Complexity | Data Loss | API Breaking | Recommendation |
-| ---------------------- | ---------- | --------- | ------------ | -------------- |
-| Replace Values         | 🔴 High    | Yes       | Yes          | ❌ Not Recommended |
-| Add New Field          | 🟢 Low     | No        | No           | ✅ Recommended |
-| Rename + Repurpose     | 🟡 Medium  | No        | Yes          | ⚠️ Consider Later |
+| Option             | Complexity | Data Loss | API Breaking | Recommendation     |
+| ------------------ | ---------- | --------- | ------------ | ------------------ |
+| Replace Values     | 🔴 High    | Yes       | Yes          | ❌ Not Recommended |
+| Add New Field      | 🟢 Low     | No        | No           | ✅ Recommended     |
+| Rename + Repurpose | 🟡 Medium  | No        | Yes          | ⚠️ Consider Later  |
 
 ---
 

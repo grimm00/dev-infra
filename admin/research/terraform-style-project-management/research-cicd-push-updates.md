@@ -28,6 +28,7 @@ How should dev-infra automatically push updates to managed projects? What CI/CD 
 ## 📚 Research Methodology
 
 **Sources:**
+
 - [x] GitHub Actions cross-repository workflows
 - [x] Web search: GitHub App vs PAT for automation
 - [x] Web search: Dependabot-style automated PRs
@@ -41,12 +42,12 @@ How should dev-infra automatically push updates to managed projects? What CI/CD 
 
 **GitHub Apps vs PATs:**
 
-| Aspect | PAT | GitHub App |
-|--------|-----|------------|
-| Scope | User-level | Installation-level |
-| Rate Limits | User limits | Higher limits |
-| Security | User credentials | App credentials |
-| Granularity | All repos or none | Selected repos |
+| Aspect      | PAT               | GitHub App         |
+| ----------- | ----------------- | ------------------ |
+| Scope       | User-level        | Installation-level |
+| Rate Limits | User limits       | Higher limits      |
+| Security    | User credentials  | App credentials    |
+| Granularity | All repos or none | Selected repos     |
 
 **Source:** GitHub authentication documentation
 
@@ -57,6 +58,7 @@ How should dev-infra automatically push updates to managed projects? What CI/CD 
 ### Finding 2: Dependabot Pattern is Well-Established
 
 Dependabot creates PRs for dependency updates:
+
 - One PR per update
 - Clear title and description
 - Assignable, reviewable, mergeable
@@ -71,6 +73,7 @@ Dependabot creates PRs for dependency updates:
 ### Finding 3: Rate Limits Require Batching
 
 GitHub API limits:
+
 - 5,000 requests/hour (authenticated)
 - Creating PR + updating files = several API calls
 - For 50+ repos, batching is necessary
@@ -84,6 +87,7 @@ GitHub API limits:
 ### Finding 4: Opt-in is Safer Than Opt-out
 
 Projects should explicitly opt-in to auto-updates:
+
 - Prevents surprises
 - Clear consent model
 - Easier to troubleshoot
@@ -97,6 +101,7 @@ Projects should explicitly opt-in to auto-updates:
 ### Finding 5: PR Template Improves Review Experience
 
 Automated PRs should include:
+
 - Clear summary of changes
 - Link to release notes
 - Test/review instructions
@@ -129,6 +134,7 @@ Rate limit: 10 projects/batch, 1 min between batches
 **Authentication Options:**
 
 1. **V1: PAT-based (simpler)**
+
    - Store PAT in repository secrets
    - Works for personal projects
    - Limited to owned repos
@@ -139,6 +145,7 @@ Rate limit: 10 projects/batch, 1 min between batches
    - Organization-ready
 
 **Key Insights:**
+
 - [x] Insight 1: Opt-in via `auto_update` field in state file
 - [x] Insight 2: Dependabot-style PRs are familiar to developers
 - [x] Insight 3: Rate limiting essential for many projects
@@ -171,12 +178,12 @@ jobs:
     steps:
       - name: Checkout dev-infra
         uses: actions/checkout@v4
-        
+
       - name: Get managed projects
         run: |
           # Call work-prod API to get projects with auto_update: true
           curl -s $WORK_PROD_API/projects?auto_update=true > projects.json
-          
+
       - name: Create update PRs
         env:
           GH_TOKEN: ${{ secrets.UPDATE_PAT }}

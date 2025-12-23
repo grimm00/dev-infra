@@ -23,12 +23,12 @@ Establishing a **unified understanding of what a "project" is** across the four-
 
 The project model exists in multiple places with different definitions:
 
-| Location | Status | Fields | Problem |
-|----------|--------|--------|---------|
-| `work-prod/project.py` | Implemented | 10 fields | Minimal, missing learning taxonomy |
-| `work-prod/projects-data-model.md` | Research | 15+ fields | Not implemented |
-| `dev-infra/research-project-model.md` | Speculative | Guesses | Uses "likely" language |
-| `proj-cli` | Consumer | Unknown | Needs to know what to use |
+| Location                              | Status      | Fields     | Problem                            |
+| ------------------------------------- | ----------- | ---------- | ---------------------------------- |
+| `work-prod/project.py`                | Implemented | 10 fields  | Minimal, missing learning taxonomy |
+| `work-prod/projects-data-model.md`    | Research    | 15+ fields | Not implemented                    |
+| `dev-infra/research-project-model.md` | Speculative | Guesses    | Uses "likely" language             |
+| `proj-cli`                            | Consumer    | Unknown    | Needs to know what to use          |
 
 ### The Solution: Tiered Approach
 
@@ -46,27 +46,29 @@ Rather than trying to implement everything at once:
 
 ### Fields Already Implemented
 
-| Field | Type | Tier | Status | Notes |
-|-------|------|------|--------|-------|
-| `id` | Integer | 1 | ✅ Ready | Auto-increment PK |
-| `name` | String(200) | 1 | ✅ Ready | Required, indexed |
-| `path` | String(500) | 1 | ✅ Ready | Unique, optional (local filesystem) |
-| `description` | Text | 1 | ✅ Ready | Optional |
-| `remote_url` | String(500) | 1 | ✅ Ready | Optional (GitHub URL) |
-| `created_at` | DateTime | 1 | ✅ Ready | Auto-populated |
-| `updated_at` | DateTime | 1 | ✅ Ready | Auto-updated |
-| `organization` | String(100) | 2 | ⚠️ Review | String vs FK decision needed |
-| `classification` | Enum | 2 | ⚠️ Review | Values differ from research |
-| `status` | Enum | 2 | ✅ Ready | active/paused/completed/cancelled |
+| Field            | Type        | Tier | Status    | Notes                               |
+| ---------------- | ----------- | ---- | --------- | ----------------------------------- |
+| `id`             | Integer     | 1    | ✅ Ready  | Auto-increment PK                   |
+| `name`           | String(200) | 1    | ✅ Ready  | Required, indexed                   |
+| `path`           | String(500) | 1    | ✅ Ready  | Unique, optional (local filesystem) |
+| `description`    | Text        | 1    | ✅ Ready  | Optional                            |
+| `remote_url`     | String(500) | 1    | ✅ Ready  | Optional (GitHub URL)               |
+| `created_at`     | DateTime    | 1    | ✅ Ready  | Auto-populated                      |
+| `updated_at`     | DateTime    | 1    | ✅ Ready  | Auto-updated                        |
+| `organization`   | String(100) | 2    | ⚠️ Review | String vs FK decision needed        |
+| `classification` | Enum        | 2    | ⚠️ Review | Values differ from research         |
+| `status`         | Enum        | 2    | ✅ Ready  | active/paused/completed/cancelled   |
 
 ### Gap: Classification Enum Mismatch
 
 **Current Implementation:**
+
 ```python
 classification = Enum('primary', 'secondary', 'archive', 'maintenance')
 ```
 
 **Research Recommendation:**
+
 ```python
 classification = Enum('Work', 'Personal', 'Learning', 'Inactive')
 ```
@@ -76,11 +78,13 @@ classification = Enum('Work', 'Personal', 'Learning', 'Inactive')
 ### Gap: Organization as String
 
 **Current Implementation:**
+
 ```python
 organization = db.Column(db.String(100), nullable=True)
 ```
 
 **Research Recommendation:**
+
 ```python
 organization_id = db.Column(db.Integer, db.ForeignKey('organizations.id'))
 ```
@@ -98,6 +102,7 @@ organization_id = db.Column(db.Integer, db.ForeignKey('organizations.id'))
 **Status:** 7 fields ready, 0 changes needed
 
 **Fields:**
+
 - `id` - Unique identifier
 - `name` - Project display name
 - `path` - Local filesystem path (optional)
@@ -107,6 +112,7 @@ organization_id = db.Column(db.Integer, db.ForeignKey('organizations.id'))
 - `updated_at` - Last modification timestamp
 
 **Use Cases Supported:**
+
 - `proj create "My Project"` - Create project record
 - `proj list` - List all projects
 - `proj get <id>` - Get project details
@@ -123,16 +129,19 @@ organization_id = db.Column(db.Integer, db.ForeignKey('organizations.id'))
 **Status:** Fields exist but need alignment
 
 **Fields:**
+
 - `classification` - Work/Personal/Learning/Inactive (needs enum update)
 - `organization` - DRW/Apprenti/Personal (FK vs string decision)
 - `status` - active/paused/completed/cancelled (ready)
 
 **Use Cases Supported:**
+
 - Filter projects by type (work vs personal)
 - Filter projects by organization
 - Track project lifecycle status
 
 **Decisions Needed:**
+
 1. Reconcile classification enum values
 2. Decide organization implementation (string vs FK)
 
@@ -145,11 +154,13 @@ organization_id = db.Column(db.Integer, db.ForeignKey('organizations.id'))
 **Status:** Not yet implemented
 
 **Fields:**
+
 - `learning_type` - work_related/personal_dev/hybrid
 - `learning_context` - Free-form description of learning goals
 - `learning_status` - exploring/active_learning/completed/paused
 
 **Use Cases Supported:**
+
 - Distinguish work-related learning from personal hobbies
 - Track learning progress separately from project status
 - Accurate time allocation between work and personal
@@ -167,10 +178,12 @@ organization_id = db.Column(db.Integer, db.ForeignKey('organizations.id'))
 **Status:** Not yet implemented
 
 **Fields:**
+
 - `tech_stack` - JSON array for quick access (["Python", "Flask", "React"])
 - `projects_skills` - Junction table with proficiency tracking
 
 **Junction Table Schema:**
+
 ```sql
 projects_skills (
     project_id INTEGER,
@@ -183,6 +196,7 @@ projects_skills (
 ```
 
 **Use Cases Supported:**
+
 - "What projects use Python?"
 - "What skills does this project use?"
 - Skills matrix visualization
@@ -197,12 +211,14 @@ projects_skills (
 **Status:** Not yet implemented
 
 **Fields:**
+
 - `last_worked_on` - Last git commit or file modification
 - `project_size` - Lines of code or file count
 - `is_favorite` - User can star projects
 - `notes` - Free-form notes
 
 **Additional Analysis (in work-prod service):**
+
 - Health metrics
 - Activity indicators
 - Staleness detection
@@ -227,6 +243,7 @@ projects_skills (
 **Question:** Which classification system to use?
 
 **Options:**
+
 1. Keep current: `primary`, `secondary`, `archive`, `maintenance`
 2. Adopt research: `Work`, `Personal`, `Learning`, `Inactive`
 3. Hybrid: Map current to new
@@ -240,6 +257,7 @@ projects_skills (
 **Question:** String field or FK to organizations table?
 
 **Options:**
+
 1. Keep string: Simpler, no migration needed
 2. Migrate to FK: More robust, supports organization metadata
 
@@ -268,9 +286,11 @@ projects_skills (
 ## 📝 Notes
 
 **User Insight (2025-12-22):**
+
 > "There needs to be a deep discussion about what a project is and what useful information can be gleamed from its attributes. This means we may need to develop a full model. We need fields that will be helpful in both project management and analysis, especially for our skills matrix."
 
 This exploration addresses that by:
+
 1. Auditing what exists (not guessing)
 2. Tiering features by priority
 3. Connecting to skills matrix (Tier 4)
@@ -279,4 +299,3 @@ This exploration addresses that by:
 ---
 
 **Last Updated:** 2025-12-22
-

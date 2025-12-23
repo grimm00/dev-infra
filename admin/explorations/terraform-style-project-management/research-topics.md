@@ -24,6 +24,7 @@ This document lists research topics and questions that need investigation before
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - What's the minimum viable state information?
 - How to track sync history?
 - How to record intentional customizations?
@@ -43,6 +44,7 @@ This document lists research topics and questions that need investigation before
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - Local registry (`~/.dev-infra/registry.json`) vs GitHub-based discovery?
 - How to handle projects across multiple machines?
 - Should the registry sync with work-prod API?
@@ -50,6 +52,7 @@ This document lists research topics and questions that need investigation before
 - What metadata to store in the registry?
 
 **Options to explore:**
+
 1. **Local-only:** Fast, simple, but not portable
 2. **GitHub-based:** Discoverable, but requires API access
 3. **Hybrid:** Local cache + GitHub sync
@@ -68,6 +71,7 @@ This document lists research topics and questions that need investigation before
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - How to generate diffs between template and project?
 - How to display changes in a readable way?
 - How to handle partial applies (some files, not all)?
@@ -75,6 +79,7 @@ This document lists research topics and questions that need investigation before
 - How to handle merge conflicts?
 
 **Terraform patterns to consider:**
+
 - `terraform plan -out=plan.tfplan` (save plan for later apply)
 - `terraform apply -target=resource` (selective apply)
 - `terraform plan -refresh=false` (skip state refresh)
@@ -92,6 +97,7 @@ This document lists research topics and questions that need investigation before
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - GitHub Actions workflow design?
 - How to authenticate across repos (PAT, GitHub App, etc.)?
 - PR creation strategy (one PR per project, batched, etc.)?
@@ -99,6 +105,7 @@ This document lists research topics and questions that need investigation before
 - Should projects opt-in or opt-out of auto-updates?
 
 **Considerations:**
+
 - GitHub API rate limits
 - Permission model (who can push to which repos?)
 - Notification strategy (how to alert project owners?)
@@ -116,6 +123,7 @@ This document lists research topics and questions that need investigation before
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - File-level or content-level comparison?
 - How to distinguish intentional changes from drift?
 - Should drift be reported or just logged?
@@ -123,6 +131,7 @@ This document lists research topics and questions that need investigation before
 - Performance considerations for large projects?
 
 **Options to explore:**
+
 1. **Hash-based:** Compare file hashes to template
 2. **Git-based:** Track changes since last sync commit
 3. **Content-diff:** Semantic comparison of file contents
@@ -141,17 +150,20 @@ This document lists research topics and questions that need investigation before
 **Status:** 🔴 Not Started
 
 **Sub-questions:**
+
 - How to mark files as "do not sync"?
 - How to handle partial file customizations (some sections customized, some not)?
 - Should conflicts block apply or be handled interactively?
 - How to record conflict resolution decisions?
 
 **Terraform patterns to consider:**
+
 - `lifecycle { ignore_changes = [...] }` - Ignore specific attributes
 - `lifecycle { prevent_destroy = true }` - Prevent accidental deletion
 - Manual state manipulation (`terraform state rm`)
 
 **Merge strategies:**
+
 1. **Ours:** Always keep local version
 2. **Theirs:** Always take template version
 3. **Interactive:** Ask user for each conflict
@@ -161,16 +173,17 @@ This document lists research topics and questions that need investigation before
 
 ## 📊 Priority Matrix
 
-| Topic | Priority | Complexity | Dependencies |
-|-------|----------|------------|--------------|
-| State File Format | High | Medium | Template Metadata research |
-| Registry Architecture | High | High | work-prod integration |
-| Plan/Apply Workflow | High | High | State file, proj-cli |
-| CI/CD Push Updates | Medium | High | Registry, GitHub API |
-| Drift Detection | Medium | Medium | State file |
-| Conflict Resolution | High | High | Plan/Apply workflow |
+| Topic                 | Priority | Complexity | Dependencies               |
+| --------------------- | -------- | ---------- | -------------------------- |
+| State File Format     | High     | Medium     | Template Metadata research |
+| Registry Architecture | High     | High       | work-prod integration      |
+| Plan/Apply Workflow   | High     | High       | State file, proj-cli       |
+| CI/CD Push Updates    | Medium   | High       | Registry, GitHub API       |
+| Drift Detection       | Medium   | Medium     | State file                 |
+| Conflict Resolution   | High     | High       | Plan/Apply workflow        |
 
 **Recommended Research Order:**
+
 1. State File Format (foundational)
 2. Plan/Apply Workflow (core UX)
 3. Conflict Resolution (required for safe applies)
@@ -197,4 +210,3 @@ This document lists research topics and questions that need investigation before
 ---
 
 **Last Updated:** 2025-12-22
-
