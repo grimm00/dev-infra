@@ -10,7 +10,8 @@
 
 ### Active Explorations
 
-- **[Work-Prod Analysis Service](work-prod-analysis-service/README.md)** - Separating analysis from proj-cli inventory into work-prod (🔴 Exploration) ⭐ **NEW**
+- **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Exploration) ⭐ **NEW**
+- **[Work-Prod Analysis Service](work-prod-analysis-service/README.md)** - Separating analysis from proj-cli inventory into work-prod (🔴 Exploration)
 - **[Four-Arm Architecture](four-arm-architecture/README.md)** - Mapping dev-infra, dev-toolkit, proj-cli, work-prod relationships (🔴 Exploration)
 - **[proj-cli Focused Role](proj-cli-focused-role/README.md)** - Clarifying proj-cli scope within four-arm architecture (🔴 Exploration)
 - **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - Dev-infra as infrastructure manager with state tracking and CI/CD push updates (🔴 Exploration)

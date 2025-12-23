@@ -1,0 +1,180 @@
+# Research Topics - Project Model Definition
+
+**Purpose:** List of research topics/questions to investigate  
+**Status:** 🔴 Pending Research  
+**Created:** 2025-12-22  
+**Last Updated:** 2025-12-22
+
+---
+
+## 📋 Research Topics
+
+This document lists research topics and questions that need investigation for the project model definition.
+
+---
+
+### Research Topic 1: Classification Enum Alignment
+
+**Question:** Should work-prod migrate from current classification values to research-recommended values?
+
+**Why:** Current enum (`primary`, `secondary`, `archive`, `maintenance`) doesn't align with the taxonomy designed in work-prod research (`Work`, `Personal`, `Learning`, `Inactive`).
+
+**Priority:** High (affects Tier 2)
+
+**Status:** 🔴 Not Started
+
+**Sub-questions:**
+- Is there existing data using current enum values?
+- What's the migration path?
+- Do current values map cleanly to new values?
+- Impact on proj-cli commands?
+
+**Options:**
+1. Keep current values (no change)
+2. Migrate to research values (breaking change)
+3. Add new values, deprecate old ones (gradual migration)
+
+---
+
+### Research Topic 2: Organization Implementation
+
+**Question:** Should `organization` remain a string field or migrate to FK?
+
+**Why:** String field is simpler but lacks referential integrity. FK enables organization metadata (color, display name, type).
+
+**Priority:** Medium (affects Tier 2)
+
+**Status:** 🔴 Not Started
+
+**Sub-questions:**
+- Does work-prod have an organizations table?
+- What organization metadata is needed?
+- Is referential integrity important for this use case?
+- Migration complexity?
+
+**Options:**
+1. Keep string (simple, works now)
+2. Add FK, keep string for backward compatibility
+3. Migrate to FK only (breaking change)
+
+---
+
+### Research Topic 3: Tier 1 API Contract
+
+**Question:** What exact API contract does proj-cli need from work-prod for Tier 1?
+
+**Why:** proj-cli needs to know exactly what endpoints and fields are available.
+
+**Priority:** High (enables Tier 1 implementation)
+
+**Status:** 🔴 Not Started
+
+**Sub-questions:**
+- What endpoints exist in work-prod?
+- What fields are required vs optional on create?
+- What fields are returned on list/get?
+- Error response format?
+
+**Deliverable:** API contract document for proj-cli team
+
+---
+
+### Research Topic 4: Learning Taxonomy Implementation
+
+**Question:** How should learning sub-classification be implemented?
+
+**Why:** 17 of 59 projects are Learning type - needs sub-classification for meaningful metrics.
+
+**Priority:** High (Tier 3, but marked MVP-critical)
+
+**Status:** 🔴 Not Started
+
+**Sub-questions:**
+- Are the three learning types sufficient? (work_related, personal_dev, hybrid)
+- Should learning_type be required for Learning classification?
+- How to handle existing Learning projects without sub-classification?
+- UI implications?
+
+**Reference:** [work-prod Learning Project Taxonomy](../../../../work-prod/docs/maintainers/research/data-models/learning-project-taxonomy.md) (429 lines of detailed research)
+
+---
+
+### Research Topic 5: Skills Matrix Integration
+
+**Question:** How should projects connect to the skills matrix?
+
+**Why:** Skills matrix is a key feature - projects need to link to skills.
+
+**Priority:** Medium (Tier 4)
+
+**Status:** 🔴 Not Started
+
+**Sub-questions:**
+- JSON `tech_stack` vs junction table vs both?
+- How to populate skills from inventory scan?
+- Proficiency tracking per project - is it needed?
+- How to sync with GitHub language detection?
+
+**Reference:** [work-prod Projects Data Model](../../../../work-prod/docs/maintainers/research/data-models/projects-data-model.md) (Section: Projects-Skills Junction Table)
+
+---
+
+### Research Topic 6: Analysis Field Requirements
+
+**Question:** What fields does the analysis service need?
+
+**Why:** Analysis service (work-prod) needs specific fields to calculate metrics.
+
+**Priority:** Low (Tier 5)
+
+**Status:** 🔴 Not Started
+
+**Sub-questions:**
+- What analysis capabilities are planned?
+- What fields feed those capabilities?
+- Can analysis be computed vs stored?
+- How to keep analysis fields up to date?
+
+**Reference:** [Work-Prod Analysis Service Exploration](../work-prod-analysis-service/README.md)
+
+---
+
+## 📊 Priority Matrix
+
+| Topic | Priority | Tier | Dependencies |
+|-------|----------|------|--------------|
+| Tier 1 API Contract | High | 1 | None |
+| Classification Enum | High | 2 | None |
+| Learning Taxonomy | High | 3 | Classification |
+| Organization Implementation | Medium | 2 | None |
+| Skills Matrix Integration | Medium | 4 | Skills table |
+| Analysis Field Requirements | Low | 5 | Analysis service |
+
+**Recommended Research Order:**
+1. Tier 1 API Contract (enables proj-cli work immediately)
+2. Classification Enum (foundational decision)
+3. Learning Taxonomy (MVP-critical per work-prod)
+4. Organization Implementation (can defer)
+5. Skills Matrix Integration (depends on Skills feature)
+6. Analysis Field Requirements (depends on Analysis service)
+
+---
+
+## 🎯 Research Workflow
+
+1. Use `/research project-model-definition --from-explore project-model-definition` to conduct research
+2. Research will create documents in `admin/research/project-model-definition/`
+3. After research complete, use `/decision project-model-definition --from-research` to make decisions
+
+---
+
+## 🔗 Related Research
+
+- **[work-prod Projects Data Model](../../../../work-prod/docs/maintainers/research/data-models/projects-data-model.md)** - Comprehensive research (1100+ lines)
+- **[work-prod Learning Project Taxonomy](../../../../work-prod/docs/maintainers/research/data-models/learning-project-taxonomy.md)** - Learning classification
+- **[Four-Arm Architecture](../four-arm-architecture/README.md)** - Ecosystem context
+
+---
+
+**Last Updated:** 2025-12-22
+
