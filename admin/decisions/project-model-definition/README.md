@@ -15,16 +15,21 @@
 
 ### ADR Documents
 
+**Tier 1 (API Contract):**
 - **[ADR-001: Tier 1 API Contract Validation](adr-001-tier-1-api-validation.md)** - Validate Tier 1 integration readiness
 - **[ADR-002: OpenAPI as Single Source of Truth](adr-002-openapi-source-of-truth.md)** - API contract documentation standard
+
+**Tier 2 (Classification):**
+- **[ADR-003: Add project_type Field](adr-003-add-project-type-field.md)** - Add new field for project type classification
+- **[ADR-004: Keep classification Field](adr-004-keep-classification-field.md)** - Maintain existing field for priority
 
 ---
 
 ## 🎯 Decisions Overview
 
-Decisions documenting the Tier 1 API contract validation and establishing standards for API contract management between work-prod (provider) and proj-cli (consumer).
+Decisions documenting the unified project model across the four-arm architecture, covering API contracts, classification, and ownership.
 
-**Decision Points:** 2 decisions  
+**Decision Points:** 4 decisions  
 **Status:** ✅ Accepted
 
 ---
@@ -35,6 +40,8 @@ Decisions documenting the Tier 1 API contract validation and establishing standa
 |----------|-------|--------|-----|
 | Tier 1 API Contract Validation | work-prod, proj-cli | ✅ Accepted | [adr-001](adr-001-tier-1-api-validation.md) |
 | OpenAPI as Single Source of Truth | work-prod, proj-cli, dev-infra | ✅ Accepted | [adr-002](adr-002-openapi-source-of-truth.md) |
+| Add project_type Field | work-prod | ✅ Accepted | [adr-003](adr-003-add-project-type-field.md) |
+| Keep classification Field | work-prod | ✅ Accepted | [adr-004](adr-004-keep-classification-field.md) |
 
 ---
 
@@ -42,16 +49,16 @@ Decisions documenting the Tier 1 API contract validation and establishing standa
 
 | Arm | Role | Responsibilities |
 |-----|------|------------------|
-| **work-prod** | API Provider | Maintains endpoints, OpenAPI spec |
-| **proj-cli** | API Consumer | Client implementation, spec consumption |
+| **work-prod** | Schema Owner | Schema changes, migrations, API updates |
+| **proj-cli** | API Consumer | Client updates, filtering support |
 | **dev-infra** | Standards | Documents decisions, maintains ADRs |
 
 ---
 
 ## 🚀 Next Steps
 
-1. ✅ ADR-001 and ADR-002 accepted
-2. Continue with Classification Enum decisions (Tier 2)
+1. ✅ ADR-001 and ADR-002 accepted (Tier 1)
+2. ✅ ADR-003 and ADR-004 accepted (Tier 2 - Classification)
 3. Continue with Learning Taxonomy decisions (Tier 3)
 4. Use `/transition-plan --from-adr` to transition to implementation planning
 

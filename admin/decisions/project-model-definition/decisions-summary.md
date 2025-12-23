@@ -9,9 +9,11 @@
 
 ## 📋 Decisions Overview
 
-These decisions document the Tier 1 API contract validation and establish standards for API contract management in the four-arm architecture.
+These decisions document the unified project model across the four-arm architecture, covering:
+- **Tier 1:** API contract validation and documentation standards
+- **Tier 2:** Classification schema (project_type field addition)
 
-**Decision Points:** 2 decisions  
+**Decision Points:** 4 decisions  
 **Status:** ✅ All Accepted
 
 ---
@@ -57,12 +59,51 @@ These decisions document the Tier 1 API contract validation and establish standa
 
 ---
 
+### Decision 3: Add project_type Field
+
+**Decision:** Add a new `project_type` field with enum values `Work`, `Personal`, `Learning`, `Inactive`.
+
+**Status:** ✅ Accepted
+
+**Ownership:**
+
+| Arm | Role |
+|-----|------|
+| work-prod | Schema Owner (implements field, migration) |
+| proj-cli | Consumer (updates client filtering) |
+
+**ADR:** [adr-003-add-project-type-field.md](adr-003-add-project-type-field.md)
+
+**Impact:** Enables project type classification - "What kind of project is this?"
+
+---
+
+### Decision 4: Keep classification Field
+
+**Decision:** Keep existing `classification` field as-is for priority. Optional rename to `priority` later.
+
+**Status:** ✅ Accepted
+
+**Ownership:**
+
+| Arm | Role |
+|-----|------|
+| work-prod | Schema Owner |
+
+**ADR:** [adr-004-keep-classification-field.md](adr-004-keep-classification-field.md)
+
+**Impact:** Maintains backward compatibility, preserves priority dimension.
+
+---
+
 ## 🏢 Ownership Matrix
 
 | Decision | work-prod | proj-cli | dev-infra | dev-toolkit |
 |----------|-----------|----------|-----------|-------------|
 | Tier 1 API Validation | Provider | Consumer | - | - |
 | OpenAPI Source of Truth | Owner | Consumer | Standard | - |
+| Add project_type Field | Schema Owner | Consumer | - | - |
+| Keep classification Field | Schema Owner | - | - | - |
 
 ---
 
@@ -76,9 +117,13 @@ These decisions document the Tier 1 API contract validation and establish standa
 | FR-1a: Required Fields on Create | ✅ Validated | ADR-001 |
 | FR-1b: HTTP Status Code Handling | ✅ Validated | ADR-001 |
 | FR-1c: Deduplication Awareness | ✅ Validated | ADR-001 |
+| FR-2: Project Type Classification | ✅ Enabled | ADR-003 |
+| FR-2a: Project Type Field Addition | ✅ Decided | ADR-003 |
+| FR-2b-e: Implementation Tasks | 🟡 work-prod | ADR-003 |
 | NFR-1: API Compatibility | ✅ Validated | ADR-001 |
 | NFR-1a: OpenAPI as Source of Truth | ✅ Validated | ADR-002 |
-| NFR-1b: Configurable API URL | ✅ Validated | ADR-001 |
+| NFR-2: Migration Safety | ✅ Satisfied | ADR-003, ADR-004 |
+| NFR-3: Backward Compatibility | ✅ Satisfied | ADR-004 |
 
 **Process Requirements Established:**
 
@@ -86,14 +131,22 @@ These decisions document the Tier 1 API contract validation and establish standa
 - PR-2: API changes without spec updates flagged in code review
 - PR-3: proj-cli should validate client against spec on major changes
 
+**Implementation Tasks for work-prod (from ADR-003):**
+
+- [ ] Create migration for `project_type` field
+- [ ] Implement backfill script with heuristics
+- [ ] Add API filtering support for `project_type`
+- [ ] Update OpenAPI spec
+- [ ] Update mapping script
+
 **See:** [requirements.md](../../research/project-model-definition/requirements.md) for complete requirements
 
 ---
 
 ## 🚀 Next Steps
 
-1. ✅ Tier 1 decisions accepted
-2. Continue with Classification Enum decisions (add `project_type` field)
+1. ✅ Tier 1 decisions accepted (ADR-001, ADR-002)
+2. ✅ Classification decisions accepted (ADR-003, ADR-004)
 3. Continue with Learning Taxonomy decisions (add `learning_type` field)
 4. Use `/transition-plan --from-adr` to create implementation plans
 
@@ -105,6 +158,8 @@ These decisions document the Tier 1 API contract validation and establish standa
 |------|----------|--------|
 | 2025-12-23 | ADR-001: Tier 1 API Validation | ✅ Accepted |
 | 2025-12-23 | ADR-002: OpenAPI Source of Truth | ✅ Accepted |
+| 2025-12-23 | ADR-003: Add project_type Field | ✅ Accepted |
+| 2025-12-23 | ADR-004: Keep classification Field | ✅ Accepted |
 
 ---
 
