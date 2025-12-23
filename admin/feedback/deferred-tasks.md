@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2025-12-10
+**Last Updated:** 2025-12-23
 
 ---
 
@@ -10,11 +10,12 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 42 (3 fixed in PR #39, 20 new from PR #39, PR #40, PR #41, PR #42)
+**Total Tasks:** 53
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
-- 🟡 **MEDIUM**: 26 tasks
+- 🟡 **MEDIUM**: 27 tasks
 - 🟢 **LOW**: 18 tasks (1 fixed)
+- 📋 **Workflow**: 1 task (new)
 
 ---
 
@@ -323,7 +324,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
-**Last Updated:** 2025-12-09  
+**Last Updated:** 2025-12-23  
 **Status:** 📋 Active Backlog
 
 ---
@@ -507,3 +508,24 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - Task 50: Add --last N edge case tests (LOW priority, MEDIUM effort) - Test coverage: test boundary/invalid values (PR42-#7)
 - Task 51: Fix grammar typo in manual testing docs (LOW priority, LOW effort) - Documentation: "Metrics includes" → "Metrics include" (PR42-#8)
 - Task 52: Refactor generate_assessment variable dependencies (LOW priority, MEDIUM effort) - Code organization: keep computation within function (PR42-Overall-2)
+
+---
+
+## Workflow Improvements
+
+**Date:** 2025-12-23  
+**Source:** Manual observation during project-model-definition research
+
+### Task 53: `/research` Command Should Update Exploration Status
+
+- **Source:** Manual observation
+- **Location:** `.cursor/commands/research.md` and exploration `research-topics.md` files
+- **Priority:** 🟡 MEDIUM
+- **Impact:** 🟡 MEDIUM (Developer experience - manual tracking required)
+- **Effort:** 🟡 MEDIUM
+- **Description:** When completing research via `/research` command, the command updates the research documents (`admin/research/[topic]/`) but does NOT update the corresponding exploration `research-topics.md` status. This leads to stale status in exploration documents.
+- **Expected Behavior:** After completing research for a topic, the `/research` command should:
+  1. Update `admin/research/[topic]/` documents (current behavior)
+  2. Update `admin/explorations/[exploration]/research-topics.md` topic status to "✅ Complete" with link to research document
+- **Current Workaround:** Manually update exploration research-topics.md after completing research
+- **Status:** 🟡 Planned
