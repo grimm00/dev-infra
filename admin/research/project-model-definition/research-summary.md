@@ -13,7 +13,7 @@ Research to establish a unified project model across the four-arm architecture (
 
 **Research Topics:** 6 topics  
 **Research Documents:** 6 documents  
-**Status:** 🟠 In Progress (3/6 complete)
+**Status:** 🟠 In Progress (4/6 complete)
 
 ---
 
@@ -80,6 +80,24 @@ No organizations table exists in work-prod, and the string field (`organization`
 
 ---
 
+### Finding 6: Three-Type Learning Taxonomy Validated
+
+17 Learning projects (29% of total) need sub-classification. Three types are sufficient:
+
+| Learning Type | Description | Estimated Count |
+| ------------- | ----------- | --------------- |
+| `work_related` | Job/career learning | 8-10 |
+| `personal_dev` | Hobby/interest learning | 5-7 |
+| `hybrid` | Serves both purposes | 2-3 |
+
+**Key Discovery:** Work-related learning should count toward work metrics (apprenticeship reality). Hybrid projects need visibility in both work and personal views.
+
+**Implementation:** Add `learning_type` field (Tier 3), depends on `project_type` (Tier 2).
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+---
+
 ## 💡 Key Insights
 
 - [x] Insight 1: **API already complete** - Both work-prod and proj-cli are implementation-ready
@@ -88,7 +106,9 @@ No organizations table exists in work-prod, and the string field (`organization`
 - [x] Insight 4: **Two-field solution needed** - Keep `classification` (priority), add `project_type` (type)
 - [x] Insight 5: **`maintenance` value unused** - Never used in 48 projects
 - [x] Insight 6: **String organization works** - FK is optional, defer until metadata needed
-- [ ] Insight 7: _Pending - Learning taxonomy research_
+- [x] Insight 7: **Three learning types sufficient** - work_related, personal_dev, hybrid cover all scenarios
+- [x] Insight 8: **Work learning = work time** - Include work-related learning in work metrics
+- [x] Insight 9: **Tier 3 depends on Tier 2** - Learning taxonomy requires project_type first
 
 ---
 
@@ -116,6 +136,15 @@ No organizations table exists in work-prod, and the string field (`organization`
 - REQ-12: Organization values should be validated (DRW, Apprenti, Personal, null)
 - REQ-13: Organization FK migration deferred until metadata is needed
 
+**From Learning Taxonomy Research:**
+
+- REQ-14: Add `learning_type` field (work_related, personal_dev, hybrid)
+- REQ-15: `learning_type` only non-NULL when `project_type = 'Learning'`
+- REQ-16: Work-related learning included in work metrics/views
+- REQ-17: Hybrid projects visible in both work and personal views
+- REQ-18: API filtering by `learning_type` parameter
+- REQ-19: Mapping script prompts for learning sub-classification
+
 **See:** [requirements.md](requirements.md) for complete requirements document
 
 ---
@@ -128,7 +157,10 @@ No organizations table exists in work-prod, and the string field (`organization`
 - [x] Recommendation 4: **Keep `classification` as-is** - Rename to `priority` later if desired
 - [x] Recommendation 5: **Backfill existing data** - Use heuristics (organization, path)
 - [x] Recommendation 6: **Keep organization as string** - Defer FK to Tier 4+
-- [ ] Recommendation 7: _Pending - Learning taxonomy research_
+- [x] Recommendation 7: **Adopt three-type learning taxonomy** - work_related, personal_dev, hybrid
+- [x] Recommendation 8: **Work-related learning counts as work** - Include in work metrics
+- [x] Recommendation 9: **Hybrid shows in both views** - With clear indicator
+- [x] Recommendation 10: **Defer learning_status to Phase 4** - Not MVP-critical
 
 ---
 
@@ -139,7 +171,7 @@ No organizations table exists in work-prod, and the string field (`organization`
 | Tier 1 API Contract         | 🔴 High   | ✅ Complete    |
 | Classification Enum         | 🔴 High   | ✅ Complete    |
 | Organization Implementation | 🟡 Medium | ✅ Complete    |
-| Learning Taxonomy           | 🔴 High   | 🔴 Not Started |
+| Learning Taxonomy           | 🔴 High   | ✅ Complete    |
 | Skills Matrix Integration   | 🟡 Medium | 🔴 Not Started |
 | Analysis Field Requirements | 🟢 Low    | 🔴 Not Started |
 
@@ -150,8 +182,9 @@ No organizations table exists in work-prod, and the string field (`organization`
 1. ✅ Complete Tier 1 API Contract research
 2. ✅ Complete Classification Enum research
 3. ✅ Complete Organization Implementation research
-4. ➡️ Continue with Learning Taxonomy research (Topic 4)
-5. After all research complete: `/decision project-model-definition --from-research`
+4. ✅ Complete Learning Taxonomy research
+5. ➡️ Continue with Skills Matrix Integration research (Topic 5)
+6. After all research complete: `/decision project-model-definition --from-research`
 
 ---
 

@@ -157,7 +157,7 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
-### FR-3: Learning Sub-Classification
+### FR-3: Learning Sub-Classification ✅ VALIDATED
 
 **Description:** Learning projects must have sub-classification (work_related, personal_dev, hybrid).
 
@@ -165,7 +165,86 @@ This document captures requirements discovered during research on the unified pr
 
 **Priority:** High
 
-**Status:** 🔴 Pending Research
+**Status:** ✅ Validated - Requires `learning_type` field
+
+**Details:**
+
+- Three learning types: `work_related`, `personal_dev`, `hybrid`
+- `learning_type` only non-NULL when `project_type = 'Learning'`
+- Work-related learning counts toward work metrics
+- Hybrid projects appear in both work and personal views
+
+---
+
+### FR-3a: Learning Type Field Addition
+
+**Description:** work-prod must add `learning_type` field with enum values `work_related`, `personal_dev`, `hybrid`.
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+**Priority:** High
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-3b: Learning Type Constraint
+
+**Description:** `learning_type` should only be non-NULL when `project_type = 'Learning'`.
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+**Priority:** High
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-3c: Work-Related Learning in Work Metrics
+
+**Description:** Work-related learning and hybrid projects must be included in work metrics and views.
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+**Priority:** High
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-3d: Hybrid Project Visibility
+
+**Description:** Hybrid projects must appear in both work and personal views with clear indicator.
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+**Priority:** Medium
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-3e: API Filtering by Learning Type
+
+**Description:** API must support filtering projects by `learning_type` parameter.
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+**Priority:** High
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
+### FR-3f: Learning Sub-Classification in Mapping Script
+
+**Description:** Mapping script must prompt for learning sub-classification for Learning projects.
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+**Priority:** Medium
+
+**Status:** 🟡 Validated - Needs Implementation
 
 ---
 
@@ -303,6 +382,30 @@ This document captures requirements discovered during research on the unified pr
 
 ---
 
+### NFR-4: Learning Taxonomy Tier Dependency ✅ VALIDATED
+
+**Description:** Learning taxonomy (Tier 3) depends on project_type (Tier 2) being implemented first.
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated - Implementation order established
+
+---
+
+### NFR-5: Learning Type UI Indicators ✅ VALIDATED
+
+**Description:** UI must clearly indicate learning type with badges/labels (e.g., "🎓 Work-Related", "🔀 Hybrid").
+
+**Source:** [research-learning-taxonomy.md](research-learning-taxonomy.md)
+
+**Priority:** Medium
+
+**Status:** 🟡 Validated - Needs Implementation
+
+---
+
 ## ⚠️ Constraints
 
 ### C-1: Existing Implementation
@@ -394,9 +497,10 @@ This document captures requirements discovered during research on the unified pr
 1. ✅ Tier 1 API Contract requirements validated
 2. ✅ Classification Enum requirements validated (two-field solution)
 3. ✅ Organization Implementation requirements validated (string sufficient)
-4. ➡️ Continue with Learning Taxonomy research
-5. After research: `/decision project-model-definition --from-research`
-6. Decisions may refine requirements
+4. ✅ Learning Taxonomy requirements validated (three-type system)
+5. ➡️ Continue with Skills Matrix Integration research (Topic 5)
+6. After research: `/decision project-model-definition --from-research`
+7. Decisions may refine requirements
 
 ---
 

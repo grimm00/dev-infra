@@ -34,7 +34,7 @@ Researching the unified project model that enables proj-cli and work-prod to wor
 - **Tier 5:** Analysis & Metrics
 
 **Research Topics:** 6 topics  
-**Status:** 🟠 In Progress (3/6 complete)
+**Status:** 🟠 In Progress (4/6 complete)
 
 **Source:** [Project Model Definition Exploration](../../explorations/project-model-definition/README.md)
 
@@ -47,7 +47,7 @@ Researching the unified project model that enables proj-cli and work-prod to wor
 | Tier 1 API Contract | 🔴 High | 1 | ✅ Complete | [research-tier-1-api-contract.md](research-tier-1-api-contract.md) |
 | Classification Enum | 🔴 High | 2 | ✅ Complete | [research-classification-enum.md](research-classification-enum.md) |
 | Organization Implementation | 🟡 Medium | 2 | ✅ Complete | [research-organization-implementation.md](research-organization-implementation.md) |
-| Learning Taxonomy | 🔴 High | 3 | 🔴 Not Started | [research-learning-taxonomy.md](research-learning-taxonomy.md) |
+| Learning Taxonomy | 🔴 High | 3 | ✅ Complete | [research-learning-taxonomy.md](research-learning-taxonomy.md) |
 | Skills Matrix Integration | 🟡 Medium | 4 | 🔴 Not Started | [research-skills-matrix-integration.md](research-skills-matrix-integration.md) |
 | Analysis Field Requirements | 🟢 Low | 5 | 🔴 Not Started | [research-analysis-field-requirements.md](research-analysis-field-requirements.md) |
 
@@ -76,7 +76,7 @@ For **auth, sync, and local registry topics**, see [Work-Prod Integration Resear
 1. ✅ **Tier 1 API Contract** - Enables proj-cli work immediately
 2. ✅ **Classification Enum** - Foundational decision for Tier 2
 3. ✅ **Organization Implementation** - String field sufficient
-4. **Learning Taxonomy** - MVP-critical per work-prod research
+4. ✅ **Learning Taxonomy** - Three-type system validated
 5. **Skills Matrix Integration** - Depends on Skills feature
 6. **Analysis Field Requirements** - Depends on Analysis service
 
@@ -95,8 +95,9 @@ For **auth, sync, and local registry topics**, see [Work-Prod Integration Resear
 1. ✅ Complete Tier 1 API Contract research
 2. ✅ Complete Classification Enum research
 3. ✅ Complete Organization Implementation research
-4. Use `/research project-model-definition --conduct --topic-num 4` for Learning Taxonomy
-5. After research complete, use `/decision project-model-definition --from-research` to make decisions
+4. ✅ Complete Learning Taxonomy research
+5. Use `/research project-model-definition --conduct --topic-num 5` for Skills Matrix Integration
+6. After research complete, use `/decision project-model-definition --from-research` to make decisions
 
 ---
 
