@@ -57,10 +57,12 @@ organization_id = db.Column(db.Integer, db.ForeignKey('organizations.id'))
 The `work-prod` database only has a `projects` table. There is no `organizations` table, despite the research document recommending one.
 
 **Database models found:**
+
 - `backend/app/models/project.py` - Only model file
 - `backend/app/models/__init__.py` - No other models imported
 
 **Migrations:**
+
 - `879b388fb5ae_add_projects_table.py` - Initial projects table
 - `377f1471283c_add_organization_classification_status_.py` - Added org/classification as strings
 
@@ -79,6 +81,7 @@ organization = db.Column(db.String(100), nullable=True, index=True)
 ```
 
 **Usage in API:**
+
 - Supports filtering by organization
 - Included in project list/get responses
 - Updatable via PATCH endpoint
@@ -94,9 +97,9 @@ organization = db.Column(db.String(100), nullable=True, index=True)
 Audit of existing data (`scripts/projects.json`) shows only one organization value is currently used:
 
 | Organization | Count |
-|--------------|-------|
-| DRW | 18 |
-| (null) | 35 |
+| ------------ | ----- |
+| DRW          | 18    |
+| (null)       | 35    |
 
 The `map_inventory_to_projects.py` script maps classifications to organizations:
 
@@ -135,6 +138,7 @@ CREATE TABLE organizations (
 ```
 
 **Rationale for FK:**
+
 - Referential integrity enforced
 - Organization metadata (logo, color, description)
 - Prevents typos
@@ -182,21 +186,21 @@ If FK is desired, migration path is clear:
 
 **Trade-offs:**
 
-| Option | Pros | Cons |
-|--------|------|------|
-| Keep String | Simple, no migration, already working | No referential integrity, typo risk |
-| Add FK + String | Both benefits, gradual migration | Data duplication, complexity |
-| Migrate to FK | Integrity, metadata, clean design | Migration required, API changes |
+| Option          | Pros                                  | Cons                                |
+| --------------- | ------------------------------------- | ----------------------------------- |
+| Keep String     | Simple, no migration, already working | No referential integrity, typo risk |
+| Add FK + String | Both benefits, gradual migration      | Data duplication, complexity        |
+| Migrate to FK   | Integrity, metadata, clean design     | Migration required, API changes     |
 
 **Decision Matrix:**
 
-| Factor | String | FK |
-|--------|--------|-----|
-| Implementation effort | ✅ None | 🟡 Medium |
-| Current functionality | ✅ Working | N/A |
-| Data integrity | 🟡 Low risk (3 values) | ✅ Enforced |
-| Metadata support | ❌ None | ✅ Full |
-| Future scalability | 🟡 Limited | ✅ Excellent |
+| Factor                | String                 | FK           |
+| --------------------- | ---------------------- | ------------ |
+| Implementation effort | ✅ None                | 🟡 Medium    |
+| Current functionality | ✅ Working             | N/A          |
+| Data integrity        | 🟡 Low risk (3 values) | ✅ Enforced  |
+| Metadata support      | ❌ None                | ✅ Full      |
+| Future scalability    | 🟡 Limited             | ✅ Excellent |
 
 ---
 
