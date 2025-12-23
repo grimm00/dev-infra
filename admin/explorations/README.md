@@ -10,7 +10,9 @@
 
 ### Active Explorations
 
-- **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - Dev-infra as infrastructure manager with state tracking and CI/CD push updates (🔴 Exploration) ⭐ **NEW**
+- **[Four-Arm Architecture](four-arm-architecture/README.md)** - Mapping dev-infra, dev-toolkit, proj-cli, work-prod relationships (🔴 Exploration) ⭐ **NEW**
+- **[proj-cli Focused Role](proj-cli-focused-role/README.md)** - Clarifying proj-cli scope within four-arm architecture (🔴 Exploration) ⭐ **NEW**
+- **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - Dev-infra as infrastructure manager with state tracking and CI/CD push updates (🔴 Exploration)
 - **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Evolved to v4: Global Commands Discovery! (🟠 Active v4)
 - **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Exploration)
 - **[Template Architecture](template-architecture/README.md)** - Explore alternative directory structures beyond frontend/backend (🔴 Exploration)
