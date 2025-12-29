@@ -2,7 +2,7 @@
 
 **Phase:** 1 - Workflow Overview  
 **Duration:** ~30 min  
-**Status:** ✅ Expanded  
+**Status:** 🟠 In Progress  
 **Prerequisites:** ADRs reviewed
 
 ---
