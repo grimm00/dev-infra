@@ -816,6 +816,422 @@ Creates the main `transition-plan.md` file with phase summaries.
 
 ---
 
+### 1. Identify Phase(s) to Expand
+
+**Determine scope:**
+
+1. **Specific Phase** (`--phase N`):
+   - Expand only the specified phase
+   - Useful for incremental progress
+   - Example: `/transition-plan [topic] --expand --phase 1`
+
+2. **All Phases** (`--all`):
+   - Expand all scaffolding phases at once
+   - Useful after reviewing all scaffolding
+   - Example: `/transition-plan [topic] --expand --all`
+
+3. **Interactive** (no flag):
+   - List phases with status
+   - Prompt user to select phase
+   - Show which phases need expansion (`🔴 Scaffolding`)
+
+**Read phase scaffolding document:**
+
+```bash
+# Find phase documents
+ls docs/maintainers/planning/features/[feature]/phase-*.md
+
+# Check scaffolding status
+grep "Status:" docs/maintainers/planning/features/[feature]/phase-1.md
+```
+
+**Checklist:**
+
+- [ ] Phase(s) to expand identified
+- [ ] Phase document exists
+- [ ] Phase status is `🔴 Scaffolding`
+
+---
+
+### 2. Read Phase Scaffolding
+
+**Extract from scaffolding:**
+
+- Phase number and name
+- Goals (list of objectives)
+- Task categories (high-level groupings)
+- Completion criteria (success measures)
+- Deliverables (expected outputs)
+- Dependencies (prerequisites and blocks)
+
+**Identify expansion needs:**
+
+- Which task categories need TDD breakdown?
+- What code examples are needed?
+- What implementation notes would help?
+
+**Example scaffolding extraction:**
+
+```markdown
+# From phase-1.md scaffolding:
+Goals:
+1. Add Setup Mode subsection
+2. Add Expand Mode subsection
+3. Document mode selection
+
+Task Categories:
+- Setup Mode Documentation
+- Expand Mode Documentation
+- Flag Documentation
+
+Deliverables:
+- Updated Workflow Overview section
+```
+
+**Checklist:**
+
+- [ ] Phase scaffolding read
+- [ ] Goals extracted
+- [ ] Task categories identified
+- [ ] Deliverables understood
+
+---
+
+### 3. Determine TDD vs Non-TDD
+
+**TDD Ordering applies when:**
+
+- Phase involves code implementation
+- Phase involves script creation
+- Phase involves testable functionality
+
+**Non-TDD Ordering for:**
+
+- Documentation-only phases
+- Configuration phases
+- Planning phases
+
+**Task Ordering Patterns:**
+
+| Phase Type | Task Order | Example |
+|------------|------------|---------|
+| **Code + Tests (TDD)** | Tests → Implementation → Docs | Write tests, implement code, document |
+| **Scripts (TDD)** | Tests → Script → Integration | Write bats tests, create script, integrate |
+| **Documentation Only** | Create → Link → Verify | Create docs, add links, verify links work |
+| **Configuration** | Plan → Implement → Validate | Define config, apply changes, verify |
+
+**Decision Logic:**
+
+```
+IF phase creates code or scripts:
+  → Use TDD ordering (RED → GREEN → REFACTOR)
+ELSE IF phase creates documentation:
+  → Use Create → Link → Verify ordering
+ELSE:
+  → Use logical dependency ordering
+```
+
+**Checklist:**
+
+- [ ] Phase type determined (code/script/docs/config)
+- [ ] Task ordering pattern selected
+- [ ] TDD applicability decided
+
+---
+
+### 4. Expand Tasks with Detail
+
+**This is the core expansion step.** Transform task categories into detailed, actionable tasks.
+
+**For TDD phases (code/scripts):**
+
+**TDD Task Structure:**
+
+```markdown
+### Task N: [Task Name]
+
+**Purpose:** [Why this task exists]
+
+**TDD Flow:**
+
+1. **RED - Write failing test:**
+   - [ ] Create test file: `tests/test_[feature].py`
+   - [ ] Write test for [specific behavior]
+   - [ ] Verify test fails (no implementation yet)
+
+   **Test code:**
+   ```python
+   def test_feature_behavior():
+       # Arrange
+       ...
+       # Act
+       result = feature_function()
+       # Assert
+       assert result == expected
+   ```
+
+2. **GREEN - Implement minimum code:**
+   - [ ] Create implementation file: `src/[feature].py`
+   - [ ] Write minimum code to pass test
+   - [ ] Run test, verify it passes
+
+   **Implementation:**
+   ```python
+   def feature_function():
+       # Minimum implementation
+       return expected
+   ```
+
+3. **REFACTOR - Clean up:**
+   - [ ] Review code for improvements
+   - [ ] Extract helper functions if needed
+   - [ ] Ensure tests still pass
+
+**Checklist:**
+- [ ] Test written and failing
+- [ ] Implementation passes test
+- [ ] Code refactored and clean
+```
+
+**For Documentation phases:**
+
+```markdown
+### Task N: [Task Name]
+
+**Purpose:** [Why this task exists]
+
+- [ ] Read existing content to understand current state
+- [ ] Create new content as specified
+- [ ] Verify content is complete and accurate
+- [ ] Update any cross-references
+
+**Content to Add:**
+```markdown
+[Specific markdown content to add]
+```
+
+**Checklist:**
+- [ ] Content created
+- [ ] Links verified
+- [ ] Cross-references updated
+```
+
+**Expansion adds:**
+
+| Section | Scaffolding | After Expansion |
+|---------|-------------|-----------------|
+| Tasks | Categories only | Full TDD breakdown |
+| Code Examples | None | Language-specific samples |
+| Testing Commands | None | Specific commands to run |
+| Implementation Notes | None | Patterns, tips, examples |
+| Progress Tracking | None | Task status table |
+
+**Target expansion:**
+
+- Scaffolding: ~60-80 lines
+- Expanded: ~200-300 lines
+- Added: ~150-200 lines of detail
+
+**Checklist:**
+
+- [ ] Task categories expanded to full tasks
+- [ ] TDD flow added where applicable
+- [ ] Code examples included
+- [ ] Testing commands documented
+- [ ] Implementation notes added
+
+---
+
+### 5. Update Phase Status
+
+**Update status in phase document:**
+
+**Header:**
+```markdown
+# Before:
+**Status:** 🔴 Scaffolding (needs expansion)
+
+# After:
+**Status:** ✅ Expanded
+```
+
+**Footer:**
+```markdown
+# Before:
+**Status:** 🔴 Scaffolding  
+**Next:** Expand with `/transition-plan [topic] --expand --phase [N]`
+
+# After:
+**Status:** ✅ Expanded  
+**Next:** Begin implementation with Task 1
+```
+
+**Remove placeholder message:**
+
+```markdown
+# Remove this from Tasks section:
+> ⚠️ **Scaffolding:** Run `/transition-plan [topic] --expand --phase [N]` to add detailed TDD tasks.
+```
+
+**Add progress tracking table:**
+
+```markdown
+## 📊 Progress Tracking
+
+| Task | Status | Notes |
+|------|--------|-------|
+| Task 1: [Name] | 🔴 Not Started | |
+| Task 2: [Name] | 🔴 Not Started | |
+```
+
+**Checklist:**
+
+- [ ] Header status updated to `✅ Expanded`
+- [ ] Footer status updated
+- [ ] Placeholder message removed
+- [ ] Progress tracking table added
+
+---
+
+### 6. Update Hub Status
+
+**Update feature hub (README.md):**
+
+```markdown
+# Before:
+| [Phase 1](phase-1.md) | Workflow Overview | 🔴 Scaffolding |
+
+# After:
+| [Phase 1](phase-1.md) | Workflow Overview | ✅ Expanded |
+```
+
+**Update status-and-next-steps.md:**
+
+```markdown
+# Before:
+| Phase 1: Workflow Overview | 🔴 Scaffolding | 0% | Needs expansion |
+
+# After:
+| Phase 1: Workflow Overview | ✅ Expanded | 0% impl | Ready for implementation |
+```
+
+**Checklist:**
+
+- [ ] Feature hub updated
+- [ ] Status document updated
+- [ ] Phase listed as ready for implementation
+
+---
+
+### 7. Commit Changes
+
+**Commit expanded phase:**
+
+**Since expansion is documentation-only, use docs workflow:**
+
+```bash
+# Stage expanded phase
+git add docs/maintainers/planning/features/[feature]/phase-N.md
+git add docs/maintainers/planning/features/[feature]/README.md
+git add docs/maintainers/planning/features/[feature]/status-and-next-steps.md
+
+# Commit with descriptive message
+git commit -m "docs(planning): expand Phase N scaffolding with detailed tasks
+
+Expand Phase N ([Name]) from ~[X] lines scaffolding to ~[Y] lines
+with detailed implementation tasks:
+
+- Task 1: [Name]
+- Task 2: [Name]
+- ...
+
+Includes [TDD breakdown / documentation steps / etc.]"
+
+# Push to develop (docs can push directly)
+git push origin develop
+```
+
+**Checklist:**
+
+- [ ] Changes committed
+- [ ] Commit message descriptive
+- [ ] Pushed to develop
+
+---
+
+### Flag Handling
+
+**`--phase N` Flag:**
+
+```
+/transition-plan [topic] --expand --phase N
+
+Validation:
+- Check phase-N.md exists
+- Check status is 🔴 Scaffolding
+- Error if phase already expanded
+
+Processing:
+- Expand single phase
+- Update phase status
+- Update hub
+- Commit changes
+```
+
+**`--all` Flag:**
+
+```
+/transition-plan [topic] --expand --all
+
+Processing:
+- Find all phase-*.md files with 🔴 Scaffolding status
+- Expand each phase in order (1, 2, 3, ...)
+- Update each phase status
+- Update hub once at end
+- Single commit for all expansions
+```
+
+**Error Handling:**
+
+| Error | Message | Action |
+|-------|---------|--------|
+| Phase not found | "Phase N does not exist" | List available phases |
+| Already expanded | "Phase N already expanded" | Skip or use --force |
+| No scaffolding | "No scaffolding phases found" | Run setup mode first |
+
+---
+
+### Summary Report
+
+**Present to user after expansion:**
+
+```markdown
+## Expand Mode Complete
+
+**Phase:** Phase [N] - [Name]
+**Status:** 🔴 Scaffolding → ✅ Expanded
+
+### Expansion Summary
+
+- Lines: ~[X] → ~[Y] (+[Z] lines)
+- Tasks: [N] detailed tasks added
+- TDD: [Yes/No] - [TDD flow / documentation flow]
+
+### Tasks Added
+
+1. Task 1: [Name]
+2. Task 2: [Name]
+...
+
+### Next Steps
+
+1. Review expanded phase document
+2. Begin implementation: `/task-phase [N] 1`
+3. Or expand next phase: `/transition-plan [topic] --expand --phase [N+1]`
+```
+
+---
+
 ## From Reflection Mode
 
 **When to use:**
