@@ -11,7 +11,7 @@
 ### Architecture Decision Records (ADRs)
 
 **Active:**
-- **[Experimental Template](experimental-template/README.md)** - Create experimental template with evolving commands (🟡 Proposed) ⭐ **NEW**
+- **[Transition-Plan Two-Mode](transition-plan-two-mode/README.md)** - Adopt two-mode pattern for `/transition-plan` (🔴 Proposed) ⭐ **NEW**
 - **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Project identity as template factory (✅ Accepted)
 
 **Previous:**
@@ -59,6 +59,6 @@ admin/decisions/
 
 ---
 
-**Last Updated:** 2025-12-12  
+**Last Updated:** 2025-12-29  
 **Status:** ✅ Active
 
