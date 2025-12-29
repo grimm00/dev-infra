@@ -10,6 +10,14 @@
 
 ### Active Features
 
+- **[Transition-Plan Two-Mode](transition-plan-two-mode/README.md)** - Implement two-mode pattern for `/transition-plan` command (🔴 Not Started)
+  - Phase 1: Workflow Overview (~30 min)
+  - Phase 2: Setup Mode Workflow (~1-2 hrs)
+  - Phase 3: Expand Mode Workflow (~2 hrs)
+  - Phase 4: Supporting Content (~1 hr)
+  - Estimated: 4-6 hours
+  - Source: ADR-001, ADR-002, ADR-003
+
 - **[Experimental Template](experimental-template/README.md)** - Create experimental template with Evolving commands (🔴 Not Started) ⭐ **v0.6.0 Target**
   - Phase 1: Create experimental-project template
   - Phase 2: Update generator script
@@ -165,6 +173,6 @@ None currently - all features are either complete or have status discrepancies t
 
 ---
 
-**Last Updated:** 2025-12-12  
+**Last Updated:** 2025-12-29  
 **Status:** ✅ Active  
 **Next:** See individual feature directories for current work
