@@ -8,14 +8,14 @@
 
 ## 📊 Current Status
 
-**Overall Progress:** 0/4 phases complete (0%)
+**Overall Progress:** 0/4 phases implemented (Phase 1 expanded, ready for implementation)
 
 | Phase | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Phase 1: Workflow Overview | 🔴 Not Started | 0% | ~30 min |
-| Phase 2: Setup Mode Workflow | 🔴 Not Started | 0% | ~1-2 hrs |
-| Phase 3: Expand Mode Workflow | 🔴 Not Started | 0% | ~2 hrs |
-| Phase 4: Supporting Content | 🔴 Not Started | 0% | ~1 hr |
+| Phase 1: Workflow Overview | ✅ Expanded | 0% impl | Ready for implementation |
+| Phase 2: Setup Mode Workflow | 🔴 Scaffolding | 0% | Needs expansion |
+| Phase 3: Expand Mode Workflow | 🔴 Scaffolding | 0% | Needs expansion |
+| Phase 4: Supporting Content | 🔴 Scaffolding | 0% | Needs expansion |
 
 **Total Estimated:** 4-6 hours
 
@@ -45,7 +45,12 @@
 
 ## 🟠 In Progress
 
-*None currently*
+### Phase Expansion
+
+- [x] Phase 1: Workflow Overview - ✅ Expanded
+- [ ] Phase 2: Setup Mode Workflow - 🔴 Scaffolding
+- [ ] Phase 3: Expand Mode Workflow - 🔴 Scaffolding
+- [ ] Phase 4: Supporting Content - 🔴 Scaffolding
 
 ---
 
@@ -53,7 +58,7 @@
 
 ### Implementation
 
-- [ ] Phase 1: Workflow Overview
+- [ ] Phase 1: Workflow Overview (expanded, ready)
 - [ ] Phase 2: Setup Mode Workflow
 - [ ] Phase 3: Expand Mode Workflow
 - [ ] Phase 4: Supporting Content
@@ -68,23 +73,19 @@
 
 ## 🚀 Next Steps
 
-1. **Begin Phase 1:** `/task-phase phase-1`
-   - Update Workflow Overview with mode subsections
+1. **Option A: Implement Phase 1 now**
+   - Phase 1 is expanded and ready
+   - Follow tasks in [phase-1.md](phase-1.md)
    - ~30 min estimated
 
-2. **Continue Phase 2:** `/task-phase phase-2`
-   - Refactor Step-by-Step for scaffolding
-   - ~1-2 hrs estimated
+2. **Option B: Expand remaining phases first**
+   - Expand Phase 2, 3, 4 scaffolding
+   - Then implement all phases
+   - Better for review before implementation
 
-3. **Continue Phase 3:** `/task-phase phase-3`
-   - Create Expand Mode Workflow
-   - ~2 hrs estimated
-
-4. **Continue Phase 4:** `/task-phase phase-4`
-   - Update Usage, Scenarios, Tips
-   - ~1 hr estimated
-
-5. **Create PR:** `/pr --phase all`
+3. **After implementation:**
+   - Create PR: `feat/transition-plan-two-mode`
+   - Copy to global after merge: `~/.cursor/commands/`
 
 ---
 

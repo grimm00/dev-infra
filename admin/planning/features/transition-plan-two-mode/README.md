@@ -20,10 +20,10 @@
 
 | Phase | Name | Duration | Status |
 |-------|------|----------|--------|
-| [Phase 1](phase-1.md) | Workflow Overview | ~30 min | 🔴 Not Started |
-| [Phase 2](phase-2.md) | Setup Mode Workflow | ~1-2 hrs | 🔴 Not Started |
-| [Phase 3](phase-3.md) | Expand Mode Workflow | ~2 hrs | 🔴 Not Started |
-| [Phase 4](phase-4.md) | Supporting Content | ~1 hr | 🔴 Not Started |
+| [Phase 1](phase-1.md) | Workflow Overview | ~30 min | ✅ Expanded |
+| [Phase 2](phase-2.md) | Setup Mode Workflow | ~1-2 hrs | 🔴 Scaffolding |
+| [Phase 3](phase-3.md) | Expand Mode Workflow | ~2 hrs | 🔴 Scaffolding |
+| [Phase 4](phase-4.md) | Supporting Content | ~1 hr | 🔴 Scaffolding |
 
 ### Related Documents
 
