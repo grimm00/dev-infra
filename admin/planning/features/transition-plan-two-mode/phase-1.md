@@ -192,13 +192,13 @@ Fills scaffolding with detailed TDD tasks, code examples, and implementation not
 
 ## 📊 Progress Tracking
 
-| Task                         | Status      | Notes                        |
-| ---------------------------- | ----------- | ---------------------------- |
-| Task 1: Read Current         | ✅ Complete | Lines 40-50 analyzed         |
-| Task 2: Write Setup Mode     | ✅ Complete | Added lines 55-78            |
-| Task 3: Write Expand Mode    | ✅ Complete | Added lines 80-108           |
-| Task 4: Update "When to use" | ✅ Complete | Added ADR bullet + Workflow  |
-| Task 5: Verify Changes       | ✅ Complete | All 6 criteria verified      |
+| Task                         | Status      | Notes                       |
+| ---------------------------- | ----------- | --------------------------- |
+| Task 1: Read Current         | ✅ Complete | Lines 40-50 analyzed        |
+| Task 2: Write Setup Mode     | ✅ Complete | Added lines 55-78           |
+| Task 3: Write Expand Mode    | ✅ Complete | Added lines 80-108          |
+| Task 4: Update "When to use" | ✅ Complete | Added ADR bullet + Workflow |
+| Task 5: Verify Changes       | ✅ Complete | All 6 criteria verified     |
 
 ---
 
