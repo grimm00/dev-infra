@@ -808,6 +808,14 @@ Creates the main `transition-plan.md` file with phase summaries.
 
 ---
 
+## Expand Mode Workflow (`--expand`)
+
+**When to use:** After scaffolding has been created (Setup Mode), use Expand Mode to fill in detailed TDD tasks.
+
+**Prerequisite:** Phase scaffolding documents must exist with status `🔴 Scaffolding`.
+
+---
+
 ## From Reflection Mode
 
 **When to use:**
