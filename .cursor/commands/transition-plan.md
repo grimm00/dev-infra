@@ -42,10 +42,70 @@ This command supports multiple project organization patterns:
 **When to use:**
 
 - After creating reflection artifacts with `/reflection-artifacts`
+- After creating ADRs with `/decision` command
 - To plan transition to next stage (feature, release, infrastructure)
 - When ready to move from reflection to implementation planning
 
+**Workflow:** Setup → Human Review → Expand → Implement
+
 **Key principle:** Transform reflection artifacts into actionable transition plans ready for implementation, following established planning patterns. For feature transitions, also create detailed phase documents (`phase-#.md`) following work-prod's comprehensive phase structure.
+
+**Two Modes:**
+
+### Setup Mode (Default)
+
+Creates scaffolding documents (~60-80 lines per phase) with structure but not detail.
+
+**When to use:**
+
+- First run on a new transition
+- After creating ADRs with `/decision`
+- To review phase breakdown before adding detail
+
+**Output:**
+
+- `transition-plan.md` - Transition overview
+- `phase-N.md` files - Phase scaffolding (goals, criteria, dependencies)
+
+**Status Indicator:** Phase documents show `🔴 Scaffolding (needs expansion)`
+
+```
+/transition-plan --from-adr decisions/[topic]/
+  → Reads ADR and requirements documents
+  → Creates transition-plan.md
+  → Creates phase scaffolding documents
+  → Outputs: Scaffolding ready for human review
+```
+
+### Expand Mode (`--expand`)
+
+Fills scaffolding with detailed TDD tasks, code examples, and implementation notes.
+
+**When to use:**
+
+- After reviewing scaffolding structure
+- When ready to add implementation detail
+- Before starting `/task-phase` implementation
+
+**Flags:**
+
+- `--phase N` - Expand specific phase only
+- `--all` - Expand all phases at once
+
+**Output:**
+
+- Updated `phase-N.md` files (~200-300 lines with TDD detail)
+
+**Status Indicator:** Phase documents show `✅ Expanded`
+
+```
+/transition-plan [topic] --expand --phase N
+  → Reads existing phase scaffolding
+  → Fills in TDD tasks (RED → GREEN → REFACTOR)
+  → Adds code examples and implementation notes
+  → Updates phase status to Expanded
+  → Commits changes
+```
 
 ---
 
