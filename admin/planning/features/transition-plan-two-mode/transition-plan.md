@@ -28,11 +28,27 @@ Transform the `/transition-plan` command from a single-pass approach to a two-mo
 
 ---
 
+## 🔧 Workflow Decisions
+
+**Deliverable Location:**
+- Work in: `dev-infra/.cursor/commands/transition-plan.md`
+- Copy to: `~/.cursor/commands/transition-plan.md` (after merge)
+
+**Version Control:**
+- Research/ADR/Planning docs: `docs/*` → direct push to develop ✅
+- Command implementation: `feat/transition-plan-two-mode` → **PR required**
+
+**Release to Global:**
+- Manual copy after PR merge to develop
+
+---
+
 ## ✅ Pre-Transition Checklist
 
 - [x] ADRs reviewed and approved (3 ADRs)
 - [x] Requirements documented (16 requirements)
 - [x] Phase documents created (4 phases)
+- [x] Workflow decisions documented
 - [ ] `/research` command reviewed as pattern source
 - [ ] Current `/transition-plan` command backed up (implicit in git)
 
@@ -141,7 +157,9 @@ Transform the `/transition-plan` command from a single-pass approach to a two-mo
 - [ ] All 4 phases complete
 - [ ] Command tested manually (setup + expand)
 - [ ] Documentation reviewed for accuracy
-- [ ] PR created and merged
+- [ ] PR created (`feat/transition-plan-two-mode`)
+- [ ] PR reviewed and merged to develop
+- [ ] Copy to global: `~/.cursor/commands/transition-plan.md`
 - [ ] Requirements marked as implemented
 
 ---
