@@ -113,18 +113,23 @@ Fills scaffolding with detailed TDD tasks, code examples, and implementation not
 
 **Command:** `/transition-plan [--from-artifacts|--from-reflection|--from-adr] [options]`
 
-**Examples:**
+**Setup Mode Examples (default):**
 
-- `/transition-plan --from-reflection reflection-2025-12-07-mvp-complete.md` - Create transition plan from reflection (auto-generates artifacts first)
-- `/transition-plan --from-artifacts releases/v0.1.0/checklist.md` - Create transition plan from specific artifact
-- `/transition-plan --from-adr decisions/auth-system/adr-001-auth-system.md` - Create transition plan from ADR document
-- `/transition-plan --from-adr decisions/auth-system/adr-001-auth-system.md --requirements research/auth-system/requirements.md` - Include requirements explicitly
+- `/transition-plan --from-adr decisions/auth-system/` - Create scaffolding from ADRs
+- `/transition-plan --from-artifacts releases/v0.1.0/checklist.md` - Create scaffolding from artifact
+- `/transition-plan --from-reflection reflection-2025-12-07-mvp-complete.md` - Create scaffolding from reflection (auto-generates artifacts first)
+- `/transition-plan --dry-run` - Preview scaffolding without creating files
 - `/transition-plan --type release` - Force release transition type
 - `/transition-plan --type feature` - Force feature transition type
 - `/transition-plan --feature my-feature` - Specify feature name
-- `/transition-plan --dry-run` - Show transition plan without creating files
 
-**Options:**
+**Expand Mode Examples:**
+
+- `/transition-plan auth-system --expand --phase 1` - Expand specific phase with TDD detail
+- `/transition-plan auth-system --expand --phase 2` - Expand phase 2
+- `/transition-plan auth-system --expand --all` - Expand all phases at once
+
+**Setup Mode Options:**
 
 - `--from-reflection FILE` - Use reflection file (auto-generates artifacts first, then creates plans)
 - `--from-artifacts PATH` - Use specific artifact file (e.g., `releases/v0.1.0/checklist.md`)
@@ -133,6 +138,12 @@ Fills scaffolding with detailed TDD tasks, code examples, and implementation not
 - `--feature [name]` - Specify feature name (overrides auto-detection)
 - `--type TYPE` - Force transition type (`feature`, `release`, `ci-cd`, `infrastructure`, `auto`)
 - `--dry-run` - Show transition plan without creating files
+
+**Expand Mode Options:**
+
+- `--expand` - Enter expand mode (fill scaffolding with detail)
+- `--phase N` - Expand specific phase number (use with `--expand`)
+- `--all` - Expand all scaffolding phases (use with `--expand`)
 
 ---
 

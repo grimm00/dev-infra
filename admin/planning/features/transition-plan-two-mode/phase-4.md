@@ -2,7 +2,7 @@
 
 **Phase:** 4 - Supporting Content  
 **Duration:** ~1 hour  
-**Status:** ✅ Expanded  
+**Status:** 🟠 In Progress  
 **Prerequisites:** Phase 3 complete
 
 ---
@@ -33,9 +33,9 @@ Update Usage, Scenarios, and Tips sections for two-mode workflow.
 
 **Purpose:** Add examples showing how to use `--expand` flag.
 
-- [ ] Read current Usage section (lines 52-76)
-- [ ] Add expand mode examples after existing examples
-- [ ] Add new options documentation
+- [x] Read current Usage section (lines 52-76)
+- [x] Add expand mode examples after existing examples
+- [x] Add new options documentation
 
 **Current Examples (lines 56-65):**
 ```markdown
@@ -360,7 +360,7 @@ cat docs/maintainers/planning/features/auth-system/phase-1.md
 
 | Task                                | Status         | Notes |
 | ----------------------------------- | -------------- | ----- |
-| Task 1: Update Usage Section        | 🔴 Not Started |       |
+| Task 1: Update Usage Section        | ✅ Complete    |       |
 | Task 2: Add Common Scenarios        | 🔴 Not Started |       |
 | Task 3: Update Tips Section         | 🔴 Not Started |       |
 | Task 4: Update Common Issues        | 🔴 Not Started |       |
