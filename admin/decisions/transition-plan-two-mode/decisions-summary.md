@@ -16,7 +16,7 @@ This topic addresses the need to redesign the `/transition-plan` command for con
 | # | ADR | Decision | Status |
 |---|-----|----------|--------|
 | 1 | [ADR-001](adr-001-flag-based-mode-switching.md) | Flag-Based Mode Switching | 🔴 Proposed |
-| 2 | ADR-002 | Scaffolding Content Design | ⏳ Pending |
+| 2 | [ADR-002](adr-002-scaffolding-content-boundaries.md) | Scaffolding Content Boundaries | 🔴 Proposed |
 | 3 | ADR-003 | Command Structure Refactoring | ⏳ Pending |
 
 ---
@@ -41,15 +41,19 @@ This topic addresses the need to redesign the `/transition-plan` command for con
 
 ---
 
-### ADR-002: Scaffolding Content Design ⏳
+### ADR-002: Scaffolding Content Boundaries ✅
 
-**Decision:** (Pending)
+**Decision:** Define clear content boundaries between scaffolding (~60-80 lines) and expansion (~150-200 additional lines).
 
-**Expected:** Define what content goes in scaffolding vs. expansion.
+**Key Points:**
+- Scaffolding: Header, Overview, Goals, Task headers, Criteria, Deliverables, Dependencies
+- Expansion: Detailed TDD tasks, Code examples, Testing commands, Implementation notes
+- Status indicators: `🔴 Scaffolding` → `✅ Expanded`
+- Placeholder messages guide users to expansion command
 
-**Requirements Expected:** FR-8, FR-9, FR-10, NFR-6, NFR-7
+**Requirements Addressed:** FR-8, FR-9, FR-10, NFR-6, NFR-7
 
-**Status:** ⏳ Pending
+**Status:** 🔴 Proposed
 
 **Research:** [research-scaffolding-design.md](../../research/transition-plan-two-mode/research-scaffolding-design.md)
 
@@ -76,9 +80,9 @@ This topic addresses the need to redesign the `/transition-plan` command for con
 | FR-5: Mode Switching via `--expand` | ADR-001 | 🔴 Proposed |
 | FR-6: Phase-Specific Expansion | ADR-001 | 🔴 Proposed |
 | FR-7: Expand All via `--all` | ADR-001 | 🔴 Proposed |
-| FR-8: Scaffolding Template | ADR-002 | ⏳ Pending |
-| FR-9: Status Indicators | ADR-002 | ⏳ Pending |
-| FR-10: Placeholder Messages | ADR-002 | ⏳ Pending |
+| FR-8: Scaffolding Template | ADR-002 | 🔴 Proposed |
+| FR-9: Status Indicators | ADR-002 | 🔴 Proposed |
+| FR-10: Placeholder Messages | ADR-002 | 🔴 Proposed |
 | FR-11: Setup Mode Workflow Section | ADR-003 | ⏳ Pending |
 | FR-12: Expand Mode Workflow Section | ADR-003 | ⏳ Pending |
 | FR-13: Mode-Specific Overview | ADR-003 | ⏳ Pending |
@@ -86,18 +90,18 @@ This topic addresses the need to redesign the `/transition-plan` command for con
 | FR-15: Mode-Specific Scenarios | ADR-003 | ⏳ Pending |
 | NFR-4: Document-Based State | ADR-001 | 🔴 Proposed |
 | NFR-5: Clear Documentation Separation | ADR-001 | 🔴 Proposed |
-| NFR-6: Scaffolding Consistency | ADR-002 | ⏳ Pending |
-| NFR-7: Scaffolding Size Limit | ADR-002 | ⏳ Pending |
+| NFR-6: Scaffolding Consistency | ADR-002 | 🔴 Proposed |
+| NFR-7: Scaffolding Size Limit | ADR-002 | 🔴 Proposed |
 | NFR-8: Command Structure Pattern | ADR-003 | ⏳ Pending |
 
-**Coverage:** 5/16 requirements addressed (ADR-001)
+**Coverage:** 10/16 requirements addressed (ADR-001 + ADR-002)
 
 ---
 
 ## 🚀 Next Steps
 
 1. ✅ ADR-001 created
-2. 🔴 Create ADR-002: `/decision transition-plan-two-mode --from-research research-scaffolding-design.md`
+2. ✅ ADR-002 created
 3. 🔴 Create ADR-003: `/decision transition-plan-two-mode --from-research research-command-structure.md`
 4. Review and approve all ADRs
 5. Use `/transition-plan --from-adr` to create implementation plan

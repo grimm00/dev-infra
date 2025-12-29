@@ -19,7 +19,7 @@
 | ADR | Decision | Research Source | Status |
 |-----|----------|-----------------|--------|
 | [ADR-001](adr-001-flag-based-mode-switching.md) | Flag-Based Mode Switching | [Pattern Analysis](../../research/transition-plan-two-mode/research-pattern-analysis.md) | 🔴 Proposed |
-| ADR-002 | Scaffolding Content Design | [Scaffolding Design](../../research/transition-plan-two-mode/research-scaffolding-design.md) | ⏳ Pending |
+| [ADR-002](adr-002-scaffolding-content-boundaries.md) | Scaffolding Content Boundaries | [Scaffolding Design](../../research/transition-plan-two-mode/research-scaffolding-design.md) | 🔴 Proposed |
 | ADR-003 | Command Structure Refactoring | [Command Structure](../../research/transition-plan-two-mode/research-command-structure.md) | ⏳ Pending |
 
 ---
@@ -43,17 +43,17 @@ This decision set addresses problems with the current `/transition-plan` command
 | # | Decision | Research | Status |
 |---|----------|----------|--------|
 | 1 | Flag-Based Mode Switching | ✅ Complete | 🔴 Proposed |
-| 2 | Scaffolding Content Design | ✅ Complete | ⏳ Pending |
+| 2 | Scaffolding Content Boundaries | ✅ Complete | 🔴 Proposed |
 | 3 | Command Structure Refactoring | ✅ Complete | ⏳ Pending |
 
-**Progress:** 1/3 ADRs created
+**Progress:** 2/3 ADRs created
 
 ---
 
 ## 🚀 Next Steps
 
 1. ✅ ADR-001 created (Pattern Analysis)
-2. 🔴 Create ADR-002 (Scaffolding Design): `/decision transition-plan-two-mode --from-research research-scaffolding-design.md`
+2. ✅ ADR-002 created (Scaffolding Design)
 3. 🔴 Create ADR-003 (Command Structure): `/decision transition-plan-two-mode --from-research research-command-structure.md`
 4. Review and approve all ADRs
 5. Use `/transition-plan --from-adr` to create implementation plan
