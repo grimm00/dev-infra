@@ -1,7 +1,7 @@
 # Decisions Summary - Transition-Plan Two-Mode Pattern
 
 **Purpose:** Summary of all decisions made  
-**Status:** 🟡 In Progress  
+**Status:** ✅ Complete  
 **Created:** 2025-12-29  
 **Last Updated:** 2025-12-29
 
@@ -17,7 +17,7 @@ This topic addresses the need to redesign the `/transition-plan` command for con
 |---|-----|----------|--------|
 | 1 | [ADR-001](adr-001-flag-based-mode-switching.md) | Flag-Based Mode Switching | 🔴 Proposed |
 | 2 | [ADR-002](adr-002-scaffolding-content-boundaries.md) | Scaffolding Content Boundaries | 🔴 Proposed |
-| 3 | ADR-003 | Command Structure Refactoring | ⏳ Pending |
+| 3 | [ADR-003](adr-003-command-structure-refactoring.md) | Command Structure Refactoring | 🔴 Proposed |
 
 ---
 
@@ -59,15 +59,20 @@ This topic addresses the need to redesign the `/transition-plan` command for con
 
 ---
 
-### ADR-003: Command Structure Refactoring ⏳
+### ADR-003: Command Structure Refactoring ✅
 
-**Decision:** (Pending)
+**Decision:** Refactor command documentation to mirror the `/research` command structure, with clear separation between Setup Mode and Expand Mode workflows.
 
-**Expected:** Restructure command documentation with separate mode workflows.
+**Key Points:**
+- Workflow Overview: Add Setup Mode + Expand Mode subsections
+- Step-by-Step Process: Rename to "Setup Mode Workflow", simplify to scaffolding
+- New section: "Expand Mode Workflow" with steps 1-7
+- Common Scenarios: Add mode-specific scenarios
+- Tips: Add "When to Use Each Mode"
 
-**Requirements Expected:** FR-11, FR-12, FR-13, FR-14, FR-15, NFR-8
+**Requirements Addressed:** FR-11, FR-12, FR-13, FR-14, FR-15, NFR-8
 
-**Status:** ⏳ Pending
+**Status:** 🔴 Proposed
 
 **Research:** [research-command-structure.md](../../research/transition-plan-two-mode/research-command-structure.md)
 
@@ -83,27 +88,27 @@ This topic addresses the need to redesign the `/transition-plan` command for con
 | FR-8: Scaffolding Template | ADR-002 | 🔴 Proposed |
 | FR-9: Status Indicators | ADR-002 | 🔴 Proposed |
 | FR-10: Placeholder Messages | ADR-002 | 🔴 Proposed |
-| FR-11: Setup Mode Workflow Section | ADR-003 | ⏳ Pending |
-| FR-12: Expand Mode Workflow Section | ADR-003 | ⏳ Pending |
-| FR-13: Mode-Specific Overview | ADR-003 | ⏳ Pending |
-| FR-14: Mode-Specific Examples | ADR-003 | ⏳ Pending |
-| FR-15: Mode-Specific Scenarios | ADR-003 | ⏳ Pending |
+| FR-11: Setup Mode Workflow Section | ADR-003 | 🔴 Proposed |
+| FR-12: Expand Mode Workflow Section | ADR-003 | 🔴 Proposed |
+| FR-13: Mode-Specific Overview | ADR-003 | 🔴 Proposed |
+| FR-14: Mode-Specific Examples | ADR-003 | 🔴 Proposed |
+| FR-15: Mode-Specific Scenarios | ADR-003 | 🔴 Proposed |
 | NFR-4: Document-Based State | ADR-001 | 🔴 Proposed |
 | NFR-5: Clear Documentation Separation | ADR-001 | 🔴 Proposed |
 | NFR-6: Scaffolding Consistency | ADR-002 | 🔴 Proposed |
 | NFR-7: Scaffolding Size Limit | ADR-002 | 🔴 Proposed |
-| NFR-8: Command Structure Pattern | ADR-003 | ⏳ Pending |
+| NFR-8: Command Structure Pattern | ADR-003 | 🔴 Proposed |
 
-**Coverage:** 10/16 requirements addressed (ADR-001 + ADR-002)
+**Coverage:** 16/16 requirements addressed ✅ (ADR-001 + ADR-002 + ADR-003)
 
 ---
 
 ## 🚀 Next Steps
 
-1. ✅ ADR-001 created
-2. ✅ ADR-002 created
-3. 🔴 Create ADR-003: `/decision transition-plan-two-mode --from-research research-command-structure.md`
-4. Review and approve all ADRs
+1. ✅ ADR-001 created (Pattern Analysis)
+2. ✅ ADR-002 created (Scaffolding Design)
+3. ✅ ADR-003 created (Command Structure)
+4. 🔴 Review and approve all ADRs
 5. Use `/transition-plan --from-adr` to create implementation plan
 
 ---
