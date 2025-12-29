@@ -57,7 +57,8 @@ Update the Workflow Overview section with mode subsections, documenting Setup Mo
 
 **Purpose:** Document default (scaffolding) behavior.
 
-- [ ] Add `### Setup Mode (Default)` heading after "Key principle"
+- [ ] Add `**Two Modes:**` header after "Key principle" (matches `/research` pattern)
+- [ ] Add `### Setup Mode (Default)` heading after "Two Modes:"
 - [ ] Document what setup mode creates (scaffolding ~60-80 lines)
 - [ ] Document when to use setup mode
 - [ ] Document output (transition-plan.md + phase-N.md scaffolds)
@@ -65,6 +66,8 @@ Update the Workflow Overview section with mode subsections, documenting Setup Mo
 **Content to Add:**
 
 ```markdown
+**Two Modes:**
+
 ### Setup Mode (Default)
 
 Creates scaffolding documents (~60-80 lines per phase) with structure but not detail.
@@ -147,6 +150,7 @@ Fills scaffolding with detailed TDD tasks, code examples, and implementation not
 
 **Purpose:** Confirm all completion criteria met.
 
+- [ ] Verify "**Two Modes:**" header exists after "Key principle"
 - [ ] Verify "### Setup Mode (Default)" subsection exists
 - [ ] Verify "### Expand Mode (`--expand`)" subsection exists
 - [ ] Verify when to use each mode is documented
@@ -157,6 +161,7 @@ Fills scaffolding with detailed TDD tasks, code examples, and implementation not
 
 ## ✅ Completion Criteria
 
+- [ ] Workflow Overview has "**Two Modes:**" header after "Key principle"
 - [ ] Workflow Overview has "### Setup Mode (Default)" subsection
 - [ ] Workflow Overview has "### Expand Mode (`--expand`)" subsection
 - [ ] When to use each mode is documented
@@ -253,5 +258,5 @@ The `/research` command (lines 37-71) shows the target pattern:
 ---
 
 **Last Updated:** 2025-12-29  
-**Status:** ✅ Expanded  
+**Status:** ✅ Expanded (Review addressed)  
 **Next:** Begin implementation with Task 1
