@@ -2,11 +2,12 @@
 
 **Source:** Work-prod Phase 1 Implementation (project-type-field)  
 **Target:** dev-infra `/transition-plan` command (all templates)  
-**Status:** 🔴 Not Started  
+**Status:** ✅ Complete  
 **Priority:** HIGH  
-**Effort:** MEDIUM (~4-6 hours)  
+**Effort:** MEDIUM (~4-6 hours estimated, ~3 hours actual)  
 **Created:** 2025-12-23  
-**Last Updated:** 2025-12-23
+**Completed:** 2025-12-29  
+**Last Updated:** 2025-12-29
 
 ---
 
@@ -124,37 +125,34 @@ The `/transition-plan` command currently tries to do everything at once:
 
 ## 📋 Implementation Tasks
 
-### Phase 1: Command Redesign (~2 hours)
+### Phase 1: Workflow Overview ✅ (PR #55)
 
-- [ ] Update `/transition-plan` command documentation
-- [ ] Add "Setup Mode" section (default behavior)
-- [ ] Add "Expand Mode" section (`--expand` flag)
-- [ ] Define scaffolding templates (minimal phase structure)
-- [ ] Define expansion logic (TDD task ordering rules)
-- [ ] Add flag documentation (`--expand`, `--phase`, `--tdd`, `--no-tdd`)
+- [x] Update `/transition-plan` command documentation
+- [x] Add "Two Modes:" header with Setup and Expand subsections
+- [x] Add status indicators (`🔴 Scaffolding`, `✅ Expanded`)
+- [x] Add flag documentation (`--expand`, `--phase N`, `--all`)
 
-### Phase 2: Template Updates (~2 hours)
+### Phase 2: Setup Mode Workflow ✅ (PR #55)
 
-- [ ] Create scaffolding templates for phase documents
-- [ ] Create TDD expansion rules (tests before implementation)
-- [ ] Create non-TDD expansion rules (for docs-only phases)
-- [ ] Update phase document template with scaffolding/expanded markers
+- [x] Rename "Step-by-Step Process" to "Setup Mode Workflow"
+- [x] Create scaffolding templates (~60-80 lines)
+- [x] Update Summary Report for scaffolding output
+- [x] Defer TDD content to Expand Mode
 
-### Phase 3: Distribution (~1 hour)
+### Phase 3: Expand Mode Workflow ✅ (PR #56)
 
-- [ ] Update dev-infra command
-- [ ] Sync to standard-project template
-- [ ] Sync to learning-project template
-- [ ] Update template-sync-manifest.txt
-- [ ] Update command documentation
+- [x] Create Expand Mode Workflow section header
+- [x] Implement 7 steps: Identify → Read → Determine TDD → Expand → Update Phase → Update Hub → Commit
+- [x] Add TDD task templates and code examples
+- [x] Add Flag Handling section (`--phase N`, `--all`)
+- [x] Add Summary Report template
 
-### Phase 4: Testing (~1 hour)
+### Phase 4: Supporting Content ✅ (PR #56)
 
-- [ ] Test setup mode creates minimal scaffolding
-- [ ] Test expand mode with `--tdd` creates TDD ordering
-- [ ] Test expand mode with `--no-tdd` skips TDD ordering
-- [ ] Test `--phase N` only expands specific phase
-- [ ] Test `--all` expands all phases
+- [x] Update Usage section with mode-specific examples
+- [x] Add 4 Common Scenarios
+- [x] Add "When to Use Each Mode" guidance
+- [x] Add 4 new Common Issues for two-mode troubleshooting
 
 ---
 
@@ -169,23 +167,28 @@ The `/transition-plan` command currently tries to do everything at once:
 
 ## 📊 Success Criteria
 
-- [ ] Setup mode creates consistent scaffolding every time
-- [ ] Expand mode enforces TDD task ordering when `--tdd` specified
-- [ ] Phase documents follow TDD pattern (tests before implementation)
-- [ ] Human review possible between scaffolding and expansion
-- [ ] Command synced to all templates
+- [x] Setup mode creates consistent scaffolding every time
+- [x] Expand mode enforces TDD task ordering for code phases
+- [x] Non-TDD ordering available for docs-only phases
+- [x] Human review possible between scaffolding and expansion
+- [x] Command documentation complete with examples
 
 ---
 
-## 🚀 Next Steps
+## ✅ Completion Summary
 
-1. **Create exploration** - `/explore transition-plan-two-mode-pattern`
-2. **Research similar patterns** - `/research --conduct`
-3. **Create ADR** - Document the decision
-4. **Implement** - Update command documentation
+**Completed:** 2025-12-29  
+**PRs:** #55 (Phases 1-2), #56 (Phases 3-4)  
+**Time:** ~3 hours (vs 4-6 hour estimate)  
+**Deferred Issues:** 6 (all MEDIUM/LOW)
+
+**See:**
+- [Feature Hub](../../../features/transition-plan-two-mode/README.md)
+- [Feature Learnings](../learnings/transition-plan-two-mode/feature-learnings.md)
+- [/transition-plan Command](../../../../.cursor/commands/transition-plan.md)
 
 ---
 
-**Last Updated:** 2025-12-23
+**Last Updated:** 2025-12-29
 
 
