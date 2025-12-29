@@ -1,24 +1,24 @@
 # Status & Next Steps - Transition-Plan Two-Mode Pattern
 
 **Feature:** Transition-Plan Two-Mode Pattern  
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
 **Last Updated:** 2025-12-29
 
 ---
 
 ## 📊 Current Status
 
-**Overall Progress:** 2/4 phases complete (50%)
+**Overall Progress:** 4/4 phases complete (100%) ✅
 
 | Phase | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Phase 1: Workflow Overview | ✅ Complete | 100% | PR #55 (2025-12-29) |
 | Phase 2: Setup Mode Workflow | ✅ Complete | 100% | PR #55 (2025-12-29) |
-| Phase 3: Expand Mode Workflow | ✅ Expanded | 0% impl | Ready for implementation |
-| Phase 4: Supporting Content | ✅ Expanded | 0% impl | Ready for implementation |
+| Phase 3: Expand Mode Workflow | ✅ Complete | 100% | Pending PR |
+| Phase 4: Supporting Content | ✅ Complete | 100% | Pending PR |
 
 **Total Estimated:** 4-6 hours  
-**Actual (Phases 1-2):** ~1.5 hours
+**Actual:** ~3 hours
 
 ---
 
@@ -59,49 +59,45 @@
   - Deferred TDD content to Phase 3 (Expand Mode)
   - PR #55
 
+### Implementation (Phases 3-4) ✅
+
+- [x] **Phase 3: Expand Mode Workflow** ✅ Complete (2025-12-29)
+  - Added Expand Mode Workflow section header
+  - Implemented 7 steps: Identify → Read → Determine TDD → Expand → Update Phase → Update Hub → Commit
+  - Added TDD task templates and code examples
+  - Added Flag Handling section (`--phase N`, `--all`)
+  - Added Summary Report template
+
+- [x] **Phase 4: Supporting Content** ✅ Complete (2025-12-29)
+  - Updated Usage section with mode-specific examples
+  - Added 4 Common Scenarios (Setup Only, Single Phase, All Phases, Full Workflow)
+  - Added "When to Use Each Mode" guidance to Tips
+  - Added 4 new Common Issues for two-mode troubleshooting
+
 ---
 
-## 🟠 In Progress
-
-### Implementation (Phases 3-4)
-
-- [ ] Phase 3: Expand Mode Workflow (expanded, ready)
-- [ ] Phase 4: Supporting Content (expanded, ready)
-
----
-
-## 🔴 Not Started
+## 🟡 Pending
 
 ### Verification
 
+- [ ] Create PR for Phases 3 & 4
 - [ ] Manual testing of complete two-mode workflow
-- [ ] Documentation review
 - [ ] Copy to global commands (`~/.cursor/commands/`)
 
 ---
 
 ## 🚀 Next Steps
 
-**Phases 1-2 complete!** Continue with implementation:
+**All phases complete!** Final steps:
 
-1. **Phase 3: Expand Mode Workflow (~2 hrs)**
-   - Create branch: `git checkout -b feat/transition-plan-two-mode-phase-3`
-   - Follow tasks in [phase-3.md](phase-3.md)
-   - Add Expand Mode Workflow section
-   - Add detailed TDD task templates
-   - Add code examples
+1. **Create PR for Phases 3 & 4**
+   - Push branch: `feat/transition-plan-two-mode-phase-3`
+   - Create PR with all Phase 3 & 4 changes
+   - Review and merge
 
-2. **Phase 4: Supporting Content (~1 hr)**
-   - Follow tasks in [phase-4.md](phase-4.md)
-   - Add error handling section
-   - Add usage examples
-   - Update reference section
-
-3. **After all phases complete:**
-   - Create final PR
-   - Copy to global: `~/.cursor/commands/`
-
-**Remaining Estimated:** 3-4 hours
+2. **After merge:**
+   - Copy to global: `~/.cursor/commands/transition-plan.md`
+   - Test complete two-mode workflow manually
 
 ---
 
@@ -112,8 +108,8 @@
 - [Transition Plan](transition-plan.md)
 - [Phase 1](phase-1.md) ✅
 - [Phase 2](phase-2.md) ✅
-- [Phase 3](phase-3.md)
-- [Phase 4](phase-4.md)
+- [Phase 3](phase-3.md) ✅
+- [Phase 4](phase-4.md) ✅
 
 ---
 

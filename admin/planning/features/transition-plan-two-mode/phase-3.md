@@ -38,6 +38,7 @@ Create new Expand Mode Workflow section with TDD logic and detailed expansion st
 - [ ] Add introduction explaining when to use
 
 **Content to Add:**
+
 ```markdown
 ## Expand Mode Workflow (`--expand`)
 
@@ -57,17 +58,20 @@ Create new Expand Mode Workflow section with TDD logic and detailed expansion st
 - [ ] Document default behavior (prompt for phase)
 
 **Content to Add:**
-```markdown
+
+````markdown
 ### 1. Identify Phase(s) to Expand
 
 **Determine scope:**
 
 1. **Specific Phase** (`--phase N`):
+
    - Expand only the specified phase
    - Useful for incremental progress
    - Example: `/transition-plan [topic] --expand --phase 1`
 
 2. **All Phases** (`--all`):
+
    - Expand all scaffolding phases at once
    - Useful after reviewing all scaffolding
    - Example: `/transition-plan [topic] --expand --all`
@@ -86,13 +90,15 @@ ls docs/maintainers/planning/features/[feature]/phase-*.md
 # Check scaffolding status
 grep "Status:" docs/maintainers/planning/features/[feature]/phase-1.md
 ```
+````
 
 **Checklist:**
 
 - [ ] Phase(s) to expand identified
 - [ ] Phase document exists
 - [ ] Phase status is `🔴 Scaffolding`
-```
+
+````
 
 ---
 
@@ -138,7 +144,7 @@ Task Categories:
 
 Deliverables:
 - Updated Workflow Overview section
-```
+````
 
 **Checklist:**
 
@@ -146,7 +152,8 @@ Deliverables:
 - [ ] Goals extracted
 - [ ] Task categories identified
 - [ ] Deliverables understood
-```
+
+````
 
 ---
 
@@ -184,13 +191,15 @@ Deliverables:
 
 **Decision Logic:**
 
-```
+````
+
 IF phase creates code or scripts:
-  → Use TDD ordering (RED → GREEN → REFACTOR)
+→ Use TDD ordering (RED → GREEN → REFACTOR)
 ELSE IF phase creates documentation:
-  → Use Create → Link → Verify ordering
+→ Use Create → Link → Verify ordering
 ELSE:
-  → Use logical dependency ordering
+→ Use logical dependency ordering
+
 ```
 
 **Checklist:**
@@ -211,7 +220,8 @@ ELSE:
 - [ ] Document what sections to add
 
 **Content to Add:**
-```markdown
+
+````markdown
 ### 4. Expand Tasks with Detail
 
 **This is the core expansion step.** Transform task categories into detailed, actionable tasks.
@@ -220,7 +230,7 @@ ELSE:
 
 **TDD Task Structure:**
 
-```markdown
+````markdown
 ### Task N: [Task Name]
 
 **Purpose:** [Why this task exists]
@@ -228,11 +238,13 @@ ELSE:
 **TDD Flow:**
 
 1. **RED - Write failing test:**
+
    - [ ] Create test file: `tests/test_[feature].py`
    - [ ] Write test for [specific behavior]
    - [ ] Verify test fails (no implementation yet)
 
    **Test code:**
+
    ```python
    def test_feature_behavior():
        # Arrange
@@ -242,13 +254,17 @@ ELSE:
        # Assert
        assert result == expected
    ```
+````
+````
 
 2. **GREEN - Implement minimum code:**
+
    - [ ] Create implementation file: `src/[feature].py`
    - [ ] Write minimum code to pass test
    - [ ] Run test, verify it passes
 
    **Implementation:**
+
    ```python
    def feature_function():
        # Minimum implementation
@@ -261,10 +277,12 @@ ELSE:
    - [ ] Ensure tests still pass
 
 **Checklist:**
+
 - [ ] Test written and failing
 - [ ] Implementation passes test
 - [ ] Code refactored and clean
-```
+
+````
 
 **For Documentation phases:**
 
@@ -281,12 +299,14 @@ ELSE:
 **Content to Add:**
 ```markdown
 [Specific markdown content to add]
-```
+````
 
 **Checklist:**
+
 - [ ] Content created
 - [ ] Links verified
 - [ ] Cross-references updated
+
 ```
 
 **Expansion adds:**
@@ -324,27 +344,35 @@ ELSE:
 - [ ] Document where status appears
 
 **Content to Add:**
-```markdown
+
+````markdown
 ### 5. Update Phase Status
 
 **Update status in phase document:**
 
 **Header:**
+
 ```markdown
 # Before:
+
 **Status:** 🔴 Scaffolding (needs expansion)
 
 # After:
+
 **Status:** ✅ Expanded
 ```
+````
 
 **Footer:**
+
 ```markdown
 # Before:
+
 **Status:** 🔴 Scaffolding  
 **Next:** Expand with `/transition-plan [topic] --expand --phase [N]`
 
 # After:
+
 **Status:** ✅ Expanded  
 **Next:** Begin implementation with Task 1
 ```
@@ -353,6 +381,7 @@ ELSE:
 
 ```markdown
 # Remove this from Tasks section:
+
 > ⚠️ **Scaffolding:** Run `/transition-plan [topic] --expand --phase [N]` to add detailed TDD tasks.
 ```
 
@@ -361,10 +390,10 @@ ELSE:
 ```markdown
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: [Name] | 🔴 Not Started | |
-| Task 2: [Name] | 🔴 Not Started | |
+| Task           | Status         | Notes |
+| -------------- | -------------- | ----- |
+| Task 1: [Name] | 🔴 Not Started |       |
+| Task 2: [Name] | 🔴 Not Started |       |
 ```
 
 **Checklist:**
@@ -373,7 +402,8 @@ ELSE:
 - [ ] Footer status updated
 - [ ] Placeholder message removed
 - [ ] Progress tracking table added
-```
+
+````
 
 ---
 
@@ -396,15 +426,17 @@ ELSE:
 
 # After:
 | [Phase 1](phase-1.md) | Workflow Overview | ✅ Expanded |
-```
+````
 
 **Update status-and-next-steps.md:**
 
 ```markdown
 # Before:
+
 | Phase 1: Workflow Overview | 🔴 Scaffolding | 0% | Needs expansion |
 
 # After:
+
 | Phase 1: Workflow Overview | ✅ Expanded | 0% impl | Ready for implementation |
 ```
 
@@ -413,7 +445,8 @@ ELSE:
 - [ ] Feature hub updated
 - [ ] Status document updated
 - [ ] Phase listed as ready for implementation
-```
+
+````
 
 ---
 
@@ -452,14 +485,15 @@ Includes [TDD breakdown / documentation steps / etc.]"
 
 # Push to develop (docs can push directly)
 git push origin develop
-```
+````
 
 **Checklist:**
 
 - [ ] Changes committed
 - [ ] Commit message descriptive
 - [ ] Pushed to develop
-```
+
+````
 
 ---
 
@@ -477,32 +511,39 @@ git push origin develop
 
 **`--phase N` Flag:**
 
-```
+````
+
 /transition-plan [topic] --expand --phase N
 
 Validation:
+
 - Check phase-N.md exists
 - Check status is 🔴 Scaffolding
 - Error if phase already expanded
 
 Processing:
+
 - Expand single phase
 - Update phase status
 - Update hub
 - Commit changes
+
 ```
 
 **`--all` Flag:**
 
 ```
+
 /transition-plan [topic] --expand --all
 
 Processing:
-- Find all phase-*.md files with 🔴 Scaffolding status
+
+- Find all phase-\*.md files with 🔴 Scaffolding status
 - Expand each phase in order (1, 2, 3, ...)
 - Update each phase status
 - Update hub once at end
 - Single commit for all expansions
+
 ```
 
 **Error Handling:**
@@ -564,18 +605,18 @@ Processing:
 
 ## 📊 Progress Tracking
 
-| Task                                  | Status         | Notes |
-| ------------------------------------- | -------------- | ----- |
-| Task 1: Create Section Header         | ✅ Complete    |       |
-| Task 2: Step 1 - Identify Phases      | ✅ Complete    |       |
-| Task 3: Step 2 - Read Scaffolding     | ✅ Complete    |       |
-| Task 4: Step 3 - Determine TDD        | ✅ Complete    |       |
-| Task 5: Step 4 - Expand Tasks (Main)  | ✅ Complete    |       |
-| Task 6: Step 5 - Update Phase Status  | ✅ Complete    |       |
-| Task 7: Step 6 - Update Hub Status    | ✅ Complete    |       |
-| Task 8: Step 7 - Commit Changes       | ✅ Complete    |       |
-| Task 9: Document Flag Handling        | ✅ Complete    |       |
-| Task 10: Verify Changes               | ✅ Complete    |       |
+| Task                                 | Status      | Notes |
+| ------------------------------------ | ----------- | ----- |
+| Task 1: Create Section Header        | ✅ Complete |       |
+| Task 2: Step 1 - Identify Phases     | ✅ Complete |       |
+| Task 3: Step 2 - Read Scaffolding    | ✅ Complete |       |
+| Task 4: Step 3 - Determine TDD       | ✅ Complete |       |
+| Task 5: Step 4 - Expand Tasks (Main) | ✅ Complete |       |
+| Task 6: Step 5 - Update Phase Status | ✅ Complete |       |
+| Task 7: Step 6 - Update Hub Status   | ✅ Complete |       |
+| Task 8: Step 7 - Commit Changes      | ✅ Complete |       |
+| Task 9: Document Flag Handling       | ✅ Complete |       |
+| Task 10: Verify Changes              | ✅ Complete |       |
 
 ---
 
@@ -585,15 +626,15 @@ Processing:
 
 The `/research --conduct` workflow (lines 658-900) provides the pattern:
 
-| /research Conduct | /transition-plan Expand |
-|-------------------|-------------------------|
-| Step 1: Identify research | Step 1: Identify phase(s) |
-| Step 2: Conduct web research | Step 2: Read scaffolding |
-| Step 3: Fill in findings | Step 3: Determine TDD |
-| Step 4: Update status | Step 4: Expand tasks (main) |
-| Step 5: Update summary | Step 5: Update phase status |
-| Step 6: Update hub | Step 6: Update hub status |
-| Step 7: Commit | Step 7: Commit |
+| /research Conduct            | /transition-plan Expand     |
+| ---------------------------- | --------------------------- |
+| Step 1: Identify research    | Step 1: Identify phase(s)   |
+| Step 2: Conduct web research | Step 2: Read scaffolding    |
+| Step 3: Fill in findings     | Step 3: Determine TDD       |
+| Step 4: Update status        | Step 4: Expand tasks (main) |
+| Step 5: Update summary       | Step 5: Update phase status |
+| Step 6: Update hub           | Step 6: Update hub status   |
+| Step 7: Commit               | Step 7: Commit              |
 
 ### TDD Ordering Critical
 
