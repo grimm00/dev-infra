@@ -13,7 +13,7 @@
 | Phase | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Phase 1: Workflow Overview | ✅ Expanded | 0% impl | Ready for implementation |
-| Phase 2: Setup Mode Workflow | 🔴 Scaffolding | 0% | Needs expansion |
+| Phase 2: Setup Mode Workflow | ✅ Expanded | 0% impl | Ready for implementation |
 | Phase 3: Expand Mode Workflow | 🔴 Scaffolding | 0% | Needs expansion |
 | Phase 4: Supporting Content | 🔴 Scaffolding | 0% | Needs expansion |
 
@@ -48,7 +48,7 @@
 ### Phase Expansion
 
 - [x] Phase 1: Workflow Overview - ✅ Expanded
-- [ ] Phase 2: Setup Mode Workflow - 🔴 Scaffolding
+- [x] Phase 2: Setup Mode Workflow - ✅ Expanded
 - [ ] Phase 3: Expand Mode Workflow - 🔴 Scaffolding
 - [ ] Phase 4: Supporting Content - 🔴 Scaffolding
 
@@ -59,7 +59,7 @@
 ### Implementation
 
 - [ ] Phase 1: Workflow Overview (expanded, ready)
-- [ ] Phase 2: Setup Mode Workflow
+- [ ] Phase 2: Setup Mode Workflow (expanded, ready)
 - [ ] Phase 3: Expand Mode Workflow
 - [ ] Phase 4: Supporting Content
 

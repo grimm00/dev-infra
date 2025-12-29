@@ -38,6 +38,7 @@ Update the Workflow Overview section with mode subsections, documenting Setup Mo
 - [ ] Review `/research` command Workflow Overview as pattern (lines 37-71)
 
 **Current Content (Lines 40-48):**
+
 ```markdown
 ## Workflow Overview
 
@@ -62,17 +63,20 @@ Update the Workflow Overview section with mode subsections, documenting Setup Mo
 - [ ] Document output (transition-plan.md + phase-N.md scaffolds)
 
 **Content to Add:**
+
 ```markdown
 ### Setup Mode (Default)
 
 Creates scaffolding documents (~60-80 lines per phase) with structure but not detail.
 
 **When to use:**
+
 - First run on a new transition
 - After creating ADRs with `/decision`
 - To review phase breakdown before adding detail
 
 **Output:**
+
 - `transition-plan.md` - Transition overview
 - `phase-N.md` files - Phase scaffolding (goals, criteria, dependencies)
 
@@ -91,21 +95,25 @@ Creates scaffolding documents (~60-80 lines per phase) with structure but not de
 - [ ] Document flags (`--phase N`, `--all`)
 
 **Content to Add:**
+
 ```markdown
 ### Expand Mode (`--expand`)
 
 Fills scaffolding with detailed TDD tasks, code examples, and implementation notes.
 
 **When to use:**
+
 - After reviewing scaffolding structure
 - When ready to add implementation detail
 - Before starting `/task-phase` implementation
 
 **Flags:**
+
 - `--phase N` - Expand specific phase only
 - `--all` - Expand all phases at once
 
 **Output:**
+
 - Updated `phase-N.md` files (~200-300 lines with TDD detail)
 
 **Status Indicator:** Phase documents show `✅ Expanded`
@@ -121,6 +129,7 @@ Fills scaffolding with detailed TDD tasks, code examples, and implementation not
 - [ ] Add note about human review between modes
 
 **Updated Content:**
+
 ```markdown
 **When to use:**
 
@@ -166,23 +175,25 @@ Fills scaffolding with detailed TDD tasks, code examples, and implementation not
 ## 🔗 Dependencies
 
 ### Prerequisites
+
 - [x] ADR-001, ADR-002, ADR-003 reviewed
 - [x] `/research` command reviewed as pattern source
 
 ### Blocks
+
 - Phase 2 (Setup Mode Workflow)
 
 ---
 
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: Read Current | 🔴 Not Started | |
-| Task 2: Write Setup Mode | 🔴 Not Started | |
-| Task 3: Write Expand Mode | 🔴 Not Started | |
-| Task 4: Update "When to use" | 🔴 Not Started | |
-| Task 5: Verify Changes | 🔴 Not Started | |
+| Task                         | Status         | Notes |
+| ---------------------------- | -------------- | ----- |
+| Task 1: Read Current         | 🔴 Not Started |       |
+| Task 2: Write Setup Mode     | 🔴 Not Started |       |
+| Task 3: Write Expand Mode    | 🔴 Not Started |       |
+| Task 4: Update "When to use" | 🔴 Not Started |       |
+| Task 5: Verify Changes       | 🔴 Not Started |       |
 
 ---
 
@@ -204,25 +215,30 @@ The `/research` command (lines 37-71) shows the target pattern:
 
 ### Setup Mode (Default)
 ```
+
 /research [topic] --from-explore [topic]
-  → Creates research structure ready for conducting
+→ Creates research structure ready for conducting
+
 ```
 
 ### Conduct Mode (`--conduct`)
 ```
+
 /research [topic] --conduct [--topic-num N]
-  → Actually performs research, fills in findings
+→ Actually performs research, fills in findings
+
 ```
+
 ```
 
 ### Key Differences from /research
 
-| Aspect | /research | /transition-plan |
-|--------|-----------|------------------|
+| Aspect       | /research          | /transition-plan  |
+| ------------ | ------------------ | ----------------- |
 | Setup output | Research templates | Phase scaffolding |
-| Expand flag | `--conduct` | `--expand` |
-| Incremental | `--topic-num N` | `--phase N` |
-| Batch | (all topics) | `--all` |
+| Expand flag  | `--conduct`        | `--expand`        |
+| Incremental  | `--topic-num N`    | `--phase N`       |
+| Batch        | (all topics)       | `--all`           |
 
 ---
 
