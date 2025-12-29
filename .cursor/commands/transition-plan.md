@@ -1558,6 +1558,95 @@ Processing:
 
 ---
 
+## Common Scenarios
+
+### Scenario 1: Setup Scaffolding Only
+
+**Use case:** Create scaffolding for human review before expanding.
+
+```bash
+# From ADRs
+/transition-plan --from-adr decisions/auth-system/
+
+# Output:
+# - transition-plan.md
+# - phase-1.md (🔴 Scaffolding)
+# - phase-2.md (🔴 Scaffolding)
+# - phase-3.md (🔴 Scaffolding)
+```
+
+**Next:** Review scaffolding, then use `--expand` when ready.
+
+---
+
+### Scenario 2: Expand Single Phase
+
+**Use case:** Incrementally expand one phase at a time.
+
+```bash
+# Review scaffolding first
+cat docs/maintainers/planning/features/auth-system/phase-1.md
+
+# Expand Phase 1 only
+/transition-plan auth-system --expand --phase 1
+
+# Output:
+# - phase-1.md updated (✅ Expanded, ~200-300 lines)
+```
+
+**Next:** Implement Phase 1 with `/task-phase`, then expand Phase 2.
+
+---
+
+### Scenario 3: Expand All Phases
+
+**Use case:** Expand all scaffolding at once after review.
+
+```bash
+# After reviewing all scaffolding
+/transition-plan auth-system --expand --all
+
+# Output:
+# - phase-1.md (✅ Expanded)
+# - phase-2.md (✅ Expanded)
+# - phase-3.md (✅ Expanded)
+```
+
+**Next:** Begin implementation with `/task-phase phase-1`.
+
+---
+
+### Scenario 4: Full Workflow (End-to-End)
+
+**Use case:** Complete workflow from ADRs to expanded phases.
+
+```bash
+# Step 1: Create scaffolding
+/transition-plan --from-adr decisions/auth-system/
+
+# Step 2: Review scaffolding (human review)
+# - Check phase breakdown
+# - Verify goals and criteria
+# - Confirm dependencies
+
+# Step 3: Expand all phases
+/transition-plan auth-system --expand --all
+
+# Step 4: Implement
+/task-phase phase-1
+/task-phase phase-2
+...
+```
+
+**Timeline:**
+
+- Setup: ~5-10 min
+- Human review: Variable
+- Expand: ~5-10 min per phase
+- Implement: Per phase estimate
+
+---
+
 ## Reference
 
 **Artifact Files:**

@@ -77,11 +77,11 @@ Update Usage, Scenarios, and Tips sections for two-mode workflow.
 
 **Purpose:** Add a new section with mode-specific usage scenarios.
 
-- [ ] Create new "## Common Scenarios" section
-- [ ] Add Scenario 1: Setup Scaffolding Only
-- [ ] Add Scenario 2: Expand Single Phase
-- [ ] Add Scenario 3: Expand All Phases
-- [ ] Add Scenario 4: Full Workflow
+- [x] Create new "## Common Scenarios" section
+- [x] Add Scenario 1: Setup Scaffolding Only
+- [x] Add Scenario 2: Expand Single Phase
+- [x] Add Scenario 3: Expand All Phases
+- [x] Add Scenario 4: Full Workflow
 
 **Location:** After Tips section (before Reference)
 
@@ -361,7 +361,7 @@ cat docs/maintainers/planning/features/auth-system/phase-1.md
 | Task                                | Status         | Notes |
 | ----------------------------------- | -------------- | ----- |
 | Task 1: Update Usage Section        | ✅ Complete    |       |
-| Task 2: Add Common Scenarios        | 🔴 Not Started |       |
+| Task 2: Add Common Scenarios        | ✅ Complete    |       |
 | Task 3: Update Tips Section         | 🔴 Not Started |       |
 | Task 4: Update Common Issues        | 🔴 Not Started |       |
 | Task 5: Verify All Changes          | 🔴 Not Started |       |
