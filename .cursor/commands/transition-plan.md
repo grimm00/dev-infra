@@ -1536,6 +1536,57 @@ Processing:
 
 ---
 
+### Issue: Phase Already Expanded
+
+**Symptom:** Error when trying to expand a phase that's already expanded.
+
+**Solution:**
+
+- Check phase status: `grep "Status:" phase-N.md`
+- If `✅ Expanded`, phase is already done
+- Use `--force` to re-expand (overwrites existing content)
+- Or edit phase document directly
+
+---
+
+### Issue: No Scaffolding Found
+
+**Symptom:** `--expand` fails because no scaffolding exists.
+
+**Solution:**
+
+- Run setup mode first: `/transition-plan --from-adr [path]`
+- Check phase files exist: `ls docs/maintainers/planning/features/[feature]/phase-*.md`
+- Verify status is `🔴 Scaffolding`
+
+---
+
+### Issue: Scaffolding Structure Incorrect
+
+**Symptom:** After setup, phase breakdown doesn't match expectations.
+
+**Solution:**
+
+- Edit scaffolding files directly before expanding
+- Adjust phase boundaries in `transition-plan.md`
+- Re-run setup with different source if needed
+- Scaffolding is meant for human review - modify as needed
+
+---
+
+### Issue: TDD Ordering Wrong After Expand
+
+**Symptom:** Tasks not in test-first order after expansion.
+
+**Solution:**
+
+- Edit phase document to reorder tasks
+- Ensure test tasks come before implementation tasks
+- Check "Determine TDD vs Non-TDD" logic in expansion
+- For documentation phases, TDD ordering may not apply
+
+---
+
 ## Tips
 
 ### When to Use Each Mode

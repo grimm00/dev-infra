@@ -244,9 +244,9 @@ cat docs/maintainers/planning/features/auth-system/phase-1.md
 
 **Purpose:** Add two-mode specific troubleshooting.
 
-- [ ] Read current Common Issues section (lines 1005-1030)
-- [ ] Add new issues for expand mode
-- [ ] Update existing issues for two-mode context
+- [x] Read current Common Issues section (lines 1005-1030)
+- [x] Add new issues for expand mode
+- [x] Update existing issues for two-mode context
 
 **Current Issues:**
 ```markdown
@@ -363,7 +363,7 @@ cat docs/maintainers/planning/features/auth-system/phase-1.md
 | Task 1: Update Usage Section        | ✅ Complete    |       |
 | Task 2: Add Common Scenarios        | ✅ Complete    |       |
 | Task 3: Update Tips Section         | ✅ Complete    |       |
-| Task 4: Update Common Issues        | 🔴 Not Started |       |
+| Task 4: Update Common Issues        | ✅ Complete    |       |
 | Task 5: Verify All Changes          | 🔴 Not Started |       |
 
 ---
