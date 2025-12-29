@@ -1538,11 +1538,47 @@ Processing:
 
 ## Tips
 
+### When to Use Each Mode
+
+**Setup Mode (default):**
+
+- First time creating transition plan from new source
+- When you want to review phase structure before detail
+- When working with unfamiliar ADRs or artifacts
+- When multiple stakeholders need to approve structure
+
+**Expand Mode (`--expand`):**
+
+- After scaffolding has been reviewed and approved
+- When ready to add implementation detail
+- Before starting `/task-phase` implementation
+- When TDD task ordering is needed
+
+**Incremental vs Batch:**
+
+| Approach | Flag | When to Use |
+|----------|------|-------------|
+| **Incremental** | `--phase N` | Complex phases, want to review each |
+| **Batch** | `--all` | Simple phases, already reviewed scaffolding |
+
+**Rule of Thumb:**
+
+- If unsure → Use Setup Mode first, review, then expand
+- If familiar with source → Can use `--expand --all` directly
+
+---
+
 ### Before Running
 
-- Ensure artifacts exist (or use `--from-reflection`)
-- Review artifact content for completeness
-- Determine desired transition type
+- **For Setup Mode:**
+  - Ensure source exists (ADRs, artifacts, or reflection)
+  - Review source content for completeness
+  - Determine desired transition type
+
+- **For Expand Mode:**
+  - Ensure scaffolding exists (run setup first)
+  - Review scaffolding for correct phase breakdown
+  - Decide on incremental (`--phase N`) vs batch (`--all`)
 
 ### During Planning
 

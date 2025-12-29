@@ -180,9 +180,9 @@ cat docs/maintainers/planning/features/auth-system/phase-1.md
 
 **Purpose:** Help users understand when to use Setup vs Expand mode.
 
-- [ ] Read current Tips section (lines 1033-1052)
-- [ ] Add new "### When to Use Each Mode" subsection
-- [ ] Update existing tips for two-mode workflow
+- [x] Read current Tips section (lines 1033-1052)
+- [x] Add new "### When to Use Each Mode" subsection
+- [x] Update existing tips for two-mode workflow
 
 **Current Tips Structure:**
 ```markdown
@@ -362,7 +362,7 @@ cat docs/maintainers/planning/features/auth-system/phase-1.md
 | ----------------------------------- | -------------- | ----- |
 | Task 1: Update Usage Section        | ✅ Complete    |       |
 | Task 2: Add Common Scenarios        | ✅ Complete    |       |
-| Task 3: Update Tips Section         | 🔴 Not Started |       |
+| Task 3: Update Tips Section         | ✅ Complete    |       |
 | Task 4: Update Common Issues        | 🔴 Not Started |       |
 | Task 5: Verify All Changes          | 🔴 Not Started |       |
 
