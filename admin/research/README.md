@@ -2,7 +2,7 @@
 
 **Purpose:** Research and analysis for dev-infra and template improvements  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-22
+**Last Updated:** 2025-12-29
 
 ---
 
@@ -10,7 +10,8 @@
 
 ### Active Research
 
-- **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Research) ⭐ **NEW**
+- **[Transition-Plan Two-Mode Pattern](transition-plan-two-mode/README.md)** - Redesigning `/transition-plan` with setup + expand modes (🔴 Research) ⭐ **NEW**
+- **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Research)
 - **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - State tracking, plan/apply workflow, CI/CD push updates (✅ Complete)
 - **[Global Command Distribution](global-command-distribution/README.md)** - Distributing dev-infra commands via `~/.cursor/commands/` (🟡 Research)
 - **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Research)
@@ -206,8 +207,8 @@ This research evaluates the current template structure against:
 
 ---
 
-**Last Updated:** 2025-12-22  
+**Last Updated:** 2025-12-29  
 **Status:** ✅ Active  
-**Latest Research:** [Global Command Distribution](global-command-distribution/README.md)
+**Latest Research:** [Transition-Plan Two-Mode Pattern](transition-plan-two-mode/README.md)
 
 
