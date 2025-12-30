@@ -2,7 +2,7 @@
 
 **Purpose:** Active explorations and proof of concepts  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-29
+**Last Updated:** 2025-12-30
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Active Explorations
 
-- **[Transition-Plan Two-Mode Pattern](transition-plan-two-mode/README.md)** - Redesigning `/transition-plan` with setup + expand modes (🔴 Exploration) ⭐ **NEW**
+- **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, and topic unification (🔴 Exploration) ⭐ **NEW**
 - **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Exploration)
 - **[Work-Prod Analysis Service](work-prod-analysis-service/README.md)** - Separating analysis from proj-cli inventory into work-prod (🔴 Exploration)
 - **[Four-Arm Architecture](four-arm-architecture/README.md)** - Mapping dev-infra, dev-toolkit, proj-cli, work-prod relationships (🔴 Exploration)
@@ -24,6 +24,7 @@
 
 ### Completed Explorations
 
+- **[Transition-Plan Two-Mode Pattern](transition-plan-two-mode/README.md)** - Redesigning `/transition-plan` with setup + expand modes (✅ Transitioned to Feature → Complete)
 - **[Release Readiness](release-readiness/README.md)** - Release readiness assessment and automation (✅ Transitioned to Feature)
 - **[Templates Enhancement](templates-enhancement/README.md)** - Enhancements to dev-infra templates (✅ Transitioned to Feature)
 
@@ -41,4 +42,4 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2025-12-29
+**Last Updated:** 2025-12-30
