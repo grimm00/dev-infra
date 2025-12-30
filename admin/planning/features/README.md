@@ -10,7 +10,23 @@
 
 ### Active Features
 
-- **[Transition-Plan Two-Mode](transition-plan-two-mode/README.md)** - Implement two-mode pattern for `/transition-plan` command (🔴 Not Started)
+- **[Explore Two-Mode](explore-two-mode/README.md)** - Apply two-mode pattern to `/explore` command (🟡 Planned, 🔴 High Priority) ⭐ **NEW**
+  - Phase 1: Exploration & Research (~1 hr)
+  - Phase 2: Implementation (~2 hrs)
+  - Estimated: ~3 hours
+  - Source: reflection-transition-plan-two-mode-2025-12-29.md
+
+- **[Decision Two-Mode](decision-two-mode/README.md)** - Apply two-mode pattern to `/decision` command (🟡 Planned, 🟢 Low Priority)
+  - Blocked by: explore-two-mode completion
+  - Estimated: ~3 hours
+  - Source: reflection-transition-plan-two-mode-2025-12-29.md
+
+- **[Reflect Two-Mode](reflect-two-mode/README.md)** - Evaluate two-mode pattern for `/reflect` command (🔴 Needs Evaluation, 🟢 Low Priority)
+  - May not be needed - requires evaluation
+  - Estimated: ~2.5 hours (if implemented)
+  - Source: reflection-transition-plan-two-mode-2025-12-29.md
+
+- **[Transition-Plan Two-Mode](transition-plan-two-mode/README.md)** - Implement two-mode pattern for `/transition-plan` command (✅ Complete)
   - Phase 1: Workflow Overview (~30 min)
   - Phase 2: Setup Mode Workflow (~1-2 hrs)
   - Phase 3: Expand Mode Workflow (~2 hrs)
@@ -173,6 +189,6 @@ None currently - all features are either complete or have status discrepancies t
 
 ---
 
-**Last Updated:** 2025-12-29  
+**Last Updated:** 2025-12-30  
 **Status:** ✅ Active  
 **Next:** See individual feature directories for current work

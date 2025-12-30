@@ -24,6 +24,13 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 - **[Release Distribution Workflow](release-distribution/README.md)** - Automated distribution package creation
 
+### Quick Fixes
+
+- **[Template Sync Drift Fix](template-sync-drift-fix/README.md)** - Fix template sync drift causing CI failures (🔴 Not Started, 🔴 High Priority) ⭐ **NEW**
+  - `status.md` file drifted between templates
+  - Effort: Quick (~30 min)
+  - Source: reflection-transition-plan-two-mode-2025-12-29.md
+
 ### Active
 
 - **[Command Documentation & Maintenance](command-documentation-maintenance/README.md)** - Track command documentation updates and improvements (✅ Active)
@@ -79,5 +86,5 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 ---
 
-**Last Updated:** 2025-12-12  
+**Last Updated:** 2025-12-30  
 **Status:** 🟠 Active Development
