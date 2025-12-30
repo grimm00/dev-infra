@@ -20,7 +20,8 @@
 
 ### CI/CD Improvement Learnings
 
-- **[CI Git Configuration Learnings](ci-git-configuration/README.md)** - Learnings from CI Git Configuration improvement (1 phase, ✅ Complete, PR #47) ⭐ **NEW**
+- **[Template Sync Drift Fix Learnings](template-sync-drift-fix/README.md)** - Learnings from template sync drift fix (✅ Complete, PR #57) - Transition-plan workflow validation, CI folder organization insights ⭐ **NEW**
+- **[CI Git Configuration Learnings](ci-git-configuration/README.md)** - Learnings from CI Git Configuration improvement (1 phase, ✅ Complete, PR #47)
 
 ### Learning Documents
 
@@ -47,16 +48,16 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 19  
+**Total Learning Documents:** 20  
 **Feature-Specific Learnings:** 6 features (16 phases + 5 fix batches + 1 release total)  
-**CI/CD Improvement Learnings:** 1 improvement (1 phase)  
+**CI/CD Improvement Learnings:** 2 improvements  
 **Status:** ✅ Active
 
 **Recent Additions:**
-- **Transition-Plan Two-Mode Feature Learnings (2025-12-29)** - Two-mode pattern, phase batching, pattern replication
+- **Template Sync Drift Fix Learnings (2025-12-30)** - Transition-plan workflow validation, CI folder organization insights
+- Transition-Plan Two-Mode Feature Learnings (2025-12-29) - Two-mode pattern, phase batching, pattern replication
 - Fix Management Workflow Learnings (2025-12-15) - Cross-PR fix batch workflow learnings (all 8 batches complete)
-- Experimental Template Phase 3 Learnings (2025-12-15) - CI drift detection learnings
 
 ---
 
-**Last Updated:** 2025-12-29
+**Last Updated:** 2025-12-30
