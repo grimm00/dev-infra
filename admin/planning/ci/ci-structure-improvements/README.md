@@ -27,7 +27,7 @@ This CI improvement consolidates several organizational suggestions from the tem
 
 | Improvement | Priority | Status | Notes |
 |-------------|----------|--------|-------|
-| Classification guidance | 🔴 High | 🔴 Not Started | Quick win, ~15 min |
+| Classification guidance | 🔴 High | ✅ Complete | Added to CI README (2025-12-30) |
 | Fixes subdirectory | 🟡 Medium | 🔴 Not Started | Consider for release bundle |
 | Folder reorganization | 🟢 Low | ⏸️ Deferred | Align with project restructure |
 

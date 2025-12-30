@@ -12,6 +12,31 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 ---
 
+## 📋 Classification Guidelines
+
+**When creating CI/CD work, use this guide to determine the appropriate structure:**
+
+| Classification | Criteria | Structure | Example |
+|----------------|----------|-----------|---------|
+| **Fix** | < 1 hour effort | Single file or bundled with release | Template sync drift (PR #57) |
+| | Single PR | Track in release notes | CI git configuration (PR #47) |
+| | Resolves existing bug/failure | No dedicated hub needed | |
+| | No new capability | | |
+| **Improvement** | > 1 hour effort | Full hub directory | Multi-environment testing |
+| | New capability added | Multiple phase files | Template generation automation |
+| | May span multiple PRs | Transition plan | Release automation v2 |
+| | Changes workflows | | |
+
+**Key Principles:**
+- **Quick fixes** can be bundled with major releases rather than getting separate PRs
+- **Use `/transition-plan`** for structured CI improvements (validated in PR #57)
+- **Three-phase pattern** works well for CI fixes: Analysis → Implementation → Verification
+- **Document decisions** even for simple fixes to build organizational knowledge
+
+**Reference:** [Template Sync Drift Fix](template-sync-drift-fix/) - Example of a well-documented CI fix using transition-plan workflow.
+
+---
+
 ## 📊 Status Documentation
 
 - **[Detailed Status Analysis](STATUS.md)** - Comprehensive analysis of all CI projects, completion status, and next steps

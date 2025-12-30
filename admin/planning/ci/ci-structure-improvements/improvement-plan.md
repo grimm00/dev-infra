@@ -105,7 +105,7 @@ ci/
 ## 📈 Implementation Approach
 
 ### Immediate (Can Do Now)
-- [ ] Add classification guidance to `admin/planning/ci/README.md`
+- [x] Add classification guidance to `admin/planning/ci/README.md` ✅ (2025-12-30)
 
 ### Bundle with Next Release
 - [ ] Create `ci/fixes/` if valuable (evaluate during release)
@@ -121,8 +121,8 @@ ci/
 ## ✅ Definition of Done
 
 **Minimum Viable:**
-- [ ] CI README has classification guidance
-- [ ] Contributors know when to use full hub vs simple tracking
+- [x] CI README has classification guidance ✅ (2025-12-30)
+- [x] Contributors know when to use full hub vs simple tracking ✅
 
 **Full Implementation (if bundled):**
 - [ ] `ci/fixes/` subdirectory created (if valuable)
