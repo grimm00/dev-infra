@@ -51,7 +51,7 @@ Identify the drift source and determine which template has the correct version o
 **Expected Result:**
 
 - Script reports drift in `.cursor/commands/status.md`
-- No other files should be drifted
+- No other files should show drift
 
 **Checklist:**
 
