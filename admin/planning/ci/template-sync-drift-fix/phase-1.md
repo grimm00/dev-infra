@@ -157,11 +157,11 @@ git log --oneline -5 -- templates/learning-project/.cursor/commands/status.md
 
 ## 📊 Progress Tracking
 
-| Task                     | Status      | Notes                                       |
-| ------------------------ | ----------- | ------------------------------------------- |
+| Task                     | Status      | Notes                                         |
+| ------------------------ | ----------- | --------------------------------------------- |
 | Task 1: Run Validation   | ✅ Complete | Drift confirmed: `.cursor/commands/status.md` |
-| Task 2: Compare Versions | ✅ Complete | Diff: standard has extra trailing blank line |
-| Task 3: Determine Source | ✅ Complete | Use learning-project (cleaner file ending)  |
+| Task 2: Compare Versions | ✅ Complete | Diff: standard has extra trailing blank line  |
+| Task 3: Determine Source | ✅ Complete | Use learning-project (cleaner file ending)    |
 
 ---
 
@@ -171,7 +171,8 @@ git log --oneline -5 -- templates/learning-project/.cursor/commands/status.md
 
 **File:** `.cursor/commands/status.md`
 
-**Difference:** 
+**Difference:**
+
 - Standard-project: 495 lines (extra blank line at end)
 - Learning-project: 494 lines (clean ending)
 
@@ -180,6 +181,7 @@ git log --oneline -5 -- templates/learning-project/.cursor/commands/status.md
 **Source of Truth:** `learning-project`
 
 **Rationale:**
+
 - Content is identical between both files
 - Learning-project has cleaner file ending (no unnecessary trailing blank line)
 - Best practice: files should end with single newline
@@ -187,6 +189,7 @@ git log --oneline -5 -- templates/learning-project/.cursor/commands/status.md
 **Direction:** `learning → standard` (copy from learning-project to standard-project)
 
 **Commit Message Notes:**
+
 - File: `.cursor/commands/status.md`
 - Fix: Remove trailing blank line from standard-project
 - Summary: Sync status.md to resolve template drift
