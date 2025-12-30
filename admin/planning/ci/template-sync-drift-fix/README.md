@@ -11,6 +11,15 @@
 ## 📋 Quick Links
 
 - **[Improvement Plan](improvement-plan.md)** - Implementation plan
+- **[Transition Plan](transition-plan.md)** - Transition plan with phases
+
+### Phases
+
+| Phase | Name | Status |
+|-------|------|--------|
+| [Phase 1](phase-1.md) | Analysis | ✅ Complete |
+| [Phase 2](phase-2.md) | Implementation | 🔴 Scaffolding |
+| [Phase 3](phase-3.md) | Verification | 🔴 Scaffolding |
 
 ### Related
 
