@@ -28,9 +28,14 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 - **[Command Documentation & Maintenance](command-documentation-maintenance/README.md)** - Track command documentation updates and improvements (✅ Active)
 
-### Planned (v0.6.0)
+### Planned
 
-- **[GitHub Release Automation](github-release-automation/README.md)** - Auto-create GitHub Releases from tags (🔴 Not Started, 🔴 High Priority) ⭐ **NEW**
+- **[CI Structure Improvements](ci-structure-improvements/README.md)** - CI folder organization & classification guidance (🔴 Not Started, 🟡 Medium Priority) ⭐ **NEW**
+  - Add fix vs improvement classification
+  - Consider bundling with major release
+  - Input for broader project restructure
+
+- **[GitHub Release Automation](github-release-automation/README.md)** - Auto-create GitHub Releases from tags (🔴 Not Started, 🔴 High Priority)
   - Discovered in v0.5.0 release
   - Eliminates manual `gh release create` step
   - Effort: LOW (30 minutes)

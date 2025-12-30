@@ -12,6 +12,7 @@
 
 - **[Feature Plan](feature-plan.md)** - Feature overview and goals
 - **[Status & Next Steps](status-and-next-steps.md)** - Current progress tracking
+- **[Transition-Plan Validation](transition-plan-validation.md)** - Evidence from PR #57 ⭐ **NEW**
 
 ### Related
 
@@ -19,6 +20,7 @@
 - **[/research Command](../../../../.cursor/commands/research.md)** - Pattern source (has `--conduct`)
 - **[/transition-plan Command](../../../../.cursor/commands/transition-plan.md)** - Recent two-mode implementation
 - **[Transition-Plan Two-Mode Learnings](../../opportunities/internal/dev-infra/learnings/transition-plan-two-mode/)** - Learnings to apply
+- **[Template Sync Drift Fix](../../ci/template-sync-drift-fix/)** - Example of transition-plan in action (PR #57)
 
 ---
 
