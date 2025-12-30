@@ -20,7 +20,7 @@
 |-------|------|--------|
 | [Phase 1](phase-1.md) | Analysis | ✅ Complete |
 | [Phase 2](phase-2.md) | Implementation | ✅ Complete |
-| [Phase 3](phase-3.md) | Verification | ✅ Expanded |
+| [Phase 3](phase-3.md) | Verification | ✅ Complete |
 
 ### Related
 
@@ -42,7 +42,7 @@ Address the template sync drift (`status.md` file) causing CI failures. This dri
 |------|--------|
 | Identify drift source | ✅ Complete |
 | Sync files | ✅ Complete |
-| Verify CI passes | 🟡 Pending PR |
+| Verify CI passes | ✅ Complete |
 
 ---
 

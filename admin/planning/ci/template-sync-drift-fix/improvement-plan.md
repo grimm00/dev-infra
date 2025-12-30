@@ -86,7 +86,7 @@ Resolves template sync drift causing CI failures."
 - [x] Files synced between templates
 - [x] Template sync validation passes locally
 - [x] Changes committed and pushed
-- [ ] CI passes (pending PR merge)
+- [x] CI passes ✅
 
 ---
 
