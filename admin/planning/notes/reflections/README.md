@@ -10,7 +10,8 @@
 
 ### Reflection Documents
 
-- **[Transition-Plan Two-Mode Reflection](reflection-transition-plan-two-mode-2025-12-29.md)** - Feature reflection with cross-feature learnings: two-mode pattern, batching, pattern replication (2025-12-29) ⭐ **NEW**
+- **[Template Sync Drift Fix Reflection](reflection-template-sync-drift-fix-2025-12-30.md)** - CI improvement reflection: transition-plan workflow validation, CI folder organization suggestions (2025-12-30) ⭐ **NEW**
+- **[Transition-Plan Two-Mode Reflection](reflection-transition-plan-two-mode-2025-12-29.md)** - Feature reflection with cross-feature learnings: two-mode pattern, batching, pattern replication (2025-12-29)
 - **[Experimental Template Reflection](reflection-experimental-template-2025-12-15.md)** - Complete feature reflection (4 phases) with learnings and fix analysis (2025-12-15)
 - **[Release Automation v2 Reflection](reflection-release-automation-v2-2025-12-12.md)** - Complete feature reflection with cross-phase learnings and fix analysis (2025-12-12)
 - **[v0.4.0 Release Cycle Reflection](reflection-v0.4.0-release-cycle-2025-12-11.md)** - Post-release analysis with actionable suggestions for v0.5.0 (2025-12-11)
@@ -37,13 +38,14 @@ This directory contains project-wide reflection documents that analyze project s
 
 ## 📊 Summary
 
-**Total Reflection Documents:** 13  
+**Total Reflection Documents:** 14  
 **Status:** ✅ Active
 
 **Recent Reflections:**
+- Template Sync Drift Fix (2025-12-30) - CI folder organization, transition-plan workflow validation
 - Transition-Plan Two-Mode (2025-12-29) - Two-mode pattern adoption for future commands
 
 ---
 
-**Last Updated:** 2025-12-29
+**Last Updated:** 2025-12-30
 
