@@ -223,7 +223,7 @@ ELSE:
 
 **Content to Add:**
 
-````markdown
+`````markdown
 ### 4. Expand Tasks with Detail
 
 **This is the core expansion step.** Transform task categories into detailed, actionable tasks.
@@ -257,6 +257,8 @@ ELSE:
        assert result == expected
    ```
 ````
+`````
+
 ````
 
 2. **GREEN - Implement minimum code:**
@@ -288,7 +290,7 @@ ELSE:
 
 **For Documentation phases:**
 
-```markdown
+````markdown
 ### Task N: [Task Name]
 
 **Purpose:** [Why this task exists]
@@ -299,8 +301,10 @@ ELSE:
 - [ ] Update any cross-references
 
 **Content to Add:**
+
 ```markdown
 [Specific markdown content to add]
+```
 ````
 
 **Checklist:**

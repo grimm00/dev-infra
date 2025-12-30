@@ -19,15 +19,15 @@
 
 ### Key Metrics
 
-| Metric | Value | Notes |
-|--------|-------|-------|
-| Phases Complete | 4/4 (100%) | All implementation done |
-| Time Estimated | 4-6 hours | Original estimate |
-| Time Actual | ~3 hours | 50-75% of estimate |
-| Lines Added | ~630 lines | To transition-plan.md |
-| Total Command Length | 1,778 lines | Was ~1,100 lines |
-| Deferred Issues | 6 | All MEDIUM/LOW |
-| CRITICAL/HIGH Issues | 0 | None found |
+| Metric               | Value       | Notes                   |
+| -------------------- | ----------- | ----------------------- |
+| Phases Complete      | 4/4 (100%)  | All implementation done |
+| Time Estimated       | 4-6 hours   | Original estimate       |
+| Time Actual          | ~3 hours    | 50-75% of estimate      |
+| Lines Added          | ~630 lines  | To transition-plan.md   |
+| Total Command Length | 1,778 lines | Was ~1,100 lines        |
+| Deferred Issues      | 6           | All MEDIUM/LOW          |
+| CRITICAL/HIGH Issues | 0           | None found              |
 
 ---
 
@@ -38,6 +38,7 @@
 **Pattern:** Separating scaffolding creation from detail expansion creates a natural human review checkpoint.
 
 **Evidence:**
+
 - `/research` uses this pattern successfully (`--conduct`)
 - `/transition-plan` now mirrors this pattern (`--expand`)
 - Clear status indicators (`🔴 Scaffolding` → `✅ Expanded`)
@@ -52,6 +53,7 @@
 **Pattern:** Using an existing command as a template accelerates new command development.
 
 **Evidence:**
+
 - `/research --conduct` provided the structural template
 - 1:1 mapping between workflows (7 steps each)
 - Reduced design decisions needed
@@ -66,6 +68,7 @@
 **Pattern:** Combining related work reduces overhead without sacrificing quality.
 
 **Evidence:**
+
 - Phases 1+2 → PR #55, Phases 3+4 → PR #56
 - Task batching after pattern established in Phase 3
 - Reduced PR overhead (2 PRs vs 4)
@@ -80,6 +83,7 @@
 **Pattern:** Commands that support each other create efficient workflows.
 
 **Evidence:**
+
 - `/pre-phase-review` → `/address-review` → `/task-phase` → `/pr` → `/pr-validation` → `/post-pr` → `/int-opp` → `/reflect`
 - Each command has clear handoff to next
 - Status tracking maintains context
@@ -93,6 +97,7 @@
 **Pattern:** Centralized hubs with linked spokes keep documentation navigable.
 
 **Evidence:**
+
 - Feature hub links to phases, ADRs, status
 - Fix tracking organized by PR number
 - Learnings organized by feature/phase
@@ -112,11 +117,11 @@
 
 **Suggestion:** Prioritize two-mode pattern for:
 
-| Command | Pattern Opportunity | Priority | Effort |
-|---------|-------------------|----------|--------|
-| `/explore` | Setup scaffolding → Conduct exploration | 🟠 HIGH | ~2-3 hrs |
-| `/decision` | ADR scaffolding → Detail expansion | 🟡 MEDIUM | ~2-3 hrs |
-| `/reflect` | Structure → Content separation | 🟢 LOW | ~1-2 hrs |
+| Command     | Pattern Opportunity                     | Priority  | Effort   |
+| ----------- | --------------------------------------- | --------- | -------- |
+| `/explore`  | Setup scaffolding → Conduct exploration | 🟠 HIGH   | ~2-3 hrs |
+| `/decision` | ADR scaffolding → Detail expansion      | 🟡 MEDIUM | ~2-3 hrs |
+| `/reflect`  | Structure → Content separation          | 🟢 LOW    | ~1-2 hrs |
 
 **Effort:** ~2-3 hours per command (based on transition-plan learnings)
 
@@ -129,6 +134,7 @@
 **Impact:** Documentation may not render correctly in Cursor IDE preview.
 
 **Suggestion:** Add to documentation standards:
+
 1. Use 4-backtick outer fences when nesting
 2. Maximum 2 levels of nesting
 3. Verify rendering before PR
@@ -144,6 +150,7 @@
 **Impact:** User confusion when trying to use referenced but undocumented features.
 
 **Suggestion:** Add to command documentation checklist:
+
 - Cross-reference validation between Options and Troubleshooting
 - Verify all referenced flags are documented
 - Consider automated validation
@@ -159,6 +166,7 @@
 **Impact:** Time spent investigating failures not related to PR changes.
 
 **Suggestion:** Create "known CI issues" tracking:
+
 - Document pre-existing failures
 - Include in PR validation workflow
 - Clear process for resolving vs ignoring
@@ -174,6 +182,7 @@
 **Impact:** User confusion about correct invocation syntax.
 
 **Suggestion:** Define canonical example format per command:
+
 - Single source of truth for syntax
 - Consistent variable naming (`[phase-N]`, `[task-N]`)
 - Cross-command reference validation
@@ -191,6 +200,7 @@
 **Impact:** Harder to navigate, maintain, and understand.
 
 **Mitigation:**
+
 - Consider splitting into multiple files (workflow-setup.md, workflow-expand.md)
 - Or accept length as trade-off for comprehensive documentation
 - Add table of contents / better navigation
@@ -206,6 +216,7 @@
 **Impact:** CI failures not related to PR changes cause confusion.
 
 **Mitigation:**
+
 - Address drift in dedicated PR
 - Add to "known issues" tracking
 - Consider sync automation
@@ -221,6 +232,7 @@
 **Impact:** Other projects using global commands don't have two-mode pattern.
 
 **Mitigation:**
+
 - Copy updated command to global location
 - Consider automated sync mechanism
 - Document manual copy process
@@ -243,15 +255,18 @@
 Copy updated command to global location for use in all projects.
 
 **Command:**
+
 ```bash
 cp .cursor/commands/transition-plan.md ~/.cursor/commands/transition-plan.md
 ```
 
 **Benefits:**
+
 - All projects get two-mode pattern
 - Consistent experience across projects
 
 **Next Steps:**
+
 1. Copy file to global location
 2. Verify command works in another project
 
@@ -267,17 +282,20 @@ cp .cursor/commands/transition-plan.md ~/.cursor/commands/transition-plan.md
 Refactor `/explore` to use Setup + Conduct pattern, mirroring `/research` and `/transition-plan`.
 
 **Benefits:**
+
 - Human review before detailed exploration
 - Predictable output sizes
 - Consistent command UX
 
 **Next Steps:**
+
 1. Create exploration for `/explore` two-mode pattern
 2. Research scaffolding vs conduct content boundaries
 3. Create ADRs if needed
 4. Implement following transition-plan pattern
 
 **Related:**
+
 - [Transition-Plan Two-Mode Learnings](../opportunities/internal/dev-infra/learnings/transition-plan-two-mode/)
 - [/explore command](.cursor/commands/explore.md)
 
@@ -293,10 +311,12 @@ Refactor `/explore` to use Setup + Conduct pattern, mirroring `/research` and `/
 Address the template sync drift causing CI failures.
 
 **Benefits:**
+
 - Clean CI status
 - No confusion during PR validation
 
 **Next Steps:**
+
 1. Identify source of drift (`status.md`)
 2. Sync file between templates
 3. Commit fix
@@ -316,10 +336,12 @@ Address the template sync drift causing CI failures.
 Add documentation standards for nested code blocks to prevent rendering issues.
 
 **Benefits:**
+
 - Consistent rendering across IDEs
 - Prevent future issues
 
 **Next Steps:**
+
 1. Add to cursor rules or documentation standards
 2. Audit existing commands for issues
 3. Fix problematic nesting
@@ -336,6 +358,7 @@ Add documentation standards for nested code blocks to prevent rendering issues.
 Create checklist for command documentation to ensure consistency.
 
 **Contents:**
+
 - [ ] All flags documented in Options
 - [ ] Troubleshooting only references documented flags
 - [ ] Examples use consistent syntax
@@ -343,6 +366,7 @@ Create checklist for command documentation to ensure consistency.
 - [ ] Rendering verified in IDE preview
 
 **Benefits:**
+
 - Fewer documentation inconsistencies
 - Better user experience
 
@@ -360,10 +384,12 @@ Create checklist for command documentation to ensure consistency.
 Refactor `/decision` to use Setup + Expand pattern for ADR creation.
 
 **Benefits:**
+
 - ADR scaffolding for review before detail
 - Consistent with other two-mode commands
 
 **Next Steps:**
+
 1. After `/explore` two-mode is complete
 2. Follow same pattern as transition-plan
 
@@ -381,6 +407,7 @@ Evaluate whether `/reflect` would benefit from Setup + Expand pattern.
 **Note:** May not be needed - reflections are already naturally iterative.
 
 **Benefits:**
+
 - Structure review before content generation
 - Predictable output
 
@@ -444,11 +471,13 @@ Evaluate whether `/reflect` would benefit from Setup + Expand pattern.
 
 ```markdown
 ## Setup Mode (default)
+
 - Creates scaffolding (~60-80 lines)
 - Status indicator: 🔴 Scaffolding
 - Human review point before expansion
 
 ## Expand Mode (--expand)
+
 - Fills scaffolding with detail (~200-300 lines)
 - Status indicator: ✅ Expanded
 - TDD ordering for code phases
@@ -460,6 +489,7 @@ Evaluate whether `/reflect` would benefit from Setup + Expand pattern.
 #### 2. Pattern Replication Checklist
 
 **For new commands:**
+
 - [ ] Identify pattern source (existing command with similar workflow)
 - [ ] Create 1:1 structural mapping
 - [ ] Document mapping table in implementation notes
@@ -470,6 +500,7 @@ Evaluate whether `/reflect` would benefit from Setup + Expand pattern.
 #### 3. Batching Decision Tree
 
 **For phases:**
+
 ```
 Are phases docs-only?
 ├─ Yes → Are they logically related?
@@ -481,6 +512,7 @@ Are phases docs-only?
 ```
 
 **For tasks:**
+
 ```
 Is Task 1 complete?
 ├─ Yes → Does pattern apply to remaining tasks?
@@ -504,4 +536,3 @@ Is Task 1 complete?
 
 **Last Updated:** 2025-12-29  
 **Next Reflection:** After `/explore` two-mode implementation or next significant feature
-
