@@ -3,7 +3,7 @@
 **Purpose:** List of research topics/questions to investigate  
 **Status:** 🔴 Pending Research  
 **Created:** 2025-12-22  
-**Last Updated:** 2025-12-22
+**Last Updated:** 2025-12-31
 
 ---
 
@@ -31,7 +31,41 @@ This document lists research topics and questions that need investigation before
 
 ---
 
-### Research Topic 2: Integration Points and Data Flow
+### Research Topic 2: Shared Contracts and Business Logic (NEW)
+
+**Question:** How should dev-infra coordinate shared schemas and business logic across all four arms while maintaining standalone usability?
+
+**Why:** Each project needs to work independently for external users, but internal development requires consistent contracts (API schemas, database models, JSON store formats).
+
+**Priority:** High
+
+**Status:** 🔴 Not Started
+
+**Sub-questions:**
+- Where should shared contracts live in dev-infra? (`admin/contracts/`, templates, or elsewhere?)
+- How are contracts distributed to consuming projects?
+- How do external users get contracts when using a project standalone?
+- How are contract changes coordinated across arms?
+- Should contracts be versioned separately from templates?
+- What validation ensures implementations match contracts?
+
+**Contracts to consider:**
+1. **work-prod API Schema** - OpenAPI spec (already exists in work-prod)
+2. **work-prod Database Schema** - SQLAlchemy models / migration definitions
+3. **proj-cli JSON Store Schema** - JSON schema for local data store
+4. **Project Model Definition** - Shared data model across all arms
+
+**Options to explore:**
+1. **Embedded contracts:** Each project has its own copy (simple, but drift risk)
+2. **Shared source:** dev-infra holds canonical contracts, projects sync (coordinated, but complex)
+3. **Published contracts:** dev-infra publishes contracts as artifacts (versioned, but overhead)
+4. **Hybrid:** Different strategies for different contract types
+
+**Existing pattern:** `admin/planning/standards/openapi-source-of-truth/` establishes work-prod's OpenAPI spec as authoritative - could extend this pattern.
+
+---
+
+### Research Topic 3: Integration Points and Data Flow
 
 **Question:** How should the four projects communicate with each other?
 
@@ -54,7 +88,7 @@ This document lists research topics and questions that need investigation before
 
 ---
 
-### Research Topic 3: Managed Project Lifecycle
+### Research Topic 4: Managed Project Lifecycle
 
 **Question:** What does "managed by dev-infra" mean for different project types?
 
@@ -77,7 +111,7 @@ This document lists research topics and questions that need investigation before
 
 ---
 
-### Research Topic 4: Version Coordination
+### Research Topic 5: Version Coordination
 
 **Question:** How should versions coordinate across the four projects?
 
@@ -100,7 +134,7 @@ This document lists research topics and questions that need investigation before
 
 ---
 
-### Research Topic 5: Workspace-Level Coordination
+### Research Topic 6: Workspace-Level Coordination
 
 **Question:** How should these four projects work together in a Cursor workspace?
 
@@ -128,17 +162,19 @@ This document lists research topics and questions that need investigation before
 | Topic | Priority | Complexity | Dependencies |
 |-------|----------|------------|--------------|
 | Command Distribution Ownership | High | Medium | Global Command Distribution research |
-| Integration Points | High | High | All four projects |
+| **Shared Contracts (NEW)** | **High** | **High** | **OpenAPI standard, all four projects** |
+| Integration Points | High | High | All four projects, Shared Contracts |
 | Managed Project Lifecycle | Medium | Medium | Terraform-style research |
 | Version Coordination | Medium | Low | None |
 | Workspace Coordination | Low | Medium | None |
 
 **Recommended Research Order:**
 1. Command Distribution Ownership (informs dev-toolkit roadmap)
-2. Integration Points (architectural foundation)
-3. Managed Project Lifecycle (clarifies proj-cli scope)
-4. Version Coordination (release planning)
-5. Workspace Coordination (nice-to-have)
+2. **Shared Contracts (foundational - affects all integration decisions)**
+3. Integration Points (architectural foundation, builds on contracts)
+4. Managed Project Lifecycle (clarifies proj-cli scope)
+5. Version Coordination (release planning)
+6. Workspace Coordination (nice-to-have)
 
 ---
 
@@ -158,6 +194,6 @@ This document lists research topics and questions that need investigation before
 
 ---
 
-**Last Updated:** 2025-12-22
+**Last Updated:** 2025-12-31
 
 
