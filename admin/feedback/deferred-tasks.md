@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2025-12-23
+**Last Updated:** 2025-12-31
 
 ---
 
@@ -10,12 +10,12 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 53
+**Total Tasks:** 54
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
-- 🟡 **MEDIUM**: 27 tasks
+- 🟡 **MEDIUM**: 28 tasks
 - 🟢 **LOW**: 18 tasks (1 fixed)
-- 📋 **Workflow**: 1 task (new)
+- 📋 **Workflow**: 1 task
 
 ---
 
@@ -324,7 +324,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
-**Last Updated:** 2025-12-23  
+**Last Updated:** 2025-12-31  
 **Status:** 📋 Active Backlog
 
 ---
@@ -529,3 +529,19 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
   2. Update `admin/explorations/[exploration]/research-topics.md` topic status to "✅ Complete" with link to research document
 - **Current Workaround:** Manually update exploration research-topics.md after completing research
 - **Status:** 🟡 Planned
+
+---
+
+## PR #58 Additions
+
+**Date:** 2025-12-31  
+**Status:** ✅ Most issues fixed, one deferred to backlog
+
+### Fixed in PR #58
+
+- ✅ **Checksum verification example** - Fixed filename mismatch in docs (Comment #2, Overall-1)
+- ✅ **Unused TOKEN variable** - Removed unused variable from upload step (Overall-2)
+
+### Deferred from PR #58
+
+- Task 54: Centralize artifact naming in release workflow (MEDIUM priority, LOW effort) - Currently upload step hardcodes `PACKAGE_NAME="dev-infra-..."` instead of using `steps.get_version.outputs.package_name`. Values are same now but could diverge. (PR58-#1)
