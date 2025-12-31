@@ -10,6 +10,13 @@
 
 ### Active Features
 
+- **[Command Distribution](command-distribution/README.md)** - Implement command distribution from dev-infra to dev-toolkit (🔴 Not Started, 🔴 High Priority) ⭐ **NEW**
+  - Phase 1: dev-infra Release Artifacts (~2-3 hrs)
+  - Phase 2: dt-cursor-install Implementation (~4-6 hrs)
+  - Phase 3: Documentation & Standard (~2-3 hrs)
+  - Estimated: ~8-12 hours (cross-project)
+  - Source: ADR-001 (Four-Arm Architecture)
+
 - **[Explore Two-Mode](explore-two-mode/README.md)** - Apply two-mode pattern to `/explore` command (🟡 Planned, 🔴 High Priority) ⭐ **NEW**
   - Phase 1: Exploration & Research (~1 hr)
   - Phase 2: Implementation (~2 hrs)
@@ -189,6 +196,6 @@ None currently - all features are either complete or have status discrepancies t
 
 ---
 
-**Last Updated:** 2025-12-30  
+**Last Updated:** 2025-12-31  
 **Status:** ✅ Active  
 **Next:** See individual feature directories for current work
