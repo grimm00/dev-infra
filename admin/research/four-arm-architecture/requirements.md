@@ -143,17 +143,65 @@ This document captures requirements discovered during research on the four-arm a
 
 ---
 
-### Integration Points (from Topic 3 - Pending)
+### Integration Points (from Topic 3)
 
-#### FR-IP-1: [Pending - Integration Points]
+#### FR-IP-1: proj-cli REST API Communication
 
-**Description:** [To be determined from research]
+**Description:** proj-cli MUST continue using REST API for work-prod communication. The current implementation is well-designed and follows best practices.
 
 **Source:** [research-integration-points.md](research-integration-points.md)
 
 **Priority:** High
 
-**Status:** 🔴 Pending Research
+**Status:** ✅ Validated (already implemented)
+
+---
+
+#### FR-IP-2: dt-cursor-install Implementation
+
+**Description:** dev-toolkit MUST implement `dt-cursor-install` command for command distribution (ties to Topic 1 requirement).
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### FR-IP-3: dt-cursor-install Source Location
+
+**Description:** `dt-cursor-install` MUST read commands from dev-infra repository (not duplicated in dev-toolkit).
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### FR-IP-4: Global Command Destination
+
+**Description:** `dt-cursor-install` MUST copy commands to `~/.cursor/commands/` directory.
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### FR-IP-5: Version Tracking
+
+**Description:** `dt-cursor-install` SHOULD track installed version for update detection.
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending Implementation
 
 ---
 
@@ -261,6 +309,56 @@ This document captures requirements discovered during research on the four-arm a
 
 ---
 
+### Integration Points (from Topic 3)
+
+#### NFR-IP-1: Optional Integrations
+
+**Description:** All integrations MUST be optional. Tools MUST degrade gracefully when other arms are unavailable.
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated (already achieved)
+
+---
+
+#### NFR-IP-2: Offline Core Functionality
+
+**Description:** Tools MUST work offline for core functionality. Network is only required for optional integrations.
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated (already achieved)
+
+---
+
+#### NFR-IP-3: XDG Configuration Pattern
+
+**Description:** Configuration MUST follow XDG Base Directory pattern for consistency with other CLI tools.
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+**Priority:** Medium
+
+**Status:** ✅ Validated (proj-cli implements this)
+
+---
+
+#### NFR-IP-4: No Runtime Dependencies
+
+**Description:** Tools MUST NOT have runtime dependencies between each other. Dependencies are install-time only.
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated (already achieved)
+
+---
+
 ### Version Coordination (from Topic 5 - Pending)
 
 #### NFR-VC-1: [Pending - Version Coordination]
@@ -331,6 +429,24 @@ This document captures requirements discovered during research on the four-arm a
 **Description:** Complex contract infrastructure (schema registries, automated sync, consumer-driven contract testing) is NOT appropriate for current scale. Use process-based standards instead.
 
 **Source:** [research-shared-contracts.md](research-shared-contracts.md)
+
+---
+
+### Integration Points (from Topic 3)
+
+#### C-IP-1: No Shared Configuration
+
+**Description:** Shared configuration is NOT appropriate for the Four-Arm Architecture. Each tool should maintain its own configuration. Shared config adds complexity without proportional benefit.
+
+**Source:** [research-integration-points.md](research-integration-points.md)
+
+---
+
+#### C-IP-2: No Direct Tool Dependencies
+
+**Description:** proj-cli and dev-toolkit MUST NOT have direct dependencies on each other. They can both consume from other arms but should not depend on each other.
+
+**Source:** [research-integration-points.md](research-integration-points.md)
 
 ---
 

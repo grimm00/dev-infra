@@ -13,7 +13,7 @@ This research investigates how four interconnected projects should work together
 
 **Research Topics:** 6 topics  
 **Research Documents:** 6 documents  
-**Status:** 🟠 Research (2/6 complete)
+**Status:** 🟠 Research (3/6 complete)
 
 ---
 
@@ -36,7 +36,7 @@ This research investigates how four interconnected projects should work together
 |---|----------------|----------|--------|
 | 1 | Command Distribution Ownership | 🔴 High | ✅ Complete |
 | 2 | Shared Contracts and Business Logic | 🔴 High | ✅ Complete |
-| 3 | Integration Points and Data Flow | 🔴 High | 🔴 Not Started |
+| 3 | Integration Points and Data Flow | 🔴 High | ✅ Complete |
 | 4 | Managed Project Lifecycle | 🟡 Medium | 🔴 Not Started |
 | 5 | Version Coordination | 🟡 Medium | 🔴 Not Started |
 | 6 | Workspace-Level Coordination | 🟢 Low | 🔴 Not Started |
@@ -73,9 +73,16 @@ This research investigates how four interconnected projects should work together
 
 ---
 
-### Topic 3: Integration Points and Data Flow
+### Topic 3: Integration Points and Data Flow ✅
 
-**Finding:** [Pending research]
+**Finding:** The Four-Arm Architecture uses a **hybrid integration model**: REST API for data operations (proj-cli ↔ work-prod), file copy for installation (dev-toolkit ← dev-infra), and per-tool XDG-compliant configuration. **No shared configuration is needed.**
+
+**Key points:**
+- Current proj-cli → work-prod API integration is well-designed and should be the model
+- Use API for real-time data, files for installation/config
+- All dependencies are optional or one-time - no runtime coupling
+- XDG Base Directory pattern is right for tool configuration
+- Git tags provide version awareness without runtime coupling
 
 **Source:** [research-integration-points.md](research-integration-points.md)
 
@@ -119,7 +126,14 @@ This research investigates how four interconnected projects should work together
 - [x] **Insight 7:** Process-based standards work better than technical sync for small teams
 - [x] **Insight 8:** Standalone usability is already achieved via embedded contracts
 
-- [ ] Insight 9+: [Pending - from remaining research]
+**From Topic 3: Integration Points**
+- [x] **Insight 9:** API for real-time data (proj-cli ↔ work-prod), files for installation/config
+- [x] **Insight 10:** No shared configuration needed - each tool manages its own config
+- [x] **Insight 11:** Git tags/releases provide version awareness without runtime coupling
+- [x] **Insight 12:** XDG Base Directory is the right pattern for tool configuration
+- [x] **Insight 13:** All integrations are optional - supports standalone use
+
+- [ ] Insight 14+: [Pending - from remaining research]
 
 ---
 
@@ -134,6 +148,11 @@ This research investigates how four interconnected projects should work together
 - 4 Functional Requirements (FR-SC-1 through FR-SC-4)
 - 3 Non-Functional Requirements (NFR-SC-1 through NFR-SC-3)
 - 2 Constraints (C-SC-1, C-SC-2)
+
+**From Topic 3: Integration Points**
+- 5 Functional Requirements (FR-IP-1 through FR-IP-5)
+- 4 Non-Functional Requirements (NFR-IP-1 through NFR-IP-4)
+- 2 Constraints (C-IP-1, C-IP-2)
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -156,7 +175,15 @@ This research investigates how four interconnected projects should work together
 - [x] **Recommendation 10:** Document ownership matrix for each contract type
 - [x] **Recommendation 11:** Consider published packages only if team/complexity grows significantly
 
-- [ ] Recommendation 12+: [Pending - from remaining research]
+**From Topic 3: Integration Points**
+- [x] **Recommendation 12:** Keep proj-cli ↔ work-prod API integration as-is (it's well-designed)
+- [x] **Recommendation 13:** Implement `dt-cursor-install` for dev-infra → dev-toolkit → global commands flow
+- [x] **Recommendation 14:** Use Git tags for version awareness (simpler than GitHub API)
+- [x] **Recommendation 15:** Do NOT implement shared configuration - per-tool config is sufficient
+- [x] **Recommendation 16:** All integrations MUST be optional - graceful degradation when unavailable
+- [x] **Recommendation 17:** Follow XDG Base Directory pattern for any new configuration needs
+
+- [ ] Recommendation 18+: [Pending - from remaining research]
 
 ---
 
