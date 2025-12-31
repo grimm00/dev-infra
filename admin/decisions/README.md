@@ -2,7 +2,7 @@
 
 **Purpose:** Central hub for documenting architectural decisions and migration roadmaps  
 **Status:** ✅ Active  
-**Last Updated:** 2025-01-27
+**Last Updated:** 2025-12-31
 
 ---
 
@@ -11,7 +11,8 @@
 ### Architecture Decision Records (ADRs)
 
 **Active:**
-- **[Transition-Plan Two-Mode](transition-plan-two-mode/README.md)** - Adopt two-mode pattern for `/transition-plan` (🔴 Proposed) ⭐ **NEW**
+- **[Four-Arm Architecture](four-arm-architecture/README.md)** - How dev-infra, dev-toolkit, proj-cli, work-prod work together (✅ Accepted) ⭐ **NEW**
+- **[Transition-Plan Two-Mode](transition-plan-two-mode/README.md)** - Adopt two-mode pattern for `/transition-plan` (🔴 Proposed)
 - **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Project identity as template factory (✅ Accepted)
 
 **Previous:**
@@ -59,6 +60,6 @@ admin/decisions/
 
 ---
 
-**Last Updated:** 2025-12-29  
+**Last Updated:** 2025-12-31  
 **Status:** ✅ Active
 
