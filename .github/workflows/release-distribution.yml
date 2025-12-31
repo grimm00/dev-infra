@@ -291,12 +291,9 @@ jobs:
           VERSION="${{ steps.get_version.outputs.version }}"
           TAG_NAME="${{ github.event.release.tag_name }}"
           
-          # Use PAT if available, otherwise fall back to GITHUB_TOKEN
-          # PAT is needed for uploading to manually-created releases
-          TOKEN="${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}"
-          
           # Upload each file using GitHub CLI
           # Includes main distribution packages and command bundle
+          # Note: Uses PAT_TOKEN if available for manually-created releases
           gh release upload "$TAG_NAME" \
             "${PACKAGE_NAME}.tar.gz" \
             "${PACKAGE_NAME}.tar.gz.sha256" \

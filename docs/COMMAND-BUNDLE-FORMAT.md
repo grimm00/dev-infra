@@ -142,18 +142,18 @@ dt-cursor-install --status
 Always verify downloads using the SHA256 checksum:
 
 ```bash
-# Download bundle and checksum
+# Download bundle and checksum (keeping original filenames)
 VERSION="0.8.0"
-curl -L -o commands.tar.gz \
+curl -L -o "commands-v${VERSION}.tar.gz" \
   "https://github.com/grimm00/dev-infra/releases/download/v${VERSION}/commands-v${VERSION}.tar.gz"
-curl -L -o commands.tar.gz.sha256 \
+curl -L -o "commands-v${VERSION}.tar.gz.sha256" \
   "https://github.com/grimm00/dev-infra/releases/download/v${VERSION}/commands-v${VERSION}.tar.gz.sha256"
 
 # Verify (Linux)
-sha256sum -c commands.tar.gz.sha256
+sha256sum -c "commands-v${VERSION}.tar.gz.sha256"
 
 # Verify (macOS)
-shasum -a 256 -c commands.tar.gz.sha256
+shasum -a 256 -c "commands-v${VERSION}.tar.gz.sha256"
 ```
 
 **Expected output:**
