@@ -2,7 +2,7 @@
 
 **Purpose:** Research and analysis for dev-infra and template improvements  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-29
+**Last Updated:** 2025-12-30
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Active Research
 
-- **[Transition-Plan Two-Mode Pattern](transition-plan-two-mode/README.md)** - Redesigning `/transition-plan` with setup + expand modes (🔴 Research) ⭐ **NEW**
+- **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, topic unification (🔴 Research) ⭐ **NEW**
 - **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Research)
 - **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - State tracking, plan/apply workflow, CI/CD push updates (✅ Complete)
 - **[Global Command Distribution](global-command-distribution/README.md)** - Distributing dev-infra commands via `~/.cursor/commands/` (🟡 Research)
@@ -19,6 +19,7 @@
 
 ### Completed Research
 
+- **[Transition-Plan Two-Mode Pattern](transition-plan-two-mode/README.md)** - Redesigning `/transition-plan` with setup + expand modes (✅ Complete)
 - **[Dev-Infra Identity & Focus v1](dev-infra-identity-and-focus/README.md)** - Explore dev-infra identity: factory, laboratory, or reference implementation (✅ Complete)
 
 ### Previous Research
@@ -207,8 +208,8 @@ This research evaluates the current template structure against:
 
 ---
 
-**Last Updated:** 2025-12-29  
+**Last Updated:** 2025-12-30  
 **Status:** ✅ Active  
-**Latest Research:** [Transition-Plan Two-Mode Pattern](transition-plan-two-mode/README.md)
+**Latest Research:** [Explore Two-Mode Enhancement](explore-two-mode/README.md)
 
 
