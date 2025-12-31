@@ -23,6 +23,53 @@ What explicit input sources should `/explore` accept?
 - [ ] Goal 2: Identify other documents that could seed explorations (reflections, feature plans, ADRs)
 - [ ] Goal 3: Define how command extracts exploration context from each source type
 - [ ] Goal 4: Determine flag naming (`--from-start`, `--from-project-init`, etc.)
+- [ ] Goal 5: **NEW** Define how command handles raw/unstructured text input
+
+---
+
+## 💡 Pre-Research Insight: Raw Thoughts Input
+
+**Added:** 2025-12-31 (during research pivot)
+
+**Insight:** Unlike other commands that expect structured input, `/explore` could uniquely accept **raw, unstructured thoughts** as input. This positions `/explore` as the entry point for the ideation pipeline.
+
+**Input Structure Comparison:**
+
+| Command | Expected Input | Structure Level |
+|---------|----------------|-----------------|
+| `/research` | Research topics from exploration | 🟢 Organized |
+| `/decision` | Research findings | 🟢 Organized |
+| `/transition-plan` | ADRs (structured decisions) | 🟢 Organized |
+| `/reflect` | Project state (automated) | 🟢 Organized |
+| **`/explore`** | Raw thoughts, ideas, brain dumps | 🔴 **Unstructured** |
+
+**Two-Mode Value for Unstructured Input:**
+
+- **Setup Mode** becomes a "thought organizer" - takes chaos, outputs structure
+- **Conduct Mode** then expands the organized scaffold
+
+**Example transformation:**
+```
+Input: "I've been thinking about how our CLI could maybe talk to the 
+API but also maybe it should be more standalone and there's this 
+pattern I saw in terraform where you have state files and..."
+
+Output: Organized exploration scaffold with:
+- Key themes identified
+- Questions extracted  
+- Research topics suggested
+- Structure imposed on chaos
+```
+
+**Input Source Types to Research:**
+
+| Input Source | Structure | Two-Mode Value |
+|--------------|-----------|----------------|
+| `start.txt` | Semi-structured | Extract and organize |
+| Reflection artifacts | Structured | Reference and expand |
+| **Raw thoughts/text** | Unstructured | **Organize then expand** |
+
+**Impact:** This insight suggests `/explore` should support both `--from-*` flags for structured input AND direct text/stdin for unstructured input
 
 ---
 

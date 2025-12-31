@@ -15,19 +15,22 @@
 
 During Topic 1 research, we identified that dev-infra is not just a "template factory" but the **standard setter** for the entire four-arm architecture ecosystem:
 
-| Project | Role | Relationship |
-|---------|------|--------------|
-| **dev-infra** | Standard setter | Source of truth for patterns, commands, docs |
-| **dev-toolkit** | Utility distribution | Installs dev-infra commands globally |
-| **proj-cli** | Lifecycle management | Uses dev-infra patterns |
-| **work-prod** | Data backend | Uses dev-infra template structure |
+| Project         | Role                 | Relationship                                 |
+| --------------- | -------------------- | -------------------------------------------- |
+| **dev-infra**   | Standard setter      | Source of truth for patterns, commands, docs |
+| **dev-toolkit** | Utility distribution | Installs dev-infra commands globally         |
+| **proj-cli**    | Lifecycle management | Uses dev-infra patterns                      |
+| **work-prod**   | Data backend         | Uses dev-infra template structure            |
 
 This foundational context affects how we approach:
+
 - **Topic 2 (Topic Unification)** - Need to understand cross-project command patterns
 - **Topic 3 (Input Sources)** - Need to understand how projects share state
 - **Topic 6 (Cross-Command Consistency)** - Need to understand inter-project coordination
 
 **Resume after:** Complete `/research four-arm-architecture` and `/decision four-arm-architecture`
+
+**Insight captured during pivot:** `/explore` uniquely accepts unstructured "raw thoughts" input, making two-mode valuable as a "thought organizer" → see [research-explore-input-sources.md](research-explore-input-sources.md)
 
 ---
 

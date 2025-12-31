@@ -76,7 +76,8 @@ The existing `admin/planning/commands/` directory is specifically for **command 
 - [x] Insight 2: **Commands directory is for integration, not enhancement** - different purpose
 - [x] Insight 3: **Current features structure works** - `transition-plan-two-mode` success validates approach
 - [x] Insight 4: **Consolidation reduces duplication** - 4 similar features would benefit from shared structure
-- [ ] Insight 5: [Pending - Topic 2+]
+- [x] Insight 5: **Raw thoughts as input** - `/explore` uniquely can accept unstructured text, making two-mode valuable as "thought organizer"
+- [ ] Insight 6: [Pending - Topic 2+]
 
 ---
 
