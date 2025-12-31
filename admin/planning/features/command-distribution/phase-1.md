@@ -32,6 +32,7 @@ Enable dev-infra GitHub releases to include downloadable command bundles that de
 **Current State (from analysis):**
 
 The release workflow (`release-distribution.yml`) already:
+
 - Triggers on `release: published` event
 - Creates `dev-infra-X.Y.Z.tar.gz` and `.zip` packages
 - Includes `templates/` directory (which contains commands)
@@ -40,12 +41,12 @@ The release workflow (`release-distribution.yml`) already:
 
 **Key Findings:**
 
-| Component | Location | Notes |
-|-----------|----------|-------|
-| Release trigger | `create-release-tag.yml` | Creates tag from `release/*` branch |
-| Distribution | `release-distribution.yml` | Creates packages on release publish |
-| Commands source | `templates/standard-project/.cursor/commands/` | 19 command files |
-| Current packages | `dev-infra-X.Y.Z.{tar.gz,zip}` | Contains full templates |
+| Component        | Location                                       | Notes                               |
+| ---------------- | ---------------------------------------------- | ----------------------------------- |
+| Release trigger  | `create-release-tag.yml`                       | Creates tag from `release/*` branch |
+| Distribution     | `release-distribution.yml`                     | Creates packages on release publish |
+| Commands source  | `templates/standard-project/.cursor/commands/` | 19 command files                    |
+| Current packages | `dev-infra-X.Y.Z.{tar.gz,zip}`                 | Contains full templates             |
 
 **What Needs to Change:**
 
@@ -53,6 +54,7 @@ The release workflow (`release-distribution.yml`) already:
 - This allows `dt-cursor-install` to download just commands (~50KB) vs full package (~200KB+)
 
 **Checklist:**
+
 - [x] Review `release-distribution.yml`
 - [x] Review `create-release-tag.yml`
 - [x] Identify command source location
@@ -92,16 +94,17 @@ commands-vX.Y.Z.tar.gz
 
 **Design Decisions:**
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Archive format | `.tar.gz` | Standard, cross-platform, smaller than zip |
-| Root directory | `commands/` | Clear intent, easy extraction |
-| File naming | Original names | No version suffix in filenames (version in archive name) |
-| Checksums | Yes (SHA256) | Verify download integrity |
+| Decision       | Choice         | Rationale                                                |
+| -------------- | -------------- | -------------------------------------------------------- |
+| Archive format | `.tar.gz`      | Standard, cross-platform, smaller than zip               |
+| Root directory | `commands/`    | Clear intent, easy extraction                            |
+| File naming    | Original names | No version suffix in filenames (version in archive name) |
+| Checksums      | Yes (SHA256)   | Verify download integrity                                |
 
 **Bundle Metadata (optional future enhancement):**
 
 Could include a `VERSION` file in the bundle:
+
 ```
 VERSION=0.8.0
 DATE=2025-12-31
@@ -109,6 +112,7 @@ COMMANDS=19
 ```
 
 **Checklist:**
+
 - [x] Bundle format documented
 - [x] Directory structure defined
 - [x] Naming convention established
@@ -131,102 +135,103 @@ COMMANDS=19
 Add these steps to `.github/workflows/release-distribution.yml` in the `create-distribution` job:
 
 ```yaml
-      - name: Create command bundle
-        run: |
-          VERSION="${{ steps.get_version.outputs.version }}"
-          COMMANDS_PACKAGE="commands-v${VERSION}"
-          
-          # Create commands directory structure
-          mkdir -p "${COMMANDS_PACKAGE}/commands"
-          
-          # Copy command files from standard-project template
-          cp templates/standard-project/.cursor/commands/*.md "${COMMANDS_PACKAGE}/commands/"
-          
-          # Create VERSION file for metadata
-          echo "VERSION=${VERSION}" > "${COMMANDS_PACKAGE}/commands/VERSION"
-          echo "DATE=$(date -u +%Y-%m-%d)" >> "${COMMANDS_PACKAGE}/commands/VERSION"
-          echo "COMMANDS=$(ls -1 ${COMMANDS_PACKAGE}/commands/*.md | wc -l)" >> "${COMMANDS_PACKAGE}/commands/VERSION"
-          
-          # Create tarball
-          tar -czf "${COMMANDS_PACKAGE}.tar.gz" -C "${COMMANDS_PACKAGE}" commands/
-          
-          echo "✅ Command bundle created"
-          ls -lh "${COMMANDS_PACKAGE}.tar.gz"
+- name: Create command bundle
+  run: |
+    VERSION="${{ steps.get_version.outputs.version }}"
+    COMMANDS_PACKAGE="commands-v${VERSION}"
 
-      - name: Validate command bundle
-        run: |
-          VERSION="${{ steps.get_version.outputs.version }}"
-          COMMANDS_PACKAGE="commands-v${VERSION}"
-          
-          echo "Validating command bundle..."
-          
-          # Extract to test
-          TEST_DIR="/tmp/test-commands"
-          mkdir -p "${TEST_DIR}"
-          tar -xzf "${COMMANDS_PACKAGE}.tar.gz" -C "${TEST_DIR}"
-          
-          # Check required files exist
-          echo "Checking command files..."
-          [ -d "${TEST_DIR}/commands" ] || { echo "❌ Missing commands/"; exit 1; }
-          
-          # Check key commands exist
-          for cmd in pr.md task-phase.md reflect.md explore.md; do
-            [ -f "${TEST_DIR}/commands/${cmd}" ] || { echo "❌ Missing ${cmd}"; exit 1; }
-          done
-          
-          # Count commands (should be 19+)
-          CMD_COUNT=$(ls -1 "${TEST_DIR}/commands/"*.md 2>/dev/null | wc -l)
-          echo "Found ${CMD_COUNT} command files"
-          [ "$CMD_COUNT" -ge 19 ] || { echo "❌ Expected at least 19 commands, found ${CMD_COUNT}"; exit 1; }
-          
-          echo "✅ Command bundle validation passed"
-          rm -rf "${TEST_DIR}"
+    # Create commands directory structure
+    mkdir -p "${COMMANDS_PACKAGE}/commands"
+
+    # Copy command files from standard-project template
+    cp templates/standard-project/.cursor/commands/*.md "${COMMANDS_PACKAGE}/commands/"
+
+    # Create VERSION file for metadata
+    echo "VERSION=${VERSION}" > "${COMMANDS_PACKAGE}/commands/VERSION"
+    echo "DATE=$(date -u +%Y-%m-%d)" >> "${COMMANDS_PACKAGE}/commands/VERSION"
+    echo "COMMANDS=$(ls -1 ${COMMANDS_PACKAGE}/commands/*.md | wc -l)" >> "${COMMANDS_PACKAGE}/commands/VERSION"
+
+    # Create tarball
+    tar -czf "${COMMANDS_PACKAGE}.tar.gz" -C "${COMMANDS_PACKAGE}" commands/
+
+    echo "✅ Command bundle created"
+    ls -lh "${COMMANDS_PACKAGE}.tar.gz"
+
+- name: Validate command bundle
+  run: |
+    VERSION="${{ steps.get_version.outputs.version }}"
+    COMMANDS_PACKAGE="commands-v${VERSION}"
+
+    echo "Validating command bundle..."
+
+    # Extract to test
+    TEST_DIR="/tmp/test-commands"
+    mkdir -p "${TEST_DIR}"
+    tar -xzf "${COMMANDS_PACKAGE}.tar.gz" -C "${TEST_DIR}"
+
+    # Check required files exist
+    echo "Checking command files..."
+    [ -d "${TEST_DIR}/commands" ] || { echo "❌ Missing commands/"; exit 1; }
+
+    # Check key commands exist
+    for cmd in pr.md task-phase.md reflect.md explore.md; do
+      [ -f "${TEST_DIR}/commands/${cmd}" ] || { echo "❌ Missing ${cmd}"; exit 1; }
+    done
+
+    # Count commands (should be 19+)
+    CMD_COUNT=$(ls -1 "${TEST_DIR}/commands/"*.md 2>/dev/null | wc -l)
+    echo "Found ${CMD_COUNT} command files"
+    [ "$CMD_COUNT" -ge 19 ] || { echo "❌ Expected at least 19 commands, found ${CMD_COUNT}"; exit 1; }
+
+    echo "✅ Command bundle validation passed"
+    rm -rf "${TEST_DIR}"
 ```
 
 **Update checksum generation step:**
 
 ```yaml
-      - name: Generate checksums
-        run: |
-          PACKAGE_NAME="${{ steps.get_version.outputs.package_name }}"
-          VERSION="${{ steps.get_version.outputs.version }}"
-          
-          echo "Generating checksums..."
-          sha256sum "${PACKAGE_NAME}.tar.gz" > "${PACKAGE_NAME}.tar.gz.sha256"
-          sha256sum "${PACKAGE_NAME}.zip" > "${PACKAGE_NAME}.zip.sha256"
-          sha256sum "commands-v${VERSION}.tar.gz" > "commands-v${VERSION}.tar.gz.sha256"
-          
-          echo "✅ Checksums generated"
-          cat "${PACKAGE_NAME}.tar.gz.sha256"
-          cat "${PACKAGE_NAME}.zip.sha256"
-          cat "commands-v${VERSION}.tar.gz.sha256"
+- name: Generate checksums
+  run: |
+    PACKAGE_NAME="${{ steps.get_version.outputs.package_name }}"
+    VERSION="${{ steps.get_version.outputs.version }}"
+
+    echo "Generating checksums..."
+    sha256sum "${PACKAGE_NAME}.tar.gz" > "${PACKAGE_NAME}.tar.gz.sha256"
+    sha256sum "${PACKAGE_NAME}.zip" > "${PACKAGE_NAME}.zip.sha256"
+    sha256sum "commands-v${VERSION}.tar.gz" > "commands-v${VERSION}.tar.gz.sha256"
+
+    echo "✅ Checksums generated"
+    cat "${PACKAGE_NAME}.tar.gz.sha256"
+    cat "${PACKAGE_NAME}.zip.sha256"
+    cat "commands-v${VERSION}.tar.gz.sha256"
 ```
 
 **Update upload step:**
 
 ```yaml
-      - name: Upload distribution to release
-        run: |
-          PACKAGE_NAME="dev-infra-${{ steps.get_version.outputs.version }}"
-          VERSION="${{ steps.get_version.outputs.version }}"
-          TAG_NAME="${{ github.event.release.tag_name }}"
-          
-          TOKEN="${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}"
-          
-          gh release upload "$TAG_NAME" \
-            "${PACKAGE_NAME}.tar.gz" \
-            "${PACKAGE_NAME}.tar.gz.sha256" \
-            "${PACKAGE_NAME}.zip" \
-            "${PACKAGE_NAME}.zip.sha256" \
-            "commands-v${VERSION}.tar.gz" \
-            "commands-v${VERSION}.tar.gz.sha256" \
-            --clobber \
-            --repo "${{ github.repository }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+- name: Upload distribution to release
+  run: |
+    PACKAGE_NAME="dev-infra-${{ steps.get_version.outputs.version }}"
+    VERSION="${{ steps.get_version.outputs.version }}"
+    TAG_NAME="${{ github.event.release.tag_name }}"
+
+    TOKEN="${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}"
+
+    gh release upload "$TAG_NAME" \
+      "${PACKAGE_NAME}.tar.gz" \
+      "${PACKAGE_NAME}.tar.gz.sha256" \
+      "${PACKAGE_NAME}.zip" \
+      "${PACKAGE_NAME}.zip.sha256" \
+      "commands-v${VERSION}.tar.gz" \
+      "commands-v${VERSION}.tar.gz.sha256" \
+      --clobber \
+      --repo "${{ github.repository }}"
+  env:
+    GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 ```
 
 **Checklist:**
+
 - [x] Command bundle creation step added
 - [x] Validation step added
 - [x] Checksum generation updated
@@ -244,31 +249,33 @@ Add these steps to `.github/workflows/release-distribution.yml` in the `create-d
 Since CI workflows can only be fully tested on release events, use this approach:
 
 1. **Local Testing (commands bundle script):**
+
    ```bash
    # Test bundle creation locally
    cd /Users/cdwilson/Projects/dev-infra
-   
+
    VERSION="test"
    COMMANDS_PACKAGE="commands-v${VERSION}"
-   
+
    mkdir -p "${COMMANDS_PACKAGE}/commands"
    cp templates/standard-project/.cursor/commands/*.md "${COMMANDS_PACKAGE}/commands/"
-   
+
    # Create VERSION file
    echo "VERSION=${VERSION}" > "${COMMANDS_PACKAGE}/commands/VERSION"
    echo "DATE=$(date -u +%Y-%m-%d)" >> "${COMMANDS_PACKAGE}/commands/VERSION"
    echo "COMMANDS=$(ls -1 ${COMMANDS_PACKAGE}/commands/*.md | wc -l)" >> "${COMMANDS_PACKAGE}/commands/VERSION"
-   
+
    tar -czf "${COMMANDS_PACKAGE}.tar.gz" -C "${COMMANDS_PACKAGE}" commands/
-   
+
    # Verify
    tar -tzf "${COMMANDS_PACKAGE}.tar.gz"
-   
+
    # Cleanup
    rm -rf "${COMMANDS_PACKAGE}" "${COMMANDS_PACKAGE}.tar.gz"
    ```
 
 2. **Workflow Syntax Validation:**
+
    ```bash
    # Use act or GitHub's workflow linter
    # Or just push to a branch and check GitHub Actions tab for syntax errors
@@ -281,6 +288,7 @@ Since CI workflows can only be fully tested on release events, use this approach
    - Delete test release if needed
 
 **Checklist:**
+
 - [x] Local bundle creation tested
 - [x] Workflow syntax validated
 - [ ] Integration test planned (on next release)
@@ -308,10 +316,10 @@ Since CI workflows can only be fully tested on release events, use this approach
 
 Each dev-infra release includes a command bundle:
 
-| Artifact | Format | Contents |
-|----------|--------|----------|
-| `commands-vX.Y.Z.tar.gz` | gzipped tarball | Cursor AI command files |
-| `commands-vX.Y.Z.tar.gz.sha256` | checksum | SHA256 hash for verification |
+| Artifact                        | Format          | Contents                     |
+| ------------------------------- | --------------- | ---------------------------- |
+| `commands-vX.Y.Z.tar.gz`        | gzipped tarball | Cursor AI command files      |
+| `commands-vX.Y.Z.tar.gz.sha256` | checksum        | SHA256 hash for verification |
 
 ---
 
@@ -320,26 +328,26 @@ Each dev-infra release includes a command bundle:
 \`\`\`
 commands-vX.Y.Z.tar.gz
 └── commands/
-    ├── VERSION           # Metadata file
-    ├── cursor-rules.md
-    ├── decision.md
-    ├── explore.md
-    ├── fix-implement.md
-    ├── fix-plan.md
-    ├── fix-review.md
-    ├── int-opp.md
-    ├── post-pr.md
-    ├── pr-validation.md
-    ├── pr.md
-    ├── pre-phase-review.md
-    ├── reflect.md
-    ├── reflection-artifacts.md
-    ├── research.md
-    ├── status.md
-    ├── task-improvement.md
-    ├── task-phase.md
-    ├── task-release.md
-    └── transition-plan.md
+├── VERSION # Metadata file
+├── cursor-rules.md
+├── decision.md
+├── explore.md
+├── fix-implement.md
+├── fix-plan.md
+├── fix-review.md
+├── int-opp.md
+├── post-pr.md
+├── pr-validation.md
+├── pr.md
+├── pre-phase-review.md
+├── reflect.md
+├── reflection-artifacts.md
+├── research.md
+├── status.md
+├── task-improvement.md
+├── task-phase.md
+├── task-release.md
+└── transition-plan.md
 \`\`\`
 
 ---
@@ -367,14 +375,18 @@ https://github.com/grimm00/dev-infra/releases/download/vX.Y.Z/commands-vX.Y.Z.ta
 Commands should be extracted to `~/.cursor/commands/`:
 
 \`\`\`bash
+
 # Download
+
 curl -L -o commands.tar.gz https://github.com/grimm00/dev-infra/releases/download/vX.Y.Z/commands-vX.Y.Z.tar.gz
 
 # Extract
+
 mkdir -p ~/.cursor/commands
 tar -xzf commands.tar.gz -C ~/.cursor --strip-components=1
 
 # Verify
+
 ls ~/.cursor/commands/
 \`\`\`
 
@@ -383,29 +395,33 @@ ls ~/.cursor/commands/
 ## Checksum Verification
 
 \`\`\`bash
+
 # Download checksum
+
 curl -L -o commands.tar.gz.sha256 https://github.com/grimm00/dev-infra/releases/download/vX.Y.Z/commands-vX.Y.Z.tar.gz.sha256
 
 # Verify
+
 sha256sum -c commands.tar.gz.sha256
 \`\`\`
 ```
 
 **Checklist:**
-- [ ] Documentation file created
-- [ ] Format documented
-- [ ] Download URLs documented
-- [ ] Installation instructions included
+
+- [x] Documentation file created (`docs/COMMAND-BUNDLE-FORMAT.md`)
+- [x] Format documented (bundle structure, VERSION file)
+- [x] Download URLs documented (GitHub release URLs)
+- [x] Installation instructions included (manual + dt-cursor-install placeholder)
 
 ---
 
 ## ✅ Completion Criteria
 
-- [ ] Release workflow updated with command bundle creation
-- [ ] `commands-vX.Y.Z.tar.gz` created during release
-- [ ] Artifact downloadable from GitHub release page
-- [ ] Artifact format documented
-- [ ] Local testing completed
+- [x] Release workflow updated with command bundle creation
+- [ ] `commands-vX.Y.Z.tar.gz` created during release (CI test on next release)
+- [ ] Artifact downloadable from GitHub release page (CI test on next release)
+- [x] Artifact format documented
+- [x] Local testing completed
 
 ---
 
@@ -419,13 +435,13 @@ sha256sum -c commands.tar.gz.sha256
 
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: Analyze Current Workflow | ✅ Complete | Analysis in this document |
-| Task 2: Design Bundle Format | ✅ Complete | Specification confirmed |
-| Task 3: Update Release Workflow | ✅ Complete | Workflow updated with bundle steps |
-| Task 4: Test Workflow Changes | 🟠 Partial | Local test passed, CI test on next release |
-| Task 5: Document Artifact Format | 🔴 Not Started | |
+| Task                             | Status         | Notes                                      |
+| -------------------------------- | -------------- | ------------------------------------------ |
+| Task 1: Analyze Current Workflow | ✅ Complete    | Analysis in this document                  |
+| Task 2: Design Bundle Format     | ✅ Complete    | Specification confirmed                    |
+| Task 3: Update Release Workflow  | ✅ Complete    | Workflow updated with bundle steps         |
+| Task 4: Test Workflow Changes    | 🟠 Partial     | Local test passed, CI test on next release |
+| Task 5: Document Artifact Format | ✅ Complete    | `docs/COMMAND-BUNDLE-FORMAT.md` created    |
 
 ---
 
@@ -443,9 +459,9 @@ sha256sum -c commands.tar.gz.sha256
 
 ## 📚 Requirements Addressed
 
-| Requirement | Description |
-|-------------|-------------|
-| NFR-CMD-3 | Release artifacts - dev-infra MUST include commands in releases |
+| Requirement | Description                                                     |
+| ----------- | --------------------------------------------------------------- |
+| NFR-CMD-3   | Release artifacts - dev-infra MUST include commands in releases |
 
 ---
 
