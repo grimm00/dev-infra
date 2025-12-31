@@ -13,7 +13,7 @@ This research investigates how four interconnected projects should work together
 
 **Research Topics:** 6 topics  
 **Research Documents:** 6 documents  
-**Status:** 🔴 Research (0/6 complete)
+**Status:** 🟠 Research (1/6 complete)
 
 ---
 
@@ -34,7 +34,7 @@ This research investigates how four interconnected projects should work together
 
 | # | Research Topic | Priority | Status |
 |---|----------------|----------|--------|
-| 1 | Command Distribution Ownership | 🔴 High | 🔴 Not Started |
+| 1 | Command Distribution Ownership | 🔴 High | ✅ Complete |
 | 2 | Shared Contracts and Business Logic | 🔴 High | 🔴 Not Started |
 | 3 | Integration Points and Data Flow | 🔴 High | 🔴 Not Started |
 | 4 | Managed Project Lifecycle | 🟡 Medium | 🔴 Not Started |
@@ -45,11 +45,15 @@ This research investigates how four interconnected projects should work together
 
 ## 🔍 Key Findings
 
-*This section will be populated as research is conducted.*
+### Topic 1: Command Distribution Ownership ✅
 
-### Topic 1: Command Distribution Ownership
+**Finding:** dev-infra should remain the **source owner** of Cursor AI commands, while dev-toolkit should become the **distribution owner** via a new `dt-cursor-install` command.
 
-**Finding:** [Pending research]
+**Key points:**
+- dev-toolkit already has mature installation infrastructure (`install.sh`, `dt-*` pattern)
+- Industry standard is to separate source ownership from distribution ownership
+- User intuition aligned with this pattern
+- Commands should be versioned with dev-infra releases
 
 **Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
 
@@ -97,27 +101,34 @@ This research investigates how four interconnected projects should work together
 
 ## 💡 Key Insights
 
-*This section will be populated as research is conducted.*
-
-- [ ] Insight 1: [Pending]
-- [ ] Insight 2: [Pending]
+- [x] **Insight 1:** Source ownership (dev-infra) and distribution ownership (dev-toolkit) are separate concerns that should be handled by different projects
+- [x] **Insight 2:** dev-toolkit's existing infrastructure is perfectly suited for command distribution
+- [x] **Insight 3:** User intuition aligned with industry best practices for source/distribution separation
+- [x] **Insight 4:** Commands should be versioned with dev-infra releases, not separately
+- [ ] Insight 5: [Pending - from remaining research]
 
 ---
 
 ## 📋 Requirements Summary
 
-**See:** [requirements.md](requirements.md) for complete requirements document
+**From Topic 1: Command Distribution Ownership**
+- 6 Functional Requirements (FR-CMD-1 through FR-CMD-6)
+- 3 Non-Functional Requirements (NFR-CMD-1 through NFR-CMD-3)
+- 2 Constraints (C-CMD-1, C-CMD-2)
 
-*Requirements will be extracted as research is conducted.*
+**See:** [requirements.md](requirements.md) for complete requirements document
 
 ---
 
 ## 🎯 Recommendations
 
-*This section will be populated as research is conducted.*
-
-- [ ] Recommendation 1: [Pending]
-- [ ] Recommendation 2: [Pending]
+**From Topic 1: Command Distribution Ownership**
+- [x] **Recommendation 1:** dev-infra should remain the source owner of all Cursor AI commands
+- [x] **Recommendation 2:** dev-toolkit should become the distribution owner via new `dt-cursor-install` command
+- [x] **Recommendation 3:** `dt-cursor-install` should pull from dev-infra releases (tagged versions)
+- [x] **Recommendation 4:** Default to latest stable release, allow explicit version pinning
+- [x] **Recommendation 5:** Do NOT add installation scripts to dev-infra (keep it focused on source)
+- [ ] Recommendation 6+: [Pending - from remaining research]
 
 ---
 

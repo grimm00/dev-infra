@@ -19,19 +19,83 @@ This document captures requirements discovered during research on the four-arm a
 
 ## ✅ Functional Requirements
 
-### FR-1: [Pending - Command Distribution]
+### Command Distribution (from Topic 1)
 
-**Description:** [To be determined from research]
+#### FR-CMD-1: dt-cursor-install Command
+
+**Description:** dev-toolkit MUST provide a `dt-cursor-install` command for installing Cursor AI commands globally.
 
 **Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
 
 **Priority:** High
 
-**Status:** 🔴 Pending Research
+**Status:** 🔴 Pending Implementation
 
 ---
 
-### FR-2: [Pending - Shared Contracts]
+#### FR-CMD-2: Installation Location
+
+**Description:** `dt-cursor-install` MUST copy commands to `~/.cursor/commands/` directory.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### FR-CMD-3: Version Pinning
+
+**Description:** `dt-cursor-install` MUST support version pinning via `--version` flag to install specific dev-infra release versions.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### FR-CMD-4: List Available Versions
+
+**Description:** `dt-cursor-install` MUST support listing available versions via `--list` flag.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### FR-CMD-5: Update Command
+
+**Description:** `dt-cursor-install` MUST support updating to latest via `--update` flag.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### FR-CMD-6: Default to Latest Stable
+
+**Description:** `dt-cursor-install` SHOULD default to installing the latest stable dev-infra release when no version is specified.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+### Shared Contracts (from Topic 2 - Pending)
+
+#### FR-SC-1: [Pending - Shared Contracts]
 
 **Description:** [To be determined from research]
 
@@ -43,7 +107,9 @@ This document captures requirements discovered during research on the four-arm a
 
 ---
 
-### FR-3: [Pending - Integration Points]
+### Integration Points (from Topic 3 - Pending)
+
+#### FR-IP-1: [Pending - Integration Points]
 
 **Description:** [To be determined from research]
 
@@ -57,7 +123,9 @@ This document captures requirements discovered during research on the four-arm a
 
 ## 🎯 Non-Functional Requirements
 
-### NFR-1: Standalone Usability
+### Core Architecture (from Exploration)
+
+#### NFR-1: Standalone Usability
 
 **Description:** Each of the four projects MUST be usable independently by external users without requiring the other projects.
 
@@ -69,7 +137,7 @@ This document captures requirements discovered during research on the four-arm a
 
 ---
 
-### NFR-2: Internal Consistency
+#### NFR-2: Internal Consistency
 
 **Description:** For internal development, shared business logic (schemas, contracts, models) MUST be coordinated through dev-infra.
 
@@ -81,7 +149,47 @@ This document captures requirements discovered during research on the four-arm a
 
 ---
 
-### NFR-3: [Pending - Version Coordination]
+### Command Distribution (from Topic 1)
+
+#### NFR-CMD-1: Offline Installation Support
+
+**Description:** Installation MUST work offline if commands are already cached locally.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### NFR-CMD-2: No Clone Required
+
+**Description:** Installation MUST NOT require dev-infra repository to be cloned. Commands should be fetchable from GitHub releases.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+#### NFR-CMD-3: Release Artifacts
+
+**Description:** dev-infra MUST include commands in GitHub releases as downloadable artifacts (e.g., `commands-v0.8.0.tar.gz`).
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending Implementation
+
+---
+
+### Version Coordination (from Topic 5 - Pending)
+
+#### NFR-VC-1: [Pending - Version Coordination]
 
 **Description:** [To be determined from research]
 
@@ -95,7 +203,9 @@ This document captures requirements discovered during research on the four-arm a
 
 ## ⚠️ Constraints
 
-### C-1: Existing Infrastructure
+### Core Architecture
+
+#### C-1: Existing Infrastructure
 
 **Description:** Solutions must work with existing infrastructure:
 - dev-toolkit has established `install.sh` and `dt-*` command pattern
@@ -106,11 +216,29 @@ This document captures requirements discovered during research on the four-arm a
 
 ---
 
-### C-2: Multi-Repository Structure
+#### C-2: Multi-Repository Structure
 
 **Description:** The four projects exist in separate Git repositories and must remain so. Monorepo is not an option.
 
 **Source:** Current architecture
+
+---
+
+### Command Distribution (from Topic 1)
+
+#### C-CMD-1: No Command Duplication
+
+**Description:** Commands MUST NOT be duplicated across dev-infra and dev-toolkit repositories. dev-infra is the single source of truth.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+---
+
+#### C-CMD-2: No Content Modification
+
+**Description:** dev-toolkit MUST NOT modify command content during installation. Source owner (dev-infra) controls command content.
+
+**Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
 
 ---
 

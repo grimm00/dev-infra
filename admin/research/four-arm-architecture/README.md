@@ -1,7 +1,7 @@
 # Four-Arm Architecture - Research Hub
 
 **Purpose:** Research the interconnected ecosystem of dev-infra, dev-toolkit, proj-cli, and work-prod  
-**Status:** 🔴 Research  
+**Status:** 🟠 Research (1/6 complete)  
 **Created:** 2025-12-31  
 **Last Updated:** 2025-12-31
 
@@ -16,7 +16,7 @@
 
 | # | Research Topic | Priority | Status | Document |
 |---|----------------|----------|--------|----------|
-| 1 | Command Distribution Ownership | 🔴 High | 🔴 Not Started | [research-command-distribution-ownership.md](research-command-distribution-ownership.md) |
+| 1 | Command Distribution Ownership | 🔴 High | ✅ Complete | [research-command-distribution-ownership.md](research-command-distribution-ownership.md) |
 | 2 | Shared Contracts and Business Logic | 🔴 High | 🔴 Not Started | [research-shared-contracts.md](research-shared-contracts.md) |
 | 3 | Integration Points and Data Flow | 🔴 High | 🔴 Not Started | [research-integration-points.md](research-integration-points.md) |
 | 4 | Managed Project Lifecycle | 🟡 Medium | 🔴 Not Started | [research-managed-project-lifecycle.md](research-managed-project-lifecycle.md) |
