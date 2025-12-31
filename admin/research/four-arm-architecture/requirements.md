@@ -93,17 +93,53 @@ This document captures requirements discovered during research on the four-arm a
 
 ---
 
-### Shared Contracts (from Topic 2 - Pending)
+### Shared Contracts (from Topic 2)
 
-#### FR-SC-1: [Pending - Shared Contracts]
+#### FR-SC-1: Contract Ownership Designation
 
-**Description:** [To be determined from research]
+**Description:** Each contract type MUST have a designated owner (spec owner) who is responsible for maintaining it.
 
 **Source:** [research-shared-contracts.md](research-shared-contracts.md)
 
 **Priority:** High
 
-**Status:** 🔴 Pending Research
+**Status:** ✅ Validated (already in practice via OpenAPI standard)
+
+---
+
+#### FR-SC-2: Spec Owner Update Responsibility
+
+**Description:** Spec owners MUST update their contracts when making changes to the underlying implementation.
+
+**Source:** [research-shared-contracts.md](research-shared-contracts.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated (PR-1 in OpenAPI standard)
+
+---
+
+#### FR-SC-3: Standards Documentation Location
+
+**Description:** Standards for cross-arm contracts MUST be documented in `admin/planning/standards/`.
+
+**Source:** [research-shared-contracts.md](research-shared-contracts.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated (OpenAPI standard exists there)
+
+---
+
+#### FR-SC-4: Standards Pattern Extension
+
+**Description:** New cross-arm contracts SHOULD follow the OpenAPI standard pattern (ownership matrix, process requirements, compliance checklist).
+
+**Source:** [research-shared-contracts.md](research-shared-contracts.md)
+
+**Priority:** Medium
+
+**Status:** 🟡 Validated - Should create command-distribution standard
 
 ---
 
@@ -187,6 +223,44 @@ This document captures requirements discovered during research on the four-arm a
 
 ---
 
+### Shared Contracts (from Topic 2)
+
+#### NFR-SC-1: Standalone Usability with Embedded Contracts
+
+**Description:** Each project MUST remain standalone-usable with embedded contracts. External users should not need to fetch contracts from other repos.
+
+**Source:** [research-shared-contracts.md](research-shared-contracts.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated (already achieved)
+
+---
+
+#### NFR-SC-2: Process-Based Coordination
+
+**Description:** Contract coordination SHOULD use process standards (PR requirements, code review checklists), not technical sync mechanisms.
+
+**Source:** [research-shared-contracts.md](research-shared-contracts.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated (OpenAPI standard uses this approach)
+
+---
+
+#### NFR-SC-3: Ownership Matrix Documentation
+
+**Description:** Standards MUST define an ownership matrix specifying: spec owner, spec consumers, and responsibilities for each.
+
+**Source:** [research-shared-contracts.md](research-shared-contracts.md)
+
+**Priority:** Medium
+
+**Status:** ✅ Validated (OpenAPI standard has this)
+
+---
+
 ### Version Coordination (from Topic 5 - Pending)
 
 #### NFR-VC-1: [Pending - Version Coordination]
@@ -239,6 +313,24 @@ This document captures requirements discovered during research on the four-arm a
 **Description:** dev-toolkit MUST NOT modify command content during installation. Source owner (dev-infra) controls command content.
 
 **Source:** [research-command-distribution-ownership.md](research-command-distribution-ownership.md)
+
+---
+
+### Shared Contracts (from Topic 2)
+
+#### C-SC-1: No External Dependencies for Standalone
+
+**Description:** Contracts MUST NOT require external dependencies for standalone use. Each project must embed its own copy of contracts.
+
+**Source:** [research-shared-contracts.md](research-shared-contracts.md)
+
+---
+
+#### C-SC-2: No Complex Contract Infrastructure
+
+**Description:** Complex contract infrastructure (schema registries, automated sync, consumer-driven contract testing) is NOT appropriate for current scale. Use process-based standards instead.
+
+**Source:** [research-shared-contracts.md](research-shared-contracts.md)
 
 ---
 
