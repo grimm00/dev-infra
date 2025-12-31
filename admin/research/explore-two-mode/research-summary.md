@@ -25,7 +25,7 @@ Research for enhancing the `/explore` command with:
 
 | # | Topic | Priority | Status |
 |---|-------|----------|--------|
-| 1 | Command Improvement Organization | 🔴 High | 🔴 Not Started |
+| 1 | Command Improvement Organization | 🔴 High | ✅ Complete |
 | 2 | Topic Unification Pattern | 🔴 High | 🔴 Not Started |
 | 3 | Explore Input Sources | 🔴 High | 🔴 Not Started |
 | 4 | Scaffolding Boundaries | 🟡 Medium | 🔴 Not Started |
@@ -36,32 +36,44 @@ Research for enhancing the `/explore` command with:
 
 ## 🔍 Key Findings
 
-### Finding 1: [Title]
+### Finding 1: Command Improvements ARE Features (Topic 1)
 
-[Summary of finding]
+Per ADR-001 "Template Factory" identity, command improvements that affect template users are **template features**, not internal tooling. Commands ship in templates, making their enhancements part of the product.
 
-**Source:** [research-[question].md](research-[question].md)
+**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
 
 ---
 
-### Finding 2: [Title]
+### Finding 2: Commands Directory is for Integration, Not Enhancement (Topic 1)
 
-[Summary of finding]
+The existing `admin/planning/commands/` directory is specifically for **command integration** (bringing work-prod commands to dev-infra), NOT for **command enhancement**. Enhancement work belongs in `features/`.
 
-**Source:** [research-[question].md](research-[question].md)
+**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+
+---
+
+### Finding 3: [Pending - Topic 2+]
+
+[To be completed with remaining research topics]
 
 ---
 
 ## 💡 Key Insights
 
-- [ ] Insight 1: [Description]
-- [ ] Insight 2: [Description]
+- [x] Insight 1: **Command improvements are template features** per ADR-001 Template Factory identity
+- [x] Insight 2: **Commands directory is for integration, not enhancement** - different purpose
+- [x] Insight 3: **Current features structure works** - `transition-plan-two-mode` success validates approach
+- [x] Insight 4: **Consolidation reduces duplication** - 4 similar features would benefit from shared structure
+- [ ] Insight 5: [Pending - Topic 2+]
 
 ---
 
 ## 📋 Requirements Summary
 
-[Summary of requirements discovered]
+**From Topic 1 (Command Improvement Organization):**
+- FR-ORG-1: Command improvements MUST be tracked as features (not CI)
+- FR-ORG-2: Consolidated hub SHOULD reference related completed features
+- NFR-ORG-1: Directory structure MUST align with ADR-001 Template Factory identity
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -69,8 +81,11 @@ Research for enhancing the `/explore` command with:
 
 ## 🎯 Recommendations
 
-- [ ] Recommendation 1: [Description]
-- [ ] Recommendation 2: [Description]
+**From Topic 1 (Command Improvement Organization):**
+- [x] Recommendation 1: Keep command improvements in `features/` - they're template features per ADR-001
+- [x] Recommendation 2: Create consolidated hub `features/command-two-mode-pattern/` to group related work
+- [x] Recommendation 3: Preserve completed work where it is, reference from consolidated hub
+- [ ] Recommendation 4: [Pending - Topic 2+]
 
 ---
 

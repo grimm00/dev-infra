@@ -89,6 +89,42 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
+### FR-ORG-1: Command Improvements as Features
+
+**Description:** Command improvements MUST be tracked as features (not CI) per ADR-001 Template Factory identity
+
+**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated
+
+---
+
+### FR-ORG-2: Consolidated Hub References
+
+**Description:** Consolidated hub SHOULD reference related completed features (e.g., `transition-plan-two-mode`)
+
+**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-ORG-3: Archive Placeholder Features
+
+**Description:** Placeholder features with minimal content MAY be archived when consolidated
+
+**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+
+**Priority:** Low
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Consistency with Existing Commands
@@ -127,6 +163,30 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
+### NFR-ORG-1: ADR-001 Alignment
+
+**Description:** Directory structure MUST align with ADR-001 Template Factory identity
+
+**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+
+**Priority:** High
+
+**Status:** ✅ Validated
+
+---
+
+### NFR-ORG-2: Preserve Completed Work
+
+**Description:** Consolidation SHOULD NOT require moving completed work with extensive history
+
+**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints
 
 ### C-1: Command Improvement Organization
@@ -134,6 +194,8 @@ This document captures requirements discovered during research on enhancing the 
 **Description:** Must decide on organization structure before implementing multiple command improvements
 
 **Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+
+**Research Finding:** Recommended creating `features/command-two-mode-pattern/` as consolidated hub while preserving completed `transition-plan-two-mode` in place.
 
 ---
 
@@ -172,11 +234,12 @@ This document captures requirements discovered during research on enhancing the 
 
 ## 🚀 Next Steps
 
-1. Conduct research to refine and validate requirements
-2. Use `/decision explore-two-mode --from-research` to make decisions
-3. Decisions may refine requirements
+1. Continue research for remaining topics (2-6)
+2. Refine requirements as research progresses
+3. Use `/decision explore-two-mode --from-research` when research is complete
+4. Decisions may refine requirements
 
 ---
 
-**Last Updated:** 2025-12-30
+**Last Updated:** 2025-12-31
 
