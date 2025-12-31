@@ -1,9 +1,9 @@
 # Research Summary - Explore Two-Mode Enhancement
 
 **Purpose:** Summary of all research findings  
-**Status:** 🔴 Research  
+**Status:** ⏸️ Paused (awaiting four-arm-architecture)  
 **Created:** 2025-12-30  
-**Last Updated:** 2025-12-30
+**Last Updated:** 2025-12-31
 
 ---
 
@@ -17,7 +17,19 @@ Research for enhancing the `/explore` command with:
 
 **Research Topics:** 6 topics  
 **Research Documents:** 6 documents  
-**Status:** 🔴 Research
+**Status:** ⏸️ Paused
+
+---
+
+## ⚠️ Research Pivot
+
+**After Topic 1**, we identified that dev-infra is not just a "template factory" but the **standard setter** for the four-arm architecture ecosystem (dev-infra, dev-toolkit, proj-cli, work-prod).
+
+**Impact:** Topics 2, 3, and 6 depend on understanding how commands and patterns flow across the ecosystem.
+
+**Action:** Paused this research to complete [Four-Arm Architecture Research](../four-arm-architecture/) first.
+
+**See:** [README.md](README.md) for full pivot rationale.
 
 ---
 
@@ -91,12 +103,15 @@ The existing `admin/planning/commands/` directory is specifically for **command 
 
 ## 🚀 Next Steps
 
-1. Conduct research for each topic using `/research explore-two-mode --conduct`
-2. Review requirements in `requirements.md`
-3. Use `/decision explore-two-mode --from-research` to make decisions
-4. Decisions will create ADR documents
+**⏸️ PAUSED** - Complete four-arm architecture research first:
+
+1. ✅ Topic 1 (Command Improvement Organization) - Complete
+2. **PIVOT:** Complete [Four-Arm Architecture Research](../four-arm-architecture/)
+3. **RESUME:** Topics 2-6 with refined ecosystem context
+4. Review requirements in `requirements.md`
+5. Use `/decision explore-two-mode --from-research` to make decisions
 
 ---
 
-**Last Updated:** 2025-12-30
+**Last Updated:** 2025-12-31
 
