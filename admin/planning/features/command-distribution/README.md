@@ -98,11 +98,20 @@ User Machine
 
 ---
 
+## ✅ Completed Milestones
+
+- **Phase 1: dev-infra Release Artifacts** ✅ (PR #58, 2025-12-31)
+  - Updated `.github/workflows/release-distribution.yml` to create command bundles
+  - Created `docs/COMMAND-BUNDLE-FORMAT.md` specification
+  - Local testing passed; CI will validate on next release
+
+---
+
 ## 🚀 Next Steps
 
-1. **Merge Phase 1 PR** - Pending PR approval
-2. **Expand Phase 2** - Run `/transition-plan command-distribution --expand --phase 2`
-3. **Implement Phase 2** - dt-cursor-install in dev-toolkit
+1. **Expand Phase 2** - Run `/transition-plan command-distribution --expand --phase 2`
+2. **Implement Phase 2** - dt-cursor-install in dev-toolkit
+3. **Test end-to-end** - Verify command installation works
 
 ---
 
