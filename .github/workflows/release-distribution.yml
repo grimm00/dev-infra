@@ -160,6 +160,69 @@ jobs:
           echo "✅ Distribution packages created"
           ls -lh *.tar.gz *.zip
       
+      - name: Create command bundle
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          COMMANDS_PACKAGE="commands-v${VERSION}"
+          
+          echo "Creating command bundle..."
+          
+          # Create commands directory structure
+          mkdir -p "${COMMANDS_PACKAGE}/commands"
+          
+          # Copy command files from standard-project template
+          cp templates/standard-project/.cursor/commands/*.md "${COMMANDS_PACKAGE}/commands/"
+          
+          # Create VERSION file for metadata
+          echo "VERSION=${VERSION}" > "${COMMANDS_PACKAGE}/commands/VERSION"
+          echo "DATE=$(date -u +%Y-%m-%d)" >> "${COMMANDS_PACKAGE}/commands/VERSION"
+          echo "COMMANDS=$(ls -1 ${COMMANDS_PACKAGE}/commands/*.md | wc -l)" >> "${COMMANDS_PACKAGE}/commands/VERSION"
+          
+          # Create tarball (archive contains commands/ directory at root)
+          tar -czf "${COMMANDS_PACKAGE}.tar.gz" -C "${COMMANDS_PACKAGE}" commands/
+          
+          echo "✅ Command bundle created"
+          ls -lh "${COMMANDS_PACKAGE}.tar.gz"
+          
+          # Show bundle contents
+          echo "Bundle contents:"
+          tar -tzf "${COMMANDS_PACKAGE}.tar.gz"
+
+      - name: Validate command bundle
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          COMMANDS_PACKAGE="commands-v${VERSION}"
+          
+          echo "Validating command bundle..."
+          
+          # Extract to test
+          TEST_DIR="/tmp/test-commands"
+          mkdir -p "${TEST_DIR}"
+          tar -xzf "${COMMANDS_PACKAGE}.tar.gz" -C "${TEST_DIR}"
+          
+          # Check commands directory exists
+          echo "Checking commands directory..."
+          [ -d "${TEST_DIR}/commands" ] || { echo "❌ Missing commands/"; exit 1; }
+          
+          # Check VERSION file exists
+          echo "Checking VERSION file..."
+          [ -f "${TEST_DIR}/commands/VERSION" ] || { echo "❌ Missing VERSION file"; exit 1; }
+          cat "${TEST_DIR}/commands/VERSION"
+          
+          # Check key commands exist
+          echo "Checking key command files..."
+          for cmd in pr.md task-phase.md reflect.md explore.md decision.md research.md; do
+            [ -f "${TEST_DIR}/commands/${cmd}" ] || { echo "❌ Missing ${cmd}"; exit 1; }
+          done
+          
+          # Count commands (should be 19+)
+          CMD_COUNT=$(ls -1 "${TEST_DIR}/commands/"*.md 2>/dev/null | wc -l)
+          echo "Found ${CMD_COUNT} command files"
+          [ "$CMD_COUNT" -ge 19 ] || { echo "❌ Expected at least 19 commands, found ${CMD_COUNT}"; exit 1; }
+          
+          echo "✅ Command bundle validation passed"
+          rm -rf "${TEST_DIR}"
+
       - name: Validate distribution package
         run: |
           PACKAGE_NAME="${{ steps.get_version.outputs.package_name }}"
@@ -210,18 +273,22 @@ jobs:
       - name: Generate checksums
         run: |
           PACKAGE_NAME="${{ steps.get_version.outputs.package_name }}"
+          VERSION="${{ steps.get_version.outputs.version }}"
           
           echo "Generating checksums..."
           sha256sum "${PACKAGE_NAME}.tar.gz" > "${PACKAGE_NAME}.tar.gz.sha256"
           sha256sum "${PACKAGE_NAME}.zip" > "${PACKAGE_NAME}.zip.sha256"
+          sha256sum "commands-v${VERSION}.tar.gz" > "commands-v${VERSION}.tar.gz.sha256"
           
           echo "✅ Checksums generated"
           cat "${PACKAGE_NAME}.tar.gz.sha256"
           cat "${PACKAGE_NAME}.zip.sha256"
+          cat "commands-v${VERSION}.tar.gz.sha256"
       
       - name: Upload distribution to release
         run: |
           PACKAGE_NAME="dev-infra-${{ steps.get_version.outputs.version }}"
+          VERSION="${{ steps.get_version.outputs.version }}"
           TAG_NAME="${{ github.event.release.tag_name }}"
           
           # Use PAT if available, otherwise fall back to GITHUB_TOKEN
@@ -229,11 +296,14 @@ jobs:
           TOKEN="${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}"
           
           # Upload each file using GitHub CLI
+          # Includes main distribution packages and command bundle
           gh release upload "$TAG_NAME" \
             "${PACKAGE_NAME}.tar.gz" \
             "${PACKAGE_NAME}.tar.gz.sha256" \
             "${PACKAGE_NAME}.zip" \
             "${PACKAGE_NAME}.zip.sha256" \
+            "commands-v${VERSION}.tar.gz" \
+            "commands-v${VERSION}.tar.gz.sha256" \
             --clobber \
             --repo "${{ github.repository }}"
         env:
