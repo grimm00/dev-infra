@@ -3,7 +3,7 @@
 **Feature:** Command Distribution System  
 **Status:** 🔴 Not Started  
 **Created:** 2025-12-31  
-**Source:** [ADR-001: Command Distribution Ownership](../../../decisions/four-arm-architecture/adr-001-command-distribution-ownership.md)  
+**Source:** [Four-Arm Architecture ADRs](../../../decisions/four-arm-architecture/README.md) (ADR-001, ADR-002, ADR-003)  
 **Type:** Feature (Cross-Project)
 
 ---
@@ -16,19 +16,23 @@ Transition from the current state (no global command installation mechanism) to 
 
 ## Transition Goals
 
-Based on ADR-001 decision and requirements:
+Based on Four-Arm Architecture ADRs (ADR-001, ADR-002, ADR-003) and requirements:
 
 - Implement command distribution without duplicating commands
 - Enable global installation to `~/.cursor/commands/`
 - Support version pinning, listing, and updates
-- Document as a cross-arm standard
+- Document as a cross-arm standard (following OpenAPI pattern)
+- Validate all integrations remain optional
+- Document configuration patterns (XDG compliance)
 
 ---
 
 ## Pre-Transition Checklist
 
-- [x] ADR-001 approved
-- [x] Requirements documented (FR-CMD-1 through FR-CMD-6)
+- [x] ADR-001 approved (Command Distribution Ownership)
+- [x] ADR-002 approved (Contract Coordination Strategy)
+- [x] ADR-003 approved (Integration Architecture)
+- [x] Requirements documented (FR-CMD-*, FR-SC-*, FR-IP-*, NFR-IP-*)
 - [ ] dev-infra release workflow understood
 - [ ] dev-toolkit `dt-*` pattern understood
 
@@ -123,6 +127,36 @@ Based on ADR-001 decision and requirements:
 
 ---
 
+### Phase 4: Integration Validation
+
+**Goal:** Validate integration architecture meets ADR-003 requirements.
+
+**Estimated Effort:** 2-3 hours
+
+**Prerequisites:**
+- [ ] Phase 2 complete (dt-cursor-install implemented)
+- [ ] Phase 3 complete (standard documented)
+
+**Tasks:**
+- [ ] Verify all integrations remain optional
+- [ ] Test graceful degradation scenarios
+- [ ] Document XDG configuration patterns
+- [ ] Create integration guidelines
+
+**Deliverables:**
+- Integration validation checklist
+- Configuration guidelines document
+
+**Definition of Done:**
+- [ ] All tools work standalone without other arms
+- [ ] Graceful error handling when integrations unavailable
+- [ ] XDG configuration pattern documented
+- [ ] Integration guidelines published
+
+**Details:** [phase-4.md](phase-4.md)
+
+---
+
 ## Post-Transition
 
 - [ ] All phases complete
@@ -134,11 +168,15 @@ Based on ADR-001 decision and requirements:
 
 ## Definition of Done
 
-- [ ] All 3 phases complete
-- [ ] FR-CMD-1 through FR-CMD-6 satisfied
-- [ ] NFR-CMD-1 through NFR-CMD-3 satisfied
-- [ ] C-CMD-1, C-CMD-2 constraints satisfied
+- [ ] All 4 phases complete
+- [ ] FR-CMD-1 through FR-CMD-6 satisfied (ADR-001)
+- [ ] NFR-CMD-1 through NFR-CMD-3 satisfied (ADR-001)
+- [ ] C-CMD-1, C-CMD-2 constraints satisfied (ADR-001)
+- [ ] FR-SC-4 satisfied - Standards pattern extension (ADR-002)
+- [ ] NFR-IP-1 through NFR-IP-4 satisfied (ADR-003)
+- [ ] C-IP-1, C-IP-2 constraints satisfied (ADR-003)
 - [ ] Standard documented
+- [ ] Integration guidelines documented
 
 ---
 

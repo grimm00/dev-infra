@@ -63,7 +63,7 @@ Document the command distribution pattern as a cross-arm standard following the 
 
 ### Blocks
 
-- None (final phase)
+- Phase 4: Integration Validation (needs standard documented)
 
 ---
 
@@ -104,6 +104,7 @@ admin/planning/standards/command-distribution/
 - [Feature Hub](README.md)
 - [Transition Plan](transition-plan.md)
 - [Previous Phase: Phase 2](phase-2.md)
+- [Next Phase: Phase 4](phase-4.md)
 - [OpenAPI Standard](../../standards/openapi-source-of-truth/README.md) - Pattern to follow
 
 ---

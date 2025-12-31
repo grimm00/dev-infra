@@ -4,7 +4,7 @@
 **Status:** 🔴 Not Started  
 **Created:** 2025-12-31  
 **Priority:** High  
-**Source:** [ADR-001: Command Distribution Ownership](../../../decisions/four-arm-architecture/adr-001-command-distribution-ownership.md)
+**Source:** [Four-Arm Architecture ADRs](../../../decisions/four-arm-architecture/README.md) (ADR-001, ADR-002, ADR-003)
 
 ---
 
@@ -25,6 +25,8 @@ Implement a command distribution system that separates source ownership (dev-inf
 - [ ] Version listing works (`--list` flag)
 - [ ] Update command works (`--update` flag)
 - [ ] Command distribution standard documented
+- [ ] All integrations verified as optional
+- [ ] Configuration patterns documented
 
 ---
 
@@ -76,6 +78,22 @@ Implement a command distribution system that separates source ownership (dev-inf
 - [ ] Create command distribution standard (follow OpenAPI pattern)
 - [ ] Update user documentation
 - [ ] Add to global commands guide
+
+---
+
+### Phase 4: Integration Validation (~2-3 hrs)
+
+**Goal:** Validate integration architecture meets ADR-003 requirements.
+
+**Deliverables:**
+- Integration validation checklist
+- Configuration guidelines document
+
+**Tasks:**
+- [ ] Verify all integrations remain optional
+- [ ] Test graceful degradation scenarios
+- [ ] Document XDG configuration patterns
+- [ ] Create integration guidelines
 
 ---
 
