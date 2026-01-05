@@ -31,6 +31,10 @@
 - **[Requirements](../../../research/four-arm-architecture/requirements.md)** - Related requirements (FR-CMD-*, NFR-IP-*)
 - **[Research](../../../research/four-arm-architecture/research-command-distribution-ownership.md)** - Supporting research
 
+### Related Standards
+
+- **[Command Distribution Standard](../../../standards/command-distribution/README.md)** - Process standard (Phase 3 deliverable)
+
 ---
 
 ## 🎯 Overview
