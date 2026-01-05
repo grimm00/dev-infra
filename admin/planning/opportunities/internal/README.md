@@ -2,7 +2,7 @@
 
 **Purpose:** Learnings to export from dev-infra to other projects  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-15
+**Last Updated:** 2026-01-05
 
 ---
 
@@ -42,6 +42,12 @@ This directory captures learnings and improvements discovered during dev-infra t
   - Learnings: 1 document (Command Inventory)
   - Improvements: 1 document (Command Sync Opportunities)
 
+### proj-cli Opportunities
+
+- **[proj-cli Hub](proj-cli/README.md)** - Learnings from unified CLI development
+  - Learnings: 2 documents (Template Generation Phases 1-2)
+  - Improvements: 0 documents
+
 ---
 
 ## 🔄 Process
@@ -61,8 +67,8 @@ This directory captures learnings and improvements discovered during dev-infra t
 
 ---
 
-**Last Updated:** 2025-12-15  
+**Last Updated:** 2026-01-05  
 **Status:** ✅ Active  
-**Next:** Implement work-prod command sync from v0.6.0
+**Next:** Review proj-cli learnings for template improvements
 
 
