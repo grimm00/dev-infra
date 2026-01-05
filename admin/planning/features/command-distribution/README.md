@@ -20,7 +20,7 @@
 |-------|------|--------|--------|
 | [Phase 1](phase-1.md) | dev-infra Release Artifacts | ✅ Complete | ~2-3 hrs |
 | [Phase 2](phase-2.md) | dt-cursor-install Implementation | ✅ Expanded | ~4-6 hrs |
-| [Phase 3](phase-3.md) | Documentation & Standard | ✅ Expanded | ~2-3 hrs |
+| [Phase 3](phase-3.md) | Documentation & Standard | ✅ Complete | ~2-3 hrs |
 | [Phase 4](phase-4.md) | Integration Validation | ✅ Expanded | ~2-3 hrs |
 
 ### Related Documents
@@ -96,7 +96,7 @@ User Machine
 | Metric | Value |
 |--------|-------|
 | Total Phases | 4 |
-| Completed | 1 (Phase 1) |
+| Completed | 2 (Phase 1, Phase 3) |
 | In Progress | 0 |
 | Estimated Total | 10-15 hrs |
 
@@ -109,17 +109,22 @@ User Machine
   - Created `docs/COMMAND-BUNDLE-FORMAT.md` specification
   - Local testing passed; CI will validate on next release
 
+- **Phase 3: Documentation & Standard** ✅ (Direct merge, 2025-12-31)
+  - Created `admin/planning/standards/command-distribution/README.md`
+  - Created standards hub `admin/planning/standards/README.md`
+  - Updated `docs/GLOBAL-COMMANDS.md` with installation methods
+  - Added cross-references to related documentation
+
 ---
 
 ## 🚀 Next Steps
 
-**Parallel Track (can run now):**
-1. **Implement Phase 3** - Create command-distribution standard (documentation only)
-2. **Expand Phase 4** - Run `/transition-plan command-distribution --expand --phase 4`
-
 **dev-toolkit Track:**
-3. **Implement Phase 2** - dt-cursor-install in dev-toolkit
-4. **Test end-to-end** - Verify command installation works
+1. **Implement Phase 2** - dt-cursor-install in dev-toolkit (expanded, ready for implementation)
+2. **Test end-to-end** - Verify command installation works
+
+**After Phase 2:**
+3. **Implement Phase 4** - Integration validation (expanded, needs Phase 2 for testing)
 
 ---
 
