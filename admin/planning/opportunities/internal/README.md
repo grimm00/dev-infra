@@ -25,6 +25,7 @@ This directory captures learnings and improvements discovered during dev-infra t
 |---------|-----------|--------------|--------|
 | dev-infra | 3 | 0 | ✅ Active |
 | work-prod | 1 | 1 | ✅ Active |
+| proj-cli | 2 | 0 | ✅ Active |
 
 ---
 
