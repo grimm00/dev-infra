@@ -2,15 +2,95 @@
 
 **Purpose:** Reference for installing dev-infra commands globally  
 **Global Location:** `~/.cursor/commands/`  
-**Last Updated:** 2025-12-30
+**Last Updated:** 2025-12-31
 
 ---
 
 ## 📋 Overview
 
-Dev-infra commands can be installed globally for use across all projects. Commands are copied from `dev-infra/.cursor/commands/` to `~/.cursor/commands/`.
+Dev-infra commands can be installed globally for use across all projects. Commands are installed to `~/.cursor/commands/` using one of three methods:
 
-**Future:** dev-toolkit will automate this installation process.
+1. **dt-cursor-install** (Recommended) - Automated installation via dev-toolkit
+2. **Manual Download** - Download from dev-infra releases
+3. **From Template** - Commands included when creating new projects
+
+---
+
+## 🚀 Installation
+
+### Using dt-cursor-install (Recommended)
+
+If you have [dev-toolkit](https://github.com/grimm00/dev-toolkit) installed:
+
+```bash
+# Install latest commands
+dt-cursor-install
+
+# Install specific version
+dt-cursor-install --install v0.8.0
+
+# Check installed version
+dt-cursor-install --status
+
+# Update to latest
+dt-cursor-install --update
+
+# List available versions
+dt-cursor-install --list
+```
+
+### Manual Installation
+
+Download and extract from dev-infra releases:
+
+```bash
+# Download specific version
+VERSION="0.8.0"
+curl -L -o "commands-v${VERSION}.tar.gz" \
+  "https://github.com/grimm00/dev-infra/releases/download/v${VERSION}/commands-v${VERSION}.tar.gz"
+
+# Create directory
+mkdir -p ~/.cursor/commands
+
+# Extract
+tar -xzf "commands-v${VERSION}.tar.gz" -C ~/.cursor --strip-components=1
+
+# Verify
+ls ~/.cursor/commands/
+```
+
+### From Template (Project Creation)
+
+When creating a new project with dev-infra templates:
+
+```bash
+./scripts/new-project.sh my-project
+```
+
+Commands are automatically included in `.cursor/commands/`.
+
+---
+
+## 🔄 Version Tracking
+
+Installed version is tracked in `~/.dev-toolkit/cursor-commands-version`.
+
+```bash
+# Check installed version
+cat ~/.dev-toolkit/cursor-commands-version
+```
+
+---
+
+## ⬆️ Updating Commands
+
+```bash
+# Check for updates
+dt-cursor-install --status
+
+# Update to latest
+dt-cursor-install --update
+```
 
 ---
 
@@ -106,7 +186,9 @@ Commands primarily for dev-infra template development. Generally not needed glob
 
 ---
 
-## 🔧 Installation
+## 🔧 Install by Tier (From Local Clone)
+
+If you have dev-infra cloned locally, you can install specific tiers:
 
 ### Install All Commands
 
@@ -132,40 +214,14 @@ ls ~/.cursor/commands/
 
 ---
 
-## 📊 Current Global Status
-
-Track which commands are installed globally:
-
-| Command | Global | Version | Last Updated |
-|---------|--------|---------|--------------|
-| `transition-plan.md` | ✅ | Two-mode | 2025-12-30 |
-| `status.md` | ✅ | - | - |
-| Others | ❌ | - | - |
-
----
-
-## 🔄 Syncing Updates
-
-When commands are updated in dev-infra, re-copy to global:
-
-```bash
-# Sync specific command
-cp dev-infra/.cursor/commands/transition-plan.md ~/.cursor/commands/
-
-# Sync all
-cp dev-infra/.cursor/commands/*.md ~/.cursor/commands/
-```
-
-**Future:** dev-toolkit will provide `dt-sync-commands` or similar.
-
----
-
 ## 🔗 Related
 
+- **[Command Distribution Standard](../admin/planning/standards/command-distribution/README.md)** - Process standard
+- **[Command Bundle Format](COMMAND-BUNDLE-FORMAT.md)** - Bundle specification
 - **[Command Adaptation Pattern](COMMAND-ADAPTATION-PATTERN.md)** - How to adapt commands for different projects
-- **[dev-toolkit](../../dev-toolkit/)** - Future automated installation
+- **[dev-toolkit](https://github.com/grimm00/dev-toolkit)** - Automated installation tool
 
 ---
 
-**Last Updated:** 2025-12-30
+**Last Updated:** 2025-12-31
 
