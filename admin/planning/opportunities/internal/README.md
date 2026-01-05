@@ -25,7 +25,6 @@ This directory captures learnings and improvements discovered during dev-infra t
 |---------|-----------|--------------|--------|
 | dev-infra | 3 | 0 | ✅ Active |
 | work-prod | 1 | 1 | ✅ Active |
-| proj-cli | 2 | 0 | ✅ Active |
 
 ---
 
@@ -42,12 +41,6 @@ This directory captures learnings and improvements discovered during dev-infra t
 - **[Work-Prod Hub](work-prod/README.md)** - Learnings and sync opportunities for work-prod
   - Learnings: 1 document (Command Inventory)
   - Improvements: 1 document (Command Sync Opportunities)
-
-### proj-cli Opportunities
-
-- **[proj-cli Hub](proj-cli/README.md)** - Learnings from unified CLI development
-  - Learnings: 2 documents (Template Generation Phases 1-2)
-  - Improvements: 0 documents
 
 ---
 
@@ -70,6 +63,6 @@ This directory captures learnings and improvements discovered during dev-infra t
 
 **Last Updated:** 2026-01-05  
 **Status:** ✅ Active  
-**Next:** Review proj-cli learnings for template improvements
+**Next:** Implement work-prod command sync from v0.6.0
 
 
