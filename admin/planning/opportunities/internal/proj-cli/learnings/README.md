@@ -13,7 +13,7 @@
 
 - **[Template Generation](template-generation/README.md)** - Learnings from template generation feature (6 phases)
 - **[Project Type Support](project-type-support/README.md)** - Learnings from project type filtering (2 phases)
-- **[Code Structure Refactoring](code-structure-refactoring/README.md)** - Learnings from module split refactoring (1 phase) (NEW)
+- **[Code Structure Refactoring](code-structure-refactoring/README.md)** - Learnings from module split refactoring (2 phases)
 
 ### General Learnings
 
@@ -38,8 +38,8 @@ This directory contains learnings from proj-cli that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 4  
-**Feature-Specific Learnings:** 3 features  
+**Total Learning Documents:** 5  
+**Feature-Specific Learnings:** 3 features (10 phases total)  
 **General Learnings:** 1 document  
 **Status:** ✅ Active
 

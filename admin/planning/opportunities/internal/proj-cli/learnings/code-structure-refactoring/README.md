@@ -12,6 +12,7 @@
 ### Phase Learnings
 
 - **[Phase 1](phase-1-learnings.md)** - Source code refactoring (projects.py → projects/)
+- **[Phase 2](phase-2-learnings.md)** - Test structure reorganization (flat → hierarchical)
 
 ---
 
@@ -20,20 +21,22 @@
 This directory contains phase-specific learnings from the code structure refactoring feature in proj-cli.
 
 **Feature Overview:**
-- Split large `projects.py` (943 lines) into focused modules
-- Restructure test directory (Phase 2)
+- Phase 1: Split large `projects.py` (943 lines) into focused modules
+- Phase 2: Restructure test directory (flat → hierarchical)
 
 **Key Themes:**
 - Module extraction patterns
 - Test patching compatibility
 - TDD discipline in refactoring
+- Test structure mirroring source structure
+- Incremental verification during refactoring
 
 ---
 
 ## 📊 Summary
 
-**Total Phase Learnings:** 1  
-**Status:** ✅ Active
+**Total Phase Learnings:** 2  
+**Status:** ✅ Complete
 
 ---
 
