@@ -4,7 +4,7 @@
 **Type:** CLI Tool (Python/Typer)  
 **Status:** ✅ Active  
 **Created:** 2026-01-06  
-**Last Updated:** 2026-01-07
+**Last Updated:** 2026-01-08
 
 ---
 
@@ -15,6 +15,7 @@
 - **[Learnings Hub](learnings/README.md)** - Learnings from proj-cli development
   - **[Template Generation](learnings/template-generation/README.md)** - Phase learnings from template generation feature
   - **[Project Type Support](learnings/project-type-support/README.md)** - Phase learnings from project type filtering
+  - **[Code Structure Refactoring](learnings/code-structure-refactoring/README.md)** - Phase learnings from module split refactoring (NEW)
 
 ### Improvements
 
@@ -42,10 +43,10 @@ proj-cli is a unified CLI tool that provides:
 
 ## 📊 Summary
 
-**Learnings Documents:** 2  
+**Learnings Documents:** 4  
 **Improvement Documents:** 0  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2026-01-07
+**Last Updated:** 2026-01-08

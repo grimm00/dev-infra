@@ -3,7 +3,7 @@
 **Purpose:** Learnings from proj-cli development  
 **Target:** Inform dev-infra template and other projects  
 **Status:** ✅ Active  
-**Last Updated:** 2026-01-07
+**Last Updated:** 2026-01-08
 
 ---
 
@@ -13,10 +13,11 @@
 
 - **[Template Generation](template-generation/README.md)** - Learnings from template generation feature (6 phases)
 - **[Project Type Support](project-type-support/README.md)** - Learnings from project type filtering (2 phases)
+- **[Code Structure Refactoring](code-structure-refactoring/README.md)** - Learnings from module split refactoring (1 phase) (NEW)
 
 ### General Learnings
 
-- **[Refactor Planning Category](refactor-planning-category-learnings.md)** - New planning category for code quality work (NEW)
+- **[Refactor Planning Category](refactor-planning-category-learnings.md)** - New planning category for code quality work
 
 ---
 
@@ -37,11 +38,11 @@ This directory contains learnings from proj-cli that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 3  
-**Feature-Specific Learnings:** 2 features  
+**Total Learning Documents:** 4  
+**Feature-Specific Learnings:** 3 features  
 **General Learnings:** 1 document  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2026-01-07
+**Last Updated:** 2026-01-08
