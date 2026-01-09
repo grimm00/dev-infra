@@ -46,12 +46,12 @@ cursor-wt() {
         return 1
     fi
     
-    # Common worktree locations to check
+    # Common worktree locations to check (prefer worktrees/ at project root)
     local paths=(
+        "$HOME/Projects/$project/worktrees/feat-$feature"
+        "$HOME/Projects/$project/worktrees/$feature"
         "$HOME/Projects/$project/.cursor/worktrees/$project/feat-$feature"
         "$HOME/Projects/$project/.cursor/worktrees/$project/$feature"
-        "$HOME/.cursor/worktrees/$project/feat-$feature"
-        "$HOME/.cursor/worktrees/$project/$feature"
     )
     
     for path in "${paths[@]}"; do
