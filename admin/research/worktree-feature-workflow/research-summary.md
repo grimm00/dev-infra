@@ -61,32 +61,36 @@ No manual documentation of active worktrees needed.
 
 ---
 
-### Finding 4: Full Isolation is Preferred
+### Finding 4: Review Gate - Definition of Done
 
-Self-contained feature branches should include ALL feature-specific documentation:
-- Exploration docs
-- Research docs
-- ADRs
-- Planning docs
+Feature branches need clear "Definition of Done" criteria:
+- **Features:** Complete implementation + tests + docs + review
+- **Explorations:** Decision reached + docs complete + review
 
-Benefits: Abandoned features leave no trace, reviewers see full context, atomic changes.
-
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 ---
 
-### Finding 5: Document Category Separation
+### Finding 5: "No Action" ≠ "Abandoned"
 
-Not all docs belong on feature branches:
+**Key distinction:**
+- **"No Action"** = Deliberate decision after research → Merge docs for learning value
+- **"Abandoned"** = Ran out of time/priority changed → Delete branch (no value)
 
-| Feature branch | Develop |
-|----------------|---------|
-| Feature exploration | Global rules |
-| Feature research | Templates |
-| Feature ADRs | Cursor commands |
-| Feature planning | Project-wide docs |
+Preserving "no action" decisions prevents repeated exploration of the same ideas.
 
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
+
+---
+
+### Finding 6: Holistic PR Review
+
+Review code + docs together for:
+- Full context (the "why" and "how")
+- Atomic changes (feature complete in one merge)
+- Better decisions (context enables better feedback)
+
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 ---
 
@@ -99,12 +103,12 @@ Not all docs belong on feature branches:
 - [x] Insight 4: `git worktree list` provides built-in discoverability
 - [x] Insight 5: Window titles display directory name, reinforcing meaningful naming
 
-**From Topic 2 (Self-Contained):**
-- [x] Insight 6: Full isolation is preferred over partial isolation
-- [x] Insight 7: Feature docs travel WITH the feature (exploration, research, ADRs, planning)
-- [x] Insight 8: Global docs (rules, templates, commands) stay on develop
-- [x] Insight 9: Short-lived feature branches minimize drift issues
-- [x] Insight 10: This pattern aligns with atomic commit principles
+**From Topic 3 (Review Gate):**
+- [x] Insight 6: "No action" ≠ "abandoned" - deliberate decisions have learning value
+- [x] Insight 7: Time-boxing features (days, not weeks) prevents most drift issues
+- [x] Insight 8: Different branch types need different review focus
+- [x] Insight 9: Holistic review is the core benefit of self-contained branches
+- [x] Insight 10: Clear decision tree prevents branch accumulation
 
 ---
 
@@ -118,13 +122,14 @@ Not all docs belong on feature branches:
 - NFR-1: No generic names (`temp`, `wip`)
 - NFR-2: Use type prefixes matching branch type
 
-**From Topic 2 (Self-Contained):**
-- FR-5 to FR-8: Feature docs (exploration, research, ADRs, planning) MUST be on feature branch
-- FR-9: Global docs (rules, templates, commands) MUST remain on develop
-- FR-10: Cross-feature docs MUST be on develop
-- NFR-3: Feature branches SHOULD be short-lived (days, not weeks)
+**From Topic 3 (Review Gate):**
+- FR-5: Feature branches MUST have clear "Definition of Done" criteria
+- FR-6: "No-action" explorations SHOULD be merged for learning value
+- FR-7: PRs MUST be reviewed holistically (code + docs together)
+- NFR-3: Features SHOULD be time-boxed (target: < 1 week)
 - NFR-4: Abandoned branches SHOULD be deleted promptly
-- NFR-5: PRs SHOULD be reviewed holistically (code + docs)
+- NFR-5: sourcery.yml SHOULD ignore `admin/**` for cleaner review
+- C-3: Long-running branches (> 1 week) require periodic develop merges
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -140,12 +145,14 @@ Not all docs belong on feature branches:
 - [x] Recommendation 5: Use `git worktree list` for discoverability
 - [x] Recommendation 6: Commands should output `cursor <path>` for opening
 
-**From Topic 2 (Self-Contained):**
-- [x] Recommendation 7: Use full isolation - ALL feature docs on feature branch
-- [x] Recommendation 8: Keep feature branches short-lived (days, not weeks)
-- [x] Recommendation 9: Global docs (rules, templates, commands) stay on develop
-- [x] Recommendation 10: Review PRs holistically (code + docs together)
-- [x] Recommendation 11: Delete abandoned branches promptly (no trace)
+**From Topic 3 (Review Gate):**
+- [x] Recommendation 7: Define clear "Definition of Done" for features and explorations
+- [x] Recommendation 8: Merge "no-action" exploration docs for learning value
+- [x] Recommendation 9: Time-box explorations (max 1 week) to prevent drift
+- [x] Recommendation 10: Use rebase for short branches, merge for long branches
+- [x] Recommendation 11: Review holistically (code + docs together)
+- [x] Recommendation 12: Configure Sourcery to ignore process docs (`admin/**`)
+- [x] Recommendation 13: Delete abandoned branches promptly
 
 ---
 
@@ -154,8 +161,8 @@ Not all docs belong on feature branches:
 | # | Research Topic | Priority | Status |
 |---|----------------|----------|--------|
 | 1 | Worktree Naming Conventions | 🔴 High | ✅ Complete |
-| 2 | Self-Contained Feature Branches | 🔴 High | ✅ Complete |
-| 3 | Review Gate Pattern | 🟡 Medium | 🔴 Not Started |
+| 2 | Self-Contained Feature Branches | 🔴 High | 🔴 Not Started |
+| 3 | Review Gate Pattern | 🟡 Medium | ✅ Complete |
 | 4 | sourcery.yml Configuration | 🟡 Medium | 🔴 Not Started |
 | 5 | Context Switching and Discovery | 🟡 Medium | 🔴 Not Started |
 
@@ -164,10 +171,11 @@ Not all docs belong on feature branches:
 ## 🚀 Next Steps
 
 1. ✅ ~~Topic 1: Worktree Naming Conventions~~ (Complete)
-2. ✅ ~~Topic 2: Self-Contained Feature Branches~~ (Complete)
-3. Continue with remaining topics (Topics 3-5)
-4. Review requirements in `requirements.md`
-5. Use `/decision worktree-feature-workflow --from-research` to make decisions
+2. Conduct Topic 2: Self-Contained Feature Branches
+3. ✅ ~~Topic 3: Review Gate Pattern~~ (Complete)
+4. Continue with Topics 4-5
+5. Review requirements in `requirements.md`
+6. Use `/decision worktree-feature-workflow --from-research` to make decisions
 
 ---
 

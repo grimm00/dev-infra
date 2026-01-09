@@ -88,35 +88,22 @@ cursor worktrees/feat-my-feature
 
 ---
 
-### FR-5: Feature Exploration on Feature Branch
+### FR-5: Definition of Done Criteria
 
-**Description:** Feature exploration documentation MUST be created on the feature branch, not develop.
+**Description:** Feature branches MUST have clear "Definition of Done" criteria before merging.
 
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**For Features:**
+- Complete implementation
+- Tests pass (if applicable)
+- Documentation updated
+- Reviewed and approved
 
-**Priority:** High
+**For Explorations:**
+- Decision reached (proceed, no-action, or abandon)
+- Documentation complete
+- Reviewed for value/accuracy
 
-**Status:** 🔴 Pending
-
----
-
-### FR-6: Feature Research on Feature Branch
-
-**Description:** Feature research documentation MUST be created on the feature branch, not develop.
-
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
-
-**Priority:** High
-
-**Status:** 🔴 Pending
-
----
-
-### FR-7: Feature ADRs on Feature Branch
-
-**Description:** Feature-specific Architecture Decision Records MUST be created on the feature branch.
-
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 **Priority:** High
 
@@ -124,41 +111,36 @@ cursor worktrees/feat-my-feature
 
 ---
 
-### FR-8: Feature Planning on Feature Branch
+### FR-6: Merge "No-Action" Explorations
 
-**Description:** Feature planning documentation MUST be created on the feature branch.
+**Description:** Explorations that conclude with "no action" SHOULD be merged if they have learning value.
 
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Rationale:** Preserves learning and prevents repeated exploration of the same ideas.
 
-**Priority:** High
+**Distinction:**
+- "No action" (deliberate decision) → Merge docs
+- "Abandoned" (no decision) → Delete branch
 
-**Status:** 🔴 Pending
-
----
-
-### FR-9: Global Docs on Develop
-
-**Description:** Global documentation (rules, templates, commands) MUST remain on develop branch.
-
-**Rationale:** These affect all work and are not feature-specific.
-
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
-
-**Priority:** High
-
-**Status:** 🔴 Pending
-
----
-
-### FR-10: Cross-Feature Docs on Develop
-
-**Description:** Documentation that spans multiple features MUST be on develop, not feature branches.
-
-**Rationale:** Prevents coupling features through shared docs on feature branches.
-
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 **Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-7: Holistic PR Review
+
+**Description:** PRs MUST be reviewed holistically - code and documentation together.
+
+**Rationale:** 
+- Reviewers need full context (the "why" and "how")
+- Enables better review decisions
+- Ensures atomic, complete changes
+
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
+
+**Priority:** High
 
 **Status:** 🔴 Pending
 
@@ -199,13 +181,16 @@ cursor worktrees/feat-my-feature
 
 ---
 
-### NFR-3: Short-Lived Feature Branches
+### NFR-3: Time-Boxed Features
 
-**Description:** Feature branches SHOULD be short-lived (days, not weeks) to minimize develop drift.
+**Description:** Feature branches SHOULD be time-boxed (target: less than 1 week).
 
-**Rationale:** Long-running branches accumulate drift and merge conflicts.
+**Rationale:** 
+- Prevents develop drift issues
+- Reduces merge conflicts
+- Encourages small, focused features
 
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 **Priority:** High
 
@@ -219,7 +204,7 @@ cursor worktrees/feat-my-feature
 
 **Rationale:** Prevents clutter and signals clear intent.
 
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 **Priority:** Medium
 
@@ -227,13 +212,13 @@ cursor worktrees/feat-my-feature
 
 ---
 
-### NFR-5: Holistic PR Review
+### NFR-5: Sourcery Ignore Process Docs
 
-**Description:** Pull requests SHOULD be reviewed holistically (code + docs together).
+**Description:** sourcery.yml SHOULD ignore `admin/**` for cleaner code review.
 
-**Rationale:** Reviewers need full context to make informed decisions.
+**Rationale:** Focuses automated review on code, not process documentation.
 
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 **Priority:** Medium
 
@@ -263,13 +248,13 @@ cursor worktrees/feat-my-feature
 
 ---
 
-### C-3: Feature Branch Coupling
+### C-3: Long-Running Branches Require Merges
 
-**Description:** Feature branches should not depend on documentation in other feature branches.
+**Description:** Long-running feature branches (> 1 week) require periodic merges from develop.
 
-**Impact:** Cross-feature docs must be on develop; features wait for dependencies to merge.
+**Impact:** Cannot rebase long-running branches; must use merge strategy.
 
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+**Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 ---
 
@@ -292,26 +277,6 @@ cursor worktrees/feat-my-feature
 **Impact:** No need to manually document active worktrees.
 
 **Source:** [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md)
-
----
-
-### A-3: Features are Small and Focused
-
-**Description:** Feature branches represent small, focused units of work (days, not weeks).
-
-**Impact:** Self-contained branches work best when features are small.
-
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
-
----
-
-### A-4: Clean Git History is Valuable
-
-**Description:** Having only successful features in develop's git history is valuable.
-
-**Impact:** Justifies the full isolation approach (abandoned features leave no trace).
-
-**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
 
 ---
 
