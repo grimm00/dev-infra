@@ -460,6 +460,57 @@ cursor worktrees/feat-my-feature
 
 ---
 
+### FR-20: Open Draft PR After First Commit
+
+**Description:** Features SHOULD open a draft PR after the first meaningful commit to enable continuous Sourcery feedback.
+
+**Workflow:**
+```
+First commit → Push → Open Draft PR → Continuous feedback on each push
+```
+
+**Source:** [research-phase-based-review.md](research-phase-based-review.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-21: Draft PRs for Early Feedback
+
+**Description:** Draft PRs SHOULD be used for early Sourcery feedback throughout feature development.
+
+**Benefits:**
+- Continuous feedback on every push
+- No merge pressure until complete
+- Single PR number for entire feature
+
+**Source:** [research-phase-based-review.md](research-phase-based-review.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-22: /pr Command Draft Support
+
+**Description:** The `/pr` command SHOULD support a `--draft` flag for creating initial draft PRs.
+
+**Usage:**
+```bash
+/pr --draft --feature my-feature
+```
+
+**Source:** [research-phase-based-review.md](research-phase-based-review.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ### NFR-9: Use Native Tools for Context Switching
 
 **Description:** Context switching SHOULD use native tools (git, cursor CLI).
@@ -497,6 +548,34 @@ cursor worktrees/feat-my-feature
 
 ---
 
+### NFR-11: Push Frequently for Incremental Feedback
+
+**Description:** Features SHOULD push frequently to get incremental Sourcery feedback throughout development.
+
+**Rationale:** More frequent pushes = more feedback opportunities = earlier bug detection.
+
+**Source:** [research-phase-based-review.md](research-phase-based-review.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-12: Single PR Per Feature
+
+**Description:** Self-contained features SHOULD use a single PR (not per-phase PRs).
+
+**Rationale:** Aligns with self-contained philosophy - all code + docs merge atomically.
+
+**Source:** [research-phase-based-review.md](research-phase-based-review.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints
 
 ### C-1: No Slashes in Directory Names
@@ -526,6 +605,21 @@ cursor worktrees/feat-my-feature
 **Impact:** Cannot rebase long-running branches; must use merge strategy.
 
 **Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
+
+---
+
+### C-4: Draft PR Requires GitHub (or Similar)
+
+**Description:** Draft PR workflow requires a platform that supports draft pull requests.
+
+**Supported platforms:**
+- GitHub
+- GitLab (merge request drafts)
+- Bitbucket (draft pull requests)
+
+**Impact:** Self-hosted Git servers without PR support cannot use this workflow.
+
+**Source:** [research-phase-based-review.md](research-phase-based-review.md)
 
 ---
 

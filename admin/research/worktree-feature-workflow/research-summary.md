@@ -19,7 +19,7 @@ This research investigates a refined git worktree workflow for feature developme
 
 **Research Topics:** 5 topics  
 **Research Documents:** 5 documents  
-**Status:** 🟠 In Progress (5/6 complete)
+**Status:** ✅ Complete (6/6 complete)
 
 ---
 
@@ -168,6 +168,29 @@ Otherwise, native git + cursor suffice.
 
 ---
 
+### Finding 13: Draft PRs Preserve Early Feedback Without Merging
+
+Draft PRs enable:
+- Continuous Sourcery feedback on every push
+- No merge pressure until feature is complete
+- Single PR number for entire feature
+- Atomic merge of all code + docs together
+
+**Source:** [research-phase-based-review.md](research-phase-based-review.md)
+
+---
+
+### Finding 14: The Real Value is Per-Push Feedback
+
+The current workflow's value isn't the merge itself, but getting feedback before code solidifies. Draft PRs achieve the same:
+- Push to feature branch → Sourcery reviews
+- Fix issues → Push again → New review
+- Iterate until quality is good
+
+**Source:** [research-phase-based-review.md](research-phase-based-review.md)
+
+---
+
 ## 💡 Key Insights
 
 **From Topic 1 (Naming):**
@@ -204,6 +227,13 @@ Otherwise, native git + cursor suffice.
 - [x] Insight 23: Context switching is just directory navigation
 - [x] Insight 24: Handoff documents solve session continuity
 - [x] Insight 25: Don't over-engineer - native tools are sufficient
+
+**From Topic 6 (Phase-Based Review):**
+- [x] Insight 26: Draft PRs preserve feedback without requiring phase merges
+- [x] Insight 27: Value is per-push feedback, not per-merge
+- [x] Insight 28: Single draft PR aligns with self-contained philosophy
+- [x] Insight 29: Minimal changes needed to existing commands
+- [x] Insight 30: Sourcery CLI not needed - draft PR approach is superior
 
 ---
 
@@ -245,6 +275,14 @@ Otherwise, native git + cursor suffice.
 - FR-19: Handoff documents SHOULD be in `tmp/handoff.md`
 - NFR-9: Context switching SHOULD use native tools
 - NFR-10: Discovery SHOULD use `git worktree list`
+
+**From Topic 6 (Phase-Based Review):**
+- FR-20: Features SHOULD open draft PR after first commit
+- FR-21: Draft PRs SHOULD be used for early Sourcery feedback
+- FR-22: `/pr` command SHOULD support `--draft` flag
+- NFR-11: Features SHOULD push frequently for incremental feedback
+- NFR-12: Single PR per feature (not per phase)
+- C-4: Requires GitHub (or similar with draft PR support)
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -292,6 +330,14 @@ Otherwise, native git + cursor suffice.
 - [x] Recommendation 29: Only build `/worktree` command if it scaffolds docs
 - [x] Recommendation 30: Don't over-engineer - native tools suffice
 
+**From Topic 6 (Phase-Based Review):**
+- [x] Recommendation 31: Use draft PR workflow for self-contained features
+- [x] Recommendation 32: Open draft PR after first meaningful commit
+- [x] Recommendation 33: Push frequently for incremental Sourcery feedback
+- [x] Recommendation 34: Mark ready for review only when feature complete
+- [x] Recommendation 35: Keep single PR per feature (not per phase)
+- [x] Recommendation 36: Update `/pr` command to support `--draft` flag
+
 ---
 
 ## 📊 Research Status
@@ -303,7 +349,7 @@ Otherwise, native git + cursor suffice.
 | 3 | Review Gate Pattern | 🟡 Medium | ✅ Complete |
 | 4 | sourcery.yml Configuration | 🟡 Medium | ✅ Complete |
 | 5 | Context Switching and Discovery | 🟡 Medium | ✅ Complete |
-| 6 | Phase-Based Review | 🔴 High | 🔴 Not Started |
+| 6 | Phase-Based Review | 🔴 High | ✅ Complete |
 
 ---
 
@@ -314,9 +360,10 @@ Otherwise, native git + cursor suffice.
 3. ✅ ~~Topic 3: Review Gate Pattern~~ (Complete)
 4. ✅ ~~Topic 4: sourcery.yml Configuration~~ (Complete)
 5. ✅ ~~Topic 5: Context Switching and Discovery~~ (Complete)
-6. **Topic 6: Phase-Based Review** - Critical gap identified
-7. Review requirements in `requirements.md`
-8. Use `/decision worktree-feature-workflow --from-research` to make decisions
+6. ✅ ~~Topic 6: Phase-Based Review~~ (Complete)
+7. **All research complete!**
+8. Review requirements in `requirements.md`
+9. Use `/decision worktree-feature-workflow --from-research` to make decisions
 
 ---
 
