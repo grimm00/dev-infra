@@ -224,16 +224,35 @@ cursor .cursor/worktrees/dev-infra/feat-explore-two-mode
 
 Or even automatically open it (with user confirmation).
 
+### Worktree Directory Location
+
+**Discovery:** `.cursor/worktrees/` causes Cursor to prompt for confirmation on every agent action.
+
+**Solution:** Use `worktrees/` at project root instead:
+
+```
+dev-infra/
+├── worktrees/                          ← Worktrees live here (gitignored)
+│   ├── feat-explore-two-mode/
+│   └── feat-worktree-feature-workflow/
+└── ...
+```
+
+**Benefits:**
+- No Cursor confirmation prompts
+- Simpler paths
+- Still project-relative and gitignored
+
 ### Workflow Vision
 
 ```
 /explore my-new-feature --worktree
     │
     ├── Creates branch: feat/my-new-feature
-    ├── Creates worktree: .cursor/worktrees/[project]/feat-my-new-feature
+    ├── Creates worktree: worktrees/feat-my-new-feature
     ├── Scaffolds exploration docs IN the worktree
     │
-    └── Outputs: "cursor .cursor/worktrees/[project]/feat-my-new-feature"
+    └── Outputs: "cursor worktrees/feat-my-new-feature"
 ```
 
 User copies command → new focused window opens → ready to work.
