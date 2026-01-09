@@ -19,7 +19,7 @@ This research investigates a refined git worktree workflow for feature developme
 
 **Research Topics:** 5 topics  
 **Research Documents:** 5 documents  
-**Status:** 🟠 In Progress (3/5 complete)
+**Status:** 🟠 In Progress (4/5 complete)
 
 ---
 
@@ -118,6 +118,30 @@ Abandoned features leave no trace in develop.
 
 ---
 
+### Finding 9: Sourcery Reviews Docs (Problem Confirmed)
+
+Sourcery currently reviews documentation in PRs (confirmed in `admin/feedback/sourcery/pr58.md`).
+This creates noise when docs are committed with code.
+
+**Source:** [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)
+
+---
+
+### Finding 10: .sourcery.yaml Solution
+
+Create `.sourcery.yaml` with ignore patterns:
+```yaml
+ignore:
+  - admin/**
+  - tmp/**
+```
+
+Ignoring docs does NOT affect code analysis quality.
+
+**Source:** [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)
+
+---
+
 ## 💡 Key Insights
 
 **From Topic 1 (Naming):**
@@ -140,6 +164,13 @@ Abandoned features leave no trace in develop.
 - [x] Insight 13: Different branch types need different review focus
 - [x] Insight 14: Holistic review is the core benefit of self-contained branches
 - [x] Insight 15: Clear decision tree prevents branch accumulation
+
+**From Topic 4 (sourcery.yml):**
+- [x] Insight 16: No `.sourcery.yaml` exists yet
+- [x] Insight 17: Sourcery currently reviews docs (problem confirmed)
+- [x] Insight 18: Ignoring docs has no impact on code analysis
+- [x] Insight 19: `admin/**` is the key pattern for self-contained workflow
+- [x] Insight 20: Should include in templates for consistency
 
 ---
 
@@ -168,6 +199,13 @@ Abandoned features leave no trace in develop.
 - NFR-4: Abandoned branches SHOULD be deleted promptly
 - NFR-5: sourcery.yml SHOULD ignore `admin/**` for cleaner review
 - C-3: Long-running branches (> 1 week) require periodic develop merges
+
+**From Topic 4 (sourcery.yml):**
+- FR-14: `.sourcery.yaml` MUST be created in dev-infra root
+- FR-15: `.sourcery.yaml` MUST ignore `admin/**`
+- FR-16: `.sourcery.yaml` MUST be included in both templates
+- FR-17: `.sourcery.yaml` SHOULD be added to template sync manifest
+- NFR-8: Ignore patterns SHOULD not affect code analysis quality
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -200,6 +238,13 @@ Abandoned features leave no trace in develop.
 - [x] Recommendation 18: Configure Sourcery to ignore process docs (`admin/**`)
 - [x] Recommendation 19: Delete abandoned branches promptly
 
+**From Topic 4 (sourcery.yml):**
+- [x] Recommendation 20: Create `.sourcery.yaml` in dev-infra root
+- [x] Recommendation 21: Ignore `admin/**` and `tmp/**`
+- [x] Recommendation 22: Include `.sourcery.yaml` in both templates
+- [x] Recommendation 23: Add to template sync manifest
+- [x] Recommendation 24: Keep user docs reviewed (unless too noisy)
+
 ---
 
 ## 📊 Research Status
@@ -209,7 +254,7 @@ Abandoned features leave no trace in develop.
 | 1 | Worktree Naming Conventions | 🔴 High | ✅ Complete |
 | 2 | Self-Contained Feature Branches | 🔴 High | ✅ Complete |
 | 3 | Review Gate Pattern | 🟡 Medium | ✅ Complete |
-| 4 | sourcery.yml Configuration | 🟡 Medium | 🔴 Not Started |
+| 4 | sourcery.yml Configuration | 🟡 Medium | ✅ Complete |
 | 5 | Context Switching and Discovery | 🟡 Medium | 🔴 Not Started |
 
 ---
@@ -219,9 +264,10 @@ Abandoned features leave no trace in develop.
 1. ✅ ~~Topic 1: Worktree Naming Conventions~~ (Complete)
 2. ✅ ~~Topic 2: Self-Contained Feature Branches~~ (Complete)
 3. ✅ ~~Topic 3: Review Gate Pattern~~ (Complete)
-4. Continue with Topics 4-5
-5. Review requirements in `requirements.md`
-6. Use `/decision worktree-feature-workflow --from-research` to make decisions
+4. ✅ ~~Topic 4: sourcery.yml Configuration~~ (Complete)
+5. Continue with Topic 5: Context Switching
+6. Review requirements in `requirements.md`
+7. Use `/decision worktree-feature-workflow --from-research` to make decisions
 
 ---
 

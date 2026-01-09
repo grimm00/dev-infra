@@ -316,6 +316,65 @@ cursor worktrees/feat-my-feature
 
 ---
 
+### FR-14: Create .sourcery.yaml
+
+**Description:** `.sourcery.yaml` MUST be created in dev-infra root to configure Sourcery code review.
+
+**Source:** [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-15: Sourcery Ignore admin/**
+
+**Description:** `.sourcery.yaml` MUST ignore `admin/**` to prevent noise from process documentation.
+
+**Configuration:**
+```yaml
+ignore:
+  - admin/**
+  - tmp/**
+```
+
+**Source:** [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-16: Include in Templates
+
+**Description:** `.sourcery.yaml` MUST be included in both templates for consistent experience.
+
+**Locations:**
+- `templates/standard-project/.sourcery.yaml`
+- `templates/learning-project/.sourcery.yaml`
+
+**Source:** [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-17: Add to Template Sync Manifest
+
+**Description:** `.sourcery.yaml` SHOULD be added to template sync manifest to keep templates in sync.
+
+**Source:** [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ### NFR-6: Feature Independence
 
 **Description:** Features SHOULD be independent - no cross-branch documentation references.
@@ -342,6 +401,20 @@ cursor worktrees/feat-my-feature
 - Reviewers see full context
 
 **Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-8: No Code Analysis Impact
+
+**Description:** Sourcery ignore patterns SHOULD NOT affect code analysis quality.
+
+**Verification:** Ignoring `.md` files and `admin/**` only affects doc review, not code refactoring/quality.
+
+**Source:** [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)
 
 **Priority:** High
 
