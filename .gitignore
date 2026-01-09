@@ -70,3 +70,6 @@ admin/notes/opportunities/internal/cdwilson-docker-build-and-push.yaml
 
 # Cursor worktree directories (keep worktrees.json for documentation)
 .cursor/worktrees/
+
+# Local worktrees directory (for manual worktree creation)
+worktrees/
