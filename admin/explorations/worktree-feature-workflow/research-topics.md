@@ -17,9 +17,15 @@
 - Location: `.cursor/worktrees/` vs project-relative vs home directory
 - Discoverability: How to list/document active worktrees
 - Cursor integration: Does Cursor work well with manual worktrees?
+- Directory-to-branch mapping: Should directory name mirror branch name (e.g., `feat-foo` ↔ `feat/foo`)?
+- Window title implications: How does naming affect window identification?
 
 **Priority:** 🔴 High  
 **Expected outcome:** Naming convention and location standard
+
+**Session Insight (2026-01-09):**
+> `worktrees/` directory (project-relative) avoids Cursor confirmation prompts that `.cursor/worktrees/` triggers.
+> Window titles become the primary identifier when using per-window focus - reinforces importance of meaningful names.
 
 ---
 
@@ -109,4 +115,4 @@ When ready to research:
 
 ---
 
-**Last Updated:** 2026-01-09
+**Last Updated:** 2026-01-09 (Session 2)
