@@ -1,9 +1,9 @@
 # Requirements - Explore Two-Mode Enhancement
 
 **Source:** Research on explore-two-mode  
-**Status:** Draft  
+**Status:** Final  
 **Created:** 2025-12-30  
-**Last Updated:** 2025-12-30
+**Last Updated:** 2026-01-09
 
 ---
 
@@ -13,83 +13,20 @@ This document captures requirements discovered during research on enhancing the 
 
 **Research Source:** [research-summary.md](research-summary.md)
 
+**Summary:**
+- Functional Requirements: 20 (expanded Topic 2: +3 new, +2 from constraints)
+- Non-Functional Requirements: 11 (expanded Topic 2: +2 new)
+- Process Requirements: 3
+- Constraints: 4 (expanded Topic 2: +2 new)
+- Assumptions: 2
+
 ---
 
 ## ✅ Functional Requirements
 
-### FR-1: Two-Mode Pattern
+### Topic 1: Command Improvement Organization
 
-**Description:** `/explore` command should support Setup and Conduct modes
-
-**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
-
-**Priority:** High
-
-**Status:** 🔴 Pending
-
----
-
-### FR-2: Input Source - start.txt
-
-**Description:** `/explore` should accept `start.txt` as an input source via `--from-start` flag
-
-**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
-
-**Priority:** High
-
-**Status:** 🔴 Pending
-
----
-
-### FR-3: Input Source - Reflections
-
-**Description:** `/explore` should accept reflection documents as input sources
-
-**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
-
-**Priority:** Medium
-
-**Status:** 🔴 Pending
-
----
-
-### FR-4: Topic Unification
-
-**Description:** Commands should support `--topic [name] --type` pattern for directory selection
-
-**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md)
-
-**Priority:** Medium
-
-**Status:** 🔴 Pending
-
----
-
-### FR-5: Scaffolding Output
-
-**Description:** Setup mode should produce ~60-80 line scaffolding documents
-
-**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
-
-**Priority:** Medium
-
-**Status:** 🔴 Pending
-
----
-
-### FR-6: Conduct Output
-
-**Description:** Conduct mode should expand scaffolding to ~200-300 lines
-
-**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
-
-**Priority:** Medium
-
-**Status:** 🔴 Pending
-
----
-
-### FR-ORG-1: Command Improvements as Features
+#### FR-ORG-1: Command Improvements as Features
 
 **Description:** Command improvements MUST be tracked as features (not CI) per ADR-001 Template Factory identity
 
@@ -101,7 +38,7 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
-### FR-ORG-2: Consolidated Hub References
+#### FR-ORG-2: Consolidated Hub References
 
 **Description:** Consolidated hub SHOULD reference related completed features (e.g., `transition-plan-two-mode`)
 
@@ -113,11 +50,73 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
-### FR-ORG-3: Archive Placeholder Features
+### Topic 2: Topic Unification Pattern
 
-**Description:** Placeholder features with minimal content MAY be archived when consolidated
+#### FR-TU-1: Positional and Named Topic
 
-**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+**Description:** Commands MUST accept topic as positional argument OR `--topic` flag
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-TU-2: Type Flag Support
+
+**Description:** Commands with category variance MUST support `--type` flag
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-TU-3: Auto-Detection Default
+
+**Description:** Auto-detection MUST remain default behavior; explicit flags for override
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-TU-4: Mode and Scope Flag Separation
+
+**Description:** Mode flags (`--conduct`, `--expand`) MUST be distinct from type/scope flags (`--type`, `--topic-num`)
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md) (expanded via conduct mode)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-TU-5: Explore Type Flag
+
+**Description:** `/explore --type` MUST support values: exploration, research, feature
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md) (expanded via conduct mode)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-TU-6: Transition-Plan Flag Rename
+
+**Description:** `/transition-plan` SHOULD rename `--feature` to `--topic` for consistency
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md) (expanded via conduct mode)
 
 **Priority:** Low
 
@@ -125,11 +124,123 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
-## 🎯 Non-Functional Requirements
+### Topic 3: Explore Input Sources
 
-### NFR-1: Consistency with Existing Commands
+#### FR-IS-1: Unstructured Text Input
 
-**Description:** `/explore` two-mode pattern should be consistent with `/research` and `/transition-plan`
+**Description:** `/explore` MUST accept unstructured text input (stdin, inline, or file)
+
+**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-IS-2: start.txt Input Source
+
+**Description:** `/explore` SHOULD support `--from-start` flag to read start.txt
+
+**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-IS-3: Reflection Input Source
+
+**Description:** `/explore` MAY support `--from-reflect` flag to read reflection suggestions
+
+**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
+
+**Priority:** Low
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-IS-4: Theme Organization
+
+**Description:** Setup Mode MUST organize unstructured input into themed sections
+
+**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-IS-5: Question Extraction
+
+**Description:** Setup Mode MUST extract questions from unstructured input
+
+**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### Topic 4: Scaffolding Boundaries
+
+#### FR-SB-1: Scaffolding Size
+
+**Description:** Setup Mode MUST produce scaffolding of ~60-80 lines
+
+**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-SB-2: Research Topics Creation
+
+**Description:** Setup Mode MUST create research-topics.md with prioritized questions
+
+**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-SB-3: Conduct Mode Expansion
+
+**Description:** Conduct Mode MUST expand to ~200-300 lines
+
+**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-SB-4: Placeholder Guidance
+
+**Description:** Scaffolding MUST include placeholder message guiding to conduct mode
+
+**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### Topic 6: Cross-Command Consistency
+
+#### FR-CC-1: Conduct Flag
+
+**Description:** `/explore` MUST use `--conduct` flag (not `--expand`)
 
 **Source:** [research-cross-command-consistency.md](research-cross-command-consistency.md)
 
@@ -139,21 +250,9 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
-### NFR-2: Backward Compatibility
+#### FR-CC-2: Status Indicator Pattern
 
-**Description:** Existing `/explore` usage without flags should continue to work
-
-**Source:** [research-existing-feature-integration.md](research-existing-feature-integration.md)
-
-**Priority:** High
-
-**Status:** 🔴 Pending
-
----
-
-### NFR-3: Clear Status Indicators
-
-**Description:** Documents should use consistent status indicators (`🔴 Scaffolding`, `✅ Expanded`)
+**Description:** Status indicators MUST match pattern: `🔴 Scaffolding` → `✅ Expanded`
 
 **Source:** [research-cross-command-consistency.md](research-cross-command-consistency.md)
 
@@ -163,7 +262,23 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
-### NFR-ORG-1: ADR-001 Alignment
+#### FR-CC-3: No Incremental Progress
+
+**Description:** `/explore` SHOULD NOT have incremental progress flag (not structurally needed)
+
+**Source:** [research-cross-command-consistency.md](research-cross-command-consistency.md)
+
+**Priority:** Low
+
+**Status:** 🔴 Pending
+
+---
+
+## 🎯 Non-Functional Requirements
+
+### Topic 1: Command Improvement Organization
+
+#### NFR-ORG-1: ADR-001 Alignment
 
 **Description:** Directory structure MUST align with ADR-001 Template Factory identity
 
@@ -175,13 +290,169 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
-### NFR-ORG-2: Preserve Completed Work
+### Topic 2: Topic Unification Pattern
 
-**Description:** Consolidation SHOULD NOT require moving completed work with extensive history
+#### NFR-TU-1: Syntax Consistency
 
-**Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
+**Description:** Command syntax MUST be consistent across all planning commands
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### NFR-TU-2: Vocabulary Documentation
+
+**Description:** Documentation MUST clearly explain topic vs type distinction
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### NFR-TU-3: Command Help Text
+
+**Description:** Command help text MUST show default behavior and override options
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md) (expanded via conduct mode)
+
+**Priority:** Low
+
+**Status:** 🔴 Pending
+
+---
+
+#### NFR-TU-4: Migration Documentation
+
+**Description:** Migration to new flag names SHOULD use hard cutover with CHANGELOG documentation
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md) (expanded via conduct mode)
+
+**Priority:** Low
+
+**Status:** 🔴 Pending
+
+---
+
+### Topic 3: Explore Input Sources
+
+#### NFR-IS-1: Source-Agnostic Processing
+
+**Description:** Input processing SHOULD be source-agnostic (common output format)
+
+**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### NFR-IS-2: Error Guidance
+
+**Description:** Error messages SHOULD guide users to correct input format
+
+**Source:** [research-explore-input-sources.md](research-explore-input-sources.md)
+
+**Priority:** Low
+
+**Status:** 🔴 Pending
+
+---
+
+### Topic 4: Scaffolding Boundaries
+
+#### NFR-SB-1: Predictable Output
+
+**Description:** Output sizes MUST be predictable across runs
+
+**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
 
 **Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+#### NFR-SB-2: Structural Consistency
+
+**Description:** Scaffolding structure MUST be consistent with other two-mode commands
+
+**Source:** [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### Topic 6: Cross-Command Consistency
+
+#### NFR-CC-1: Shared Documentation
+
+**Description:** Two-mode commands SHOULD have shared documentation page
+
+**Source:** [research-cross-command-consistency.md](research-cross-command-consistency.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### NFR-CC-2: Semantic Flags
+
+**Description:** Flag semantics SHOULD be contextually appropriate
+
+**Source:** [research-cross-command-consistency.md](research-cross-command-consistency.md)
+
+**Priority:** Low
+
+**Status:** 🔴 Pending
+
+---
+
+## 📋 Process Requirements
+
+### Topic 5: Existing Feature Integration
+
+#### PR-FI-1: Research to Feature Flow
+
+**Description:** Exploration research SHOULD feed into existing feature plans
+
+**Source:** [research-existing-feature-integration.md](research-existing-feature-integration.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### PR-FI-2: Feature Plan Updates
+
+**Description:** Feature plans SHOULD be updated with expanded scope from research
+
+**Source:** [research-existing-feature-integration.md](research-existing-feature-integration.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### PR-FI-3: ADR Linking
+
+**Description:** ADRs SHOULD be linked from feature plan README
+
+**Source:** [research-existing-feature-integration.md](research-existing-feature-integration.md)
+
+**Priority:** Low
 
 **Status:** 🔴 Pending
 
@@ -195,15 +466,37 @@ This document captures requirements discovered during research on enhancing the 
 
 **Source:** [research-command-improvement-organization.md](research-command-improvement-organization.md)
 
-**Research Finding:** Recommended creating `features/command-two-mode-pattern/` as consolidated hub while preserving completed `transition-plan-two-mode` in place.
+**Research Finding:** Recommended keeping features in place while creating consolidated hub for grouping.
 
 ---
 
 ### C-2: Existing Feature Plan
 
-**Description:** Must integrate with or supersede existing `explore-two-mode` feature plan
+**Description:** Must integrate with or update existing `explore-two-mode` feature plan
 
 **Source:** [research-existing-feature-integration.md](research-existing-feature-integration.md)
+
+**Research Finding:** Keep existing feature plan as implementation target; update with expanded scope after decisions.
+
+---
+
+### C-3: Topic-Num Semantic Preservation
+
+**Description:** `/research --topic-num` semantic MUST be preserved (sub-selection, not unification)
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md) (expanded via conduct mode)
+
+**Research Finding:** `--topic-num` serves a different purpose (sub-selection within research) and should not be changed.
+
+---
+
+### C-4: Positional Args Priority
+
+**Description:** Positional arguments MUST remain the primary input method for simplicity
+
+**Source:** [research-topic-unification-pattern.md](research-topic-unification-pattern.md) (expanded via conduct mode)
+
+**Research Finding:** Industry CLI patterns validate positional args for simplicity; named flags only for explicit override.
 
 ---
 
@@ -234,12 +527,11 @@ This document captures requirements discovered during research on enhancing the 
 
 ## 🚀 Next Steps
 
-1. Continue research for remaining topics (2-6)
-2. Refine requirements as research progresses
-3. Use `/decision explore-two-mode --from-research` when research is complete
-4. Decisions may refine requirements
+1. ✅ Research complete
+2. Use `/decision explore-two-mode --from-research` to make decisions
+3. Decisions may refine requirements
+4. Update existing feature plan with expanded scope
 
 ---
 
-**Last Updated:** 2025-12-31
-
+**Last Updated:** 2026-01-09 (expanded via Topic 2 conduct mode)
