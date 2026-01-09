@@ -2,7 +2,7 @@
 
 **Purpose:** Active explorations and proof of concepts  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-30
+**Last Updated:** 2026-01-09
 
 ---
 
@@ -10,7 +10,9 @@
 
 ### Active Explorations
 
-- **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, and topic unification (🔴 Exploration) ⭐ **NEW**
+- **[Worktree Feature Workflow](worktree-feature-workflow/README.md)** - Self-contained feature development with manual worktrees and review gates (🔴 Exploration) ⭐ **NEW**
+- **[Handoff Command](handoff-command/README.md)** - Managing context handoff between AI chat sessions (🔴 Exploration)
+- **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, and topic unification (🔴 Exploration)
 - **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Exploration)
 - **[Work-Prod Analysis Service](work-prod-analysis-service/README.md)** - Separating analysis from proj-cli inventory into work-prod (🔴 Exploration)
 - **[Four-Arm Architecture](four-arm-architecture/README.md)** - Mapping dev-infra, dev-toolkit, proj-cli, work-prod relationships (🔴 Exploration)
@@ -42,4 +44,4 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2025-12-30
+**Last Updated:** 2026-01-09
