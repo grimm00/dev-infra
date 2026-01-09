@@ -1,7 +1,7 @@
 # Worktree Feature Workflow - Research Hub
 
 **Purpose:** Research for refined git worktree workflow with self-contained feature branches  
-**Status:** ✅ Complete  
+**Status:** 🟠 In Progress  
 **Created:** 2026-01-09  
 **Last Updated:** 2026-01-09
 
@@ -18,6 +18,7 @@
 | --------- | ------------------------------- | ------------------------------------------------------------------------------------------ | -------------- |
 | 🔴 High   | Worktree Naming Conventions     | [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md)         | ✅ Complete    |
 | 🔴 High   | Self-Contained Feature Branches | [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md) | ✅ Complete    |
+| 🔴 High   | Phase-Based Review              | [research-phase-based-review.md](research-phase-based-review.md)                           | 🔴 Not Started |
 | 🟡 Medium | Review Gate Pattern             | [research-review-gate-pattern.md](research-review-gate-pattern.md)                         | ✅ Complete    |
 | 🟡 Medium | sourcery.yml Configuration      | [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)           | ✅ Complete    |
 | 🟡 Medium | Context Switching and Discovery | [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md) | ✅ Complete    |
@@ -30,13 +31,14 @@ This research addresses questions about a refined git worktree workflow:
 
 1. **Naming:** What conventions work best for manually-created worktrees?
 2. **Isolation:** What content should live on feature branches vs develop?
-3. **Review:** How should the review gate workflow function?
-4. **Tooling:** How to configure sourcery.yml for doc-aware PRs?
-5. **Discovery:** How to efficiently switch between worktrees?
+3. **Phase Review:** How to maintain early bug detection in self-contained branches?
+4. **Review Gate:** How should the review gate workflow function?
+5. **Tooling:** How to configure sourcery.yml for doc-aware PRs?
+6. **Discovery:** How to efficiently switch between worktrees?
 
-**Research Topics:** 5 topics  
-**High Priority:** 2 topics (Naming, Self-Contained)  
-**Status:** ✅ Complete (5/5 complete)
+**Research Topics:** 6 topics  
+**High Priority:** 3 topics (Naming, Self-Contained, Phase Review)  
+**Status:** 🟠 In Progress (5/6 complete)
 
 ---
 
@@ -44,18 +46,19 @@ This research addresses questions about a refined git worktree workflow:
 
 ### High Priority (Blocking Decisions)
 
-| Research Topic                  | Status      | Key Finding                                                   |
-| ------------------------------- | ----------- | ------------------------------------------------------------- |
-| Worktree Naming Conventions     | ✅ Complete | Directory names mirror branch names (`feat/foo` → `feat-foo`) |
-| Self-Contained Feature Branches | ✅ Complete | Full isolation - ALL feature docs on feature branch           |
+| Research Topic                  | Status         | Key Finding                                                   |
+| ------------------------------- | -------------- | ------------------------------------------------------------- |
+| Worktree Naming Conventions     | ✅ Complete    | Directory names mirror branch names (`feat/foo` → `feat-foo`) |
+| Self-Contained Feature Branches | ✅ Complete    | Full isolation - ALL feature docs on feature branch           |
+| Phase-Based Review              | 🔴 Not Started | How to get early feedback in self-contained branches?         |
 
 ### Medium Priority
 
-| Research Topic                  | Status         | Key Finding                                  |
-| ------------------------------- | -------------- | -------------------------------------------- |
-| Review Gate Pattern             | ✅ Complete    | Clear "Definition of Done" + holistic review |
-| sourcery.yml Configuration      | ✅ Complete    | Create `.sourcery.yaml` ignoring `admin/**`  |
-| Context Switching and Discovery | ✅ Complete    | Native tools suffice - don't over-engineer  |
+| Research Topic                  | Status      | Key Finding                                  |
+| ------------------------------- | ----------- | -------------------------------------------- |
+| Review Gate Pattern             | ✅ Complete | Clear "Definition of Done" + holistic review |
+| sourcery.yml Configuration      | ✅ Complete | Create `.sourcery.yaml` ignoring `admin/**`  |
+| Context Switching and Discovery | ✅ Complete | Native tools suffice - don't over-engineer   |
 
 ---
 
@@ -76,7 +79,7 @@ These insights were captured during exploration and inform the research:
 
 ## 🚀 Next Steps
 
-1. ✅ ~~Conduct research for each topic~~ (All 5 topics complete)
+1. **Conduct Topic 6: Phase-Based Review** - Critical gap identified
 2. Review requirements in `requirements.md`
 3. Use `/decision worktree-feature-workflow --from-research` to make decisions
 
