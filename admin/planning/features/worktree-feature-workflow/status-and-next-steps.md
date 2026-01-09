@@ -9,7 +9,7 @@
 
 | Phase | Name | Status | Progress | Notes |
 |-------|------|--------|----------|-------|
-| Phase 1 | Configuration | 🔴 Scaffolding | 0% | Needs expansion |
+| Phase 1 | Configuration | ✅ Expanded | 0% impl | Ready for implementation |
 | Phase 2 | Template Updates | 🔴 Scaffolding | 0% | Needs expansion |
 | Phase 3 | Command Updates | 🔴 Scaffolding | 0% | Needs expansion |
 | Phase 4 | Documentation | 🔴 Scaffolding | 0% | Needs expansion |
@@ -34,17 +34,17 @@
 
 ## 🎯 Immediate Next Steps
 
-1. **Expand Phase 1 scaffolding:**
-   ```
-   /transition-plan worktree-feature-workflow --expand --phase 1
-   ```
-
-2. **Implement Phase 1:**
+1. **Implement Phase 1:**
    ```
    /task-phase 1
    ```
 
-3. **Open draft PR** (dogfooding ADR-003!)
+2. **Open draft PR** (dogfooding ADR-003!)
+
+3. **Expand Phase 2 scaffolding:**
+   ```
+   /transition-plan worktree-feature-workflow --expand --phase 2
+   ```
 
 ---
 
