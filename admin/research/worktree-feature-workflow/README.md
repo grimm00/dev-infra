@@ -1,7 +1,7 @@
 # Worktree Feature Workflow - Research Hub
 
 **Purpose:** Research for refined git worktree workflow with self-contained feature branches  
-**Status:** 🔴 Research  
+**Status:** 🟠 In Progress  
 **Created:** 2026-01-09  
 **Last Updated:** 2026-01-09
 
@@ -16,7 +16,7 @@
 
 | Priority | Topic | Document | Status |
 |----------|-------|----------|--------|
-| 🔴 High | Worktree Naming Conventions | [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md) | 🔴 Not Started |
+| 🔴 High | Worktree Naming Conventions | [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md) | ✅ Complete |
 | 🔴 High | Self-Contained Feature Branches | [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md) | 🔴 Not Started |
 | 🟡 Medium | Review Gate Pattern | [research-review-gate-pattern.md](research-review-gate-pattern.md) | 🔴 Not Started |
 | 🟡 Medium | sourcery.yml Configuration | [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md) | 🔴 Not Started |
@@ -36,7 +36,7 @@ This research addresses questions about a refined git worktree workflow:
 
 **Research Topics:** 5 topics  
 **High Priority:** 2 topics (Naming, Self-Contained)  
-**Status:** 🔴 Research
+**Status:** 🟠 In Progress (1/5 complete)
 
 ---
 
@@ -46,7 +46,7 @@ This research addresses questions about a refined git worktree workflow:
 
 | Research Topic | Status | Key Finding |
 |----------------|--------|-------------|
-| Worktree Naming Conventions | 🔴 Not Started | - |
+| Worktree Naming Conventions | ✅ Complete | Directory names mirror branch names (`feat/foo` → `feat-foo`) |
 | Self-Contained Feature Branches | 🔴 Not Started | - |
 
 ### Medium Priority
