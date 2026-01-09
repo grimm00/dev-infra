@@ -408,6 +408,44 @@ ignore:
 
 ---
 
+### FR-18: Output Cursor Command
+
+**Description:** Commands that create worktrees MUST output a `cursor <path>` command for easy opening.
+
+**Example output:**
+```
+✅ Worktree created: feat-my-feature
+
+To open in new Cursor window:
+cursor worktrees/feat-my-feature
+```
+
+**Source:** [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-19: Handoff Documents
+
+**Description:** Handoff documents SHOULD be created in `tmp/handoff.md` for session continuity.
+
+**Content:**
+- Current focus/status
+- Key files to reference
+- Next actions
+- Resume command
+
+**Source:** [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ### NFR-8: No Code Analysis Impact
 
 **Description:** Sourcery ignore patterns SHOULD NOT affect code analysis quality.
@@ -417,6 +455,43 @@ ignore:
 **Source:** [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)
 
 **Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-9: Use Native Tools for Context Switching
+
+**Description:** Context switching SHOULD use native tools (git, cursor CLI).
+
+**Tools:**
+- `git worktree list` for discovery
+- `cursor <path>` for opening
+- `cd <path>` for terminal navigation
+
+**Rationale:** Don't over-engineer - native tools are sufficient.
+
+**Source:** [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-10: Use Git Worktree List for Discovery
+
+**Description:** Worktree discovery SHOULD use `git worktree list` (no custom tooling).
+
+**Rationale:** Git provides comprehensive worktree information:
+- Full path
+- Commit hash
+- Branch name
+- Porcelain format for scripting
+
+**Source:** [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md)
+
+**Priority:** Medium
 
 **Status:** 🔴 Pending
 

@@ -19,7 +19,7 @@ This research investigates a refined git worktree workflow for feature developme
 
 **Research Topics:** 5 topics  
 **Research Documents:** 5 documents  
-**Status:** 🟠 In Progress (4/5 complete)
+**Status:** ✅ Complete (5/5 complete)
 
 ---
 
@@ -142,6 +142,32 @@ Ignoring docs does NOT affect code analysis quality.
 
 ---
 
+### Finding 11: Native Tools Suffice for Context Switching
+
+No custom tooling needed:
+- `git worktree list` for discovery
+- `cursor <path>` for opening
+- Window titles for identification
+- Handoff docs for session continuity
+
+**Source:** [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md)
+
+---
+
+### Finding 12: /worktree Command Only Valuable for Scaffolding
+
+A `/worktree` command is only worthwhile if it:
+1. Creates worktree
+2. Creates branch
+3. Scaffolds exploration docs
+4. Outputs cursor command
+
+Otherwise, native git + cursor suffice.
+
+**Source:** [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md)
+
+---
+
 ## 💡 Key Insights
 
 **From Topic 1 (Naming):**
@@ -171,6 +197,13 @@ Ignoring docs does NOT affect code analysis quality.
 - [x] Insight 18: Ignoring docs has no impact on code analysis
 - [x] Insight 19: `admin/**` is the key pattern for self-contained workflow
 - [x] Insight 20: Should include in templates for consistency
+
+**From Topic 5 (Context Switching):**
+- [x] Insight 21: `git worktree list` provides complete discovery
+- [x] Insight 22: `cursor` CLI enables easy opening
+- [x] Insight 23: Context switching is just directory navigation
+- [x] Insight 24: Handoff documents solve session continuity
+- [x] Insight 25: Don't over-engineer - native tools are sufficient
 
 ---
 
@@ -206,6 +239,12 @@ Ignoring docs does NOT affect code analysis quality.
 - FR-16: `.sourcery.yaml` MUST be included in both templates
 - FR-17: `.sourcery.yaml` SHOULD be added to template sync manifest
 - NFR-8: Ignore patterns SHOULD not affect code analysis quality
+
+**From Topic 5 (Context Switching):**
+- FR-18: Commands creating worktrees MUST output `cursor <path>`
+- FR-19: Handoff documents SHOULD be in `tmp/handoff.md`
+- NFR-9: Context switching SHOULD use native tools
+- NFR-10: Discovery SHOULD use `git worktree list`
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -245,6 +284,14 @@ Ignoring docs does NOT affect code analysis quality.
 - [x] Recommendation 23: Add to template sync manifest
 - [x] Recommendation 24: Keep user docs reviewed (unless too noisy)
 
+**From Topic 5 (Context Switching):**
+- [x] Recommendation 25: Use `git worktree list` for discovery
+- [x] Recommendation 26: Use `cursor <path>` for opening worktrees
+- [x] Recommendation 27: Commands should output `cursor` command
+- [x] Recommendation 28: Use `tmp/handoff.md` for session continuity
+- [x] Recommendation 29: Only build `/worktree` command if it scaffolds docs
+- [x] Recommendation 30: Don't over-engineer - native tools suffice
+
 ---
 
 ## 📊 Research Status
@@ -255,7 +302,7 @@ Ignoring docs does NOT affect code analysis quality.
 | 2 | Self-Contained Feature Branches | 🔴 High | ✅ Complete |
 | 3 | Review Gate Pattern | 🟡 Medium | ✅ Complete |
 | 4 | sourcery.yml Configuration | 🟡 Medium | ✅ Complete |
-| 5 | Context Switching and Discovery | 🟡 Medium | 🔴 Not Started |
+| 5 | Context Switching and Discovery | 🟡 Medium | ✅ Complete |
 
 ---
 
@@ -265,9 +312,10 @@ Ignoring docs does NOT affect code analysis quality.
 2. ✅ ~~Topic 2: Self-Contained Feature Branches~~ (Complete)
 3. ✅ ~~Topic 3: Review Gate Pattern~~ (Complete)
 4. ✅ ~~Topic 4: sourcery.yml Configuration~~ (Complete)
-5. Continue with Topic 5: Context Switching
-6. Review requirements in `requirements.md`
-7. Use `/decision worktree-feature-workflow --from-research` to make decisions
+5. ✅ ~~Topic 5: Context Switching and Discovery~~ (Complete)
+6. **All research complete!**
+7. Review requirements in `requirements.md`
+8. Use `/decision worktree-feature-workflow --from-research` to make decisions
 
 ---
 
