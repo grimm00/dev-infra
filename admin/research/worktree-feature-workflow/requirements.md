@@ -88,6 +88,82 @@ cursor worktrees/feat-my-feature
 
 ---
 
+### FR-5: Feature Exploration on Feature Branch
+
+**Description:** Feature exploration documentation MUST be created on the feature branch, not develop.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-6: Feature Research on Feature Branch
+
+**Description:** Feature research documentation MUST be created on the feature branch, not develop.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-7: Feature ADRs on Feature Branch
+
+**Description:** Feature-specific Architecture Decision Records MUST be created on the feature branch.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-8: Feature Planning on Feature Branch
+
+**Description:** Feature planning documentation MUST be created on the feature branch.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-9: Global Docs on Develop
+
+**Description:** Global documentation (rules, templates, commands) MUST remain on develop branch.
+
+**Rationale:** These affect all work and are not feature-specific.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-10: Cross-Feature Docs on Develop
+
+**Description:** Documentation that spans multiple features MUST be on develop, not feature branches.
+
+**Rationale:** Prevents coupling features through shared docs on feature branches.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Meaningful Names Required
@@ -123,6 +199,48 @@ cursor worktrees/feat-my-feature
 
 ---
 
+### NFR-3: Short-Lived Feature Branches
+
+**Description:** Feature branches SHOULD be short-lived (days, not weeks) to minimize develop drift.
+
+**Rationale:** Long-running branches accumulate drift and merge conflicts.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-4: Prompt Abandoned Branch Deletion
+
+**Description:** Abandoned feature branches SHOULD be deleted promptly after the decision to abandon.
+
+**Rationale:** Prevents clutter and signals clear intent.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-5: Holistic PR Review
+
+**Description:** Pull requests SHOULD be reviewed holistically (code + docs together).
+
+**Rationale:** Reviewers need full context to make informed decisions.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints
 
 ### C-1: No Slashes in Directory Names
@@ -145,6 +263,16 @@ cursor worktrees/feat-my-feature
 
 ---
 
+### C-3: Feature Branch Coupling
+
+**Description:** Feature branches should not depend on documentation in other feature branches.
+
+**Impact:** Cross-feature docs must be on develop; features wait for dependencies to merge.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+---
+
 ## 💭 Assumptions
 
 ### A-1: Per-Window Focus Workflow
@@ -164,6 +292,26 @@ cursor worktrees/feat-my-feature
 **Impact:** No need to manually document active worktrees.
 
 **Source:** [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md)
+
+---
+
+### A-3: Features are Small and Focused
+
+**Description:** Feature branches represent small, focused units of work (days, not weeks).
+
+**Impact:** Self-contained branches work best when features are small.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+---
+
+### A-4: Clean Git History is Valuable
+
+**Description:** Having only successful features in develop's git history is valuable.
+
+**Impact:** Justifies the full isolation approach (abandoned features leave no trace).
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
 
 ---
 
