@@ -1,9 +1,9 @@
 # Research Topics - Explore Two-Mode Enhancement
 
 **Purpose:** List of research topics/questions to investigate  
-**Status:** 🔴 Pending Research  
+**Status:** ✅ Research Complete  
 **Created:** 2025-12-30  
-**Last Updated:** 2025-12-30
+**Last Updated:** 2026-01-09
 
 ---
 
@@ -21,7 +21,7 @@ This document lists research topics and questions that need investigation before
 
 **Priority:** High
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Complete
 
 **Sub-questions:**
 - Are command improvements "features" or "internal tooling"?
@@ -39,7 +39,7 @@ This document lists research topics and questions that need investigation before
 
 **Priority:** High
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Complete
 
 **Sub-questions:**
 - What commands currently use type-specific flags (`--feature`, `--ci`)?
@@ -57,7 +57,7 @@ This document lists research topics and questions that need investigation before
 
 **Priority:** High
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Complete
 
 **Sub-questions:**
 - What content does `start.txt` provide that's useful for exploration?
@@ -75,7 +75,7 @@ This document lists research topics and questions that need investigation before
 
 **Priority:** Medium
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Complete
 
 **Sub-questions:**
 - What sections go in scaffolding vs detailed exploration?
@@ -93,7 +93,7 @@ This document lists research topics and questions that need investigation before
 
 **Priority:** Medium
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Complete
 
 **Sub-questions:**
 - Should existing feature be expanded or archived?
@@ -111,7 +111,7 @@ This document lists research topics and questions that need investigation before
 
 **Priority:** Medium
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Complete
 
 **Sub-questions:**
 - Should all use `--conduct` or should `/explore` use `--expand`?
