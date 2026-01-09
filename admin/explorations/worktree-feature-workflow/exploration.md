@@ -2,7 +2,7 @@
 
 **Status:** 🔴 Exploration  
 **Created:** 2026-01-09  
-**Last Updated:** 2026-01-09
+**Last Updated:** 2026-01-09 (Session 2)
 
 ---
 
@@ -170,6 +170,73 @@ ignore:
 - [ ] How to quickly see all active worktrees?
 - [ ] How to switch between worktrees in Cursor?
 - [ ] Should there be a `/worktree` command?
+- [ ] How to integrate `cursor` CLI for automatic opening?
+
+---
+
+## 💡 Session Insights (2026-01-09)
+
+### Per-Window Focus is Optimal
+
+**Evaluated approaches:**
+
+| Approach | Best For | Pain Points |
+|----------|----------|-------------|
+| **Per-window** (one worktree each) | Deep focus work, clear AI context | Window switching, losing track |
+| **Multi-root workspace** (all worktrees) | Overview, quick status checks | File list overload, confused AI |
+
+**Conclusion:** Per-window is optimal for actual work. Workspaces are only useful for read-only overview.
+
+**Why this matters:**
+- One feature = one mental context
+- Cursor AI works best with focused workspace
+- Shorter file tree = faster navigation
+
+### Window Titles as Primary Identifiers
+
+Since per-window is optimal, **window titles become the primary way to identify worktrees**:
+
+```
+# Good: Window title shows "feat-explore-two-mode"
+# Bad: Window title shows "wxw"
+```
+
+This strongly reinforces the importance of meaningful worktree naming.
+
+### `cursor` CLI Integration
+
+The `cursor` command can open directories directly:
+
+```bash
+cursor /path/to/worktree
+```
+
+**Opportunity:** Commands like `/explore` could:
+1. Create the worktree with meaningful name
+2. Provide copy/paste command to open it:
+
+```
+✅ Worktree created: feat-explore-two-mode
+
+To open in new Cursor window:
+cursor .cursor/worktrees/dev-infra/feat-explore-two-mode
+```
+
+Or even automatically open it (with user confirmation).
+
+### Workflow Vision
+
+```
+/explore my-new-feature --worktree
+    │
+    ├── Creates branch: feat/my-new-feature
+    ├── Creates worktree: .cursor/worktrees/[project]/feat-my-new-feature
+    ├── Scaffolds exploration docs IN the worktree
+    │
+    └── Outputs: "cursor .cursor/worktrees/[project]/feat-my-new-feature"
+```
+
+User copies command → new focused window opens → ready to work.
 
 ---
 

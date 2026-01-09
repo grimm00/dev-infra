@@ -77,9 +77,14 @@
 - Cursor switching: Best way to switch between worktrees in IDE
 - Status visibility: How to see what's being worked on across worktrees
 - Potential `/worktree` command: Would a command help?
+- **`cursor` CLI integration:** Auto-open or copy/paste command output
 
-**Priority:** 🟢 Low  
-**Expected outcome:** Context switching workflow
+**Priority:** 🟢 Low → 🟡 Medium (elevated based on session insights)  
+**Expected outcome:** Context switching workflow with `cursor` CLI integration
+
+**Session Insight (2026-01-09):**
+> Per-window focus is optimal for work. Window titles become primary identifiers.
+> Commands could output `cursor /path/to/worktree` for easy opening.
 
 ---
 
@@ -91,7 +96,7 @@
 | 2 | Self-Contained Feature Branches | 🔴 High | 🔴 Not Started |
 | 3 | Review Gate Pattern | 🟡 Medium | 🔴 Not Started |
 | 4 | sourcery.yml Configuration | 🟡 Medium | 🔴 Not Started |
-| 5 | Context Switching and Discovery | 🟢 Low | 🔴 Not Started |
+| 5 | Context Switching and Discovery | 🟡 Medium | 🔴 Not Started |
 
 ---
 
