@@ -18,7 +18,8 @@ Thumbs.db
 *.swo
 *~
 
-# Temporary files
+# Temporary files (handoff docs, scratch)
+# Per FR-19: tmp/handoff.md for session continuity
 tmp/
 *.tmp
 *.temp
@@ -68,5 +69,6 @@ admin/notes/opportunities/internal/cdwilson-docker-build-and-push.yaml
 !*.txt
 !*.mdc
 
-# Cursor worktree directories (keep worktrees.json for documentation)
-.cursor/worktrees/
+# Git worktrees (created with `git worktree add`)
+# Per ADR-001: worktrees/ is project-relative to avoid Cursor confirmation prompts
+worktrees/

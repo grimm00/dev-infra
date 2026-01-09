@@ -9,13 +9,13 @@
 
 | Phase | Name | Status | Progress | Notes |
 |-------|------|--------|----------|-------|
-| Phase 1 | Configuration | ✅ Expanded | 0% impl | Ready for implementation |
+| Phase 1 | Configuration | ✅ Complete | 100% | .gitignore + .sourcery.yaml |
 | Phase 2 | Template Updates | 🔴 Scaffolding | 0% | Needs expansion |
 | Phase 3 | Command Updates | 🔴 Scaffolding | 0% | Needs expansion |
 | Phase 4 | Documentation | 🔴 Scaffolding | 0% | Needs expansion |
 
-**Overall Status:** 🔴 Not Started  
-**Overall Progress:** 0%
+**Overall Status:** 🟠 In Progress  
+**Overall Progress:** 25%
 
 ---
 
@@ -34,16 +34,16 @@
 
 ## 🎯 Immediate Next Steps
 
-1. **Implement Phase 1:**
-   ```
-   /task-phase 1
-   ```
+1. **Open draft PR** (dogfooding ADR-003!)
 
-2. **Open draft PR** (dogfooding ADR-003!)
-
-3. **Expand Phase 2 scaffolding:**
+2. **Expand Phase 2 scaffolding:**
    ```
    /transition-plan worktree-feature-workflow --expand --phase 2
+   ```
+
+3. **Implement Phase 2:**
+   ```
+   /task-phase 2 1
    ```
 
 ---
@@ -52,11 +52,11 @@
 
 | Phase | Estimate | Status |
 |-------|----------|--------|
-| Phase 1: Configuration | ~30 min | 🔴 Not Started |
+| Phase 1: Configuration | ~30 min | ✅ Complete |
 | Phase 2: Template Updates | ~30 min | 🔴 Not Started |
 | Phase 3: Command Updates | ~1 hour | 🔴 Not Started |
 | Phase 4: Documentation | ~1 hour | 🔴 Not Started |
-| **Total** | **~3 hours** | |
+| **Remaining** | **~2.5 hours** | |
 
 ---
 

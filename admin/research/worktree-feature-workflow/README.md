@@ -14,14 +14,14 @@
 
 ### Research Documents
 
-| Priority  | Topic                           | Document                                                                                   | Status         |
-| --------- | ------------------------------- | ------------------------------------------------------------------------------------------ | -------------- |
-| 🔴 High   | Worktree Naming Conventions     | [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md)         | ✅ Complete    |
-| 🔴 High   | Self-Contained Feature Branches | [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md) | ✅ Complete    |
-| 🔴 High   | Phase-Based Review              | [research-phase-based-review.md](research-phase-based-review.md)                           | ✅ Complete    |
-| 🟡 Medium | Review Gate Pattern             | [research-review-gate-pattern.md](research-review-gate-pattern.md)                         | ✅ Complete    |
-| 🟡 Medium | sourcery.yml Configuration      | [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)           | ✅ Complete    |
-| 🟡 Medium | Context Switching and Discovery | [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md) | ✅ Complete    |
+| Priority  | Topic                           | Document                                                                                   | Status      |
+| --------- | ------------------------------- | ------------------------------------------------------------------------------------------ | ----------- |
+| 🔴 High   | Worktree Naming Conventions     | [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md)         | ✅ Complete |
+| 🔴 High   | Self-Contained Feature Branches | [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md) | ✅ Complete |
+| 🔴 High   | Phase-Based Review              | [research-phase-based-review.md](research-phase-based-review.md)                           | ✅ Complete |
+| 🟡 Medium | Review Gate Pattern             | [research-review-gate-pattern.md](research-review-gate-pattern.md)                         | ✅ Complete |
+| 🟡 Medium | sourcery.yml Configuration      | [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)           | ✅ Complete |
+| 🟡 Medium | Context Switching and Discovery | [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md) | ✅ Complete |
 
 ---
 
