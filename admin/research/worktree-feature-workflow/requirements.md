@@ -181,6 +181,96 @@ cursor worktrees/feat-my-feature
 
 ---
 
+### FR-8: Feature Exploration on Feature Branch
+
+**Description:** Feature exploration documentation MUST be created on the feature branch, not develop.
+
+**Location:** `admin/explorations/[feature]/`
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-9: Feature Research on Feature Branch
+
+**Description:** Feature research documentation MUST be created on the feature branch, not develop.
+
+**Location:** `admin/research/[feature]/`
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-10: Feature ADRs on Feature Branch
+
+**Description:** Feature-specific Architecture Decision Records MUST be created on the feature branch.
+
+**Location:** `admin/decisions/[feature]/`
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-11: Feature Planning on Feature Branch
+
+**Description:** Feature planning documentation MUST be created on the feature branch.
+
+**Location:** `admin/planning/features/[feature]/`
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-12: Global Docs on Develop
+
+**Description:** Global documentation (rules, commands, templates, user docs) MUST remain on develop branch.
+
+**Global docs include:**
+- `.cursor/rules/` - AI rules
+- `.cursor/commands/` - Workflow commands
+- `templates/` - Project templates
+- `docs/` - User documentation
+
+**Rationale:** These affect all work and are not feature-specific.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-13: Cross-Feature Docs on Develop
+
+**Description:** Documentation that spans multiple features MUST be on develop, not feature branches.
+
+**Rationale:** Prevents coupling features through shared docs on feature branches.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ### NFR-3: Time-Boxed Features
 
 **Description:** Feature branches SHOULD be time-boxed (target: less than 1 week).
@@ -221,6 +311,39 @@ cursor worktrees/feat-my-feature
 **Source:** [research-review-gate-pattern.md](research-review-gate-pattern.md)
 
 **Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-6: Feature Independence
+
+**Description:** Features SHOULD be independent - no cross-branch documentation references.
+
+**Rationale:** Prevents circular dependencies between feature branches.
+
+**If docs are shared:** They belong on develop, not a feature branch.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-7: Atomic Feature Merges
+
+**Description:** Feature merges SHOULD be atomic - all docs + code merge together in single PR.
+
+**Rationale:** 
+- Maintains traceability
+- Complete feature history arrives together
+- Reviewers see full context
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+**Priority:** High
 
 **Status:** 🔴 Pending
 

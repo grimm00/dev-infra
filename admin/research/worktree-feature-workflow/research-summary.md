@@ -19,7 +19,7 @@ This research investigates a refined git worktree workflow for feature developme
 
 **Research Topics:** 5 topics  
 **Research Documents:** 5 documents  
-**Status:** 🟠 In Progress (2/5 complete)
+**Status:** 🟠 In Progress (3/5 complete)
 
 ---
 
@@ -94,6 +94,30 @@ Review code + docs together for:
 
 ---
 
+### Finding 7: Full Isolation for Feature Docs
+
+Self-contained feature branches should include ALL feature-specific docs:
+- Exploration, research, ADRs, planning
+- All merge together atomically
+
+Abandoned features leave no trace in develop.
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+---
+
+### Finding 8: Clear Category Separation
+
+| Category | Location |
+|----------|----------|
+| Feature-specific (exploration, research, ADRs, planning) | Feature branch |
+| Global (rules, commands, templates, user docs) | Develop |
+| Cross-feature (shared concepts) | Develop |
+
+**Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
+
+---
+
 ## 💡 Key Insights
 
 **From Topic 1 (Naming):**
@@ -103,12 +127,19 @@ Review code + docs together for:
 - [x] Insight 4: `git worktree list` provides built-in discoverability
 - [x] Insight 5: Window titles display directory name, reinforcing meaningful naming
 
+**From Topic 2 (Self-Contained):**
+- [x] Insight 6: Full isolation is preferred - all feature docs on feature branch
+- [x] Insight 7: Clear category separation (feature-specific vs global)
+- [x] Insight 8: Features should be independent - shared docs go on develop
+- [x] Insight 9: Single atomic merge maintains traceability
+- [x] Insight 10: This pattern is validated by this very exploration
+
 **From Topic 3 (Review Gate):**
-- [x] Insight 6: "No action" ≠ "abandoned" - deliberate decisions have learning value
-- [x] Insight 7: Time-boxing features (days, not weeks) prevents most drift issues
-- [x] Insight 8: Different branch types need different review focus
-- [x] Insight 9: Holistic review is the core benefit of self-contained branches
-- [x] Insight 10: Clear decision tree prevents branch accumulation
+- [x] Insight 11: "No action" ≠ "abandoned" - deliberate decisions have learning value
+- [x] Insight 12: Time-boxing features (days, not weeks) prevents most drift issues
+- [x] Insight 13: Different branch types need different review focus
+- [x] Insight 14: Holistic review is the core benefit of self-contained branches
+- [x] Insight 15: Clear decision tree prevents branch accumulation
 
 ---
 
@@ -121,6 +152,13 @@ Review code + docs together for:
 - FR-4: Commands SHOULD output `cursor <path>` for easy opening
 - NFR-1: No generic names (`temp`, `wip`)
 - NFR-2: Use type prefixes matching branch type
+
+**From Topic 2 (Self-Contained):**
+- FR-8 to FR-11: Feature docs (exploration, research, ADRs, planning) MUST be on feature branch
+- FR-12: Global docs (rules, commands, templates) MUST remain on develop
+- FR-13: Cross-feature docs MUST be on develop
+- NFR-6: Features SHOULD be independent (no cross-branch doc references)
+- NFR-7: Feature merges SHOULD be atomic (all docs + code together)
 
 **From Topic 3 (Review Gate):**
 - FR-5: Feature branches MUST have clear "Definition of Done" criteria
@@ -145,14 +183,22 @@ Review code + docs together for:
 - [x] Recommendation 5: Use `git worktree list` for discoverability
 - [x] Recommendation 6: Commands should output `cursor <path>` for opening
 
+**From Topic 2 (Self-Contained):**
+- [x] Recommendation 7: Use full isolation - ALL feature docs on feature branch
+- [x] Recommendation 8: Feature-specific = exploration, research, ADRs, planning
+- [x] Recommendation 9: Global = rules, commands, templates, user docs
+- [x] Recommendation 10: Merge atomically (all docs with code in single PR)
+- [x] Recommendation 11: Avoid cross-feature doc references
+- [x] Recommendation 12: If docs are shared, they belong on develop
+
 **From Topic 3 (Review Gate):**
-- [x] Recommendation 7: Define clear "Definition of Done" for features and explorations
-- [x] Recommendation 8: Merge "no-action" exploration docs for learning value
-- [x] Recommendation 9: Time-box explorations (max 1 week) to prevent drift
-- [x] Recommendation 10: Use rebase for short branches, merge for long branches
-- [x] Recommendation 11: Review holistically (code + docs together)
-- [x] Recommendation 12: Configure Sourcery to ignore process docs (`admin/**`)
-- [x] Recommendation 13: Delete abandoned branches promptly
+- [x] Recommendation 13: Define clear "Definition of Done" for features and explorations
+- [x] Recommendation 14: Merge "no-action" exploration docs for learning value
+- [x] Recommendation 15: Time-box explorations (max 1 week) to prevent drift
+- [x] Recommendation 16: Use rebase for short branches, merge for long branches
+- [x] Recommendation 17: Review holistically (code + docs together)
+- [x] Recommendation 18: Configure Sourcery to ignore process docs (`admin/**`)
+- [x] Recommendation 19: Delete abandoned branches promptly
 
 ---
 
@@ -161,7 +207,7 @@ Review code + docs together for:
 | # | Research Topic | Priority | Status |
 |---|----------------|----------|--------|
 | 1 | Worktree Naming Conventions | 🔴 High | ✅ Complete |
-| 2 | Self-Contained Feature Branches | 🔴 High | 🔴 Not Started |
+| 2 | Self-Contained Feature Branches | 🔴 High | ✅ Complete |
 | 3 | Review Gate Pattern | 🟡 Medium | ✅ Complete |
 | 4 | sourcery.yml Configuration | 🟡 Medium | 🔴 Not Started |
 | 5 | Context Switching and Discovery | 🟡 Medium | 🔴 Not Started |
@@ -171,7 +217,7 @@ Review code + docs together for:
 ## 🚀 Next Steps
 
 1. ✅ ~~Topic 1: Worktree Naming Conventions~~ (Complete)
-2. Conduct Topic 2: Self-Contained Feature Branches
+2. ✅ ~~Topic 2: Self-Contained Feature Branches~~ (Complete)
 3. ✅ ~~Topic 3: Review Gate Pattern~~ (Complete)
 4. Continue with Topics 4-5
 5. Review requirements in `requirements.md`
