@@ -1,0 +1,7 @@
+# Sourcery Configuration
+# Ignore process documentation to focus code review on actual code
+# See: admin/decisions/worktree-feature-workflow/adr-004-sourcery-configuration.md
+
+ignore:
+  - admin/**     # Process docs (explorations, research, decisions, planning)
+  - tmp/**       # Temporary files (handoff docs, scratch)

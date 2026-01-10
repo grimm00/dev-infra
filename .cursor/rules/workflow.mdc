@@ -14,6 +14,7 @@ alwaysApply: true
 
 - **[Main Rules](main.mdc)** - Core project rules and standards
 - **[Template Rules](template.mdc)** - Template-specific standards
+- **[Worktree Workflow](../../docs/WORKTREE-WORKFLOW.md)** - Feature development with worktrees and draft PRs
 
 ---
 
@@ -272,6 +273,89 @@ For each Sourcery comment, assess:
 - Separate planning updates from implementation commits
 - Better estimation accuracy
 - Cleaner git history
+
+---
+
+## 🌳 Worktree Feature Workflow
+
+**For feature development using git worktrees and draft PRs.**
+
+**Full Guide:** [WORKTREE-WORKFLOW.md](../../docs/WORKTREE-WORKFLOW.md)
+
+### Quick Reference
+
+**Setup:**
+```bash
+# Create worktree for feature
+git worktree add worktrees/feat-my-feature -b feat/my-feature
+
+# Open in Cursor
+cursor worktrees/feat-my-feature
+```
+
+**Naming Convention:** Directory mirrors branch name (`feat/foo` → `worktrees/feat-foo`)
+
+### Draft PR Workflow
+
+```
+1. First meaningful commit → Push → Open Draft PR
+2. Phase 1 work → Push → /pr --review
+3. Fix Sourcery issues ← KEY STEP
+4. Phase 2 work → Push → /pr --review
+5. Fix Sourcery issues
+6. ... repeat ...
+7. Mark ready for review → Final review → Merge
+```
+
+**Commands:**
+- `/pr --draft` - Create draft PR for early feedback
+- `/pr --review` - Request Sourcery review (manual trigger required for drafts)
+- `/pr --ready` - Mark draft PR as ready for final review
+
+### Fix Before Re-Review Pattern
+
+**Critical:** Sourcery reviews the **entire PR diff** each time. Fix issues before requesting next review to avoid duplicate comments.
+
+**Why this matters:**
+- Each review sees all changes since branch divergence
+- Unfixed issues generate duplicate comments
+- This discipline keeps review history clean
+
+### PR Count Reduction
+
+| Workflow | PRs per Feature |
+|----------|-----------------|
+| Old (phase PRs) | ~3-5 PRs |
+| **New (draft PR)** | **1 PR** |
+
+### Self-Contained Branches
+
+**All feature content stays on feature branch:**
+- Explorations (`admin/explorations/[feature]/`)
+- Research (`admin/research/[feature]/`)
+- Decisions (`admin/decisions/[feature]/`)
+- Planning (`admin/planning/features/[feature]/`)
+
+**Benefits:**
+- Feature is portable and atomic
+- No cleanup on develop if abandoned
+- All context merges together
+
+### Sourcery Configuration
+
+Create `.sourcery.yaml` to ignore process documentation:
+
+```yaml
+ignore:
+  - admin/**     # Process docs
+  - tmp/**       # Temporary files
+```
+
+**Related ADRs:**
+- [ADR-001: Worktree Location](../../admin/decisions/worktree-feature-workflow/adr-001-worktree-location-and-naming.md)
+- [ADR-002: Self-Contained Branches](../../admin/decisions/worktree-feature-workflow/adr-002-self-contained-feature-branches.md)
+- [ADR-003: Draft PR Workflow](../../admin/decisions/worktree-feature-workflow/adr-003-draft-pr-review-workflow.md)
+- [ADR-004: Sourcery Configuration](../../admin/decisions/worktree-feature-workflow/adr-004-sourcery-configuration.md)
 
 ---
 
