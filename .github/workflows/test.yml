@@ -126,10 +126,13 @@ jobs:
         with:
           fetch-depth: 0  # Full clone for git branch operations in tests
 
-      - name: Install BATS
+      - name: Install BATS and coreutils
         run: |
-          brew install bats-core || exit 1
+          brew install bats-core coreutils || exit 1
           bats --version || exit 1
+          # coreutils provides 'timeout' command needed by tests
+          # Add gnubin to PATH so 'timeout' works without 'gtimeout' prefix
+          echo "$(brew --prefix coreutils)/libexec/gnubin" >> $GITHUB_PATH
 
       - name: Configure git for tests
         run: |
