@@ -11,7 +11,7 @@
 |-------|------|--------|----------|-------|
 | Phase 1 | Configuration | ✅ Complete | 100% | .gitignore + .sourcery.yaml |
 | Phase 2 | Template Updates | ✅ Complete | 100% | Both templates have .sourcery.yaml |
-| Phase 3 | Command Updates | 🔴 Scaffolding | 0% | Needs expansion |
+| Phase 3 | Command Updates | ✅ Expanded | 0% impl | Ready for implementation |
 | Phase 4 | Documentation | 🔴 Scaffolding | 0% | Needs expansion |
 
 **Overall Status:** 🟠 In Progress  
@@ -34,14 +34,14 @@
 
 ## 🎯 Immediate Next Steps
 
-1. **Expand Phase 3 scaffolding:**
-   ```
-   /transition-plan worktree-feature-workflow --expand --phase 3
-   ```
-
-2. **Implement Phase 3:**
+1. **Implement Phase 3:**
    ```
    /task-phase 3 1
+   ```
+
+2. **Expand Phase 4 scaffolding:**
+   ```
+   /transition-plan worktree-feature-workflow --expand --phase 4
    ```
 
 3. **Complete Phase 4** (documentation)

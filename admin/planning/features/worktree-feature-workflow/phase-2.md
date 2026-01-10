@@ -33,6 +33,7 @@ Add `.sourcery.yaml` to both project templates and update the template sync mani
 **Implementation Steps:**
 
 1. **Create the file:**
+
    - [x] Create `templates/standard-project/.sourcery.yaml`
    - [x] Use template-specific ignore patterns (per ADR-004)
 
@@ -50,15 +51,17 @@ Add `.sourcery.yaml` to both project templates and update the template sync mani
 # (dev-infra uses admin/ instead)
 
 ignore:
-  - docs/maintainers/**   # Process docs (planning, feedback, decisions)
-  - tmp/**                # Temporary files (handoff docs, scratch)
+  - docs/maintainers/** # Process docs (planning, feedback, decisions)
+  - tmp/** # Temporary files (handoff docs, scratch)
 ```
 
 **Requirements Addressed:**
+
 - FR-16: Include in Templates
 - NFR-9: Template Consistency
 
 **Checklist:**
+
 - [x] File created at correct location
 - [x] Ignore patterns match ADR-004 template section
 - [x] Comment explains purpose
@@ -85,15 +88,17 @@ ignore:
 # (dev-infra uses admin/ instead)
 
 ignore:
-  - docs/maintainers/**   # Process docs (planning, feedback, decisions)
-  - tmp/**                # Temporary files (handoff docs, scratch)
+  - docs/maintainers/** # Process docs (planning, feedback, decisions)
+  - tmp/** # Temporary files (handoff docs, scratch)
 ```
 
 **Requirements Addressed:**
+
 - FR-16: Include in Templates
 - NFR-9: Template Consistency
 
 **Checklist:**
+
 - [x] File created at correct location
 - [x] Content identical to standard-project
 - [x] Comment explains purpose
@@ -107,6 +112,7 @@ ignore:
 **Implementation Steps:**
 
 1. **Read current manifest:**
+
    - [x] Check `scripts/template-sync-manifest.txt`
    - [x] Identify appropriate section for new entry
 
@@ -124,9 +130,11 @@ ignore:
 **Location:** After the commands section, before the "Note" about different files.
 
 **Requirements Addressed:**
+
 - FR-17: Add to Template Sync Manifest
 
 **Checklist:**
+
 - [x] Entry added to manifest
 - [x] Comment section added
 - [x] Entry uses correct relative path
@@ -140,6 +148,7 @@ ignore:
 **Verification Steps:**
 
 1. **Run sync validation:**
+
    - [x] Execute: `./scripts/validate-template-sync.sh`
    - [x] Verify: No errors for `.sourcery.yaml`
 
@@ -166,6 +175,7 @@ grep ".sourcery.yaml" scripts/template-sync-manifest.txt
 ```
 
 **Checklist:**
+
 - [x] Both files exist
 - [x] Files are identical
 - [x] Manifest includes entry
@@ -175,12 +185,12 @@ grep ".sourcery.yaml" scripts/template-sync-manifest.txt
 
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: standard-project .sourcery.yaml | ✅ Complete | Created with docs/maintainers/** ignore |
-| Task 2: learning-project .sourcery.yaml | ✅ Complete | Identical to standard-project |
-| Task 3: Update sync manifest | ✅ Complete | Added to template-sync-manifest.txt |
-| Task 4: Verify template sync | ✅ Complete | Validation passes |
+| Task                                    | Status      | Notes                                     |
+| --------------------------------------- | ----------- | ----------------------------------------- |
+| Task 1: standard-project .sourcery.yaml | ✅ Complete | Created with docs/maintainers/\*\* ignore |
+| Task 2: learning-project .sourcery.yaml | ✅ Complete | Identical to standard-project             |
+| Task 3: Update sync manifest            | ✅ Complete | Added to template-sync-manifest.txt       |
+| Task 4: Verify template sync            | ✅ Complete | Validation passes                         |
 
 ---
 
@@ -208,22 +218,25 @@ grep ".sourcery.yaml" scripts/template-sync-manifest.txt
 
 ### Template vs Dev-Infra Patterns
 
-| Repository | Ignore Pattern | Reason |
-|------------|---------------|--------|
-| dev-infra | `admin/**` | Dev-infra uses `admin/` for process docs |
-| Templates | `docs/maintainers/**` | Generated projects use `docs/maintainers/` |
+| Repository | Ignore Pattern        | Reason                                     |
+| ---------- | --------------------- | ------------------------------------------ |
+| dev-infra  | `admin/**`            | Dev-infra uses `admin/` for process docs   |
+| Templates  | `docs/maintainers/**` | Generated projects use `docs/maintainers/` |
 
 ### Why Different Patterns?
 
 Dev-infra is the "template factory" with its own structure:
+
 - `admin/explorations/`, `admin/research/`, `admin/decisions/`, `admin/planning/`
 
 Generated projects use the standard template structure:
+
 - `docs/maintainers/planning/`, `docs/maintainers/feedback/`, `docs/maintainers/decisions/`
 
 ### Sync Manifest Purpose
 
 The sync manifest ensures shared files stay identical between templates:
+
 - CI validates sync on every PR
 - Prevents drift between templates
 - Documents which files should be identical
