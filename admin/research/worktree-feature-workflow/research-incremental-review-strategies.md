@@ -14,6 +14,7 @@
 How can we manipulate what Sourcery (or other reviewers) see to get incremental feedback on only new changes, not the entire PR diff?
 
 **Sub-questions:**
+
 - Can Sourcery review only specific commit ranges?
 - Can we create PRs that target the feature branch itself (sub-PRs)?
 - What does GitHub provide for "changes since last review"?
@@ -31,7 +32,7 @@ How can we manipulate what Sourcery (or other reviewers) see to get incremental 
 4. Triggered another Sourcery review
 5. **Observed:** Sourcery commented on the same issues again
 
-**Root cause:** Sourcery reviews the *entire PR diff* each time, not just the delta since last review.
+**Root cause:** Sourcery reviews the _entire PR diff_ each time, not just the delta since last review.
 
 ---
 
@@ -40,6 +41,7 @@ How can we manipulate what Sourcery (or other reviewers) see to get incremental 
 ### Finding 1: Sourcery Reviews Full PR Diff
 
 Each `@sourcery-ai review` trigger:
+
 - Compares: `base branch (develop) → HEAD of feature branch`
 - Sees: **All changes** since branch divergence
 - Result: Re-comments on unfixed issues
@@ -58,6 +60,7 @@ PR Diff = base (develop) → HEAD (feat/feature)
 ### Finding 2: GitHub Has "Changes Since Last Review" But...
 
 GitHub offers a "Changes since last review" button in the PR interface that:
+
 - Shows diff of commits since last human review
 - Works by comparing commit SHAs
 - **Limitation:** Breaks after rebase/force push
@@ -80,6 +83,7 @@ curl -H "Accept: application/vnd.github.v3.diff" \
 ```
 
 **This could enable:**
+
 - Saving the "reviewed commit" SHA after each review
 - Comparing new head vs reviewed commit
 - Getting just the incremental diff
@@ -103,6 +107,7 @@ develop
 ```
 
 **How it works:**
+
 1. Create main feature branch (`feat/my-feature`)
 2. For each phase/increment, create sub-branch
 3. Open PR from sub-branch → feature branch
@@ -111,12 +116,14 @@ develop
 6. When complete, merge feature branch to develop
 
 **Advantages:**
+
 - ✅ Sourcery sees only the incremental changes
 - ✅ Clean, focused reviews
 - ✅ Feature branch accumulates all changes
 - ✅ Final PR to develop is atomic
 
 **Disadvantages:**
+
 - ⚠️ More branch management
 - ⚠️ More PRs to create/manage
 - ⚠️ PR numbers don't tell the whole story
@@ -139,6 +146,7 @@ git rebase -i --autosquash origin/develop
 ```
 
 **How it helps:**
+
 - Keeps commit history clean
 - GitHub's "Files changed" shows actual changes
 - Reviewers can see commit-by-commit changes
@@ -169,12 +177,12 @@ Searched for Sourcery CLI options for incremental reviews:
 
 ### Option Comparison
 
-| Approach | Incremental Review? | Complexity | Branch Isolation | Sourcery Works? |
-|----------|---------------------|------------|------------------|-----------------|
-| **Fix before re-review** | ⚠️ Manual | ✅ Simple | ✅ Yes | ✅ Yes |
-| **Sub-PR pattern** | ✅ Yes | 🟠 Medium | ✅ Yes | ✅ Yes |
-| **Custom API tooling** | ✅ Yes | 🔴 High | ✅ Yes | ❌ Custom |
-| **Sourcery CLI** | ❌ No | ✅ Simple | ✅ Yes | ❌ Limited |
+| Approach                 | Incremental Review? | Complexity | Branch Isolation | Sourcery Works? |
+| ------------------------ | ------------------- | ---------- | ---------------- | --------------- |
+| **Fix before re-review** | ⚠️ Manual           | ✅ Simple  | ✅ Yes           | ✅ Yes          |
+| **Sub-PR pattern**       | ✅ Yes              | 🟠 Medium  | ✅ Yes           | ✅ Yes          |
+| **Custom API tooling**   | ✅ Yes              | 🔴 High    | ✅ Yes           | ❌ Custom       |
+| **Sourcery CLI**         | ❌ No               | ✅ Simple  | ✅ Yes           | ❌ Limited      |
 
 ### Sub-PR Pattern in Detail
 
@@ -204,6 +212,7 @@ Searched for Sourcery CLI options for incremental reviews:
 ```
 
 **Key insight:** By targeting PRs at the feature branch instead of develop:
+
 - Each sub-PR has a focused diff
 - Sourcery reviews only what's in that sub-PR
 - Feature branch accumulates all changes
@@ -220,12 +229,14 @@ Searched for Sourcery CLI options for incremental reviews:
 > **Best Practice:** Fix Sourcery issues before requesting another phase review. Each `/pr --review` triggers a fresh review of the entire PR, so unfixed issues will generate duplicate comments.
 
 **Why this works:**
+
 - Keeps workflow simple (one draft PR per feature)
 - **Reduces total PRs** compared to old phase-by-phase PR workflow
 - Natural gate for "Definition of Done" per phase
 - No additional tooling required
 
 **Workflow:**
+
 ```
 1. Open draft PR after first commit
 2. Phase 1 → Push → /pr --review
@@ -248,6 +259,7 @@ feat/my-feature-phase-1 → PR → feat/my-feature (not develop)
 ```
 
 **When to consider:**
+
 - Feature spans multiple weeks
 - 8+ distinct phases
 - Different team members working on phases
@@ -258,6 +270,7 @@ feat/my-feature-phase-1 → PR → feat/my-feature (not develop)
 ### Recommendation 3: Document in Workflow Guide
 
 Phase 4 documentation should include:
+
 - Explanation that Sourcery reviews full PR diff
 - "Fix before re-review" as the standard practice
 - PR count benefit (1 PR vs many)
@@ -266,6 +279,7 @@ Phase 4 documentation should include:
 ### Recommendation 4: No Additional Tooling Needed
 
 The current `/pr --review` command is sufficient. No need for:
+
 - `--base` flag for sub-PRs (keep it simple)
 - Deduplication in `dt-review` (not a bug)
 - Complex incremental review tooling
@@ -285,11 +299,11 @@ The current `/pr --review` command is sufficient. No need for:
 
 **The draft PR workflow already solves the "too many PRs" problem.** The "fix before re-review" discipline makes it work without duplicates. This is a workflow adjustment, not a tooling problem.
 
-| Workflow | PRs per Feature |
-|----------|-----------------|
-| Old (phase PRs to develop) | ~3-5 PRs |
-| **New (draft PR + discipline)** | **1 PR** |
-| Sub-PR pattern | ~4-6 PRs (defeats simplicity) |
+| Workflow                        | PRs per Feature               |
+| ------------------------------- | ----------------------------- |
+| Old (phase PRs to develop)      | ~3-5 PRs                      |
+| **New (draft PR + discipline)** | **1 PR**                      |
+| Sub-PR pattern                  | ~4-6 PRs (defeats simplicity) |
 
 ---
 
