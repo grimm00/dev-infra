@@ -91,9 +91,9 @@ Document the complete worktree feature workflow including naming conventions, se
    - Link to incremental review research
 
 **Checklist:**
-- [ ] Add "Fix Before Re-Review" section to ADR-003
-- [ ] Update consequences section
-- [ ] Add reference to incremental review research
+- [x] Add "Fix Before Re-Review" section to ADR-003
+- [x] Update consequences section
+- [x] Add reference to incremental review research
 
 ---
 

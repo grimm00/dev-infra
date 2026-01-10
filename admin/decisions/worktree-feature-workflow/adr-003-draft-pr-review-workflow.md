@@ -50,6 +50,7 @@ develop → feat/feature
 | PR state | Draft until feature complete |
 | Feedback | On demand (see note below) |
 | Merge | Atomic (all code + docs) |
+| Review discipline | Fix issues before re-review (see below) |
 
 ### Sourcery Review Trigger
 
@@ -64,6 +65,40 @@ gh pr comment [PR-number] --body "@sourcery-ai review"
 - After pushing significant changes
 - After completing a logical chunk of work
 - Before marking PR as ready
+
+### Fix Before Re-Review Pattern
+
+**Dogfooding Discovery (PR #59):**
+
+Sourcery reviews the **entire PR diff** each time `@sourcery-ai review` is triggered. This means:
+- It compares: `base branch (develop) → HEAD of feature branch`
+- It sees: **All changes** since branch divergence
+- Unfixed issues will generate **duplicate comments**
+
+**Solution:** Fix Sourcery issues before requesting the next review.
+
+```
+Refined Draft PR Workflow
+─────────────────────────────
+1. Open draft PR after first commit
+2. Phase 1 → Push → /pr --review
+3. Fix Sourcery issues ← KEY STEP (before next phase)
+4. Phase 2 → Push → /pr --review
+5. Fix Sourcery issues
+6. ... repeat ...
+7. Mark ready for review
+8. Final merge
+
+Result: 1 PR per feature, clean review history
+```
+
+**Why this matters:**
+- Each review is a fresh review of the entire PR
+- Sourcery doesn't track "what it already reviewed"
+- This discipline prevents duplicate comments naturally
+- Maintains clean, actionable review history
+
+**Related Research:** [Incremental Review Strategies](../../research/worktree-feature-workflow/research-incremental-review-strategies.md)
 
 ### Command Support
 
@@ -90,8 +125,30 @@ gh pr comment [PR-number] --body "@sourcery-ai review"
 ### Negative
 
 - **Requires discipline:** Must open draft PR early
+- **Requires discipline:** Must fix issues before re-review (see Fix Before Re-Review Pattern)
 - **Platform dependency:** Requires GitHub/GitLab with draft PR support
 - **PR duration:** Long-running features = long-running PRs
+
+---
+
+## Dogfooding Insight: PR Count Reduction
+
+**Discovery during implementation (PR #59):**
+
+The draft PR workflow dramatically reduces the number of PRs per feature:
+
+| Workflow | PRs per Feature | Description |
+|----------|-----------------|-------------|
+| **Old (phase PRs)** | ~3-5 PRs | Each phase merges to develop |
+| **New (draft PR)** | **1 PR** | Single draft PR, merge at end |
+
+**Why this matters:**
+- Fewer PRs = less overhead
+- Single PR tracks entire feature history
+- Atomic merge = cleaner git history
+- No orphaned docs on develop if feature abandoned
+
+**Key insight:** The draft PR workflow solves the "too many PRs" problem. The "fix before re-review" discipline makes it work without duplicate Sourcery comments.
 
 ---
 
@@ -193,7 +250,9 @@ gh pr comment [PR-number] --body "@sourcery-ai review"
 ## References
 
 - [Research: Phase-Based Review](../../research/worktree-feature-workflow/research-phase-based-review.md)
+- [Research: Incremental Review Strategies](../../research/worktree-feature-workflow/research-incremental-review-strategies.md) - Dogfooding discovery
 - [Requirements Document](../../research/worktree-feature-workflow/requirements.md)
+- [Worktree Workflow Guide](../../../docs/WORKTREE-WORKFLOW.md) - User-facing documentation
 
 ---
 
