@@ -17,9 +17,9 @@ This research investigates a refined git worktree workflow for feature developme
 4. sourcery.yml integration
 5. Context switching with `cursor` CLI
 
-**Research Topics:** 6 topics  
-**Research Documents:** 6 documents  
-**Status:** ✅ Complete (6/6 complete)
+**Research Topics:** 7 topics  
+**Research Documents:** 7 documents  
+**Status:** ✅ Complete (7/7 complete)
 
 ---
 
@@ -191,6 +191,28 @@ The current workflow's value isn't the merge itself, but getting feedback before
 
 ---
 
+### Finding 15: "Fix Before Re-Review" is the Key Discipline
+
+Sourcery reviews the **entire PR diff** each time a review is triggered. Unfixed issues generate duplicate comments. The solution is developer discipline:
+- Fix all issues from a review before requesting another review
+- This keeps review history clean and prevents noise
+- Reduces PR count from 3-5 to 1 per feature
+
+**Source:** [research-incremental-review-strategies.md](research-incremental-review-strategies.md)
+
+---
+
+### Finding 16: Sub-PRs as Escape Hatch
+
+For very large features (8+ phases), sub-PRs targeting the feature branch provide incremental reviews:
+- `feat/my-feature-phase-1` → `feat/my-feature`
+- Sourcery sees only incremental diff
+- Use sparingly - adds complexity
+
+**Source:** [research-incremental-review-strategies.md](research-incremental-review-strategies.md)
+
+---
+
 ## 💡 Key Insights
 
 **From Topic 1 (Naming):**
@@ -234,6 +256,12 @@ The current workflow's value isn't the merge itself, but getting feedback before
 - [x] Insight 28: Single draft PR aligns with self-contained philosophy
 - [x] Insight 29: Minimal changes needed to existing commands
 - [x] Insight 30: Sourcery CLI not needed - draft PR approach is superior
+
+**From Topic 7 (Incremental Review Strategies):**
+- [x] Insight 31: Sourcery reviews entire PR diff each time - expected behavior
+- [x] Insight 32: "Fix before re-review" is a discipline, not a tool
+- [x] Insight 33: Sub-PRs are an escape hatch for very large features
+- [x] Insight 34: PR count reduces from 3-5 to 1 with new workflow
 
 ---
 
@@ -338,6 +366,11 @@ The current workflow's value isn't the merge itself, but getting feedback before
 - [x] Recommendation 35: Keep single PR per feature (not per phase)
 - [x] Recommendation 36: Update `/pr` command to support `--draft` flag
 
+**From Topic 7 (Incremental Review Strategies):**
+- [x] Recommendation 37: Fix all Sourcery issues before requesting next review
+- [x] Recommendation 38: Use sub-PRs only for very large features (8+ phases)
+- [x] Recommendation 39: Document "fix before re-review" as core discipline
+
 ---
 
 ## 📊 Research Status
@@ -350,6 +383,7 @@ The current workflow's value isn't the merge itself, but getting feedback before
 | 4 | sourcery.yml Configuration | 🟡 Medium | ✅ Complete |
 | 5 | Context Switching and Discovery | 🟡 Medium | ✅ Complete |
 | 6 | Phase-Based Review | 🔴 High | ✅ Complete |
+| 7 | Incremental Review Strategies | 🔴 High | ✅ Complete |
 
 ---
 
@@ -361,9 +395,10 @@ The current workflow's value isn't the merge itself, but getting feedback before
 4. ✅ ~~Topic 4: sourcery.yml Configuration~~ (Complete)
 5. ✅ ~~Topic 5: Context Switching and Discovery~~ (Complete)
 6. ✅ ~~Topic 6: Phase-Based Review~~ (Complete)
-7. **All research complete!**
-8. Review requirements in `requirements.md`
-9. Use `/decision worktree-feature-workflow --from-research` to make decisions
+7. ✅ ~~Topic 7: Incremental Review Strategies~~ (Complete - added during implementation)
+8. **All research complete!**
+9. Review requirements in `requirements.md`
+10. Use `/decision worktree-feature-workflow --from-research` to make decisions
 
 ---
 

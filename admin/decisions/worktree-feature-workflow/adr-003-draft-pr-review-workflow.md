@@ -35,8 +35,10 @@ The current dev-infra workflow uses phase-based PRs with Sourcery reviews at eac
 ```
 develop → feat/feature
   └── First meaningful commit → Push → Open Draft PR
-  └── Phase 1 work → Push → Sourcery reviews automatically
-  └── Phase 2 work → Push → Sourcery reviews automatically
+  └── Phase 1 work → Push → /pr --review (trigger Sourcery)
+  └── Fix Sourcery issues ← KEY: Fix before next phase
+  └── Phase 2 work → Push → /pr --review (trigger Sourcery)
+  └── Fix Sourcery issues
   └── ...
   └── Feature complete → Mark Ready for Review → Final review → Merge
 ```
