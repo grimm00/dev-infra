@@ -1,7 +1,7 @@
-# Research: sourcery.yml Configuration
+# Research: .sourcery.yaml Configuration
 
 **Research Topic:** Worktree Feature Workflow  
-**Question:** How should sourcery.yml be configured to support this workflow?  
+**Question:** How should `.sourcery.yaml` be configured to support this workflow?  
 **Status:** ✅ Complete  
 **Priority:** 🟡 Medium  
 **Created:** 2026-01-09  
@@ -11,7 +11,7 @@
 
 ## 🎯 Research Question
 
-How should sourcery.yml be configured to support this workflow?
+How should `.sourcery.yaml` be configured to support this workflow?
 
 **Sub-questions:**
 - What paths should be ignored? (`admin/**`, `docs/maintainers/**`, others?)

@@ -20,7 +20,7 @@
 | 🔴 High   | Self-Contained Feature Branches | [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md) | ✅ Complete |
 | 🔴 High   | Phase-Based Review              | [research-phase-based-review.md](research-phase-based-review.md)                           | ✅ Complete |
 | 🟡 Medium | Review Gate Pattern             | [research-review-gate-pattern.md](research-review-gate-pattern.md)                         | ✅ Complete |
-| 🟡 Medium | sourcery.yml Configuration      | [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)           | ✅ Complete |
+| 🟡 Medium | .sourcery.yaml Configuration    | [research-sourcery-yml-configuration.md](research-sourcery-yml-configuration.md)           | ✅ Complete |
 | 🟡 Medium | Context Switching and Discovery | [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md) | ✅ Complete |
 
 ---
@@ -33,7 +33,7 @@ This research addresses questions about a refined git worktree workflow:
 2. **Isolation:** What content should live on feature branches vs develop?
 3. **Phase Review:** How to maintain early bug detection in self-contained branches?
 4. **Review Gate:** How should the review gate workflow function?
-5. **Tooling:** How to configure sourcery.yml for doc-aware PRs?
+5. **Tooling:** How to configure `.sourcery.yaml` for doc-aware PRs?
 6. **Discovery:** How to efficiently switch between worktrees?
 
 **Research Topics:** 6 topics  
@@ -57,7 +57,7 @@ This research addresses questions about a refined git worktree workflow:
 | Research Topic                  | Status      | Key Finding                                  |
 | ------------------------------- | ----------- | -------------------------------------------- |
 | Review Gate Pattern             | ✅ Complete | Clear "Definition of Done" + holistic review |
-| sourcery.yml Configuration      | ✅ Complete | Create `.sourcery.yaml` ignoring `admin/**`  |
+| .sourcery.yaml Configuration    | ✅ Complete | Create `.sourcery.yaml` ignoring `admin/**`  |
 | Context Switching and Discovery | ✅ Complete | Native tools suffice - don't over-engineer   |
 
 ---
