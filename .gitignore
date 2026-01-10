@@ -72,3 +72,6 @@ admin/notes/opportunities/internal/cdwilson-docker-build-and-push.yaml
 # Git worktrees (created with `git worktree add`)
 # Per ADR-001: worktrees/ is project-relative to avoid Cursor confirmation prompts
 worktrees/
+
+# Cursor worktree metadata
+.cursor/worktrees/
