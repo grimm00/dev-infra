@@ -21,6 +21,7 @@
 - **[Command Adaptation Checklist](COMMAND-ADAPTATION-CHECKLIST.md)** - Actionable checklist for command adaptation
 - **[Phase Document Template](PHASE-DOCUMENT-TEMPLATE.md)** - Template for detailed phase documents
 - **[Worktree Guide](WORKTREE-GUIDE.md)** - Multi-agent development with git worktrees
+- **[Worktree Feature Workflow](WORKTREE-WORKFLOW.md)** - Feature development with draft PRs and self-contained branches
 
 ### Distribution & Integration
 - **[Global Commands Guide](GLOBAL-COMMANDS.md)** - Using commands globally across projects

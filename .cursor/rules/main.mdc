@@ -18,6 +18,10 @@ alwaysApply: true
 - **[Workflow Rules](workflow.mdc)** - Git Flow, PR workflow, template development processes
 - **[Template Rules](template.mdc)** - Template structure, generation, and validation standards
 
+### Workflow Guides
+
+- **[Worktree Feature Workflow](../../docs/WORKTREE-WORKFLOW.md)** - Feature development using worktrees and draft PRs
+
 ---
 
 ## 🎯 Project Overview
@@ -485,6 +489,18 @@ When modifying templates:
 - ✅ Removed experimental-project template
 - ✅ Migrated to 0.x.x versioning
 - ✅ ADR-001: Commands as Guides
+
+### 🟠 In Progress
+
+**Worktree Feature Workflow (v0.8.0):**
+
+- 🟠 Worktree feature workflow with draft PRs
+- ✅ `.sourcery.yaml` configuration for doc-aware reviews
+- ✅ `/pr --draft`, `--ready`, `--review` flags
+- ✅ Self-contained feature branches (all docs on feature branch)
+- ✅ "Fix before re-review" pattern documented
+
+**See:** [WORKTREE-WORKFLOW.md](../../docs/WORKTREE-WORKFLOW.md) for complete guide
 
 ### 🟡 Planned
 

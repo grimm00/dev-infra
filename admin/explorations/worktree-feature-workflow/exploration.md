@@ -62,18 +62,20 @@ Working on multiple explorations simultaneously (`explore-two-mode`, `four-arm-a
 
 **Proposed (Manual):**
 ```
-.cursor/worktrees/dev-infra/feat-explore-two-mode/
-.cursor/worktrees/dev-infra/feat-worktree-workflow/
-.cursor/worktrees/proj-cli/feat-work-prod-integration/
+worktrees/feat-explore-two-mode/
+worktrees/feat-worktree-workflow/
+worktrees/feat-work-prod-integration/
 ```
+
+> **Note:** Using `worktrees/` (project-relative) instead of `.cursor/worktrees/` to avoid Cursor confirmation prompts.
 
 **Commands:**
 ```bash
-# Create meaningful worktree
-git worktree add .cursor/worktrees/dev-infra/feat-explore-two-mode feat/explore-two-mode
+# Create meaningful worktree (existing branch)
+git worktree add worktrees/feat-explore-two-mode feat/explore-two-mode
 
 # Or create new branch at same time
-git worktree add -b feat/explore-two-mode .cursor/worktrees/dev-infra/feat-explore-two-mode
+git worktree add -b feat/explore-two-mode worktrees/feat-explore-two-mode
 ```
 
 ### Self-Contained Feature Branches
@@ -147,9 +149,11 @@ ignore:
 ## 🔍 Key Questions
 
 ### Worktree Naming
-- [ ] What naming convention? `feat-<name>` vs `<feature-name>`?
-- [ ] Where should worktrees live? `.cursor/worktrees/` vs project-relative?
+- [ ] What naming convention? `feat-<name>` vs `<feature-name>` vs `<type>-<name>`?
+- [x] Where should worktrees live? → **`worktrees/` (project-relative)** - avoids Cursor confirmation prompts
+- [ ] Should directory name mirror branch name? (e.g., `feat-foo` ↔ `feat/foo`)
 - [ ] How to document existing worktrees?
+- [ ] How does naming affect window title identification?
 
 ### Self-Contained Features
 - [ ] Should ALL docs go on feature branch, or just exploration/research?
@@ -219,7 +223,7 @@ cursor /path/to/worktree
 ✅ Worktree created: feat-explore-two-mode
 
 To open in new Cursor window:
-cursor .cursor/worktrees/dev-infra/feat-explore-two-mode
+cursor worktrees/feat-explore-two-mode
 ```
 
 Or even automatically open it (with user confirmation).

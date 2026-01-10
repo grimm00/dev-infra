@@ -17,9 +17,15 @@
 - Location: `.cursor/worktrees/` vs project-relative vs home directory
 - Discoverability: How to list/document active worktrees
 - Cursor integration: Does Cursor work well with manual worktrees?
+- Directory-to-branch mapping: Should directory name mirror branch name (e.g., `feat-foo` ↔ `feat/foo`)?
+- Window title implications: How does naming affect window identification?
 
 **Priority:** 🔴 High  
 **Expected outcome:** Naming convention and location standard
+
+**Session Insight (2026-01-09):**
+> `worktrees/` directory (project-relative) avoids Cursor confirmation prompts that `.cursor/worktrees/` triggers.
+> Window titles become the primary identifier when using per-window focus - reinforces importance of meaningful names.
 
 ---
 
@@ -88,15 +94,36 @@
 
 ---
 
+### Topic 6: Phase-Based Review in Self-Contained Workflow
+
+**Question:** How do we maintain early bug detection (via Sourcery reviews) in a self-contained feature branch workflow?
+
+**Areas to investigate:**
+- Phase-based PRs: Should we still create them? To what branch?
+- Sourcery CLI: Can it be used locally for early feedback?
+- Draft PRs: Do they provide a middle ground?
+- Isolation vs feedback: How to balance these competing needs?
+- Current workflow value: What do we lose without phase-based PRs?
+
+**Priority:** 🔴 High  
+**Expected outcome:** Review workflow that preserves early bug detection
+
+**Session Insight (2026-01-09):**
+> Gap identified: Current workflow uses Sourcery reviews at each phase (via transition-plan).
+> Self-contained branches may lose this early feedback if we wait for final PR.
+
+---
+
 ## 📊 Topic Summary
 
 | # | Topic | Priority | Status |
 |---|-------|----------|--------|
-| 1 | Worktree Naming Conventions | 🔴 High | 🔴 Not Started |
-| 2 | Self-Contained Feature Branches | 🔴 High | 🔴 Not Started |
-| 3 | Review Gate Pattern | 🟡 Medium | 🔴 Not Started |
-| 4 | sourcery.yml Configuration | 🟡 Medium | 🔴 Not Started |
-| 5 | Context Switching and Discovery | 🟡 Medium | 🔴 Not Started |
+| 1 | Worktree Naming Conventions | 🔴 High | ✅ Complete |
+| 2 | Self-Contained Feature Branches | 🔴 High | ✅ Complete |
+| 3 | Review Gate Pattern | 🟡 Medium | ✅ Complete |
+| 4 | sourcery.yml Configuration | 🟡 Medium | ✅ Complete |
+| 5 | Context Switching and Discovery | 🟡 Medium | ✅ Complete |
+| 6 | Phase-Based Review | 🔴 High | ✅ Complete |
 
 ---
 
@@ -109,4 +136,4 @@ When ready to research:
 
 ---
 
-**Last Updated:** 2026-01-09
+**Last Updated:** 2026-01-09 (Session 2)
