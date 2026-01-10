@@ -113,10 +113,10 @@ Document the complete worktree feature workflow including naming conventions, se
    - Document "fix before re-review" pattern
 
 **Checklist:**
-- [ ] Update main.mdc with workflow reference
-- [ ] Add worktree workflow section to workflow.mdc
-- [ ] Include draft PR guidance
-- [ ] Document review discipline
+- [x] Update main.mdc with workflow reference
+- [x] Add worktree workflow section to workflow.mdc
+- [x] Include draft PR guidance
+- [x] Document review discipline
 
 ---
 
