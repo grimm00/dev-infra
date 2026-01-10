@@ -2,7 +2,7 @@
 
 **Version:** v0.8.0  
 **Release Date:** 2026-01-10  
-**Status:** ✅ Final
+**Status:** ✅ Published (PR #60 merged, GitHub Release pending)
 
 ---
 

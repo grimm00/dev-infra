@@ -1,8 +1,8 @@
 # Release v0.8.0 - Worktree Feature Workflow
 
 **Purpose:** Release planning and tracking for v0.8.0  
-**Status:** 🟢 Ready for Release Branch  
-**Target Date:** 2026-01-XX
+**Status:** ✅ Released  
+**Release Date:** 2026-01-10
 
 ---
 
@@ -45,20 +45,24 @@
 
 ### Release Process
 
-- [ ] Release branch created
-- [ ] Final review complete
-- [ ] PR to main created
-- [ ] Release tagged
+- [x] Release branch created
+- [x] Final review complete
+- [x] PR to main created (PR #60)
+- [x] Release tagged (v0.8.0)
 
 ---
 
-## 🚀 Next Steps
+## ✅ Release Complete
 
-1. Review draft documents
-2. Create release branch: `./scripts/create-release-branch.sh v0.8.0`
-3. Merge CHANGELOG draft
-4. Finalize release notes
-5. Create PR to main
+**Merged:** PR #60 (2026-01-10)  
+**Tagged:** v0.8.0
+
+### Post-Release Tasks
+
+- [x] Main merged to develop
+- [x] Historical tracking updated
+- [x] Release documents archived
+- [ ] GitHub release published (pending)
 
 ---
 
