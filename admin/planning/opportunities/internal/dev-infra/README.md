@@ -34,11 +34,15 @@ This directory captures learnings and improvements discovered during dev-infra t
 
 ## 📊 Summary
 
-**Learnings Documents:** 8  
-**Improvement Documents:** 0  
+**Learnings Documents:** 19  
+**Improvement Documents:** 1 (Transition-Plan Two-Mode Pattern ✅ Complete)  
 **Status:** ✅ Active
+
+**Recent Activity:**
+- **2025-12-29:** Transition-Plan Two-Mode learnings captured
+- **2025-12-29:** Two-Mode Pattern improvement marked complete
 
 ---
 
-**Last Updated:** 2025-12-08
+**Last Updated:** 2025-12-29
 

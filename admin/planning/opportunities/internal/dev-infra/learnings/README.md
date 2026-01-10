@@ -11,7 +11,9 @@
 
 ### Feature-Specific Learnings
 
-- **[Experimental Template Learnings](experimental-template/README.md)** - Phase learnings from Experimental Template feature (3 of 4 phases, 🟠 In Progress) ⭐ **NEW**
+- **[Worktree Feature Workflow Learnings](worktree-feature-workflow/README.md)** - Draft PR workflow, fix-before-re-review pattern, self-contained branches (4 phases, ✅ Complete) ⭐ **NEW**
+- **[Transition-Plan Two-Mode Learnings](transition-plan-two-mode/README.md)** - Command development learnings: two-mode pattern, phase batching, pattern replication (4 phases, ✅ Complete)
+- **[Experimental Template Learnings](experimental-template/README.md)** - Phase learnings from Experimental Template feature (3 of 4 phases, 🟠 In Progress)
 - **[Release Automation v2 Learnings](release-automation-v2/README.md)** - Phase and release learnings from Release Automation v2 feature (2 of 2 phases + v0.5.0 release, ✅ Complete)
 - **[Release Readiness Learnings](release-readiness/README.md)** - Phase and fix batch learnings from Release Readiness feature (4 phases + 5 fix batches, 🟠 In Progress)
 - **[Templates Enhancement Learnings](templates-enhancement/README.md)** - Phase learnings from Templates Enhancement feature (5 phases, ✅ Complete)
@@ -19,7 +21,8 @@
 
 ### CI/CD Improvement Learnings
 
-- **[CI Git Configuration Learnings](ci-git-configuration/README.md)** - Learnings from CI Git Configuration improvement (1 phase, ✅ Complete, PR #47) ⭐ **NEW**
+- **[Template Sync Drift Fix Learnings](template-sync-drift-fix/README.md)** - Learnings from template sync drift fix (✅ Complete, PR #57) - Transition-plan workflow validation, CI folder organization insights ⭐ **NEW**
+- **[CI Git Configuration Learnings](ci-git-configuration/README.md)** - Learnings from CI Git Configuration improvement (1 phase, ✅ Complete, PR #47)
 
 ### Learning Documents
 
@@ -46,16 +49,16 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 18  
-**Feature-Specific Learnings:** 5 features (12 phases + 5 fix batches + 1 release total)  
-**CI/CD Improvement Learnings:** 1 improvement (1 phase)  
+**Total Learning Documents:** 21  
+**Feature-Specific Learnings:** 7 features (20 phases + 5 fix batches + 1 release total)  
+**CI/CD Improvement Learnings:** 2 improvements  
 **Status:** ✅ Active
 
 **Recent Additions:**
-- Fix Management Workflow Learnings (2025-12-15) - Cross-PR fix batch workflow learnings (all 8 batches complete)
-- Experimental Template Phase 3 Learnings (2025-12-15) - CI drift detection learnings
-- Experimental Template Phase 2 Learnings (2025-12-15) - Generator script update learnings
+- **Worktree Feature Workflow Learnings (2026-01-09)** - Draft PR workflow, fix-before-re-review pattern, dogfooding insights
+- Template Sync Drift Fix Learnings (2025-12-30) - Transition-plan workflow validation, CI folder organization insights
+- Transition-Plan Two-Mode Feature Learnings (2025-12-29) - Two-mode pattern, phase batching, pattern replication
 
 ---
 
-**Last Updated:** 2025-12-15
+**Last Updated:** 2026-01-09

@@ -18,6 +18,10 @@ alwaysApply: true
 - **[Workflow Rules](workflow.mdc)** - Git Flow, PR workflow, template development processes
 - **[Template Rules](template.mdc)** - Template structure, generation, and validation standards
 
+### Workflow Guides
+
+- **[Worktree Feature Workflow](../../docs/WORKTREE-WORKFLOW.md)** - Feature development using worktrees and draft PRs
+
 ---
 
 ## 🎯 Project Overview
@@ -392,11 +396,11 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v0.7.0-dev  
+**Version:** v0.8.0  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
 **Updated:** 2025-12-18  
-**Priority:** Command simplification complete
+**Priority:** v0.8.0 released
 
 ### ✅ Completed
 
@@ -465,7 +469,7 @@ When modifying templates:
 
 ### ✅ Recently Completed
 
-**Command Simplification (v0.7.0):**
+**Command Simplification (v0.8.0):**
 
 - ✅ All templates now have all 19 commands
 - ✅ Removed experimental-project template (merged into standard)
@@ -477,13 +481,28 @@ When modifying templates:
 - ✅ 8 cross-PR fix batches complete (28 issues fixed)
 - ✅ `/fix-review` → `/fix-plan` → `/fix-implement` workflow validated
 
+### ✅ Recently Released
+
+**v0.8.0 - Command Simplification (2025-12-18):**
+
+- ✅ All templates now have all 19 commands
+- ✅ Removed experimental-project template
+- ✅ Migrated to 0.x.x versioning
+- ✅ ADR-001: Commands as Guides
+
+### 🟠 In Progress
+
+**Worktree Feature Workflow (v0.8.0):**
+
+- 🟠 Worktree feature workflow with draft PRs
+- ✅ `.sourcery.yaml` configuration for doc-aware reviews
+- ✅ `/pr --draft`, `--ready`, `--review` flags
+- ✅ Self-contained feature branches (all docs on feature branch)
+- ✅ "Fix before re-review" pattern documented
+
+**See:** [WORKTREE-WORKFLOW.md](../../docs/WORKTREE-WORKFLOW.md) for complete guide
+
 ### 🟡 Planned
-
-**v0.7.0 - Command Simplification:**
-
-- ✅ All phases complete
-- ✅ Update CHANGELOG (migrated to 0.x.x versioning)
-- 🟡 Create release notes
 
 **Future Considerations:**
 
@@ -519,4 +538,4 @@ When modifying templates:
 
 **Last Updated:** 2025-12-18  
 **Status:** ✅ Active  
-**Next:** v0.7.0 release (Command Simplification)
+**Next:** v0.8.0 planning

@@ -2,13 +2,38 @@
 
 **Purpose:** Central hub for all CI/CD related planning and documentation  
 **Status:** 🟠 In Progress  
-**Last Updated:** 2025-12-12
+**Last Updated:** 2025-12-30
 
 ---
 
 ## 🎯 Overview
 
 This directory contains planning documentation for CI/CD improvements, workflows, and automation enhancements for dev-infra.
+
+---
+
+## 📋 Classification Guidelines
+
+**When creating CI/CD work, use this guide to determine the appropriate structure:**
+
+| Classification | Criteria | Structure | Example |
+|----------------|----------|-----------|---------|
+| **Fix** | < 1 hour effort | Single file or bundled with release | Template sync drift (PR #57) |
+| | Single PR | Track in release notes | CI git configuration (PR #47) |
+| | Resolves existing bug/failure | No dedicated hub needed | |
+| | No new capability | | |
+| **Improvement** | > 1 hour effort | Full hub directory | Multi-environment testing |
+| | New capability added | Multiple phase files | Template generation automation |
+| | May span multiple PRs | Transition plan | Release automation v2 |
+| | Changes workflows | | |
+
+**Key Principles:**
+- **Quick fixes** can be bundled with major releases rather than getting separate PRs
+- **Use `/transition-plan`** for structured CI improvements (validated in PR #57)
+- **Three-phase pattern** works well for CI fixes: Analysis → Implementation → Verification
+- **Document decisions** even for simple fixes to build organizational knowledge
+
+**Reference:** [Template Sync Drift Fix](template-sync-drift-fix/) - Example of a well-documented CI fix using transition-plan workflow.
 
 ---
 
@@ -28,14 +53,24 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 - **[Command Documentation & Maintenance](command-documentation-maintenance/README.md)** - Track command documentation updates and improvements (✅ Active)
 
-### Planned (v0.6.0)
+### Planned
 
-- **[GitHub Release Automation](github-release-automation/README.md)** - Auto-create GitHub Releases from tags (🔴 Not Started, 🔴 High Priority) ⭐ **NEW**
+- **[CI Structure Improvements](ci-structure-improvements/README.md)** - CI folder organization & classification guidance (🔴 Not Started, 🟡 Medium Priority) ⭐ **NEW**
+  - Add fix vs improvement classification
+  - Consider bundling with major release
+  - Input for broader project restructure
+
+- **[GitHub Release Automation](github-release-automation/README.md)** - Auto-create GitHub Releases from tags (🔴 Not Started, 🔴 High Priority)
   - Discovered in v0.5.0 release
   - Eliminates manual `gh release create` step
   - Effort: LOW (30 minutes)
 
 ### Completed
+
+- **[Template Sync Drift Fix](template-sync-drift-fix/README.md)** - Fix template sync drift causing CI failures (✅ Complete - 2025-12-30, PR #57)
+  - Synced `status.md` between templates (learning-project → standard-project)
+  - Root cause: extra trailing blank line in standard-project version
+  - Effort: ~30 min (as estimated)
 
 - **[CI Git Configuration](ci-git-configuration/README.md)** - Configure git identity in CI workflows (✅ Complete - 2025-12-12, PR #47)
   - Added git config to `release-distribution.yml` workflow
@@ -79,5 +114,5 @@ This directory contains planning documentation for CI/CD improvements, workflows
 
 ---
 
-**Last Updated:** 2025-12-12  
+**Last Updated:** 2025-12-30  
 **Status:** 🟠 Active Development

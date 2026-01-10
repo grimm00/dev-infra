@@ -3,7 +3,7 @@
 **Purpose:** Actionable improvements based on dev-infra learnings  
 **Target:** Dev-infra template and other projects  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-07
+**Last Updated:** 2025-12-23
 
 ---
 
@@ -11,7 +11,7 @@
 
 ### Improvement Documents
 
-*No improvement documents yet - will be populated as learnings are analyzed*
+- **[transition-plan-two-mode-pattern.md](transition-plan-two-mode-pattern.md)** - Add Setup/Expand modes to `/transition-plan` (🔴 Not Started, HIGH priority)
 
 ---
 
@@ -23,10 +23,14 @@ This directory contains actionable improvement checklists based on learnings fro
 
 ## 📊 Summary
 
-**Total Improvement Documents:** 0  
+| Improvement | Status | Priority | Effort |
+|-------------|--------|----------|--------|
+| `/transition-plan` Two-Mode Pattern | 🔴 Not Started | HIGH | MEDIUM (~4-6 hrs) |
+
+**Total Improvement Documents:** 1  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2025-12-07
+**Last Updated:** 2025-12-23
 

@@ -21,6 +21,12 @@
 - **[Command Adaptation Checklist](COMMAND-ADAPTATION-CHECKLIST.md)** - Actionable checklist for command adaptation
 - **[Phase Document Template](PHASE-DOCUMENT-TEMPLATE.md)** - Template for detailed phase documents
 - **[Worktree Guide](WORKTREE-GUIDE.md)** - Multi-agent development with git worktrees
+- **[Worktree Feature Workflow](WORKTREE-WORKFLOW.md)** - Feature development with draft PRs and self-contained branches
+
+### Distribution & Integration
+- **[Global Commands Guide](GLOBAL-COMMANDS.md)** - Using commands globally across projects
+- **[Command Bundle Format](COMMAND-BUNDLE-FORMAT.md)** - Technical spec for command bundles
+- **[Integration Guide](INTEGRATION.md)** - Integration with dev-toolkit and other tools
 
 ### Project Management
 - **[Admin Documentation](../admin/README.md)** - Dev-infra project management
@@ -129,11 +135,12 @@ This documentation hub provides comprehensive guidance for using dev-infra templ
 | [Template Files Guide](TEMPLATE-FILES.md) | ✅ Complete | 2025-01-27 | Standard files reference |
 | [Best Practices Guide](BEST-PRACTICES.md) | ✅ Complete | 2025-01-27 | Comprehensive best practices |
 | [Customization Guide](CUSTOMIZATION.md) | ✅ Complete | 2025-01-27 | Advanced customization |
+| [Command Bundle Format](COMMAND-BUNDLE-FORMAT.md) | ✅ Complete | 2025-12-31 | Command bundle technical spec |
 
 ### 📈 Documentation Metrics
 
-- **Total Documents:** 5 comprehensive guides
-- **Total Lines:** 2,000+ lines of documentation
+- **Total Documents:** 6 comprehensive guides
+- **Total Lines:** 2,200+ lines of documentation
 - **Coverage:** Complete template usage lifecycle
 - **Examples:** 20+ practical examples
 - **Cross-References:** 50+ internal links

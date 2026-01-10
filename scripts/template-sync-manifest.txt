@@ -26,6 +26,9 @@
 .cursor/commands/task-release.md
 .cursor/commands/transition-plan.md
 
+# Configuration files
+.sourcery.yaml
+
 # Note: The following files are intentionally different between templates:
 # - README.md (different project type descriptions)
 # - start.txt (different initialization guidance)

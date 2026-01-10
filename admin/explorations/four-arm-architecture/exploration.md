@@ -1,0 +1,259 @@
+# Four-Arm Architecture - Exploration
+
+**Status:** 🔴 Exploration  
+**Created:** 2025-12-22  
+**Last Updated:** 2025-12-31
+
+---
+
+## 🎯 What Are We Exploring?
+
+The interconnected ecosystem of four projects that together provide complete developer infrastructure:
+
+1. **dev-infra** - Template factory, pattern source, and **shared business logic coordinator**
+2. **dev-toolkit** - Bash CLI utilities for daily development
+3. **proj-cli** - Python CLI for project lifecycle management
+4. **work-prod** - Flask API backend for centralized data
+
+---
+
+## 🤔 Why Explore This?
+
+**Problem:** As these projects have evolved, their boundaries have become unclear:
+
+- Where should global Cursor command installation live?
+- How do the projects communicate?
+- What does "managed project" mean?
+- How should they coordinate in a workspace?
+- **Where should shared schemas and business logic live?**
+
+**Opportunity:** Clear architecture enables:
+
+- Better separation of concerns
+- Easier maintenance and evolution
+- Clear ownership of features
+- Coordinated releases
+- **Standalone consumption by external users while maintaining internal coherence**
+
+---
+
+## 🔑 Key Design Principle: Standalone + Coordinated
+
+**Each project should stand alone for consumption by anyone**, but shared business logic and schemas should be coordinated through dev-infra.
+
+| Project         | Standalone Use Case                     | Coordinated Aspect               |
+| --------------- | --------------------------------------- | -------------------------------- |
+| **work-prod**   | Anyone can run as their project tracker | Schema defined in dev-infra      |
+| **proj-cli**    | Anyone can use for project management   | JSON store schema from dev-infra |
+| **dev-toolkit** | Anyone can install for dev utilities    | Commands sourced from dev-infra  |
+| **dev-infra**   | Anyone can use templates                | Coordinates all shared contracts |
+
+---
+
+## 🏗️ Architecture Overview
+
+### The Four Arms
+
+```
+                         ┌─────────────────────────────────────┐
+                         │           dev-infra                 │
+                         │  (Template Factory + Contract Hub)  │
+                         │                                     │
+                         │  • Project templates                │
+                         │  • Cursor AI commands (source)      │
+                         │  • Documentation patterns           │
+                         │  • Best practices                   │
+                         │  • SHARED CONTRACTS:                │
+                         │    - work-prod API/DB schema        │
+                         │    - proj-cli JSON store schema     │
+                         │    - Cross-arm data models          │
+                         └──────────────┬──────────────────────┘
+                                        │
+                                        │ generates
+                                        ▼
+    ┌───────────────────────────────────────────────────────────────────┐
+    │                        Generated Projects                          │
+    │                     (work-prod, proj-cli, etc.)                   │
+    │                                                                    │
+    │   Contains:                                                        │
+    │   • .dev-infra.yml (state file)                                   │
+    │   • .cursor/commands/ (project-level)                             │
+    │   • docs/maintainers/ (planning structure)                        │
+    └───────────────────────────────────────────────────────────────────┘
+                                        │
+           ┌────────────────────────────┼────────────────────────────┐
+           │                            │                            │
+           ▼                            ▼                            ▼
+┌─────────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐
+│    dev-toolkit      │    │      proj-cli       │    │     work-prod       │
+│   (Developer CLI)   │    │  (Project Mgmt)     │    │    (Data API)       │
+│                     │    │                     │    │                     │
+│ • dt-review         │    │ • proj plan         │    │ • Project registry  │
+│ • dt-git-safety     │    │ • proj apply        │    │ • REST API          │
+│ • dt-config         │    │ • proj init         │    │ • Central data      │
+│ • dt-install-hooks  │    │ • proj registry     │    │ • SQLite backend    │
+│                     │    │                     │    │                     │
+│ Language: Bash      │    │ Language: Python    │    │ Language: Python    │
+│ Install: ~/.dev-    │    │ Install: pip        │    │ Deploy: Server      │
+│          toolkit/   │    │                     │    │                     │
+└─────────┬───────────┘    └──────────┬──────────┘    └──────────┬──────────┘
+          │                           │                          │
+          │                           │ API calls                │
+          │                           └──────────────────────────┘
+          │
+          │ installs to
+          ▼
+    ┌─────────────────────┐
+    │ ~/.cursor/commands/ │
+    │  (Global Commands)  │
+    └─────────────────────┘
+```
+
+---
+
+## 💡 Initial Thoughts
+
+### Responsibility Matrix
+
+| Concern                      | Owner         | Rationale                                        |
+| ---------------------------- | ------------- | ------------------------------------------------ |
+| Template generation          | dev-infra     | Source of truth for project structure            |
+| Cursor command source        | dev-infra     | Commands are part of template patterns           |
+| **Shared schemas/contracts** | **dev-infra** | **Coordination point for cross-arm consistency** |
+| Global command installation  | dev-toolkit   | Already has installation infrastructure          |
+| Project-level commands       | Each project  | Copied from dev-infra templates                  |
+| Project state tracking       | proj-cli      | Terraform-style plan/apply                       |
+| Project registry             | work-prod     | Central data store                               |
+| Developer utilities          | dev-toolkit   | Daily CLI tools                                  |
+
+### Shared Contracts (NEW)
+
+dev-infra coordinates shared business logic across arms:
+
+| Contract                     | Owner              | Consumers                                     | Location                                |
+| ---------------------------- | ------------------ | --------------------------------------------- | --------------------------------------- |
+| **work-prod API Schema**     | dev-infra (source) | work-prod (implementation), proj-cli (client) | `admin/contracts/openapi/` or templates |
+| **work-prod DB Schema**      | dev-infra (source) | work-prod (implementation)                    | `admin/contracts/database/`             |
+| **proj-cli JSON Store**      | dev-infra (source) | proj-cli (implementation)                     | `admin/contracts/json-store/`           |
+| **Project Model Definition** | dev-infra (source) | All arms                                      | `admin/contracts/models/`               |
+
+**Key Principle:** Each project implements its own logic but references shared contracts from dev-infra. This enables:
+
+- External users can use any project standalone (contracts embedded)
+- Internal development maintains consistency (contracts coordinated)
+- Breaking changes are visible and coordinated
+
+### Data Flow
+
+```
+dev-infra (templates)
+    ──generates──▶ new-project/
+                       │
+                       ├── .dev-infra.yml (state)
+                       │       │
+                       │       └──read by──▶ proj-cli
+                       │                        │
+                       │                        └──API calls──▶ work-prod
+                       │
+                       └── .cursor/commands/ (project-level)
+
+dev-toolkit
+    ──installs──▶ ~/.cursor/commands/ (global)
+    ──provides──▶ dt-* commands (developer utilities)
+```
+
+### Command Ownership Proposal
+
+| Command Category           | Owner       | Commands                                                      |
+| -------------------------- | ----------- | ------------------------------------------------------------- |
+| **Developer Utilities**    | dev-toolkit | `dt-review`, `dt-git-safety`, `dt-config`, `dt-install-hooks` |
+| **Global Cursor Commands** | dev-toolkit | `dt-cursor-install` (NEW - installs from dev-infra)           |
+| **Project Management**     | proj-cli    | `proj plan`, `proj apply`, `proj init`, `proj registry`       |
+| **Template Generation**    | dev-infra   | `new-project.sh`, `validate-templates.sh`                     |
+
+---
+
+## 🔍 Key Questions
+
+### Command Distribution
+
+- [ ] Should dev-toolkit install Cursor commands from dev-infra?
+- [ ] What's the versioning relationship between dev-toolkit and dev-infra commands?
+- [ ] How does dev-toolkit know which version of commands to install?
+
+### Integration Points
+
+- [ ] Should proj-cli depend on dev-toolkit?
+- [ ] How does proj-cli discover work-prod API?
+- [ ] Should there be a shared configuration?
+
+### Managed Projects
+
+- [ ] Is dev-toolkit a "managed" project?
+- [ ] What sync scope makes sense for each project type?
+- [ ] Should tooling projects (dev-toolkit, proj-cli) be managed differently?
+
+### Workspace Coordination
+
+- [ ] Should there be workspace-level Cursor rules?
+- [ ] How do cross-project commands work?
+- [ ] What shared state exists across projects?
+
+### Shared Contracts (NEW)
+
+- [ ] Where should shared schemas/contracts live in dev-infra?
+- [ ] How are contracts distributed to consuming projects?
+- [ ] How do external users get contracts when using a project standalone?
+- [ ] How are contract changes coordinated across arms?
+- [ ] Should contracts be versioned separately from templates?
+- [ ] What validation ensures implementations match contracts?
+
+---
+
+## 🚀 Next Steps
+
+1. Review research topics in `research-topics.md`
+2. Use `/research four-arm-architecture --from-explore four-arm-architecture` to conduct research
+3. After research, use `/decision four-arm-architecture --from-research` to make decisions
+
+---
+
+## 📝 Notes
+
+**User Insight (2025-12-22):**
+
+> "The ability to provide commands that we've developed for Cursor over time seems more like something that would be installed with dev-toolkit than be a part of infrastructure management."
+
+This insight suggests:
+
+- dev-infra = source of commands (in templates)
+- dev-toolkit = distribution of commands (installation)
+- proj-cli = management of projects (state tracking)
+- work-prod = storage of data (registry)
+
+**Discovery:** dev-toolkit already has `install.sh` and the `dt-*` command pattern, making it a natural home for `dt-cursor-install` or similar command.
+
+---
+
+**User Insight (2025-12-31):**
+
+> "dev-infra also handles the business logic of other programs as well and said business logic should be present across the architecture. Each of these projects should still be able to stand alone for consumption by any person wanting to use it, but the logic is still there. This especially includes things like the schema for the work-prod api/database, json data store for proj-cli, etc."
+
+This insight expands dev-infra's role to include **shared contracts coordination**:
+
+- dev-infra = source of templates, commands, AND shared schemas/contracts
+- Each arm implements contracts locally (standalone capability)
+- Contracts are coordinated through dev-infra (internal consistency)
+- External users get embedded contracts, internal development references source
+
+**Key tension to resolve:** How to maintain standalone usability while ensuring cross-arm consistency.
+
+**Existing example:** The `admin/planning/standards/openapi-source-of-truth/` standard already establishes work-prod's OpenAPI spec as the source of truth for API contracts. This could be extended to:
+
+- Database schema contracts
+- JSON store schema contracts
+- Project model definitions
+
+---
+
+**Last Updated:** 2025-12-31

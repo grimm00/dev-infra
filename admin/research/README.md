@@ -2,7 +2,7 @@
 
 **Purpose:** Research and analysis for dev-infra and template improvements  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-11
+**Last Updated:** 2025-12-30
 
 ---
 
@@ -10,11 +10,18 @@
 
 ### Active Research
 
-- **[Experimental Template](experimental-template/README.md)** - Research for experimental template with evolving commands (✅ Complete) ⭐ **NEW**
+- **[Four-Arm Architecture](four-arm-architecture/README.md)** - How dev-infra, dev-toolkit, proj-cli, and work-prod work together (🔴 Research) ⭐ **NEW**
+- **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, topic unification (🔴 Research)
+- **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Research)
+- **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - State tracking, plan/apply workflow, CI/CD push updates (✅ Complete)
+- **[Global Command Distribution](global-command-distribution/README.md)** - Distributing dev-infra commands via `~/.cursor/commands/` (🟡 Research)
+- **[Work-prod Integration](work-prod-integration/README.md)** - Work-prod API integration and local registry for project tracking (🔴 Research)
+- **[Template Metadata System](template-metadata/README.md)** - Research metadata for project sync and version tracking (✅ Complete)
 
 ### Completed Research
 
-- **[Dev-Infra Identity & Focus](dev-infra-identity-and-focus/README.md)** - Explore dev-infra identity: factory, laboratory, or reference implementation (✅ Complete)
+- **[Transition-Plan Two-Mode Pattern](transition-plan-two-mode/README.md)** - Redesigning `/transition-plan` with setup + expand modes (✅ Complete)
+- **[Dev-Infra Identity & Focus v1](dev-infra-identity-and-focus/README.md)** - Explore dev-infra identity: factory, laboratory, or reference implementation (✅ Complete)
 
 ### Previous Research
 
@@ -202,8 +209,8 @@ This research evaluates the current template structure against:
 
 ---
 
-**Last Updated:** 2025-12-12  
+**Last Updated:** 2025-12-31  
 **Status:** ✅ Active  
-**Latest Research:** [Experimental Template](experimental-template/README.md)
+**Latest Research:** [Four-Arm Architecture](four-arm-architecture/README.md)
 
 

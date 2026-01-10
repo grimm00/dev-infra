@@ -1,6 +1,6 @@
 # PR Command
 
-Centralized command for creating pull requests for phases and fix batches. Provides consistent PR creation workflow with appropriate templates and validation.
+Centralized command for creating pull requests for phases, fix batches, and draft PRs. Provides consistent PR creation workflow with appropriate templates and validation. Also supports draft PR workflow for continuous feedback during feature development.
 
 ---
 
@@ -44,6 +44,9 @@ This command supports multiple project organization patterns, matching `/task-ph
 - After completing a phase (use `--phase`)
 - After implementing a fix batch (use `--fix`)
 - After completing release transition steps (use `--release`)
+- To start a feature with early feedback (use `--draft`)
+- To mark a draft PR ready for review (use `--ready`)
+- To request Sourcery review on a draft PR (use `--review`)
 - To create PRs with consistent formatting and validation
 
 **Key principle:** Single command for all PR creation, with context-specific templates and workflows.
@@ -74,6 +77,12 @@ This command supports multiple project organization patterns, matching `/task-ph
    - Creates PR for release transition
    - Uses release-specific template
 
+4. **Draft PR:** `/pr --draft [--feature feature-name]`
+   - Example: `/pr --draft`
+   - Example: `/pr --draft --feature my-feature`
+   - Creates draft PR for early feedback
+   - Use at start of feature for continuous Sourcery review
+
 **Options:**
 
 - `--feature [name]` - Specify feature name (overrides auto-detection)
@@ -82,6 +91,12 @@ This command supports multiple project organization patterns, matching `/task-ph
 - `--body-file [path]` - Use custom body file instead of generating
 - `--title [title]` - Override default PR title
 - `--force` - (Release mode only) Override blocking readiness checks with justification
+
+**Draft PR Options:**
+
+- `--draft` - Create draft PR for early feedback (use at start of feature)
+- `--ready` - Mark draft PR as ready for review (convert from draft to ready)
+- `--review` - Request Sourcery review on draft PR (triggers `@sourcery-ai review`)
 
 ---
 
@@ -906,6 +921,181 @@ gh pr create --title "fix: [Batch Description] ([batch-name])" \
 
 ---
 
+## Draft PR Mode (`--draft`)
+
+### When to Use
+
+Use draft PRs when:
+- Starting a new feature branch
+- Want early Sourcery feedback during development
+- Following self-contained feature branch workflow
+- Not ready for merge but want continuous review
+
+### Workflow
+
+1. Create feature branch from develop
+2. Make first meaningful commit
+3. Run `/pr --draft` to open draft PR
+4. Continue development with regular pushes
+5. Request Sourcery reviews at milestones with `/pr --review`
+6. When complete, run `/pr --ready` to mark ready for merge
+
+### Create Draft PR
+
+**Command:**
+
+```bash
+/pr --draft --feature [feature-name]
+```
+
+**Steps:**
+
+1. **Verify branch:**
+   ```bash
+   git branch --show-current
+   # Expected: feat/[feature-name] or similar
+   ```
+
+2. **Push branch:**
+   ```bash
+   git push -u origin [branch-name]
+   ```
+
+3. **Create draft PR:**
+   ```bash
+   gh pr create --draft \
+     --title "feat: [Feature Name] (WIP)" \
+     --body "[Description - work in progress]" \
+     --base develop
+   ```
+
+4. **Note PR number** for future reference
+
+### Draft PR Template
+
+```markdown
+## [Feature Name] - Work in Progress
+
+**Status:** 🟠 In Progress  
+**Branch:** feat/[feature-name]
+
+---
+
+## Overview
+
+[Brief description of the feature being developed]
+
+---
+
+## Current Progress
+
+- [ ] Phase 1: [Description]
+- [ ] Phase 2: [Description]
+- [ ] Phase N: [Description]
+
+---
+
+## Notes
+
+- This is a draft PR for early feedback
+- Sourcery reviews requested at milestones
+- Will mark ready when feature complete
+```
+
+---
+
+## Mark PR Ready (`--ready`)
+
+### When to Use
+
+Use `--ready` when:
+- Feature development is complete
+- All phases implemented
+- Ready for final review and merge
+- Draft PR exists and needs to be converted
+
+### Command
+
+```bash
+/pr --ready --feature [feature-name]
+```
+
+### Steps
+
+1. **Find PR number:**
+   ```bash
+   gh pr list --state open --head [branch-name]
+   ```
+
+2. **Mark ready:**
+   ```bash
+   gh pr ready [PR-number]
+   ```
+
+3. **Optionally update title (remove WIP):**
+   ```bash
+   gh pr edit [PR-number] --title "feat: [Feature Name]"
+   ```
+
+### Checklist Before Marking Ready
+
+- [ ] All phases complete
+- [ ] All tests passing
+- [ ] Documentation updated
+- [ ] Sourcery issues addressed
+- [ ] Ready for final review
+
+---
+
+## Request Sourcery Review (`--review`)
+
+### Important: Sourcery Does NOT Auto-Review Draft PRs
+
+Draft PRs do not trigger automatic Sourcery reviews. You must manually request a review:
+
+```bash
+/pr --review --feature [feature-name]
+```
+
+### When to Request Review
+
+Request Sourcery review at:
+- After completing a phase
+- After significant changes
+- Before marking PR ready
+- At development milestones
+
+### Command
+
+```bash
+/pr --review --feature [feature-name]
+```
+
+### Steps
+
+1. **Find PR number:**
+   ```bash
+   gh pr list --state open --head [branch-name]
+   ```
+
+2. **Request review:**
+   ```bash
+   gh pr comment [PR-number] --body "@sourcery-ai review"
+   ```
+
+3. **Wait for review** (usually 1-2 minutes)
+
+4. **Save review feedback** (optional):
+   - Copy Sourcery comments to `admin/feedback/sourcery/pr[number].md`
+
+### Note on Review Frequency
+
+- Request review at meaningful milestones, not every commit
+- Each review provides feedback on current state vs. base branch
+- Too frequent reviews may generate noise for incremental changes
+
+---
+
 ## Release PR Mode (`--release`)
 
 ### 1. Load Release Information
@@ -1346,6 +1536,19 @@ git branch --show-current
 2. `/task-release` - Implement release steps (if available)
 3. `/pr --release [version]` - Create release PR
 4. `/post-pr --release [version]` - Update documentation after merge (if available)
+
+### Draft PR Workflow (Worktree Feature)
+
+1. Start feature: `git checkout -b feat/[feature-name]`
+2. First commit: Make meaningful change, commit
+3. Draft PR: `/pr --draft --feature [feature-name]`
+4. Develop: Multiple commits, regular pushes
+5. Review: `/pr --review` at milestones
+6. Complete: `/pr --ready` when done
+7. Final review: Address any remaining issues
+8. Merge: PR merged to develop
+
+**See:** [ADR-003: Draft PR Review Workflow](../decisions/worktree-feature-workflow/adr-003-draft-pr-review-workflow.md)
 
 ---
 

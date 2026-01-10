@@ -10,6 +10,37 @@
 
 ### Active Features
 
+- **[Command Distribution](command-distribution/README.md)** - Implement command distribution from dev-infra to dev-toolkit (🔴 Not Started, 🔴 High Priority) ⭐ **NEW**
+  - Phase 1: dev-infra Release Artifacts (~2-3 hrs)
+  - Phase 2: dt-cursor-install Implementation (~4-6 hrs)
+  - Phase 3: Documentation & Standard (~2-3 hrs)
+  - Estimated: ~8-12 hours (cross-project)
+  - Source: ADR-001 (Four-Arm Architecture)
+
+- **[Explore Two-Mode](explore-two-mode/README.md)** - Apply two-mode pattern to `/explore` command (🟡 Planned, 🔴 High Priority) ⭐ **NEW**
+  - Phase 1: Exploration & Research (~1 hr)
+  - Phase 2: Implementation (~2 hrs)
+  - Estimated: ~3 hours
+  - Source: reflection-transition-plan-two-mode-2025-12-29.md
+
+- **[Decision Two-Mode](decision-two-mode/README.md)** - Apply two-mode pattern to `/decision` command (🟡 Planned, 🟢 Low Priority)
+  - Blocked by: explore-two-mode completion
+  - Estimated: ~3 hours
+  - Source: reflection-transition-plan-two-mode-2025-12-29.md
+
+- **[Reflect Two-Mode](reflect-two-mode/README.md)** - Evaluate two-mode pattern for `/reflect` command (🔴 Needs Evaluation, 🟢 Low Priority)
+  - May not be needed - requires evaluation
+  - Estimated: ~2.5 hours (if implemented)
+  - Source: reflection-transition-plan-two-mode-2025-12-29.md
+
+- **[Transition-Plan Two-Mode](transition-plan-two-mode/README.md)** - Implement two-mode pattern for `/transition-plan` command (✅ Complete)
+  - Phase 1: Workflow Overview (~30 min)
+  - Phase 2: Setup Mode Workflow (~1-2 hrs)
+  - Phase 3: Expand Mode Workflow (~2 hrs)
+  - Phase 4: Supporting Content (~1 hr)
+  - Estimated: 4-6 hours
+  - Source: ADR-001, ADR-002, ADR-003
+
 - **[Experimental Template](experimental-template/README.md)** - Create experimental template with Evolving commands (🔴 Not Started) ⭐ **v0.6.0 Target**
   - Phase 1: Create experimental-project template
   - Phase 2: Update generator script
@@ -165,6 +196,6 @@ None currently - all features are either complete or have status discrepancies t
 
 ---
 
-**Last Updated:** 2025-12-12  
+**Last Updated:** 2025-12-31  
 **Status:** ✅ Active  
 **Next:** See individual feature directories for current work
