@@ -32,10 +32,12 @@ Set up `.gitignore` and `.sourcery.yaml` in dev-infra root to enable the worktre
 **Implementation Steps:**
 
 1. **Read current .gitignore:**
+
    - [ ] Check existing entries
    - [ ] Identify appropriate section for new entries
 
 2. **Add worktrees entry:**
+
    - [ ] Add comment header: `# Git worktrees`
    - [ ] Add entry: `worktrees/`
 
@@ -54,10 +56,12 @@ tmp/
 ```
 
 **Requirements Addressed:**
+
 - FR-3: Gitignore Configuration
 - FR-2: Project-Relative Location (worktrees/ needs to exist but not be tracked)
 
 **Checklist:**
+
 - [ ] Existing .gitignore reviewed
 - [ ] `worktrees/` entry added
 - [ ] `tmp/` entry added
@@ -72,6 +76,7 @@ tmp/
 **Implementation Steps:**
 
 1. **Create .sourcery.yaml in root:**
+
    - [ ] Create new file: `.sourcery.yaml`
    - [ ] Add ignore patterns from ADR-004
 
@@ -87,17 +92,19 @@ tmp/
 # See: admin/decisions/worktree-feature-workflow/adr-004-sourcery-configuration.md
 
 ignore:
-  - admin/**     # Process docs (explorations, research, decisions, planning)
-  - tmp/**       # Temporary files (handoff docs, scratch)
+  - admin/** # Process docs (explorations, research, decisions, planning)
+  - tmp/** # Temporary files (handoff docs, scratch)
 ```
 
 **Requirements Addressed:**
+
 - FR-14: Create .sourcery.yaml
-- FR-15: Sourcery Ignore admin/**
+- FR-15: Sourcery Ignore admin/\*\*
 - NFR-5: Sourcery Ignore Process Docs
 - NFR-8: No Code Analysis Impact
 
 **Checklist:**
+
 - [ ] `.sourcery.yaml` created in root
 - [ ] `admin/**` ignore pattern added
 - [ ] `tmp/**` ignore pattern added
@@ -112,12 +119,14 @@ ignore:
 **Verification Steps:**
 
 1. **Verify .gitignore:**
+
    - [ ] Run `git status` - should not show worktrees/ or tmp/
    - [ ] Create test directory: `mkdir -p tmp/test` (should be ignored)
    - [ ] Verify: `git check-ignore -v tmp/test` (should show .gitignore rule)
    - [ ] Clean up: `rm -r tmp/test`
 
 2. **Verify .sourcery.yaml:**
+
    - [ ] Confirm file exists: `ls -la .sourcery.yaml`
    - [ ] Validate YAML syntax: `cat .sourcery.yaml`
    - [ ] Check patterns are correct
@@ -141,6 +150,7 @@ git status --ignored
 ```
 
 **Checklist:**
+
 - [ ] .gitignore patterns verified
 - [ ] .sourcery.yaml syntax validated
 - [ ] Both files committed
@@ -149,18 +159,18 @@ git status --ignored
 
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: Update .gitignore | ✅ Complete | Updated worktrees/ path, enhanced tmp/ comment |
-| Task 2: Create .sourcery.yaml | ✅ Complete | Created with admin/** and tmp/** ignore |
-| Task 3: Verify Configuration | ✅ Complete | Both patterns verified working |
+| Task                          | Status      | Notes                                          |
+| ----------------------------- | ----------- | ---------------------------------------------- |
+| Task 1: Update .gitignore     | ✅ Complete | Updated worktrees/ path, enhanced tmp/ comment |
+| Task 2: Create .sourcery.yaml | ✅ Complete | Created with admin/** and tmp/** ignore        |
+| Task 3: Verify Configuration  | ✅ Complete | Both patterns verified working                 |
 
 ---
 
 ## ✅ Completion Criteria
 
 - [x] `.gitignore` includes `worktrees/` entry
-- [x] `.gitignore` includes `tmp/` entry  
+- [x] `.gitignore` includes `tmp/` entry
 - [x] `.sourcery.yaml` exists in root
 - [x] `.sourcery.yaml` ignores `admin/**`
 - [x] `.sourcery.yaml` ignores `tmp/**`
@@ -182,6 +192,7 @@ git status --ignored
 ### Sourcery YAML Format
 
 Sourcery uses a simple `ignore` list with glob patterns:
+
 - `admin/**` - matches all files under admin/ recursively
 - `tmp/**` - matches all files under tmp/ recursively
 
@@ -192,11 +203,11 @@ Sourcery uses a simple `ignore` list with glob patterns:
 
 ### Why These Specific Paths?
 
-| Path | Reason |
-|------|--------|
-| `worktrees/` | Git worktree directories (ADR-001) |
-| `tmp/` | Handoff docs and scratch files (FR-19) |
-| `admin/**` | Process documentation that shouldn't be reviewed (ADR-004) |
+| Path         | Reason                                                     |
+| ------------ | ---------------------------------------------------------- |
+| `worktrees/` | Git worktree directories (ADR-001)                         |
+| `tmp/`       | Handoff docs and scratch files (FR-19)                     |
+| `admin/**`   | Process documentation that shouldn't be reviewed (ADR-004) |
 
 ---
 

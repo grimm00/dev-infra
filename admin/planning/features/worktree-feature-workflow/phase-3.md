@@ -18,8 +18,10 @@ Update the `/pr` command to support the `--draft` flag for creating initial draf
 ## 🎯 Goals
 
 1. **Add --draft flag** - Update /pr command to support draft PR creation
-2. **Document workflow** - Add draft PR workflow to command documentation
-3. **Update usage examples** - Show draft PR usage patterns
+2. **Add --ready flag** - Mark draft PR as ready for review
+3. **Add --review flag** - Trigger Sourcery review on draft PR (manual trigger required!)
+4. **Document workflow** - Add draft PR workflow to command documentation
+5. **Update usage examples** - Show draft PR usage patterns
 
 ---
 
@@ -29,17 +31,21 @@ Update the `/pr` command to support the `--draft` flag for creating initial draf
 
 ### Task Categories
 
-- [ ] **Command Update** - Add --draft flag to /pr command
-- [ ] **Workflow Section** - Document draft PR workflow
+- [ ] **Command Update** - Add --draft, --ready, --review flags to /pr command
+- [ ] **Draft Workflow** - Document draft PR creation workflow
+- [ ] **Review Trigger** - Document Sourcery review trigger (manual: `@sourcery-ai review`)
 - [ ] **Examples** - Add draft PR usage examples
-- [ ] **Verification** - Test command with --draft flag
+- [ ] **Verification** - Test commands with new flags
 
 ---
 
 ## ✅ Completion Criteria
 
-- [ ] `/pr` command supports `--draft` flag
+- [ ] `/pr` command supports `--draft` flag (creates draft PR)
+- [ ] `/pr` command supports `--ready` flag (marks draft as ready)
+- [ ] `/pr` command supports `--review` flag (triggers Sourcery via comment)
 - [ ] Draft PR workflow documented in command
+- [ ] Sourcery manual trigger documented (`@sourcery-ai review`)
 - [ ] Usage examples show draft PR pattern
 - [ ] Command integrates with ADR-003 workflow
 

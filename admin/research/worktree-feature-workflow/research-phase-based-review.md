@@ -87,24 +87,31 @@ The current `task-phase` command has built-in logic:
 ### Finding 2: Draft PRs Provide Early Feedback Without Merging
 
 Draft PRs enable:
-- **Continuous feedback:** Sourcery reviews on each push
+- **On-demand feedback:** Sourcery reviews when requested
 - **No merge pressure:** PR stays open until feature complete
 - **Incremental review:** Reviewers see changes as they happen
 - **Single PR:** All changes in one place
+
+**Important Discovery (2026-01-09):** Sourcery does NOT automatically review draft PRs. You must manually trigger reviews by commenting `@sourcery-ai review` on the PR.
 
 **Workflow:**
 ```
 develop → feat/feature
   └── Open draft PR immediately after first commit
-  └── Phase 1 → Push → Sourcery reviews → Fix issues
-  └── Phase 2 → Push → Sourcery reviews → Fix issues
+  └── Phase 1 → Push → Comment "@sourcery-ai review" → Fix issues
+  └── Phase 2 → Push → Comment "@sourcery-ai review" → Fix issues
   └── Mark ready for review when complete
   └── Final review → Merge
 ```
 
-**Source:** Web search on draft PR workflows, GitHub documentation
+**Trigger command:**
+```bash
+gh pr comment [PR-number] --body "@sourcery-ai review"
+```
 
-**Relevance:** This preserves early feedback while maintaining branch isolation.
+**Source:** Web search on draft PR workflows, GitHub documentation, **practical testing (2026-01-09)**
+
+**Relevance:** This preserves early feedback while maintaining branch isolation, though requires manual review triggering.
 
 ---
 

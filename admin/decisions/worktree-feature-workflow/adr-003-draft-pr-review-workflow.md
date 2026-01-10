@@ -48,8 +48,22 @@ develop → feat/feature
 | PR count | Single PR per feature |
 | PR timing | Open after first commit |
 | PR state | Draft until feature complete |
-| Feedback | On every push |
+| Feedback | On demand (see note below) |
 | Merge | Atomic (all code + docs) |
+
+### Sourcery Review Trigger
+
+**Important:** Sourcery does NOT automatically review draft PRs. You must manually trigger reviews:
+
+```bash
+# Comment on the PR to trigger Sourcery review
+gh pr comment [PR-number] --body "@sourcery-ai review"
+```
+
+**When to trigger:**
+- After pushing significant changes
+- After completing a logical chunk of work
+- Before marking PR as ready
 
 ### Command Support
 
@@ -157,10 +171,22 @@ Draft PRs provide the same feedback loop as phase-based PRs:
 ## Implementation
 
 1. Update `/pr` command to support `--draft` flag
-2. Document draft PR workflow in commands
-3. Open draft PR after first meaningful commit
-4. Push frequently for incremental feedback
-5. Mark ready for review when feature complete
+2. Update `/pr` command to support `--review` flag (triggers Sourcery)
+3. Document draft PR workflow in commands
+4. Open draft PR after first meaningful commit
+5. Trigger Sourcery review with `@sourcery-ai review` comment (or `/pr --review`)
+6. Push frequently, request reviews at milestones
+7. Mark ready for review when feature complete
+
+### Sourcery CLI Command
+
+```bash
+# After pushing, trigger Sourcery review
+gh pr comment [PR-number] --body "@sourcery-ai review"
+
+# Or use /pr command (when implemented)
+/pr --review
+```
 
 ---
 
