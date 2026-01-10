@@ -116,12 +116,12 @@ No migration required. To adopt the worktree workflow:
 
 ## 📊 Statistics
 
-| Metric           | Value |
-| ---------------- | ----- |
-| PRs Merged       | 1     |
-| New Files        | 10+   |
-| ADRs Created     | 4     |
-| Templates Updated| 2     |
+| Metric            | Value |
+| ----------------- | ----- |
+| PRs Merged        | 1     |
+| New Files         | 10+   |
+| ADRs Created      | 4     |
+| Templates Updated | 2     |
 
 ---
 
