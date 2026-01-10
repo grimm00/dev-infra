@@ -35,6 +35,7 @@ Update the `/pr` command to support the `--draft` flag for creating initial draf
 **Implementation Steps:**
 
 1. **Update Usage section:**
+
    - [x] Add new "Draft PR Mode" to command modes
    - [x] Document `--draft` flag usage
 
@@ -55,12 +56,13 @@ Update the `/pr` command to support the `--draft` flag for creating initial draf
 
 **Content to Add (new section after Fix PR Mode):**
 
-```markdown
+````markdown
 ## Draft PR Mode (`--draft`)
 
 ### When to Use
 
 Use draft PRs when:
+
 - Starting a new feature branch
 - Want early Sourcery feedback during development
 - Following self-contained feature branch workflow
@@ -82,21 +84,25 @@ Use draft PRs when:
 ```bash
 /pr --draft --feature [feature-name]
 ```
+````
 
 **Steps:**
 
 1. **Verify branch:**
+
    ```bash
    git branch --show-current
    # Expected: feat/[feature-name] or similar
    ```
 
 2. **Push branch:**
+
    ```bash
    git push -u origin [branch-name]
    ```
 
 3. **Create draft PR:**
+
    ```bash
    gh pr create --draft \
      --title "feat: [Feature Name] (WIP)" \
@@ -136,7 +142,8 @@ Use draft PRs when:
 - Sourcery reviews requested at milestones
 - Will mark ready when feature complete
 ```
-```
+
+````
 
 **Checklist:**
 
@@ -166,16 +173,17 @@ Use draft PRs when:
 
 ```markdown
 - `--ready` - Mark draft PR as ready for review (convert from draft to ready)
-```
+````
 
 **Content to Add (after Draft PR Mode section):**
 
-```markdown
+````markdown
 ## Mark PR Ready (`--ready`)
 
 ### When to Use
 
 Use `--ready` when:
+
 - Feature development is complete
 - All phases implemented
 - Ready for final review and merge
@@ -186,15 +194,18 @@ Use `--ready` when:
 ```bash
 /pr --ready --feature [feature-name]
 ```
+````
 
 ### Steps
 
 1. **Find PR number:**
+
    ```bash
    gh pr list --state open --head [branch-name]
    ```
 
 2. **Mark ready:**
+
    ```bash
    gh pr ready [PR-number]
    ```
@@ -211,7 +222,8 @@ Use `--ready` when:
 - [ ] Documentation updated
 - [ ] Sourcery issues addressed
 - [ ] Ready for final review
-```
+
+````
 
 **Checklist:**
 
@@ -240,11 +252,11 @@ Use `--ready` when:
 
 ```markdown
 - `--review` - Request Sourcery review on draft PR (triggers `@sourcery-ai review`)
-```
+````
 
 **Content to Add (after Mark PR Ready section):**
 
-```markdown
+````markdown
 ## Request Sourcery Review (`--review`)
 
 ### Important: Sourcery Does NOT Auto-Review Draft PRs
@@ -254,10 +266,12 @@ Draft PRs do not trigger automatic Sourcery reviews. You must manually request a
 ```bash
 /pr --review --feature [feature-name]
 ```
+````
 
 ### When to Request Review
 
 Request Sourcery review at:
+
 - After completing a phase
 - After significant changes
 - Before marking PR ready
@@ -272,11 +286,13 @@ Request Sourcery review at:
 ### Steps
 
 1. **Find PR number:**
+
    ```bash
    gh pr list --state open --head [branch-name]
    ```
 
 2. **Request review:**
+
    ```bash
    gh pr comment [PR-number] --body "@sourcery-ai review"
    ```
@@ -291,7 +307,8 @@ Request Sourcery review at:
 - Request review at meaningful milestones, not every commit
 - Each review provides feedback on current state vs. base branch
 - Too frequent reviews may generate noise for incremental changes
-```
+
+````
 
 **Checklist:**
 
@@ -328,7 +345,7 @@ Request Sourcery review at:
 8. Merge: PR merged to develop
 
 **See:** [ADR-003: Draft PR Review Workflow](../decisions/worktree-feature-workflow/adr-003-draft-pr-review-workflow.md)
-```
+````
 
 **Checklist:**
 
@@ -345,6 +362,7 @@ Request Sourcery review at:
 **Implementation Steps:**
 
 1. **Update command description:**
+
    - [x] Mention draft PR support
 
 2. **Update Workflow Overview:**
@@ -386,7 +404,7 @@ Centralized command for creating pull requests for phases, fix batches, and draf
 
 1. **Update Options section:**
    - [x] Add `--draft` option
-   - [x] Add `--ready` option  
+   - [x] Add `--ready` option
    - [x] Add `--review` option
    - [x] Ensure options are in logical order
 
@@ -410,14 +428,14 @@ Centralized command for creating pull requests for phases, fix batches, and draf
 
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: Add Draft PR Mode section | ✅ Complete | Full section with workflow and template |
-| Task 2: Add --ready flag documentation | ✅ Complete | Section with steps and checklist |
-| Task 3: Add --review flag documentation | ✅ Complete | Section with Sourcery manual trigger |
-| Task 4: Add Integration section | ✅ Complete | Draft PR Workflow added, ADR-003 referenced |
-| Task 5: Update Command Header | ✅ Complete | Description and When to use updated |
-| Task 6: Update Options Table | ✅ Complete | Draft PR Options group added |
+| Task                                    | Status      | Notes                                       |
+| --------------------------------------- | ----------- | ------------------------------------------- |
+| Task 1: Add Draft PR Mode section       | ✅ Complete | Full section with workflow and template     |
+| Task 2: Add --ready flag documentation  | ✅ Complete | Section with steps and checklist            |
+| Task 3: Add --review flag documentation | ✅ Complete | Section with Sourcery manual trigger        |
+| Task 4: Add Integration section         | ✅ Complete | Draft PR Workflow added, ADR-003 referenced |
+| Task 5: Update Command Header           | ✅ Complete | Description and When to use updated         |
+| Task 6: Update Options Table            | ✅ Complete | Draft PR Options group added                |
 
 ---
 
@@ -430,7 +448,7 @@ Centralized command for creating pull requests for phases, fix batches, and draf
 - [x] Sourcery manual trigger documented (`@sourcery-ai review`)
 - [x] Usage examples show draft PR pattern
 - [x] Command integrates with ADR-003 workflow
-- [ ] Changes committed
+- [x] Changes committed
 
 ---
 
@@ -454,11 +472,11 @@ This is why the `--review` flag is important - it provides a simple way to reque
 
 ### Flag Relationships
 
-| Flag | Purpose | Typical Usage |
-|------|---------|---------------|
-| `--draft` | Create initial draft PR | Start of feature |
+| Flag       | Purpose                 | Typical Usage                    |
+| ---------- | ----------------------- | -------------------------------- |
+| `--draft`  | Create initial draft PR | Start of feature                 |
 | `--review` | Request Sourcery review | At milestones during development |
-| `--ready` | Convert draft to ready | When feature complete |
+| `--ready`  | Convert draft to ready  | When feature complete            |
 
 ### Workflow Timeline
 
