@@ -2,7 +2,8 @@
 
 **Phase:** 3 - Command Updates  
 **Duration:** ~1 hour  
-**Status:** ✅ Expanded  
+**Status:** ✅ Complete  
+**Completed:** 2026-01-09  
 **Prerequisites:** Phase 2 complete
 
 ---
@@ -34,13 +35,13 @@ Update the `/pr` command to support the `--draft` flag for creating initial draf
 **Implementation Steps:**
 
 1. **Update Usage section:**
-   - [ ] Add new "Draft PR Mode" to command modes
-   - [ ] Document `--draft` flag usage
+   - [x] Add new "Draft PR Mode" to command modes
+   - [x] Document `--draft` flag usage
 
 2. **Add Draft PR Mode section:**
-   - [ ] Create new section "Draft PR Mode (`--draft`)"
-   - [ ] Document when to use draft PRs
-   - [ ] Document workflow for draft PR creation
+   - [x] Create new section "Draft PR Mode (`--draft`)"
+   - [x] Document when to use draft PRs
+   - [x] Document workflow for draft PR creation
 
 **Content to Add to Usage section (after existing modes):**
 
@@ -139,11 +140,11 @@ Use draft PRs when:
 
 **Checklist:**
 
-- [ ] Usage section updated with Draft PR mode
-- [ ] Draft PR Mode section created
-- [ ] Workflow documented
-- [ ] Template provided
-- [ ] When to use documented
+- [x] Usage section updated with Draft PR mode
+- [x] Draft PR Mode section created
+- [x] Workflow documented
+- [x] Template provided
+- [x] When to use documented
 
 ---
 
@@ -154,12 +155,12 @@ Use draft PRs when:
 **Implementation Steps:**
 
 1. **Add --ready to Options section:**
-   - [ ] Document `--ready` flag
-   - [ ] Document usage pattern
+   - [x] Document `--ready` flag
+   - [x] Document usage pattern
 
 2. **Add Ready PR section:**
-   - [ ] Create section for marking PR ready
-   - [ ] Document steps
+   - [x] Create section for marking PR ready
+   - [x] Document steps
 
 **Content to Add to Options section:**
 
@@ -214,10 +215,10 @@ Use `--ready` when:
 
 **Checklist:**
 
-- [ ] --ready option documented
-- [ ] Ready PR section created
-- [ ] Steps documented
-- [ ] Checklist provided
+- [x] --ready option documented
+- [x] Ready PR section created
+- [x] Steps documented
+- [x] Checklist provided
 
 ---
 
@@ -228,12 +229,12 @@ Use `--ready` when:
 **Implementation Steps:**
 
 1. **Add --review to Options section:**
-   - [ ] Document `--review` flag
-   - [ ] Note that Sourcery doesn't auto-review drafts
+   - [x] Document `--review` flag
+   - [x] Note that Sourcery doesn't auto-review drafts
 
 2. **Add Review Request section:**
-   - [ ] Create section for requesting Sourcery review
-   - [ ] Document manual trigger command
+   - [x] Create section for requesting Sourcery review
+   - [x] Document manual trigger command
 
 **Content to Add to Options section:**
 
@@ -294,11 +295,11 @@ Request Sourcery review at:
 
 **Checklist:**
 
-- [ ] --review option documented
-- [ ] Review Request section created
-- [ ] Manual trigger documented
-- [ ] When to request documented
-- [ ] Steps provided
+- [x] --review option documented
+- [x] Review Request section created
+- [x] Manual trigger documented
+- [x] When to request documented
+- [x] Steps provided
 
 ---
 
@@ -309,8 +310,8 @@ Request Sourcery review at:
 **Implementation Steps:**
 
 1. **Update Integration section:**
-   - [ ] Add draft PR workflow integration
-   - [ ] Reference ADR-003
+   - [x] Add draft PR workflow integration
+   - [x] Reference ADR-003
 
 **Content to Add (update Integration with Other Commands section):**
 
@@ -331,9 +332,9 @@ Request Sourcery review at:
 
 **Checklist:**
 
-- [ ] Integration section updated
-- [ ] Draft PR workflow documented
-- [ ] ADR-003 referenced
+- [x] Integration section updated
+- [x] Draft PR workflow documented
+- [x] ADR-003 referenced
 
 ---
 
@@ -344,10 +345,10 @@ Request Sourcery review at:
 **Implementation Steps:**
 
 1. **Update command description:**
-   - [ ] Mention draft PR support
+   - [x] Mention draft PR support
 
 2. **Update Workflow Overview:**
-   - [ ] Add draft PR to "When to use"
+   - [x] Add draft PR to "When to use"
 
 **Content to Update (in opening description):**
 
@@ -371,9 +372,9 @@ Centralized command for creating pull requests for phases, fix batches, and draf
 
 **Checklist:**
 
-- [ ] Description updated
-- [ ] Workflow Overview updated
-- [ ] All new flags mentioned
+- [x] Description updated
+- [x] Workflow Overview updated
+- [x] All new flags mentioned
 
 ---
 
@@ -384,10 +385,10 @@ Centralized command for creating pull requests for phases, fix batches, and draf
 **Implementation Steps:**
 
 1. **Update Options section:**
-   - [ ] Add `--draft` option
-   - [ ] Add `--ready` option  
-   - [ ] Add `--review` option
-   - [ ] Ensure options are in logical order
+   - [x] Add `--draft` option
+   - [x] Add `--ready` option  
+   - [x] Add `--review` option
+   - [x] Ensure options are in logical order
 
 **Content to Add to Options section (add after `--release`):**
 
@@ -401,9 +402,9 @@ Centralized command for creating pull requests for phases, fix batches, and draf
 
 **Checklist:**
 
-- [ ] All new options listed
-- [ ] Options grouped logically
-- [ ] Options have clear descriptions
+- [x] All new options listed
+- [x] Options grouped logically
+- [x] Options have clear descriptions
 
 ---
 
@@ -411,24 +412,24 @@ Centralized command for creating pull requests for phases, fix batches, and draf
 
 | Task | Status | Notes |
 |------|--------|-------|
-| Task 1: Add Draft PR Mode section | 🔴 Not Started | |
-| Task 2: Add --ready flag documentation | 🔴 Not Started | |
-| Task 3: Add --review flag documentation | 🔴 Not Started | |
-| Task 4: Add Integration section | 🔴 Not Started | |
-| Task 5: Update Command Header | 🔴 Not Started | |
-| Task 6: Update Options Table | 🔴 Not Started | |
+| Task 1: Add Draft PR Mode section | ✅ Complete | Full section with workflow and template |
+| Task 2: Add --ready flag documentation | ✅ Complete | Section with steps and checklist |
+| Task 3: Add --review flag documentation | ✅ Complete | Section with Sourcery manual trigger |
+| Task 4: Add Integration section | ✅ Complete | Draft PR Workflow added, ADR-003 referenced |
+| Task 5: Update Command Header | ✅ Complete | Description and When to use updated |
+| Task 6: Update Options Table | ✅ Complete | Draft PR Options group added |
 
 ---
 
 ## ✅ Completion Criteria
 
-- [ ] `/pr` command supports `--draft` flag (creates draft PR)
-- [ ] `/pr` command supports `--ready` flag (marks draft as ready)
-- [ ] `/pr` command supports `--review` flag (triggers Sourcery via comment)
-- [ ] Draft PR workflow documented in command
-- [ ] Sourcery manual trigger documented (`@sourcery-ai review`)
-- [ ] Usage examples show draft PR pattern
-- [ ] Command integrates with ADR-003 workflow
+- [x] `/pr` command supports `--draft` flag (creates draft PR)
+- [x] `/pr` command supports `--ready` flag (marks draft as ready)
+- [x] `/pr` command supports `--review` flag (triggers Sourcery via comment)
+- [x] Draft PR workflow documented in command
+- [x] Sourcery manual trigger documented (`@sourcery-ai review`)
+- [x] Usage examples show draft PR pattern
+- [x] Command integrates with ADR-003 workflow
 - [ ] Changes committed
 
 ---
@@ -499,5 +500,5 @@ Day 4: Final review, merge
 ---
 
 **Last Updated:** 2026-01-09  
-**Status:** ✅ Expanded  
-**Next:** Begin implementation with Task 1
+**Status:** ✅ Complete  
+**Next:** Phase 4 (Documentation)
