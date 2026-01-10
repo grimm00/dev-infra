@@ -1,7 +1,7 @@
 # Release v0.8.0 - Worktree Feature Workflow
 
 **Purpose:** Release planning and tracking for v0.8.0  
-**Status:** 🟠 In Preparation  
+**Status:** 🟢 Ready for Release Branch  
 **Target Date:** 2026-01-XX
 
 ---
@@ -34,14 +34,14 @@
 - [x] RELEASE-READINESS.md generated
 - [x] CHANGELOG-DRAFT.md created
 - [x] RELEASE-NOTES.md created
-- [ ] CHANGELOG-DRAFT merged into CHANGELOG.md
-- [ ] Release date set
+- [x] CHANGELOG-DRAFT merged into CHANGELOG.md (`/release-finalize`)
+- [x] Release date set (2026-01-10)
 
 ### Code
 
 - [x] All features merged to develop (PR #59)
 - [x] Tests passing
-- [ ] Version references updated
+- [x] Version references updated (`/release-finalize`)
 
 ### Release Process
 

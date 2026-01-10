@@ -396,11 +396,11 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v0.7.0  
+**Version:** v0.8.0  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
 **Updated:** 2025-12-18  
-**Priority:** v0.7.0 released
+**Priority:** v0.8.0 released
 
 ### ✅ Completed
 
@@ -469,7 +469,7 @@ When modifying templates:
 
 ### ✅ Recently Completed
 
-**Command Simplification (v0.7.0):**
+**Command Simplification (v0.8.0):**
 
 - ✅ All templates now have all 19 commands
 - ✅ Removed experimental-project template (merged into standard)
@@ -483,7 +483,7 @@ When modifying templates:
 
 ### ✅ Recently Released
 
-**v0.7.0 - Command Simplification (2025-12-18):**
+**v0.8.0 - Command Simplification (2025-12-18):**
 
 - ✅ All templates now have all 19 commands
 - ✅ Removed experimental-project template
