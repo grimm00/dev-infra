@@ -10,7 +10,7 @@
 | Phase | Name | Status | Progress | Notes |
 |-------|------|--------|----------|-------|
 | Phase 1 | Configuration | ✅ Complete | 100% | .gitignore + .sourcery.yaml |
-| Phase 2 | Template Updates | 🔴 Scaffolding | 0% | Needs expansion |
+| Phase 2 | Template Updates | ✅ Expanded | 0% impl | Ready for implementation |
 | Phase 3 | Command Updates | 🔴 Scaffolding | 0% | Needs expansion |
 | Phase 4 | Documentation | 🔴 Scaffolding | 0% | Needs expansion |
 
@@ -34,17 +34,17 @@
 
 ## 🎯 Immediate Next Steps
 
-1. **Open draft PR** (dogfooding ADR-003!)
-
-2. **Expand Phase 2 scaffolding:**
-   ```
-   /transition-plan worktree-feature-workflow --expand --phase 2
-   ```
-
-3. **Implement Phase 2:**
+1. **Implement Phase 2:**
    ```
    /task-phase 2 1
    ```
+
+2. **Expand Phase 3 scaffolding:**
+   ```
+   /transition-plan worktree-feature-workflow --expand --phase 3
+   ```
+
+3. **Implement Phase 3** (command updates)
 
 ---
 
