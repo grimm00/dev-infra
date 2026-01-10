@@ -70,7 +70,7 @@ worktrees/
 
 ### FR-4: Command Output for Easy Opening
 
-**Description:** Commands that create worktrees SHOULD output a `cursor <path>` command for easy opening.
+**Description:** Commands that create worktrees MUST output a `cursor <path>` command for easy opening.
 
 **Example output:**
 ```
@@ -80,11 +80,13 @@ To open in new Cursor window:
 cursor worktrees/feat-my-feature
 ```
 
-**Source:** [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md)
+**Source:** [research-worktree-naming-conventions.md](research-worktree-naming-conventions.md), [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md)
 
-**Priority:** Medium
+**Priority:** High
 
 **Status:** 🔴 Pending
+
+**Note:** Consolidated from FR-4 and FR-18 (duplicate requirements)
 
 ---
 
@@ -401,26 +403,6 @@ ignore:
 - Reviewers see full context
 
 **Source:** [research-self-contained-feature-branches.md](research-self-contained-feature-branches.md)
-
-**Priority:** High
-
-**Status:** 🔴 Pending
-
----
-
-### FR-18: Output Cursor Command
-
-**Description:** Commands that create worktrees MUST output a `cursor <path>` command for easy opening.
-
-**Example output:**
-```
-✅ Worktree created: feat-my-feature
-
-To open in new Cursor window:
-cursor worktrees/feat-my-feature
-```
-
-**Source:** [research-context-switching-and-discovery.md](research-context-switching-and-discovery.md)
 
 **Priority:** High
 

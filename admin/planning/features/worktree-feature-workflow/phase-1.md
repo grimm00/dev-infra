@@ -33,17 +33,17 @@ Set up `.gitignore` and `.sourcery.yaml` in dev-infra root to enable the worktre
 
 1. **Read current .gitignore:**
 
-   - [ ] Check existing entries
-   - [ ] Identify appropriate section for new entries
+   - [x] Check existing entries
+   - [x] Identify appropriate section for new entries
 
 2. **Add worktrees entry:**
 
-   - [ ] Add comment header: `# Git worktrees`
-   - [ ] Add entry: `worktrees/`
+   - [x] Add comment header: `# Git worktrees`
+   - [x] Add entry: `worktrees/`
 
 3. **Add tmp entry:**
-   - [ ] Add comment header: `# Temporary files (handoff docs, scratch)`
-   - [ ] Add entry: `tmp/`
+   - [x] Add comment header: `# Temporary files (handoff docs, scratch)`
+   - [x] Add entry: `tmp/`
 
 **Content to Add:**
 
@@ -62,10 +62,10 @@ tmp/
 
 **Checklist:**
 
-- [ ] Existing .gitignore reviewed
-- [ ] `worktrees/` entry added
-- [ ] `tmp/` entry added
-- [ ] Comments explain purpose
+- [x] Existing .gitignore reviewed
+- [x] `worktrees/` entry added
+- [x] `tmp/` entry added
+- [x] Comments explain purpose
 
 ---
 
@@ -77,12 +77,12 @@ tmp/
 
 1. **Create .sourcery.yaml in root:**
 
-   - [ ] Create new file: `.sourcery.yaml`
-   - [ ] Add ignore patterns from ADR-004
+   - [x] Create new file: `.sourcery.yaml`
+   - [x] Add ignore patterns from ADR-004
 
 2. **Configure ignore patterns:**
-   - [ ] Ignore `admin/**` (explorations, research, decisions, planning)
-   - [ ] Ignore `tmp/**` (temporary files, handoff docs)
+   - [x] Ignore `admin/**` (explorations, research, decisions, planning)
+   - [x] Ignore `tmp/**` (temporary files, handoff docs)
 
 **Content to Create:**
 
@@ -105,10 +105,10 @@ ignore:
 
 **Checklist:**
 
-- [ ] `.sourcery.yaml` created in root
-- [ ] `admin/**` ignore pattern added
-- [ ] `tmp/**` ignore pattern added
-- [ ] Comment references ADR-004
+- [x] `.sourcery.yaml` created in root
+- [x] `admin/**` ignore pattern added
+- [x] `tmp/**` ignore pattern added
+- [x] Comment references ADR-004
 
 ---
 
@@ -120,20 +120,20 @@ ignore:
 
 1. **Verify .gitignore:**
 
-   - [ ] Run `git status` - should not show worktrees/ or tmp/
-   - [ ] Create test directory: `mkdir -p tmp/test` (should be ignored)
-   - [ ] Verify: `git check-ignore -v tmp/test` (should show .gitignore rule)
-   - [ ] Clean up: `rm -r tmp/test`
+   - [x] Run `git status` - should not show worktrees/ or tmp/
+   - [x] Create test directory: `mkdir -p tmp/test` (should be ignored)
+   - [x] Verify: `git check-ignore -v tmp/test` (should show .gitignore rule)
+   - [x] Clean up: `rm -r tmp/test`
 
 2. **Verify .sourcery.yaml:**
 
-   - [ ] Confirm file exists: `ls -la .sourcery.yaml`
-   - [ ] Validate YAML syntax: `cat .sourcery.yaml`
-   - [ ] Check patterns are correct
+   - [x] Confirm file exists: `ls -la .sourcery.yaml`
+   - [x] Validate YAML syntax: `cat .sourcery.yaml`
+   - [x] Check patterns are correct
 
 3. **Document verification:**
-   - [ ] Update task status
-   - [ ] Note any issues found
+   - [x] Update task status
+   - [x] Note any issues found
 
 **Commands to Run:**
 
@@ -151,9 +151,9 @@ git status --ignored
 
 **Checklist:**
 
-- [ ] .gitignore patterns verified
-- [ ] .sourcery.yaml syntax validated
-- [ ] Both files committed
+- [x] .gitignore patterns verified
+- [x] .sourcery.yaml syntax validated
+- [x] Both files committed
 
 ---
 
@@ -175,7 +175,7 @@ git status --ignored
 - [x] `.sourcery.yaml` ignores `admin/**`
 - [x] `.sourcery.yaml` ignores `tmp/**`
 - [x] Verification commands pass
-- [ ] Changes committed
+- [x] Changes committed
 
 ---
 
