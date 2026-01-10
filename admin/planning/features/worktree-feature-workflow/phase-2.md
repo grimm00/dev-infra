@@ -2,7 +2,8 @@
 
 **Phase:** 2 - Template Updates  
 **Duration:** ~30 minutes  
-**Status:** ✅ Expanded  
+**Status:** ✅ Complete  
+**Completed:** 2026-01-09  
 **Prerequisites:** Phase 1 complete
 
 ---
@@ -32,12 +33,12 @@ Add `.sourcery.yaml` to both project templates and update the template sync mani
 **Implementation Steps:**
 
 1. **Create the file:**
-   - [ ] Create `templates/standard-project/.sourcery.yaml`
-   - [ ] Use template-specific ignore patterns (per ADR-004)
+   - [x] Create `templates/standard-project/.sourcery.yaml`
+   - [x] Use template-specific ignore patterns (per ADR-004)
 
 2. **Configure ignore patterns:**
-   - [ ] Ignore `docs/maintainers/**` (process docs in templates)
-   - [ ] Ignore `tmp/**` (temporary files)
+   - [x] Ignore `docs/maintainers/**` (process docs in templates)
+   - [x] Ignore `tmp/**` (temporary files)
 
 **Content to Create:**
 
@@ -58,9 +59,9 @@ ignore:
 - NFR-9: Template Consistency
 
 **Checklist:**
-- [ ] File created at correct location
-- [ ] Ignore patterns match ADR-004 template section
-- [ ] Comment explains purpose
+- [x] File created at correct location
+- [x] Ignore patterns match ADR-004 template section
+- [x] Comment explains purpose
 
 ---
 
@@ -71,8 +72,8 @@ ignore:
 **Implementation Steps:**
 
 1. **Create the file:**
-   - [ ] Create `templates/learning-project/.sourcery.yaml`
-   - [ ] Use same patterns as standard-project
+   - [x] Create `templates/learning-project/.sourcery.yaml`
+   - [x] Use same patterns as standard-project
 
 **Content to Create:**
 
@@ -93,9 +94,9 @@ ignore:
 - NFR-9: Template Consistency
 
 **Checklist:**
-- [ ] File created at correct location
-- [ ] Content identical to standard-project
-- [ ] Comment explains purpose
+- [x] File created at correct location
+- [x] Content identical to standard-project
+- [x] Comment explains purpose
 
 ---
 
@@ -106,12 +107,12 @@ ignore:
 **Implementation Steps:**
 
 1. **Read current manifest:**
-   - [ ] Check `scripts/template-sync-manifest.txt`
-   - [ ] Identify appropriate section for new entry
+   - [x] Check `scripts/template-sync-manifest.txt`
+   - [x] Identify appropriate section for new entry
 
 2. **Add entry:**
-   - [ ] Add `.sourcery.yaml` to manifest
-   - [ ] Add comment explaining purpose
+   - [x] Add `.sourcery.yaml` to manifest
+   - [x] Add comment explaining purpose
 
 **Content to Add:**
 
@@ -126,9 +127,9 @@ ignore:
 - FR-17: Add to Template Sync Manifest
 
 **Checklist:**
-- [ ] Entry added to manifest
-- [ ] Comment section added
-- [ ] Entry uses correct relative path
+- [x] Entry added to manifest
+- [x] Comment section added
+- [x] Entry uses correct relative path
 
 ---
 
@@ -139,13 +140,13 @@ ignore:
 **Verification Steps:**
 
 1. **Run sync validation:**
-   - [ ] Execute: `./scripts/validate-template-sync.sh`
-   - [ ] Verify: No errors for `.sourcery.yaml`
+   - [x] Execute: `./scripts/validate-template-sync.sh`
+   - [x] Verify: No errors for `.sourcery.yaml`
 
 2. **Manual verification:**
-   - [ ] Confirm both files exist
-   - [ ] Confirm files are identical
-   - [ ] Confirm manifest includes `.sourcery.yaml`
+   - [x] Confirm both files exist
+   - [x] Confirm files are identical
+   - [x] Confirm manifest includes `.sourcery.yaml`
 
 **Commands to Run:**
 
@@ -165,10 +166,10 @@ grep ".sourcery.yaml" scripts/template-sync-manifest.txt
 ```
 
 **Checklist:**
-- [ ] Both files exist
-- [ ] Files are identical
-- [ ] Manifest includes entry
-- [ ] Validation passes
+- [x] Both files exist
+- [x] Files are identical
+- [x] Manifest includes entry
+- [x] Validation passes
 
 ---
 
@@ -176,22 +177,22 @@ grep ".sourcery.yaml" scripts/template-sync-manifest.txt
 
 | Task | Status | Notes |
 |------|--------|-------|
-| Task 1: standard-project .sourcery.yaml | 🔴 Not Started | |
-| Task 2: learning-project .sourcery.yaml | 🔴 Not Started | |
-| Task 3: Update sync manifest | 🔴 Not Started | |
-| Task 4: Verify template sync | 🔴 Not Started | |
+| Task 1: standard-project .sourcery.yaml | ✅ Complete | Created with docs/maintainers/** ignore |
+| Task 2: learning-project .sourcery.yaml | ✅ Complete | Identical to standard-project |
+| Task 3: Update sync manifest | ✅ Complete | Added to template-sync-manifest.txt |
+| Task 4: Verify template sync | ✅ Complete | Validation passes |
 
 ---
 
 ## ✅ Completion Criteria
 
-- [ ] `templates/standard-project/.sourcery.yaml` exists
-- [ ] `templates/learning-project/.sourcery.yaml` exists
-- [ ] Files have correct ignore patterns (`docs/maintainers/**`, `tmp/**`)
-- [ ] Files are identical between templates
-- [ ] `scripts/template-sync-manifest.txt` includes `.sourcery.yaml`
-- [ ] Template sync validation passes
-- [ ] Changes committed
+- [x] `templates/standard-project/.sourcery.yaml` exists
+- [x] `templates/learning-project/.sourcery.yaml` exists
+- [x] Files have correct ignore patterns (`docs/maintainers/**`, `tmp/**`)
+- [x] Files are identical between templates
+- [x] `scripts/template-sync-manifest.txt` includes `.sourcery.yaml`
+- [x] Template sync validation passes
+- [x] Changes committed
 
 ---
 
@@ -253,5 +254,5 @@ The sync manifest ensures shared files stay identical between templates:
 ---
 
 **Last Updated:** 2026-01-09  
-**Status:** ✅ Expanded  
-**Next:** Begin implementation with Task 1
+**Status:** ✅ Complete  
+**Next:** Phase 3 (Command Updates)

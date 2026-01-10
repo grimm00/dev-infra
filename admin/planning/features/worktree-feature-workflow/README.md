@@ -19,7 +19,7 @@
 | Phase | Name | Status | Effort |
 |-------|------|--------|--------|
 | [Phase 1](phase-1.md) | Configuration | ✅ Complete | ~30 min |
-| [Phase 2](phase-2.md) | Template Updates | ✅ Expanded | ~30 min |
+| [Phase 2](phase-2.md) | Template Updates | ✅ Complete | ~30 min |
 | [Phase 3](phase-3.md) | Command Updates | 🔴 Scaffolding | ~1 hour |
 | [Phase 4](phase-4.md) | Documentation | 🔴 Scaffolding | ~1 hour |
 
