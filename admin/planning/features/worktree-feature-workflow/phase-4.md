@@ -131,9 +131,9 @@ Document the complete worktree feature workflow including naming conventions, se
 3. **`docs/COMMIT-WORKFLOW.md`** - Reference new workflow
 
 **Checklist:**
-- [ ] Update docs/WORKTREE-GUIDE.md with workflow link
-- [ ] Update docs/README.md with workflow link
-- [ ] Update docs/COMMIT-WORKFLOW.md with reference
+- [x] Update docs/WORKTREE-GUIDE.md with workflow link
+- [x] Update docs/README.md with workflow link
+- [x] Update docs/COMMIT-WORKFLOW.md with reference
 
 ---
 

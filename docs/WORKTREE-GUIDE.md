@@ -165,9 +165,22 @@ git worktree prune
 
 ---
 
-## 📚 Detailed Documentation
+## 📚 Related Documentation
 
-For complete documentation including workflow patterns, troubleshooting, and advanced tips, see the full guide in `docs/WORKTREE-GUIDE.md` (created but may need manual placement).
+### Worktree Feature Workflow
+
+For **feature development** using worktrees with draft PRs and self-contained branches, see:
+
+- **[Worktree Feature Workflow](WORKTREE-WORKFLOW.md)** - Complete guide including:
+  - Setup and naming conventions
+  - Self-contained feature branches
+  - Draft PR workflow
+  - "Fix before re-review" pattern
+  - Sourcery configuration
+
+### This Guide (Multi-Agent Development)
+
+This guide focuses on using **multiple worktrees simultaneously** with different Cursor agents for parallel development workflows.
 
 ---
 

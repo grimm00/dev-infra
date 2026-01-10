@@ -384,6 +384,7 @@ git status --short
 - **[Workflow Rules](../.cursor/rules/workflow.mdc)** - Complete workflow documentation including Git Flow
 - **[Status Update Workflow](STATUS-UPDATE-WORKFLOW.md)** - Status update patterns (if exists)
 - **[PR Workflow](../.cursor/commands/pr.md)** - PR creation workflow
+- **[Worktree Feature Workflow](WORKTREE-WORKFLOW.md)** - Feature development with draft PRs (includes commit patterns for draft PR workflow)
 
 ---
 
