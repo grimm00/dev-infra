@@ -2,10 +2,10 @@
 
 **Research Topic:** Worktree Feature Workflow  
 **Question:** How can we get incremental reviews (only new changes) instead of full-PR reviews?  
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
 **Priority:** 🔴 High  
 **Created:** 2026-01-09  
-**Updated:** 2026-01-09
+**Completed:** 2026-01-09
 
 ---
 
@@ -213,52 +213,92 @@ Searched for Sourcery CLI options for incremental reviews:
 
 ## 💡 Recommendations
 
-### Recommendation 1: Document "Fix Before Re-Review"
+### Recommendation 1: "Fix Before Re-Review" as Primary Pattern ✅
 
-For simple workflows, the easiest approach:
+**This is the recommended approach for most features.**
 
-> **Best Practice:** Fix Sourcery issues before requesting another review. Each `/pr --review` triggers a fresh review of the entire PR, so unfixed issues will generate duplicate comments.
+> **Best Practice:** Fix Sourcery issues before requesting another phase review. Each `/pr --review` triggers a fresh review of the entire PR, so unfixed issues will generate duplicate comments.
 
-### Recommendation 2: Consider Sub-PR Pattern for Large Features
+**Why this works:**
+- Keeps workflow simple (one draft PR per feature)
+- **Reduces total PRs** compared to old phase-by-phase PR workflow
+- Natural gate for "Definition of Done" per phase
+- No additional tooling required
 
-For features with many phases or significant code changes:
+**Workflow:**
+```
+1. Open draft PR after first commit
+2. Phase 1 → Push → /pr --review
+3. Fix Sourcery issues ← KEY STEP (before next phase)
+4. Phase 2 → Push → /pr --review
+5. Fix Sourcery issues
+6. ... repeat ...
+7. Mark ready for review
+8. Final merge
+
+Result: 1 PR per feature, clean review history
+```
+
+### Recommendation 2: Sub-PRs as Escape Hatch (Edge Cases Only)
+
+For unusually large features (8+ phases or massive code changes), the sub-PR pattern remains an option:
 
 ```
-/pr --draft --base feat/my-feature   # Target the feature branch
+feat/my-feature-phase-1 → PR → feat/my-feature (not develop)
 ```
 
-This gives truly incremental reviews where Sourcery only sees each phase's changes.
+**When to consider:**
+- Feature spans multiple weeks
+- 8+ distinct phases
+- Different team members working on phases
+- Review history becoming unwieldy
 
-### Recommendation 3: Update ADR-003 with Options
+**For most features:** Use the simpler "fix before re-review" pattern.
 
-The current ADR-003 (Draft PR Review Workflow) should include:
-- Explanation of full-PR review behavior
-- Option to use sub-PRs for large features
-- Best practice about fixing issues before re-review
+### Recommendation 3: Document in Workflow Guide
 
-### Recommendation 4: Add Sub-PR Support to /pr Command (Future)
+Phase 4 documentation should include:
+- Explanation that Sourcery reviews full PR diff
+- "Fix before re-review" as the standard practice
+- PR count benefit (1 PR vs many)
+- Sub-PRs mentioned as advanced option
 
-Consider adding:
-- `--base [branch]` flag to target non-develop branches
-- Auto-detection of feature branch for sub-PRs
-- Documentation of sub-PR workflow
+### Recommendation 4: No Additional Tooling Needed
+
+The current `/pr --review` command is sufficient. No need for:
+- `--base` flag for sub-PRs (keep it simple)
+- Deduplication in `dt-review` (not a bug)
+- Complex incremental review tooling
 
 ---
 
 ## 📋 Requirements Discovered
 
-- [x] FR-23: Documentation SHOULD explain full-PR review behavior
-- [ ] FR-24: `/pr` command COULD support `--base` flag for sub-PRs (future)
-- [ ] NFR-13: Large features MAY use sub-PR pattern for incremental reviews
+- [x] FR-23: Documentation MUST explain full-PR review behavior
+- [x] FR-24: Workflow MUST recommend "fix before re-review" pattern
+- [x] NFR-13: Draft PR workflow SHOULD result in 1 PR per feature
+- [x] NFR-14: Sub-PRs documented as escape hatch for edge cases only
+
+---
+
+## 🔑 Key Insight
+
+**The draft PR workflow already solves the "too many PRs" problem.** The "fix before re-review" discipline makes it work without duplicates. This is a workflow adjustment, not a tooling problem.
+
+| Workflow | PRs per Feature |
+|----------|-----------------|
+| Old (phase PRs to develop) | ~3-5 PRs |
+| **New (draft PR + discipline)** | **1 PR** |
+| Sub-PR pattern | ~4-6 PRs (defeats simplicity) |
 
 ---
 
 ## 🚀 Next Steps
 
-1. ✅ Research documented
-2. Decide: Add sub-PR pattern to Phase 4 documentation?
-3. Decide: Update ADR-003 with this discovery?
-4. Decide: Is sub-PR support a future enhancement?
+1. ✅ Research complete
+2. ✅ "Fix before re-review" selected as primary pattern
+3. Update Phase 4 documentation with this insight
+4. ADR-003 update can be included in Phase 4 deliverables
 
 ---
 
