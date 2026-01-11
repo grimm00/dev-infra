@@ -14,10 +14,10 @@ This document captures requirements discovered during research on enhancing the 
 **Research Source:** [research-summary.md](research-summary.md)
 
 **Summary:**
-- Functional Requirements: 20 (expanded Topic 2: +3 new, +2 from constraints)
-- Non-Functional Requirements: 11 (expanded Topic 2: +2 new)
+- Functional Requirements: 24 (Topic 7 Worktree: +4 new)
+- Non-Functional Requirements: 13 (Topic 7 Worktree: +2 new)
 - Process Requirements: 3
-- Constraints: 4 (expanded Topic 2: +2 new)
+- Constraints: 4
 - Assumptions: 2
 
 ---
@@ -274,6 +274,58 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
+### Topic 7: Worktree Integration (New)
+
+#### FR-WT-1: Lazy Worktree Creation
+
+**Description:** `/explore` Setup Mode MUST NOT require worktree; Conduct Mode SHOULD prompt for worktree creation
+
+**Source:** User decision during research review (2026-01-10)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+**Rationale:** Setup mode is light (organizing thoughts, suggesting topics) and acceptable on develop. Conduct mode represents real investment and should trigger worktree prompt per ADR-002.
+
+---
+
+#### FR-WT-2: Worktree Prompt on Conduct
+
+**Description:** When running `/explore --conduct`, command SHOULD prompt: "Create worktree for this exploration?"
+
+**Source:** User decision during research review (2026-01-10)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-WT-3: Skip Worktree Flag
+
+**Description:** `/explore --conduct --no-worktree` MUST skip worktree prompt and continue on current branch
+
+**Source:** User decision during research review (2026-01-10)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+#### FR-WT-4: Automatic Worktree Flag
+
+**Description:** `/explore --conduct --worktree` MUST create worktree without prompting
+
+**Source:** User decision during research review (2026-01-10)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### Topic 1: Command Improvement Organization
@@ -418,6 +470,32 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
+### Topic 7: Worktree Integration (New)
+
+#### NFR-WT-1: ADR-002 Alignment
+
+**Description:** Worktree integration MUST align with ADR-002 self-contained feature branches pattern
+
+**Source:** User decision during research review (2026-01-10)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+#### NFR-WT-2: Non-Disruptive Prompts
+
+**Description:** Worktree prompts MUST be skippable and not block command execution
+
+**Source:** User decision during research review (2026-01-10)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## 📋 Process Requirements
 
 ### Topic 5: Existing Feature Integration
@@ -534,4 +612,4 @@ This document captures requirements discovered during research on enhancing the 
 
 ---
 
-**Last Updated:** 2026-01-09 (expanded via Topic 2 conduct mode)
+**Last Updated:** 2026-01-10 (Topic 7 Worktree Integration added)

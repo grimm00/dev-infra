@@ -15,8 +15,8 @@ Research for enhancing the `/explore` command with:
 3. Topic unification (`--topic [name] --type`)
 4. Command improvement organization
 
-**Research Topics:** 6 topics  
-**Research Documents:** 6 documents  
+**Research Topics:** 7 topics (6 original + 1 during review)  
+**Research Documents:** 6 documents + inline decisions  
 **Status:** ✅ Complete
 
 ---
@@ -31,6 +31,7 @@ Research for enhancing the `/explore` command with:
 | 4 | Scaffolding Boundaries | 🟡 Medium | ✅ Complete |
 | 5 | Existing Feature Integration | 🟡 Medium | ✅ Complete |
 | 6 | Cross-Command Consistency | 🟡 Medium | ✅ Complete |
+| 7 | Worktree Integration | 🔴 High | ✅ Complete (inline) |
 
 ---
 
@@ -105,6 +106,28 @@ Cross-command consistency analysis:
 
 ---
 
+### Finding 7: Lazy Worktree Creation Pattern (Topic 7)
+
+Per ADR-002 (self-contained feature branches), worktrees should be created for feature work. However, exploration has a natural gate:
+
+- **Setup Mode:** Light scaffolding (~60-80 lines), organizing thoughts, suggesting topics
+  - ✅ Stays on develop - no worktree needed
+  - Low investment, acceptable to abandon on develop
+
+- **Conduct Mode:** Full exploration (~200-300 lines), creates research-topics.md
+  - 🌳 Prompts for worktree creation
+  - Represents real investment in an idea
+  - Aligns with ADR-002 self-contained pattern
+
+**Flags:**
+- `--conduct` (default behavior): prompts for worktree
+- `--conduct --worktree`: creates worktree automatically
+- `--conduct --no-worktree`: skips worktree, continues on current branch
+
+**Source:** User decision during research review (2026-01-10), informed by `feature-learnings.md`
+
+---
+
 ## 💡 Key Insights
 
 - [x] Insight 1: **Command improvements are template features** per ADR-001
@@ -118,6 +141,8 @@ Cross-command consistency analysis:
 - [x] Insight 9: **Mode flags and type/scope flags serve different purposes** - document clearly
 - [x] Insight 10: **Industry CLI patterns validate auto-detection** - git, kubectl, npm precedent
 - [x] Insight 11: **Hard cutover migration acceptable** - documentation-based commands
+- [x] Insight 12: **Lazy worktree creation via conduct mode** - setup stays on develop, conduct prompts for worktree
+- [x] Insight 13: **Commands as pipeline** - think about before/after commands, not just inputs/outputs
 
 ---
 
@@ -129,8 +154,8 @@ Cross-command consistency analysis:
 
 | Category | Count |
 |----------|-------|
-| Functional Requirements | 20 |
-| Non-Functional Requirements | 11 |
+| Functional Requirements | 24 |
+| Non-Functional Requirements | 13 |
 | Process Requirements | 3 |
 | Constraints | 4 |
 
@@ -147,6 +172,9 @@ Cross-command consistency analysis:
 7. ✅ Use `--conduct` flag for `/explore`
 8. ✅ Keep existing feature plan, update with expanded scope
 9. ✅ Create shared "Two-Mode Pattern" documentation page
+10. ✅ Implement lazy worktree creation (prompt on `--conduct`)
+11. ✅ Add `--worktree` and `--no-worktree` flags for explicit control
+12. ✅ Document command pipeline flow (before/after relationships)
 
 ---
 
@@ -159,5 +187,5 @@ Cross-command consistency analysis:
 
 ---
 
-**Last Updated:** 2026-01-09 (Topic 2 expanded via conduct mode)
+**Last Updated:** 2026-01-10 (Topic 7 Worktree Integration added)
 
