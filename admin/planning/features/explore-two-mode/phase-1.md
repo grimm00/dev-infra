@@ -123,10 +123,10 @@ Implement the two-mode pattern (Setup + Conduct) in the `/explore` command with 
 
 **Steps:**
 
-- [ ] Create "Setup Mode Output" section
-- [ ] Document exploration.md scaffolding template
-- [ ] Document research-topics.md scaffolding template
-- [ ] Add line count guidance
+- [x] Create "Setup Mode Output" section
+- [x] Document exploration.md scaffolding template
+- [x] Document research-topics.md scaffolding template
+- [x] Add line count guidance
 
 **Content to Add (exploration.md scaffolding):**
 
@@ -184,10 +184,10 @@ Run `/explore [topic] --conduct` to expand this exploration.
 ````
 
 **Checklist:**
-- [ ] Setup mode output documented
-- [ ] Scaffolding template created
-- [ ] Line count guidance included
-- [ ] Placeholder message shows conduct command
+- [x] Setup mode output documented
+- [x] Scaffolding template created
+- [x] Line count guidance included
+- [x] Placeholder message shows conduct command
 
 ---
 
@@ -484,7 +484,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 | ------------------------------------ | -------------- | --------------------------------------------- |
 | Task 1: Two-Mode Workflow Overview   | ✅ Complete    | Added two-mode structure to Workflow Overview |
 | Task 2: Usage Section with --conduct | ✅ Complete    | Added --conduct flag and examples             |
-| Task 3: Setup Mode Output Section    | 🔴 Not Started |                                               |
+| Task 3: Setup Mode Output Section    | ✅ Complete    | Added scaffolding templates with line counts  |
 | Task 4: Conduct Mode Output Section  | 🔴 Not Started |                                               |
 | Task 5: Mode Detection Logic         | 🔴 Not Started |                                               |
 | Task 6: Step-by-Step Process         | 🔴 Not Started |                                               |

@@ -114,6 +114,122 @@ Expands existing scaffolding with detailed analysis (~200-300 lines).
 
 ---
 
+## Setup Mode Output
+
+**Output Size:** ~60-80 lines total
+
+Setup Mode creates lightweight scaffolding documents for human review before investing in detailed exploration.
+
+**Creates:**
+
+```
+explorations/[topic]/
+├── README.md           (~20 lines) - Hub with quick links
+├── exploration.md      (~40-50 lines) - Scaffolding with placeholders
+└── research-topics.md  (~20-30 lines) - Prioritized questions
+```
+
+### exploration.md Scaffolding Template
+
+**File:** `explorations/[topic]/exploration.md`
+
+```markdown
+# Exploration: [Topic]
+
+**Status:** 🔴 Scaffolding (needs expansion)
+**Created:** YYYY-MM-DD
+
+---
+
+## 🎯 What We're Exploring
+
+[2-3 sentence summary extracted from input]
+
+---
+
+## 🔍 Initial Themes
+
+### Theme 1: [Name]
+<!-- PLACEHOLDER: Expand with detailed analysis in conduct mode -->
+
+### Theme 2: [Name]
+<!-- PLACEHOLDER: Expand with detailed analysis in conduct mode -->
+
+---
+
+## ❓ Key Questions
+
+1. [Question extracted from input]
+2. [Question extracted from input]
+
+---
+
+## 🚀 Next Steps
+
+Run `/explore [topic] --conduct` to expand this exploration.
+```
+
+### research-topics.md Scaffolding Template
+
+**File:** `explorations/[topic]/research-topics.md`
+
+```markdown
+# Research Topics - [Topic]
+
+**Status:** 🔴 Scaffolding (needs expansion)
+**Created:** YYYY-MM-DD
+
+---
+
+## 📋 Topics Identified
+
+### Topic 1: [Name]
+
+**Question:** [Core question to investigate]
+**Priority:** [High | Medium | Low]
+
+### Topic 2: [Name]
+
+**Question:** [Core question to investigate]
+**Priority:** [High | Medium | Low]
+
+---
+
+## 🚀 Next Steps
+
+Run `/explore [topic] --conduct` to expand these topics with context and rationale.
+```
+
+### README.md Hub Template
+
+**File:** `explorations/[topic]/README.md`
+
+```markdown
+# [Topic] - Exploration Hub
+
+**Status:** 🔴 Scaffolding (needs expansion)
+**Created:** YYYY-MM-DD
+
+---
+
+## 📋 Quick Links
+
+- **[Exploration](exploration.md)** - Main exploration document
+- **[Research Topics](research-topics.md)** - Topics to investigate
+
+---
+
+## 🎯 Overview
+
+[1-2 sentence summary]
+
+---
+
+**Next:** Run `/explore [topic] --conduct` to expand this exploration.
+```
+
+---
+
 ## Step-by-Step Process
 
 ### 1. Identify Topic
