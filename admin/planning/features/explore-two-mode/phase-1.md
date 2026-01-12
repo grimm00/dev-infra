@@ -44,26 +44,32 @@ Implement the two-mode pattern (Setup + Conduct) in the `/explore` command with 
 
 ### Setup Mode (Default)
 ```
+
 /explore [topic]
-  → Creates exploration scaffolding (~60-80 lines)
-  → Organizes thoughts into themes
-  → Extracts key questions
-  → Creates research-topics.md
-  → Outputs: Scaffolding ready for human review
+→ Creates exploration scaffolding (~60-80 lines)
+→ Organizes thoughts into themes
+→ Extracts key questions
+→ Creates research-topics.md
+→ Outputs: Scaffolding ready for human review
+
 ```
 
 ### Conduct Mode (`--conduct`)
 ```
+
 /explore [topic] --conduct
-  → Reads existing scaffolding
-  → Expands themes with detailed analysis
-  → Adds connections, implications, concerns
-  → Refines research topics with context
-  → Outputs: Full exploration (~200-300 lines)
+→ Reads existing scaffolding
+→ Expands themes with detailed analysis
+→ Adds connections, implications, concerns
+→ Refines research topics with context
+→ Outputs: Full exploration (~200-300 lines)
+
 ```
+
 ```
 
 **Checklist:**
+
 - [x] Workflow Overview updated
 - [x] Two modes clearly explained
 - [x] Diagrams added
@@ -76,9 +82,9 @@ Implement the two-mode pattern (Setup + Conduct) in the `/explore` command with 
 
 **Steps:**
 
-- [ ] Add `--conduct` to Options list
-- [ ] Add conduct mode examples to Examples section
-- [ ] Update command signature
+- [x] Add `--conduct` to Options list
+- [x] Add conduct mode examples to Examples section
+- [x] Update command signature
 
 **Content to Add:**
 
@@ -104,9 +110,10 @@ Implement the two-mode pattern (Setup + Conduct) in the `/explore` command with 
 ```
 
 **Checklist:**
-- [ ] --conduct flag documented
-- [ ] Examples show both modes
-- [ ] Options list updated
+
+- [x] --conduct flag documented
+- [x] Examples show both modes
+- [x] Options list updated
 
 ---
 
@@ -128,11 +135,13 @@ Implement the two-mode pattern (Setup + Conduct) in the `/explore` command with 
 
 **Creates:**
 ```
+
 explorations/[topic]/
-├── README.md           (~20 lines) - Hub with quick links
-├── exploration.md      (~40-50 lines) - Scaffolding with placeholders
-└── research-topics.md  (~20-30 lines) - Prioritized questions
-```
+├── README.md (~20 lines) - Hub with quick links
+├── exploration.md (~40-50 lines) - Scaffolding with placeholders
+└── research-topics.md (~20-30 lines) - Prioritized questions
+
+````
 
 **exploration.md Scaffolding Template:**
 
@@ -170,8 +179,9 @@ explorations/[topic]/
 ## 🚀 Next Steps
 
 Run `/explore [topic] --conduct` to expand this exploration.
-```
-```
+````
+
+````
 
 **Checklist:**
 - [ ] Setup mode output documented
@@ -207,7 +217,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 **Status Update:**
 ```markdown
 **Status:** ✅ Expanded
-```
+````
 
 **exploration.md After Conduct:**
 
@@ -233,12 +243,15 @@ Run `/explore [topic] --conduct` to expand this exploration.
 [Detailed analysis of theme]
 
 **Connections:**
+
 - [Connection to other themes or concepts]
 
 **Implications:**
+
 - [What this means for the exploration]
 
 **Concerns:**
+
 - [Potential issues or risks]
 
 ### Theme 2: [Name]
@@ -254,6 +267,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 **Context:** [Why this question matters]
 
 **Sub-questions:**
+
 - [Related question 1]
 - [Related question 2]
 
@@ -270,9 +284,11 @@ Run `/explore [topic] --conduct` to expand this exploration.
 [Detailed initial thinking with evidence]
 
 **Opportunities:**
+
 - [Opportunity 1]
 
 **Concerns:**
+
 - [Concern 1]
 
 ---
@@ -286,7 +302,8 @@ Run `/explore [topic] --conduct` to expand this exploration.
 
 **Last Updated:** YYYY-MM-DD
 ```
-```
+
+````
 
 **Checklist:**
 - [ ] Conduct mode output documented
@@ -335,9 +352,10 @@ Run `/explore [topic] --conduct` to expand this exploration.
 | `--conduct` with no scaffolding | "No exploration scaffolding found for [topic]. Run `/explore [topic]` first." |
 | `--conduct` on already expanded | "Exploration already expanded. Use `--force` to re-expand." |
 | Setup on existing scaffolding | "Scaffolding exists. Use `--conduct` to expand, or `--force` to overwrite." |
-```
+````
 
 **Checklist:**
+
 - [ ] Mode detection documented
 - [ ] Error handling documented
 - [ ] Validation logic clear
@@ -369,6 +387,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 [Existing content with scaffolding templates]
 
 **Checklist:**
+
 - [ ] Exploration directory created
 - [ ] Exploration hub created (~20 lines)
 - [ ] Exploration scaffolding created (~40-50 lines)
@@ -380,6 +399,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 [New content with expansion templates]
 
 **Checklist:**
+
 - [ ] Existing scaffolding read
 - [ ] Themes expanded with analysis
 - [ ] Questions expanded with context
@@ -388,6 +408,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 ```
 
 **Checklist:**
+
 - [ ] Step-by-step reorganized
 - [ ] Both modes documented
 - [ ] Checklists updated
@@ -408,23 +429,25 @@ Run `/explore [topic] --conduct` to expand this exploration.
 
 ```markdown
 ### Command Pipeline Position
-
 ```
-/explore [topic]           ← Setup: scaffolding (~60-80 lines)
-    ↓ human review
+
+/explore [topic] ← Setup: scaffolding (~60-80 lines)
+↓ human review
 /explore [topic] --conduct ← Conduct: full exploration (~200-300 lines)
-    ↓
-/research --from-explore   ← Research: investigate topics
-    ↓
-/decision --from-research  ← Decisions: create ADRs
-    ↓
+↓
+/research --from-explore ← Research: investigate topics
+↓
+/decision --from-research ← Decisions: create ADRs
+↓
 /transition-plan --from-adr ← Planning: create phases
+
 ```
 
 **Note:** Human review between Setup and Conduct is the key checkpoint.
 ```
 
 **Checklist:**
+
 - [ ] Pipeline diagram updated
 - [ ] Mode positions clear
 - [ ] Human review checkpoint shown
@@ -457,15 +480,15 @@ Run `/explore [topic] --conduct` to expand this exploration.
 
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: Two-Mode Workflow Overview | ✅ Complete | Added two-mode structure to Workflow Overview |
-| Task 2: Usage Section with --conduct | 🔴 Not Started | |
-| Task 3: Setup Mode Output Section | 🔴 Not Started | |
-| Task 4: Conduct Mode Output Section | 🔴 Not Started | |
-| Task 5: Mode Detection Logic | 🔴 Not Started | |
-| Task 6: Step-by-Step Process | 🔴 Not Started | |
-| Task 7: Integration Section | 🔴 Not Started | |
+| Task                                 | Status         | Notes                                         |
+| ------------------------------------ | -------------- | --------------------------------------------- |
+| Task 1: Two-Mode Workflow Overview   | ✅ Complete    | Added two-mode structure to Workflow Overview |
+| Task 2: Usage Section with --conduct | ✅ Complete    | Added --conduct flag and examples             |
+| Task 3: Setup Mode Output Section    | 🔴 Not Started |                                               |
+| Task 4: Conduct Mode Output Section  | 🔴 Not Started |                                               |
+| Task 5: Mode Detection Logic         | 🔴 Not Started |                                               |
+| Task 6: Step-by-Step Process         | 🔴 Not Started |                                               |
+| Task 7: Integration Section          | 🔴 Not Started |                                               |
 
 ---
 

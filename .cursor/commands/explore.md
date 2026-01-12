@@ -93,17 +93,24 @@ Expands existing scaffolding with detailed analysis (~200-300 lines).
 
 **Command:** `/explore [topic] [options]`
 
-**Examples:**
+**Setup Mode Examples (default):**
 
-- `/explore new-authentication-system` - Start exploration for new auth system
-- `/explore "improve ci pipeline"` - Start exploration (topic sanitized to `improve-ci-pipeline`)
+- `/explore new-authentication-system` - Create exploration scaffolding
+- `/explore "improve ci pipeline"` - Topic sanitized to `improve-ci-pipeline`
 - `/explore --topic database-choice` - Specify topic explicitly
 - `/explore --dry-run` - Show what would be created without creating files
+
+**Conduct Mode Examples:**
+
+- `/explore new-authentication-system --conduct` - Expand existing scaffolding
+- `/explore improve-ci-pipeline --conduct` - Fill in detailed exploration
 
 **Options:**
 
 - `--topic [name]` - Specify topic name (overrides prompt)
+- `--conduct` - Expand scaffolding with detailed exploration (requires existing scaffolding)
 - `--dry-run` - Show what would be created without creating files
+- `--force` - Overwrite existing scaffolding (setup) or re-expand (conduct)
 
 ---
 
