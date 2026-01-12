@@ -405,7 +405,52 @@ Conduct Mode expands existing scaffolding with detailed analysis, connections, a
 
 ---
 
-### 2. Create Exploration Document
+### 2. Determine Mode
+
+**Mode Detection Logic:**
+
+The command detects which mode to use based on flags and existing content.
+
+**Setup Mode (default):**
+
+1. Check if topic directory exists
+2. If exists, check exploration.md status
+3. If status is `🔴 Scaffolding`, suggest using `--conduct`
+4. If status is `✅ Expanded`, warn about overwriting
+5. If doesn't exist, proceed with setup
+
+**Conduct Mode (`--conduct`):**
+
+1. Check if topic directory exists
+2. If doesn't exist, error: "No scaffolding found. Run setup first."
+3. Check exploration.md status
+4. If status is `✅ Expanded`, warn and require `--force` to re-expand
+5. If status is `🔴 Scaffolding`, proceed with conduct
+
+**Error Messages:**
+
+| Situation | Message |
+|-----------|---------|
+| `--conduct` with no scaffolding | "No exploration scaffolding found for [topic]. Run `/explore [topic]` first." |
+| `--conduct` on already expanded | "Exploration already expanded. Use `--force` to re-expand." |
+| Setup on existing scaffolding | "Scaffolding exists. Use `--conduct` to expand, or `--force` to overwrite." |
+
+**Force Flag Behavior:**
+
+- `--force` with Setup Mode: Overwrites existing scaffolding (creates fresh)
+- `--force` with Conduct Mode: Re-expands even if already expanded
+
+**Checklist:**
+
+- [ ] Check if `--conduct` flag provided
+- [ ] Check if topic directory exists
+- [ ] Check exploration.md status (if exists)
+- [ ] Handle error cases appropriately
+- [ ] Apply `--force` logic if needed
+
+---
+
+### 3. Create Exploration Document
 
 **Location Detection:**
 
@@ -583,7 +628,7 @@ This document lists research topics and questions that need investigation before
 
 ---
 
-### 3. Update Explorations Hub
+### 4. Update Explorations Hub
 
 **Update explorations hub:**
 
