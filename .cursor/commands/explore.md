@@ -230,6 +230,160 @@ Run `/explore [topic] --conduct` to expand these topics with context and rationa
 
 ---
 
+## Conduct Mode Output
+
+**Output Size:** ~200-300 lines total
+
+Conduct Mode expands existing scaffolding with detailed analysis, connections, and context.
+
+**Expands existing scaffolding with:**
+
+- Themes with detailed analysis, connections, implications
+- Questions with context, sub-questions, research approach
+- Initial thoughts with evidence, concerns, opportunities
+- research-topics.md with full descriptions and priority rationale
+
+**Status Transition:**
+
+```
+🔴 Scaffolding (needs expansion) → ✅ Expanded
+```
+
+### exploration.md After Conduct
+
+**File:** `explorations/[topic]/exploration.md`
+
+```markdown
+# Exploration: [Topic]
+
+**Status:** ✅ Expanded
+**Created:** YYYY-MM-DD
+**Expanded:** YYYY-MM-DD
+
+---
+
+## 🎯 What We're Exploring
+
+[Expanded description with context, background, and motivation - 2-3 paragraphs]
+
+---
+
+## 🔍 Themes
+
+### Theme 1: [Name]
+
+[Detailed analysis of theme - 3-5 paragraphs]
+
+**Connections:**
+- [Connection to other themes or concepts]
+- [Connection to existing patterns or decisions]
+
+**Implications:**
+- [What this means for the exploration]
+- [Impact on related areas]
+
+**Concerns:**
+- [Potential issues or risks]
+- [Open questions]
+
+### Theme 2: [Name]
+
+[Similar detailed structure...]
+
+---
+
+## ❓ Key Questions
+
+### Question 1: [Question]
+
+**Context:** [Why this question matters - 2-3 sentences]
+
+**Sub-questions:**
+- [Related question 1]
+- [Related question 2]
+- [Related question 3]
+
+**Research Approach:** [How to investigate - suggested methods]
+
+### Question 2: [Question]
+
+[Similar structure...]
+
+---
+
+## 💡 Initial Thoughts
+
+[Detailed initial thinking with evidence - 2-3 paragraphs]
+
+**Opportunities:**
+- [Opportunity 1 with brief explanation]
+- [Opportunity 2 with brief explanation]
+
+**Concerns:**
+- [Concern 1 with brief explanation]
+- [Concern 2 with brief explanation]
+
+---
+
+## 🚀 Next Steps
+
+1. Review research topics in `research-topics.md`
+2. Use `/research [topic] --from-explore [topic]` to conduct research
+3. After research, use `/decision [topic] --from-research` to make decisions
+
+---
+
+**Last Updated:** YYYY-MM-DD
+```
+
+### research-topics.md After Conduct
+
+**File:** `explorations/[topic]/research-topics.md`
+
+```markdown
+# Research Topics - [Topic]
+
+**Status:** ✅ Expanded
+**Created:** YYYY-MM-DD
+**Expanded:** YYYY-MM-DD
+
+---
+
+## 📋 Research Topics
+
+### Topic 1: [Name]
+
+**Question:** [Core question to investigate]
+
+**Context:** [Why this research is needed - 2-3 sentences]
+
+**Priority:** [High | Medium | Low]
+
+**Rationale:** [Why this priority - 1-2 sentences]
+
+**Suggested Approach:**
+- [Research method 1]
+- [Research method 2]
+
+### Topic 2: [Name]
+
+[Similar detailed structure...]
+
+---
+
+## 🎯 Research Workflow
+
+1. Use `/research [topic] --from-explore [topic]` to start research
+2. Research will create documents in research directory
+3. After research complete, use `/decision [topic] --from-research`
+
+---
+
+**Last Updated:** YYYY-MM-DD
+```
+
+---
+
 ## Step-by-Step Process
 
 ### 1. Identify Topic

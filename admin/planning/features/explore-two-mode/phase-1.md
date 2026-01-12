@@ -197,10 +197,10 @@ Run `/explore [topic] --conduct` to expand this exploration.
 
 **Steps:**
 
-- [ ] Create "Conduct Mode Output" section
-- [ ] Document expanded exploration.md template
-- [ ] Document expanded research-topics.md template
-- [ ] Show status transition
+- [x] Create "Conduct Mode Output" section
+- [x] Document expanded exploration.md template
+- [x] Document expanded research-topics.md template
+- [x] Show status transition
 
 **Content to Add:**
 
@@ -306,10 +306,10 @@ Run `/explore [topic] --conduct` to expand this exploration.
 ````
 
 **Checklist:**
-- [ ] Conduct mode output documented
-- [ ] Expanded template created
-- [ ] Status transition shown
-- [ ] Line count guidance included
+- [x] Conduct mode output documented
+- [x] Expanded template created
+- [x] Status transition shown
+- [x] Line count guidance included
 
 ---
 
@@ -485,7 +485,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 | Task 1: Two-Mode Workflow Overview   | ✅ Complete    | Added two-mode structure to Workflow Overview |
 | Task 2: Usage Section with --conduct | ✅ Complete    | Added --conduct flag and examples             |
 | Task 3: Setup Mode Output Section    | ✅ Complete    | Added scaffolding templates with line counts  |
-| Task 4: Conduct Mode Output Section  | 🔴 Not Started |                                               |
+| Task 4: Conduct Mode Output Section  | ✅ Complete    | Added expanded templates with status transition|
 | Task 5: Mode Detection Logic         | 🔴 Not Started |                                               |
 | Task 6: Step-by-Step Process         | 🔴 Not Started |                                               |
 | Task 7: Integration Section          | 🔴 Not Started |                                               |
