@@ -20,7 +20,7 @@
 
 | Phase | Name | Status | Effort |
 |-------|------|--------|--------|
-| [Phase 1](phase-1.md) | Command Structure | 🔴 Scaffolding | ~2 hours |
+| [Phase 1](phase-1.md) | Command Structure | ✅ Expanded | ~2 hours |
 | [Phase 2](phase-2.md) | Input Sources | 🔴 Scaffolding | ~2 hours |
 | [Phase 3](phase-3.md) | Worktree Integration | 🔴 Scaffolding | ~1.5 hours |
 | [Phase 4](phase-4.md) | Template & Documentation | 🔴 Scaffolding | ~1.5 hours |
@@ -65,7 +65,7 @@ Enhance `/explore` to serve as the **ideation pipeline entry point**:
 | Research | ✅ Complete | 7 topics, 13 insights |
 | Decisions | ✅ Complete | 4 ADRs created |
 | Transition Plan | ✅ Complete | 4 phases scaffolded |
-| Phase 1 | 🔴 Scaffolding | Needs expansion |
+| Phase 1 | ✅ Expanded | Ready for implementation |
 | Phase 2 | 🔴 Scaffolding | Needs expansion |
 | Phase 3 | 🔴 Scaffolding | Needs expansion |
 | Phase 4 | 🔴 Scaffolding | Needs expansion |
@@ -88,8 +88,8 @@ Enhance `/explore` to serve as the **ideation pipeline entry point**:
 
 ## 🚀 Next Steps
 
-1. **Expand Phase 1:** `/transition-plan explore-two-mode --expand --phase 1`
-2. **Implement Phase 1:** Update explore.md with two-mode structure
+1. **Implement Phase 1:** `/task-phase explore-two-mode 1` - Update explore.md with two-mode structure
+2. **Expand Phase 2:** `/transition-plan explore-two-mode --expand --phase 2`
 3. **Continue through phases sequentially**
 
 ---
