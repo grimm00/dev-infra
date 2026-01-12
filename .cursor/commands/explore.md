@@ -35,14 +35,56 @@ This command supports multiple project organization patterns:
 - When you need to identify what questions need answering
 - Before starting research on a topic
 
-**Key principle:** Start with exploration to identify research topics, then move to research phase.
+**Key principle:** Start with exploration to identify research topics, then move to research phase. Use Setup Mode for quick ideation, then Conduct Mode for detailed exploration after human review.
 
-**Workflow:**
+**Two Modes:**
+
+### Setup Mode (Default)
+
+Creates lightweight scaffolding (~60-80 lines) for human review before investing in detailed exploration.
+
 ```
 /explore [topic]
-  → Creates exploration document
-  → Identifies research topics/questions
-  → Outputs: research-topics.md (list of research questions)
+  → Creates exploration scaffolding (~60-80 lines)
+  → Organizes thoughts into themes
+  → Extracts key questions
+  → Creates research-topics.md
+  → Outputs: Scaffolding ready for human review
+```
+
+**When to use Setup Mode:**
+
+- Starting a new exploration
+- Quick ideation without committing to full exploration
+- When you want to validate direction before deep dive
+
+### Conduct Mode (`--conduct`)
+
+Expands existing scaffolding with detailed analysis (~200-300 lines).
+
+```
+/explore [topic] --conduct
+  → Reads existing scaffolding
+  → Expands themes with detailed analysis
+  → Adds connections, implications, concerns
+  → Refines research topics with context
+  → Outputs: Full exploration (~200-300 lines)
+```
+
+**When to use Conduct Mode:**
+
+- After reviewing scaffolding and validating direction
+- When ready to invest in detailed exploration
+- Before moving to formal research phase
+
+**Workflow with Human Review:**
+
+```
+/explore [topic]           ← Setup: scaffolding (~60-80 lines)
+    ↓ human review         ← Key checkpoint
+/explore [topic] --conduct ← Conduct: full exploration (~200-300 lines)
+    ↓
+/research --from-explore   ← Research: investigate topics
 ```
 
 ---
