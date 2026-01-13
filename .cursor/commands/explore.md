@@ -1000,6 +1000,31 @@ start.txt   → /explore --from-start     ← Project initialization
 | Decision | ~30 min | ADR documents |
 | Planning | ~30 min | Feature plan + phases |
 
+### Worktree in Pipeline
+
+```
+/explore [topic]              ← Setup on develop (no worktree)
+    ↓ human review
+/explore [topic] --conduct    ← Prompt: "Create worktree?" 
+    ├─ --worktree            → Auto-create worktree
+    ├─ --no-worktree         → Skip, stay on branch
+    └─ [Y/n]                 → User decides
+    ↓
+worktrees/feat-[topic]/       ← Feature branch (if created)
+    ↓
+/research --from-explore      ← Research on feature branch
+    ↓
+/decision → /transition-plan → /task-phase
+```
+
+**Worktree Decision Point:**
+
+| Stage | Branch | Notes |
+|-------|--------|-------|
+| Setup Mode | develop | Lightweight scaffolding, no worktree |
+| Conduct Mode | develop OR feat/* | Depends on prompt response |
+| Research onwards | feat/* | Should be on feature branch |
+
 ### Exploration → Research → Decision → Planning Flow
 
 1. **`/explore [topic]`** - Start exploration (Setup Mode)
