@@ -2,7 +2,7 @@
 
 **Phase:** 2 - Input Sources  
 **Duration:** ~2 hours  
-**Status:** ✅ Expanded  
+**Status:** 🟠 In Progress  
 **Prerequisites:** Phase 1 complete, ADR-002 approved
 
 ---
@@ -519,7 +519,7 @@ start.txt   → /explore --from-start     ← Project initialization
 
 | Task                            | Status      | Notes                                   |
 | ------------------------------- | ----------- | --------------------------------------- |
-| Task 1: Usage Section Updates   | 🔴 Pending  |                                         |
+| Task 1: Usage Section Updates   | ✅ Complete | Added input source flags and examples   |
 | Task 2: Input Sources Section   | 🔴 Pending  |                                         |
 | Task 3: Theme Extraction        | 🔴 Pending  |                                         |
 | Task 4: Question Extraction     | 🔴 Pending  |                                         |

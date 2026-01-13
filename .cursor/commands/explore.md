@@ -112,6 +112,21 @@ Expands existing scaffolding with detailed analysis (~200-300 lines).
 - `--dry-run` - Show what would be created without creating files
 - `--force` - Overwrite existing scaffolding (setup) or re-expand (conduct)
 
+**Input Source Options:**
+
+- `--input [text|file]` - Raw text inline or from file (primary input source)
+- `--from-start` - Read project's start.txt as input
+- `--from-reflect [file]` - Read reflection document for actionable suggestions
+
+**Input Source Examples:**
+
+- `/explore "I've been thinking about improving our auth system..."` - Inline raw text
+- `/explore --input thoughts.txt` - Read from file
+- `/explore --from-start` - Use project's start.txt
+- `/explore --from-reflect reflection-2026-01-10.md` - Extract from reflection
+
+**Note:** Input sources are mutually exclusive. If multiple specified, command errors. If none specified, prompts for topic interactively.
+
 ---
 
 ## Setup Mode Output
