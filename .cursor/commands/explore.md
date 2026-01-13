@@ -633,6 +633,24 @@ The command detects which mode to use based on flags and existing content.
 4. If status is `✅ Expanded`, warn and require `--force` to re-expand
 5. If status is `🔴 Scaffolding`, proceed with conduct
 
+### Input Source Validation
+
+Before mode detection, validate input source:
+
+1. **Check for mutually exclusive flags:**
+   - `--input` + `--from-start` → Error
+   - `--input` + `--from-reflect` → Error
+   - `--from-start` + `--from-reflect` → Error
+
+2. **Validate source exists:**
+   - `--input file.txt` → Check file exists
+   - `--from-start` → Check start.txt exists
+   - `--from-reflect [file]` → Check reflection file exists
+
+3. **Validate source format:**
+   - Reflection file must have "Actionable Suggestions" section
+   - start.txt must not be empty
+
 **Error Messages:**
 
 | Situation | Message |
@@ -640,6 +658,12 @@ The command detects which mode to use based on flags and existing content.
 | `--conduct` with no scaffolding | "No exploration scaffolding found for [topic]. Run `/explore [topic]` first." |
 | `--conduct` on already expanded | "Exploration already expanded. Use `--force` to re-expand." |
 | Setup on existing scaffolding | "Scaffolding exists. Use `--conduct` to expand, or `--force` to overwrite." |
+| Multiple input sources | "Error: --input, --from-start, and --from-reflect are mutually exclusive" |
+| Input file not found | "Error: Input file '[path]' not found" |
+| start.txt not found | "Error: start.txt not found in current directory or project root" |
+| Reflection file missing | "Error: Reflection file '[path]' not found" |
+| Reflection missing section | "Warning: No 'Actionable Suggestions' section found in reflection" |
+| Empty start.txt | "Error: start.txt is empty" |
 
 **Force Flag Behavior:**
 
