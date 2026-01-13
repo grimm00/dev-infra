@@ -333,6 +333,67 @@ Not sure how MFA would affect user experience.
 
 ---
 
+## Worktree Integration
+
+`/explore` implements lazy worktree creation aligned with [ADR-002 Self-Contained Feature Branches](../../../decisions/worktree-feature-workflow/adr-002-self-contained-feature-branches.md).
+
+### Setup Mode (No Worktree)
+
+Setup mode stays on current branch (typically `develop`):
+
+- Creates lightweight scaffolding (~60-80 lines)
+- Low investment, acceptable to abandon on develop
+- **No worktree prompt** - keeps exploration friction low
+
+**Why:** Quick explorations shouldn't require worktree overhead.
+
+### Conduct Mode (Worktree Prompt)
+
+Conduct mode prompts for worktree creation:
+
+```
+/explore my-idea --conduct
+
+Create worktree for this exploration? [Y/n]
+```
+
+**If Yes:**
+- Creates directory: `worktrees/feat-my-idea`
+- Creates branch: `feat/my-idea`
+- Continues exploration on feature branch
+
+**If No:**
+- Stays on current branch
+- Continues exploration without worktree
+
+**Why:** Conduct mode represents real investment; prompts at natural decision point.
+
+### Explicit Control Flags
+
+For automation and scripting, use explicit flags:
+
+| Flag | Behavior | Use Case |
+|------|----------|----------|
+| `--worktree` | Creates worktree without prompting | CI/automation, scripting |
+| `--no-worktree` | Skips prompt, stays on current branch | Quick explorations, existing worktree |
+
+**Naming Convention:**
+
+| Element | Pattern | Example |
+|---------|---------|---------|
+| Directory | `worktrees/feat-[topic]` | `worktrees/feat-auth-system` |
+| Branch | `feat/[topic]` | `feat/auth-system` |
+
+### ADR-002 Alignment
+
+This pattern aligns with the worktree feature workflow:
+
+- **Setup on develop:** Scaffolding is lightweight, acceptable on develop
+- **Conduct on feature branch:** Serious investment is self-contained
+- **Natural gate:** Setup → Conduct transition is meaningful commitment point
+
+---
+
 ## Setup Mode Output
 
 **Output Size:** ~60-80 lines total
@@ -677,6 +738,11 @@ Before mode detection, validate input source:
 | Reflection file missing | "Error: Reflection file '[path]' not found" |
 | Reflection missing section | "Warning: No 'Actionable Suggestions' section found in reflection" |
 | Empty start.txt | "Error: start.txt is empty" |
+| `--worktree` in Setup Mode | "Warning: --worktree flag ignored in Setup Mode" |
+| `--no-worktree` in Setup Mode | "Warning: --no-worktree flag ignored in Setup Mode" |
+| `--worktree` + `--no-worktree` | "Error: --worktree and --no-worktree are mutually exclusive" |
+| Worktree already exists | "Worktree exists at [path]. Switching to existing worktree." |
+| Branch already exists | "Branch [name] exists. Use existing branch? [Y/n]" |
 
 **Force Flag Behavior:**
 
@@ -690,6 +756,29 @@ Before mode detection, validate input source:
 - [ ] Check exploration.md status (if exists)
 - [ ] Handle error cases appropriately
 - [ ] Apply `--force` logic if needed
+
+### Conduct Mode Worktree Prompt
+
+After mode validation, if entering Conduct Mode:
+
+1. **Check worktree flags:**
+   - `--worktree` present → Create worktree automatically
+   - `--no-worktree` present → Skip prompt, continue on current branch
+   - Neither → Prompt user
+
+2. **Prompt flow (if no flag):**
+
+```
+Create worktree for this exploration? [Y/n]
+```
+
+- Default: Yes (press Enter)
+- Creates worktree and switches to feature branch
+
+3. **Worktree creation:**
+   - Directory: `worktrees/feat-[topic]`
+   - Branch: `feat/[topic]`
+   - Uses `scripts/worktrees.sh` if available
 
 ---
 

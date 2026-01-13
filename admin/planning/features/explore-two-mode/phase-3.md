@@ -99,11 +99,12 @@ Setup mode stays on current branch (typically `develop`):
 ### Conduct Mode (Worktree Prompt)
 
 Conduct mode prompts for worktree creation:
-
 ```
+
 /explore my-idea --conduct
 
 Create worktree for this exploration? [Y/n]
+
 ```
 
 **If Yes:**
@@ -173,32 +174,35 @@ Update "2. Determine Mode" section with worktree logic:
 After mode validation, if entering Conduct Mode:
 
 1. **Check worktree flags:**
+
    - `--worktree` present → Create worktree automatically
    - `--no-worktree` present → Skip prompt, continue on current branch
    - Neither → Prompt user
 
 2. **Prompt flow (if no flag):**
-   ```
-   Create worktree for this exploration? [Y/n]
-   ```
-   - Default: Yes (press Enter)
-   - Creates worktree and switches to feature branch
+```
+
+Create worktree for this exploration? [Y/n]
+
+```
+- Default: Yes (press Enter)
+- Creates worktree and switches to feature branch
 
 3. **Worktree creation:**
-   - Directory: `worktrees/feat-[topic]`
-   - Branch: `feat/[topic]`
-   - Uses `scripts/worktrees.sh` if available
+- Directory: `worktrees/feat-[topic]`
+- Branch: `feat/[topic]`
+- Uses `scripts/worktrees.sh` if available
 ```
 
 **Error Table (append):**
 
-| Situation | Message |
-|-----------|---------|
-| `--worktree` in Setup Mode | "Warning: --worktree flag ignored in Setup Mode" |
-| `--no-worktree` in Setup Mode | "Warning: --no-worktree flag ignored in Setup Mode" |
+| Situation                      | Message                                                      |
+| ------------------------------ | ------------------------------------------------------------ |
+| `--worktree` in Setup Mode     | "Warning: --worktree flag ignored in Setup Mode"             |
+| `--no-worktree` in Setup Mode  | "Warning: --no-worktree flag ignored in Setup Mode"          |
 | `--worktree` + `--no-worktree` | "Error: --worktree and --no-worktree are mutually exclusive" |
-| Worktree already exists | "Worktree exists at [path]. Switching to existing worktree." |
-| Branch already exists | "Branch [name] exists. Use existing branch? [Y/n]" |
+| Worktree already exists        | "Worktree exists at [path]. Switching to existing worktree." |
+| Branch already exists          | "Branch [name] exists. Use existing branch? [Y/n]"           |
 
 **Checklist:**
 
@@ -228,11 +232,13 @@ Update Conduct Mode process:
 **After mode detection, before expanding scaffolding:**
 
 1. **Check worktree flags:**
+
    - If `--worktree`: Proceed to step 2
    - If `--no-worktree`: Skip to scaffolding expansion
    - If neither: Prompt user
 
 2. **Create worktree (if applicable):**
+
    - Directory: `worktrees/feat-[topic]`
    - Branch: `feat/[topic]` from current HEAD
    - Switch to worktree directory
@@ -274,7 +280,7 @@ Update Conduct Mode process:
 
 **Content to Add:**
 
-```markdown
+````markdown
 ### Scenario 6: Exploration to Feature Branch
 
 **Situation:** You've validated an exploration in Setup Mode and want to fully develop it.
@@ -297,8 +303,10 @@ Update Conduct Mode process:
 # Creating branch: feat/notification-system
 # Switched to worktree directory
 ```
+````
 
 **Result:**
+
 - Full exploration (~200-300 lines) on feature branch
 - Self-contained per ADR-002
 - Ready for `/research` phase
@@ -316,10 +324,12 @@ Update Conduct Mode process:
 ```
 
 **Result:**
+
 - Full exploration on current branch
 - Skips worktree prompt
 - Useful for explorations that may not become features
-```
+
+````
 
 **Checklist:**
 
@@ -346,19 +356,21 @@ Update "Integration with Other Commands" section:
 ```markdown
 ### Worktree in Pipeline
 
-```
-/explore [topic]              ← Setup on develop (no worktree)
-    ↓ human review
-/explore [topic] --conduct    ← Prompt: "Create worktree?" 
-    ├─ --worktree            → Auto-create worktree
-    ├─ --no-worktree         → Skip, stay on branch
-    └─ [Y/n]                 → User decides
-    ↓
-worktrees/feat-[topic]/       ← Feature branch (if created)
-    ↓
-/research --from-explore      ← Research on feature branch
-    ↓
+````
+
+/explore [topic] ← Setup on develop (no worktree)
+↓ human review
+/explore [topic] --conduct ← Prompt: "Create worktree?"
+├─ --worktree → Auto-create worktree
+├─ --no-worktree → Skip, stay on branch
+└─ [Y/n] → User decides
+↓
+worktrees/feat-[topic]/ ← Feature branch (if created)
+↓
+/research --from-explore ← Research on feature branch
+↓
 /decision → /transition-plan → /task-phase
+
 ```
 
 **Worktree Decision Point:**
@@ -391,14 +403,14 @@ worktrees/feat-[topic]/       ← Feature branch (if created)
 
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: Worktree Flags in Usage   | ✅ Complete | Added flags, examples, and mode note    |
-| Task 2: Worktree Behavior Section | 🔴 Pending  |                                         |
-| Task 3: Mode Detection Update     | 🔴 Pending  |                                         |
-| Task 4: Step-by-Step Process      | 🔴 Pending  |                                         |
-| Task 5: Worktree Scenarios        | 🔴 Pending  |                                         |
-| Task 6: Integration Update        | 🔴 Pending  |                                         |
+| Task                              | Status      | Notes                                      |
+| --------------------------------- | ----------- | ------------------------------------------ |
+| Task 1: Worktree Flags in Usage   | ✅ Complete | Added flags, examples, and mode note       |
+| Task 2: Worktree Behavior Section | ✅ Complete | Added ~60 line section after Input Sources |
+| Task 3: Mode Detection Update     | ✅ Complete | Added worktree prompt logic and errors     |
+| Task 4: Step-by-Step Process      | 🔴 Pending  |                                            |
+| Task 5: Worktree Scenarios        | 🔴 Pending  |                                            |
+| Task 6: Integration Update        | 🔴 Pending  |                                            |
 
 ---
 
@@ -441,4 +453,4 @@ worktrees/feat-[topic]/       ← Feature branch (if created)
 
 **Last Updated:** 2026-01-13  
 **Status:** ✅ Expanded  
-**Next:** Begin implementation with Task 1
+**Next:** Continue with Task 4
