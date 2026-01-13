@@ -2,7 +2,7 @@
 
 **Feature:** Enhance /explore with two-mode pattern, input sources, and worktree integration  
 **Status:** 🟠 In Progress  
-**Last Updated:** 2026-01-12
+**Last Updated:** 2026-01-13
 
 ---
 
@@ -14,12 +14,12 @@
 | Research | 7 topics completed | ✅ Complete | 100% |
 | Decisions | 4 ADRs created | ✅ Complete | 100% |
 | Transition Plan | 4 phases scaffolded | ✅ Complete | 100% |
-| Phase 1 | Command Structure | ✅ Expanded | 0% impl |
+| Phase 1 | Command Structure | ✅ Complete | 100% |
 | Phase 2 | Input Sources | 🔴 Scaffolding | 0% |
 | Phase 3 | Worktree Integration | 🔴 Scaffolding | 0% |
 | Phase 4 | Template & Documentation | 🔴 Scaffolding | 0% |
 
-**Overall Progress:** Planning complete, ready for implementation
+**Overall Progress:** Phase 1 complete (1/4 phases implemented)
 
 ---
 
@@ -46,22 +46,22 @@
 - [x] Phase scaffolding created (4 phases)
 - [x] Phase 1 expanded with detailed tasks (7 tasks)
 
+### Implementation
+
+- [x] **Phase 1: Command Structure** ✅ (2026-01-13)
+  - Updated `explore.md` with two-mode workflow overview
+  - Added `--conduct` flag documentation
+  - Created Setup Mode Output templates (~60-80 lines)
+  - Created Conduct Mode Output templates (~200-300 lines)
+  - Added Mode Detection Logic with error handling
+  - Reorganized Step-by-Step Process for Setup/Conduct modes
+  - Updated Integration section with pipeline and timing guidance
+
 ---
 
 ## 🟠 In Progress
 
-### Phase 1: Command Structure
-
-**Status:** ✅ Expanded, ready for implementation
-
-**Tasks:**
-1. [ ] Task 1: Add Two-Mode Workflow Overview
-2. [ ] Task 2: Usage Section with --conduct
-3. [ ] Task 3: Setup Mode Output Section
-4. [ ] Task 4: Conduct Mode Output Section
-5. [ ] Task 5: Mode Detection Logic
-6. [ ] Task 6: Step-by-Step Process
-7. [ ] Task 7: Integration Section
+*No implementation in progress - Phase 1 complete*
 
 ---
 
@@ -69,15 +69,13 @@
 
 ### Immediate
 
-1. [ ] Implement Phase 1: `/task-phase explore-two-mode 1`
-2. [ ] Update `.cursor/commands/explore.md` with two-mode structure
+1. [ ] Expand Phase 2: `/transition-plan explore-two-mode --expand --phase 2`
+2. [ ] Implement Phase 2: Add input source flags (`--from-start`, `--from-reflect`, `--raw`)
 
 ### Short-term
 
-1. [ ] Expand Phase 2: `/transition-plan explore-two-mode --expand --phase 2`
-2. [ ] Implement Phase 2: Add input source flags
-3. [ ] Expand Phase 3: `/transition-plan explore-two-mode --expand --phase 3`
-4. [ ] Implement Phase 3: Add worktree integration
+1. [ ] Expand Phase 3: `/transition-plan explore-two-mode --expand --phase 3`
+2. [ ] Implement Phase 3: Worktree integration (lazy creation, `--worktree`/`--no-worktree` flags)
 
 ### Medium-term
 
@@ -112,4 +110,4 @@
 
 ---
 
-**Last Updated:** 2026-01-12
+**Last Updated:** 2026-01-13
