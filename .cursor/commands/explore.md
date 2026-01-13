@@ -834,6 +834,36 @@ git push origin develop
 
 **Creates:** See [Conduct Mode Output](#conduct-mode-output) for expanded templates (~200-300 lines total)
 
+### Worktree Creation (Conduct Mode Only)
+
+**After mode detection, before expanding scaffolding:**
+
+1. **Check worktree flags:**
+   - If `--worktree`: Proceed to step 2
+   - If `--no-worktree`: Skip to scaffolding expansion
+   - If neither: Prompt user
+
+2. **Create worktree (if applicable):**
+   - Directory: `worktrees/feat-[topic]`
+   - Branch: `feat/[topic]` from current HEAD
+   - Switch to worktree directory
+
+3. **Verify worktree:**
+   - Check branch is correct: `git branch --show-current`
+   - Check working directory: `pwd`
+
+**Worktree Checklist:**
+
+- [ ] Worktree prompt handled (flag or user response)
+- [ ] Worktree created (if applicable)
+- [ ] Branch verified
+- [ ] Working directory is worktree (if created)
+
+**Commit Guidance:**
+
+- If worktree created: First commit on feature branch
+- If no worktree: Commit to current branch
+
 **Process:**
 
 1. Read existing `exploration.md` scaffolding
