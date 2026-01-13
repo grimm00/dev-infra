@@ -521,7 +521,7 @@ start.txt   → /explore --from-start     ← Project initialization
 | ------------------------------- | ----------- | --------------------------------------- |
 | Task 1: Usage Section Updates   | ✅ Complete | Added input source flags and examples   |
 | Task 2: Input Sources Section   | ✅ Complete | Added priority table and all source types |
-| Task 3: Theme Extraction        | 🔴 Pending  |                                         |
+| Task 3: Theme Extraction        | ✅ Complete | Added extraction process and examples   |
 | Task 4: Question Extraction     | 🔴 Pending  |                                         |
 | Task 5: Mode Detection Updates  | 🔴 Pending  |                                         |
 | Task 6: Common Scenarios        | 🔴 Pending  |                                         |

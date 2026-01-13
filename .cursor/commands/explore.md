@@ -219,6 +219,56 @@ What about SSO? Users keep asking about Google login..."
 
 **Note:** Interactive mode produces less context-rich scaffolding than raw text input.
 
+### Theme Extraction
+
+When processing unstructured input, `/explore` organizes content into themes:
+
+**Extraction Process:**
+
+1. **Parse input** for distinct ideas, concerns, or topics
+2. **Group related thoughts** into thematic clusters
+3. **Name themes** with descriptive, concise titles
+4. **Preserve context** - original thoughts appear under themes
+
+**Example Transformation:**
+
+**Input (raw text):**
+
+```
+I've been thinking about improving our auth system. The current JWT approach
+is okay but tokens expire too quickly. Users complain about re-logging in.
+Maybe we need refresh tokens? Also thinking about adding Google SSO -
+users keep asking. Security audit mentioned we need MFA too.
+```
+
+**Output (themes in scaffolding):**
+
+```markdown
+## 🔍 Themes
+
+### Theme 1: Token Expiration & User Experience
+- JWT tokens expire too quickly
+- Users complain about re-logging in
+- Consider refresh token pattern
+
+### Theme 2: Third-Party Authentication
+- Google SSO requested by users
+- Reduces password fatigue
+- OAuth2 integration needed
+
+### Theme 3: Security Enhancement
+- Security audit requires MFA
+- Compliance consideration
+- User friction vs security tradeoff
+```
+
+**Theme Naming Conventions:**
+
+- Use descriptive nouns/noun phrases
+- Avoid generic names like "Issue 1" or "Topic A"
+- Capture the essence of grouped thoughts
+- Keep names concise (2-5 words)
+
 ---
 
 ## Setup Mode Output
