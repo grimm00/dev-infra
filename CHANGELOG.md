@@ -32,6 +32,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Multi-language support
 - Cloud deployment templates
 
+### Added
+
+- **`/explore` Two-Mode Pattern** - Setup mode creates scaffolding (~60-80 lines) for human review; conduct mode expands to full exploration (~200-300 lines)
+- **Input Sources** - Raw text (`--input`), start.txt (`--from-start`), and reflections (`--from-reflect`) as explicit input sources
+- **Worktree Integration** - Lazy worktree creation prompts on conduct mode; `--worktree` and `--no-worktree` flags for explicit control
+- **Scaffolding Boundaries** - Clear line count guidance for consistent AI output quality
+- **Two-Mode Pattern Documentation** - `docs/TWO-MODE-PATTERN.md` documents the pattern for other commands
+
+### Changed
+
+- **`/explore` command** - Reorganized into two modes with explicit human review checkpoint
+- **Command pipeline** - `/explore` now documented as ideation pipeline entry point in `docs/GLOBAL-COMMANDS.md`
+
 ---
 
 ## [0.8.0] - 2026-01-10
