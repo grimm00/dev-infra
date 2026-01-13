@@ -12,6 +12,7 @@
 ### Phase Learnings
 
 - **[Phase 1](phase-1-learnings.md)** - Command Structure documentation
+- **[Phase 2](phase-2-learnings.md)** - Input Sources documentation
 
 ---
 
@@ -28,7 +29,7 @@ This directory contains phase-specific learnings from the `/explore` two-mode en
 
 ## 📊 Summary
 
-**Total Phase Learnings:** 1  
+**Total Phase Learnings:** 2  
 **Status:** ✅ Active
 
 ---
