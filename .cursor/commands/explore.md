@@ -450,7 +450,9 @@ The command detects which mode to use based on flags and existing content.
 
 ---
 
-### 3. Create Exploration Document
+### 3. Setup Mode: Create Scaffolding
+
+**Use when:** Mode detection indicates Setup Mode (no `--conduct` flag, no existing exploration or `--force` used).
 
 **Location Detection:**
 
@@ -463,172 +465,72 @@ The command detects which mode to use based on flags and existing content.
 - Check if `docs/maintainers/planning/explorations/` exists → use template structure
 - Otherwise → use project-wide structure
 
-**Directory structure:**
+**Creates:** See [Setup Mode Output](#setup-mode-output) for templates (~60-80 lines total)
 
-```
-explorations/[topic]/
-├── README.md                    # Exploration hub
-├── exploration.md                # Main exploration document
-└── research-topics.md            # List of research topics/questions
-```
+**Process:**
 
-**Create exploration hub:**
+1. Create exploration directory: `explorations/[topic]/`
+2. Create `README.md` hub (~20 lines) with quick links
+3. Create `exploration.md` scaffolding (~40-50 lines) with placeholders
+4. Create `research-topics.md` scaffolding (~20-30 lines) with prioritized questions
+5. Update explorations hub with new exploration link
 
-**File:** `docs/maintainers/planning/explorations/[topic]/README.md`
-
-```markdown
-# [Topic Name] - Exploration Hub
-
-**Purpose:** Explore [topic description]  
-**Status:** 🔴 Exploration  
-**Created:** YYYY-MM-DD  
-**Last Updated:** YYYY-MM-DD
-
----
-
-## 📋 Quick Links
-
-- **[Exploration Document](exploration.md)** - Main exploration document
-- **[Research Topics](research-topics.md)** - Research questions to investigate
-
----
-
-## 🎯 Overview
-
-[Brief description of what we're exploring and why]
-
----
-
-## 📊 Status
-
-**Current Phase:** Exploration  
-**Next Step:** Conduct research on topics identified in research-topics.md
-
----
-
-**Last Updated:** YYYY-MM-DD
-```
-
-**Create exploration document:**
-
-**File:** `docs/maintainers/planning/explorations/[topic]/exploration.md`
-
-```markdown
-# [Topic Name] - Exploration
-
-**Status:** 🔴 Exploration  
-**Created:** YYYY-MM-DD  
-**Last Updated:** YYYY-MM-DD
-
----
-
-## 🎯 What Are We Exploring?
-
-[Clear description of the topic, idea, or proof of concept]
-
----
-
-## 🤔 Why Explore This?
-
-[Context: What problem does this solve? What opportunity does it present?]
-
----
-
-## 💡 Initial Thoughts
-
-[Any initial ideas, concepts, or approaches]
-
----
-
-## 🔍 Key Questions
-
-- [ ] Question 1: [What do we need to understand?]
-- [ ] Question 2: [What are the options?]
-- [ ] Question 3: [What are the trade-offs?]
-- [ ] Question 4: [What are the risks?]
-
----
-
-## 🚀 Next Steps
-
-1. Review research topics in `research-topics.md`
-2. Use `/research [topic] --from-explore [topic]` to conduct research
-3. After research, use `/decision [topic] --from-research` to make decisions
-
----
-
-## 📝 Notes
-
-[Any initial thoughts, ideas, or concerns]
-
----
-
-**Last Updated:** YYYY-MM-DD
-```
-
-**Create research topics document:**
-
-**File:** `docs/maintainers/planning/explorations/[topic]/research-topics.md`
-
-```markdown
-# Research Topics - [Topic Name]
-
-**Purpose:** List of research topics/questions to investigate  
-**Status:** 🔴 Pending Research  
-**Created:** YYYY-MM-DD  
-**Last Updated:** YYYY-MM-DD
-
----
-
-## 📋 Research Topics
-
-This document lists research topics and questions that need investigation before making decisions.
-
-### Research Topic 1: [Topic Name]
-
-**Question:** [What specific question needs to be answered?]
-
-**Why:** [Why is this research needed?]
-
-**Priority:** [High | Medium | Low]
-
-**Status:** 🔴 Not Started
-
----
-
-### Research Topic 2: [Topic Name]
-
-**Question:** [What specific question needs to be answered?]
-
-**Why:** [Why is this research needed?]
-
-**Priority:** [High | Medium | Low]
-
-**Status:** 🔴 Not Started
-
----
-
-## 🎯 Research Workflow
-
-1. Use `/research [topic] --from-explore [topic]` to conduct research
-2. Research will create documents in `docs/maintainers/research/[topic]/`
-3. After research complete, use `/decision [topic] --from-research` to make decisions
-
----
-
-**Last Updated:** YYYY-MM-DD
-```
-
-**Checklist:**
+**Setup Mode Checklist:**
 
 - [ ] Exploration directory created
-- [ ] Exploration hub created
-- [ ] Exploration document created
-- [ ] Research topics document created
+- [ ] Exploration hub created (~20 lines)
+- [ ] Exploration scaffolding created (~40-50 lines)
+- [ ] Research topics scaffolding created (~20-30 lines)
+- [ ] Status set to `🔴 Scaffolding (needs expansion)`
+- [ ] Explorations hub updated
+
+**Commit (docs can push directly):**
+
+```bash
+git add explorations/[topic]/
+git commit -m "docs(explore): create [topic] exploration scaffolding"
+git push origin develop
+```
 
 ---
 
-### 4. Update Explorations Hub
+### 4. Conduct Mode: Expand Scaffolding
+
+**Use when:** Mode detection indicates Conduct Mode (`--conduct` flag provided, scaffolding exists).
+
+**Reads:** Existing scaffolding from `explorations/[topic]/`
+
+**Creates:** See [Conduct Mode Output](#conduct-mode-output) for expanded templates (~200-300 lines total)
+
+**Process:**
+
+1. Read existing `exploration.md` scaffolding
+2. Expand themes with detailed analysis, connections, implications, concerns
+3. Expand questions with context, sub-questions, research approach
+4. Add initial thoughts with evidence, opportunities, concerns
+5. Update `research-topics.md` with context and rationale for each topic
+6. Update status from `🔴 Scaffolding` to `✅ Expanded`
+
+**Conduct Mode Checklist:**
+
+- [ ] Existing scaffolding read and understood
+- [ ] Themes expanded with detailed analysis
+- [ ] Questions expanded with context and sub-questions
+- [ ] Initial thoughts documented with evidence
+- [ ] research-topics.md expanded with context
+- [ ] Status updated to `✅ Expanded`
+
+**Commit (docs can push directly):**
+
+```bash
+git add explorations/[topic]/
+git commit -m "docs(explore): expand [topic] exploration with detailed analysis"
+git push origin develop
+```
+
+---
+
+### 5. Update Explorations Hub
 
 **Update explorations hub:**
 

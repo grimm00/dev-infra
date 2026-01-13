@@ -368,10 +368,10 @@ Run `/explore [topic] --conduct` to expand this exploration.
 
 **Steps:**
 
-- [ ] Add "1. Determine Mode" step
-- [ ] Split "2. Create Exploration Document" into Setup vs Conduct
-- [ ] Update checklists for each mode
-- [ ] Add commit guidance for each mode
+- [x] Add "1. Determine Mode" step
+- [x] Split "2. Create Exploration Document" into Setup vs Conduct
+- [x] Update checklists for each mode
+- [x] Add commit guidance for each mode
 
 **Process Structure:**
 
@@ -409,9 +409,9 @@ Run `/explore [topic] --conduct` to expand this exploration.
 
 **Checklist:**
 
-- [ ] Step-by-step reorganized
-- [ ] Both modes documented
-- [ ] Checklists updated
+- [x] Step-by-step reorganized
+- [x] Both modes documented
+- [x] Checklists updated
 
 ---
 
@@ -487,7 +487,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 | Task 3: Setup Mode Output Section    | ✅ Complete    | Added scaffolding templates with line counts    |
 | Task 4: Conduct Mode Output Section  | ✅ Complete    | Added expanded templates with status transition |
 | Task 5: Mode Detection Logic         | ✅ Complete    | Added mode detection and error handling         |
-| Task 6: Step-by-Step Process         | 🔴 Not Started |                                                 |
+| Task 6: Step-by-Step Process         | ✅ Complete    | Reorganized into Setup/Conduct mode sections    |
 | Task 7: Integration Section          | 🔴 Not Started |                                                 |
 
 ---
