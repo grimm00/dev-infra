@@ -269,6 +269,55 @@ users keep asking. Security audit mentioned we need MFA too.
 - Capture the essence of grouped thoughts
 - Keep names concise (2-5 words)
 
+### Question Extraction
+
+`/explore` identifies questions from input and generates `research-topics.md`:
+
+**Extraction Process:**
+
+1. **Identify explicit questions** - Text ending in "?"
+2. **Identify implicit questions** - Statements implying uncertainty ("maybe", "not sure", "consider")
+3. **Convert to research questions** - Rephrase as investigable questions
+4. **Prioritize** - Order by apparent importance in input
+
+**Question Markers:**
+
+| Marker | Example | Conversion |
+|--------|---------|------------|
+| Explicit "?" | "Should we use JWTs?" | Direct research question |
+| "Maybe" | "Maybe we need refresh tokens" | "Should we implement refresh tokens?" |
+| "Not sure" | "Not sure about OAuth scope" | "What OAuth scopes are appropriate?" |
+| "Consider" | "Consider MFA options" | "What MFA options exist?" |
+| "What about" | "What about SSO?" | "Should we implement SSO?" |
+
+**Example:**
+
+**Input:**
+
+```
+Maybe we need refresh tokens? What about Google SSO? 
+Not sure how MFA would affect user experience.
+```
+
+**Output (research-topics.md):**
+
+```markdown
+### Topic 1: Refresh Token Implementation
+
+**Question:** Should we implement refresh tokens for better user experience?
+**Priority:** High
+
+### Topic 2: SSO Integration
+
+**Question:** Should we implement Google SSO?
+**Priority:** Medium
+
+### Topic 3: MFA User Impact
+
+**Question:** How would MFA affect user experience?
+**Priority:** Medium
+```
+
 ---
 
 ## Setup Mode Output
