@@ -2,7 +2,7 @@
 
 **Phase:** 3 - Worktree Integration  
 **Duration:** ~1.5 hours  
-**Status:** ✅ Expanded  
+**Status:** 🟠 In Progress  
 **Prerequisites:** Phase 2 complete, ADR-003 approved
 **Last Updated:** 2026-01-13
 
@@ -393,7 +393,7 @@ worktrees/feat-[topic]/       ← Feature branch (if created)
 
 | Task | Status | Notes |
 |------|--------|-------|
-| Task 1: Worktree Flags in Usage   | 🔴 Pending  |                                         |
+| Task 1: Worktree Flags in Usage   | ✅ Complete | Added flags, examples, and mode note    |
 | Task 2: Worktree Behavior Section | 🔴 Pending  |                                         |
 | Task 3: Mode Detection Update     | 🔴 Pending  |                                         |
 | Task 4: Step-by-Step Process      | 🔴 Pending  |                                         |

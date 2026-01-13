@@ -127,6 +127,19 @@ Expands existing scaffolding with detailed analysis (~200-300 lines).
 
 **Note:** Input sources are mutually exclusive. If multiple specified, command errors. If none specified, prompts for topic interactively.
 
+**Worktree Options (Conduct Mode only):**
+
+- `--worktree` - Create worktree automatically (skip prompt)
+- `--no-worktree` - Skip worktree prompt, stay on current branch
+
+**Worktree Examples:**
+
+- `/explore my-idea --conduct` - Prompts "Create worktree?"
+- `/explore my-idea --conduct --worktree` - Auto-creates worktree
+- `/explore my-idea --conduct --no-worktree` - Skips prompt, stays on current branch
+
+**Note:** Worktree flags only apply to Conduct Mode. Setup Mode always stays on current branch.
+
 ---
 
 ## Input Sources
