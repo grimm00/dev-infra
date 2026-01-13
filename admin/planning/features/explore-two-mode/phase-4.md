@@ -357,7 +357,7 @@ See [Worktree Workflow](WORKTREE-WORKFLOW.md) for details.
 | Task 2: Learning Template Update | ✅ Complete    | Copied and verified |
 | Task 3: Template Sync Validation | ✅ Complete    | All synced          |
 | Task 4: Sync Manifest Check      | ✅ Complete    | Already in manifest |
-| Task 5: Two-Mode Pattern Docs    | 🔴 Not Started |                     |
+| Task 5: Two-Mode Pattern Docs    | ✅ Complete    | Created + linked    |
 | Task 6: Pipeline Documentation   | 🔴 Not Started |                     |
 | Task 7: CHANGELOG Update         | 🔴 Not Started |                     |
 
