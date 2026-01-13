@@ -908,6 +908,59 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
+### Scenario 3: Raw Text Brain Dump
+
+**Situation:** You have unstructured thoughts about a feature idea.
+
+**Action:**
+
+```bash
+/explore "I want to add a notification system. Users should get
+alerts for important events. Maybe email? Push notifications?
+What about in-app badges? Need to think about user preferences too."
+```
+
+**Output:**
+- Exploration scaffolding with 3-4 themes (notification channels, user preferences, etc.)
+- research-topics.md with prioritized questions
+- Status: `🔴 Scaffolding (needs expansion)`
+
+---
+
+### Scenario 4: New Project from start.txt
+
+**Situation:** Starting a new project with initialization notes in start.txt.
+
+**Action:**
+
+```bash
+/explore --from-start
+```
+
+**Output:**
+- Exploration based on project goals from start.txt
+- Themes organized around project objectives
+- Questions extracted from open items in start.txt
+
+---
+
+### Scenario 5: Reflection to Exploration
+
+**Situation:** You ran `/reflect` and want to explore the actionable suggestions.
+
+**Action:**
+
+```bash
+/explore --from-reflect admin/planning/notes/reflection-2026-01-10.md
+```
+
+**Output:**
+- Exploration themes from reflection's "Actionable Suggestions"
+- research-topics.md populated from suggestions
+- Bridges reflection → exploration → research pipeline
+
+---
+
 ## Tips
 
 ### When to Use
