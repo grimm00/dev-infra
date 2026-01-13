@@ -21,7 +21,7 @@
 | Phase | Name | Status | Effort |
 |-------|------|--------|--------|
 | [Phase 1](phase-1.md) | Command Structure | ✅ Complete | ~2 hours |
-| [Phase 2](phase-2.md) | Input Sources | ✅ Expanded | ~2 hours |
+| [Phase 2](phase-2.md) | Input Sources | ✅ Complete | ~2 hours |
 | [Phase 3](phase-3.md) | Worktree Integration | 🔴 Scaffolding | ~1.5 hours |
 | [Phase 4](phase-4.md) | Template & Documentation | 🔴 Scaffolding | ~1.5 hours |
 
@@ -66,7 +66,7 @@ Enhance `/explore` to serve as the **ideation pipeline entry point**:
 | Decisions | ✅ Complete | 4 ADRs created |
 | Transition Plan | ✅ Complete | 4 phases scaffolded |
 | Phase 1 | ✅ Complete | Implemented 2026-01-13 |
-| Phase 2 | ✅ Expanded | Ready for implementation |
+| Phase 2 | ✅ Complete | Implemented 2026-01-13 |
 | Phase 3 | 🔴 Scaffolding | Needs expansion |
 | Phase 4 | 🔴 Scaffolding | Needs expansion |
 
@@ -88,8 +88,8 @@ Enhance `/explore` to serve as the **ideation pipeline entry point**:
 
 ## 🚀 Next Steps
 
-1. **Implement Phase 2:** `/task-phase 2 1` - Add input source documentation
-2. **Expand Phase 3:** `/transition-plan explore-two-mode --expand --phase 3` - Worktree integration
+1. **Expand Phase 3:** `/transition-plan explore-two-mode --expand --phase 3` - Worktree integration
+2. **Implement Phase 3:** `/task-phase 3 1` - Add worktree integration documentation
 3. **Continue through phases sequentially**
 
 ---

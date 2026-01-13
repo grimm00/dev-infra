@@ -15,11 +15,11 @@
 | Decisions | 4 ADRs created | ✅ Complete | 100% |
 | Transition Plan | 4 phases scaffolded | ✅ Complete | 100% |
 | Phase 1 | Command Structure | ✅ Complete | 100% |
-| Phase 2 | Input Sources | ✅ Expanded | 0% |
+| Phase 2 | Input Sources | ✅ Complete | 100% |
 | Phase 3 | Worktree Integration | 🔴 Scaffolding | 0% |
 | Phase 4 | Template & Documentation | 🔴 Scaffolding | 0% |
 
-**Overall Progress:** Phase 1 complete (1/4 phases implemented)
+**Overall Progress:** Phase 2 complete (2/4 phases implemented)
 
 ---
 
@@ -57,11 +57,20 @@
   - Reorganized Step-by-Step Process for Setup/Conduct modes
   - Updated Integration section with pipeline and timing guidance
 
+- [x] **Phase 2: Input Sources** ✅ (2026-01-13)
+  - Added input source flags (`--input`, `--from-start`, `--from-reflect`)
+  - Created Input Sources section with source priority
+  - Added Theme Extraction documentation with examples
+  - Added Question Extraction with markers table
+  - Added Input Source Validation to Mode Detection
+  - Created 3 input source usage scenarios
+  - Updated Integration with Input Sources in Pipeline
+
 ---
 
 ## 🟠 In Progress
 
-*No implementation in progress - Phase 1 complete*
+*No implementation in progress - Phase 2 complete*
 
 ---
 
@@ -69,19 +78,18 @@
 
 ### Immediate
 
-1. [ ] Expand Phase 2: `/transition-plan explore-two-mode --expand --phase 2`
-2. [ ] Implement Phase 2: Add input source flags (`--from-start`, `--from-reflect`, `--raw`)
-
-### Short-term
-
 1. [ ] Expand Phase 3: `/transition-plan explore-two-mode --expand --phase 3`
 2. [ ] Implement Phase 3: Worktree integration (lazy creation, `--worktree`/`--no-worktree` flags)
 
-### Medium-term
+### Short-term
 
 1. [ ] Expand Phase 4: `/transition-plan explore-two-mode --expand --phase 4`
 2. [ ] Implement Phase 4: Template updates
-3. [ ] Final testing and documentation
+
+### Medium-term
+
+1. [ ] Final testing and documentation
+2. [ ] Merge feature to develop
 
 ---
 
