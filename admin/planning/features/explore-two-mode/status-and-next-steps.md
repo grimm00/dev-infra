@@ -17,7 +17,7 @@
 | Phase 1 | Command Structure | ✅ Complete | 100% |
 | Phase 2 | Input Sources | ✅ Complete | 100% |
 | Phase 3 | Worktree Integration | ✅ Complete | 100% |
-| Phase 4 | Template & Documentation | 🔴 Scaffolding | 0% |
+| Phase 4 | Template & Documentation | ✅ Expanded | 0% impl |
 
 **Overall Progress:** Phase 3 complete (3/4 phases implemented, 75%)
 
@@ -92,8 +92,8 @@
 
 ### Short-term
 
-1. [ ] Expand Phase 4: `/transition-plan explore-two-mode --expand --phase 4`
-2. [ ] Implement Phase 4: Template updates
+1. [x] Expand Phase 4: `/transition-plan explore-two-mode --expand --phase 4` ✅
+2. [ ] Implement Phase 4: `/task-phase 4 1` - Template updates
 
 ### Medium-term
 
