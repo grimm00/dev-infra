@@ -421,9 +421,9 @@ Run `/explore [topic] --conduct` to expand this exploration.
 
 **Steps:**
 
-- [ ] Update "Integration with Other Commands" section
-- [ ] Show pipeline with mode annotations
-- [ ] Add timing guidance
+- [x] Update "Integration with Other Commands" section
+- [x] Show pipeline with mode annotations
+- [x] Add timing guidance
 
 **Content to Add:**
 
@@ -448,9 +448,9 @@ Run `/explore [topic] --conduct` to expand this exploration.
 
 **Checklist:**
 
-- [ ] Pipeline diagram updated
-- [ ] Mode positions clear
-- [ ] Human review checkpoint shown
+- [x] Pipeline diagram updated
+- [x] Mode positions clear
+- [x] Human review checkpoint shown
 
 ---
 
@@ -488,7 +488,7 @@ Run `/explore [topic] --conduct` to expand this exploration.
 | Task 4: Conduct Mode Output Section  | ✅ Complete    | Added expanded templates with status transition |
 | Task 5: Mode Detection Logic         | ✅ Complete    | Added mode detection and error handling         |
 | Task 6: Step-by-Step Process         | ✅ Complete    | Reorganized into Setup/Conduct mode sections    |
-| Task 7: Integration Section          | 🔴 Not Started |                                                 |
+| Task 7: Integration Section          | ✅ Complete    | Added pipeline, timing, human review checkpoint |
 
 ---
 

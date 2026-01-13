@@ -581,24 +581,63 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ## Integration with Other Commands
 
+### Command Pipeline Position
+
+```
+/explore [topic]              ← Setup: scaffolding (~60-80 lines)
+    ↓ human review            ← KEY CHECKPOINT: validate direction
+/explore [topic] --conduct    ← Conduct: full exploration (~200-300 lines)
+    ↓
+/research --from-explore      ← Research: investigate topics
+    ↓
+/decision --from-research     ← Decisions: create ADRs
+    ↓
+/transition-plan --from-adr   ← Planning: create phases
+    ↓
+/task-phase 1 1               ← Implementation: execute phases
+```
+
+**Note:** Human review between Setup and Conduct is the key checkpoint. This allows:
+- Quick validation of exploration direction before full investment
+- Course correction with minimal time spent
+- Rejection of dead-end explorations without wasted effort
+
+### Timing Guidance
+
+| Stage | Time Investment | Output |
+|-------|-----------------|--------|
+| Setup Mode | ~5-10 min | Scaffolding for review (~60-80 lines) |
+| Human Review | ~2-5 min | Go/no-go decision on direction |
+| Conduct Mode | ~20-30 min | Full exploration (~200-300 lines) |
+| Research | ~1-2 hours | Research documents + requirements |
+| Decision | ~30 min | ADR documents |
+| Planning | ~30 min | Feature plan + phases |
+
 ### Exploration → Research → Decision → Planning Flow
 
-1. **`/explore [topic]`** - Start exploration
-   - Creates exploration document
-   - Identifies research topics/questions
-   - Outputs: `research-topics.md`
+1. **`/explore [topic]`** - Start exploration (Setup Mode)
+   - Creates scaffolding with placeholders
+   - Organizes thoughts into themes
+   - Outputs: `research-topics.md` scaffolding
+   - Status: `🔴 Scaffolding (needs expansion)`
 
-2. **`/research [topic] --from-explore [topic]`** - Conduct research
+2. **`/explore [topic] --conduct`** - Expand exploration (Conduct Mode)
+   - Expands scaffolding with detailed analysis
+   - Adds connections, implications, concerns
+   - Outputs: Full exploration (~200-300 lines)
+   - Status: `✅ Expanded`
+
+3. **`/research [topic] --from-explore [topic]`** - Conduct research
    - Reads research topics from exploration
    - Creates research documents
    - Outputs: Research documents + `requirements.md`
 
-3. **`/decision [topic] --from-research`** - Make decisions
+4. **`/decision [topic] --from-research`** - Make decisions
    - Reads research documents
    - Creates ADR documents
    - Outputs: ADR documents
 
-4. **`/transition-plan --from-adr`** - Transition to planning
+5. **`/transition-plan --from-adr`** - Transition to planning
    - Reads ADR documents
    - Creates feature plan and phase documents
    - Outputs: Transition plan + Feature plan + Phase documents
