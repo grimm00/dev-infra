@@ -129,6 +129,98 @@ Expands existing scaffolding with detailed analysis (~200-300 lines).
 
 ---
 
+## Input Sources
+
+`/explore` is the pipeline entry point - the only command that handles **unstructured input**. This makes it the "thought organizer" that transforms raw ideas into structured exploration.
+
+### Source Priority
+
+| Priority | Source | Flag | Use Case |
+|----------|--------|------|----------|
+| 1 (Primary) | Raw text | `--input [text\|file]` | Brain dumps, ideas, thoughts |
+| 2 | start.txt | `--from-start` | Project initialization context |
+| 3 | Reflections | `--from-reflect [file]` | Actionable suggestions from reflection |
+| 4 | Interactive | (no flag) | Prompt for topic when no input provided |
+
+### Raw Text Input (Primary)
+
+**When to use:** You have unstructured thoughts, ideas, or a brain dump you want organized.
+
+**Inline text:**
+
+```
+/explore "I've been thinking about how we handle authentication.
+The current system is too rigid. Maybe we need roles? Or tokens?
+What about SSO? Users keep asking about Google login..."
+```
+
+**From file:**
+
+```
+/explore --input ~/thoughts/auth-ideas.txt
+```
+
+**What happens:**
+
+1. Input parsed for themes and patterns
+2. Related thoughts grouped together
+3. Questions extracted for research topics
+4. Scaffolding created with organized structure
+
+### start.txt Input
+
+**When to use:** Starting a new project or exploring project initialization notes.
+
+**Command:**
+
+```
+/explore --from-start
+```
+
+**Auto-detection:**
+
+- Searches for `start.txt` in current directory
+- Falls back to project root
+- Error if not found
+
+**What happens:**
+
+1. start.txt content parsed
+2. Project goals extracted as themes
+3. Open questions identified
+4. Exploration scaffolding reflects project context
+
+### Reflection Input
+
+**When to use:** You have actionable suggestions from a `/reflect` output.
+
+**Command:**
+
+```
+/explore --from-reflect admin/planning/notes/reflection-2026-01-10.md
+```
+
+**What happens:**
+
+1. Reads "Actionable Suggestions" section from reflection
+2. Converts suggestions into exploration themes
+3. Preserves suggestion context in output
+4. Creates bridge between `/reflect` → `/explore` pipeline
+
+### Interactive Mode (Default)
+
+**When to use:** Quick exploration when you just have a topic name.
+
+**What happens when no input source specified:**
+
+1. Prompts: "What topic would you like to explore?"
+2. Uses topic name only (no additional context)
+3. Generates exploration based on topic
+
+**Note:** Interactive mode produces less context-rich scaffolding than raw text input.
+
+---
+
 ## Setup Mode Output
 
 **Output Size:** ~60-80 lines total
