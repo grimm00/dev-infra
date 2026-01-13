@@ -16,7 +16,7 @@
 | Transition Plan | 4 phases scaffolded | ✅ Complete | 100% |
 | Phase 1 | Command Structure | ✅ Complete | 100% |
 | Phase 2 | Input Sources | ✅ Complete | 100% |
-| Phase 3 | Worktree Integration | 🔴 Scaffolding | 0% |
+| Phase 3 | Worktree Integration | ✅ Expanded | 0% |
 | Phase 4 | Template & Documentation | 🔴 Scaffolding | 0% |
 
 **Overall Progress:** Phase 2 complete (2/4 phases implemented)
@@ -78,8 +78,8 @@
 
 ### Immediate
 
-1. [ ] Expand Phase 3: `/transition-plan explore-two-mode --expand --phase 3`
-2. [ ] Implement Phase 3: Worktree integration (lazy creation, `--worktree`/`--no-worktree` flags)
+1. [x] Expand Phase 3: `/transition-plan explore-two-mode --expand --phase 3` ✅
+2. [ ] Implement Phase 3: `/task-phase 3 1` - Worktree integration documentation
 
 ### Short-term
 
