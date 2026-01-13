@@ -525,7 +525,7 @@ start.txt   → /explore --from-start     ← Project initialization
 | Task 4: Question Extraction     | ✅ Complete | Added markers table and examples        |
 | Task 5: Mode Detection Updates  | ✅ Complete | Added validation logic and error table  |
 | Task 6: Common Scenarios        | ✅ Complete | Added 3 input source scenarios          |
-| Task 7: Integration Updates     | 🔴 Pending  |                                         |
+| Task 7: Integration Updates     | ✅ Complete | Added input sources pipeline diagram    |
 
 ---
 

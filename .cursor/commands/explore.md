@@ -811,6 +811,31 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ## Integration with Other Commands
 
+### Input Sources in Pipeline
+
+```
+Raw thoughts → /explore --input "..."   ← Primary entry point
+start.txt   → /explore --from-start     ← Project initialization
+/reflect    → /explore --from-reflect   ← Reflection pipeline
+    ↓
+/explore [topic]              ← Setup: scaffolding (~60-80 lines)
+    ↓ human review
+/explore [topic] --conduct    ← Conduct: full exploration (~200-300 lines)
+    ↓
+/research --from-explore      ← Research: investigate topics
+```
+
+**Input Source → Output Quality:**
+
+| Input Source | Output Quality | Notes |
+|--------------|----------------|-------|
+| Raw text (rich) | High | Themes and questions from user context |
+| start.txt | Medium-High | Project-focused exploration |
+| Reflection | Medium-High | Suggestion-focused exploration |
+| Topic only | Medium | AI-generated without user context |
+
+---
+
 ### Command Pipeline Position
 
 ```
