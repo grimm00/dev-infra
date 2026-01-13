@@ -1118,6 +1118,53 @@ What about in-app badges? Need to think about user preferences too."
 
 ---
 
+### Scenario 6: Exploration to Feature Branch
+
+**Situation:** You've validated an exploration in Setup Mode and want to fully develop it.
+
+**Action:**
+
+```bash
+# Step 1: Setup mode on develop (quick scaffolding)
+/explore notification-system
+
+# Step 2: Review scaffolding, decide to proceed
+# ...
+
+# Step 3: Conduct mode (prompts for worktree)
+/explore notification-system --conduct
+
+# Output:
+# Create worktree for this exploration? [Y/n] y
+# Creating worktree: worktrees/feat-notification-system
+# Creating branch: feat/notification-system
+# Switched to worktree directory
+```
+
+**Result:**
+- Full exploration (~200-300 lines) on feature branch
+- Self-contained per ADR-002
+- Ready for `/research` phase
+
+---
+
+### Scenario 7: Quick Exploration (No Worktree)
+
+**Situation:** You want to quickly expand an exploration without worktree overhead.
+
+**Action:**
+
+```bash
+/explore quick-idea --conduct --no-worktree
+```
+
+**Result:**
+- Full exploration on current branch
+- Skips worktree prompt
+- Useful for explorations that may not become features
+
+---
+
 ## Tips
 
 ### When to Use

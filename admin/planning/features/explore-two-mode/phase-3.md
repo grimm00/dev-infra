@@ -409,7 +409,7 @@ worktrees/feat-[topic]/ ← Feature branch (if created)
 | Task 2: Worktree Behavior Section | ✅ Complete | Added ~60 line section after Input Sources |
 | Task 3: Mode Detection Update     | ✅ Complete | Added worktree prompt logic and errors     |
 | Task 4: Step-by-Step Process      | ✅ Complete | Added worktree creation to Conduct Mode    |
-| Task 5: Worktree Scenarios        | 🔴 Pending  |                                            |
+| Task 5: Worktree Scenarios        | ✅ Complete | Added 2 scenarios with examples            |
 | Task 6: Integration Update        | 🔴 Pending  |                                            |
 
 ---
@@ -453,4 +453,4 @@ worktrees/feat-[topic]/ ← Feature branch (if created)
 
 **Last Updated:** 2026-01-13  
 **Status:** ✅ Expanded  
-**Next:** Continue with Task 5
+**Next:** Continue with Task 6 (final task)
