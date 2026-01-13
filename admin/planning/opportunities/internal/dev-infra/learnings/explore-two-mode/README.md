@@ -13,6 +13,7 @@
 
 - **[Phase 1](phase-1-learnings.md)** - Command Structure documentation
 - **[Phase 2](phase-2-learnings.md)** - Input Sources documentation
+- **[Phase 3](phase-3-learnings.md)** - Worktree Integration documentation
 
 ---
 
@@ -29,7 +30,7 @@ This directory contains phase-specific learnings from the `/explore` two-mode en
 
 ## 📊 Summary
 
-**Total Phase Learnings:** 2  
+**Total Phase Learnings:** 3  
 **Status:** ✅ Active
 
 ---
