@@ -2,7 +2,7 @@
 
 **Purpose:** Research and analysis for dev-infra and template improvements  
 **Status:** ✅ Active  
-**Last Updated:** 2025-12-30
+**Last Updated:** 2026-01-13
 
 ---
 
@@ -10,7 +10,8 @@
 
 ### Active Research
 
-- **[Four-Arm Architecture](four-arm-architecture/README.md)** - How dev-infra, dev-toolkit, proj-cli, and work-prod work together (🔴 Research) ⭐ **NEW**
+- **[Template Doc Infrastructure](template-doc-infrastructure/README.md)** - Template-based doc generation and validation infrastructure (🟡 Research) ⭐ **NEW**
+- **[Four-Arm Architecture](four-arm-architecture/README.md)** - How dev-infra, dev-toolkit, proj-cli, and work-prod work together (🔴 Research)
 - **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, topic unification (🔴 Research)
 - **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Research)
 - **[Terraform-Style Project Management](terraform-style-project-management/README.md)** - State tracking, plan/apply workflow, CI/CD push updates (✅ Complete)

@@ -1,8 +1,9 @@
 # Template Doc Infrastructure - Exploration Hub
 
-**Status:** ✅ Expanded  
+**Status:** 🟡 Research Started  
 **Created:** 2026-01-13  
-**Expanded:** 2026-01-13
+**Expanded:** 2026-01-13  
+**Research Started:** 2026-01-13
 
 ---
 
@@ -36,9 +37,10 @@ Explore creating template-based documentation infrastructure that ensures consis
 
 ## 🚀 Next Steps
 
-1. Review expanded exploration in `exploration.md`
-2. Use `/research template-doc-infrastructure --from-explore template-doc-infrastructure` to conduct research
-3. After research, use `/decision template-doc-infrastructure --from-research` to make decisions
+1. ✅ ~~Review expanded exploration in `exploration.md`~~
+2. ✅ ~~Conduct research on high-priority topics (Topics 1-2)~~
+3. Review [Research Hub](../../research/template-doc-infrastructure/README.md) findings
+4. Use `/decision template-doc-infrastructure --from-research` to make decisions
 
 ---
 
