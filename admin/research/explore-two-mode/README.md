@@ -1,36 +1,9 @@
 # Explore Two-Mode Enhancement - Research Hub
 
 **Purpose:** Research for enhancing `/explore` command with two-mode pattern, input sources, and topic unification  
-**Status:** ⏸️ Paused (awaiting four-arm-architecture)  
+**Status:** ✅ Research Complete  
 **Created:** 2025-12-30  
-**Last Updated:** 2025-12-31
-
----
-
-## ⚠️ Research Pivot Notice
-
-**Status:** This research is **paused** pending completion of [Four-Arm Architecture](../../explorations/four-arm-architecture/) research.
-
-**Why the pivot?**
-
-During Topic 1 research, we identified that dev-infra is not just a "template factory" but the **standard setter** for the entire four-arm architecture ecosystem:
-
-| Project         | Role                 | Relationship                                 |
-| --------------- | -------------------- | -------------------------------------------- |
-| **dev-infra**   | Standard setter      | Source of truth for patterns, commands, docs |
-| **dev-toolkit** | Utility distribution | Installs dev-infra commands globally         |
-| **proj-cli**    | Lifecycle management | Uses dev-infra patterns                      |
-| **work-prod**   | Data backend         | Uses dev-infra template structure            |
-
-This foundational context affects how we approach:
-
-- **Topic 2 (Topic Unification)** - Need to understand cross-project command patterns
-- **Topic 3 (Input Sources)** - Need to understand how projects share state
-- **Topic 6 (Cross-Command Consistency)** - Need to understand inter-project coordination
-
-**Resume after:** Complete `/research four-arm-architecture` and `/decision four-arm-architecture`
-
-**Insight captured during pivot:** `/explore` uniquely accepts unstructured "raw thoughts" input, making two-mode valuable as a "thought organizer" → see [research-explore-input-sources.md](research-explore-input-sources.md)
+**Last Updated:** 2026-01-09
 
 ---
 
@@ -41,14 +14,14 @@ This foundational context affects how we approach:
 
 ### Research Documents
 
-| #   | Research Topic                   | Priority  | Status         | Document                                                                                     |
-| --- | -------------------------------- | --------- | -------------- | -------------------------------------------------------------------------------------------- |
-| 1   | Command Improvement Organization | 🔴 High   | ✅ Complete    | [research-command-improvement-organization.md](research-command-improvement-organization.md) |
-| 2   | Topic Unification Pattern        | 🔴 High   | 🔴 Not Started | [research-topic-unification-pattern.md](research-topic-unification-pattern.md)               |
-| 3   | Explore Input Sources            | 🔴 High   | 🔴 Not Started | [research-explore-input-sources.md](research-explore-input-sources.md)                       |
-| 4   | Scaffolding Boundaries           | 🟡 Medium | 🔴 Not Started | [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)                     |
-| 5   | Existing Feature Integration     | 🟡 Medium | 🔴 Not Started | [research-existing-feature-integration.md](research-existing-feature-integration.md)         |
-| 6   | Cross-Command Consistency        | 🟡 Medium | 🔴 Not Started | [research-cross-command-consistency.md](research-cross-command-consistency.md)               |
+| #   | Research Topic                   | Priority  | Status      | Document                                                                                     |
+| --- | -------------------------------- | --------- | ----------- | -------------------------------------------------------------------------------------------- |
+| 1   | Command Improvement Organization | 🔴 High   | ✅ Complete | [research-command-improvement-organization.md](research-command-improvement-organization.md) |
+| 2   | Topic Unification Pattern        | 🔴 High   | ✅ Complete | [research-topic-unification-pattern.md](research-topic-unification-pattern.md)               |
+| 3   | Explore Input Sources            | 🔴 High   | ✅ Complete | [research-explore-input-sources.md](research-explore-input-sources.md)                       |
+| 4   | Scaffolding Boundaries           | 🟡 Medium | ✅ Complete | [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)                     |
+| 5   | Existing Feature Integration     | 🟡 Medium | ✅ Complete | [research-existing-feature-integration.md](research-existing-feature-integration.md)         |
+| 6   | Cross-Command Consistency        | 🟡 Medium | ✅ Complete | [research-cross-command-consistency.md](research-cross-command-consistency.md)               |
 
 ### Related Documents
 
@@ -57,9 +30,9 @@ This foundational context affects how we approach:
 - **[/research Command](../../../.cursor/commands/research.md)** - Two-mode pattern reference
 - **[/transition-plan Command](../../../.cursor/commands/transition-plan.md)** - Two-mode pattern reference
 
-### Dependencies
+### Related Research
 
-- **[Four-Arm Architecture Exploration](../../explorations/four-arm-architecture/)** - ⚠️ **BLOCKING** - Foundational context for command patterns across ecosystem
+- **[Four-Arm Architecture Research](../four-arm-architecture/)** - Ecosystem context (3/6 topics complete)
 
 ---
 
@@ -68,41 +41,34 @@ This foundational context affects how we approach:
 This research supports enhancing the `/explore` command with three interconnected improvements:
 
 1. **Two-Mode Pattern** - Setup + Conduct modes (like `/research` and `/transition-plan`)
-2. **Explicit Input Sources** - Accept `start.txt`, reflections, and other sources
-3. **Topic Unification** - Generalize `--topic [name] --type` pattern across commands
+2. **Explicit Input Sources** - Accept raw text, `start.txt`, reflections, worktree files
+3. **Topic Unification** - Standardize `--topic [name] --type` vocabulary
 
 Additionally: 4. **Command Improvement Organization** - Consolidate `*-two-mode` features
 
 **Research Topics:** 6 topics (3 High, 3 Medium priority)  
-**Status:** 🔴 Research
+**Status:** ✅ All Complete
 
 ---
 
-## 📊 Research Status
+## 📊 Key Findings
 
-| Research Topic                   | Priority  | Status         | Document                                                                                     |
-| -------------------------------- | --------- | -------------- | -------------------------------------------------------------------------------------------- |
-| Command Improvement Organization | 🔴 High   | ✅ Complete    | [research-command-improvement-organization.md](research-command-improvement-organization.md) |
-| Topic Unification Pattern        | 🔴 High   | 🔴 Not Started | [research-topic-unification-pattern.md](research-topic-unification-pattern.md)               |
-| Explore Input Sources            | 🔴 High   | 🔴 Not Started | [research-explore-input-sources.md](research-explore-input-sources.md)                       |
-| Scaffolding Boundaries           | 🟡 Medium | 🔴 Not Started | [research-scaffolding-boundaries.md](research-scaffolding-boundaries.md)                     |
-| Existing Feature Integration     | 🟡 Medium | 🔴 Not Started | [research-existing-feature-integration.md](research-existing-feature-integration.md)         |
-| Cross-Command Consistency        | 🟡 Medium | 🔴 Not Started | [research-cross-command-consistency.md](research-cross-command-consistency.md)               |
+1. **Command improvements are template features** per ADR-001 Template Factory identity
+2. **"Topic" = name, "Type" = category** - standardize vocabulary
+3. **/explore uniquely handles unstructured input** - two-mode as "thought organizer"
+4. **ADR-002 scaffolding pattern applies** - ~60-80 lines setup, ~200-300 conduct
+5. **Use `--conduct` flag** for `/explore` (matches `/research` semantics)
+6. **Existing feature plan is valid** - update with expanded scope after decisions
 
 ---
 
 ## 🚀 Next Steps
 
-**⏸️ PAUSED** - Complete four-arm architecture research first:
-
-1. ~~Use `/research explore-two-mode --conduct --topic-num 1` to research Command Improvement Organization~~ ✅ Complete
-2. **PIVOT:** `/research four-arm-architecture --from-explore four-arm-architecture` (setup)
-3. **PIVOT:** `/research four-arm-architecture --conduct` (conduct all topics)
-4. **PIVOT:** `/decision four-arm-architecture --from-research` (make decisions)
-5. **RESUME:** Continue explore-two-mode topics 2-6 with refined context
-6. Review requirements in `requirements.md`
-7. Use `/decision explore-two-mode --from-research` to make decisions
+1. ✅ All 6 research topics complete
+2. Use `/decision explore-two-mode --from-research` to make decisions
+3. After decisions, update existing feature plan with expanded scope
+4. Use `/transition-plan --from-adr` to create implementation plan
 
 ---
 
-**Last Updated:** 2025-12-31
+**Last Updated:** 2026-01-09

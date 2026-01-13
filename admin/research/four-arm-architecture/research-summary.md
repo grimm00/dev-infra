@@ -133,7 +133,8 @@ This research investigates how four interconnected projects should work together
 - [x] **Insight 12:** XDG Base Directory is the right pattern for tool configuration
 - [x] **Insight 13:** All integrations are optional - supports standalone use
 
-- [ ] Insight 14+: [Pending - from remaining research]
+- [x] **Insight 14:** Worktrees as untracked project root file - project identity/context can be stored in an untracked file at project root (e.g., `worktree.txt`), avoiding `.cursor/` directory issues while providing local project context
+- [ ] Insight 15+: [Pending - from remaining research]
 
 ---
 

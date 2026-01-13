@@ -1,60 +1,97 @@
-# Explore Two-Mode Pattern - Feature Hub
+# Explore Two-Mode Enhancement - Feature Hub
 
-**Purpose:** Apply two-mode pattern (Setup + Conduct) to `/explore` command  
-**Status:** 🟡 Planned  
+**Purpose:** Enhance `/explore` with two-mode pattern, input sources, and worktree integration  
+**Status:** 🟠 In Progress  
 **Priority:** 🔴 High  
 **Created:** 2025-12-30  
-**Source:** reflection-transition-plan-two-mode-2025-12-29.md
+**Last Updated:** 2026-01-13
 
 ---
 
 ## 📋 Quick Links
 
-- **[Feature Plan](feature-plan.md)** - Feature overview and goals
-- **[Status & Next Steps](status-and-next-steps.md)** - Current progress tracking
-- **[Transition-Plan Validation](transition-plan-validation.md)** - Evidence from PR #57 ⭐ **NEW**
+### Planning Documents
+
+- **[Feature Plan](feature-plan.md)** - Original feature overview
+- **[Transition Plan](transition-plan.md)** - Implementation plan from ADRs ⭐ **NEW**
+- **[Status & Next Steps](status-and-next-steps.md)** - Progress tracking
+
+### Phase Documents
+
+| Phase | Name | Status | Effort |
+|-------|------|--------|--------|
+| [Phase 1](phase-1.md) | Command Structure | ✅ Complete | ~2 hours |
+| [Phase 2](phase-2.md) | Input Sources | 🔴 Scaffolding | ~2 hours |
+| [Phase 3](phase-3.md) | Worktree Integration | 🔴 Scaffolding | ~1.5 hours |
+| [Phase 4](phase-4.md) | Template & Documentation | 🔴 Scaffolding | ~1.5 hours |
+
+**Total Estimated Effort:** ~7 hours
+
+### Research & Decisions
+
+- **[Exploration](../../../explorations/explore-two-mode/)** - Initial exploration
+- **[Research](../../../research/explore-two-mode/)** - 7 research topics complete
+- **[Decisions](../../../decisions/explore-two-mode/)** - 4 ADRs created ⭐ **NEW**
+- **[Requirements](../../../research/explore-two-mode/requirements.md)** - 24 FRs, 13 NFRs
 
 ### Related
 
-- **[/explore Command](../../../../.cursor/commands/explore.md)** - Current command implementation
-- **[/research Command](../../../../.cursor/commands/research.md)** - Pattern source (has `--conduct`)
-- **[/transition-plan Command](../../../../.cursor/commands/transition-plan.md)** - Recent two-mode implementation
-- **[Transition-Plan Two-Mode Learnings](../../opportunities/internal/dev-infra/learnings/transition-plan-two-mode/)** - Learnings to apply
-- **[Template Sync Drift Fix](../../ci/template-sync-drift-fix/)** - Example of transition-plan in action (PR #57)
+- **[/explore Command](../../../../.cursor/commands/explore.md)** - Current implementation
+- **[/research Command](../../../../.cursor/commands/research.md)** - Two-mode pattern source
+- **[Worktree Workflow](../../../../docs/WORKTREE-WORKFLOW.md)** - Worktree integration guide
 
 ---
 
 ## 🎯 Feature Overview
 
-Refactor `/explore` to use Setup + Conduct pattern, mirroring `/research` and `/transition-plan`.
+Enhance `/explore` to serve as the **ideation pipeline entry point**:
 
-**Problem:** Current `/explore` produces variable output sizes and doesn't provide a human review checkpoint before detailed exploration.
+1. **Two-Mode Pattern** (ADR-001) - Setup creates scaffolding; Conduct expands
+2. **Input Sources** (ADR-002) - Raw text, start.txt, reflections
+3. **Worktree Integration** (ADR-003) - Lazy creation on conduct mode
+4. **Scaffolding Boundaries** (ADR-004) - ~60-80 setup, ~200-300 conduct
 
-**Solution:** Implement two-mode pattern:
-- **Setup Mode (default):** Create exploration scaffolding (~60-80 lines)
-- **Conduct Mode (`--conduct`):** Fill scaffolding with detailed exploration (~200-300 lines)
+**Problem:** Current `/explore` produces variable output without review checkpoint.
+
+**Solution:** Two-mode pattern with lazy worktree creation and multiple input sources.
 
 ---
 
-## 📊 Feature Status
+## 📊 Progress Summary
 
-| Phase | Name | Status | Effort |
-|-------|------|--------|--------|
-| Phase 1 | Exploration & Research | 🔴 Not Started | ~1 hour |
-| Phase 2 | Implementation | 🔴 Not Started | ~2 hours |
+| Area | Status | Notes |
+|------|--------|-------|
+| Exploration | ✅ Complete | 7 topics identified |
+| Research | ✅ Complete | 7 topics, 13 insights |
+| Decisions | ✅ Complete | 4 ADRs created |
+| Transition Plan | ✅ Complete | 4 phases scaffolded |
+| Phase 1 | ✅ Complete | Implemented 2026-01-13 |
+| Phase 2 | 🔴 Scaffolding | Needs expansion |
+| Phase 3 | 🔴 Scaffolding | Needs expansion |
+| Phase 4 | 🔴 Scaffolding | Needs expansion |
 
-**Total Estimated Effort:** ~3 hours
+---
+
+## 🔗 Command Pipeline Position
+
+```
+┌─────────┐    ┌──────────┐    ┌──────────┐    ┌─────────────────┐    ┌────────────┐
+│ /explore│ → │ /research│ → │ /decision│ → │ /transition-plan│ → │ /task-phase│
+└─────────┘    └──────────┘    └──────────┘    └─────────────────┘    └────────────┘
+     ↑
+  Entry point
+  - Raw thoughts → structured themes
+  - Outputs: research-topics.md
+```
 
 ---
 
 ## 🚀 Next Steps
 
-1. Create exploration for `/explore` two-mode pattern
-2. Research scaffolding vs conduct content boundaries
-3. Create ADRs if needed
-4. Implement following transition-plan pattern
+1. **Expand Phase 2:** `/transition-plan explore-two-mode --expand --phase 2` - Input source flags
+2. **Implement Phase 2:** `/task-phase 2 1` - Add `--from-start`, `--from-reflect`, `--raw` flags
+3. **Continue through phases sequentially**
 
 ---
 
-**Last Updated:** 2025-12-30
-
+**Last Updated:** 2026-01-13
