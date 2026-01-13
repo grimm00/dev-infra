@@ -15,6 +15,7 @@ Update templates with enhanced `/explore` command and create documentation for t
 **Success Definition:** Templates synced with new explore.md; documentation explains two-mode pattern and pipeline position.
 
 **ADR References:**
+
 - [ADR-001: Two-Mode Pattern](../../../decisions/explore-two-mode/adr-001-two-mode-pattern.md)
 - [ADR-002: Input Sources](../../../decisions/explore-two-mode/adr-002-input-sources.md)
 - [ADR-003: Worktree Integration](../../../decisions/explore-two-mode/adr-003-worktree-integration.md)
@@ -174,9 +175,11 @@ The two-mode pattern separates commands into lightweight setup and detailed cond
 
 **Pattern:**
 ```
-/command [topic]              ← Setup: scaffolding (~60-80 lines)
-    ↓ human review            ← KEY CHECKPOINT
-/command [topic] --conduct    ← Conduct: full output (~200-300 lines)
+
+/command [topic] ← Setup: scaffolding (~60-80 lines)
+↓ human review ← KEY CHECKPOINT
+/command [topic] --conduct ← Conduct: full output (~200-300 lines)
+
 ```
 
 ---
@@ -246,7 +249,7 @@ See [Worktree Workflow](WORKTREE-WORKFLOW.md) for details.
 
 ---
 
-**Last Updated:** 2026-01-13  
+**Last Updated:** 2026-01-13
 **Related:** [ADR-001: Two-Mode Pattern](../admin/decisions/explore-two-mode/adr-001-two-mode-pattern.md)
 ```
 
@@ -272,19 +275,20 @@ See [Worktree Workflow](WORKTREE-WORKFLOW.md) for details.
 ### Pipeline Position
 
 `/explore` is the entry point for the ideation pipeline:
-
 ```
-/explore [topic]              ← Setup: scaffolding
-    ↓ human review
-/explore [topic] --conduct    ← Conduct: full exploration
-    ↓
-/research --from-explore      ← Research: investigate topics
-    ↓
-/decision --from-research     ← Decisions: create ADRs
-    ↓
-/transition-plan --from-adr   ← Planning: create phases
-    ↓
-/task-phase 1 1               ← Implementation: execute phases
+
+/explore [topic] ← Setup: scaffolding
+↓ human review
+/explore [topic] --conduct ← Conduct: full exploration
+↓
+/research --from-explore ← Research: investigate topics
+↓
+/decision --from-research ← Decisions: create ADRs
+↓
+/transition-plan --from-adr ← Planning: create phases
+↓
+/task-phase 1 1 ← Implementation: execute phases
+
 ```
 
 **Key Points:**
@@ -347,15 +351,15 @@ See [Worktree Workflow](WORKTREE-WORKFLOW.md) for details.
 
 ## 📊 Progress Tracking
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: Standard Template Update | ✅ Complete | Copied and verified |
-| Task 2: Learning Template Update | ✅ Complete | Copied and verified |
-| Task 3: Template Sync Validation | ✅ Complete | All synced |
-| Task 4: Sync Manifest Check | 🔴 Not Started | |
-| Task 5: Two-Mode Pattern Docs | 🔴 Not Started | |
-| Task 6: Pipeline Documentation | 🔴 Not Started | |
-| Task 7: CHANGELOG Update | 🔴 Not Started | |
+| Task                             | Status         | Notes               |
+| -------------------------------- | -------------- | ------------------- |
+| Task 1: Standard Template Update | ✅ Complete    | Copied and verified |
+| Task 2: Learning Template Update | ✅ Complete    | Copied and verified |
+| Task 3: Template Sync Validation | ✅ Complete    | All synced          |
+| Task 4: Sync Manifest Check      | ✅ Complete    | Already in manifest |
+| Task 5: Two-Mode Pattern Docs    | 🔴 Not Started |                     |
+| Task 6: Pipeline Documentation   | 🔴 Not Started |                     |
+| Task 7: CHANGELOG Update         | 🔴 Not Started |                     |
 
 ---
 
