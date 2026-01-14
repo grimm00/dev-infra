@@ -14,15 +14,15 @@
 
 ### Research Documents
 
-| Priority | Topic | Document | Status |
-|----------|-------|----------|--------|
-| 🔴 High | Template Inventory & Structure | [research-template-inventory.md](research-template-inventory.md) | ✅ Complete |
-| 🔴 High | Generation Script Architecture | [research-generation-architecture.md](research-generation-architecture.md) | ✅ Complete |
-| 🔴 High | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md) | 🔴 Not Started |
-| 🟡 Medium | Validation Approach | [research-validation-approach.md](research-validation-approach.md) | 🔴 Not Started |
-| 🟡 Medium | Command Integration | [research-command-integration.md](research-command-integration.md) | 🔴 Not Started |
-| 🟡 Medium | Cursor CLI & Model Selection | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | 🔴 Not Started |
-| 🟢 Low | Template Format | [research-template-format.md](research-template-format.md) | 🔴 Not Started |
+| Priority  | Topic                              | Document                                                                         | Status         |
+| --------- | ---------------------------------- | -------------------------------------------------------------------------------- | -------------- |
+| 🔴 High   | Template Inventory & Structure     | [research-template-inventory.md](research-template-inventory.md)                 | ✅ Complete    |
+| 🔴 High   | Generation Script Architecture     | [research-generation-architecture.md](research-generation-architecture.md)       | ✅ Complete    |
+| 🔴 High   | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md)       | 🔴 Not Started |
+| 🟡 Medium | Validation Approach                | [research-validation-approach.md](research-validation-approach.md)               | 🔴 Not Started |
+| 🟡 Medium | Command Integration                | [research-command-integration.md](research-command-integration.md)               | 🔴 Not Started |
+| 🟡 Medium | Cursor CLI & Model Selection       | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | 🔴 Not Started |
+| 🟢 Low    | Template Format                    | [research-template-format.md](research-template-format.md)                       | 🔴 Not Started |
 
 ---
 
@@ -33,6 +33,7 @@ This research addresses how to build template-based documentation infrastructure
 **Strategic Insight:** This exploration evolved into **workflow orchestration architecture** where scripts handle structure + context gathering (0 tokens) and AI handles creative content only (targeted tokens). Estimated 50-60% token savings.
 
 **Key Questions:**
+
 1. ✅ What doc types need templates and what structure should each have?
 2. ✅ How should generation scripts be structured?
 3. How should validation work?
@@ -51,25 +52,25 @@ This research addresses how to build template-based documentation infrastructure
 
 ### High Priority
 
-| Research Topic | Status | Key Finding |
-|----------------|--------|-------------|
-| Template Inventory & Structure | ✅ Complete | 17 doc types, 5 common patterns |
-| Generation Script Architecture | ✅ Complete | Shared library + sed-based templates |
+| Research Topic                     | Status         | Key Finding                               |
+| ---------------------------------- | -------------- | ----------------------------------------- |
+| Template Inventory & Structure     | ✅ Complete    | 17 doc types, 5 common patterns           |
+| Generation Script Architecture     | ✅ Complete    | Shared library + sed-based templates      |
 | Architectural Placement (Four-Arm) | 🔴 Not Started | Decision phase - where does tooling live? |
 
 ### Medium Priority
 
-| Research Topic | Status | Key Finding |
-|----------------|--------|-------------|
-| Validation Approach | 🔴 Not Started | - |
-| Command Integration | 🔴 Not Started | - |
-| Cursor CLI & Model Selection | 🔴 Not Started | - |
+| Research Topic               | Status         | Key Finding |
+| ---------------------------- | -------------- | ----------- |
+| Validation Approach          | 🔴 Not Started | -           |
+| Command Integration          | 🔴 Not Started | -           |
+| Cursor CLI & Model Selection | 🔴 Not Started | -           |
 
 ### Low Priority
 
-| Research Topic | Status | Key Finding |
-|----------------|--------|-------------|
-| Template Format | 🔴 Not Started | - |
+| Research Topic  | Status         | Key Finding |
+| --------------- | -------------- | ----------- |
+| Template Format | 🔴 Not Started | -           |
 
 ---
 

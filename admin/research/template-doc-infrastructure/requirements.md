@@ -103,9 +103,14 @@ This document captures requirements discovered during research on template-based
 
 ### FR-8: Generation Modes
 
-**Description:** Generation scripts must support both scaffolding mode (minimal content) and full generation mode (complete content).
+**Description:** Generation scripts must support multiple modes:
+- **Scaffolding mode:** Structure with empty placeholders (AI/human fills later)
+- **Partial fill mode:** Structure with some placeholders pre-filled
+- **Full fill mode:** Complete structure with all placeholders for AI to fill
 
-**Source:** [research-generation-architecture.md](research-generation-architecture.md)
+**CRITICAL:** Even "full generation" docs (ADRs, transition plans, handoff) MUST have script-generated structure. "Full generation" means "script generates full structure, AI fills all content" - NOT "AI generates everything."
+
+**Source:** [research-generation-architecture.md](research-generation-architecture.md), [research-template-inventory.md](research-template-inventory.md) (Finding 6 - Hybrid Architecture Insight)
 
 **Priority:** 🔴 High
 
@@ -330,6 +335,20 @@ This document captures requirements discovered during research on template-based
 **Description:** Template files must remain human-readable and editable without special tooling.
 
 **Source:** [research-generation-architecture.md](research-generation-architecture.md)
+
+---
+
+### C-7: Scripts Generate Structure, AI Fills Content (Hybrid Architecture)
+
+**Description:** AI must NEVER generate document structure - only fill in content within script-generated structure. This applies to ALL doc types, including "full generation" docs like ADRs, transition plans, and handoff docs.
+
+**Rationale:**
+1. **Consistency:** Script-generated structure is guaranteed correct (0 format drift)
+2. **Token efficiency:** Structure generation costs 0 AI tokens
+3. **Validation:** Structure can be validated independently of content
+4. **Predictability:** Output structure is deterministic
+
+**Source:** [research-template-inventory.md](research-template-inventory.md) (Finding 6 - Hybrid Architecture Insight), Strategic discussion
 
 ---
 

@@ -230,18 +230,34 @@ What document types need templates and what structure should each have? This is 
 | research-summary.md | `/research` | Setup creates, updated after each topic |
 | requirements.md | `/research` | Setup creates skeleton, Conduct populates |
 | README.md (research hub) | `/research` | Setup creates |
-| adr-NNN-[name].md | `/decision` | Full generation |
+| adr-NNN-[name].md | `/decision` | Full structure + AI content |
 | decisions-summary.md | `/decision` | Creates/updates |
-| transition-plan.md | `/transition-plan` | Full generation from ADRs |
+| transition-plan.md | `/transition-plan` | Full structure + AI content |
 | phase-N.md | `/transition-plan` | Creates scaffolding from transition plan |
-| feature-plan.md | `/transition-plan` | Creates from ADRs |
+| feature-plan.md | `/transition-plan` | Full structure + AI content |
 | status-and-next-steps.md | `/task-phase` | Creates, auto-updates |
 | README.md (feature hub) | `/transition-plan` | Creates |
-| handoff.md | `/handoff` (proposed) | Full generation with gathered context |
+| handoff.md | `/handoff` (proposed) | Full structure + AI content (context-rich) |
 
 **Source:** Analysis of `.cursor/commands/explore.md`, `research.md`, and `task-phase.md`
 
 **Relevance:** Understanding generation modes helps design templates - some need scaffolding templates, others need full content templates.
+
+**IMPORTANT (Hybrid Architecture Insight):** Even docs marked "Full structure + AI content" should have **script-generated structure**:
+
+| Mode | Script Does | AI Does |
+|------|-------------|---------|
+| Scaffolding | Generates structure with empty placeholders | Nothing (human reviews) |
+| Partial Fill | Generates structure with some placeholders | Fills specific placeholders |
+| Full Fill | Generates **complete structure** | Fills **all placeholders** |
+
+**"Full generation" ≠ "AI generates everything"**  
+**"Full generation" = "Script generates full structure, AI fills all content"**
+
+This ensures:
+1. Consistent structure (0 format drift)
+2. Token efficiency (0 tokens for structure)
+3. Predictable output (validation can check structure)
 
 ---
 

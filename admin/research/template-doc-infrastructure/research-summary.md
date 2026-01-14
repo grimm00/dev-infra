@@ -151,12 +151,13 @@ This tooling should **NOT** live in dev-infra (template factory identity per ADR
 - [x] **Insight 6:** Scripts can orchestrate entire workflows, not just generate docs ⭐
 - [x] **Insight 7:** Significant token savings (~50-60%) from hybrid architecture ⭐
 - [x] **Insight 8:** Model selection by task type optimizes cost and quality ⭐
+- [x] **Insight 9:** "Full generation" docs MUST still have script-generated structure - AI only fills content ⭐
 
 ---
 
 ## 📋 Requirements Summary
 
-**Total Requirements Discovered:** 14 FRs, 8 NFRs, 6 Constraints
+**Total Requirements Discovered:** 14 FRs, 8 NFRs, 7 Constraints
 
 ### High-Priority Requirements
 
