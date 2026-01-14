@@ -52,11 +52,11 @@ This research addresses how to build template-based documentation infrastructure
 
 ### High Priority
 
-| Research Topic                     | Status         | Key Finding                               |
-| ---------------------------------- | -------------- | ----------------------------------------- |
-| Template Inventory & Structure     | ✅ Complete    | 17 doc types, 5 common patterns           |
-| Generation Script Architecture     | ✅ Complete    | Shared library + sed-based templates      |
-| Architectural Placement (Four-Arm) | ✅ Complete    | Templates in dev-infra, tooling in dev-toolkit |
+| Research Topic                     | Status      | Key Finding                                    |
+| ---------------------------------- | ----------- | ---------------------------------------------- |
+| Template Inventory & Structure     | ✅ Complete | 17 doc types, 5 common patterns                |
+| Generation Script Architecture     | ✅ Complete | Shared library + sed-based templates           |
+| Architectural Placement (Four-Arm) | ✅ Complete | Templates in dev-infra, tooling in dev-toolkit |
 
 ### Medium Priority
 

@@ -495,13 +495,14 @@ This research recommends sed-based templates, but implementers should validate:
 
 Current approach uses **literal file templates** (Option A). This may evolve:
 
-| Abstraction | Description | When to Consider |
-|-------------|-------------|------------------|
-| **A. Literal Files** (current) | Actual files with `{{VAR}}` placeholders | ✅ Start here - simple, WYSIWYG |
-| **B. Declarative (IaC)** | YAML defines structure, generator creates files | If composition/inheritance needs emerge |
-| **C. Hybrid** | Files + manifest.yml for validation/metadata | **Transition path** from A → B |
+| Abstraction                    | Description                                     | When to Consider                        |
+| ------------------------------ | ----------------------------------------------- | --------------------------------------- |
+| **A. Literal Files** (current) | Actual files with `{{VAR}}` placeholders        | ✅ Start here - simple, WYSIWYG         |
+| **B. Declarative (IaC)**       | YAML defines structure, generator creates files | If composition/inheritance needs emerge |
+| **C. Hybrid**                  | Files + manifest.yml for validation/metadata    | **Transition path** from A → B          |
 
 **Key Questions to Monitor:**
+
 - Are we copy-pasting status headers across templates? (→ consider inheritance)
 - Do we need conditional sections (scaffolding vs full)? (→ consider declarative)
 - Are hub READMEs duplicated? (→ consider base template)
