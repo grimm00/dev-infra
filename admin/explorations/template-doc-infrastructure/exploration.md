@@ -1,8 +1,9 @@
 # Exploration: Template Doc Infrastructure
 
-**Status:** ✅ Expanded  
+**Status:** ✅ Expanded (Updated with Strategic Insights)  
 **Created:** 2026-01-13  
-**Expanded:** 2026-01-13
+**Expanded:** 2026-01-13  
+**Updated:** 2026-01-13
 
 ---
 
@@ -141,6 +142,115 @@ The ultimate goal is seamless integration with existing commands. Generated docs
 
 ---
 
+### Theme 5: Scripts as Orchestration Layer (Strategic Insight)
+
+**Discovery:** The two-mode pattern in `/explore` (Setup + Conduct) was organically discovering a hybrid architecture where scripts handle structure and AI handles creativity. This extends beyond just doc generation to **full workflow orchestration**.
+
+**The Hybrid Architecture:**
+
+```
+Scripts (Guaranteed, 0 tokens)     AI (Creative, targeted tokens)
+├── Context gathering              ├── Analysis
+├── Structure generation           ├── Insights  
+├── Model selection                ├── Connections
+├── Cursor CLI invocation          ├── Recommendations
+├── Validation                     └── Content fill
+└── Side effects (commits, etc.)
+```
+
+**Token Efficiency Benefits:**
+- **Output tokens:** Scripts generate structure (0 AI tokens), AI only fills placeholders (~40-60% savings)
+- **Input tokens:** Scripts gather context into compact manifests, AI reads less (~80-90% savings on context discovery)
+
+**Connections:**
+- Validates research findings (shared library, hybrid integration)
+- Aligns with `/handoff` context manifest idea
+- Transforms "commands as AI guides" to "scripts that orchestrate AI"
+
+**Implications:**
+- Each command becomes a script that orchestrates workflow
+- Command flags become script flags (programmatic, not AI-interpreted)
+- AI becomes a "cognitive function" called by scripts, not the orchestrator
+- Significant cost reduction on AI token usage
+
+**Concerns:**
+- Complexity of script orchestration
+- Cursor CLI capabilities for programmatic invocation
+- Where does this tooling live? (dev-toolkit, proj-cli, new repo?)
+
+---
+
+### Theme 6: Model Selection by Task Type
+
+**Discovery:** Different cognitive tasks benefit from different AI models. Scripts can select the optimal model based on task type.
+
+**Model Mapping:**
+
+| Task Type | Model | Reasoning |
+|-----------|-------|-----------|
+| explore, research, decision | claude-opus-4 | Deep thinking, analysis |
+| naming, creative | gemini-2.5-pro | Divergent creativity |
+| pr, post-pr, release-prep | claude-sonnet-4 | Structured, routine |
+| task-phase, implement, code | composer-1 | Code implementation |
+
+**How it would work:**
+```bash
+# CLI determines task type from command
+dt explore my-topic --conduct
+# → Script selects claude-opus-4 for "explore" task type
+# → Invokes Cursor with model flag
+
+dt task-phase 3 1
+# → Script selects composer-1 for implementation
+```
+
+**Connections:**
+- Natural extension of orchestration pattern
+- Cost optimization (expensive models only for high-value tasks)
+- Quality optimization (right model for the job)
+
+**Implications:**
+- CLI/scripts need model selection logic
+- Configuration for model preferences
+- Override flag for special cases (`--model gemini-2.5-pro`)
+
+**Concerns:**
+- Cursor CLI model selection capabilities
+- Model availability and API access
+- Configuration management
+
+---
+
+### Theme 7: Architectural Placement (Four-Arm Question)
+
+**Discovery:** This infrastructure needs a home. The four-arm architecture (dev-infra, dev-toolkit, proj-cli, work-prod) suggests it should NOT live in dev-infra (template factory), but in a tooling arm.
+
+**Options:**
+
+| Location | Pros | Cons |
+|----------|------|------|
+| **dev-toolkit** | Existing tooling home, dt-review lives here | May be too general |
+| **proj-cli** | Project-specific focus | May be too narrow |
+| **New repo** (workflow-tools?) | Clean separation | Yet another repo |
+| **dev-infra** | Close to templates | Violates template factory identity |
+
+**Key Question:** Which arm of the architecture should own workflow orchestration scripts?
+
+**Decision Criteria:**
+- Aligns with existing tool locations
+- Clear ownership and versioning
+- Easy for projects to consume
+- Supports independent evolution
+
+**Connections:**
+- ADR-001 (Project Identity): dev-infra = template factory
+- Four-arm architecture research
+- Global command distribution research
+
+**This question should be resolved in the decision phase.**
+
+---
+
 ## ❓ Key Questions
 
 ### Question 1: What doc types need templates and what structure should each have?
@@ -199,11 +309,41 @@ The ultimate goal is seamless integration with existing commands. Generated docs
 
 ---
 
+### Question 5: Where should this tooling live in the four-arm architecture?
+
+**Context:** The four-arm architecture (dev-infra, dev-toolkit, proj-cli, work-prod) separates concerns. Doc generation/orchestration is workflow tooling, not template structure.
+
+**Sub-questions:**
+- Does this belong in dev-toolkit (general tooling)?
+- Does this belong in proj-cli (project management)?
+- Should this be a new repo (workflow-tools)?
+- How do projects consume this tooling?
+
+**Research Approach:** Analyze four-arm architecture, evaluate fit for each arm, consider distribution mechanism.
+
+---
+
+### Question 6: How should scripts invoke Cursor programmatically with model selection?
+
+**Context:** Scripts need to call Cursor CLI with specific models based on task type. This enables cost/quality optimization.
+
+**Sub-questions:**
+- What are Cursor CLI capabilities for programmatic invocation?
+- How to pass context manifests to AI?
+- How to select models via CLI flags?
+- How to capture and validate AI output?
+
+**Research Approach:** Investigate Cursor CLI capabilities, prototype invocation pattern.
+
+---
+
 ## 💡 Initial Thoughts
 
 The pattern of "generate from template + validate against schema" is well-proven in software development. Config files have schemas, code has linters, tests have assertions. Applying this pattern to workflow documentation addresses a real pain point: **inconsistent docs break automation**.
 
 The `dt-review` and `release-readiness` scripts provide concrete evidence this works in dev-toolkit/dev-infra context. Both are simple shell scripts that have proven valuable. Extending this pattern to all workflow docs is a natural evolution.
+
+**Strategic Insight (2026-01-13):** This exploration has evolved beyond just "doc templates" to a broader vision of **scripts as workflow orchestration**. The hybrid pattern (scripts handle structure + context, AI handles creativity) offers significant token efficiency gains while improving consistency.
 
 **Opportunities:**
 
@@ -212,6 +352,9 @@ The `dt-review` and `release-readiness` scripts provide concrete evidence this w
 - **Testable docs:** Validation enables CI checks for doc quality
 - **Learnable patterns:** Consistent structure across all docs aids understanding
 - **AI assistance:** Templates give AI clear target structure to generate
+- **Token efficiency:** Scripts generate structure (0 tokens), gather context (reduces input tokens) - estimated 50-60% total savings
+- **Model optimization:** Right model for the right task (cost + quality)
+- **Programmatic workflows:** Scripts can orchestrate entire workflows, invoking AI only when needed
 
 **Concerns:**
 
@@ -219,6 +362,8 @@ The `dt-review` and `release-readiness` scripts provide concrete evidence this w
 - **Over-engineering risk:** Could add complexity without proportional value
 - **Adoption friction:** Existing docs may need migration
 - **Flexibility vs consistency:** Some docs may need custom sections
+- **Cursor CLI capabilities:** Unknown if programmatic invocation with model selection is supported
+- **Architectural placement:** Where does this tooling live? (four-arm question)
 
 ---
 
@@ -233,15 +378,31 @@ The `dt-review` and `release-readiness` scripts provide concrete evidence this w
 - Two-mode pattern (Setup + Conduct) already implemented
 - Could benefit from template-based scaffolding generation
 - Provides model for phased doc creation
+- **Key insight:** Two-mode pattern IS the hybrid architecture (setup=script, conduct=AI)
+
+**Strategic Architecture Discussion** (from main dev-infra worktree):
+- Validates the hybrid pattern at strategic level
+- Raises question of where tooling should live
+- See: `tmp/handoff-strategic-architecture-2026-01-13.md`
+
+**Four-Arm Architecture Research:**
+- dev-infra, dev-toolkit, proj-cli, work-prod separation
+- This feature likely belongs in tooling arm, not dev-infra
+- Decision phase should resolve placement
 
 ---
 
 ## 🚀 Next Steps
 
-1. Review research topics in `research-topics.md`
-2. Conduct research on high-priority topics (Template Inventory, Generation Architecture)
-3. After research, use `/decision template-doc-infrastructure --from-research` to make decisions
-4. Create transition plan for implementation
+1. ✅ ~~Review research topics in `research-topics.md`~~
+2. ✅ ~~Conduct research on high-priority topics (Template Inventory, Generation Architecture)~~
+3. Review [Research Hub](../../research/template-doc-infrastructure/README.md) with strategic context
+4. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+   - Template architecture (17 doc types, 5 patterns)
+   - Generation script architecture (shared library + templates)
+   - **Architectural placement (four-arm question)**
+   - Model selection strategy
+5. Create transition plan for implementation
 
 ---
 

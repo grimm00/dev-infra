@@ -1,8 +1,9 @@
 # Research Topics - Template Doc Infrastructure
 
-**Status:** ✅ Expanded  
+**Status:** ✅ Expanded (Updated with Strategic Topics)  
 **Created:** 2026-01-13  
-**Expanded:** 2026-01-13
+**Expanded:** 2026-01-13  
+**Updated:** 2026-01-13
 
 ---
 
@@ -105,23 +106,72 @@
 
 ---
 
+### Topic 6: Architectural Placement (Four-Arm Question) ⭐ NEW
+
+**Question:** Where should this tooling live in the four-arm architecture (dev-infra, dev-toolkit, proj-cli, work-prod)?
+
+**Context:** The four-arm architecture separates concerns. Dev-infra is the "template factory" (ADR-001), so workflow tooling should likely live elsewhere. Options include dev-toolkit (general tooling), proj-cli (project management), or a new repo. The placement affects versioning, distribution, and project consumption.
+
+**Priority:** 🔴 High
+
+**Rationale:** Architectural placement should be decided before implementation to avoid restructuring later. This decision impacts versioning semantics and project consumption patterns.
+
+**Suggested Approach:**
+- Review four-arm architecture research
+- Evaluate fit for each arm (dev-toolkit, proj-cli, new repo)
+- Consider distribution mechanism (how projects get tooling)
+- Analyze versioning implications
+- Consider existing tool locations (where does dt-review live?)
+
+---
+
+### Topic 7: Cursor CLI Programmatic Invocation & Model Selection ⭐ NEW
+
+**Question:** How should scripts invoke Cursor programmatically with model selection based on task type?
+
+**Context:** The hybrid architecture (scripts orchestrate, AI fills creative content) requires programmatic Cursor invocation. Different cognitive tasks benefit from different models (opus for deep thinking, sonnet for routine, composer for code). Scripts need to select models and invoke Cursor with targeted prompts.
+
+**Priority:** 🟡 Medium
+
+**Rationale:** This is the key enabler for the full hybrid architecture. Without programmatic invocation, scripts can only generate structure but can't orchestrate AI work.
+
+**Suggested Approach:**
+- Investigate Cursor CLI capabilities for agent invocation
+- Determine how to pass context to AI via CLI
+- Determine how to select models via CLI flags
+- Prototype script → Cursor → output flow
+- Design model selection configuration
+
+**Model Mapping (from discussion):**
+
+| Task Type | Model | Reasoning |
+|-----------|-------|-----------|
+| explore, research, decision | claude-opus-4 | Deep thinking, analysis |
+| naming, creative | gemini-2.5-pro | Divergent creativity |
+| pr, post-pr, release-prep | claude-sonnet-4 | Structured, routine |
+| task-phase, implement | composer-1 | Code implementation |
+
+---
+
 ## 📊 Topic Summary
 
 | # | Topic | Priority | Status |
 |---|-------|----------|--------|
-| 1 | Template Inventory & Structure | 🔴 High | 🔴 Not Started |
-| 2 | Generation Script Architecture | 🔴 High | 🔴 Not Started |
+| 1 | Template Inventory & Structure | 🔴 High | ✅ Complete |
+| 2 | Generation Script Architecture | 🔴 High | ✅ Complete |
 | 3 | Validation Approach | 🟡 Medium | 🔴 Not Started |
 | 4 | Command Integration | 🟡 Medium | 🔴 Not Started |
 | 5 | Template Format | 🟢 Low | 🔴 Not Started |
+| 6 | Architectural Placement (Four-Arm) | 🔴 High | 🔴 Not Started |
+| 7 | Cursor CLI & Model Selection | 🟡 Medium | 🔴 Not Started |
 
 ---
 
 ## 🎯 Research Workflow
 
-1. Use `/research template-doc-infrastructure --from-explore template-doc-infrastructure` to start research
-2. Research will create documents in `admin/research/template-doc-infrastructure/`
-3. After research complete, use `/decision template-doc-infrastructure --from-research` to make decisions
+1. ✅ ~~Use `/research template-doc-infrastructure --from-explore template-doc-infrastructure` to start research~~
+2. ✅ ~~Research created documents in `admin/research/template-doc-infrastructure/`~~
+3. Use `/decision template-doc-infrastructure --from-research` to make decisions
 
 ---
 
@@ -129,13 +179,15 @@
 
 **Suggested sequence:**
 
-1. **Topic 1 (Inventory)** - Foundation for everything else
-2. **Topic 2 (Architecture)** - Design before building
-3. **Topic 5 (Format)** - Quick decision during prototyping
-4. **Topic 3 (Validation)** - After templates exist
-5. **Topic 4 (Integration)** - After generation works
+1. ✅ **Topic 1 (Inventory)** - Foundation for everything else
+2. ✅ **Topic 2 (Architecture)** - Design before building
+3. **Topic 6 (Placement)** - Where does this live? (decision phase)
+4. **Topic 5 (Format)** - Quick decision during prototyping
+5. **Topic 3 (Validation)** - After templates exist
+6. **Topic 4 (Integration)** - After generation works
+7. **Topic 7 (Cursor CLI)** - Research during implementation
 
-Topics 1-2 are high priority and should be done first. Topic 5 can be resolved quickly during Topic 2 prototyping. Topics 3-4 build on the foundation.
+Topics 1-2 are complete. Topic 6 should be addressed in decision phase. Topics 3-5 can be researched during implementation. Topic 7 requires experimentation with Cursor CLI.
 
 ---
 
