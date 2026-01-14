@@ -12,8 +12,8 @@
 Research for template-based documentation infrastructure that ensures consistent doc structure across all workflows. **Strategic insight:** This evolved into a broader **workflow orchestration architecture** where scripts handle structure + context gathering and AI handles creative content only.
 
 **Research Topics:** 7 topics (5 original + 2 strategic)  
-**Completed:** 2 high-priority topics (foundational)  
-**Status:** 🟡 In Progress (Topics 1-2 complete, ready for decision phase)
+**Completed:** 4 topics (3 high-priority + 1 medium)  
+**Status:** 🟡 In Progress (Topics 1, 2, 3, 6 complete)
 
 ---
 
@@ -145,6 +145,26 @@ Research confirms: **Templates in dev-infra, tooling in dev-toolkit**.
 
 ---
 
+### Finding 8: Layered Validation Architecture ✅
+
+Validation uses three layers with on-demand CLI as primary interface:
+
+| Layer | Component | Role |
+|-------|-----------|------|
+| 1. Library | `lib/validate.sh` | Reusable validation functions |
+| 2. CLI | `dt-doc-validate` | Primary interface (developers, CI) |
+| 3. Commands | Cursor commands | Call CLI during workflow |
+
+**Validation timing:**
+- **On-demand CLI** (primary): Developer invokes when ready
+- **In-command** (secondary): Commands call CLI before commit
+- **Pre-commit** (optional): User-configurable enhancement
+- **CI** (enforcement): GitHub Action on PR
+
+**Source:** [research-validation-approach.md](research-validation-approach.md) ✅ Complete
+
+---
+
 ## 💡 Key Insights
 
 - [x] **Insight 1:** Current AI-inline generation causes format drift that breaks automation
@@ -156,12 +176,13 @@ Research confirms: **Templates in dev-infra, tooling in dev-toolkit**.
 - [x] **Insight 7:** Significant token savings (~50-60%) from hybrid architecture ⭐
 - [x] **Insight 8:** Model selection by task type optimizes cost and quality ⭐
 - [x] **Insight 9:** "Full generation" docs MUST still have script-generated structure - AI only fills content ⭐
+- [x] **Insight 10:** On-demand CLI is primary validation interface; pre-commit is optional ⭐
 
 ---
 
 ## 📋 Requirements Summary
 
-**Total Requirements Discovered:** 18 FRs, 10 NFRs, 9 Constraints
+**Total Requirements Discovered:** 25 FRs, 12 NFRs, 12 Constraints
 
 ### High-Priority Requirements
 
@@ -214,7 +235,7 @@ Research confirms: **Templates in dev-infra, tooling in dev-toolkit**.
 | Template Inventory & Structure | 🔴 High | ✅ Complete | 17 doc types, 5 common patterns |
 | Generation Script Architecture | 🔴 High | ✅ Complete | Shared library + template files |
 | Architectural Placement (Four-Arm) | 🔴 High | ✅ Complete | Templates in dev-infra, tooling in dev-toolkit |
-| Validation Approach | 🟡 Medium | 🔴 Not Started | - |
+| Validation Approach | 🟡 Medium | ✅ Complete | Layered validation, on-demand CLI primary |
 | Command Integration | 🟡 Medium | 🔴 Not Started | - |
 | Cursor CLI & Model Selection | 🟡 Medium | 🔴 Not Started | - |
 | Template Format | 🟢 Low | 🔴 Not Started | - |
@@ -223,15 +244,17 @@ Research confirms: **Templates in dev-infra, tooling in dev-toolkit**.
 
 ## 🚀 Next Steps
 
-1. ✅ ~~Complete high-priority research (Topics 1-2)~~
-2. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+1. ✅ ~~Complete high-priority research (Topics 1-2, 6)~~
+2. ✅ ~~Complete validation approach research (Topic 3)~~
+3. Use `/decision template-doc-infrastructure --from-research` to make decisions:
    - Template architecture (17 doc types, 5 patterns)
    - Generation script architecture (shared library)
    - **Architectural placement (four-arm question)** ⭐
+   - Validation architecture
    - Model selection strategy
-3. Create ADRs for each decision
-4. Complete remaining research topics (3-5, 7) during implementation if needed
+4. Create ADRs for each decision
+5. Complete remaining research topics (4-5, 7) during implementation if needed
 
 ---
 
-**Last Updated:** 2026-01-13
+**Last Updated:** 2026-01-14

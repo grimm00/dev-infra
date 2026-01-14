@@ -1,16 +1,16 @@
 # Template Doc Infrastructure - Research Hub
 
 **Purpose:** Research for template-based documentation infrastructure  
-**Status:** 🟡 Research (High-Priority Topics 1-2 Complete)  
+**Status:** 🟡 Research (4 Topics Complete)  
 **Created:** 2026-01-13  
-**Last Updated:** 2026-01-13
+**Last Updated:** 2026-01-14
 
 ---
 
 ## 📋 Quick Links
 
 - **[Research Summary](research-summary.md)** - Summary of all research findings ⭐
-- **[Requirements](requirements.md)** - 14 FRs, 8 NFRs, 6 Constraints discovered
+- **[Requirements](requirements.md)** - 25 FRs, 12 NFRs, 12 Constraints discovered
 
 ### Research Documents
 
@@ -19,7 +19,7 @@
 | 🔴 High   | Template Inventory & Structure     | [research-template-inventory.md](research-template-inventory.md)                 | ✅ Complete    |
 | 🔴 High   | Generation Script Architecture     | [research-generation-architecture.md](research-generation-architecture.md)       | ✅ Complete    |
 | 🔴 High   | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md)       | ✅ Complete    |
-| 🟡 Medium | Validation Approach                | [research-validation-approach.md](research-validation-approach.md)               | 🔴 Not Started |
+| 🟡 Medium | Validation Approach                | [research-validation-approach.md](research-validation-approach.md)               | ✅ Complete    |
 | 🟡 Medium | Command Integration                | [research-command-integration.md](research-command-integration.md)               | 🔴 Not Started |
 | 🟡 Medium | Cursor CLI & Model Selection       | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | 🔴 Not Started |
 | 🟢 Low    | Template Format                    | [research-template-format.md](research-template-format.md)                       | 🔴 Not Started |
@@ -36,15 +36,16 @@ This research addresses how to build template-based documentation infrastructure
 
 1. ✅ What doc types need templates and what structure should each have?
 2. ✅ How should generation scripts be structured?
-3. How should validation work?
+3. ✅ How should validation work?
 4. How do templates integrate with existing commands?
 5. What format should templates use?
-6. **Where should this tooling live? (Four-Arm Question)** ⭐ NEW
+6. ✅ **Where should this tooling live? (Four-Arm Question)**
 7. **How should scripts invoke Cursor with model selection?** ⭐ NEW
 
 **Research Topics:** 7 topics  
 **High Priority Complete:** 3/3 topics ✅  
-**Status:** ✅ High-Priority Research Complete (ready for decision phase)
+**Medium Priority Complete:** 1/3 topics ✅  
+**Status:** 🟡 Research (ready for decision phase)
 
 ---
 
@@ -60,11 +61,11 @@ This research addresses how to build template-based documentation infrastructure
 
 ### Medium Priority
 
-| Research Topic               | Status         | Key Finding |
-| ---------------------------- | -------------- | ----------- |
-| Validation Approach          | 🔴 Not Started | -           |
-| Command Integration          | 🔴 Not Started | -           |
-| Cursor CLI & Model Selection | 🔴 Not Started | -           |
+| Research Topic               | Status         | Key Finding                                |
+| ---------------------------- | -------------- | ------------------------------------------ |
+| Validation Approach          | ✅ Complete    | Layered validation, on-demand CLI primary  |
+| Command Integration          | 🔴 Not Started | -                                          |
+| Cursor CLI & Model Selection | 🔴 Not Started | -                                          |
 
 ### Low Priority
 
@@ -91,6 +92,14 @@ This research addresses how to build template-based documentation infrastructure
 - **Hybrid integration** - scripts generate base, AI customizes
 - **Validation as important as generation**
 
+### From Topic 3: Validation Approach
+
+- **Layered architecture** - library → CLI → commands
+- **On-demand CLI primary** (`dt-doc-validate`) - developer controls timing
+- **Pre-commit optional** - user-configurable enhancement, not required
+- **Actionable errors** - file path, specific issue, fix suggestion
+- **Type-specific validation** - different rules per doc type
+
 ### Strategic Insights (From Discussion)
 
 - **Scripts as orchestration layer** - not just generation, full workflow control
@@ -110,17 +119,19 @@ This research addresses how to build template-based documentation infrastructure
 
 ## 🚀 Next Steps
 
-1. ✅ ~~Conduct research on high-priority topics (Topics 1-2)~~
-2. Review [research-summary.md](research-summary.md) and [requirements.md](requirements.md)
-3. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+1. ✅ ~~Conduct research on high-priority topics (Topics 1-2, 6)~~
+2. ✅ ~~Conduct research on validation approach (Topic 3)~~
+3. Review [research-summary.md](research-summary.md) and [requirements.md](requirements.md)
+4. Use `/decision template-doc-infrastructure --from-research` to make decisions:
    - Template architecture (17 doc types, 5 patterns)
    - Generation script architecture (shared library)
-   - **Architectural placement (four-arm question)** ⭐
+   - Architectural placement (four-arm question)
+   - Validation architecture
    - Model selection strategy
-4. Decisions will create ADR documents
+5. Decisions will create ADR documents
 
-**Note:** Medium and low-priority topics (3-5, 7) can be researched during implementation if needed. High-priority findings + Topic 6 decision are sufficient for architectural decisions.
+**Note:** Remaining medium-priority topics (4, 7) and low-priority (5) can be researched during implementation if needed.
 
 ---
 
-**Last Updated:** 2026-01-13
+**Last Updated:** 2026-01-14

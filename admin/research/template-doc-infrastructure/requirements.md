@@ -238,6 +238,90 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### FR-19: Type-Specific Validation
+
+**Description:** Validation CLI must support type-specific validation for all doc types (exploration, research, adr, feature, handoff, etc.).
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-20: Common Validation Rules
+
+**Description:** Validation CLI must check common rules (status header, dates, status indicators) for all doc types.
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-21: Type-Specific Required Sections
+
+**Description:** Validation CLI must check type-specific required sections based on doc type (e.g., `## 📊 Findings` for research docs).
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-22: Actionable Error Messages
+
+**Description:** Validation errors must include file path, specific issue, and fix suggestion.
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-23: JSON Output
+
+**Description:** Validation CLI must support `--json` output for programmatic parsing.
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-24: Quiet Mode
+
+**Description:** Validation CLI must support `--quiet` mode (exit code only) for CI scripts.
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-25: Single File or Directory Validation
+
+**Description:** Validation CLI must support validating single file or directory recursively.
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Parseable Structure
@@ -360,6 +444,30 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### NFR-11: Fast Validation
+
+**Description:** Validation must complete within 1 second per file (fast enough for pre-commit hooks).
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-12: Clear Exit Codes
+
+**Description:** Validation must have clear exit codes (0=pass, 1=validation errors, 2=usage error).
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints
 
 ### C-1: Pure Markdown
@@ -440,6 +548,30 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### C-10: Validation Logic in Shared Library
+
+**Description:** Validation logic must be in shared library (`lib/validate.sh`) for reuse across commands.
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+---
+
+### C-11: Commands Call Validation CLI
+
+**Description:** Commands must call validation CLI, not implement validation inline. Single source of truth.
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+---
+
+### C-12: Pre-commit Optional
+
+**Description:** Pre-commit integration must be optional (user-configurable), not required.
+
+**Source:** [research-validation-approach.md](research-validation-approach.md)
+
+---
+
 ## 💭 Assumptions
 
 ### A-1: Cursor Environment
@@ -476,4 +608,4 @@ This document captures requirements discovered during research on template-based
 
 ---
 
-**Last Updated:** 2026-01-13
+**Last Updated:** 2026-01-14
