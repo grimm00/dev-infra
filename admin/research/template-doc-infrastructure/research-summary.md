@@ -9,11 +9,11 @@
 
 ## 📋 Research Overview
 
-Research for template-based documentation infrastructure that ensures consistent doc structure across all workflows.
+Research for template-based documentation infrastructure that ensures consistent doc structure across all workflows. **Strategic insight:** This evolved into a broader **workflow orchestration architecture** where scripts handle structure + context gathering and AI handles creative content only.
 
-**Research Topics:** 5 topics  
-**Completed:** 2 high-priority topics  
-**Status:** 🟡 In Progress (Topics 1-2 complete)
+**Research Topics:** 7 topics (5 original + 2 strategic)  
+**Completed:** 2 high-priority topics (foundational)  
+**Status:** 🟡 In Progress (Topics 1-2 complete, ready for decision phase)
 
 ---
 
@@ -85,6 +85,62 @@ This balances consistency (scripts) with flexibility (AI customization).
 
 ---
 
+### Finding 5: Scripts as Orchestration Layer ⭐ STRATEGIC
+
+**From strategic discussion:** The hybrid pattern extends beyond doc generation to **full workflow orchestration**:
+
+```
+Scripts (0 tokens)              AI (targeted tokens)
+├── Context gathering           ├── Analysis
+├── Structure generation        ├── Insights  
+├── Model selection             ├── Connections
+├── Cursor CLI invocation       ├── Recommendations
+├── Validation                  └── Content fill
+└── Side effects (commits)
+```
+
+**Token Efficiency:**
+- **Output tokens:** Scripts generate structure (0 AI tokens), AI fills placeholders (~40-60% savings)
+- **Input tokens:** Scripts gather context into manifests, AI reads less (~80-90% savings on discovery)
+- **Estimated total savings:** ~50-60%
+
+**Source:** Strategic discussion (exploration.md Themes 5-7)
+
+---
+
+### Finding 6: Model Selection by Task Type ⭐ STRATEGIC
+
+Different cognitive tasks benefit from different AI models:
+
+| Task Type | Model | Reasoning |
+|-----------|-------|-----------|
+| explore, research, decision | claude-opus-4 | Deep thinking, analysis |
+| naming, creative | gemini-2.5-pro | Divergent creativity |
+| pr, post-pr, release-prep | claude-sonnet-4 | Structured, routine |
+| task-phase, implement | composer-1 | Code implementation |
+
+Scripts can select optimal model based on task type, optimizing both cost and quality.
+
+**Source:** Strategic discussion (exploration.md Theme 6)
+
+---
+
+### Finding 7: Four-Arm Placement Question ⭐ STRATEGIC
+
+This tooling should **NOT** live in dev-infra (template factory identity per ADR-001). Options:
+
+| Location | Pros | Cons |
+|----------|------|------|
+| dev-toolkit | Existing tooling home | May be too general |
+| proj-cli | Project-specific focus | May be too narrow |
+| New repo | Clean separation | Yet another repo |
+
+**Needs Decision:** Architectural placement should be decided before implementation.
+
+**Source:** Strategic discussion (exploration.md Theme 7)
+
+---
+
 ## 💡 Key Insights
 
 - [x] **Insight 1:** Current AI-inline generation causes format drift that breaks automation
@@ -92,6 +148,9 @@ This balances consistency (scripts) with flexibility (AI customization).
 - [x] **Insight 3:** Two-mode generation (scaffolding + expansion) is emerging as standard
 - [x] **Insight 4:** Simple sed-based templates are sufficient; avoid external dependencies
 - [x] **Insight 5:** Validation is as important as generation - catches drift before problems
+- [x] **Insight 6:** Scripts can orchestrate entire workflows, not just generate docs ⭐
+- [x] **Insight 7:** Significant token savings (~50-60%) from hybrid architecture ⭐
+- [x] **Insight 8:** Model selection by task type optimizes cost and quality ⭐
 
 ---
 
@@ -134,6 +193,13 @@ This balances consistency (scripts) with flexibility (AI customization).
 8. **Clear error messages** that help fix issues
 9. **Exit codes** for CI integration
 
+### Strategic (New)
+
+10. **Decide architectural placement** before implementation (four-arm question)
+11. **Design context gathering** scripts for token efficiency
+12. **Explore Cursor CLI** capabilities for programmatic invocation
+13. **Configure model selection** by task type
+
 ---
 
 ## 📊 Research Status
@@ -142,8 +208,10 @@ This balances consistency (scripts) with flexibility (AI customization).
 |-------|----------|--------|-------------|
 | Template Inventory & Structure | 🔴 High | ✅ Complete | 17 doc types, 5 common patterns |
 | Generation Script Architecture | 🔴 High | ✅ Complete | Shared library + template files |
+| Architectural Placement (Four-Arm) | 🔴 High | 🔴 Not Started | Decision phase |
 | Validation Approach | 🟡 Medium | 🔴 Not Started | - |
 | Command Integration | 🟡 Medium | 🔴 Not Started | - |
+| Cursor CLI & Model Selection | 🟡 Medium | 🔴 Not Started | - |
 | Template Format | 🟢 Low | 🔴 Not Started | - |
 
 ---
@@ -151,10 +219,13 @@ This balances consistency (scripts) with flexibility (AI customization).
 ## 🚀 Next Steps
 
 1. ✅ ~~Complete high-priority research (Topics 1-2)~~
-2. Complete remaining research topics (3-5) if needed
-3. Review requirements in `requirements.md`
-4. Use `/decision template-doc-infrastructure --from-research` to make decisions
-5. Create ADRs for template architecture and generation approach
+2. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+   - Template architecture (17 doc types, 5 patterns)
+   - Generation script architecture (shared library)
+   - **Architectural placement (four-arm question)** ⭐
+   - Model selection strategy
+3. Create ADRs for each decision
+4. Complete remaining research topics (3-5, 7) during implementation if needed
 
 ---
 

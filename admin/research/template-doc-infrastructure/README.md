@@ -1,7 +1,7 @@
 # Template Doc Infrastructure - Research Hub
 
 **Purpose:** Research for template-based documentation infrastructure  
-**Status:** 🟡 Research (High-Priority Complete)  
+**Status:** 🟡 Research (High-Priority Topics 1-2 Complete)  
 **Created:** 2026-01-13  
 **Last Updated:** 2026-01-13
 
@@ -18,8 +18,10 @@
 |----------|-------|----------|--------|
 | 🔴 High | Template Inventory & Structure | [research-template-inventory.md](research-template-inventory.md) | ✅ Complete |
 | 🔴 High | Generation Script Architecture | [research-generation-architecture.md](research-generation-architecture.md) | ✅ Complete |
+| 🔴 High | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md) | 🔴 Not Started |
 | 🟡 Medium | Validation Approach | [research-validation-approach.md](research-validation-approach.md) | 🔴 Not Started |
 | 🟡 Medium | Command Integration | [research-command-integration.md](research-command-integration.md) | 🔴 Not Started |
+| 🟡 Medium | Cursor CLI & Model Selection | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | 🔴 Not Started |
 | 🟢 Low | Template Format | [research-template-format.md](research-template-format.md) | 🔴 Not Started |
 
 ---
@@ -28,36 +30,42 @@
 
 This research addresses how to build template-based documentation infrastructure that ensures consistent doc structure across all workflows (`/explore`, `/research`, `/decision`, `/handoff`, `/task-phase`, `/fix`).
 
+**Strategic Insight:** This exploration evolved into **workflow orchestration architecture** where scripts handle structure + context gathering (0 tokens) and AI handles creative content only (targeted tokens). Estimated 50-60% token savings.
+
 **Key Questions:**
 1. ✅ What doc types need templates and what structure should each have?
 2. ✅ How should generation scripts be structured?
 3. How should validation work?
 4. How do templates integrate with existing commands?
 5. What format should templates use?
+6. **Where should this tooling live? (Four-Arm Question)** ⭐ NEW
+7. **How should scripts invoke Cursor with model selection?** ⭐ NEW
 
-**Research Topics:** 5 topics  
-**High Priority Complete:** 2/2 topics ✅  
+**Research Topics:** 7 topics  
+**High Priority Complete:** 2/3 topics (Topic 6 is high-priority but needs decision phase)  
 **Status:** 🟡 Research (ready for decision phase)
 
 ---
 
 ## 📊 Research Status
 
-### High Priority (Complete) ✅
+### High Priority
 
 | Research Topic | Status | Key Finding |
 |----------------|--------|-------------|
 | Template Inventory & Structure | ✅ Complete | 17 doc types, 5 common patterns |
 | Generation Script Architecture | ✅ Complete | Shared library + sed-based templates |
+| Architectural Placement (Four-Arm) | 🔴 Not Started | Decision phase - where does tooling live? |
 
-### Medium Priority (Not Started)
+### Medium Priority
 
 | Research Topic | Status | Key Finding |
 |----------------|--------|-------------|
 | Validation Approach | 🔴 Not Started | - |
 | Command Integration | 🔴 Not Started | - |
+| Cursor CLI & Model Selection | 🔴 Not Started | - |
 
-### Low Priority (Not Started)
+### Low Priority
 
 | Research Topic | Status | Key Finding |
 |----------------|--------|-------------|
@@ -82,12 +90,20 @@ This research addresses how to build template-based documentation infrastructure
 - **Hybrid integration** - scripts generate base, AI customizes
 - **Validation as important as generation**
 
+### Strategic Insights (From Discussion)
+
+- **Scripts as orchestration layer** - not just generation, full workflow control
+- **Token efficiency** - scripts generate structure (0 tokens), AI fills creative content (~50-60% savings)
+- **Model selection by task type** - opus for deep thinking, sonnet for routine, composer for code
+- **Four-arm placement question** - tooling should NOT live in dev-infra (template factory)
+
 ---
 
 ## 🔗 Related
 
-- **[Exploration](../../explorations/template-doc-infrastructure/README.md)** - Source exploration
+- **[Exploration](../../explorations/template-doc-infrastructure/README.md)** - Source exploration (7 themes)
 - **[Handoff Command Exploration](../../explorations/handoff-command/README.md)** - Related exploration (will use template infrastructure)
+- **[Strategic Architecture Handoff](../../../tmp/handoff-strategic-architecture-2026-01-13.md)** - Context from main worktree
 
 ---
 
@@ -95,10 +111,14 @@ This research addresses how to build template-based documentation infrastructure
 
 1. ✅ ~~Conduct research on high-priority topics (Topics 1-2)~~
 2. Review [research-summary.md](research-summary.md) and [requirements.md](requirements.md)
-3. Use `/decision template-doc-infrastructure --from-research` to make decisions
-4. Decisions will create ADR documents for template architecture
+3. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+   - Template architecture (17 doc types, 5 patterns)
+   - Generation script architecture (shared library)
+   - **Architectural placement (four-arm question)** ⭐
+   - Model selection strategy
+4. Decisions will create ADR documents
 
-**Note:** Medium and low-priority topics (3-5) can be researched during implementation if needed. High-priority findings are sufficient for architectural decisions.
+**Note:** Medium and low-priority topics (3-5, 7) can be researched during implementation if needed. High-priority findings + Topic 6 decision are sufficient for architectural decisions.
 
 ---
 
