@@ -491,6 +491,25 @@ This research recommends sed-based templates, but implementers should validate:
 
 ---
 
+**📌 DECISION BREADCRUMB: Template Abstraction Level**
+
+Current approach uses **literal file templates** (Option A). This may evolve:
+
+| Abstraction | Description | When to Consider |
+|-------------|-------------|------------------|
+| **A. Literal Files** (current) | Actual files with `{{VAR}}` placeholders | ✅ Start here - simple, WYSIWYG |
+| **B. Declarative (IaC)** | YAML defines structure, generator creates files | If composition/inheritance needs emerge |
+| **C. Hybrid** | Files + manifest.yml for validation/metadata | **Transition path** from A → B |
+
+**Key Questions to Monitor:**
+- Are we copy-pasting status headers across templates? (→ consider inheritance)
+- Do we need conditional sections (scaffolding vs full)? (→ consider declarative)
+- Are hub READMEs duplicated? (→ consider base template)
+
+**Recommendation:** Start with literal files. If pain points emerge, transition via hybrid approach (add manifest.yml alongside files) before going full declarative. Don't halt development for this decision.
+
+---
+
 ### Finding 6: Validation Architecture
 
 **Validation rules derived from Topic 1 research:**
