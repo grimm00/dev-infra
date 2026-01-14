@@ -18,7 +18,7 @@
 | --------- | ---------------------------------- | -------------------------------------------------------------------------------- | -------------- |
 | 🔴 High   | Template Inventory & Structure     | [research-template-inventory.md](research-template-inventory.md)                 | ✅ Complete    |
 | 🔴 High   | Generation Script Architecture     | [research-generation-architecture.md](research-generation-architecture.md)       | ✅ Complete    |
-| 🔴 High   | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md)       | 🔴 Not Started |
+| 🔴 High   | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md)       | ✅ Complete    |
 | 🟡 Medium | Validation Approach                | [research-validation-approach.md](research-validation-approach.md)               | 🔴 Not Started |
 | 🟡 Medium | Command Integration                | [research-command-integration.md](research-command-integration.md)               | 🔴 Not Started |
 | 🟡 Medium | Cursor CLI & Model Selection       | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | 🔴 Not Started |
@@ -43,8 +43,8 @@ This research addresses how to build template-based documentation infrastructure
 7. **How should scripts invoke Cursor with model selection?** ⭐ NEW
 
 **Research Topics:** 7 topics  
-**High Priority Complete:** 2/3 topics (Topic 6 is high-priority but needs decision phase)  
-**Status:** 🟡 Research (ready for decision phase)
+**High Priority Complete:** 3/3 topics ✅  
+**Status:** ✅ High-Priority Research Complete (ready for decision phase)
 
 ---
 
@@ -56,7 +56,7 @@ This research addresses how to build template-based documentation infrastructure
 | ---------------------------------- | -------------- | ----------------------------------------- |
 | Template Inventory & Structure     | ✅ Complete    | 17 doc types, 5 common patterns           |
 | Generation Script Architecture     | ✅ Complete    | Shared library + sed-based templates      |
-| Architectural Placement (Four-Arm) | 🔴 Not Started | Decision phase - where does tooling live? |
+| Architectural Placement (Four-Arm) | ✅ Complete    | Templates in dev-infra, tooling in dev-toolkit |
 
 ### Medium Priority
 

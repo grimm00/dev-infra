@@ -190,6 +190,54 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### FR-15: Templates in dev-infra
+
+**Description:** Doc templates must be stored in dev-infra (`scripts/doc-gen/templates/`) as part of the Template Factory identity.
+
+**Source:** [research-architectural-placement.md](research-architectural-placement.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-16: Tooling in dev-toolkit
+
+**Description:** Doc generation and validation tooling must be in dev-toolkit (`bin/dt-doc-gen`, `bin/dt-doc-validate`) following the dt-* pattern.
+
+**Source:** [research-architectural-placement.md](research-architectural-placement.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-17: Template Fetching
+
+**Description:** Tooling must be able to fetch templates from dev-infra releases or a local dev-infra clone.
+
+**Source:** [research-architectural-placement.md](research-architectural-placement.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-18: dt-* Naming Convention
+
+**Description:** Tooling must follow the established dt-* command naming convention (e.g., dt-doc-gen, dt-doc-validate).
+
+**Source:** [research-architectural-placement.md](research-architectural-placement.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Parseable Structure
@@ -276,6 +324,30 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### NFR-9: Independent Versioning
+
+**Description:** Template and tooling versions should be independent - template structure changes don't require tooling releases and vice versa.
+
+**Source:** [research-architectural-placement.md](research-architectural-placement.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-10: Template Version Compatibility
+
+**Description:** Tooling should work with template versions from dev-infra releases, supporting a reasonable range of versions.
+
+**Source:** [research-architectural-placement.md](research-architectural-placement.md)
+
+**Priority:** 🟢 Low
+
+**Status:** 🔴 Pending
+
+---
+
 ### NFR-8: Non-Interactive CI
 
 **Description:** Scripts must work in non-interactive CI environments (detect CI, skip prompts).
@@ -349,6 +421,22 @@ This document captures requirements discovered during research on template-based
 4. **Predictability:** Output structure is deterministic
 
 **Source:** [research-template-inventory.md](research-template-inventory.md) (Finding 6 - Hybrid Architecture Insight), Strategic discussion
+
+---
+
+### C-8: No Template Duplication
+
+**Description:** Tooling must not duplicate templates - always fetch from dev-infra source (releases or local clone).
+
+**Source:** [research-architectural-placement.md](research-architectural-placement.md)
+
+---
+
+### C-9: dev-infra No Orchestration Scripts
+
+**Description:** dev-infra must not contain workflow orchestration scripts - only templates. Tooling belongs in dev-toolkit.
+
+**Source:** [research-architectural-placement.md](research-architectural-placement.md)
 
 ---
 

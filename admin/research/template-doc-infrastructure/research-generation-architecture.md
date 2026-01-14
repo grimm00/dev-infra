@@ -26,6 +26,7 @@ How should doc generation scripts be structured - standalone scripts per doc typ
 ## 📚 Research Methodology
 
 **Sources:**
+
 - [x] Source 1: Review `scripts/check-release-readiness.sh` architecture
 - [x] Source 2: Review `scripts/new-project.sh` generation patterns
 - [x] Source 3: Review `scripts/shell-functions.sh` library pattern
@@ -41,6 +42,7 @@ How should doc generation scripts be structured - standalone scripts per doc typ
 **Three distinct patterns exist in dev-infra:**
 
 #### Pattern A: Standalone Validation + Generation Script
+
 **Example:** `check-release-readiness.sh`
 
 ```bash
@@ -53,6 +55,7 @@ How should doc generation scripts be structured - standalone scripts per doc typ
 ```
 
 **Architecture:**
+
 ```
 check-release-readiness.sh
 ├── argument parsing (getopts)
@@ -62,12 +65,14 @@ check-release-readiness.sh
 ```
 
 **Strengths:**
+
 - Self-contained, no dependencies
 - Clear single responsibility
 - Easy to test in isolation
 - CI-friendly exit codes
 
 **Weaknesses:**
+
 - Templates embedded in script (hard to maintain)
 - Code duplication if multiple scripts need similar patterns
 - No shared infrastructure
@@ -75,6 +80,7 @@ check-release-readiness.sh
 ---
 
 #### Pattern B: Interactive Generator Script
+
 **Example:** `new-project.sh`
 
 ```bash
@@ -86,6 +92,7 @@ check-release-readiness.sh
 ```
 
 **Architecture:**
+
 ```
 new-project.sh
 ├── utility functions (print_status, print_error)
@@ -96,11 +103,13 @@ new-project.sh
 ```
 
 **Strengths:**
+
 - Rich user interaction
 - Progressive disclosure of options
 - Graceful handling of CI/non-interactive environments
 
 **Weaknesses:**
+
 - Complex argument handling
 - Long script with mixed concerns
 - Templates scattered throughout
@@ -108,6 +117,7 @@ new-project.sh
 ---
 
 #### Pattern C: Sourced Function Library
+
 **Example:** `shell-functions.sh`
 
 ```bash
@@ -119,6 +129,7 @@ new-project.sh
 ```
 
 **Architecture:**
+
 ```
 shell-functions.sh
 ├── wt() - main worktree function
@@ -127,11 +138,13 @@ shell-functions.sh
 ```
 
 **Strengths:**
+
 - Composable and reusable
 - Can be sourced in other scripts
 - Thin wrappers around core functionality
 
 **Weaknesses:**
+
 - Requires explicit sourcing
 - Tight coupling to external scripts
 - Limited to shell environment
@@ -146,8 +159,9 @@ shell-functions.sh
 
 **Commands currently generate docs inline via AI interpretation:**
 
-```markdown
+````markdown
 # Command defines template:
+
 **File:** `explorations/[topic]/exploration.md`
 
 ```markdown
@@ -156,14 +170,17 @@ shell-functions.sh
 **Status:** 🔴 Scaffolding (needs expansion)
 ...
 ```
+````
 
 **How it works:**
+
 1. Command markdown contains template examples
 2. AI reads command definition
 3. AI generates content following template
 4. AI writes files directly
 
 **Problems with current approach:**
+
 1. **Inconsistency** - AI interprets templates differently each time
 2. **Format drift** - Small variations accumulate (e.g., unlabeled topic numbers)
 3. **No validation** - No programmatic check that output matches template
@@ -182,19 +199,21 @@ shell-functions.sh
 ```
 scripts/doc-gen/
 ├── gen-exploration.sh     # /explore doc generation
-├── gen-research.sh        # /research doc generation  
+├── gen-research.sh        # /research doc generation
 ├── gen-decision.sh        # /decision doc generation
 ├── gen-phase.sh           # /task-phase doc generation
 └── gen-handoff.sh         # /handoff doc generation
 ```
 
 **Pros:**
+
 - ✅ Clear ownership - one script per workflow
 - ✅ Easy to test in isolation
 - ✅ Simple mental model
 - ✅ Can add --validate flag to each
 
 **Cons:**
+
 - ❌ Code duplication (common patterns repeated)
 - ❌ 5+ scripts to maintain
 - ❌ No shared template infrastructure
@@ -217,12 +236,14 @@ scripts/doc-gen/
 ```
 
 **Pros:**
+
 - ✅ DRY - common code shared
 - ✅ Consistent patterns across workflows
 - ✅ Single place to update common functionality
 - ✅ Library can be sourced by other scripts
 
 **Cons:**
+
 - ❌ More complex architecture
 - ❌ Dependencies between files
 - ❌ Need to manage library versioning
@@ -242,12 +263,14 @@ scripts/doc-gen.sh
 ```
 
 **Pros:**
+
 - ✅ Single entry point
 - ✅ Consistent CLI interface
 - ✅ Easy to discover available generators
 - ✅ Can share state across subcommands
 
 **Cons:**
+
 - ❌ Large single file (or complex include structure)
 - ❌ Harder to test individual generators
 - ❌ May become unwieldy as more doc types added
@@ -272,12 +295,14 @@ scripts/templates/
 ```
 
 **Pros:**
+
 - ✅ Templates are standalone files (easy to edit)
 - ✅ Simple renderer (sed/envsubst)
 - ✅ Easy to version control template changes
 - ✅ Non-programmers can edit templates
 
 **Cons:**
+
 - ❌ Limited template logic (no conditionals)
 - ❌ Need external tool for complex rendering
 - ❌ Template files require their own validation
@@ -295,8 +320,10 @@ scripts/templates/
 **How Cursor commands could invoke scripts:**
 
 #### Integration Method A: Shell Command in Checklist
+
 ```markdown
 **Checklist:**
+
 - [ ] Run `scripts/doc-gen/gen-exploration.sh [topic]` to create scaffolding
 - [ ] Verify output matches expected structure
 ```
@@ -307,16 +334,20 @@ scripts/templates/
 ---
 
 #### Integration Method B: Command Instructs AI to Execute
-```markdown
+
+````markdown
 ### Step 1: Generate Scaffolding
 
 **Execute:**
+
 ```bash
 scripts/doc-gen/gen-exploration.sh "$TOPIC" --mode setup
 ```
+````
 
 **Then:** Verify the generated files and continue with Step 2.
-```
+
+````
 
 **Pros:** More automated feel
 **Cons:** AI may not execute reliably, no feedback loop
@@ -330,14 +361,16 @@ scripts/doc-gen/gen-exploration.sh "$TOPIC" --mode setup
 Run the generation script:
 ```bash
 scripts/doc-gen/gen-exploration.sh "$TOPIC" --mode setup
-```
+````
 
 ### Step 2: Customize Generated Content
 
 Read the generated files and customize:
+
 - [ ] Update the "What We're Exploring" section with specific context
 - [ ] Add project-specific themes
-```
+
+````
 
 **Pros:** Best of both worlds - consistent structure + AI customization
 **Cons:** Two-step process
@@ -351,10 +384,11 @@ Read the generated files and customize:
 **Validate output:**
 ```bash
 scripts/doc-gen/validate-doc.sh explorations/[topic]/exploration.md --type exploration
-```
+````
 
 If validation fails, fix the issues and re-validate.
-```
+
+````
 
 **Pros:** AI retains generation flexibility, script ensures quality
 **Cons:** Fix cycle can be frustrating
@@ -378,7 +412,7 @@ If validation fails, fix the issues and re-validate.
 sed -e "s/{{DATE}}/$(date +%Y-%m-%d)/g" \
     -e "s/{{TOPIC}}/$TOPIC/g" \
     template.tmpl > output.md
-```
+````
 
 **Pros:** No dependencies, works everywhere
 **Cons:** Limited (no loops, conditionals)
@@ -386,6 +420,7 @@ sed -e "s/{{DATE}}/$(date +%Y-%m-%d)/g" \
 ---
 
 **Option B: envsubst (Environment Variables)**
+
 ```bash
 # Template uses $VAR syntax
 export DATE=$(date +%Y-%m-%d)
@@ -399,6 +434,7 @@ envsubst < template.tmpl > output.md
 ---
 
 **Option C: Bash Heredocs (Embedded Templates)**
+
 ```bash
 generate_exploration() {
     cat <<EOF
@@ -416,6 +452,7 @@ EOF
 ---
 
 **Option D: Template Engine (jinja2-cli, gomplate)**
+
 ```bash
 # Template with logic
 {% if mode == 'scaffolding' %}
@@ -443,12 +480,12 @@ jinja2 template.j2 data.yaml > output.md
 
 This research recommends sed-based templates, but implementers should validate:
 
-| Question | Research Position | Needs Validation? |
-|----------|-------------------|-------------------|
-| Variable syntax | `{{VAR}}` with sed | ✅ Test cross-platform (macOS vs Linux sed) |
-| Complex templates | Fall back to jinja2-cli if needed | ✅ Identify which templates need conditionals |
-| Dependency tolerance | Prefer 0 external deps | ⚠️ If jinja2 needed, is pip install acceptable? |
-| Template inheritance | Not addressed | 🟡 May need for DRY hub templates |
+| Question             | Research Position                 | Needs Validation?                               |
+| -------------------- | --------------------------------- | ----------------------------------------------- |
+| Variable syntax      | `{{VAR}}` with sed                | ✅ Test cross-platform (macOS vs Linux sed)     |
+| Complex templates    | Fall back to jinja2-cli if needed | ✅ Identify which templates need conditionals   |
+| Dependency tolerance | Prefer 0 external deps            | ⚠️ If jinja2 needed, is pip install acceptable? |
+| Template inheritance | Not addressed                     | 🟡 May need for DRY hub templates               |
 
 **Recommendation for /decision phase:** Create ADR for template rendering tech stack if research shows sed insufficient for identified use cases.
 
@@ -458,26 +495,27 @@ This research recommends sed-based templates, but implementers should validate:
 
 **Validation rules derived from Topic 1 research:**
 
-| Check | Doc Type | Rule |
-|-------|----------|------|
-| Status Header | All | Must contain `**Status:**` with valid indicator |
-| Date Format | All | `**Created:** YYYY-MM-DD` pattern |
-| Required Sections | Per type | Type-specific sections present |
-| Status Indicators | All | Valid emoji (🔴, 🟠, 🟡, 🟢, ✅) |
-| Quick Links | Hubs | Section exists with markdown links |
-| Next Steps | All | Section exists at end |
+| Check             | Doc Type | Rule                                            |
+| ----------------- | -------- | ----------------------------------------------- |
+| Status Header     | All      | Must contain `**Status:**` with valid indicator |
+| Date Format       | All      | `**Created:** YYYY-MM-DD` pattern               |
+| Required Sections | Per type | Type-specific sections present                  |
+| Status Indicators | All      | Valid emoji (🔴, 🟠, 🟡, 🟢, ✅)                |
+| Quick Links       | Hubs     | Section exists with markdown links              |
+| Next Steps        | All      | Section exists at end                           |
 
 **Validation script structure:**
+
 ```bash
 validate_doc() {
     local file="$1"
     local type="$2"
-    
+
     # Common checks
     check_status_header "$file"
     check_date_format "$file"
     check_next_steps "$file"
-    
+
     # Type-specific checks
     case "$type" in
         exploration) check_exploration_sections "$file" ;;
@@ -522,6 +560,7 @@ scripts/
 ```
 
 **Usage:**
+
 ```bash
 # Generate exploration scaffolding
 scripts/doc-gen/gen-doc.sh exploration my-topic --mode setup

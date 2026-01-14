@@ -125,19 +125,23 @@ Scripts can select optimal model based on task type, optimizing both cost and qu
 
 ---
 
-### Finding 7: Four-Arm Placement Question ⭐ STRATEGIC
+### Finding 7: Four-Arm Placement Decision ⭐ STRATEGIC ✅
 
-This tooling should **NOT** live in dev-infra (template factory identity per ADR-001). Options:
+Research confirms: **Templates in dev-infra, tooling in dev-toolkit**.
 
-| Location | Pros | Cons |
-|----------|------|------|
-| dev-toolkit | Existing tooling home | May be too general |
-| proj-cli | Project-specific focus | May be too narrow |
-| New repo | Clean separation | Yet another repo |
+| Component | Location | Rationale |
+|-----------|----------|-----------|
+| Doc templates | dev-infra | Template Factory identity (ADR-001) |
+| gen-doc, validate scripts | dev-toolkit | Follows dt-review precedent |
+| Context gathering | dev-toolkit | Tooling that uses templates |
+| Model selection | dev-toolkit | Orchestration logic |
 
-**Needs Decision:** Architectural placement should be decided before implementation.
+**Key precedents:**
+- ADR-001 (Project Identity): "Internal tooling stays internal"
+- ADR-001 (Command Distribution): Source owner ≠ distribution owner
+- dt-review: Workflow tool in dev-toolkit, not dev-infra
 
-**Source:** Strategic discussion (exploration.md Theme 7)
+**Source:** [research-architectural-placement.md](research-architectural-placement.md) ✅ Complete
 
 ---
 
@@ -157,7 +161,7 @@ This tooling should **NOT** live in dev-infra (template factory identity per ADR
 
 ## 📋 Requirements Summary
 
-**Total Requirements Discovered:** 14 FRs, 8 NFRs, 7 Constraints
+**Total Requirements Discovered:** 18 FRs, 10 NFRs, 9 Constraints
 
 ### High-Priority Requirements
 
@@ -209,7 +213,7 @@ This tooling should **NOT** live in dev-infra (template factory identity per ADR
 |-------|----------|--------|-------------|
 | Template Inventory & Structure | 🔴 High | ✅ Complete | 17 doc types, 5 common patterns |
 | Generation Script Architecture | 🔴 High | ✅ Complete | Shared library + template files |
-| Architectural Placement (Four-Arm) | 🔴 High | 🔴 Not Started | Decision phase |
+| Architectural Placement (Four-Arm) | 🔴 High | ✅ Complete | Templates in dev-infra, tooling in dev-toolkit |
 | Validation Approach | 🟡 Medium | 🔴 Not Started | - |
 | Command Integration | 🟡 Medium | 🔴 Not Started | - |
 | Cursor CLI & Model Selection | 🟡 Medium | 🔴 Not Started | - |
