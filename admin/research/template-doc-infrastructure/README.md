@@ -61,11 +61,11 @@ This research addresses how to build template-based documentation infrastructure
 
 ### Medium Priority
 
-| Research Topic               | Status         | Key Finding                                  |
-| ---------------------------- | -------------- | -------------------------------------------- |
-| Validation Approach          | ✅ Complete    | Layered validation, on-demand CLI primary    |
-| Command Integration          | ✅ Complete    | 154 inline templates, incremental migration  |
-| Cursor CLI & Model Selection | 🔴 Not Started | -                                            |
+| Research Topic               | Status         | Key Finding                                 |
+| ---------------------------- | -------------- | ------------------------------------------- |
+| Validation Approach          | ✅ Complete    | Layered validation, on-demand CLI primary   |
+| Command Integration          | ✅ Complete    | 154 inline templates, incremental migration |
+| Cursor CLI & Model Selection | 🔴 Not Started | -                                           |
 
 ### Low Priority
 
