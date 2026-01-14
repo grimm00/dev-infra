@@ -26,6 +26,7 @@ What document types need templates and what structure should each have? This is 
 ## 📚 Research Methodology
 
 **Sources:**
+
 - [x] Source 1: Audit `admin/explorations/` directory structure and doc patterns
 - [x] Source 2: Audit `admin/research/` directory structure and doc patterns
 - [x] Source 3: Audit `admin/decisions/` directory structure and doc patterns
@@ -41,14 +42,14 @@ What document types need templates and what structure should each have? This is 
 
 **Comprehensive inventory of all doc types across the six main workflows:**
 
-| Workflow | Command | Doc Types | Location |
-|----------|---------|-----------|----------|
-| Exploration | `/explore` | README.md, exploration.md, research-topics.md | `admin/explorations/[topic]/` |
-| Research | `/research` | README.md, research-[topic].md, research-summary.md, requirements.md | `admin/research/[topic]/` |
-| Decision | `/decision` | README.md, adr-NNN-[name].md, decisions-summary.md, transition-plan.md | `admin/decisions/[topic]/` |
+| Workflow         | Command                           | Doc Types                                                                            | Location                             |
+| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ |
+| Exploration      | `/explore`                        | README.md, exploration.md, research-topics.md                                        | `admin/explorations/[topic]/`        |
+| Research         | `/research`                       | README.md, research-[topic].md, research-summary.md, requirements.md                 | `admin/research/[topic]/`            |
+| Decision         | `/decision`                       | README.md, adr-NNN-[name].md, decisions-summary.md, transition-plan.md               | `admin/decisions/[topic]/`           |
 | Feature Planning | `/transition-plan`, `/task-phase` | README.md, feature-plan.md, transition-plan.md, phase-N.md, status-and-next-steps.md | `admin/planning/features/[feature]/` |
-| Fix | `/fix-plan`, `/fix-implement` | fix-review-report-YYYY-MM-DD.md, deferred-tasks.md, fix-batch docs | `admin/planning/fix/` |
-| Handoff | `/handoff` (proposed) | handoff.md | `tmp/` (untracked) |
+| Fix              | `/fix-plan`, `/fix-implement`     | fix-review-report-YYYY-MM-DD.md, deferred-tasks.md, fix-batch docs                   | `admin/planning/fix/`                |
+| Handoff          | `/handoff` (proposed)             | handoff.md                                                                           | `tmp/` (untracked)                   |
 
 **Source:** Direct audit of `admin/explorations/`, `admin/research/`, `admin/decisions/`, `admin/planning/`
 
@@ -61,46 +62,56 @@ What document types need templates and what structure should each have? This is 
 **Five common patterns appear across all doc types:**
 
 #### Pattern 1: Status Header Block
+
 ```markdown
 **Status:** [🔴 Not Started | 🟠 In Progress | ✅ Complete]
 **Created:** YYYY-MM-DD
 **Last Updated:** YYYY-MM-DD
 ```
+
 **Used in:** All docs (required)
 
 #### Pattern 2: Quick Links Section
+
 ```markdown
 ## 📋 Quick Links
 
 - **[Document 1](doc1.md)** - Description ⭐ **NEW**
 - **[Document 2](doc2.md)** - Description
 ```
+
 **Used in:** Hub docs (README.md, feature hubs)
 
 #### Pattern 3: Status Tables
+
 ```markdown
-| Topic | Priority | Status | Notes |
-|-------|----------|--------|-------|
-| Item 1 | 🔴 High | 🔴 Not Started | - |
-| Item 2 | 🟡 Medium | ✅ Complete | Key finding |
+| Topic  | Priority  | Status         | Notes       |
+| ------ | --------- | -------------- | ----------- |
+| Item 1 | 🔴 High   | 🔴 Not Started | -           |
+| Item 2 | 🟡 Medium | ✅ Complete    | Key finding |
 ```
+
 **Used in:** Research hubs, decision hubs, feature hubs
 
 #### Pattern 4: Next Steps Section
+
 ```markdown
 ## 🚀 Next Steps
 
 1. [First action with specific command]
 2. [Second action]
 ```
+
 **Used in:** All docs (required at end)
 
 #### Pattern 5: Related Links Section
+
 ```markdown
 ## 🔗 Related
 
 - **[Related Item](../path/to/item/)** - Description
 ```
+
 **Used in:** Exploration, research, decision docs
 
 **Source:** Analysis of `admin/explorations/template-doc-infrastructure/`, `admin/research/dev-infra-identity-and-focus/`, `admin/decisions/dev-infra-identity-and-focus/`
@@ -123,12 +134,12 @@ What document types need templates and what structure should each have? This is 
 
 **Examples by workflow:**
 
-| Workflow | Hub | Primary Spoke | Supporting Spokes |
-|----------|-----|---------------|-------------------|
-| Exploration | README.md | exploration.md | research-topics.md |
-| Research | README.md | research-summary.md | research-[topic].md, requirements.md |
-| Decision | README.md | decisions-summary.md | adr-NNN-[name].md, transition-plan.md |
-| Feature | README.md | feature-plan.md | phase-N.md, status-and-next-steps.md |
+| Workflow    | Hub       | Primary Spoke        | Supporting Spokes                     |
+| ----------- | --------- | -------------------- | ------------------------------------- |
+| Exploration | README.md | exploration.md       | research-topics.md                    |
+| Research    | README.md | research-summary.md  | research-[topic].md, requirements.md  |
+| Decision    | README.md | decisions-summary.md | adr-NNN-[name].md, transition-plan.md |
+| Feature     | README.md | feature-plan.md      | phase-N.md, status-and-next-steps.md  |
 
 **Source:** Pattern analysis across all workflow directories
 
@@ -140,12 +151,12 @@ What document types need templates and what structure should each have? This is 
 
 **The `/explore` command already defines target line counts:**
 
-| Document | Setup Mode | Conduct Mode |
-|----------|------------|--------------|
-| README.md (hub) | ~20 lines | ~20 lines |
-| exploration.md | ~40-50 lines | ~200-300 lines |
+| Document           | Setup Mode   | Conduct Mode          |
+| ------------------ | ------------ | --------------------- |
+| README.md (hub)    | ~20 lines    | ~20 lines             |
+| exploration.md     | ~40-50 lines | ~200-300 lines        |
 | research-topics.md | ~20-30 lines | expanded with context |
-| **Total** | ~60-80 lines | ~200-300 lines |
+| **Total**          | ~60-80 lines | ~200-300 lines        |
 
 **Source:** `.cursor/commands/explore.md` (Setup Mode Output, Conduct Mode Output sections)
 
@@ -159,59 +170,59 @@ What document types need templates and what structure should each have? This is 
 
 #### Exploration Docs
 
-| Section | exploration.md | research-topics.md | README.md |
-|---------|----------------|-------------------|-----------|
-| Status Header | ✅ Required | ✅ Required | ✅ Required |
-| What We're Exploring | ✅ Required | - | - |
-| Themes | ✅ Required | - | - |
-| Key Questions | ✅ Required | ✅ Required (as topics) | - |
-| Initial Thoughts | 🟡 Optional | - | - |
-| Quick Links | - | - | ✅ Required |
-| Overview | - | - | ✅ Required |
-| Next Steps | ✅ Required | ✅ Required | ✅ Required |
+| Section              | exploration.md | research-topics.md      | README.md   |
+| -------------------- | -------------- | ----------------------- | ----------- |
+| Status Header        | ✅ Required    | ✅ Required             | ✅ Required |
+| What We're Exploring | ✅ Required    | -                       | -           |
+| Themes               | ✅ Required    | -                       | -           |
+| Key Questions        | ✅ Required    | ✅ Required (as topics) | -           |
+| Initial Thoughts     | 🟡 Optional    | -                       | -           |
+| Quick Links          | -              | -                       | ✅ Required |
+| Overview             | -              | -                       | ✅ Required |
+| Next Steps           | ✅ Required    | ✅ Required             | ✅ Required |
 
 #### Research Docs
 
-| Section | research-[topic].md | research-summary.md | requirements.md |
-|---------|---------------------|---------------------|-----------------|
-| Status Header | ✅ Required | ✅ Required | ✅ Required |
-| Research Question | ✅ Required | - | - |
-| Research Goals | ✅ Required | - | - |
-| Methodology | ✅ Required | - | - |
-| Findings | ✅ Required | ✅ Required (key findings) | - |
-| Analysis | ✅ Required | - | - |
-| Recommendations | ✅ Required | ✅ Required | - |
-| Requirements Discovered | ✅ Required | - | ✅ Required (all FRs/NFRs) |
-| Next Steps | ✅ Required | ✅ Required | ✅ Required |
+| Section                 | research-[topic].md | research-summary.md        | requirements.md            |
+| ----------------------- | ------------------- | -------------------------- | -------------------------- |
+| Status Header           | ✅ Required         | ✅ Required                | ✅ Required                |
+| Research Question       | ✅ Required         | -                          | -                          |
+| Research Goals          | ✅ Required         | -                          | -                          |
+| Methodology             | ✅ Required         | -                          | -                          |
+| Findings                | ✅ Required         | ✅ Required (key findings) | -                          |
+| Analysis                | ✅ Required         | -                          | -                          |
+| Recommendations         | ✅ Required         | ✅ Required                | -                          |
+| Requirements Discovered | ✅ Required         | -                          | ✅ Required (all FRs/NFRs) |
+| Next Steps              | ✅ Required         | ✅ Required                | ✅ Required                |
 
 #### Decision Docs (ADRs)
 
-| Section | adr-NNN-[name].md | decisions-summary.md | transition-plan.md |
-|---------|-------------------|---------------------|-------------------|
-| Status Header | ✅ Required | ✅ Required | ✅ Required |
-| Context | ✅ Required | - | - |
-| Decision | ✅ Required | ✅ Required (summary) | - |
-| Consequences | ✅ Required | - | - |
-| Alternatives Considered | ✅ Required | - | - |
-| Decision Rationale | ✅ Required | - | - |
-| Requirements Impact | 🟡 Optional | - | - |
-| Implementation | ✅ Required | - | ✅ Required (detailed) |
-| Next Steps | ✅ Required | ✅ Required | ✅ Required |
+| Section                 | adr-NNN-[name].md | decisions-summary.md  | transition-plan.md     |
+| ----------------------- | ----------------- | --------------------- | ---------------------- |
+| Status Header           | ✅ Required       | ✅ Required           | ✅ Required            |
+| Context                 | ✅ Required       | -                     | -                      |
+| Decision                | ✅ Required       | ✅ Required (summary) | -                      |
+| Consequences            | ✅ Required       | -                     | -                      |
+| Alternatives Considered | ✅ Required       | -                     | -                      |
+| Decision Rationale      | ✅ Required       | -                     | -                      |
+| Requirements Impact     | 🟡 Optional       | -                     | -                      |
+| Implementation          | ✅ Required       | -                     | ✅ Required (detailed) |
+| Next Steps              | ✅ Required       | ✅ Required           | ✅ Required            |
 
 #### Feature Planning Docs
 
-| Section | phase-N.md | feature-plan.md | status-and-next-steps.md |
-|---------|-----------|-----------------|-------------------------|
-| Status Header | ✅ Required | ✅ Required | ✅ Required |
-| Overview | ✅ Required | ✅ Required | - |
-| Goals | ✅ Required | ✅ Required | - |
-| Tasks | ✅ Required | - | - |
-| Completion Criteria | ✅ Required | - | - |
-| Progress Tracking | ✅ Required | - | ✅ Required |
-| Dependencies | 🟡 Optional | ✅ Required | - |
-| Deliverables | ✅ Required | ✅ Required | - |
-| Related Documents | ✅ Required | ✅ Required | ✅ Required |
-| Next Steps | ✅ Required | ✅ Required | ✅ Required |
+| Section             | phase-N.md  | feature-plan.md | status-and-next-steps.md |
+| ------------------- | ----------- | --------------- | ------------------------ |
+| Status Header       | ✅ Required | ✅ Required     | ✅ Required              |
+| Overview            | ✅ Required | ✅ Required     | -                        |
+| Goals               | ✅ Required | ✅ Required     | -                        |
+| Tasks               | ✅ Required | -               | -                        |
+| Completion Criteria | ✅ Required | -               | -                        |
+| Progress Tracking   | ✅ Required | -               | ✅ Required              |
+| Dependencies        | 🟡 Optional | ✅ Required     | -                        |
+| Deliverables        | ✅ Required | ✅ Required     | -                        |
+| Related Documents   | ✅ Required | ✅ Required     | ✅ Required              |
+| Next Steps          | ✅ Required | ✅ Required     | ✅ Required              |
 
 **Source:** Analysis of existing docs in `admin/explorations/`, `admin/research/`, `admin/decisions/`, `admin/planning/features/`
 
@@ -221,23 +232,23 @@ What document types need templates and what structure should each have? This is 
 
 ### Finding 6: Command-Generated vs Manually Created Docs
 
-| Document | Generated By | Generation Mode |
-|----------|--------------|-----------------|
-| exploration.md | `/explore` | Setup creates scaffolding, Conduct expands |
-| research-topics.md | `/explore` | Setup creates with topics from exploration |
-| README.md (exploration hub) | `/explore` | Setup creates |
-| research-[topic].md | `/research` | Setup creates template, Conduct fills in |
-| research-summary.md | `/research` | Setup creates, updated after each topic |
-| requirements.md | `/research` | Setup creates skeleton, Conduct populates |
-| README.md (research hub) | `/research` | Setup creates |
-| adr-NNN-[name].md | `/decision` | Full structure + AI content |
-| decisions-summary.md | `/decision` | Creates/updates |
-| transition-plan.md | `/transition-plan` | Full structure + AI content |
-| phase-N.md | `/transition-plan` | Creates scaffolding from transition plan |
-| feature-plan.md | `/transition-plan` | Full structure + AI content |
-| status-and-next-steps.md | `/task-phase` | Creates, auto-updates |
-| README.md (feature hub) | `/transition-plan` | Creates |
-| handoff.md | `/handoff` (proposed) | Full structure + AI content (context-rich) |
+| Document                    | Generated By          | Generation Mode                            |
+| --------------------------- | --------------------- | ------------------------------------------ |
+| exploration.md              | `/explore`            | Setup creates scaffolding, Conduct expands |
+| research-topics.md          | `/explore`            | Setup creates with topics from exploration |
+| README.md (exploration hub) | `/explore`            | Setup creates                              |
+| research-[topic].md         | `/research`           | Setup creates template, Conduct fills in   |
+| research-summary.md         | `/research`           | Setup creates, updated after each topic    |
+| requirements.md             | `/research`           | Setup creates skeleton, Conduct populates  |
+| README.md (research hub)    | `/research`           | Setup creates                              |
+| adr-NNN-[name].md           | `/decision`           | Full structure + AI content                |
+| decisions-summary.md        | `/decision`           | Creates/updates                            |
+| transition-plan.md          | `/transition-plan`    | Full structure + AI content                |
+| phase-N.md                  | `/transition-plan`    | Creates scaffolding from transition plan   |
+| feature-plan.md             | `/transition-plan`    | Full structure + AI content                |
+| status-and-next-steps.md    | `/task-phase`         | Creates, auto-updates                      |
+| README.md (feature hub)     | `/transition-plan`    | Creates                                    |
+| handoff.md                  | `/handoff` (proposed) | Full structure + AI content (context-rich) |
 
 **Source:** Analysis of `.cursor/commands/explore.md`, `research.md`, and `task-phase.md`
 
@@ -245,16 +256,17 @@ What document types need templates and what structure should each have? This is 
 
 **IMPORTANT (Hybrid Architecture Insight):** Even docs marked "Full structure + AI content" should have **script-generated structure**:
 
-| Mode | Script Does | AI Does |
-|------|-------------|---------|
-| Scaffolding | Generates structure with empty placeholders | Nothing (human reviews) |
-| Partial Fill | Generates structure with some placeholders | Fills specific placeholders |
-| Full Fill | Generates **complete structure** | Fills **all placeholders** |
+| Mode         | Script Does                                 | AI Does                     |
+| ------------ | ------------------------------------------- | --------------------------- |
+| Scaffolding  | Generates structure with empty placeholders | Nothing (human reviews)     |
+| Partial Fill | Generates structure with some placeholders  | Fills specific placeholders |
+| Full Fill    | Generates **complete structure**            | Fills **all placeholders**  |
 
 **"Full generation" ≠ "AI generates everything"**  
 **"Full generation" = "Script generates full structure, AI fills all content"**
 
 This ensures:
+
 1. Consistent structure (0 format drift)
 2. Token efficiency (0 tokens for structure)
 3. Predictable output (validation can check structure)
@@ -265,20 +277,20 @@ This ensures:
 
 **Consistent priority indicators across all docs:**
 
-| Indicator | Meaning | Used For |
-|-----------|---------|----------|
-| 🔴 High | Critical/blocking | Research topics, tasks, requirements |
-| 🟡 Medium | Important but not blocking | Research topics, requirements |
-| 🟢 Low | Nice-to-have | Research topics, requirements |
+| Indicator | Meaning                    | Used For                             |
+| --------- | -------------------------- | ------------------------------------ |
+| 🔴 High   | Critical/blocking          | Research topics, tasks, requirements |
+| 🟡 Medium | Important but not blocking | Research topics, requirements        |
+| 🟢 Low    | Nice-to-have               | Research topics, requirements        |
 
 **Status indicators:**
 
-| Indicator | Meaning | Used For |
-|-----------|---------|----------|
+| Indicator                    | Meaning           | Used For                |
+| ---------------------------- | ----------------- | ----------------------- |
 | 🔴 Not Started / Scaffolding | Work hasn't begun | Phases, research topics |
-| 🟠 In Progress | Work underway | Phases, features |
-| 🟡 Analysis / Review | Needs review | Research |
-| ✅ Complete / Expanded | Work finished | All docs |
+| 🟠 In Progress               | Work underway     | Phases, features        |
+| 🟡 Analysis / Review         | Needs review      | Research                |
+| ✅ Complete / Expanded       | Work finished     | All docs                |
 
 **Source:** Pattern analysis across `admin/explorations/`, `admin/research/`, `admin/planning/`
 
@@ -302,15 +314,15 @@ Based on the findings, we can now design a comprehensive template system:
 
 **Template Categories:**
 
-| Category | Doc Types | Count |
-|----------|-----------|-------|
-| Hub Templates | README.md (4 variants) | 4 |
-| Exploration Templates | exploration.md, research-topics.md | 2 |
-| Research Templates | research-[topic].md, research-summary.md, requirements.md | 3 |
-| Decision Templates | adr-NNN.md, decisions-summary.md, transition-plan.md | 3 |
-| Planning Templates | feature-plan.md, phase-N.md, status-and-next-steps.md | 3 |
-| Other Templates | handoff.md, fix-review-report.md | 2 |
-| **Total** | | **17** |
+| Category              | Doc Types                                                 | Count  |
+| --------------------- | --------------------------------------------------------- | ------ |
+| Hub Templates         | README.md (4 variants)                                    | 4      |
+| Exploration Templates | exploration.md, research-topics.md                        | 2      |
+| Research Templates    | research-[topic].md, research-summary.md, requirements.md | 3      |
+| Decision Templates    | adr-NNN.md, decisions-summary.md, transition-plan.md      | 3      |
+| Planning Templates    | feature-plan.md, phase-N.md, status-and-next-steps.md     | 3      |
+| Other Templates       | handoff.md, fix-review-report.md                          | 2      |
+| **Total**             |                                                           | **17** |
 
 ---
 
