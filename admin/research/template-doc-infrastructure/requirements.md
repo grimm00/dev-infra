@@ -104,6 +104,7 @@ This document captures requirements discovered during research on template-based
 ### FR-8: Generation Modes
 
 **Description:** Generation scripts must support multiple modes:
+
 - **Scaffolding mode:** Structure with empty placeholders (AI/human fills later)
 - **Partial fill mode:** Structure with some placeholders pre-filled
 - **Full fill mode:** Complete structure with all placeholders for AI to fill
@@ -204,7 +205,7 @@ This document captures requirements discovered during research on template-based
 
 ### FR-16: Tooling in dev-toolkit
 
-**Description:** Doc generation and validation tooling must be in dev-toolkit (`bin/dt-doc-gen`, `bin/dt-doc-validate`) following the dt-* pattern.
+**Description:** Doc generation and validation tooling must be in dev-toolkit (`bin/dt-doc-gen`, `bin/dt-doc-validate`) following the dt-\* pattern.
 
 **Source:** [research-architectural-placement.md](research-architectural-placement.md)
 
@@ -226,9 +227,9 @@ This document captures requirements discovered during research on template-based
 
 ---
 
-### FR-18: dt-* Naming Convention
+### FR-18: dt-\* Naming Convention
 
-**Description:** Tooling must follow the established dt-* command naming convention (e.g., dt-doc-gen, dt-doc-validate).
+**Description:** Tooling must follow the established dt-\* command naming convention (e.g., dt-doc-gen, dt-doc-validate).
 
 **Source:** [research-architectural-placement.md](research-architectural-placement.md)
 
@@ -315,6 +316,66 @@ This document captures requirements discovered during research on template-based
 **Description:** Validation CLI must support validating single file or directory recursively.
 
 **Source:** [research-validation-approach.md](research-validation-approach.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-26: Command Script Invocation
+
+**Description:** Commands must invoke `dt-doc-gen` for structure generation instead of inline templates.
+
+**Source:** [research-command-integration.md](research-command-integration.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-27: Command Validation Invocation
+
+**Description:** Commands must invoke `dt-doc-validate` before committing generated docs.
+
+**Source:** [research-command-integration.md](research-command-integration.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-28: Placeholder Type Support
+
+**Description:** Templates must support three placeholder types: variable (`{{VAR}}`), AI-required (`<!-- AI: -->`), expansion zone (`<!-- EXPAND: -->`).
+
+**Source:** [research-command-integration.md](research-command-integration.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-29: Two-Mode Expansion Zones
+
+**Description:** Two-mode templates must have clear expansion zones marked for Conduct mode filling.
+
+**Source:** [research-command-integration.md](research-command-integration.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-30: Incremental Migration
+
+**Description:** Command migration from inline templates must be incremental (one command at a time, with fallback to inline).
+
+**Source:** [research-command-integration.md](research-command-integration.md)
 
 **Priority:** 🟡 Medium
 
@@ -468,6 +529,30 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### NFR-13: Migration Backwards Compatibility
+
+**Description:** Command migration must not break existing workflows (inline templates as fallback during transition).
+
+**Source:** [research-command-integration.md](research-command-integration.md)
+
+**Priority:** 🔴 High
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-14: Script Invocation Speed
+
+**Description:** Script invocation for structure generation must be faster than AI template generation.
+
+**Source:** [research-command-integration.md](research-command-integration.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints
 
 ### C-1: Pure Markdown
@@ -523,6 +608,7 @@ This document captures requirements discovered during research on template-based
 **Description:** AI must NEVER generate document structure - only fill in content within script-generated structure. This applies to ALL doc types, including "full generation" docs like ADRs, transition plans, and handoff docs.
 
 **Rationale:**
+
 1. **Consistency:** Script-generated structure is guaranteed correct (0 format drift)
 2. **Token efficiency:** Structure generation costs 0 AI tokens
 3. **Validation:** Structure can be validated independently of content
@@ -572,6 +658,22 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### C-13: Commands Remain Orchestrators
+
+**Description:** Commands must remain workflow orchestrators. Scripts are tools commands invoke, not replacements for commands.
+
+**Source:** [research-command-integration.md](research-command-integration.md)
+
+---
+
+### C-14: AI No Structure Generation
+
+**Description:** AI must not generate document structure, only fill placeholders within script-generated structure.
+
+**Source:** [research-command-integration.md](research-command-integration.md)
+
+---
+
 ## 💭 Assumptions
 
 ### A-1: Cursor Environment
@@ -597,6 +699,9 @@ This document captures requirements discovered during research on template-based
 - [Exploration](../../explorations/template-doc-infrastructure/README.md)
 - [Topic 1: Template Inventory](research-template-inventory.md)
 - [Topic 2: Generation Architecture](research-generation-architecture.md)
+- [Topic 3: Validation Approach](research-validation-approach.md)
+- [Topic 4: Command Integration](research-command-integration.md)
+- [Topic 6: Architectural Placement](research-architectural-placement.md)
 
 ---
 

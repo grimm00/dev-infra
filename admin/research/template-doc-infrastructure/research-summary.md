@@ -12,8 +12,8 @@
 Research for template-based documentation infrastructure that ensures consistent doc structure across all workflows. **Strategic insight:** This evolved into a broader **workflow orchestration architecture** where scripts handle structure + context gathering and AI handles creative content only.
 
 **Research Topics:** 7 topics (5 original + 2 strategic)  
-**Completed:** 4 topics (3 high-priority + 1 medium)  
-**Status:** 🟡 In Progress (Topics 1, 2, 3, 6 complete)
+**Completed:** 5 topics (3 high-priority + 2 medium)  
+**Status:** 🟡 In Progress (Topics 1, 2, 3, 4, 6 complete)
 
 ---
 
@@ -165,6 +165,34 @@ Validation uses three layers with on-demand CLI as primary interface:
 
 ---
 
+### Finding 9: Command Integration Pattern ✅
+
+Commands have 154 inline template instances across 23 commands. Migration to external templates:
+
+| Phase | Action | Risk |
+|-------|--------|------|
+| 1. Extract | Create external templates | None (no command changes) |
+| 2. Integrate | Commands call scripts | Low (fallback to inline) |
+| 3. Cleanup | Remove inline templates | Low (after validation) |
+
+**Integration pattern:**
+
+```
+Command → dt-doc-gen → Structure
+       → AI        → Content (fill placeholders)
+       → dt-doc-validate → Check compliance
+       → git commit
+```
+
+**Placeholder types:**
+- `{{VAR}}` - Script replaces (DATE, TOPIC)
+- `<!-- AI: instruction -->` - AI fills content
+- `<!-- EXPAND: scope -->` - AI expands in Conduct mode
+
+**Source:** [research-command-integration.md](research-command-integration.md) ✅ Complete
+
+---
+
 ## 💡 Key Insights
 
 - [x] **Insight 1:** Current AI-inline generation causes format drift that breaks automation
@@ -177,12 +205,28 @@ Validation uses three layers with on-demand CLI as primary interface:
 - [x] **Insight 8:** Model selection by task type optimizes cost and quality ⭐
 - [x] **Insight 9:** "Full generation" docs MUST still have script-generated structure - AI only fills content ⭐
 - [x] **Insight 10:** On-demand CLI is primary validation interface; pre-commit is optional ⭐
+- [x] **Insight 11:** 154 inline templates across 23 commands confirms duplication problem ⭐
+- [x] **Insight 12:** Commands remain orchestrators; scripts are tools they invoke ⭐
+
+---
+
+## 🏗️ Implementation Scope Boundaries
+
+Research confirmed multi-repository architecture. Work must be dispersed:
+
+| Repository | Scope | Priority |
+|------------|-------|----------|
+| **dev-infra** (this feature) | Doc templates (17 types), format spec, validation rules spec | 🔴 High |
+| **dev-toolkit** (separate) | `dt-doc-gen`, `dt-doc-validate`, `lib/*.sh`, template fetching | 🔴 High |
+| **dev-toolkit** (separate) | Cursor CLI wrapper, model selection | 🟡 Medium |
+
+**Note:** ADRs from `/decision` phase will formalize this split.
 
 ---
 
 ## 📋 Requirements Summary
 
-**Total Requirements Discovered:** 25 FRs, 12 NFRs, 12 Constraints
+**Total Requirements Discovered:** 30 FRs, 14 NFRs, 14 Constraints
 
 ### High-Priority Requirements
 
@@ -236,7 +280,7 @@ Validation uses three layers with on-demand CLI as primary interface:
 | Generation Script Architecture | 🔴 High | ✅ Complete | Shared library + template files |
 | Architectural Placement (Four-Arm) | 🔴 High | ✅ Complete | Templates in dev-infra, tooling in dev-toolkit |
 | Validation Approach | 🟡 Medium | ✅ Complete | Layered validation, on-demand CLI primary |
-| Command Integration | 🟡 Medium | 🔴 Not Started | - |
+| Command Integration | 🟡 Medium | ✅ Complete | 154 inline templates, incremental migration |
 | Cursor CLI & Model Selection | 🟡 Medium | 🔴 Not Started | - |
 | Template Format | 🟢 Low | 🔴 Not Started | - |
 
@@ -246,14 +290,15 @@ Validation uses three layers with on-demand CLI as primary interface:
 
 1. ✅ ~~Complete high-priority research (Topics 1-2, 6)~~
 2. ✅ ~~Complete validation approach research (Topic 3)~~
-3. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+3. ✅ ~~Complete command integration research (Topic 4)~~
+4. Use `/decision template-doc-infrastructure --from-research` to make decisions:
    - Template architecture (17 doc types, 5 patterns)
    - Generation script architecture (shared library)
-   - **Architectural placement (four-arm question)** ⭐
+   - Architectural placement (four-arm question)
    - Validation architecture
-   - Model selection strategy
-4. Create ADRs for each decision
-5. Complete remaining research topics (4-5, 7) during implementation if needed
+   - Command integration pattern
+5. Create ADRs for each decision
+6. Complete remaining research topics (5, 7) during implementation if needed
 
 ---
 
