@@ -383,6 +383,42 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### FR-31: Model Selection Config
+
+**Description:** Model selection configuration file (`models.yaml`) must map task types to preferred AI models.
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+**Priority:** 🟢 Low
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-32: Command Model Recommendations
+
+**Description:** Command documentation must include recommended model for optimal results.
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+**Priority:** 🟢 Low
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-33: Future Programmatic Model Selection
+
+**Description:** Future programmatic AI invocation must support model selection per task type.
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+**Priority:** 🟢 Low
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Parseable Structure
@@ -553,6 +589,30 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### NFR-15: Model Selection Not Blocking
+
+**Description:** Programmatic AI invocation with model selection is enhancement, not blocker for template infrastructure.
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-16: User-Customizable Model Config
+
+**Description:** Model selection configuration must be user-customizable (not hardcoded).
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+**Priority:** 🟢 Low
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints
 
 ### C-1: Pure Markdown
@@ -674,6 +734,22 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### C-15: No Cursor CLI Agent API
+
+**Description:** Cursor CLI does not currently support programmatic agent invocation (file-open only).
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+---
+
+### C-16: Programmatic AI Requires External Tool
+
+**Description:** Programmatic AI invocation requires external tool (Aider/LLM CLI) or future Cursor API.
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+---
+
 ## 💭 Assumptions
 
 ### A-1: Cursor Environment
@@ -692,6 +768,22 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### A-3: Future Cursor API
+
+**Description:** Cursor may expose programmatic agent API in future versions.
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+---
+
+### A-4: Manual Model Switching
+
+**Description:** Users are willing to manually switch models in Cursor settings for optimal results.
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md)
+
+---
+
 ## 🔗 Related Documents
 
 - [Research Summary](research-summary.md)
@@ -702,6 +794,7 @@ This document captures requirements discovered during research on template-based
 - [Topic 3: Validation Approach](research-validation-approach.md)
 - [Topic 4: Command Integration](research-command-integration.md)
 - [Topic 6: Architectural Placement](research-architectural-placement.md)
+- [Topic 7: Cursor CLI & Model Selection](research-cursor-cli-model-selection.md)
 
 ---
 

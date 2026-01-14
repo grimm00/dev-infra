@@ -12,8 +12,8 @@
 Research for template-based documentation infrastructure that ensures consistent doc structure across all workflows. **Strategic insight:** This evolved into a broader **workflow orchestration architecture** where scripts handle structure + context gathering and AI handles creative content only.
 
 **Research Topics:** 7 topics (5 original + 2 strategic)  
-**Completed:** 5 topics (3 high-priority + 2 medium)  
-**Status:** 🟡 In Progress (Topics 1, 2, 3, 4, 6 complete)
+**Completed:** 6 topics (3 high-priority + 3 medium)  
+**Status:** 🟡 Near Complete (Topics 1, 2, 3, 4, 6, 7 complete; Topic 5 optional)
 
 ---
 
@@ -193,6 +193,28 @@ Command → dt-doc-gen → Structure
 
 ---
 
+### Finding 10: Cursor CLI is File-Open Only ✅
+
+Cursor CLI cannot programmatically invoke AI agents:
+
+| Capability | Available | Notes |
+|------------|-----------|-------|
+| Open project/file | ✅ Yes | `cursor /path/to/project` |
+| Agent invocation | ❌ No | No `--prompt` flag |
+| Model selection | ❌ No | No `--model` flag |
+| Context passing | ❌ No | No `--context` flag |
+
+**Alternative tools available:**
+- **Aider:** `--model` flag, `--files` for context
+- **LLM CLI:** Pipe context, `-m model` selection
+- **Claude API:** Full programmatic control
+
+**Recommendation:** Config-based model selection now, programmatic invocation as future enhancement.
+
+**Source:** [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) ✅ Complete
+
+---
+
 ## 💡 Key Insights
 
 - [x] **Insight 1:** Current AI-inline generation causes format drift that breaks automation
@@ -207,6 +229,8 @@ Command → dt-doc-gen → Structure
 - [x] **Insight 10:** On-demand CLI is primary validation interface; pre-commit is optional ⭐
 - [x] **Insight 11:** 154 inline templates across 23 commands confirms duplication problem ⭐
 - [x] **Insight 12:** Commands remain orchestrators; scripts are tools they invoke ⭐
+- [x] **Insight 13:** Cursor CLI is file-open only - no programmatic agent API exists ⭐
+- [x] **Insight 14:** Model selection is enhancement, not blocker - implement incrementally ⭐
 
 ---
 
@@ -226,7 +250,7 @@ Research confirmed multi-repository architecture. Work must be dispersed:
 
 ## 📋 Requirements Summary
 
-**Total Requirements Discovered:** 30 FRs, 14 NFRs, 14 Constraints
+**Total Requirements Discovered:** 33 FRs, 16 NFRs, 16 Constraints, 4 Assumptions
 
 ### High-Priority Requirements
 
@@ -281,8 +305,8 @@ Research confirmed multi-repository architecture. Work must be dispersed:
 | Architectural Placement (Four-Arm) | 🔴 High | ✅ Complete | Templates in dev-infra, tooling in dev-toolkit |
 | Validation Approach | 🟡 Medium | ✅ Complete | Layered validation, on-demand CLI primary |
 | Command Integration | 🟡 Medium | ✅ Complete | 154 inline templates, incremental migration |
-| Cursor CLI & Model Selection | 🟡 Medium | 🔴 Not Started | - |
-| Template Format | 🟢 Low | 🔴 Not Started | - |
+| Cursor CLI & Model Selection | 🟡 Medium | ✅ Complete | No CLI API; config-based model selection |
+| Template Format | 🟢 Low | 🔴 Scaffolding | Optional - can defer |
 
 ---
 
@@ -291,14 +315,16 @@ Research confirmed multi-repository architecture. Work must be dispersed:
 1. ✅ ~~Complete high-priority research (Topics 1-2, 6)~~
 2. ✅ ~~Complete validation approach research (Topic 3)~~
 3. ✅ ~~Complete command integration research (Topic 4)~~
-4. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+4. ✅ ~~Complete Cursor CLI & model selection research (Topic 7)~~
+5. Use `/decision template-doc-infrastructure --from-research` to make decisions:
    - Template architecture (17 doc types, 5 patterns)
    - Generation script architecture (shared library)
    - Architectural placement (four-arm question)
    - Validation architecture
    - Command integration pattern
-5. Create ADRs for each decision
-6. Complete remaining research topics (5, 7) during implementation if needed
+   - Model selection configuration
+6. Create ADRs for each decision
+7. Template Format (Topic 5) is optional - can defer to implementation
 
 ---
 

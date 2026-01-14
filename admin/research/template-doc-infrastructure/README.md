@@ -1,7 +1,7 @@
 # Template Doc Infrastructure - Research Hub
 
 **Purpose:** Research for template-based documentation infrastructure  
-**Status:** 🟡 Research (5 Topics Complete)  
+**Status:** ✅ Research Near Complete (6/7 Topics)  
 **Created:** 2026-01-13  
 **Last Updated:** 2026-01-14
 
@@ -10,7 +10,7 @@
 ## 📋 Quick Links
 
 - **[Research Summary](research-summary.md)** - Summary of all research findings ⭐
-- **[Requirements](requirements.md)** - 30 FRs, 14 NFRs, 14 Constraints discovered
+- **[Requirements](requirements.md)** - 33 FRs, 16 NFRs, 16 Constraints, 4 Assumptions
 
 ### Research Documents
 
@@ -21,8 +21,8 @@
 | 🔴 High   | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md)       | ✅ Complete    |
 | 🟡 Medium | Validation Approach                | [research-validation-approach.md](research-validation-approach.md)               | ✅ Complete    |
 | 🟡 Medium | Command Integration                | [research-command-integration.md](research-command-integration.md)               | ✅ Complete    |
-| 🟡 Medium | Cursor CLI & Model Selection       | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | 🔴 Not Started |
-| 🟢 Low    | Template Format                    | [research-template-format.md](research-template-format.md)                       | 🔴 Not Started |
+| 🟡 Medium | Cursor CLI & Model Selection       | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | ✅ Complete    |
+| 🟢 Low    | Template Format                    | [research-template-format.md](research-template-format.md)                       | 🔴 Optional    |
 
 ---
 
@@ -38,14 +38,15 @@ This research addresses how to build template-based documentation infrastructure
 2. ✅ How should generation scripts be structured?
 3. ✅ How should validation work?
 4. ✅ How do templates integrate with existing commands?
-5. What format should templates use?
-6. ✅ **Where should this tooling live? (Four-Arm Question)**
-7. **How should scripts invoke Cursor with model selection?** ⭐ NEW
+5. 🟢 What format should templates use? (optional)
+6. ✅ Where should this tooling live? (Four-Arm Question)
+7. ✅ How should scripts invoke Cursor with model selection?
 
 **Research Topics:** 7 topics  
 **High Priority Complete:** 3/3 topics ✅  
-**Medium Priority Complete:** 2/3 topics ✅  
-**Status:** 🟡 Research (ready for decision phase)
+**Medium Priority Complete:** 3/3 topics ✅  
+**Low Priority:** 0/1 (optional)  
+**Status:** ✅ Ready for decision phase
 
 ---
 
@@ -61,17 +62,17 @@ This research addresses how to build template-based documentation infrastructure
 
 ### Medium Priority
 
-| Research Topic               | Status         | Key Finding                                 |
-| ---------------------------- | -------------- | ------------------------------------------- |
-| Validation Approach          | ✅ Complete    | Layered validation, on-demand CLI primary   |
-| Command Integration          | ✅ Complete    | 154 inline templates, incremental migration |
-| Cursor CLI & Model Selection | 🔴 Not Started | -                                           |
+| Research Topic               | Status      | Key Finding                                 |
+| ---------------------------- | ----------- | ------------------------------------------- |
+| Validation Approach          | ✅ Complete | Layered validation, on-demand CLI primary   |
+| Command Integration          | ✅ Complete | 154 inline templates, incremental migration |
+| Cursor CLI & Model Selection | ✅ Complete | No CLI API; config-based model selection    |
 
 ### Low Priority
 
-| Research Topic  | Status         | Key Finding |
-| --------------- | -------------- | ----------- |
-| Template Format | 🔴 Not Started | -           |
+| Research Topic  | Status      | Key Finding                     |
+| --------------- | ----------- | ------------------------------- |
+| Template Format | 🔴 Optional | Can defer to implementation     |
 
 ---
 
@@ -108,6 +109,14 @@ This research addresses how to build template-based documentation infrastructure
 - **Placeholder types** - `{{VAR}}`, `<!-- AI: -->`, `<!-- EXPAND: -->`
 - **Start with /explore and /research** - most complex, highest value
 
+### From Topic 7: Cursor CLI & Model Selection
+
+- **Cursor CLI is file-open only** - no `--model`, `--prompt`, or `--context` flags
+- **MCP is tool-TO-AI** - doesn't help with script-TO-AI invocation
+- **Alternative tools exist** - Aider, LLM CLI, Claude API provide what we need
+- **Config-based model selection** - `models.yaml` can prepare for future
+- **Not a blocker** - current interactive commands work fine
+
 ### Strategic Insights (From Discussion)
 
 - **Scripts as orchestration layer** - not just generation, full workflow control
@@ -130,16 +139,18 @@ This research addresses how to build template-based documentation infrastructure
 1. ✅ ~~Conduct research on high-priority topics (Topics 1-2, 6)~~
 2. ✅ ~~Conduct research on validation approach (Topic 3)~~
 3. ✅ ~~Conduct research on command integration (Topic 4)~~
-4. Review [research-summary.md](research-summary.md) and [requirements.md](requirements.md)
-5. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+4. ✅ ~~Conduct research on Cursor CLI & model selection (Topic 7)~~
+5. Review [research-summary.md](research-summary.md) and [requirements.md](requirements.md)
+6. Use `/decision template-doc-infrastructure --from-research` to make decisions:
    - Template architecture (17 doc types, 5 patterns)
    - Generation script architecture (shared library)
    - Architectural placement (four-arm question)
    - Validation architecture
    - Command integration pattern
-6. Decisions will create ADR documents
+   - Model selection configuration
+7. Decisions will create ADR documents
 
-**Note:** Remaining medium-priority topic (7) and low-priority (5) can be researched during implementation if needed.
+**Note:** Topic 5 (Template Format) is optional and can be decided during implementation.
 
 ---
 
