@@ -439,6 +439,21 @@ jinja2 template.j2 data.yaml > output.md
 
 ---
 
+**📌 DECISION BREADCRUMB: Tech Stack Selection**
+
+This research recommends sed-based templates, but implementers should validate:
+
+| Question | Research Position | Needs Validation? |
+|----------|-------------------|-------------------|
+| Variable syntax | `{{VAR}}` with sed | ✅ Test cross-platform (macOS vs Linux sed) |
+| Complex templates | Fall back to jinja2-cli if needed | ✅ Identify which templates need conditionals |
+| Dependency tolerance | Prefer 0 external deps | ⚠️ If jinja2 needed, is pip install acceptable? |
+| Template inheritance | Not addressed | 🟡 May need for DRY hub templates |
+
+**Recommendation for /decision phase:** Create ADR for template rendering tech stack if research shows sed insufficient for identified use cases.
+
+---
+
 ### Finding 6: Validation Architecture
 
 **Validation rules derived from Topic 1 research:**
