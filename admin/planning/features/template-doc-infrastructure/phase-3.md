@@ -62,12 +62,12 @@ Define validation rules for each doc type, providing the specification for `dt-d
 
 **Purpose:** Document the required sections for each of the 6 doc types.
 
-- [ ] Document Exploration rules (Problem, Themes, Key Questions)
-- [ ] Document Research rules (Research Question, Findings, Recommendations)
-- [ ] Document Decision/ADR rules (Context, Decision, Consequences)
-- [ ] Document Planning rules (Overview, Success Criteria, Phases)
-- [ ] Document Handoff rules (Current State, Next Steps)
-- [ ] Document Fix rules (Issues Table, Status)
+- [x] Document Exploration rules (What We're Exploring, Themes, Key Questions)
+- [x] Document Research rules (Research Question, Findings, Recommendations)
+- [x] Document Decision/ADR rules (Context, Decision, Consequences)
+- [x] Document Planning rules (Overview, Goals, Phase subtypes)
+- [x] Document Handoff rules (Current State, Next Actions)
+- [x] Document Fix rules (Issues Table, Overview)
 
 **Type-Specific Rules from ADR-004:**
 
@@ -287,7 +287,7 @@ grep -c "pattern:" scripts/doc-gen/templates/validation-rules/*.yaml
 | Task                              | Status         | Notes |
 | --------------------------------- | -------------- | ----- |
 | Task 1: Common Rules              | ✅ Complete    |       |
-| Task 2: Type-Specific Rules       | 🔴 Not Started |       |
+| Task 2: Type-Specific Rules       | ✅ Complete    |       |
 | Task 3: Error Format              | 🔴 Not Started |       |
 | Task 4: Exploration YAML          | 🔴 Not Started |       |
 | Task 5: Research YAML             | 🔴 Not Started |       |
