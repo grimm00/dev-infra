@@ -832,6 +832,196 @@ Add "{metadata_field}" to document metadata block
 
 ---
 
+## 🖥️ CLI Reference (`dt-doc-validate`)
+
+The `dt-doc-validate` CLI tool in dev-toolkit implements these validation rules.
+
+### Basic Usage
+
+```bash
+# Validate a single file
+dt-doc-validate <file>
+
+# Validate all .md files in a directory
+dt-doc-validate <directory>
+
+# Validate with specific options
+dt-doc-validate [options] <path>
+```
+
+### Command-Line Options
+
+| Option | Short | Description | Default |
+|--------|-------|-------------|---------|
+| `--type <type>` | `-t` | Override auto-detected document type | Auto-detect |
+| `--json` | `-j` | Output results in JSON format | Text format |
+| `--quiet` | `-q` | Suppress output, exit code only | Normal output |
+| `--verbose` | `-v` | Show additional details (rules checked, timing) | Normal output |
+| `--help` | `-h` | Show help message | — |
+| `--version` | | Show version information | — |
+
+### Document Type Values (`--type`)
+
+When using `--type` to override detection, use one of these values:
+
+| Type Value | Documents |
+|------------|-----------|
+| `exploration` | Exploration documents |
+| `exploration-hub` | Exploration README.md |
+| `research-topic` | Individual research topic |
+| `research-summary` | Research summary document |
+| `requirements` | Requirements document |
+| `research-hub` | Research README.md |
+| `adr` | Architecture Decision Record |
+| `decisions-summary` | Decisions summary |
+| `decisions-hub` | Decisions README.md |
+| `feature-plan` | Feature plan document |
+| `phase` | Phase document |
+| `status` | Status and next steps |
+| `planning-hub` | Planning README.md |
+| `handoff` | Handoff document |
+| `reflection` | Reflection document |
+| `fix-batch` | Fix batch plan |
+
+### Exit Codes
+
+| Code | Meaning | Description |
+|------|---------|-------------|
+| `0` | Success | All files passed validation (warnings OK) |
+| `1` | Validation Error | One or more files have errors |
+| `2` | System Error | Invalid arguments, file not found, etc. |
+
+### Usage Examples
+
+#### Validate a Single File
+
+```bash
+# Validate a research summary
+dt-doc-validate admin/research/my-topic/research-summary.md
+
+# Expected output:
+# Validating: admin/research/my-topic/research-summary.md
+#   ✓ Passed
+# 
+# Summary: 1 file, 1 passed, 0 errors, 0 warnings
+# Result: PASSED
+```
+
+#### Validate a Directory
+
+```bash
+# Validate all docs in a research topic directory
+dt-doc-validate admin/research/my-topic/
+
+# Expected output:
+# Validating: admin/research/my-topic/README.md
+#   ✓ Passed
+# Validating: admin/research/my-topic/research-summary.md
+#   ✓ Passed
+# Validating: admin/research/my-topic/requirements.md
+#   [WARNING] Date may be stale
+# 
+# Summary: 3 files, 3 passed, 0 errors, 1 warning
+# Result: PASSED
+```
+
+#### Override Document Type
+
+```bash
+# Force validation as exploration type
+dt-doc-validate --type exploration admin/explorations/my-topic/exploration.md
+
+# Validate a hub file explicitly
+dt-doc-validate --type research-hub admin/research/my-topic/README.md
+```
+
+#### JSON Output for CI/Scripts
+
+```bash
+# Get JSON output for parsing
+dt-doc-validate --json admin/research/my-topic/research-summary.md
+
+# Pipe to jq for processing
+dt-doc-validate --json admin/research/ | jq '.summary'
+
+# Check specific field
+dt-doc-validate --json admin/research/ | jq '.summary.errors'
+```
+
+#### Quiet Mode for Scripts
+
+```bash
+# Use exit code only (for shell scripts)
+if dt-doc-validate --quiet admin/research/my-topic/; then
+  echo "Validation passed"
+else
+  echo "Validation failed"
+fi
+
+# Combine with --json for minimal but parseable output
+dt-doc-validate --quiet --json admin/research/my-topic/
+```
+
+#### Verbose Mode for Debugging
+
+```bash
+# Show detailed validation information
+dt-doc-validate --verbose admin/research/my-topic/research-summary.md
+
+# Expected additional output:
+# Document type: research-summary (auto-detected)
+# Rules checked: COMMON_STATUS_HEADER, COMMON_CREATED_DATE, ...
+# Validation time: 45ms
+```
+
+### Integration with dev-toolkit Commands
+
+The validation tool integrates with other dev-toolkit commands:
+
+```bash
+# Validate before generating docs
+dt-doc-gen exploration my-topic && dt-doc-validate admin/explorations/my-topic/
+
+# Validate as part of research workflow
+dt-research complete my-topic  # Internally calls dt-doc-validate
+
+# Pre-commit hook usage
+dt-doc-validate --quiet $(git diff --name-only --staged '*.md')
+```
+
+### Common Patterns
+
+#### Validate Before Commit
+
+```bash
+# Validate changed markdown files
+git diff --name-only --staged '*.md' | xargs -r dt-doc-validate
+```
+
+#### Validate Feature Documentation
+
+```bash
+# Validate all planning docs for a feature
+dt-doc-validate admin/planning/features/my-feature/
+
+# Validate exploration → research → decision chain
+dt-doc-validate admin/explorations/my-topic/ \
+                admin/research/my-topic/ \
+                admin/decisions/my-topic/
+```
+
+#### CI Pipeline Usage
+
+```bash
+# In CI, fail fast on validation errors
+dt-doc-validate --quiet admin/planning/features/my-feature/ || exit 1
+
+# Or collect all errors with JSON
+dt-doc-validate --json admin/ > validation-report.json
+```
+
+---
+
 ## 🔗 References
 
 - [ADR-004: Validation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-004-validation-architecture.md)
@@ -840,9 +1030,5 @@ Add "{metadata_field}" to document metadata block
 - [AUTHORING.md](AUTHORING.md) - Template authoring guide
 
 ---
-
-<!-- 
-NOTE: CLI reference (Task 9) will be added in subsequent tasks.
--->
 
 **Last Updated:** 2026-01-16
