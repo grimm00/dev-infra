@@ -1,0 +1,176 @@
+# Handoff Document Validation Rules
+# 
+# Purpose: Define validation rules for handoff and reflection documents
+# Used by: dt-doc-validate CLI tool
+# Reference: VALIDATION.md (Type-Specific Rules section)
+#
+# Document types covered:
+#   - handoff.md (session/work handoff)
+#   - reflection.md (project reflection)
+
+---
+
+# Handoff Document
+handoff:
+  description: "Session/work handoff validation rules"
+  path_pattern: "tmp/handoff*.md"
+  alternate_patterns:
+    - "admin/handoffs/*.md"
+    - "**/handoff-*.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 7  # Handoffs should be current
+  
+  # Handoff-specific metadata rules
+  metadata_rules:
+    - rule_id: HANDOFF_DATE
+      severity: WARNING
+      pattern: "^\\*\\*Date:\\*\\* "
+      error_code: MISSING_HANDOFF_DATE
+      error_message: "Missing 'Date:' metadata field"
+      fix_suggestion: "Add '**Date:** YYYY-MM-DD' in metadata"
+      
+    - rule_id: HANDOFF_FEATURE
+      severity: INFO
+      pattern: "^\\*\\*Feature:\\*\\* "
+      error_code: MISSING_FEATURE
+      error_message: "Missing 'Feature:' metadata field"
+      fix_suggestion: "Add '**Feature:** [feature-name]' in metadata"
+      
+    - rule_id: HANDOFF_WORKTREE
+      severity: INFO
+      pattern: "^\\*\\*Worktree:\\*\\* "
+      error_code: MISSING_WORKTREE
+      error_message: "Missing 'Worktree:' metadata field"
+      fix_suggestion: "Add '**Worktree:** [worktree-name]' in metadata"
+      
+    - rule_id: HANDOFF_BRANCH
+      severity: INFO
+      pattern: "^\\*\\*Branch:\\*\\* "
+      error_code: MISSING_BRANCH
+      error_message: "Missing 'Branch:' metadata field"
+      fix_suggestion: "Add '**Branch:** [branch-name]' in metadata"
+  
+  required_sections:
+    - section_id: current_state
+      pattern: "^## 📍 Current State"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Current State' section"
+      fix_suggestion: "Add '## 📍 Current State' section after metadata"
+      
+    - section_id: next_actions
+      pattern: "^## 🚀 Next Actions"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Next Actions' section"
+      fix_suggestion: "Add '## 🚀 Next Actions' section"
+  
+  optional_sections:
+    - pattern: "^## 📂 Key Files"
+      description: "Important files for next session"
+    - pattern: "^## 📋 Implementation Scope"
+      description: "What is in/out of scope"
+    - pattern: "^## 🔗 Quick Navigation"
+      description: "Links to relevant docs"
+    - pattern: "^## 📝 Notes"
+      description: "Additional context"
+    - pattern: "^### Completed Work"
+      description: "Work completed table"
+  
+  examples:
+    valid: |
+      # Handoff: Feature Implementation
+      
+      **Feature:** user-auth
+      **Worktree:** feat-user-auth
+      **Branch:** feat/user-auth-phase-2
+      **Date:** 2026-01-16
+      **Status:** 🟠 In Progress
+      
+      ---
+      
+      ## 📍 Current State
+      
+      Phase 2 is 60% complete.
+      
+      ---
+      
+      ## 🚀 Next Actions
+      
+      1. Complete Task 4
+      2. Run integration tests
+
+---
+
+# Reflection Document
+reflection:
+  description: "Project reflection validation rules"
+  path_pattern: "**/reflection*.md"
+  alternate_patterns:
+    - "admin/reflections/*.md"
+    - "**/project-reflection-*.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30  # Reflections may be stable
+  
+  # Reflection-specific metadata rules
+  metadata_rules:
+    - rule_id: REFLECTION_SCOPE
+      severity: WARNING
+      pattern: "^\\*\\*Scope:\\*\\* "
+      error_code: MISSING_SCOPE
+      error_message: "Missing 'Scope:' metadata field"
+      fix_suggestion: "Add '**Scope:** [feature|phase|project]' in metadata"
+      
+    - rule_id: REFLECTION_PERIOD
+      severity: WARNING
+      pattern: "^\\*\\*Period:\\*\\* "
+      error_code: MISSING_PERIOD
+      error_message: "Missing 'Period:' metadata field"
+      fix_suggestion: "Add '**Period:** [date range]' in metadata"
+  
+  required_sections:
+    - section_id: current_state
+      pattern: "^## 📊 Current State"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Current State' section"
+      fix_suggestion: "Add '## 📊 Current State' section after metadata"
+      
+    - section_id: working_well
+      pattern: "^## ✅ What's Working Well"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'What's Working Well' section"
+      fix_suggestion: "Add '## ✅ What's Working Well' section"
+      
+    - section_id: opportunities
+      pattern: "^## 🟡 Opportunities for Improvement"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Opportunities for Improvement' section"
+      fix_suggestion: "Add '## 🟡 Opportunities for Improvement' section"
+  
+  optional_sections:
+    - pattern: "^## 🔴 Potential Issues"
+      description: "Risks or issues needing attention"
+    - pattern: "^## 💡 Actionable Suggestions"
+      description: "Prioritized suggestions"
+    - pattern: "^## 🎯 Recommended Next Steps"
+      description: "Time-boxed recommendations"
+    - pattern: "^## 📈 Trends & Patterns"
+      description: "Observed trends"
+    - pattern: "^## 🔗 Related"
+      description: "Links to related documents"
+    - pattern: "^### Recent Activity"
+      description: "Recent commits, PRs, etc."
+    - pattern: "^### Key Metrics"
+      description: "Relevant metrics"
