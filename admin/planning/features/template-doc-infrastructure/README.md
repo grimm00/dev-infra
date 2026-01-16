@@ -14,7 +14,7 @@
 - **[Transition Plan](transition-plan.md)** - Implementation roadmap (🔴 Not Started)
 - **[Phase 1: Template Creation](phase-1.md)** - Create 17 templates (✅ Complete)
 - **[Phase 2: Format Specification](phase-2.md)** - Document standards (✅ Complete)
-- **[Phase 3: Validation Rules](phase-3.md)** - Define validation spec (🔴 Scaffolding)
+- **[Phase 3: Validation Rules](phase-3.md)** - Define validation spec (✅ Expanded)
 
 ### Research & Decisions
 
@@ -51,7 +51,7 @@ This feature implements the **template portion** of the template-based documenta
 |-------|------|--------|--------------|
 | [Phase 1](phase-1.md) | Template Creation | ✅ Complete | 17 template files |
 | [Phase 2](phase-2.md) | Format Specification | ✅ Complete | Placeholder docs, format spec |
-| [Phase 3](phase-3.md) | Validation Rules | 🔴 Scaffolding | Validation spec per doc type |
+| [Phase 3](phase-3.md) | Validation Rules | ✅ Expanded | Validation spec per doc type |
 
 **Total Estimated Effort:** 12-16 hours
 
