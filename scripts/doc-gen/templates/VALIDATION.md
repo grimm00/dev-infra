@@ -1025,6 +1025,7 @@ dt-doc-validate --json admin/ > validation-report.json
 ## 🔗 References
 
 - [ADR-004: Validation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-004-validation-architecture.md)
+- [validation-rules/](validation-rules/) - Machine-readable YAML validation rules
 - [FORMAT.md](FORMAT.md) - Template format specification
 - [VARIABLES.md](VARIABLES.md) - Variable reference
 - [AUTHORING.md](AUTHORING.md) - Template authoring guide
