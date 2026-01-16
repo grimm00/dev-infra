@@ -548,10 +548,25 @@ Two-mode generation integrates with workflow commands:
 
 ## 🔗 Related Documents
 
+**Spec Documents:**
+
 - [Variable Reference](VARIABLES.md) - Complete variable list
 - [Authoring Guide](AUTHORING.md) - Template creation guide
-- [ADR-002: Template Structure Standard](../../admin/decisions/template-doc-infrastructure/adr-002-template-structure-standard.md)
-- [ADR-003: Generation Architecture](../../admin/decisions/template-doc-infrastructure/adr-003-generation-architecture.md)
+
+**Architecture Decisions:**
+
+- [ADR-002: Template Structure Standard](../../../admin/decisions/template-doc-infrastructure/adr-002-template-structure-standard.md)
+- [ADR-003: Generation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-003-generation-architecture.md)
+
+**Template Examples:**
+
+| Category | Example Template | Demonstrates |
+|----------|------------------|--------------|
+| Exploration | [exploration.md.tmpl](exploration/exploration.md.tmpl) | AI markers, EXPAND zones |
+| Research | [research-topic.md.tmpl](research/research-topic.md.tmpl) | All 3 placeholder types |
+| Decision | [adr.md.tmpl](decision/adr.md.tmpl) | Script variables, status header |
+| Planning | [phase.md.tmpl](planning/phase.md.tmpl) | Status tables, EXPAND zones |
+| Other | [handoff.md.tmpl](other/handoff.md.tmpl) | Quick links, AI markers |
 
 ---
 

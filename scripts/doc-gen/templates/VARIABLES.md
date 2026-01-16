@@ -355,9 +355,25 @@ envsubst -v '${TOPIC_NAME} ${DATE}' < /dev/null
 
 ## 🔗 Related Documents
 
+**Spec Documents:**
+
 - [Format Specification](FORMAT.md) - Placeholder types and rendering
 - [Authoring Guide](AUTHORING.md) - Template creation guide
-- [ADR-002: Template Structure Standard](../../admin/decisions/template-doc-infrastructure/adr-002-template-structure-standard.md)
+
+**Architecture Decisions:**
+
+- [ADR-002: Template Structure Standard](../../../admin/decisions/template-doc-infrastructure/adr-002-template-structure-standard.md)
+
+**Template Examples by Variable Category:**
+
+| Variable Category | Example Template | Key Variables |
+|-------------------|------------------|---------------|
+| Exploration | [README.md.tmpl](exploration/README.md.tmpl) | `${TOPIC_TITLE}`, `${TOPIC_COUNT}` |
+| Research | [research-topic.md.tmpl](research/research-topic.md.tmpl) | `${QUESTION}`, `${QUESTION_NAME}` |
+| Decision | [adr.md.tmpl](decision/adr.md.tmpl) | `${ADR_NUMBER}`, `${DECISION_TITLE}` |
+| Planning | [phase.md.tmpl](planning/phase.md.tmpl) | `${PHASE_NUMBER}`, `${PHASE_NAME}` |
+| Fix/Handoff | [fix-batch.md.tmpl](other/fix-batch.md.tmpl) | `${BATCH_ID}`, `${BRANCH_NAME}` |
+| Reflection | [reflection.md.tmpl](other/reflection.md.tmpl) | `${SCOPE}`, `${PERIOD}` |
 
 ---
 

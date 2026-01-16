@@ -13,7 +13,7 @@
 
 - **[Transition Plan](transition-plan.md)** - Implementation roadmap (🔴 Not Started)
 - **[Phase 1: Template Creation](phase-1.md)** - Create 17 templates (✅ Complete)
-- **[Phase 2: Format Specification](phase-2.md)** - Document standards (✅ Expanded)
+- **[Phase 2: Format Specification](phase-2.md)** - Document standards (✅ Complete)
 - **[Phase 3: Validation Rules](phase-3.md)** - Define validation spec (🔴 Scaffolding)
 
 ### Research & Decisions
@@ -50,7 +50,7 @@ This feature implements the **template portion** of the template-based documenta
 | Phase | Name | Status | Deliverables |
 |-------|------|--------|--------------|
 | [Phase 1](phase-1.md) | Template Creation | ✅ Complete | 17 template files |
-| [Phase 2](phase-2.md) | Format Specification | ✅ Expanded | Placeholder docs, format spec |
+| [Phase 2](phase-2.md) | Format Specification | ✅ Complete | Placeholder docs, format spec |
 | [Phase 3](phase-3.md) | Validation Rules | 🔴 Scaffolding | Validation spec per doc type |
 
 **Total Estimated Effort:** 12-16 hours
@@ -60,8 +60,8 @@ This feature implements the **template portion** of the template-based documenta
 ## ✅ Success Criteria
 
 - [x] All 17 templates created in `scripts/doc-gen/templates/`
-- [ ] Format specification documented
-- [ ] Placeholder conventions documented
+- [x] Format specification documented (FORMAT.md)
+- [x] Placeholder conventions documented (VARIABLES.md)
 - [ ] Validation rules defined per doc type
 - [ ] Templates produce identical output to current command behavior
 
@@ -94,4 +94,4 @@ This feature implements the **template portion** of the template-based documenta
 
 **Last Updated:** 2026-01-16  
 **Status:** 🟠 In Progress  
-**Next:** Expand Phase 2 scaffolding
+**Next:** Phase 3: Validation Rules

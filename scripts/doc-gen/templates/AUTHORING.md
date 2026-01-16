@@ -659,10 +659,25 @@ Templates are reviewed for:
 
 ## 🔗 References
 
+**Spec Documents:**
+
 - [FORMAT.md](FORMAT.md) - Placeholder specification
 - [VARIABLES.md](VARIABLES.md) - Variable reference
+
+**Architecture Decisions:**
+
 - [ADR-002: Template Structure Standard](../../../admin/decisions/template-doc-infrastructure/adr-002-template-structure-standard.md)
 - [ADR-003: Generation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-003-generation-architecture.md)
+
+**Template Examples by Category:**
+
+| Category | Hub Template | Spoke Templates |
+|----------|--------------|-----------------|
+| Exploration | [README.md.tmpl](exploration/README.md.tmpl) | [exploration.md.tmpl](exploration/exploration.md.tmpl), [research-topics.md.tmpl](exploration/research-topics.md.tmpl) |
+| Research | [README.md.tmpl](research/README.md.tmpl) | [research-topic.md.tmpl](research/research-topic.md.tmpl), [research-summary.md.tmpl](research/research-summary.md.tmpl), [requirements.md.tmpl](research/requirements.md.tmpl) |
+| Decision | [README.md.tmpl](decision/README.md.tmpl) | [adr.md.tmpl](decision/adr.md.tmpl), [decisions-summary.md.tmpl](decision/decisions-summary.md.tmpl) |
+| Planning | [README.md.tmpl](planning/README.md.tmpl) | [feature-plan.md.tmpl](planning/feature-plan.md.tmpl), [phase.md.tmpl](planning/phase.md.tmpl), [status-and-next-steps.md.tmpl](planning/status-and-next-steps.md.tmpl) |
+| Other | - | [handoff.md.tmpl](other/handoff.md.tmpl), [fix-batch.md.tmpl](other/fix-batch.md.tmpl), [reflection.md.tmpl](other/reflection.md.tmpl) |
 
 ---
 
