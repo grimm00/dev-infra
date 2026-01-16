@@ -14,15 +14,15 @@
 
 ### Research Documents
 
-| Priority  | Topic                              | Document                                                                         | Status         |
-| --------- | ---------------------------------- | -------------------------------------------------------------------------------- | -------------- |
-| 🔴 High   | Template Inventory & Structure     | [research-template-inventory.md](research-template-inventory.md)                 | ✅ Complete    |
-| 🔴 High   | Generation Script Architecture     | [research-generation-architecture.md](research-generation-architecture.md)       | ✅ Complete    |
-| 🔴 High   | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md)       | ✅ Complete    |
-| 🟡 Medium | Validation Approach                | [research-validation-approach.md](research-validation-approach.md)               | ✅ Complete    |
-| 🟡 Medium | Command Integration                | [research-command-integration.md](research-command-integration.md)               | ✅ Complete    |
-| 🟡 Medium | Cursor CLI & Model Selection       | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | ✅ Complete    |
-| 🟢 Low    | Template Format                    | [research-template-format.md](research-template-format.md)                       | 🔴 Optional    |
+| Priority  | Topic                              | Document                                                                         | Status      |
+| --------- | ---------------------------------- | -------------------------------------------------------------------------------- | ----------- |
+| 🔴 High   | Template Inventory & Structure     | [research-template-inventory.md](research-template-inventory.md)                 | ✅ Complete |
+| 🔴 High   | Generation Script Architecture     | [research-generation-architecture.md](research-generation-architecture.md)       | ✅ Complete |
+| 🔴 High   | Architectural Placement (Four-Arm) | [research-architectural-placement.md](research-architectural-placement.md)       | ✅ Complete |
+| 🟡 Medium | Validation Approach                | [research-validation-approach.md](research-validation-approach.md)               | ✅ Complete |
+| 🟡 Medium | Command Integration                | [research-command-integration.md](research-command-integration.md)               | ✅ Complete |
+| 🟡 Medium | Cursor CLI & Model Selection       | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | ✅ Complete |
+| 🟢 Low    | Template Format                    | [research-template-format.md](research-template-format.md)                       | 🔴 Optional |
 
 ---
 
@@ -70,9 +70,9 @@ This research addresses how to build template-based documentation infrastructure
 
 ### Low Priority
 
-| Research Topic  | Status      | Key Finding                     |
-| --------------- | ----------- | ------------------------------- |
-| Template Format | 🔴 Optional | Can defer to implementation     |
+| Research Topic  | Status      | Key Finding                 |
+| --------------- | ----------- | --------------------------- |
+| Template Format | 🔴 Optional | Can defer to implementation |
 
 ---
 
