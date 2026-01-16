@@ -88,11 +88,11 @@ Define validation rules for each doc type, providing the specification for `dt-d
 
 **Purpose:** Document the error message format for actionable validation feedback.
 
-- [ ] Define text error format (default output)
-- [ ] Define JSON error format (`--json` flag)
-- [ ] Document error severity levels (ERROR, WARNING)
-- [ ] Include error code conventions (MISSING_SECTION, INVALID_FORMAT, etc.)
-- [ ] Provide fix suggestion guidelines
+- [x] Define text error format (default output)
+- [x] Define JSON error format (`--json` flag)
+- [x] Document error severity levels (ERROR, WARNING)
+- [x] Include error code conventions (MISSING_SECTION, INVALID_FORMAT, etc.)
+- [x] Provide fix suggestion guidelines
 
 **Error Format from ADR-004:**
 
@@ -288,7 +288,7 @@ grep -c "pattern:" scripts/doc-gen/templates/validation-rules/*.yaml
 | --------------------------------- | -------------- | ----- |
 | Task 1: Common Rules              | ✅ Complete    |       |
 | Task 2: Type-Specific Rules       | ✅ Complete    |       |
-| Task 3: Error Format              | 🔴 Not Started |       |
+| Task 3: Error Format              | ✅ Complete    |       |
 | Task 4: Exploration YAML          | 🔴 Not Started |       |
 | Task 5: Research YAML             | 🔴 Not Started |       |
 | Task 6: Decision YAML             | 🔴 Not Started |       |
