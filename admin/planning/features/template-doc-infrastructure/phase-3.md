@@ -199,10 +199,10 @@ optional_sections:
 
 **File:** `scripts/doc-gen/templates/validation-rules/planning.yaml`
 
-- [ ] Create planning.yaml with feature-plan rules
-- [ ] Include phase document validation
-- [ ] Define status-and-next-steps rules
-- [ ] Document hub (README.md) rules
+- [x] Create planning.yaml with feature-plan rules
+- [x] Include phase document validation
+- [x] Define status-and-next-steps rules
+- [x] Document hub (README.md) rules
 
 **Deliverable:** `scripts/doc-gen/templates/validation-rules/planning.yaml`
 
@@ -292,7 +292,7 @@ grep -c "pattern:" scripts/doc-gen/templates/validation-rules/*.yaml
 | Task 4: Exploration YAML          | ✅ Complete    |       |
 | Task 5: Research YAML             | ✅ Complete    |       |
 | Task 6: Decision YAML             | ✅ Complete    |       |
-| Task 7: Planning YAML             | 🔴 Not Started |       |
+| Task 7: Planning YAML             | ✅ Complete    |       |
 | Task 8: Handoff/Fix YAML          | 🔴 Not Started |       |
 | Task 9: CLI Reference             | 🔴 Not Started |       |
 | Task 10: Verify Completeness      | 🔴 Not Started |       |
