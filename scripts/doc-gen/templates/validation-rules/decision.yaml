@@ -1,0 +1,200 @@
+# Decision Document Validation Rules
+# 
+# Purpose: Define validation rules for Architecture Decision Records (ADRs)
+# Used by: dt-doc-validate CLI tool
+# Reference: VALIDATION.md (Type-Specific Rules section)
+#
+# Document types covered:
+#   - adr.md (ADR-NNN: individual architecture decision)
+#   - decisions-summary.md (aggregated decisions summary)
+#   - README.md (decisions hub)
+
+---
+
+# Architecture Decision Record (ADR)
+adr:
+  description: "Individual Architecture Decision Record validation rules"
+  path_pattern: "admin/decisions/*/adr-*.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 60  # ADRs may be stable longer
+  
+  # ADR-specific metadata rules
+  metadata_rules:
+    - rule_id: ADR_BATCH_NUMBER
+      severity: WARNING
+      pattern: "^\\*\\*Batch:\\*\\* \\d+"
+      error_code: MISSING_BATCH
+      error_message: "Missing 'Batch:' metadata field"
+      fix_suggestion: "Add '**Batch:** [batch-number]' after Last Updated"
+      
+    - rule_id: ADR_NUMBER_TITLE
+      severity: ERROR
+      pattern: "^# ADR-\\d{3}: "
+      error_code: INVALID_ADR_TITLE
+      error_message: "ADR title must follow 'ADR-NNN: Title' format"
+      fix_suggestion: "Use format '# ADR-001: Decision Title'"
+  
+  required_sections:
+    - section_id: context
+      pattern: "^## Context"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Context' section"
+      fix_suggestion: "Add '## Context' section after metadata block"
+      
+    - section_id: decision
+      pattern: "^## Decision"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Decision' section"
+      fix_suggestion: "Add '## Decision' section after Context"
+      
+    - section_id: consequences
+      pattern: "^## Consequences"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Consequences' section"
+      fix_suggestion: "Add '## Consequences' section after Decision"
+  
+  optional_sections:
+    - pattern: "^## Alternatives Considered"
+      description: "Options evaluated before decision"
+    - pattern: "^## Decision Rationale"
+      description: "Why this decision was made"
+    - pattern: "^## Requirements Impact"
+      description: "How decision impacts requirements"
+    - pattern: "^## References"
+      description: "Related documents and resources"
+  
+  examples:
+    valid: |
+      # ADR-001: Use PostgreSQL for Data Storage
+      
+      **Status:** ✅ Accepted
+      **Created:** 2026-01-16
+      **Last Updated:** 2026-01-16
+      **Batch:** 1
+      
+      ---
+      
+      ## Context
+      
+      We need a persistent data store for user data.
+      
+      ---
+      
+      ## Decision
+      
+      Use PostgreSQL as the primary database.
+      
+      ---
+      
+      ## Consequences
+      
+      - Positive: ACID compliance, JSON support
+      - Negative: Additional infrastructure complexity
+
+---
+
+# Decisions Summary Document
+decisions_summary:
+  description: "Aggregated decisions summary validation rules"
+  path_pattern: "admin/decisions/*/decisions-summary.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30
+  
+  required_sections:
+    - section_id: decisions_overview
+      pattern: "^## 📋 Decisions Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Decisions Overview' section"
+      fix_suggestion: "Add '## 📋 Decisions Overview' section after metadata"
+      
+    - section_id: key_decisions
+      pattern: "^## 🎯 Key Decisions"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Key Decisions' section"
+      fix_suggestion: "Add '## 🎯 Key Decisions' section to list ADRs"
+      
+    - section_id: requirements_impact
+      pattern: "^## 📋 Requirements Impact"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Requirements Impact' section"
+      fix_suggestion: "Add '## 📋 Requirements Impact' section"
+  
+  optional_sections:
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended follow-up actions"
+
+---
+
+# Decisions Hub (README.md)
+decisions_hub:
+  description: "Decisions hub (README.md) validation rules"
+  path_pattern: "admin/decisions/*/README.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30
+  
+  required_sections:
+    - section_id: quick_links
+      pattern: "^## 📋 Quick Links"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Quick Links' section"
+      fix_suggestion: "Add '## 📋 Quick Links' section after metadata"
+      
+    - section_id: decisions_overview
+      pattern: "^## 🎯 Decisions Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Decisions Overview' section"
+      fix_suggestion: "Add '## 🎯 Decisions Overview' section after Quick Links"
+  
+  optional_sections:
+    - pattern: "^## 📊 Decision Status"
+      description: "Status table of decisions"
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended next actions"
+
+---
+
+# ADR Status Values
+status_values:
+  description: "Valid ADR status values for validation"
+  valid_statuses:
+    - value: "🔴 Not Started"
+      description: "Decision process not begun"
+    - value: "🟠 Draft"
+      description: "Decision being drafted"
+    - value: "🟡 Proposed"
+      description: "Decision proposed, awaiting review"
+    - value: "✅ Accepted"
+      description: "Decision accepted and active"
+    - value: "❌ Rejected"
+      description: "Decision rejected"
+    - value: "⚪ Deprecated"
+      description: "Decision superseded"
+    - value: "🔵 Superseded"
+      description: "Replaced by another ADR"
