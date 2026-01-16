@@ -125,14 +125,14 @@ Document template format, placeholder conventions, and variable definitions for 
 
 **File:** `scripts/doc-gen/templates/AUTHORING.md`
 
-- [ ] Create AUTHORING.md document
-- [ ] Document template file naming conventions
-- [ ] Document directory structure requirements
-- [ ] Explain two-mode support (setup vs full)
-- [ ] Include template creation checklist
-- [ ] Provide step-by-step guide for new templates
-- [ ] Document testing and validation process
-- [ ] Include contribution guidelines
+- [x] Create AUTHORING.md document
+- [x] Document template file naming conventions
+- [x] Document directory structure requirements
+- [x] Explain two-mode support (setup vs full)
+- [x] Include template creation checklist
+- [x] Provide step-by-step guide for new templates
+- [x] Document testing and validation process
+- [x] Include contribution guidelines
 
 **Sections to Include:**
 
@@ -262,7 +262,7 @@ grep -rh '<!-- EXPAND:' scripts/doc-gen/templates/*.tmpl | head -20
 | --------------------------------- | -------------- | ----- |
 | Task 1: FORMAT.md                 | ✅ Complete    |       |
 | Task 2: VARIABLES.md              | ✅ Complete    |       |
-| Task 3: AUTHORING.md              | 🔴 Not Started |       |
+| Task 3: AUTHORING.md              | ✅ Complete    |       |
 | Task 4: Two-Mode Documentation    | 🔴 Not Started |       |
 | Task 5: Verify Spec Completeness  | 🔴 Not Started |       |
 
@@ -272,7 +272,7 @@ grep -rh '<!-- EXPAND:' scripts/doc-gen/templates/*.tmpl | head -20
 
 - [x] FORMAT.md documents all placeholder types ✅
 - [x] VARIABLES.md lists all standard variables ✅
-- [ ] AUTHORING.md provides complete guide
+- [x] AUTHORING.md provides complete guide ✅
 - [ ] Two-mode support clearly explained
 - [ ] Examples provided for each concept
 - [ ] Spec enables tooling implementation
