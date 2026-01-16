@@ -352,6 +352,178 @@ in the application, focusing on security best practices and user experience.
 
 ---
 
+## 🔀 Two-Mode Generation
+
+Templates support two distinct generation modes, enabling efficient workflows where structure is created quickly and content is added progressively.
+
+### Mode Comparison
+
+| Aspect | Setup Mode (Scaffolding) | Conduct Mode (Full) |
+|--------|--------------------------|---------------------|
+| **Purpose** | Create structure for review | Generate complete content |
+| **Status** | `🔴 Scaffolding` | `✅ Expanded` |
+| **`${VAR}`** | ✅ Expanded | ✅ Expanded |
+| **`<!-- AI: -->`** | ⏸️ Preserved | ✅ Filled by AI |
+| **`<!-- EXPAND: -->`** | ⏸️ Preserved | ✅ Expanded by AI |
+| **Use Case** | Initial creation, rapid setup | Complete document, conduct workflow |
+| **Human Review** | Before expansion | After expansion |
+
+### When to Use Each Mode
+
+**Use Setup Mode when:**
+
+- Starting a new exploration, research, or planning workflow
+- Creating multiple documents quickly for review
+- Need to validate structure before investing AI tokens
+- Human wants to review approach before detailed content
+
+**Use Conduct Mode when:**
+
+- Human has reviewed and approved scaffolding
+- Ready to generate full content
+- Workflow command includes `--expand` or `--conduct` flag
+- Filling in a previously scaffolded document
+
+### Complete Example: Same Template in Both Modes
+
+**Template File (`research-topic.md.tmpl`):**
+
+```markdown
+# Research: ${TOPIC_TITLE}
+
+**Status:** ${STATUS}  
+**Created:** ${DATE}
+
+## 🎯 Research Question
+
+<!-- AI: State the specific research question being investigated -->
+
+## 📚 Research Goals
+
+<!-- EXPAND: List 3-5 research goals with measurable outcomes -->
+
+## 📊 Findings
+
+<!-- EXPAND: Document findings for each research goal. Include:
+- Finding title
+- Description with evidence
+- Source reference
+- Impact assessment
+-->
+
+## 🚀 Next Steps
+
+<!-- AI: List 2-3 immediate next steps based on findings -->
+```
+
+**After Setup Mode (Scaffolding):**
+
+```markdown
+# Research: Token Authentication
+
+**Status:** 🔴 Scaffolding  
+**Created:** 2026-01-16
+
+## 🎯 Research Question
+
+<!-- AI: State the specific research question being investigated -->
+
+## 📚 Research Goals
+
+<!-- EXPAND: List 3-5 research goals with measurable outcomes -->
+
+## 📊 Findings
+
+<!-- EXPAND: Document findings for each research goal. Include:
+- Finding title
+- Description with evidence
+- Source reference
+- Impact assessment
+-->
+
+## 🚀 Next Steps
+
+<!-- AI: List 2-3 immediate next steps based on findings -->
+```
+
+**After Conduct Mode (Full):**
+
+```markdown
+# Research: Token Authentication
+
+**Status:** ✅ Expanded  
+**Created:** 2026-01-16
+
+## 🎯 Research Question
+
+How should the application implement token-based authentication to balance security requirements with developer experience and user convenience?
+
+## 📚 Research Goals
+
+- [ ] **Goal 1:** Evaluate JWT vs opaque token approaches
+  - Outcome: Documented pros/cons with recommendation
+- [ ] **Goal 2:** Research refresh token best practices
+  - Outcome: Implementation pattern for token refresh
+- [ ] **Goal 3:** Assess token storage strategies
+  - Outcome: Security analysis of storage options
+- [ ] **Goal 4:** Review industry standards (OAuth 2.0, OIDC)
+  - Outcome: Compliance requirements documented
+
+## 📊 Findings
+
+### Finding 1: JWT Recommended for Stateless APIs
+
+- **Description:** JSON Web Tokens provide self-contained authentication without server-side session storage
+- **Evidence:** Industry adoption by Auth0, Firebase, AWS Cognito
+- **Source:** OWASP Authentication Cheat Sheet, RFC 7519
+- **Impact:** Simplifies horizontal scaling, reduces database load
+
+### Finding 2: Short-Lived Access + Refresh Pattern
+
+- **Description:** 15-minute access tokens with 7-day refresh tokens balance security and UX
+- **Evidence:** Google, GitHub, Microsoft all use this pattern
+- **Source:** OAuth 2.0 Security Best Practices (RFC 6819)
+- **Impact:** Limits exposure window while reducing re-authentication friction
+
+### Finding 3: HttpOnly Cookies for Web Storage
+
+- **Description:** Store tokens in HttpOnly cookies to prevent XSS attacks
+- **Evidence:** Prevents JavaScript access to tokens
+- **Source:** OWASP Secure Cookie Attributes
+- **Impact:** Significant security improvement over localStorage
+
+## 🚀 Next Steps
+
+1. **Create ADR** for JWT implementation decision
+2. **Design token refresh flow** with sequence diagrams
+3. **Evaluate libraries** (jose, jsonwebtoken, authlib)
+```
+
+### Workflow Integration
+
+Two-mode generation integrates with workflow commands:
+
+| Command | Default Mode | Full Mode Flag |
+|---------|--------------|----------------|
+| `/explore` | Setup | `--expand` or `--conduct` |
+| `/research` | Setup | `--expand` or `--conduct` |
+| `/decision` | Full | N/A (always full) |
+| `/transition-plan` | Setup | `--expand` |
+
+**Typical Workflow:**
+
+```
+1. /explore my-topic
+   → Creates scaffolding (setup mode)
+   → Human reviews structure
+   
+2. /explore my-topic --conduct
+   → Expands all markers (conduct mode)
+   → Complete document generated
+```
+
+---
+
 ## ✅ Validation Rules
 
 ### Script Variables

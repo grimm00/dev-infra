@@ -122,19 +122,44 @@ scripts/doc-gen/templates/
 
 ## 🔄 Two-Mode Support
 
-Templates support two generation modes to enable efficient workflows.
+Templates support two generation modes to enable efficient workflows where structure can be reviewed before content is generated.
+
+### Why Two Modes?
+
+**Problem:** Generating complete documents in one step can waste AI tokens if the structure isn't right.
+
+**Solution:** Two-mode generation separates structure creation from content filling:
+
+1. **Setup Mode** - Create structure quickly, human reviews
+2. **Conduct Mode** - AI fills content after structure is approved
+
+**Benefits:**
+
+- ⚡ Fast scaffolding (minimal AI tokens)
+- 👀 Human review before content investment
+- 🎯 Better final documents (structure validated first)
+- 💰 Token efficiency (no wasted AI on wrong structure)
 
 ### Setup Mode (Scaffolding)
 
 **Purpose:** Create document structure quickly for human review.
 
 **Behavior:**
-- `${VAR}` placeholders are expanded by `envsubst`
-- `<!-- AI: -->` markers are **preserved** (not filled)
-- `<!-- EXPAND: -->` zones are **preserved** (not filled)
-- Status set to `🔴 Scaffolding`
 
-**Use Case:** Initial document creation, rapid structure setup
+| Placeholder Type | Behavior in Setup Mode |
+|-----------------|------------------------|
+| `${VAR}` | ✅ Expanded by envsubst |
+| `<!-- AI: -->` | ⏸️ Preserved (not filled) |
+| `<!-- EXPAND: -->` | ⏸️ Preserved (not filled) |
+
+**Status:** `🔴 Scaffolding`
+
+**When to Use:**
+
+- Starting new workflows (`/explore`, `/research`, `/transition-plan`)
+- Creating multiple related documents
+- Need to validate structure before content
+- Want human review of approach
 
 **Example Output:**
 
@@ -146,20 +171,33 @@ Templates support two generation modes to enable efficient workflows.
 
 ## 🎯 Goals
 
-<!-- AI: List feature goals -->
+<!-- AI: List feature goals based on research findings -->
+
+## 📅 Implementation Phases
+
+<!-- EXPAND: Break down into 3-5 phases with tasks and estimates -->
 ```
 
-### Full Mode (Expansion)
+### Conduct Mode (Full Expansion)
 
 **Purpose:** AI fills all content markers for complete documents.
 
 **Behavior:**
-- `${VAR}` placeholders are expanded by `envsubst`
-- `<!-- AI: -->` markers are **filled** by AI
-- `<!-- EXPAND: -->` zones are **expanded** with detailed content
-- Status set to `✅ Expanded` or workflow-specific status
 
-**Use Case:** Complete document generation, conduct mode
+| Placeholder Type | Behavior in Conduct Mode |
+|-----------------|--------------------------|
+| `${VAR}` | ✅ Expanded by envsubst |
+| `<!-- AI: -->` | ✅ Filled with AI-generated content |
+| `<!-- EXPAND: -->` | ✅ Expanded with detailed content |
+
+**Status:** `✅ Expanded` (or workflow-specific status)
+
+**When to Use:**
+
+- After human reviews scaffolding
+- Ready for complete document
+- Command includes `--expand` or `--conduct` flag
+- Decision workflows (usually always full)
 
 **Example Output:**
 
@@ -174,22 +212,123 @@ Templates support two generation modes to enable efficient workflows.
 1. Implement secure user authentication with JWT tokens
 2. Support multiple authentication providers (local, OAuth)
 3. Provide role-based access control (RBAC)
+4. Ensure compliance with security best practices
+
+## 📅 Implementation Phases
+
+### Phase 1: Foundation (2-3 days)
+
+- [ ] Set up authentication middleware
+- [ ] Implement JWT token generation
+- [ ] Create user model with password hashing
+
+### Phase 2: Core Auth (3-4 days)
+
+- [ ] Implement login/logout endpoints
+- [ ] Add refresh token support
+- [ ] Create session management
+
+### Phase 3: Advanced Features (2-3 days)
+
+- [ ] Add OAuth provider support
+- [ ] Implement RBAC
+- [ ] Add audit logging
 ```
 
-### Designing for Two-Mode
+### Designing Templates for Two-Mode
 
-When creating templates, consider both modes:
+**When creating templates, ensure they work well in both modes:**
+
+#### 1. Use Clear Section Headers
 
 ```markdown
-## Section Title
+## 🎯 Goals
 
-<!-- AI: Brief instruction for AI -->
-
-<!-- EXPAND: Detailed scope for expansion -->
+<!-- AI: List 3-5 goals as numbered items -->
 ```
 
-- **AI markers:** Use for smaller content pieces (1-3 paragraphs)
-- **EXPAND zones:** Use for larger sections requiring detailed content
+Scaffolding shows: header + marker (reviewable structure)
+Full shows: header + generated content
+
+#### 2. Provide Detailed AI Instructions
+
+```markdown
+<!-- AI: List key findings. For each finding include:
+- Finding title
+- Brief description
+- Source reference
+-->
+```
+
+Better instructions → better AI output in conduct mode.
+
+#### 3. Choose Marker Type Appropriately
+
+| Content Size | Marker Type | Example Use |
+|--------------|-------------|-------------|
+| Brief (1-3 sentences) | `<!-- AI: -->` | Summaries, descriptions |
+| Moderate (1-3 paragraphs) | `<!-- AI: -->` | Analysis, recommendations |
+| Detailed (sections) | `<!-- EXPAND: -->` | Findings, methodology, phases |
+
+#### 4. Design for Progressive Disclosure
+
+```markdown
+## Overview
+
+<!-- AI: Brief 2-3 sentence overview -->
+
+## Details
+
+<!-- EXPAND: Comprehensive details with subsections -->
+```
+
+In scaffolding, humans see structure.
+In full mode, AI fills appropriate detail levels.
+
+### Two-Mode Workflow Example
+
+**Typical workflow using two modes:**
+
+```
+Step 1: Create Scaffolding
+$ dt-doc-gen explore "User Auth" --setup
+→ Creates admin/explorations/user-auth/
+→ All documents have 🔴 Scaffolding status
+→ AI/EXPAND markers preserved
+
+Step 2: Human Review
+Developer reviews:
+- Is the structure right?
+- Are the sections appropriate?
+- Should anything be added/removed?
+
+Step 3: Expand Content
+$ dt-doc-gen explore "User Auth" --expand
+→ AI fills all markers
+→ Status changes to ✅ Expanded
+→ Complete documents generated
+```
+
+### Testing Two-Mode Behavior
+
+**Verify template works in setup mode:**
+
+```bash
+# Export variables
+export DATE=$(date +%Y-%m-%d)
+export STATUS="🔴 Scaffolding"
+export TOPIC_TITLE="Test Topic"
+
+# Generate scaffolding
+envsubst < template.md.tmpl
+
+# Verify:
+# ✅ ${VAR} placeholders expanded
+# ✅ <!-- AI: --> markers preserved
+# ✅ <!-- EXPAND: --> zones preserved
+```
+
+**See:** [FORMAT.md](FORMAT.md#-two-mode-generation) for complete two-mode specification.
 
 ---
 

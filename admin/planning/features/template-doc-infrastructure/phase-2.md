@@ -196,11 +196,11 @@ Document template format, placeholder conventions, and variable definitions for 
 - `scripts/doc-gen/templates/FORMAT.md` - Add Two-Mode section
 - `scripts/doc-gen/templates/AUTHORING.md` - Expand Two-Mode section
 
-- [ ] Document setup mode behavior (scaffolding)
-- [ ] Document full mode behavior (AI fills content)
-- [ ] Explain when each mode is used
-- [ ] Provide examples of same template in both modes
-- [ ] Document expansion zones (`<!-- EXPAND: -->`) in detail
+- [x] Document setup mode behavior (scaffolding)
+- [x] Document full mode behavior (AI fills content)
+- [x] Explain when each mode is used
+- [x] Provide examples of same template in both modes
+- [x] Document expansion zones (`<!-- EXPAND: -->`) in detail
 
 **Two-Mode Flow:**
 
@@ -263,7 +263,7 @@ grep -rh '<!-- EXPAND:' scripts/doc-gen/templates/*.tmpl | head -20
 | Task 1: FORMAT.md                 | ✅ Complete    |       |
 | Task 2: VARIABLES.md              | ✅ Complete    |       |
 | Task 3: AUTHORING.md              | ✅ Complete    |       |
-| Task 4: Two-Mode Documentation    | 🔴 Not Started |       |
+| Task 4: Two-Mode Documentation    | ✅ Complete    |       |
 | Task 5: Verify Spec Completeness  | 🔴 Not Started |       |
 
 ---
@@ -273,7 +273,7 @@ grep -rh '<!-- EXPAND:' scripts/doc-gen/templates/*.tmpl | head -20
 - [x] FORMAT.md documents all placeholder types ✅
 - [x] VARIABLES.md lists all standard variables ✅
 - [x] AUTHORING.md provides complete guide ✅
-- [ ] Two-mode support clearly explained
+- [x] Two-mode support clearly explained ✅
 - [ ] Examples provided for each concept
 - [ ] Spec enables tooling implementation
 
