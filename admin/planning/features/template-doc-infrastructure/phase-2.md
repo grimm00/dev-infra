@@ -2,7 +2,7 @@
 
 **Phase:** 2 - Format Specification  
 **Duration:** 3-4 hours  
-**Status:** ✅ Expanded  
+**Status:** 🟠 In Progress  
 **Prerequisites:** Phase 1 complete
 
 ---
@@ -313,5 +313,5 @@ grep -rh '<!-- EXPAND:' scripts/doc-gen/templates/*.tmpl | head -20
 ---
 
 **Last Updated:** 2026-01-16  
-**Status:** ✅ Expanded  
-**Next:** Begin implementation with Task 1
+**Status:** 🟠 In Progress  
+**Next:** Complete Task 1: FORMAT.md
