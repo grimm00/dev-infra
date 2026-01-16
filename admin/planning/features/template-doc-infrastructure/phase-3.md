@@ -184,10 +184,10 @@ optional_sections:
 
 **File:** `scripts/doc-gen/templates/validation-rules/decision.yaml`
 
-- [ ] Create decision.yaml with ADR required sections
-- [ ] Include decisions-summary validation rules
-- [ ] Define hub (README.md) rules
-- [ ] Document ADR-specific patterns (Status, Batch)
+- [x] Create decision.yaml with ADR required sections
+- [x] Include decisions-summary validation rules
+- [x] Define hub (README.md) rules
+- [x] Document ADR-specific patterns (Status, Batch)
 
 **Deliverable:** `scripts/doc-gen/templates/validation-rules/decision.yaml`
 
@@ -291,7 +291,7 @@ grep -c "pattern:" scripts/doc-gen/templates/validation-rules/*.yaml
 | Task 3: Error Format              | ✅ Complete    |       |
 | Task 4: Exploration YAML          | ✅ Complete    |       |
 | Task 5: Research YAML             | ✅ Complete    |       |
-| Task 6: Decision YAML             | 🔴 Not Started |       |
+| Task 6: Decision YAML             | ✅ Complete    |       |
 | Task 7: Planning YAML             | 🔴 Not Started |       |
 | Task 8: Handoff/Fix YAML          | 🔴 Not Started |       |
 | Task 9: CLI Reference             | 🔴 Not Started |       |
