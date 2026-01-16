@@ -564,6 +564,274 @@ Each document type has additional required sections beyond the common rules. Doc
 
 ---
 
+## 🚨 Error Output Format
+
+Validation errors must be **actionable** - each error includes the file, issue, and specific fix suggestion.
+
+---
+
+### Severity Levels
+
+| Severity | Symbol | Meaning | Exit Code Impact |
+|----------|--------|---------|------------------|
+| **ERROR** | `[ERROR]` | Must be fixed for document to be valid | Causes exit code 1 |
+| **WARNING** | `[WARNING]` | Should be reviewed but doesn't fail validation | Does not affect exit code |
+
+**Examples:**
+- ERROR: Missing required section, invalid status header, malformed date
+- WARNING: Stale date (>30 days), missing optional sections, format suggestions
+
+---
+
+### Error Code Conventions
+
+All error codes follow the pattern `[CATEGORY]_[SPECIFIC_ERROR]`.
+
+| Code | Category | Description |
+|------|----------|-------------|
+| `MISSING_SECTION` | Structure | Required section not found |
+| `INVALID_FORMAT` | Format | Pattern doesn't match expected format |
+| `INVALID_STATUS` | Metadata | Status indicator not valid |
+| `INVALID_DATE` | Metadata | Date not in YYYY-MM-DD format |
+| `MISSING_METADATA` | Metadata | Required metadata field missing |
+| `STALE_DATE` | Warning | Last Updated >30 days old |
+| `TYPE_DETECTION_FAILED` | System | Could not determine document type |
+| `FILE_NOT_FOUND` | System | Specified file does not exist |
+
+**Full Error Code List:**
+
+| Error Code | Severity | Rule ID | Trigger |
+|------------|----------|---------|---------|
+| `MISSING_STATUS_HEADER` | ERROR | `COMMON_STATUS_HEADER` | No `**Status:**` line found |
+| `INVALID_STATUS_INDICATOR` | ERROR | `COMMON_VALID_INDICATOR` | Status emoji not in allowed set |
+| `MISSING_CREATED_DATE` | ERROR | `COMMON_CREATED_DATE` | No `**Created:**` line found |
+| `INVALID_CREATED_DATE` | ERROR | `COMMON_CREATED_DATE` | Date not YYYY-MM-DD format |
+| `MISSING_LAST_UPDATED` | ERROR | `COMMON_LAST_UPDATED` | No `**Last Updated:**` line found |
+| `INVALID_LAST_UPDATED` | ERROR | `COMMON_LAST_UPDATED` | Date not YYYY-MM-DD format |
+| `STALE_LAST_UPDATED` | WARNING | `COMMON_STALE_DATE` | Date >30 days old |
+| `MISSING_SECTION` | ERROR | `*_REQUIRED_SECTIONS` | Required section not found |
+| `INVALID_ADR_TITLE` | ERROR | `ADR_TITLE_FORMAT` | ADR title not `# ADR-NNN: Title` |
+| `MISSING_ADR_BATCH` | WARNING | `ADR_BATCH_FIELD` | ADR missing Batch field |
+| `MISSING_TASKS_SECTION` | ERROR | `PHASE_TASKS_SECTION` | Phase has no tasks |
+| `MISSING_ISSUES_TABLE` | WARNING | `FIX_BATCH_TABLE` | Fix batch has no issues table |
+
+---
+
+### Text Output Format (Default)
+
+**Single File Validation:**
+
+```
+dt-doc-validate admin/research/my-topic/research-summary.md
+
+[ERROR] Missing required section: ## 📊 Findings
+  File: admin/research/my-topic/research-summary.md
+  Line: (not found)
+  Fix:  Add "## 📊 Findings" section after Research Goals
+
+[WARNING] Date may be stale: Last Updated is 30+ days old
+  File: admin/research/my-topic/research-summary.md
+  Line: 7
+  Fix:  Review document and update "**Last Updated:** YYYY-MM-DD"
+
+Summary: 1 error, 1 warning
+Result: FAILED
+```
+
+**Multi-File Validation (Directory):**
+
+```
+dt-doc-validate admin/research/my-topic/
+
+Validating: admin/research/my-topic/README.md
+  ✓ Passed
+
+Validating: admin/research/my-topic/research-summary.md
+  [ERROR] Missing required section: ## 📊 Findings
+    Fix: Add "## 📊 Findings" section after Research Goals
+
+Validating: admin/research/my-topic/requirements.md
+  [WARNING] Date may be stale
+    Fix: Update "**Last Updated:** YYYY-MM-DD"
+
+Summary: 3 files, 1 passed, 1 error, 1 warning
+Result: FAILED
+```
+
+**Text Format Structure:**
+
+```
+[SEVERITY] {message}
+  File: {file_path}
+  Line: {line_number} (or "not found" if section missing)
+  Fix:  {actionable_fix_suggestion}
+```
+
+---
+
+### JSON Output Format (`--json`)
+
+**Single File:**
+
+```json
+{
+  "file": "admin/research/my-topic/research-summary.md",
+  "type": "research-summary",
+  "passed": false,
+  "errors": [
+    {
+      "code": "MISSING_SECTION",
+      "rule_id": "RESEARCH_SUMMARY_REQUIRED_SECTIONS",
+      "message": "Missing required section: ## 📊 Findings",
+      "line": null,
+      "fix": "Add \"## 📊 Findings\" section after Research Goals"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "STALE_LAST_UPDATED",
+      "rule_id": "COMMON_STALE_DATE",
+      "message": "Date may be stale: Last Updated is 30+ days old",
+      "line": 7,
+      "fix": "Review document and update \"**Last Updated:** YYYY-MM-DD\""
+    }
+  ]
+}
+```
+
+**Multi-File (Directory):**
+
+```json
+{
+  "summary": {
+    "total_files": 3,
+    "passed": 1,
+    "failed": 2,
+    "errors": 1,
+    "warnings": 1
+  },
+  "results": [
+    {
+      "file": "admin/research/my-topic/README.md",
+      "type": "research-hub",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "file": "admin/research/my-topic/research-summary.md",
+      "type": "research-summary",
+      "passed": false,
+      "errors": [
+        {
+          "code": "MISSING_SECTION",
+          "rule_id": "RESEARCH_SUMMARY_REQUIRED_SECTIONS",
+          "message": "Missing required section: ## 📊 Findings",
+          "line": null,
+          "fix": "Add \"## 📊 Findings\" section after Research Goals"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "file": "admin/research/my-topic/requirements.md",
+      "type": "requirements",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "code": "STALE_LAST_UPDATED",
+          "rule_id": "COMMON_STALE_DATE",
+          "message": "Date may be stale: Last Updated is 30+ days old",
+          "line": 5,
+          "fix": "Review document and update \"**Last Updated:** YYYY-MM-DD\""
+        }
+      ]
+    }
+  ]
+}
+```
+
+**JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "file": { "type": "string", "description": "Path to validated file" },
+    "type": { "type": "string", "description": "Detected document type" },
+    "passed": { "type": "boolean", "description": "True if no errors" },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "rule_id": { "type": "string" },
+          "message": { "type": "string" },
+          "line": { "type": ["integer", "null"] },
+          "fix": { "type": "string" }
+        },
+        "required": ["code", "message", "fix"]
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "$ref": "#/properties/errors/items" }
+    }
+  },
+  "required": ["file", "type", "passed", "errors", "warnings"]
+}
+```
+
+---
+
+### Exit Codes
+
+| Code | Meaning | When |
+|------|---------|------|
+| `0` | Success | All files passed validation (warnings OK) |
+| `1` | Validation Error | One or more files have errors |
+| `2` | System Error | Invalid arguments, file not found, etc. |
+
+**Exit Code Logic:**
+- Errors → exit 1 (validation failed)
+- Warnings only → exit 0 (validation passed with notes)
+- System issues → exit 2 (cannot complete validation)
+
+---
+
+### Fix Suggestion Guidelines
+
+Fix suggestions must be **specific and actionable**:
+
+| Guideline | Good Example | Bad Example |
+|-----------|--------------|-------------|
+| **Specific location** | `Add "## 📊 Findings" section after Research Goals` | `Add missing section` |
+| **Exact text** | `Change "**Status:** Started" to "**Status:** 🟠 In Progress"` | `Fix status` |
+| **Format example** | `Use format "**Created:** YYYY-MM-DD" (e.g., 2026-01-16)` | `Fix date format` |
+| **Context aware** | `Add "## Context" section after metadata block` | `Add Context section` |
+
+**Fix Suggestion Template:**
+
+For missing sections:
+```
+Add "{section_header}" section after {preceding_element}
+```
+
+For invalid format:
+```
+Change "{found_value}" to "{expected_format}" (e.g., {example})
+```
+
+For missing metadata:
+```
+Add "{metadata_field}" to document metadata block
+```
+
+---
+
 ## 🔗 References
 
 - [ADR-004: Validation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-004-validation-architecture.md)
@@ -574,7 +842,7 @@ Each document type has additional required sections beyond the common rules. Doc
 ---
 
 <!-- 
-NOTE: Error format (Task 3) and CLI reference (Task 9) will be added in subsequent tasks.
+NOTE: CLI reference (Task 9) will be added in subsequent tasks.
 -->
 
 **Last Updated:** 2026-01-16
