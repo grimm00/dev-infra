@@ -74,13 +74,13 @@ scripts/doc-gen/templates/
 
 ### Category Guidelines
 
-| Category | Purpose | When to Use |
-|----------|---------|-------------|
-| `exploration/` | Initial discovery and problem framing | `/explore` command |
-| `research/` | Structured investigation and analysis | `/research` command |
-| `decision/` | Architectural decisions (ADRs) | `/decision` command |
-| `planning/` | Feature planning and tracking | `/transition-plan` command |
-| `other/` | Cross-workflow utilities | Various commands |
+| Category       | Purpose                               | When to Use                |
+| -------------- | ------------------------------------- | -------------------------- |
+| `exploration/` | Initial discovery and problem framing | `/explore` command         |
+| `research/`    | Structured investigation and analysis | `/research` command        |
+| `decision/`    | Architectural decisions (ADRs)        | `/decision` command        |
+| `planning/`    | Feature planning and tracking         | `/transition-plan` command |
+| `other/`       | Cross-workflow utilities              | Various commands           |
 
 ---
 
@@ -88,18 +88,18 @@ scripts/doc-gen/templates/
 
 ### Template Files
 
-| Convention | Example | Notes |
-|------------|---------|-------|
-| Extension | `.md.tmpl` | Always use `.tmpl` extension |
-| Case | `lowercase-with-hyphens` | No underscores or camelCase |
+| Convention   | Example                        | Notes                        |
+| ------------ | ------------------------------ | ---------------------------- |
+| Extension    | `.md.tmpl`                     | Always use `.tmpl` extension |
+| Case         | `lowercase-with-hyphens`       | No underscores or camelCase  |
 | Output match | `README.md.tmpl` → `README.md` | Template name matches output |
-| Descriptive | `research-topic.md.tmpl` | Clear purpose from name |
+| Descriptive  | `research-topic.md.tmpl`       | Clear purpose from name      |
 
 ### Hub vs. Spoke Documents
 
-| Type | Filename | Purpose |
-|------|----------|---------|
-| Hub | `README.md.tmpl` | Navigation entry point |
+| Type  | Filename                  | Purpose                   |
+| ----- | ------------------------- | ------------------------- |
+| Hub   | `README.md.tmpl`          | Navigation entry point    |
 | Spoke | `[document-name].md.tmpl` | Specific content document |
 
 ### Examples
@@ -146,10 +146,10 @@ Templates support two generation modes to enable efficient workflows where struc
 
 **Behavior:**
 
-| Placeholder Type | Behavior in Setup Mode |
-|-----------------|------------------------|
-| `${VAR}` | ✅ Expanded by envsubst |
-| `<!-- AI: -->` | ⏸️ Preserved (not filled) |
+| Placeholder Type   | Behavior in Setup Mode    |
+| ------------------ | ------------------------- |
+| `${VAR}`           | ✅ Expanded by envsubst   |
+| `<!-- AI: -->`     | ⏸️ Preserved (not filled) |
 | `<!-- EXPAND: -->` | ⏸️ Preserved (not filled) |
 
 **Status:** `🔴 Scaffolding`
@@ -184,11 +184,11 @@ Templates support two generation modes to enable efficient workflows where struc
 
 **Behavior:**
 
-| Placeholder Type | Behavior in Conduct Mode |
-|-----------------|--------------------------|
-| `${VAR}` | ✅ Expanded by envsubst |
-| `<!-- AI: -->` | ✅ Filled with AI-generated content |
-| `<!-- EXPAND: -->` | ✅ Expanded with detailed content |
+| Placeholder Type   | Behavior in Conduct Mode            |
+| ------------------ | ----------------------------------- |
+| `${VAR}`           | ✅ Expanded by envsubst             |
+| `<!-- AI: -->`     | ✅ Filled with AI-generated content |
+| `<!-- EXPAND: -->` | ✅ Expanded with detailed content   |
 
 **Status:** `✅ Expanded` (or workflow-specific status)
 
@@ -264,11 +264,11 @@ Better instructions → better AI output in conduct mode.
 
 #### 3. Choose Marker Type Appropriately
 
-| Content Size | Marker Type | Example Use |
-|--------------|-------------|-------------|
-| Brief (1-3 sentences) | `<!-- AI: -->` | Summaries, descriptions |
-| Moderate (1-3 paragraphs) | `<!-- AI: -->` | Analysis, recommendations |
-| Detailed (sections) | `<!-- EXPAND: -->` | Findings, methodology, phases |
+| Content Size              | Marker Type        | Example Use                   |
+| ------------------------- | ------------------ | ----------------------------- |
+| Brief (1-3 sentences)     | `<!-- AI: -->`     | Summaries, descriptions       |
+| Moderate (1-3 paragraphs) | `<!-- AI: -->`     | Analysis, recommendations     |
+| Detailed (sections)       | `<!-- EXPAND: -->` | Findings, methodology, phases |
 
 #### 4. Design for Progressive Disclosure
 
@@ -352,6 +352,7 @@ All templates should use these 5 standard patterns for consistency.
 ```
 
 **Variables:**
+
 - `${TOPIC_TITLE}` or `${FEATURE_NAME}` - Document subject
 - `${PURPOSE}` - One-line purpose statement
 - `${STATUS}` - Status indicator (🔴, 🟠, ✅)
@@ -365,6 +366,7 @@ All templates should use these 5 standard patterns for consistency.
 ## 📋 Quick Links
 
 <!-- AI: Generate links based on created documents -->
+
 - **[Document 1](document-1.md)** - Brief description
 - **[Document 2](document-2.md)** - Brief description
 ```
@@ -387,10 +389,12 @@ All templates should use these 5 standard patterns for consistency.
 
 | Item | Status | Notes |
 | ---- | ------ | ----- |
+
 <!-- AI: Generate status rows -->
 ```
 
 **Status indicators:**
+
 - 🔴 Not Started
 - 🟡 Planned
 - 🟠 In Progress
@@ -464,6 +468,7 @@ Use this checklist when creating new templates:
 ### Step 1: Identify Document Type
 
 **Questions to ask:**
+
 - What workflow does this document support?
 - Is it a hub (navigation) or spoke (content)?
 - What information does it need to capture?
@@ -472,12 +477,12 @@ Use this checklist when creating new templates:
 ### Step 2: Choose Category
 
 | If the document is for... | Use category... |
-|---------------------------|-----------------|
-| Initial discovery | `exploration/` |
-| Structured investigation | `research/` |
-| Architectural decisions | `decision/` |
-| Feature planning | `planning/` |
-| Cross-workflow utility | `other/` |
+| ------------------------- | --------------- |
+| Initial discovery         | `exploration/`  |
+| Structured investigation  | `research/`     |
+| Architectural decisions   | `decision/`     |
+| Feature planning          | `planning/`     |
+| Cross-workflow utility    | `other/`        |
 
 ### Step 3: Create Template File
 
@@ -522,6 +527,7 @@ code scripts/doc-gen/templates/[category]/[document-name].md.tmpl
 ### Step 5: Add Variables
 
 **Identify what needs to be dynamic:**
+
 - Dates → `${DATE}`
 - Names/titles → `${TOPIC_TITLE}`, `${FEATURE_NAME}`
 - Status → `${STATUS}`
@@ -624,6 +630,7 @@ dt-doc-validate admin/explorations/test-topic/
 ### Contribution Process
 
 1. **Create feature branch:**
+
    ```bash
    git checkout -b feat/template-[name]
    ```
@@ -631,10 +638,12 @@ dt-doc-validate admin/explorations/test-topic/
 2. **Create/modify template** following this guide
 
 3. **Update documentation:**
+
    - Add new variables to VARIABLES.md
    - Update category README if needed
 
 4. **Test thoroughly:**
+
    - Manual envsubst testing
    - Verify two-mode support
    - Check all links
@@ -671,13 +680,13 @@ Templates are reviewed for:
 
 **Template Examples by Category:**
 
-| Category | Hub Template | Spoke Templates |
-|----------|--------------|-----------------|
-| Exploration | [README.md.tmpl](exploration/README.md.tmpl) | [exploration.md.tmpl](exploration/exploration.md.tmpl), [research-topics.md.tmpl](exploration/research-topics.md.tmpl) |
-| Research | [README.md.tmpl](research/README.md.tmpl) | [research-topic.md.tmpl](research/research-topic.md.tmpl), [research-summary.md.tmpl](research/research-summary.md.tmpl), [requirements.md.tmpl](research/requirements.md.tmpl) |
-| Decision | [README.md.tmpl](decision/README.md.tmpl) | [adr.md.tmpl](decision/adr.md.tmpl), [decisions-summary.md.tmpl](decision/decisions-summary.md.tmpl) |
-| Planning | [README.md.tmpl](planning/README.md.tmpl) | [feature-plan.md.tmpl](planning/feature-plan.md.tmpl), [phase.md.tmpl](planning/phase.md.tmpl), [status-and-next-steps.md.tmpl](planning/status-and-next-steps.md.tmpl) |
-| Other | - | [handoff.md.tmpl](other/handoff.md.tmpl), [fix-batch.md.tmpl](other/fix-batch.md.tmpl), [reflection.md.tmpl](other/reflection.md.tmpl) |
+| Category    | Hub Template                                 | Spoke Templates                                                                                                                                                                 |
+| ----------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Exploration | [README.md.tmpl](exploration/README.md.tmpl) | [exploration.md.tmpl](exploration/exploration.md.tmpl), [research-topics.md.tmpl](exploration/research-topics.md.tmpl)                                                          |
+| Research    | [README.md.tmpl](research/README.md.tmpl)    | [research-topic.md.tmpl](research/research-topic.md.tmpl), [research-summary.md.tmpl](research/research-summary.md.tmpl), [requirements.md.tmpl](research/requirements.md.tmpl) |
+| Decision    | [README.md.tmpl](decision/README.md.tmpl)    | [adr.md.tmpl](decision/adr.md.tmpl), [decisions-summary.md.tmpl](decision/decisions-summary.md.tmpl)                                                                            |
+| Planning    | [README.md.tmpl](planning/README.md.tmpl)    | [feature-plan.md.tmpl](planning/feature-plan.md.tmpl), [phase.md.tmpl](planning/phase.md.tmpl), [status-and-next-steps.md.tmpl](planning/status-and-next-steps.md.tmpl)         |
+| Other       | -                                            | [handoff.md.tmpl](other/handoff.md.tmpl), [fix-batch.md.tmpl](other/fix-batch.md.tmpl), [reflection.md.tmpl](other/reflection.md.tmpl)                                          |
 
 ---
 
