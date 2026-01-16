@@ -126,11 +126,11 @@ Define validation rules for each doc type, providing the specification for `dt-d
 - `scripts/doc-gen/templates/validation-rules/` (directory)
 - `scripts/doc-gen/templates/validation-rules/exploration.yaml`
 
-- [ ] Create validation-rules directory
-- [ ] Create exploration.yaml with rule definitions
-- [ ] Define required sections as patterns
-- [ ] Define optional sections
-- [ ] Include example valid/invalid snippets
+- [x] Create validation-rules directory
+- [x] Create exploration.yaml with rule definitions
+- [x] Define required sections as patterns
+- [x] Define optional sections
+- [x] Include example valid/invalid snippets
 
 **YAML Structure:**
 
@@ -289,7 +289,7 @@ grep -c "pattern:" scripts/doc-gen/templates/validation-rules/*.yaml
 | Task 1: Common Rules              | ✅ Complete    |       |
 | Task 2: Type-Specific Rules       | ✅ Complete    |       |
 | Task 3: Error Format              | ✅ Complete    |       |
-| Task 4: Exploration YAML          | 🔴 Not Started |       |
+| Task 4: Exploration YAML          | ✅ Complete    |       |
 | Task 5: Research YAML             | 🔴 Not Started |       |
 | Task 6: Decision YAML             | 🔴 Not Started |       |
 | Task 7: Planning YAML             | 🔴 Not Started |       |
