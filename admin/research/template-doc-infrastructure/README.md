@@ -70,9 +70,9 @@ This research addresses how to build template-based documentation infrastructure
 
 ### Low Priority
 
-| Research Topic  | Status      | Key Finding                           |
-| --------------- | ----------- | ------------------------------------- |
-| Template Format | ✅ Complete | envsubst with `${VAR}` format         |
+| Research Topic  | Status      | Key Finding                   |
+| --------------- | ----------- | ----------------------------- |
+| Template Format | ✅ Complete | envsubst with `${VAR}` format |
 
 ---
 
