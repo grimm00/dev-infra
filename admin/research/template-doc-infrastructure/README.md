@@ -1,7 +1,7 @@
 # Template Doc Infrastructure - Research Hub
 
 **Purpose:** Research for template-based documentation infrastructure  
-**Status:** ✅ Research Near Complete (6/7 Topics)  
+**Status:** ✅ Research Complete (7/7 Topics)  
 **Created:** 2026-01-13  
 **Last Updated:** 2026-01-14
 
@@ -10,7 +10,7 @@
 ## 📋 Quick Links
 
 - **[Research Summary](research-summary.md)** - Summary of all research findings ⭐
-- **[Requirements](requirements.md)** - 33 FRs, 16 NFRs, 16 Constraints, 4 Assumptions
+- **[Requirements](requirements.md)** - 36 FRs, 18 NFRs, 18 Constraints, 4 Assumptions
 
 ### Research Documents
 
@@ -22,7 +22,7 @@
 | 🟡 Medium | Validation Approach                | [research-validation-approach.md](research-validation-approach.md)               | ✅ Complete |
 | 🟡 Medium | Command Integration                | [research-command-integration.md](research-command-integration.md)               | ✅ Complete |
 | 🟡 Medium | Cursor CLI & Model Selection       | [research-cursor-cli-model-selection.md](research-cursor-cli-model-selection.md) | ✅ Complete |
-| 🟢 Low    | Template Format                    | [research-template-format.md](research-template-format.md)                       | 🔴 Optional |
+| 🟢 Low    | Template Format                    | [research-template-format.md](research-template-format.md)                       | ✅ Complete |
 
 ---
 
@@ -38,15 +38,15 @@ This research addresses how to build template-based documentation infrastructure
 2. ✅ How should generation scripts be structured?
 3. ✅ How should validation work?
 4. ✅ How do templates integrate with existing commands?
-5. 🟢 What format should templates use? (optional)
+5. ✅ What format should templates use?
 6. ✅ Where should this tooling live? (Four-Arm Question)
 7. ✅ How should scripts invoke Cursor with model selection?
 
 **Research Topics:** 7 topics  
 **High Priority Complete:** 3/3 topics ✅  
 **Medium Priority Complete:** 3/3 topics ✅  
-**Low Priority:** 0/1 (optional)  
-**Status:** ✅ Ready for decision phase
+**Low Priority Complete:** 1/1 topics ✅  
+**Status:** ✅ All research complete - ready for decision phase
 
 ---
 
@@ -70,9 +70,9 @@ This research addresses how to build template-based documentation infrastructure
 
 ### Low Priority
 
-| Research Topic  | Status      | Key Finding                 |
-| --------------- | ----------- | --------------------------- |
-| Template Format | 🔴 Optional | Can defer to implementation |
+| Research Topic  | Status      | Key Finding                           |
+| --------------- | ----------- | ------------------------------------- |
+| Template Format | ✅ Complete | envsubst with `${VAR}` format         |
 
 ---
 
@@ -117,6 +117,14 @@ This research addresses how to build template-based documentation infrastructure
 - **Config-based model selection** - `models.yaml` can prepare for future
 - **Not a blocker** - current interactive commands work fine
 
+### From Topic 5: Template Format
+
+- **envsubst recommended** - simple, portable, no dependencies
+- **`${VAR}` syntax** - envsubst-compatible, visually distinct from AI placeholders
+- **Three placeholder types** - `${VAR}` (script), `<!-- AI: -->` (content), `<!-- EXPAND: -->` (zones)
+- **No complex engines needed** - jinja2/gomplate are overkill for doc generation
+- **Gradual migration** - can transition from current `[...]` format
+
 ### Strategic Insights (From Discussion)
 
 - **Scripts as orchestration layer** - not just generation, full workflow control
@@ -140,17 +148,17 @@ This research addresses how to build template-based documentation infrastructure
 2. ✅ ~~Conduct research on validation approach (Topic 3)~~
 3. ✅ ~~Conduct research on command integration (Topic 4)~~
 4. ✅ ~~Conduct research on Cursor CLI & model selection (Topic 7)~~
-5. Review [research-summary.md](research-summary.md) and [requirements.md](requirements.md)
-6. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+5. ✅ ~~Conduct research on template format (Topic 5)~~
+6. Review [research-summary.md](research-summary.md) and [requirements.md](requirements.md)
+7. Use `/decision template-doc-infrastructure --from-research` to make decisions:
    - Template architecture (17 doc types, 5 patterns)
    - Generation script architecture (shared library)
    - Architectural placement (four-arm question)
    - Validation architecture
    - Command integration pattern
    - Model selection configuration
-7. Decisions will create ADR documents
-
-**Note:** Topic 5 (Template Format) is optional and can be decided during implementation.
+   - Template format (envsubst with `${VAR}`)
+8. Decisions will create ADR documents
 
 ---
 

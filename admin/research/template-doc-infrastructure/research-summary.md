@@ -12,8 +12,8 @@
 Research for template-based documentation infrastructure that ensures consistent doc structure across all workflows. **Strategic insight:** This evolved into a broader **workflow orchestration architecture** where scripts handle structure + context gathering and AI handles creative content only.
 
 **Research Topics:** 7 topics (5 original + 2 strategic)  
-**Completed:** 6 topics (3 high-priority + 3 medium)  
-**Status:** 🟡 Near Complete (Topics 1, 2, 3, 4, 6, 7 complete; Topic 5 optional)
+**Completed:** 7 topics (all complete)  
+**Status:** ✅ Complete (All 7 topics researched)
 
 ---
 
@@ -215,6 +215,25 @@ Cursor CLI cannot programmatically invoke AI agents:
 
 ---
 
+### Finding 11: envsubst for Simple Template Expansion ✅
+
+Template format should use envsubst-compatible `${VAR}` syntax:
+
+| Approach | Complexity | Dependencies | Recommended |
+|----------|------------|--------------|-------------|
+| **sed** | Simple | None | Current pattern |
+| **envsubst** | Simple | gettext | ✅ Recommended |
+| **jinja2** | Complex | Python | ❌ Overkill |
+
+**Placeholder convention:**
+- `${VAR}` - Script-time expansion (envsubst)
+- `<!-- AI: instruction -->` - AI fills content
+- `<!-- EXPAND: scope -->` - AI expands in Conduct mode
+
+**Source:** [research-template-format.md](research-template-format.md) ✅ Complete
+
+---
+
 ## 💡 Key Insights
 
 - [x] **Insight 1:** Current AI-inline generation causes format drift that breaks automation
@@ -231,6 +250,8 @@ Cursor CLI cannot programmatically invoke AI agents:
 - [x] **Insight 12:** Commands remain orchestrators; scripts are tools they invoke ⭐
 - [x] **Insight 13:** Cursor CLI is file-open only - no programmatic agent API exists ⭐
 - [x] **Insight 14:** Model selection is enhancement, not blocker - implement incrementally ⭐
+- [x] **Insight 15:** envsubst provides clean variable syntax with minimal dependencies ⭐
+- [x] **Insight 16:** Complex template engines (jinja2) are overkill for doc generation ⭐
 
 ---
 
@@ -250,7 +271,7 @@ Research confirmed multi-repository architecture. Work must be dispersed:
 
 ## 📋 Requirements Summary
 
-**Total Requirements Discovered:** 33 FRs, 16 NFRs, 16 Constraints, 4 Assumptions
+**Total Requirements Discovered:** 36 FRs, 18 NFRs, 18 Constraints, 4 Assumptions
 
 ### High-Priority Requirements
 
@@ -306,7 +327,7 @@ Research confirmed multi-repository architecture. Work must be dispersed:
 | Validation Approach | 🟡 Medium | ✅ Complete | Layered validation, on-demand CLI primary |
 | Command Integration | 🟡 Medium | ✅ Complete | 154 inline templates, incremental migration |
 | Cursor CLI & Model Selection | 🟡 Medium | ✅ Complete | No CLI API; config-based model selection |
-| Template Format | 🟢 Low | 🔴 Scaffolding | Optional - can defer |
+| Template Format | 🟢 Low | ✅ Complete | envsubst with `${VAR}` format |
 
 ---
 
@@ -316,15 +337,16 @@ Research confirmed multi-repository architecture. Work must be dispersed:
 2. ✅ ~~Complete validation approach research (Topic 3)~~
 3. ✅ ~~Complete command integration research (Topic 4)~~
 4. ✅ ~~Complete Cursor CLI & model selection research (Topic 7)~~
-5. Use `/decision template-doc-infrastructure --from-research` to make decisions:
+5. ✅ ~~Complete template format research (Topic 5)~~
+6. Use `/decision template-doc-infrastructure --from-research` to make decisions:
    - Template architecture (17 doc types, 5 patterns)
    - Generation script architecture (shared library)
    - Architectural placement (four-arm question)
    - Validation architecture
    - Command integration pattern
    - Model selection configuration
-6. Create ADRs for each decision
-7. Template Format (Topic 5) is optional - can defer to implementation
+   - Template format (envsubst with `${VAR}`)
+7. Create ADRs for each decision
 
 ---
 

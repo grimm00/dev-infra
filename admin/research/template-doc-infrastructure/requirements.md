@@ -419,6 +419,42 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### FR-34: envsubst-Compatible Variable Format
+
+**Description:** Templates must support variable expansion via envsubst-compatible `${VAR}` format.
+
+**Source:** [research-template-format.md](research-template-format.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-35: Distinguishable Placeholder Types
+
+**Description:** Placeholder types must be visually distinguishable (script `${VAR}` vs AI `<!-- AI: -->` vs expansion `<!-- EXPAND: -->`).
+
+**Source:** [research-template-format.md](research-template-format.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-36: Placeholder Convention Documentation
+
+**Description:** Template documentation must clearly define placeholder conventions for template authors.
+
+**Source:** [research-template-format.md](research-template-format.md)
+
+**Priority:** 🟢 Low
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Parseable Structure
@@ -613,6 +649,30 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### NFR-17: Readable Templates Without Processing
+
+**Description:** Templates must remain readable markdown without pre-processing required.
+
+**Source:** [research-template-format.md](research-template-format.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-18: Minimal Learning Curve
+
+**Description:** Template format must have minimal learning curve for template authors.
+
+**Source:** [research-template-format.md](research-template-format.md)
+
+**Priority:** 🟡 Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints
 
 ### C-1: Pure Markdown
@@ -750,6 +810,22 @@ This document captures requirements discovered during research on template-based
 
 ---
 
+### C-17: No Python/Binary Dependencies for Templates
+
+**Description:** Avoid introducing Python or binary dependencies solely for template rendering.
+
+**Source:** [research-template-format.md](research-template-format.md)
+
+---
+
+### C-18: No Syntax Conflicts
+
+**Description:** Script placeholders must not conflict with markdown or shell syntax.
+
+**Source:** [research-template-format.md](research-template-format.md)
+
+---
+
 ## 💭 Assumptions
 
 ### A-1: Cursor Environment
@@ -793,6 +869,7 @@ This document captures requirements discovered during research on template-based
 - [Topic 2: Generation Architecture](research-generation-architecture.md)
 - [Topic 3: Validation Approach](research-validation-approach.md)
 - [Topic 4: Command Integration](research-command-integration.md)
+- [Topic 5: Template Format](research-template-format.md)
 - [Topic 6: Architectural Placement](research-architectural-placement.md)
 - [Topic 7: Cursor CLI & Model Selection](research-cursor-cli-model-selection.md)
 
