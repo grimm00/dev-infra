@@ -169,10 +169,10 @@ optional_sections:
 
 **File:** `scripts/doc-gen/templates/validation-rules/research.yaml`
 
-- [ ] Create research.yaml with required sections
-- [ ] Include research-topic and research-summary variants
-- [ ] Define requirements.md validation rules
-- [ ] Document hub (README.md) rules
+- [x] Create research.yaml with required sections
+- [x] Include research-topic and research-summary variants
+- [x] Define requirements.md validation rules
+- [x] Document hub (README.md) rules
 
 **Deliverable:** `scripts/doc-gen/templates/validation-rules/research.yaml`
 
@@ -290,7 +290,7 @@ grep -c "pattern:" scripts/doc-gen/templates/validation-rules/*.yaml
 | Task 2: Type-Specific Rules       | ✅ Complete    |       |
 | Task 3: Error Format              | ✅ Complete    |       |
 | Task 4: Exploration YAML          | ✅ Complete    |       |
-| Task 5: Research YAML             | 🔴 Not Started |       |
+| Task 5: Research YAML             | ✅ Complete    |       |
 | Task 6: Decision YAML             | 🔴 Not Started |       |
 | Task 7: Planning YAML             | 🔴 Not Started |       |
 | Task 8: Handoff/Fix YAML          | 🔴 Not Started |       |
