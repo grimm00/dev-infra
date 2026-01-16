@@ -12,7 +12,7 @@
 ### Planning Documents
 
 - **[Transition Plan](transition-plan.md)** - Implementation roadmap (🔴 Not Started)
-- **[Phase 1: Template Creation](phase-1.md)** - Create 17 templates (🔴 Scaffolding)
+- **[Phase 1: Template Creation](phase-1.md)** - Create 17 templates (✅ Expanded)
 - **[Phase 2: Format Specification](phase-2.md)** - Document standards (🔴 Scaffolding)
 - **[Phase 3: Validation Rules](phase-3.md)** - Define validation spec (🔴 Scaffolding)
 
@@ -49,7 +49,7 @@ This feature implements the **template portion** of the template-based documenta
 
 | Phase | Name | Status | Deliverables |
 |-------|------|--------|--------------|
-| [Phase 1](phase-1.md) | Template Creation | 🔴 Scaffolding | 17 template files |
+| [Phase 1](phase-1.md) | Template Creation | ✅ Expanded | 17 template files |
 | [Phase 2](phase-2.md) | Format Specification | 🔴 Scaffolding | Placeholder docs, format spec |
 | [Phase 3](phase-3.md) | Validation Rules | 🔴 Scaffolding | Validation spec per doc type |
 
