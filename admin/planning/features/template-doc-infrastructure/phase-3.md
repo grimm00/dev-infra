@@ -33,12 +33,12 @@ Define validation rules for each doc type, providing the specification for `dt-d
 
 **File:** `scripts/doc-gen/templates/VALIDATION.md`
 
-- [ ] Create VALIDATION.md document structure
-- [ ] Document status header validation (pattern, valid indicators)
-- [ ] Document date format validation (Created, Last Updated)
-- [ ] Document status indicator validation (🔴, 🟠, 🟡, 🟢, ✅)
-- [ ] Include regex patterns for each check
-- [ ] Reference ADR-004 for authoritative rules
+- [x] Create VALIDATION.md document structure
+- [x] Document status header validation (pattern, valid indicators)
+- [x] Document date format validation (Created, Last Updated)
+- [x] Document status indicator validation (🔴, 🟠, 🟡, 🟢, ✅)
+- [x] Include regex patterns for each check
+- [x] Reference ADR-004 for authoritative rules
 
 **Content to Include:**
 
@@ -286,7 +286,7 @@ grep -c "pattern:" scripts/doc-gen/templates/validation-rules/*.yaml
 
 | Task                              | Status         | Notes |
 | --------------------------------- | -------------- | ----- |
-| Task 1: Common Rules              | 🔴 Not Started |       |
+| Task 1: Common Rules              | ✅ Complete    |       |
 | Task 2: Type-Specific Rules       | 🔴 Not Started |       |
 | Task 3: Error Format              | 🔴 Not Started |       |
 | Task 4: Exploration YAML          | 🔴 Not Started |       |
