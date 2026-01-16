@@ -230,10 +230,10 @@ optional_sections:
 
 **Purpose:** Document the dt-doc-validate CLI interface for implementers.
 
-- [ ] Document CLI usage patterns
-- [ ] Document flags (--type, --json, --quiet, --verbose)
-- [ ] Document exit codes (0, 1, 2)
-- [ ] Include usage examples
+- [x] Document CLI usage patterns
+- [x] Document flags (--type, --json, --quiet, --verbose)
+- [x] Document exit codes (0, 1, 2)
+- [x] Include usage examples
 
 **CLI Interface from ADR-004:**
 
@@ -294,7 +294,7 @@ grep -c "pattern:" scripts/doc-gen/templates/validation-rules/*.yaml
 | Task 6: Decision YAML             | ✅ Complete    |       |
 | Task 7: Planning YAML             | ✅ Complete    |       |
 | Task 8: Handoff/Fix YAML          | ✅ Complete    |       |
-| Task 9: CLI Reference             | 🔴 Not Started |       |
+| Task 9: CLI Reference             | ✅ Complete    |       |
 | Task 10: Verify Completeness      | 🔴 Not Started |       |
 
 ---
