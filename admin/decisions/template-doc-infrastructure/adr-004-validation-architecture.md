@@ -1,6 +1,6 @@
 # ADR-004: Validation Architecture
 
-**Status:** 🔴 Proposed  
+**Status:** ✅ Accepted  
 **Created:** 2026-01-14  
 **Last Updated:** 2026-01-14  
 **Batch:** 2 (Implementation)
@@ -9,7 +9,7 @@
 
 ## Context
 
-Documentation infrastructure needs validation to ensure compliance with template standards. Research identified a layered validation architecture with on-demand CLI as primary interface. We need to decide on the validation architecture.
+Documentation infrastructure needs validation to ensure compliance with template standards. Research identified multiple timing options (pre-commit, on-demand, in-command) and validation patterns from existing scripts. We need to decide on the validation architecture.
 
 **Related Research:**
 - [Research: Validation Approach](../../research/template-doc-infrastructure/research-validation-approach.md)
@@ -33,9 +33,14 @@ Documentation infrastructure needs validation to ensure compliance with template
 
 ## Decision
 
-<!-- FILL: State the decision clearly -->
+**Decision:** Adopt a **layered validation architecture with on-demand CLI as primary interface**:
 
-**Decision:** [To be filled]
+1. **Layer 1:** Shared library (`lib/doc-validate.sh`) with reusable functions
+2. **Layer 2:** CLI tool (`dt-doc-validate`) as primary interface
+3. **Layer 3:** Command integration (commands call CLI tool)
+4. **Timing:** On-demand CLI primary, CI enforcement, pre-commit optional
+
+This approach provides reusable validation logic, clear developer interface, and flexible integration points.
 
 ---
 
@@ -43,17 +48,18 @@ Documentation infrastructure needs validation to ensure compliance with template
 
 ### Positive
 
-<!-- FILL: List positive consequences -->
-
-- [Positive consequence 1]
-- [Positive consequence 2]
+- **Reusable logic:** Validation functions shared via library
+- **Developer control:** On-demand CLI lets developers validate when ready
+- **CI enforcement:** GitHub Action validates on PR
+- **Flexible timing:** Pre-commit available but optional
+- **Clear errors:** Actionable messages with file, location, fix suggestion
+- **Multiple outputs:** Text (default), JSON (`--json`), quiet (`--quiet`)
 
 ### Negative
 
-<!-- FILL: List negative consequences -->
-
-- [Negative consequence 1]
-- [Negative consequence 2]
+- **Not automatic:** Developers may forget to validate (mitigated by CI enforcement)
+- **Multiple layers:** Complexity in maintaining library + CLI + integration
+- **Learning curve:** Developers must know about dt-doc-validate
 
 ---
 
@@ -69,11 +75,11 @@ Documentation infrastructure needs validation to ensure compliance with template
 - Self-contained commands
 
 **Cons:**
-- Duplicated validation logic across commands
-- Inconsistent validation
+- Duplicated validation logic across 23 commands
+- Inconsistent validation rules
 - No standalone validation tool
 
-**Why not chosen:** [To be filled]
+**Why not chosen:** Violates DRY. 23 commands would duplicate validation logic. Changes would require updating all commands.
 
 ---
 
@@ -88,10 +94,11 @@ Documentation infrastructure needs validation to ensure compliance with template
 
 **Cons:**
 - Delayed feedback (only at commit time)
-- Can be bypassed
+- Can be bypassed with `--no-verify`
+- WIP commits blocked (defeats draft PR workflow)
 - Slow commits if validation is heavy
 
-**Why not chosen:** [To be filled]
+**Why not chosen:** Frustrating for iterative development. Draft PR workflow (ADR-003 worktree) relies on WIP commits. Pre-commit blocking all commits is counterproductive.
 
 ---
 
@@ -106,146 +113,287 @@ Documentation infrastructure needs validation to ensure compliance with template
 
 **Cons:**
 - Very delayed feedback (push → CI → feedback)
-- Frustrating iteration
+- Frustrating iteration cycle
 - Doesn't catch issues locally
 
-**Why not chosen:** [To be filled]
+**Why not chosen:** Feedback loop too slow. Developers should be able to validate locally before pushing.
 
 ---
 
-### Alternative 4: Layered Validation (On-Demand CLI Primary)
+### Alternative 4: Layered Validation (On-Demand Primary)
 
 **Description:** Three-layer validation with on-demand CLI as primary:
-1. Library (`lib/validate.sh`) - Reusable functions
+1. Library (`lib/doc-validate.sh`) - Reusable functions
 2. CLI (`dt-doc-validate`) - Primary interface
 3. Commands - Call CLI during workflow
 
 **Pros:**
 - Developer controls when to validate
-- Reusable across contexts
+- Reusable across contexts (CLI, commands, CI)
 - Multiple integration points
+- Doesn't block WIP commits
 
 **Cons:**
-- Requires developer discipline
-- May miss validation if not called
+- Requires developer discipline to validate
+- More infrastructure to build
 
-**Why not chosen:** [Or: Why chosen - to be filled]
+**Why chosen:** Best balance of developer experience and enforcement. On-demand gives control, CI provides enforcement, pre-commit available for those who want it.
 
 ---
 
 ## Decision Rationale
 
-<!-- FILL: Explain why this decision was made -->
-
 **Key Factors:**
-- [Factor 1]
-- [Factor 2]
+
+1. **Draft PR workflow:** WIP commits must not be blocked (per WORKTREE-WORKFLOW.md)
+2. **Developer experience:** Immediate feedback when requested, not forced
+3. **CI as safety net:** Enforcement happens on PR, not every commit
+4. **Reusability:** Library functions can be used anywhere
 
 **Research Support:**
-- Finding 8: Layered validation architecture
-- Precedent: `check-release-readiness.sh` pattern
+
+| Finding | Implication |
+|---------|-------------|
+| Finding 8: Layered validation | Three layers: library → CLI → commands |
+| Finding 4: On-demand primary | Developer controls validation timing |
+| Finding 5: Pre-commit optional | Available but not required |
 
 ---
 
 ## Validation Architecture
 
-<!-- FILL: Define the architecture -->
-
 ```
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 3: Cursor Commands                                     │
-│ - Call dt-doc-validate after generation                     │
-│ - Show validation results to user                           │
-└─────────────────────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 2: CLI (dt-doc-validate)                              │
-│ - Primary interface for developers                          │
-│ - Accepts file/directory paths                              │
-│ - Returns structured output (text/JSON)                     │
-└─────────────────────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 1: Library (lib/validate.sh)                          │
-│ - Reusable validation functions                             │
-│ - Type-specific rules                                       │
-│ - Common rules                                              │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│ Layer 3: Cursor Commands                                         │
+│ - Call dt-doc-validate after generation                         │
+│ - Example: /research --conduct → validate before commit         │
+│ - Commands are orchestrators, not validators                    │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              │ invoke
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ Layer 2: CLI (dt-doc-validate)                                  │
+│ - Primary interface for developers                              │
+│ - Accepts file/directory paths                                  │
+│ - Returns structured output (text/JSON)                         │
+│ - Exit codes: 0=pass, 1=validation error, 2=system error        │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              │ calls
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ Layer 1: Library (lib/doc-validate.sh)                          │
+│ - Reusable validation functions                                 │
+│ - check_status_header(), check_required_sections()              │
+│ - Type-specific validators                                      │
+│ - Counter-based result tracking                                 │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## Validation Timing
 
-<!-- FILL: Define when validation runs -->
+| When | How | Required? | Purpose |
+|------|-----|-----------|---------|
+| **On-demand** | Developer runs `dt-doc-validate` | Primary | Immediate feedback when desired |
+| **In-command** | Commands call CLI after generation | Yes | Context-aware validation |
+| **CI** | GitHub Action on PR | Yes | Enforcement gate |
+| **Pre-commit** | Hook calls CLI on staged files | Optional | For those who want it |
 
-| When | How | Required? |
-|------|-----|-----------|
-| On-demand | Developer runs `dt-doc-validate` | No (primary) |
-| In-command | Commands call CLI after generation | Yes |
-| Pre-commit | Hook calls CLI on staged files | Optional |
-| CI | GitHub Action on PR | Yes (enforcement) |
+**Validation flow:**
+
+```
+Developer creates/edits doc
+         │
+         ▼
+Command validation (context-aware)
+         │ /research --conduct validates
+         ▼
+On-demand validation (developer choice)
+         │ dt-doc-validate research admin/research/my-topic/
+         ▼
+CI validation (enforcement)
+         │ GitHub Action on PR
+         ▼
+Pre-commit hook (optional)
+         │ User-configurable
+```
+
+---
+
+## CLI Interface
+
+```bash
+# Validate single file
+dt-doc-validate admin/research/template-doc-infrastructure/research-summary.md
+
+# Validate directory (all docs)
+dt-doc-validate admin/research/template-doc-infrastructure/
+
+# Validate with specific type (override auto-detection)
+dt-doc-validate --type exploration admin/explorations/my-topic/
+
+# JSON output for tooling
+dt-doc-validate --json admin/research/my-topic/
+
+# Quiet mode for CI (exit code only)
+dt-doc-validate --quiet admin/research/my-topic/
+
+# Verbose output (show all checks)
+dt-doc-validate --verbose admin/research/my-topic/
+```
+
+**Exit codes:**
+
+| Code | Meaning |
+|------|---------|
+| 0 | All validations passed |
+| 1 | Validation errors found |
+| 2 | System error (bad args, file not found) |
 
 ---
 
 ## Validation Rules
 
-<!-- FILL: Define validation rules -->
-
 ### Common Rules (All Doc Types)
 
-- [ ] Status header present (Status, Created, Last Updated)
-- [ ] Date format correct (YYYY-MM-DD)
-- [ ] Quick Links section present (where applicable)
-- [ ] No broken internal links
+| Check | Pattern | Example |
+|-------|---------|---------|
+| Status Header | `\*\*Status:\*\* [🔴🟠🟡🟢✅]` | `**Status:** 🟠 In Progress` |
+| Created Date | `\*\*Created:\*\* \d{4}-\d{2}-\d{2}` | `**Created:** 2026-01-14` |
+| Last Updated | `\*\*Last Updated:\*\* \d{4}-\d{2}-\d{2}` | `**Last Updated:** 2026-01-14` |
+| Valid Indicator | One of: 🔴 🟠 🟡 🟢 ✅ | Valid emoji in Status |
 
 ### Type-Specific Rules
 
 | Doc Type | Required Sections |
 |----------|-------------------|
-| exploration.md | Context, Themes, Key Questions |
-| research-*.md | Research Question, Findings, Analysis |
-| adr-*.md | Context, Decision, Consequences |
-| ... | ... |
+| **Exploration** | `## 🎯 Problem`, `## 🌊 Themes`, `## ❓ Key Questions` |
+| **Research** | `## 🎯 Research Question`, `## 📊 Findings`, `## 💡 Recommendations` |
+| **ADR** | `## Context`, `## Decision`, `## Consequences` |
+| **Hub (README)** | `## 📋 Quick Links` |
+| **Feature Plan** | `## 📋 Overview`, `## 🎯 Success Criteria`, `## 📅 Phases` |
+| **Handoff** | `## 📍 Current State`, `## 🚀 Next Steps` |
 
 ---
 
 ## Error Output Format
 
-<!-- FILL: Define error format -->
+**Text format (default):**
 
 ```
-# Text format (default)
-ERROR: Missing required section "Decision" in adr-001.md:1
-ERROR: Invalid date format "Jan 14, 2026" in research-summary.md:4 (expected YYYY-MM-DD)
-WARNING: No Quick Links section in README.md
+dt-doc-validate admin/research/my-topic/research-summary.md
 
-# JSON format (--json flag)
+[ERROR] Missing required section: ## 📊 Findings
+  File: admin/research/my-topic/research-summary.md
+  Fix:  Add "## 📊 Findings" section after Research Goals
+
+[WARNING] Date may be stale: Last Updated is 30+ days old
+  File: admin/research/my-topic/research-summary.md
+
+Summary: 1 error, 1 warning
+```
+
+**JSON format (`--json`):**
+
+```json
 {
-  "file": "adr-001.md",
-  "errors": [...],
-  "warnings": [...]
+  "file": "admin/research/my-topic/research-summary.md",
+  "type": "research-summary",
+  "errors": [
+    {
+      "code": "MISSING_SECTION",
+      "message": "Missing required section: ## 📊 Findings",
+      "fix": "Add \"## 📊 Findings\" section after Research Goals"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "STALE_DATE",
+      "message": "Date may be stale: Last Updated is 30+ days old"
+    }
+  ],
+  "passed": false
 }
+```
+
+---
+
+## Library Functions
+
+**`lib/doc-validate.sh`:**
+
+```bash
+# Result tracking
+declare -a VALIDATION_ERRORS=()
+declare -a VALIDATION_WARNINGS=()
+
+# Common checks
+check_status_header() { ... }
+check_date_format() { ... }
+check_required_sections() { ... }
+
+# Type-specific checks
+validate_exploration() { ... }
+validate_research() { ... }
+validate_adr() { ... }
+
+# Result reporting
+print_error() { ... }
+print_warning() { ... }
+generate_report() { ... }
 ```
 
 ---
 
 ## Requirements Impact
 
-<!-- FILL: Document requirements affected -->
-
 **Requirements Addressed:**
-- FR-19 through FR-25 (validation features)
-- NFR-11, NFR-12 (validation quality)
-- C-10 through C-12 (validation constraints)
+
+| Requirement | How Addressed |
+|-------------|---------------|
+| FR-19 | Auto-detect doc type from path/content |
+| FR-20 | Type-specific section validation |
+| FR-21 | Common rules in shared library |
+| FR-22 | Errors include file, message, fix suggestion |
+| FR-23 | `--json` flag for JSON output |
+| FR-24 | `--quiet` flag for exit code only |
+| FR-25 | Supports single file and directory |
+| NFR-11 | grep/awk checks are fast (<200ms) |
+| NFR-12 | Exit codes: 0=pass, 1=error, 2=system |
+| C-10 | Logic in `lib/doc-validate.sh` |
+| C-11 | Commands call dt-doc-validate |
+| C-12 | Pre-commit integration optional |
+
+---
+
+## Implementation Notes
+
+**For dev-toolkit (this feature goes there per ADR-001):**
+- Create `dt-doc-validate` CLI script
+- Create `lib/doc-validate.sh` shared functions
+- Implement type detection logic
+- Implement validation rules from ADR-002
+
+**For CI (GitHub Actions):**
+- Create workflow that runs `dt-doc-validate`
+- Configure to run on PR for relevant paths
+- Report validation results in PR comments
+
+**For Pre-commit (optional):**
+- Document how to add to `.pre-commit-config.yaml`
+- Ensure `--no-verify` bypass works for WIP
 
 ---
 
 ## References
 
 - [Research: Validation Approach](../../research/template-doc-infrastructure/research-validation-approach.md)
+- [ADR-001: Architectural Placement](adr-001-architectural-placement.md)
+- [ADR-002: Template Structure Standard](adr-002-template-structure-standard.md)
+- [Existing: validate-templates.sh](../../../scripts/validate-templates.sh)
 - [Existing: check-release-readiness.sh](../../../scripts/check-release-readiness.sh)
 
 ---

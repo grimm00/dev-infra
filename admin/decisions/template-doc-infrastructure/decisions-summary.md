@@ -52,13 +52,16 @@ This document summarizes all architecture decisions for the template-based docum
 
 ### ADR-003: Generation Architecture
 
-**Decision:** <!-- FILL: Decision statement -->
+**Decision:** Adopt shared library architecture with template files and unified CLI (`dt-doc-gen`), using envsubst for variable expansion.
 
-**Status:** 🔴 Proposed
+**Status:** ✅ Accepted
 
 **Key Points:**
-- <!-- FILL -->
-- <!-- FILL -->
+- Shared library (`lib/`) for common functions
+- Template files (`.tmpl`) for each document type
+- Unified CLI with subcommand interface (`dt-doc-gen exploration my-topic`)
+- envsubst for simple, portable variable expansion
+- Two modes: scaffolding (setup) and full (conduct)
 
 **ADR:** [adr-003-generation-architecture.md](adr-003-generation-architecture.md)
 
@@ -66,13 +69,16 @@ This document summarizes all architecture decisions for the template-based docum
 
 ### ADR-004: Validation Architecture
 
-**Decision:** <!-- FILL: Decision statement -->
+**Decision:** Adopt layered validation architecture with on-demand CLI (`dt-doc-validate`) as primary interface, CI enforcement, and optional pre-commit.
 
-**Status:** 🔴 Proposed
+**Status:** ✅ Accepted
 
 **Key Points:**
-- <!-- FILL -->
-- <!-- FILL -->
+- Layer 1: Shared library (`lib/doc-validate.sh`)
+- Layer 2: CLI tool (`dt-doc-validate`) as primary interface
+- Layer 3: Commands call CLI (not own validation)
+- On-demand primary, CI enforcement, pre-commit optional
+- Actionable errors with file, location, fix suggestion
 
 **ADR:** [adr-004-validation-architecture.md](adr-004-validation-architecture.md)
 

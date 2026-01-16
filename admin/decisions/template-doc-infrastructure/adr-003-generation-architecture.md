@@ -1,6 +1,6 @@
 # ADR-003: Generation Architecture
 
-**Status:** 🔴 Proposed  
+**Status:** ✅ Accepted  
 **Created:** 2026-01-14  
 **Last Updated:** 2026-01-14  
 **Batch:** 2 (Implementation)
@@ -9,7 +9,7 @@
 
 ## Context
 
-Template documentation infrastructure needs scripts to generate documents from templates. Research identified a shared library architecture with sed/envsubst-based variable expansion. We need to decide on the generation architecture.
+Template documentation infrastructure needs scripts to generate documents from templates. Research identified multiple approaches: standalone scripts, shared libraries, unified entry points, and various template rendering options. We need to decide on the generation architecture.
 
 **Related Research:**
 - [Research: Generation Architecture](../../research/template-doc-infrastructure/research-generation-architecture.md)
@@ -40,9 +40,15 @@ Template documentation infrastructure needs scripts to generate documents from t
 
 ## Decision
 
-<!-- FILL: State the decision clearly -->
+**Decision:** Adopt a **shared library architecture with template files and unified entry point**:
 
-**Decision:** [To be filled]
+1. **Shared library** (`lib/`) for common functions
+2. **Template files** (`.tmpl`) for each document type
+3. **Unified CLI** (`dt-doc-gen`) with subcommand interface
+4. **envsubst** for variable expansion (simple, portable)
+5. **Two generation modes:** scaffolding and full
+
+This approach provides DRY code, maintainable templates, and consistent generation across all document types.
 
 ---
 
@@ -50,23 +56,44 @@ Template documentation infrastructure needs scripts to generate documents from t
 
 ### Positive
 
-<!-- FILL: List positive consequences -->
-
-- [Positive consequence 1]
-- [Positive consequence 2]
+- **DRY code:** Common functions shared via library
+- **Maintainable templates:** Templates as separate files, easy to edit
+- **Consistent CLI:** Single entry point (`dt-doc-gen exploration my-topic`)
+- **Simple rendering:** envsubst is universally available, no dependencies
+- **Two modes:** Support both scaffolding (setup) and full generation (conduct)
+- **Testable:** Library functions can be unit tested with BATS
+- **CI-friendly:** Clear exit codes, non-interactive mode
 
 ### Negative
 
-<!-- FILL: List negative consequences -->
-
-- [Negative consequence 1]
-- [Negative consequence 2]
+- **Library management:** Must manage dependencies between lib files
+- **Template proliferation:** 17+ template files to maintain
+- **envsubst limitations:** No conditionals or loops (but not needed)
+- **Cross-platform testing:** Must validate on both macOS and Linux
 
 ---
 
 ## Alternatives Considered
 
-### Alternative 1: Inline Templates (Current Pattern)
+### Alternative 1: Standalone Scripts per Doc Type
+
+**Description:** Separate script for each workflow (`gen-exploration.sh`, `gen-research.sh`, etc.)
+
+**Pros:**
+- Clear ownership - one script per workflow
+- Easy to test in isolation
+- Simple mental model
+
+**Cons:**
+- Code duplication (common patterns repeated)
+- 5+ scripts to maintain
+- No shared infrastructure
+
+**Why not chosen:** Doesn't scale well. DRY principle violated as more doc types added.
+
+---
+
+### Alternative 2: Inline Templates (Current Pattern)
 
 **Description:** Keep templates embedded in Cursor commands as heredocs.
 
@@ -79,141 +106,243 @@ Template documentation infrastructure needs scripts to generate documents from t
 - 154 inline templates = massive duplication
 - Format drift between commands
 - Hard to maintain consistency
+- No validation possible
 
-**Why not chosen:** [To be filled]
+**Why not chosen:** This is the core problem we're solving. Research identified 154 inline template instances causing inconsistency.
 
 ---
 
-### Alternative 2: External Templates + jinja2
+### Alternative 3: Complex Template Engine (jinja2)
 
-**Description:** Templates as files, rendered with jinja2.
+**Description:** Use jinja2 or similar for advanced template features.
 
 **Pros:**
-- Powerful templating (conditionals, loops)
+- Full template power (conditionals, loops, filters)
 - Industry standard
 - Rich ecosystem
 
 **Cons:**
 - Python dependency
 - Overkill for simple variable expansion
-- Learning curve for authors
+- Learning curve for template authors
+- Violates NFR-5 (standard bash)
 
-**Why not chosen:** [To be filled]
-
----
-
-### Alternative 3: External Templates + envsubst
-
-**Description:** Templates as files, rendered with envsubst.
-
-**Pros:**
-- Simple, no dependencies (gettext)
-- Standard POSIX syntax (`${VAR}`)
-- Fast execution
-
-**Cons:**
-- No conditionals/loops
-- No default values in syntax
-
-**Why not chosen:** [Or: Why chosen - to be filled]
+**Why not chosen:** Overkill. Research confirmed we don't need conditionals or loops. Simple variable expansion is sufficient.
 
 ---
 
-### Alternative 4: External Templates + sed
+### Alternative 4: sed-based Replacement
 
-**Description:** Templates as files, rendered with sed.
+**Description:** Use sed for variable expansion with `{{VAR}}` syntax.
 
 **Pros:**
 - No dependencies
-- Proven in current scripts
+- Proven in current scripts (`new-project.sh`)
 - Full regex power
 
 **Cons:**
-- Platform differences (GNU vs BSD)
-- Complex escaping
-- Less readable
+- Platform differences (GNU vs BSD sed)
+- Complex escaping for special characters
+- Less readable than envsubst
 
-**Why not chosen:** [To be filled]
+**Why not chosen:** Platform differences add complexity. envsubst is more portable and cleaner syntax.
 
 ---
 
 ## Decision Rationale
 
-<!-- FILL: Explain why this decision was made -->
-
 **Key Factors:**
-- [Factor 1]
-- [Factor 2]
+
+1. **Simplicity over power:** envsubst is sufficient; no need for jinja2 complexity
+2. **Maintainability:** Shared library + separate templates is most maintainable
+3. **Portability:** envsubst works on macOS and Linux without modification
+4. **Consistency with ADR-002:** Template structure already defines placeholder types
 
 **Research Support:**
-- Finding 3: Shared library architecture
-- Finding 4: Hybrid command integration
-- Finding 11: envsubst recommended
+
+| Finding | Implication |
+|---------|-------------|
+| Finding 3: Shared library recommended | Use `lib/` for common functions |
+| Finding 4: Hybrid command integration | Scripts generate, AI fills content |
+| Finding 5: Scripts as orchestration | Scripts handle structure, AI handles creative |
+| Finding 11: envsubst recommended | Simple, portable variable expansion |
 
 ---
 
 ## Generation Architecture
 
-<!-- FILL: Define the architecture -->
+```
+dev-toolkit/                        # Per ADR-001: Tooling in dev-toolkit
+├── bin/
+│   └── dt-doc-gen                  # Unified entry point (CLI)
+├── lib/
+│   ├── doc-common.sh               # Colors, logging, utilities
+│   ├── doc-render.sh               # Template rendering (envsubst)
+│   └── doc-templates.sh            # Template fetching/management
+└── config/
+    └── templates/                  # Cached templates from dev-infra
+        ├── exploration/
+        ├── research/
+        ├── decision/
+        └── planning/
+```
+
+**Template Source (per ADR-001):**
 
 ```
-scripts/doc-gen/
-├── lib/
-│   ├── common.sh         # Shared utilities
-│   ├── render.sh         # Template rendering (envsubst)
-│   └── validate.sh       # Validation functions
-├── templates/            # Template files by workflow
-│   ├── exploration/
-│   ├── research/
-│   ├── decision/
-│   ├── planning/
-│   └── common/
-├── dt-doc-gen            # Unified entry point
-└── dt-doc-validate       # Validation entry point
+dev-infra/
+└── scripts/doc-gen/templates/      # Template source of truth
+    ├── exploration/
+    │   ├── README.md.tmpl
+    │   ├── exploration.md.tmpl
+    │   └── research-topics.md.tmpl
+    ├── research/
+    │   ├── README.md.tmpl
+    │   ├── research-topic.md.tmpl
+    │   ├── research-summary.md.tmpl
+    │   └── requirements.md.tmpl
+    ├── decision/
+    │   └── ...
+    └── planning/
+        └── ...
 ```
+
+---
+
+## CLI Interface
+
+```bash
+# Generate exploration scaffolding
+dt-doc-gen exploration my-topic --mode setup
+
+# Generate full research doc
+dt-doc-gen research my-topic --mode full --topic-title "User Authentication"
+
+# Generate with validation
+dt-doc-gen exploration my-topic --validate
+
+# Show what would be created (dry-run)
+dt-doc-gen exploration my-topic --dry-run
+
+# Use specific output directory
+dt-doc-gen exploration my-topic --output admin/explorations/
+```
+
+**Subcommands:**
+
+| Subcommand | Purpose | Templates |
+|------------|---------|-----------|
+| `exploration` | Generate exploration docs | README, exploration.md, research-topics.md |
+| `research` | Generate research docs | README, research-*.md, summary, requirements |
+| `decision` | Generate ADR docs | README, adr-NNN.md, summary |
+| `planning` | Generate feature docs | README, feature-plan.md, phase-N.md |
+| `handoff` | Generate handoff doc | handoff.md |
 
 ---
 
 ## Generation Modes
 
-<!-- FILL: Define modes -->
+| Mode | Purpose | When Used | Content |
+|------|---------|-----------|---------|
+| **setup** | Create structure with placeholders | `/explore --setup`, `/research --setup` | `${VAR}` expanded, `<!-- AI: -->` preserved |
+| **full** | Create structure + fill all content | ADRs, transition plans | `${VAR}` expanded, AI fills `<!-- AI: -->` zones |
 
-| Mode | Purpose | When Used |
-|------|---------|-----------|
-| Scaffolding | Create structure with placeholders | Setup mode |
-| Full | Fill all content | Conduct mode |
+**Mode flow:**
+
+```
+Setup Mode:
+  Template → envsubst (${VAR}) → Output with AI placeholders
+
+Full Mode:
+  Template → envsubst (${VAR}) → AI fills <!-- AI: --> → Final output
+```
+
+---
+
+## Template Rendering
+
+**envsubst approach:**
+
+```bash
+render_template() {
+    local template="$1"
+    local output="$2"
+    
+    # Export variables
+    export DATE=$(date +%Y-%m-%d)
+    export TOPIC="$topic"
+    export STATUS="🔴 Scaffolding"
+    
+    # Render with envsubst
+    envsubst < "$template" > "$output"
+}
+```
+
+**Variable types (per ADR-002):**
+
+| Type | Syntax | Expanded By | Example |
+|------|--------|-------------|---------|
+| Script variable | `${VAR}` | dt-doc-gen (envsubst) | `${DATE}`, `${TOPIC}` |
+| AI content | `<!-- AI: instruction -->` | AI (preserved by generator) | `<!-- AI: Summarize -->` |
+| Expansion zone | `<!-- EXPAND: scope -->` | AI in Conduct mode | `<!-- EXPAND: Findings -->` |
 
 ---
 
 ## Model Selection (Future Enhancement)
 
-<!-- FILL: Document model selection approach -->
+Per research Finding 10, Cursor CLI doesn't support programmatic model selection. Config-based approach for future:
 
-**Current:** Manual model selection in Cursor settings
+**Config file (`~/.config/dt-workflow/models.yaml`):**
 
-**Future:** Config-based model selection (`models.yaml`)
+```yaml
+task_models:
+  explore: claude-opus-4
+  research: claude-opus-4
+  decision: claude-opus-4
+  pr: claude-sonnet-4
+  task-phase: composer-1
+default: claude-sonnet-4
+```
 
-| Task Type | Recommended Model |
-|-----------|-------------------|
-| explore, research, decision | claude-opus-4 |
-| naming, creative | gemini-2.5-pro |
-| pr, post-pr, release-prep | claude-sonnet-4 |
-| task-phase, implement | composer-1 |
-
-**Status:** Enhancement, not blocker (per NFR-15)
+**Status:** Enhancement, not blocker (per NFR-15). Command documentation will include recommended models (FR-32).
 
 ---
 
 ## Requirements Impact
 
-<!-- FILL: Document requirements affected -->
-
 **Requirements Addressed:**
-- FR-6 through FR-10 (generation features)
-- FR-31 through FR-33 (model selection)
-- NFR-4 through NFR-8 (generation quality)
-- NFR-15, NFR-16 (model selection)
-- C-17, C-18 (dependency constraints)
+
+| Requirement | How Addressed |
+|-------------|---------------|
+| FR-6 | `dt-doc-gen` with subcommand interface |
+| FR-7 | Templates passed via workflow type |
+| FR-8 | `--mode setup` and `--mode full` flags |
+| FR-9 | `--validate` flag calls dt-doc-validate |
+| FR-10 | Consistent output: file path, warnings |
+| FR-31 | Config file pattern defined (future) |
+| FR-32 | Commands to document recommended models |
+| NFR-4 | envsubst is fast (<500ms easily) |
+| NFR-5 | Standard bash + envsubst (gettext) |
+| NFR-6 | envsubst works on macOS and Linux |
+| NFR-7 | Non-interactive by default |
+| NFR-8 | Clear error messages with suggestions |
+| C-17 | No Python/binary dependencies |
+| C-18 | `${VAR}` doesn't conflict with markdown |
+
+---
+
+## Implementation Notes
+
+**For dev-infra (this feature):**
+- Create template files in `scripts/doc-gen/templates/`
+- Define variable conventions in template documentation
+- Version templates with dev-infra releases
+
+**For dev-toolkit (separate feature):**
+- Create `dt-doc-gen` CLI script
+- Create `lib/doc-*.sh` shared functions
+- Implement template fetching from dev-infra
+- Implement envsubst-based rendering
 
 ---
 
@@ -221,7 +350,9 @@ scripts/doc-gen/
 
 - [Research: Generation Architecture](../../research/template-doc-infrastructure/research-generation-architecture.md)
 - [Research: Template Format](../../research/template-doc-infrastructure/research-template-format.md)
-- [Research: Cursor CLI & Model Selection](../../research/template-doc-infrastructure/research-cursor-cli-model-selection.md)
+- [ADR-001: Architectural Placement](adr-001-architectural-placement.md)
+- [ADR-002: Template Structure Standard](adr-002-template-structure-standard.md)
+- [Requirements Document](../../research/template-doc-infrastructure/requirements.md)
 
 ---
 
