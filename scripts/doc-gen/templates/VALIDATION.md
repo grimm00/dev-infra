@@ -202,6 +202,368 @@ When validating a directory:
 
 ---
 
+## 📑 Type-Specific Rules
+
+Each document type has additional required sections beyond the common rules. Document type is detected from:
+1. **Path-based detection:** Directory structure (e.g., `admin/explorations/` → Exploration)
+2. **Content-based detection:** Title patterns (e.g., `# ADR-NNN:` → ADR)
+3. **Override flag:** `--type` CLI option
+
+---
+
+### Exploration Documents
+
+**Path Pattern:** `admin/explorations/[topic]/exploration.md`
+
+**Document Subtypes:**
+
+| Subtype | File Pattern | Required Sections |
+|---------|--------------|-------------------|
+| **Exploration** | `exploration.md` | What We're Exploring, Themes, Key Questions |
+| **Research Topics** | `research-topics.md` | Topics Identified |
+| **Exploration Hub** | `README.md` | Quick Links, Overview |
+
+#### Exploration (Main Document)
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `EXPLORATION_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| What We're Exploring | `^## 🎯 What We're Exploring` | Missing "What We're Exploring" section | Add `## 🎯 What We're Exploring` section after metadata |
+| Themes | `^## 🔍 Themes` | Missing "Themes" section | Add `## 🔍 Themes` section |
+| Key Questions | `^## ❓ Key Questions` | Missing "Key Questions" section | Add `## ❓ Key Questions` section |
+
+**Optional Sections:**
+- `## 💡 Initial Thoughts`
+- `## 🚀 Next Steps`
+- `## 🔗 Related`
+
+#### Exploration Hub (README.md)
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `EXPLORATION_HUB_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Quick Links | `^## 📋 Quick Links` | Missing "Quick Links" section | Add `## 📋 Quick Links` section |
+| Overview | `^## 🎯 Overview` | Missing "Overview" section | Add `## 🎯 Overview` section |
+
+---
+
+### Research Documents
+
+**Path Pattern:** `admin/research/[topic]/`
+
+**Document Subtypes:**
+
+| Subtype | File Pattern | Required Sections |
+|---------|--------------|-------------------|
+| **Research Topic** | `research-*.md` | Research Question, Findings, Recommendations |
+| **Research Summary** | `research-summary.md` | Research Overview, Key Insights, Recommendations |
+| **Requirements** | `requirements.md` | Overview, Functional Requirements |
+| **Research Hub** | `README.md` | Quick Links, Research Overview |
+
+#### Research Topic
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `RESEARCH_TOPIC_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Research Question | `^## 🎯 Research Question` | Missing "Research Question" section | Add `## 🎯 Research Question` section after metadata |
+| Findings | `^## 📊 Findings` | Missing "Findings" section | Add `## 📊 Findings` section |
+| Recommendations | `^## 💡 Recommendations` | Missing "Recommendations" section | Add `## 💡 Recommendations` section |
+
+**Optional Sections:**
+- `## 📋 Requirements Discovered`
+- `## 🚀 Next Steps`
+
+#### Research Summary
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `RESEARCH_SUMMARY_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Research Overview | `^## 📋 Research Overview` | Missing "Research Overview" section | Add `## 📋 Research Overview` section |
+| Key Insights | `^## 💡 Key Insights` | Missing "Key Insights" section | Add `## 💡 Key Insights` section |
+| Recommendations | `^## 🎯 Recommendations` | Missing "Recommendations" section | Add `## 🎯 Recommendations` section |
+
+#### Requirements Document
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `REQUIREMENTS_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Overview | `^## 📋 Overview` | Missing "Overview" section | Add `## 📋 Overview` section |
+| Non-Functional Requirements | `^## 🎯 Non-Functional Requirements` | Missing "Non-Functional Requirements" section | Add `## 🎯 Non-Functional Requirements` section |
+
+**Note:** Functional Requirements section uses format `### FR-NN:` (inline, not section header)
+
+#### Research Hub (README.md)
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `RESEARCH_HUB_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Quick Links | `^## 📋 Quick Links` | Missing "Quick Links" section | Add `## 📋 Quick Links` section |
+| Research Overview | `^## 🎯 Research Overview` | Missing "Research Overview" section | Add `## 🎯 Research Overview` section |
+
+---
+
+### Decision Documents (ADRs)
+
+**Path Pattern:** `admin/decisions/[topic]/`
+
+**Document Subtypes:**
+
+| Subtype | File Pattern | Required Sections |
+|---------|--------------|-------------------|
+| **ADR** | `adr-NNN-*.md` | Context, Decision, Consequences |
+| **Decisions Summary** | `decisions-summary.md` | Decisions Overview, Key Decisions |
+| **Decision Hub** | `README.md` | Quick Links, Decisions Overview |
+
+#### ADR (Architectural Decision Record)
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `ADR_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Context | `^## Context` | Missing "Context" section | Add `## Context` section after metadata |
+| Decision | `^## Decision` | Missing "Decision" section | Add `## Decision` section |
+| Consequences | `^## Consequences` | Missing "Consequences" section | Add `## Consequences` section |
+
+**Optional Sections:**
+- `## Alternatives Considered`
+- `## Decision Rationale`
+- `## Requirements Impact`
+- `## References`
+
+**ADR-Specific Rules:**
+
+| Rule ID | Severity | Pattern | Error Message |
+|---------|----------|---------|---------------|
+| `ADR_TITLE_FORMAT` | ERROR | `^# ADR-\d{3}:` | ADR title must follow format "# ADR-NNN: Title" |
+| `ADR_BATCH_FIELD` | WARNING | `^\*\*Batch:\*\*` | ADR should include Batch field in metadata |
+
+#### Decisions Summary
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `DECISIONS_SUMMARY_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Decisions Overview | `^## 📋 Decisions Overview` | Missing "Decisions Overview" section | Add `## 📋 Decisions Overview` section |
+| Key Decisions | `^## 🎯 Key Decisions` | Missing "Key Decisions" section | Add `## 🎯 Key Decisions` section |
+
+#### Decision Hub (README.md)
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `DECISION_HUB_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Quick Links | `^## 📋 Quick Links` | Missing "Quick Links" section | Add `## 📋 Quick Links` section |
+| Decisions Overview | `^## 🎯 Decisions Overview` | Missing "Decisions Overview" section | Add `## 🎯 Decisions Overview` section |
+
+---
+
+### Planning Documents
+
+**Path Pattern:** `admin/planning/features/[feature]/` or `docs/maintainers/planning/features/[feature]/`
+
+**Document Subtypes:**
+
+| Subtype | File Pattern | Required Sections |
+|---------|--------------|-------------------|
+| **Feature Plan** | `feature-plan.md` | Overview, Goals |
+| **Phase** | `phase-N.md` | Goals, Tasks |
+| **Status** | `status-and-next-steps.md` | Progress Overview, Next Steps |
+| **Planning Hub** | `README.md` | Quick Links, Overview |
+
+#### Feature Plan
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `FEATURE_PLAN_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Overview | `^## 📋 Overview` | Missing "Overview" section | Add `## 📋 Overview` section after metadata |
+| Goals | `^## 🎯 Goals` | Missing "Goals" section | Add `## 🎯 Goals` section |
+
+**Optional Sections:**
+- `## 📅 Phases` or `## Phases`
+- `## 🚀 Next Steps`
+
+#### Phase Document
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `PHASE_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Goals | `^## 🎯 Goals` | Missing "Goals" section | Add `## 🎯 Goals` section after metadata |
+
+**Phase-Specific Rules:**
+
+| Rule ID | Severity | Pattern | Error Message |
+|---------|----------|---------|---------------|
+| `PHASE_TASKS_SECTION` | ERROR | `^## 📝 Tasks` or `^### Task \d+` | Phase must contain Tasks section or individual Task headings |
+| `PHASE_NUMBER_METADATA` | WARNING | `^\*\*Phase:\*\*` | Phase document should include Phase number in metadata |
+
+#### Status and Next Steps
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `STATUS_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Progress Overview | `^## 📊 Progress Overview` | Missing "Progress Overview" section | Add `## 📊 Progress Overview` section |
+| Next Steps | `^## 🚀 Next Steps` | Missing "Next Steps" section | Add `## 🚀 Next Steps` section |
+
+#### Planning Hub (README.md)
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `PLANNING_HUB_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Quick Links | `^## 📋 Quick Links` | Missing "Quick Links" section | Add `## 📋 Quick Links` section |
+| Overview | `^## 🎯 Overview` | Missing "Overview" section | Add `## 🎯 Overview` section |
+
+---
+
+### Handoff Documents
+
+**Path Pattern:** `tmp/handoff*.md` or context-specific
+
+**Document Subtypes:**
+
+| Subtype | File Pattern | Required Sections |
+|---------|--------------|-------------------|
+| **Handoff** | `handoff*.md` | Current State, Next Actions |
+| **Reflection** | `reflection*.md` | Current State, Actionable Suggestions |
+
+#### Handoff
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `HANDOFF_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Current State | `^## 📍 Current State` | Missing "Current State" section | Add `## 📍 Current State` section |
+| Next Actions | `^## 🚀 Next Actions` | Missing "Next Actions" section | Add `## 🚀 Next Actions` section |
+
+**Optional Sections:**
+- `## 📋 Implementation Scope`
+- `## 📝 Notes`
+
+#### Reflection
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `REFLECTION_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Current State | `^## 📊 Current State` | Missing "Current State" section | Add `## 📊 Current State` section |
+| Actionable Suggestions | `^## 💡 Actionable Suggestions` | Missing "Actionable Suggestions" section | Add `## 💡 Actionable Suggestions` section |
+| Recommended Next Steps | `^## 🎯 Recommended Next Steps` | Missing "Recommended Next Steps" section | Add `## 🎯 Recommended Next Steps` section |
+
+---
+
+### Fix Documents
+
+**Path Pattern:** `admin/planning/fix/` or `admin/feedback/sourcery/`
+
+**Document Subtypes:**
+
+| Subtype | File Pattern | Required Sections |
+|---------|--------------|-------------------|
+| **Fix Batch** | `fix-batch-*.md` | Issues in This Batch, Overview |
+
+#### Fix Batch
+
+| Property | Value |
+|----------|-------|
+| **Rule ID** | `FIX_BATCH_REQUIRED_SECTIONS` |
+| **Severity** | ERROR |
+| **Required Sections** | |
+
+| Section | Pattern | Error Message | Fix Suggestion |
+|---------|---------|---------------|----------------|
+| Issues in This Batch | `^## 📋 Issues in This Batch` | Missing "Issues in This Batch" section | Add `## 📋 Issues in This Batch` section |
+| Overview | `^## 🎯 Overview` | Missing "Overview" section | Add `## 🎯 Overview` section |
+
+**Fix-Specific Rules:**
+
+| Rule ID | Severity | Pattern | Error Message |
+|---------|----------|---------|---------------|
+| `FIX_BATCH_TABLE` | WARNING | `\| Issue \|` or `\| # \|` | Fix batch should contain issues table |
+
+---
+
+## 📊 Type-Specific Rules Summary
+
+| Doc Type | Subtypes | Rule ID Prefix | Required Sections (Main) |
+|----------|----------|----------------|--------------------------|
+| **Exploration** | exploration, hub | `EXPLORATION_*` | What We're Exploring, Themes, Key Questions |
+| **Research** | topic, summary, requirements, hub | `RESEARCH_*` | Research Question, Findings, Recommendations |
+| **Decision** | adr, summary, hub | `ADR_*`, `DECISION_*` | Context, Decision, Consequences |
+| **Planning** | feature-plan, phase, status, hub | `FEATURE_*`, `PHASE_*`, `PLANNING_*` | Overview, Goals |
+| **Handoff** | handoff, reflection | `HANDOFF_*`, `REFLECTION_*` | Current State, Next Actions |
+| **Fix** | fix-batch | `FIX_*` | Issues in This Batch, Overview |
+
+---
+
 ## 🔗 References
 
 - [ADR-004: Validation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-004-validation-architecture.md)
@@ -212,8 +574,7 @@ When validating a directory:
 ---
 
 <!-- 
-NOTE: Type-specific rules (Task 2), error format (Task 3), and CLI reference (Task 9) 
-will be added in subsequent tasks.
+NOTE: Error format (Task 3) and CLI reference (Task 9) will be added in subsequent tasks.
 -->
 
 **Last Updated:** 2026-01-16
