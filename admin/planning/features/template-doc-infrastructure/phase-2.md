@@ -32,12 +32,12 @@ Document template format, placeholder conventions, and variable definitions for 
 
 **File:** `scripts/doc-gen/templates/FORMAT.md`
 
-- [ ] Create FORMAT.md document
-- [ ] Document the three placeholder types with syntax table
-- [ ] Add examples for each placeholder type
-- [ ] Document when each placeholder type is expanded
-- [ ] Include template rendering flow diagram
-- [ ] Reference ADR-002 for authoritative definitions
+- [x] Create FORMAT.md document
+- [x] Document the three placeholder types with syntax table
+- [x] Add examples for each placeholder type
+- [x] Document when each placeholder type is expanded
+- [x] Include template rendering flow diagram
+- [x] Reference ADR-002 for authoritative definitions
 
 **Content to Include:**
 
@@ -260,7 +260,7 @@ grep -rh '<!-- EXPAND:' scripts/doc-gen/templates/*.tmpl | head -20
 
 | Task                              | Status         | Notes |
 | --------------------------------- | -------------- | ----- |
-| Task 1: FORMAT.md                 | 🔴 Not Started |       |
+| Task 1: FORMAT.md                 | ✅ Complete    |       |
 | Task 2: VARIABLES.md              | 🔴 Not Started |       |
 | Task 3: AUTHORING.md              | 🔴 Not Started |       |
 | Task 4: Two-Mode Documentation    | 🔴 Not Started |       |
@@ -270,7 +270,7 @@ grep -rh '<!-- EXPAND:' scripts/doc-gen/templates/*.tmpl | head -20
 
 ## ✅ Completion Criteria
 
-- [x] FORMAT.md documents all placeholder types
+- [x] FORMAT.md documents all placeholder types ✅
 - [ ] VARIABLES.md lists all standard variables
 - [ ] AUTHORING.md provides complete guide
 - [ ] Two-mode support clearly explained
