@@ -1,7 +1,7 @@
 # Decisions Summary - Template Doc Infrastructure
 
 **Purpose:** Summary of all architecture decisions  
-**Status:** 🔴 Pending  
+**Status:** ✅ Complete  
 **Created:** 2026-01-14  
 **Last Updated:** 2026-01-14
 
@@ -12,7 +12,7 @@
 This document summarizes all architecture decisions for the template-based documentation infrastructure. Decisions are based on 7 completed research topics with 36 functional requirements, 18 non-functional requirements, and 18 constraints.
 
 **Decision Points:** 5 ADRs  
-**Status:** 🔴 Pending
+**Status:** ✅ All Accepted
 
 ---
 
@@ -86,13 +86,17 @@ This document summarizes all architecture decisions for the template-based docum
 
 ### ADR-005: Command Integration Pattern
 
-**Decision:** <!-- FILL: Decision statement -->
+**Decision:** Commands remain orchestrators but delegate structure generation to scripts (`dt-doc-gen`) and validation to `dt-doc-validate`. AI fills placeholders only.
 
-**Status:** 🔴 Proposed
+**Status:** ✅ Accepted
 
 **Key Points:**
-- <!-- FILL -->
-- <!-- FILL -->
+- Commands invoke `dt-doc-gen` for structure (not inline templates)
+- AI fills `<!-- AI: -->` and `<!-- EXPAND: -->` placeholders
+- Commands invoke `dt-doc-validate` before commit
+- Incremental 4-phase migration (extract → pilot → rollout → cleanup)
+- Two-mode support via expansion zones for `/explore`, `/research`
+- 154 inline templates → 17 external templates
 
 **ADR:** [adr-005-command-integration.md](adr-005-command-integration.md)
 
@@ -116,17 +120,39 @@ This document summarizes all architecture decisions for the template-based docum
 
 ### dev-infra (This Repository)
 
-<!-- FILL: What needs to be done in dev-infra -->
+**Templates & Specification:**
 
-- [ ] Task 1
-- [ ] Task 2
+- [ ] Create template files in `scripts/doc-gen/templates/`
+  - [ ] Exploration templates (README, exploration.md, research-topics.md)
+  - [ ] Research templates (README, research-*.md, summary, requirements)
+  - [ ] Decision templates (README, adr-NNN.md, summary)
+  - [ ] Planning templates (README, feature-plan.md, phase-N.md)
+  - [ ] Handoff template
+- [ ] Document template format specification
+- [ ] Document placeholder conventions
+- [ ] Document validation rules per doc type
 
 ### dev-toolkit (Separate Feature)
 
-<!-- FILL: What needs to be done in dev-toolkit -->
+**Tooling Implementation:**
 
-- [ ] Task 1
-- [ ] Task 2
+- [ ] Create `dt-doc-gen` CLI script
+  - [ ] Template fetching from dev-infra
+  - [ ] envsubst-based variable expansion
+  - [ ] Mode handling (setup vs full)
+- [ ] Create `dt-doc-validate` CLI script
+  - [ ] Common rules (status, dates, indicators)
+  - [ ] Type-specific section validation
+  - [ ] JSON and quiet output modes
+- [ ] Create shared library (`lib/doc-*.sh`)
+- [ ] Implement template caching
+
+### Command Migration (Per-Command Work)
+
+- [ ] Phase 1: Extract templates from commands
+- [ ] Phase 2: Pilot with `/explore`, `/research`
+- [ ] Phase 3: Incremental rollout to remaining commands
+- [ ] Phase 4: Remove inline template fallbacks
 
 ---
 

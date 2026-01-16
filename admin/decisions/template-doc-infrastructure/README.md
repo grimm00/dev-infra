@@ -21,7 +21,7 @@
 | [ADR-002](adr-002-template-structure-standard.md) | Template Structure Standard | ✅ Accepted | 1 |
 | [ADR-003](adr-003-generation-architecture.md) | Generation Architecture | ✅ Accepted | 2 |
 | [ADR-004](adr-004-validation-architecture.md) | Validation Architecture | ✅ Accepted | 2 |
-| [ADR-005](adr-005-command-integration.md) | Command Integration Pattern | 🔴 Pending | 3 |
+| [ADR-005](adr-005-command-integration.md) | Command Integration Pattern | ✅ Accepted | 3 |
 
 ---
 
@@ -70,7 +70,7 @@ These decisions formalize the findings from 7 completed research topics into act
 
 ---
 
-### Batch 3: Integration (ADR-005) 🔴
+### Batch 3: Integration (ADR-005) ✅
 
 **Purpose:** Define how commands use the infrastructure.
 
