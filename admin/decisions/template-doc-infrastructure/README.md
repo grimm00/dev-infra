@@ -17,8 +17,8 @@
 
 | ADR | Decision | Status | Batch |
 |-----|----------|--------|-------|
-| [ADR-001](adr-001-architectural-placement.md) | Architectural Placement (Four-Arm) | 🔴 Pending | 1 |
-| [ADR-002](adr-002-template-structure-standard.md) | Template Structure Standard | 🔴 Pending | 1 |
+| [ADR-001](adr-001-architectural-placement.md) | Architectural Placement (Four-Arm) | ✅ Accepted | 1 |
+| [ADR-002](adr-002-template-structure-standard.md) | Template Structure Standard | ✅ Accepted | 1 |
 | [ADR-003](adr-003-generation-architecture.md) | Generation Architecture | 🔴 Pending | 2 |
 | [ADR-004](adr-004-validation-architecture.md) | Validation Architecture | 🔴 Pending | 2 |
 | [ADR-005](adr-005-command-integration.md) | Command Integration Pattern | 🔴 Pending | 3 |
@@ -36,7 +36,7 @@ These decisions formalize the findings from 7 completed research topics into act
 
 ## 📊 Decision Batching Plan
 
-### Batch 1: Foundation (ADR-001, ADR-002) 🔴
+### Batch 1: Foundation (ADR-001, ADR-002) ✅
 
 **Purpose:** Set boundaries and define what we're building.
 

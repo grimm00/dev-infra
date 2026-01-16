@@ -20,13 +20,15 @@ This document summarizes all architecture decisions for the template-based docum
 
 ### ADR-001: Architectural Placement (Four-Arm Question)
 
-**Decision:** <!-- FILL: Decision statement -->
+**Decision:** Split template documentation infrastructure across two repositories: **Templates** in dev-infra (source), **Tooling** in dev-toolkit (distribution).
 
-**Status:** 🔴 Proposed
+**Status:** ✅ Accepted
 
 **Key Points:**
-- <!-- FILL -->
-- <!-- FILL -->
+- Templates in dev-infra (`scripts/doc-gen/templates/`) - source of truth
+- Tooling in dev-toolkit (`bin/dt-doc-gen`, `bin/dt-doc-validate`)
+- Follows dt-review precedent and ADR-001 (Project Identity)
+- Independent versioning of templates and tooling
 
 **ADR:** [adr-001-architectural-placement.md](adr-001-architectural-placement.md)
 
@@ -34,13 +36,15 @@ This document summarizes all architecture decisions for the template-based docum
 
 ### ADR-002: Template Structure Standard
 
-**Decision:** <!-- FILL: Decision statement -->
+**Decision:** Adopt hybrid template structure with 17 templates, 5 common patterns, 3 placeholder types, and envsubst-compatible `${VAR}` syntax.
 
-**Status:** 🔴 Proposed
+**Status:** ✅ Accepted
 
 **Key Points:**
-- <!-- FILL -->
-- <!-- FILL -->
+- 17 template files organized by workflow category
+- 5 common patterns (status header, quick links, status tables, next steps, related links)
+- 3 placeholder types: `${VAR}` (script), `<!-- AI: -->` (content), `<!-- EXPAND: -->` (zones)
+- Supports two-mode generation (scaffolding + expansion)
 
 **ADR:** [adr-002-template-structure-standard.md](adr-002-template-structure-standard.md)
 
