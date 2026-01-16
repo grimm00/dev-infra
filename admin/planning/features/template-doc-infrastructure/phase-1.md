@@ -373,15 +373,15 @@ find scripts/doc-gen/templates -name "*.tmpl" | wc -l  # Should be 17
 
 ## 📊 Progress Tracking
 
-| Task                              | Status         | Notes |
-| --------------------------------- | -------------- | ----- |
-| Task 1: Directory Structure       | ✅ Complete    |       |
-| Task 2: Exploration Templates (3) | ✅ Complete    |       |
-| Task 3: Research Templates (4)    | ✅ Complete    |       |
-| Task 4: Decision Templates (3)    | ✅ Complete    |       |
-| Task 5: Planning Templates (4)    | ✅ Complete    |       |
-| Task 6: Other Templates (3)       | ✅ Complete    |       |
-| Task 7: Verify Consistency        | ✅ Complete    |       |
+| Task                              | Status      | Notes |
+| --------------------------------- | ----------- | ----- |
+| Task 1: Directory Structure       | ✅ Complete |       |
+| Task 2: Exploration Templates (3) | ✅ Complete |       |
+| Task 3: Research Templates (4)    | ✅ Complete |       |
+| Task 4: Decision Templates (3)    | ✅ Complete |       |
+| Task 5: Planning Templates (4)    | ✅ Complete |       |
+| Task 6: Other Templates (3)       | ✅ Complete |       |
+| Task 7: Verify Consistency        | ✅ Complete |       |
 
 ---
 
