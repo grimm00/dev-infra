@@ -13,6 +13,7 @@
 
 - **[Phase 1](phase-1-learnings.md)** - Template Creation (17 templates)
 - **[Phase 2](phase-2-learnings.md)** - Format Specification (FORMAT.md, VARIABLES.md, AUTHORING.md)
+- **[Phase 3](phase-3-learnings.md)** - Validation Rules (VALIDATION.md, 6 YAML rule files)
 
 ---
 
@@ -29,7 +30,8 @@ This directory contains phase-specific learnings from the template-doc-infrastru
 
 ## 📊 Summary
 
-**Total Phase Learnings:** 2  
+**Total Phase Learnings:** 3  
+**Feature Status:** ✅ Complete (dev-infra portion)  
 **Status:** ✅ Active
 
 ---
