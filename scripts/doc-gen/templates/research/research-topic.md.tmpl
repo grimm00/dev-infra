@@ -1,3 +1,14 @@
+# Template Variables
+# 
+# This template uses the following variables (set via dt_set_research_vars):
+# - ${QUESTION_NAME} - Human-readable question name (e.g., "my research question")
+# - ${TOPIC_NAME} - Kebab-case topic name (e.g., "my-topic")
+# - ${QUESTION} - Full research question text
+# - ${STATUS} - Document status (e.g., "🔴 Research")
+# - ${DATE} - Creation/update date (ISO format: YYYY-MM-DD)
+#
+# Variables are expanded via envsubst during template rendering.
+
 # Research: ${QUESTION_NAME}
 
 **Research Topic:** ${TOPIC_NAME}
@@ -15,8 +26,11 @@
 ---
 
 ## 🔍 Research Goals
+<!-- REQUIRED: At least 3 goals -->
 
-<!-- AI: List goals -->
+- [x] Goal 1: <!-- AI: First goal statement -->
+- [ ] Goal 2: <!-- AI: Second goal statement -->
+- [ ] Goal 3: <!-- AI: Third goal statement -->
 
 ---
 
@@ -31,7 +45,17 @@
 
 ## 📊 Findings
 
-<!-- EXPAND: Document findings with sources and relevance -->
+### Finding 1: [Title]
+<!-- EXPAND: Add detailed explanation with sources -->
+
+**Source:** [Link or reference]
+**Relevance:** <!-- AI: How this relates to the research question -->
+
+### Finding 2: [Title]
+<!-- EXPAND: Add detailed explanation with sources -->
+
+**Source:** [Link or reference]
+**Relevance:** <!-- AI: How this relates to the research question -->
 
 ---
 
@@ -40,7 +64,11 @@
 <!-- EXPAND: Analyze findings and draw insights -->
 
 **Key Insights:**
-<!-- AI: List key insights -->
+<!-- REQUIRED: At least 3 insights -->
+
+1. <!-- AI: First key insight -->
+2. <!-- AI: Second key insight -->
+3. <!-- AI: Third key insight -->
 
 ---
 
