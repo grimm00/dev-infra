@@ -396,11 +396,11 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v0.8.0  
+**Version:** v0.8.0 (released 2026-01-10)  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
-**Updated:** 2025-12-18  
-**Priority:** v0.8.0 released
+**Updated:** 2026-01-10  
+**Priority:** v0.9.0 planning
 
 ### ✅ Completed
 
@@ -483,24 +483,21 @@ When modifying templates:
 
 ### ✅ Recently Released
 
-**v0.8.0 - Command Simplification (2025-12-18):**
+**v0.8.0 - Worktree Feature Workflow (2026-01-10):**
 
-- ✅ All templates now have all 19 commands
-- ✅ Removed experimental-project template
-- ✅ Migrated to 0.x.x versioning
-- ✅ ADR-001: Commands as Guides
-
-### 🟠 In Progress
-
-**Worktree Feature Workflow (v0.8.0):**
-
-- 🟠 Worktree feature workflow with draft PRs
+- ✅ Worktree feature workflow with draft PRs
 - ✅ `.sourcery.yaml` configuration for doc-aware reviews
 - ✅ `/pr --draft`, `--ready`, `--review` flags
 - ✅ Self-contained feature branches (all docs on feature branch)
 - ✅ "Fix before re-review" pattern documented
+- ✅ Discovery scripts (`worktrees.sh`, `shell-functions.sh`)
+- ✅ 4 ADRs for workflow decisions
 
 **See:** [WORKTREE-WORKFLOW.md](../../docs/WORKTREE-WORKFLOW.md) for complete guide
+
+### 🟠 In Progress
+
+*No features currently in progress*
 
 ### 🟡 Planned
 
@@ -536,6 +533,6 @@ When modifying templates:
 
 ---
 
-**Last Updated:** 2025-12-18  
+**Last Updated:** 2026-01-10  
 **Status:** ✅ Active  
-**Next:** v0.8.0 planning
+**Next:** v0.9.0 planning

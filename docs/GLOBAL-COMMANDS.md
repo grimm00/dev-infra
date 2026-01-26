@@ -94,6 +94,43 @@ dt-cursor-install --update
 
 ---
 
+## 🔄 Command Pipeline
+
+Commands follow a natural progression from exploration to implementation:
+
+### Ideation Pipeline
+
+`/explore` is the **entry point** for the ideation pipeline:
+
+```
+/explore [topic]              ← Setup: scaffolding
+    ↓ human review
+/explore [topic] --conduct    ← Conduct: full exploration
+    ↓
+/research --from-explore      ← Research: investigate topics
+    ↓
+/decision --from-research     ← Decisions: create ADRs
+    ↓
+/transition-plan --from-adr   ← Planning: create phases
+    ↓
+/task-phase 1 1               ← Implementation: execute phases
+```
+
+**Key Points:**
+
+- `/explore` is the **only command handling unstructured input** (raw ideas, brain dumps)
+- Natural entry point for new ideas before they're structured
+- Human review gate between setup and conduct modes
+- Subsequent commands receive structured input from previous stages
+
+**Two-Mode Pattern:**
+
+`/explore` uses the [two-mode pattern](TWO-MODE-PATTERN.md):
+- **Setup Mode** (default): Creates lightweight scaffolding (~60-80 lines)
+- **Conduct Mode** (`--conduct`): Full exploration (~200-300 lines)
+
+---
+
 ## 🎯 Command Tiers
 
 Commands are organized by importance and use case. Install based on your workflow needs.

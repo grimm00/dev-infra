@@ -1,0 +1,260 @@
+# Planning Document Validation Rules
+# 
+# Purpose: Define validation rules for planning documents
+# Used by: dt-doc-validate CLI tool
+# Reference: VALIDATION.md (Type-Specific Rules section)
+#
+# Document types covered:
+#   - feature-plan.md (feature plan)
+#   - phase.md (individual phase document)
+#   - status-and-next-steps.md (progress tracking)
+#   - README.md (feature hub)
+
+---
+
+# Feature Plan Document
+feature_plan:
+  description: "Feature plan validation rules"
+  path_pattern: "admin/planning/features/*/feature-plan.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30
+  
+  required_sections:
+    - section_id: overview
+      pattern: "^## 📋 Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Overview' section"
+      fix_suggestion: "Add '## 📋 Overview' section after metadata block"
+      
+    - section_id: goals
+      pattern: "^## 🎯 Goals"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Goals' section"
+      fix_suggestion: "Add '## 🎯 Goals' section after Overview"
+      
+    - section_id: implementation_phases
+      pattern: "^## 📅 Implementation Phases"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Implementation Phases' section"
+      fix_suggestion: "Add '## 📅 Implementation Phases' section after Goals"
+      
+    - section_id: success_criteria
+      pattern: "^## ✅ Success Criteria"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Success Criteria' section"
+      fix_suggestion: "Add '## ✅ Success Criteria' section after Implementation Phases"
+  
+  optional_sections:
+    - pattern: "^## 🔗 Dependencies"
+      description: "Feature dependencies"
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended next actions"
+  
+  examples:
+    valid: |
+      # Feature Plan: User Authentication
+      
+      **Status:** 🟠 In Progress
+      **Created:** 2026-01-16
+      **Last Updated:** 2026-01-16
+      
+      ---
+      
+      ## 📋 Overview
+      
+      Implement secure user authentication.
+      
+      ---
+      
+      ## 🎯 Goals
+      
+      - Secure login/logout
+      - Session management
+      
+      ---
+      
+      ## 📅 Implementation Phases
+      
+      - Phase 1: Basic auth
+      - Phase 2: OAuth integration
+      
+      ---
+      
+      ## ✅ Success Criteria
+      
+      - Users can log in securely
+
+---
+
+# Phase Document
+phase:
+  description: "Phase document validation rules"
+  path_pattern: "admin/planning/features/*/phase-*.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 14  # Phases should be updated frequently
+  
+  # Phase-specific metadata rules
+  metadata_rules:
+    - rule_id: PHASE_FEATURE_REF
+      severity: WARNING
+      pattern: "^\\*\\*Feature:\\*\\* "
+      error_code: MISSING_FEATURE_REF
+      error_message: "Missing 'Feature:' metadata field"
+      fix_suggestion: "Add '**Feature:** [feature-name]' in metadata"
+      
+    - rule_id: PHASE_NUMBER
+      severity: WARNING
+      pattern: "^\\*\\*Phase:\\*\\* \\d+"
+      error_code: MISSING_PHASE_NUMBER
+      error_message: "Missing 'Phase:' metadata field"
+      fix_suggestion: "Add '**Phase:** [number]' in metadata"
+  
+  required_sections:
+    - section_id: goals
+      pattern: "^## 🎯 Goals"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Goals' section"
+      fix_suggestion: "Add '## 🎯 Goals' section after metadata"
+      
+    - section_id: tasks
+      pattern: "^## 📝 Tasks"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Tasks' section"
+      fix_suggestion: "Add '## 📝 Tasks' section after Goals"
+      
+    - section_id: completion_criteria
+      pattern: "^## ✅ Completion Criteria"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Completion Criteria' section"
+      fix_suggestion: "Add '## ✅ Completion Criteria' section after Tasks"
+  
+  optional_sections:
+    - pattern: "^## 📦 Deliverables"
+      description: "Phase deliverables"
+    - pattern: "^## 🔗 Dependencies"
+      description: "Phase dependencies"
+  
+  # Scaffolding detection
+  content_patterns:
+    - pattern_id: scaffolding_marker
+      pattern: "⚠️ \\*\\*Scaffolding:\\*\\*"
+      severity: INFO
+      error_message: "Phase contains scaffolding - run --expand to add detailed tasks"
+      fix_suggestion: "Run '/transition-plan [feature] --expand --phase N' to expand"
+
+---
+
+# Status and Next Steps Document
+status_and_next_steps:
+  description: "Status and next steps validation rules"
+  path_pattern: "admin/planning/features/*/status-and-next-steps.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 7  # Status should be updated frequently
+  
+  required_sections:
+    - section_id: progress_overview
+      pattern: "^## 📊 Progress Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Progress Overview' section"
+      fix_suggestion: "Add '## 📊 Progress Overview' section with phase status table"
+      
+    - section_id: next_steps
+      pattern: "^## 🚀 Next Steps"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Next Steps' section"
+      fix_suggestion: "Add '## 🚀 Next Steps' section"
+  
+  optional_sections:
+    - pattern: "^## 🔄 Phase Progress"
+      description: "Detailed phase progress"
+  
+  # Progress table validation
+  content_patterns:
+    - pattern_id: progress_table
+      pattern: "\\| Phase \\| Name \\| Status \\|"
+      severity: WARNING
+      error_message: "Missing progress tracking table"
+      fix_suggestion: "Add progress table with columns: Phase, Name, Status, Progress, Notes"
+
+---
+
+# Planning Hub (README.md)
+planning_hub:
+  description: "Feature hub (README.md) validation rules"
+  path_pattern: "admin/planning/features/*/README.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 14
+  
+  required_sections:
+    - section_id: quick_links
+      pattern: "^## 📋 Quick Links"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Quick Links' section"
+      fix_suggestion: "Add '## 📋 Quick Links' section after metadata"
+      
+    - section_id: overview
+      pattern: "^## 🎯 Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Overview' section"
+      fix_suggestion: "Add '## 🎯 Overview' section after Quick Links"
+  
+  optional_sections:
+    - pattern: "^## 📊 Phase Status"
+      description: "Status table of phases"
+    - pattern: "^## ✅ Success Criteria"
+      description: "Feature success criteria"
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended next actions"
+
+---
+
+# Phase Status Values
+status_values:
+  description: "Valid planning status values for validation"
+  valid_statuses:
+    - value: "🔴 Not Started"
+      description: "Work not yet begun"
+    - value: "🟠 In Progress"
+      description: "Work currently active"
+    - value: "🟡 Blocked"
+      description: "Work blocked by dependencies"
+    - value: "✅ Complete"
+      description: "Work completed"
+    - value: "⏸️ Paused"
+      description: "Work temporarily paused"
+    - value: "❌ Cancelled"
+      description: "Work cancelled"

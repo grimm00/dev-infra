@@ -1,0 +1,173 @@
+# Fix Document Validation Rules
+# 
+# Purpose: Define validation rules for fix batch documents
+# Used by: dt-doc-validate CLI tool
+# Reference: VALIDATION.md (Type-Specific Rules section)
+#
+# Document types covered:
+#   - fix-batch.md (grouped fix plan)
+
+---
+
+# Fix Batch Document
+fix_batch:
+  description: "Fix batch plan validation rules"
+  path_pattern: "admin/planning/fix/**/batch-*.md"
+  alternate_patterns:
+    - "**/fix-batch-*.md"
+    - "admin/feedback/**/batch-*.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 14  # Fix batches should be addressed promptly
+  
+  # Fix-specific metadata rules
+  metadata_rules:
+    - rule_id: FIX_BATCH_ID
+      severity: ERROR
+      pattern: "^\\*\\*Batch:\\*\\* "
+      error_code: MISSING_BATCH_ID
+      error_message: "Missing 'Batch:' metadata field"
+      fix_suggestion: "Add '**Batch:** [batch-id]' in metadata"
+      
+    - rule_id: FIX_PRIORITY
+      severity: WARNING
+      pattern: "^\\*\\*Priority:\\*\\* "
+      error_code: MISSING_PRIORITY
+      error_message: "Missing 'Priority:' metadata field"
+      fix_suggestion: "Add '**Priority:** [CRITICAL|HIGH|MEDIUM|LOW]' in metadata"
+      
+    - rule_id: FIX_EFFORT
+      severity: WARNING
+      pattern: "^\\*\\*Effort:\\*\\* "
+      error_code: MISSING_EFFORT
+      error_message: "Missing 'Effort:' metadata field"
+      fix_suggestion: "Add '**Effort:** [XS|S|M|L|XL]' in metadata"
+      
+    - rule_id: FIX_ISSUE_COUNT
+      severity: WARNING
+      pattern: "^\\*\\*Issues:\\*\\* \\d+ issues"
+      error_code: MISSING_ISSUE_COUNT
+      error_message: "Missing 'Issues:' metadata field"
+      fix_suggestion: "Add '**Issues:** [N] issues' in metadata"
+  
+  required_sections:
+    - section_id: issues_table
+      pattern: "^## 📋 Issues in This Batch"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Issues in This Batch' section"
+      fix_suggestion: "Add '## 📋 Issues in This Batch' section with issues table"
+      
+    - section_id: overview
+      pattern: "^## 🎯 Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Overview' section"
+      fix_suggestion: "Add '## 🎯 Overview' section describing the batch"
+      
+    - section_id: implementation_steps
+      pattern: "^## 🔨 Implementation Steps"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Implementation Steps' section"
+      fix_suggestion: "Add '## 🔨 Implementation Steps' section"
+      
+    - section_id: definition_of_done
+      pattern: "^## ✅ Definition of Done"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Definition of Done' section"
+      fix_suggestion: "Add '## ✅ Definition of Done' section with checklist"
+  
+  optional_sections:
+    - pattern: "^## 📝 Issue Details"
+      description: "Detailed breakdown of each issue"
+    - pattern: "^## 🧪 Testing"
+      description: "Testing requirements"
+  
+  # Issues table validation
+  content_patterns:
+    - pattern_id: issues_table_header
+      pattern: "\\| Issue \\| Priority \\| Impact \\| Effort \\| Description \\|"
+      severity: WARNING
+      error_message: "Issues table missing or has wrong columns"
+      fix_suggestion: "Add table with columns: Issue, Priority, Impact, Effort, Description"
+      
+    - pattern_id: definition_of_done_checklist
+      pattern: "- \\[ \\] All issues in batch fixed"
+      severity: INFO
+      error_message: "Definition of Done missing standard checklist"
+      fix_suggestion: "Add standard checklist items to Definition of Done"
+  
+  examples:
+    valid: |
+      # Fix Plan: Authentication Fixes
+      
+      **Batch:** AUTH-001
+      **Priority:** HIGH
+      **Effort:** M
+      **Status:** 🟠 In Progress
+      **Created:** 2026-01-16
+      **Issues:** 3 issues
+      
+      ---
+      
+      ## 📋 Issues in This Batch
+      
+      | Issue | Priority | Impact | Effort | Description |
+      |-------|----------|--------|--------|-------------|
+      | AUTH-1 | HIGH | Security | S | Token validation |
+      
+      ---
+      
+      ## 🎯 Overview
+      
+      Fixes related to authentication.
+      
+      ---
+      
+      ## 🔨 Implementation Steps
+      
+      1. Fix token validation
+      2. Add tests
+      
+      ---
+      
+      ## ✅ Definition of Done
+      
+      - [ ] All issues in batch fixed
+      - [ ] Tests passing
+
+---
+
+# Fix Priority Values
+priority_values:
+  description: "Valid fix priority values for validation"
+  valid_priorities:
+    - value: "CRITICAL"
+      description: "Must fix immediately (blocking production)"
+    - value: "HIGH"
+      description: "Must fix before release"
+    - value: "MEDIUM"
+      description: "Should fix when possible"
+    - value: "LOW"
+      description: "Nice to fix"
+
+---
+
+# Fix Effort Values
+effort_values:
+  description: "Valid fix effort values for validation"
+  valid_efforts:
+    - value: "XS"
+      description: "Extra small (~15 mins)"
+    - value: "S"
+      description: "Small (~30 mins)"
+    - value: "M"
+      description: "Medium (~1-2 hours)"
+    - value: "L"
+      description: "Large (~half day)"
+    - value: "XL"
+      description: "Extra large (~1+ days)"

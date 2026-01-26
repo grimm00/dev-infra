@@ -1,0 +1,211 @@
+# Research Document Validation Rules
+# 
+# Purpose: Define validation rules for research documents
+# Used by: dt-doc-validate CLI tool
+# Reference: VALIDATION.md (Type-Specific Rules section)
+#
+# Document types covered:
+#   - research-topic.md (individual research topic)
+#   - research-summary.md (aggregated findings)
+#   - requirements.md (captured requirements)
+#   - README.md (research hub)
+
+---
+
+# Research Topic Document
+research_topic:
+  description: "Individual research topic validation rules"
+  path_pattern: "admin/research/*/research-*.md"
+  exclude_pattern: "research-summary.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30
+  
+  required_sections:
+    - section_id: research_question
+      pattern: "^## 🎯 Research Question"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Research Question' section"
+      fix_suggestion: "Add '## 🎯 Research Question' section after metadata block"
+      
+    - section_id: findings
+      pattern: "^## 📊 Findings"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Findings' section"
+      fix_suggestion: "Add '## 📊 Findings' section after methodology"
+      
+    - section_id: recommendations
+      pattern: "^## 💡 Recommendations"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Recommendations' section"
+      fix_suggestion: "Add '## 💡 Recommendations' section after Findings"
+  
+  optional_sections:
+    - pattern: "^## 📋 Requirements Discovered"
+      description: "Requirements identified during research"
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended follow-up actions"
+    - pattern: "^## 🔗 References"
+      description: "Sources and related documents"
+  
+  examples:
+    valid: |
+      # Research: Authentication Methods
+      
+      **Status:** ✅ Complete
+      **Created:** 2026-01-16
+      **Last Updated:** 2026-01-16
+      
+      ---
+      
+      ## 🎯 Research Question
+      
+      What authentication method best fits our security requirements?
+      
+      ---
+      
+      ## 📊 Findings
+      
+      - Finding 1
+      - Finding 2
+      
+      ---
+      
+      ## 💡 Recommendations
+      
+      Recommend OAuth 2.0 with JWT tokens.
+
+---
+
+# Research Summary Document
+research_summary:
+  description: "Aggregated research findings validation rules"
+  path_pattern: "admin/research/*/research-summary.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30
+  
+  required_sections:
+    - section_id: research_overview
+      pattern: "^## 📋 Research Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Research Overview' section"
+      fix_suggestion: "Add '## 📋 Research Overview' section after metadata"
+      
+    - section_id: key_insights
+      pattern: "^## 💡 Key Insights"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Key Insights' section"
+      fix_suggestion: "Add '## 💡 Key Insights' section to summarize findings"
+      
+    - section_id: recommendations
+      pattern: "^## 🎯 Recommendations"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Recommendations' section"
+      fix_suggestion: "Add '## 🎯 Recommendations' section after Key Insights"
+  
+  optional_sections:
+    - pattern: "^## 📋 Requirements Summary"
+      description: "Summary of discovered requirements"
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended follow-up actions"
+
+---
+
+# Requirements Document
+requirements:
+  description: "Requirements document validation rules"
+  path_pattern: "admin/research/*/requirements.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 60  # Requirements may be stable longer
+  
+  required_sections:
+    - section_id: overview
+      pattern: "^## 📋 Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Overview' section"
+      fix_suggestion: "Add '## 📋 Overview' section after metadata"
+      
+    - section_id: nfr
+      pattern: "^## 🎯 Non-Functional Requirements"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Non-Functional Requirements' section"
+      fix_suggestion: "Add '## 🎯 Non-Functional Requirements' section"
+  
+  # Functional requirements use inline format (### FR-NN:), not section headers
+  content_patterns:
+    - pattern_id: functional_requirements
+      pattern: "### FR-\\d{2}:"
+      severity: WARNING
+      error_message: "No functional requirements found"
+      fix_suggestion: "Add functional requirements using format '### FR-01: [Name]'"
+  
+  optional_sections:
+    - pattern: "^## ⚠️ Constraints"
+      description: "Project constraints"
+    - pattern: "^## 📝 Assumptions"
+      description: "Project assumptions"
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended follow-up actions"
+
+---
+
+# Research Hub (README.md)
+research_hub:
+  description: "Research hub (README.md) validation rules"
+  path_pattern: "admin/research/*/README.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30
+  
+  required_sections:
+    - section_id: quick_links
+      pattern: "^## 📋 Quick Links"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Quick Links' section"
+      fix_suggestion: "Add '## 📋 Quick Links' section after metadata"
+      
+    - section_id: research_overview
+      pattern: "^## 🎯 Research Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Research Overview' section"
+      fix_suggestion: "Add '## 🎯 Research Overview' section after Quick Links"
+  
+  optional_sections:
+    - pattern: "^## 📊 Research Status"
+      description: "Status table of research topics"
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended next actions"

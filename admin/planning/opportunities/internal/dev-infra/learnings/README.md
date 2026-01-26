@@ -11,7 +11,9 @@
 
 ### Feature-Specific Learnings
 
-- **[Worktree Feature Workflow Learnings](worktree-feature-workflow/README.md)** - Draft PR workflow, fix-before-re-review pattern, self-contained branches (4 phases, ✅ Complete) ⭐ **NEW**
+- **[Template Doc Infrastructure Learnings](template-doc-infrastructure/README.md)** - Template creation learnings: ADR-driven structure, placeholder conventions, hub-and-spoke pattern (1 of 3 phases, 🟠 In Progress) ⭐ **NEW**
+- **[Explore Two-Mode Learnings](explore-two-mode/README.md)** - Command enhancement learnings: two-mode pattern docs, timing guidance, task-based phases (1 of 4 phases, 🟠 In Progress)
+- **[Worktree Feature Workflow Learnings](worktree-feature-workflow/README.md)** - Draft PR workflow, fix-before-re-review pattern, self-contained branches (4 phases, ✅ Complete)
 - **[Transition-Plan Two-Mode Learnings](transition-plan-two-mode/README.md)** - Command development learnings: two-mode pattern, phase batching, pattern replication (4 phases, ✅ Complete)
 - **[Experimental Template Learnings](experimental-template/README.md)** - Phase learnings from Experimental Template feature (3 of 4 phases, 🟠 In Progress)
 - **[Release Automation v2 Learnings](release-automation-v2/README.md)** - Phase and release learnings from Release Automation v2 feature (2 of 2 phases + v0.5.0 release, ✅ Complete)
@@ -49,16 +51,16 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 21  
-**Feature-Specific Learnings:** 7 features (20 phases + 5 fix batches + 1 release total)  
+**Total Learning Documents:** 23  
+**Feature-Specific Learnings:** 9 features (22 phases + 5 fix batches + 1 release total)  
 **CI/CD Improvement Learnings:** 2 improvements  
 **Status:** ✅ Active
 
 **Recent Additions:**
-- **Worktree Feature Workflow Learnings (2026-01-09)** - Draft PR workflow, fix-before-re-review pattern, dogfooding insights
-- Template Sync Drift Fix Learnings (2025-12-30) - Transition-plan workflow validation, CI folder organization insights
-- Transition-Plan Two-Mode Feature Learnings (2025-12-29) - Two-mode pattern, phase batching, pattern replication
+- **Template Doc Infrastructure Learnings (2026-01-16)** - Phase 1 Template Creation: ADR-driven structure, placeholder conventions, batch task organization ⭐ **NEW**
+- Explore Two-Mode Learnings (2026-01-13) - Phase 1 Command Structure: task-based docs, timing guidance, human review checkpoint
+- Worktree Feature Workflow Learnings (2026-01-09) - Draft PR workflow, fix-before-re-review pattern, dogfooding insights
 
 ---
 
-**Last Updated:** 2026-01-09
+**Last Updated:** 2026-01-16

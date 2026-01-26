@@ -1,0 +1,151 @@
+# Exploration Document Validation Rules
+# 
+# Purpose: Define validation rules for exploration documents
+# Used by: dt-doc-validate CLI tool
+# Reference: VALIDATION.md (Type-Specific Rules section)
+#
+# Document types covered:
+#   - exploration.md (main exploration document)
+#   - research-topics.md (research topics list)
+#   - README.md (exploration hub)
+
+---
+
+# Main Exploration Document
+exploration:
+  description: "Main exploration document validation rules"
+  path_pattern: "admin/explorations/*/exploration.md"
+  
+  # Common rules applied to all exploration documents
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: false  # Not required for exploration docs
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30
+  
+  # Required sections for exploration documents
+  required_sections:
+    - section_id: what_exploring
+      pattern: "^## 🎯 What We're Exploring"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'What We're Exploring' section"
+      fix_suggestion: "Add '## 🎯 What We're Exploring' section after metadata block"
+      
+    - section_id: themes
+      pattern: "^## 🔍 Themes"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Themes' section"
+      fix_suggestion: "Add '## 🔍 Themes' section after What We're Exploring"
+      
+    - section_id: key_questions
+      pattern: "^## ❓ Key Questions"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Key Questions' section"
+      fix_suggestion: "Add '## ❓ Key Questions' section after Themes"
+  
+  # Optional sections (not validated, but recognized)
+  optional_sections:
+    - pattern: "^## 💡 Initial Thoughts"
+      description: "Initial thinking and analysis"
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended next actions"
+    - pattern: "^## 🔗 Related"
+      description: "Links to related documents"
+  
+  # Example valid document snippet
+  examples:
+    valid: |
+      # Exploration: My Feature
+      
+      **Status:** 🟠 In Progress
+      **Created:** 2026-01-16
+      
+      ---
+      
+      ## 🎯 What We're Exploring
+      
+      Brief description of the exploration topic.
+      
+      ---
+      
+      ## 🔍 Themes
+      
+      - Theme 1
+      - Theme 2
+      
+      ---
+      
+      ## ❓ Key Questions
+      
+      1. Question 1?
+      2. Question 2?
+    
+    invalid: |
+      # Exploration: My Feature
+      
+      **Status:** Started  # Invalid: missing emoji
+      
+      ## Overview  # Invalid: wrong section name
+      
+      Some content here.
+
+---
+
+# Research Topics Document
+research_topics:
+  description: "Research topics list validation rules"
+  path_pattern: "admin/explorations/*/research-topics.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+  
+  required_sections:
+    - section_id: topics_identified
+      pattern: "^## 📋 Topics Identified"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Topics Identified' section"
+      fix_suggestion: "Add '## 📋 Topics Identified' section after metadata"
+  
+  optional_sections:
+    - pattern: "^## 🚀 Next Steps"
+      description: "Recommended next actions"
+
+---
+
+# Exploration Hub (README.md)
+exploration_hub:
+  description: "Exploration hub (README.md) validation rules"
+  path_pattern: "admin/explorations/*/README.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+  
+  required_sections:
+    - section_id: quick_links
+      pattern: "^## 📋 Quick Links"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Quick Links' section"
+      fix_suggestion: "Add '## 📋 Quick Links' section after metadata"
+      
+    - section_id: overview
+      pattern: "^## 🎯 Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Overview' section"
+      fix_suggestion: "Add '## 🎯 Overview' section after Quick Links"
+  
+  optional_sections:
+    - pattern: "^## 📊 Research Topics"
+      description: "Status table of research topics"
