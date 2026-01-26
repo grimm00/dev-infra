@@ -1,3 +1,13 @@
+# Template Variables
+# 
+# This template uses the following variables (set via dt_set_exploration_vars):
+# - ${TOPIC_TITLE} - Title case version of topic name (e.g., "My Topic")
+# - ${TOPIC_NAME} - Kebab-case topic name (e.g., "my-topic")
+# - ${STATUS} - Document status (e.g., "🔴 Exploration")
+# - ${DATE} - Creation/update date (ISO format: YYYY-MM-DD)
+#
+# Variables are expanded via envsubst during template rendering.
+
 # Exploration: ${TOPIC_TITLE}
 
 **Status:** ${STATUS}
