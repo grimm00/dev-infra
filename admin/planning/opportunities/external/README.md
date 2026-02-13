@@ -14,6 +14,10 @@
   - [Code Improvements](work-prod/code-improvements.md) - Phase 1-3 learnings (26h)
   - [Cursor Commands](work-prod/cursor-commands/) - 🔴 CRITICAL: Workflow automation (40h)
   - [Documentation Templates](work-prod/documentation-templates.md) - Process templates (6h)
+- **[Helm-Charts Opportunities](helm-charts/lightweight-commands.md)** - Lightweight commands for non-proj-cli projects
+  - Success with `/review` + `/commit`, spike commands, and `/reflect --eod` in a repo without scaffolding
+- **[Dev-Toolkit Opportunities](dev-toolkit/README.md)** - Spike workflow framework and agentic coding learnings
+  - [Spike Workflow Framework](dev-toolkit/spike-workflow-framework.md) - Time-boxed experimentation methodology (HIGH priority)
 
 ---
 
@@ -49,6 +53,29 @@ This directory captures valuable patterns, improvements, and learnings discovere
 
 **See:** [Work-Prod Opportunities](work-prod/README.md) for complete details
 
+### Helm-Charts Project
+
+**Source:** `~/Projects/work/helm-charts`
+**Status:** 🟡 Documented
+**Focus:** Lightweight commands for non-proj-cli projects
+
+**Key Finding:** A small set of Cursor commands (review/commit, spike, EOD reflect) proved effective in a shared team Helm chart repo with no `admin/` structure, no phases, and no Sourcery. Informs how dev-infra can guide contributions to projects not created with proj-cli.
+
+**See:** [Helm-Charts Lightweight Commands](helm-charts/lightweight-commands.md) for details
+
+### Dev-Toolkit Project
+
+**Source:** `~/Projects/dev-toolkit` (dt-workflow v1 exploration)  
+**Status:** 🟡 Documented  
+**Focus:** Spike workflow framework and agentic coding meta-learnings
+
+**Key Findings:**
+- **Spike Workflow Framework** - Time-boxed experiments to validate high-risk decisions before research
+- **Meta-Learnings** - Discovery problem and ownership problem with agentic coding
+- **Two-Tier Documentation** - AI-discoverable vs human-detailed pattern
+
+**See:** [Dev-Toolkit Opportunities](dev-toolkit/README.md) for details
+
 ---
 
 ## 🔄 Review Process
@@ -78,18 +105,23 @@ This directory captures valuable patterns, improvements, and learnings discovere
 ```
 external/
 ├── README.md                    # 📍 HUB - This file
-└── work-prod/                    # Work-prod opportunities
-    ├── README.md                # Work-prod hub
-    ├── code-improvements.md      # Phase 1-3 learnings
-    ├── cursor-commands/         # Cursor commands integration
-    │   ├── README.md
-    │   ├── integration.md        # Complete analysis
-    │   └── adaptations/          # Adaptation guides
-    └── documentation-templates.md # Process templates
+├── work-prod/                    # Work-prod opportunities
+│   ├── README.md                # Work-prod hub
+│   ├── code-improvements.md      # Phase 1-3 learnings
+│   ├── cursor-commands/         # Cursor commands integration
+│   │   ├── README.md
+│   │   ├── integration.md        # Complete analysis
+│   │   └── adaptations/          # Adaptation guides
+│   └── documentation-templates.md # Process templates
+├── helm-charts/                  # Helm-charts opportunities
+│   └── lightweight-commands.md   # Lightweight commands for non-proj-cli projects
+└── dev-toolkit/                  # Dev-toolkit opportunities
+    ├── README.md                 # Dev-toolkit hub
+    └── spike-workflow-framework.md # Spike methodology and agentic coding learnings
 ```
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2026-02-13  
 **Status:** ✅ Active  
-**Next:** Review work-prod opportunities and create implementation plan
+**Next:** Integrate spike workflow framework into explore command and workflow rules
