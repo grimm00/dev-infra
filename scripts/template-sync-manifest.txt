@@ -5,10 +5,12 @@
 # Note: experimental-project was merged into standard-project (ADR-001: Commands as Guides)
 # All templates now receive all commands - no stable/experimental distinction
 
-# All commands (19 total)
+# All commands (23 total)
+.cursor/commands/commit.md
 .cursor/commands/cursor-rules.md
 .cursor/commands/decision.md
 .cursor/commands/explore.md
+.cursor/commands/handoff.md
 .cursor/commands/fix-implement.md
 .cursor/commands/fix-plan.md
 .cursor/commands/fix-review.md
@@ -20,6 +22,8 @@
 .cursor/commands/reflect.md
 .cursor/commands/reflection-artifacts.md
 .cursor/commands/research.md
+.cursor/commands/review.md
+.cursor/commands/spike.md
 .cursor/commands/status.md
 .cursor/commands/task-improvement.md
 .cursor/commands/task-phase.md
