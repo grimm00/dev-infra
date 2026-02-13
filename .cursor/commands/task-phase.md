@@ -377,11 +377,25 @@ When starting a phase (first task of the phase), automatically update status:
 
 **Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
 
-**Commit Pattern:**
+**For code changes (tests, implementation, refactoring):**
 
-- Commit after each logical unit (test file, implementation, migration, CLI command)
-- Small commits are better than large commits
-- Always commit before stopping (even if work incomplete)
+Use `/review` to review changes before committing. This forces a deliberate pause to verify agentic code changes.
+
+```
+[AI implements task]
+    ↓
+/review [task-description]   ← Review in a separate prompt
+    ↓ human review
+/commit                      ← Commit reviewed changes
+```
+
+**For documentation-only changes (status updates, phase markers):**
+
+Direct commit is fine -- no review pause needed.
+
+```bash
+git commit -m "docs(phase-N): mark Task M complete"
+```
 
 **Commit Message Format:**
 
@@ -392,16 +406,18 @@ When starting a phase (first task of the phase), automatically update status:
 **Examples:**
 
 ```bash
-git commit -m "test(phase-3): add DELETE endpoint tests"
-git commit -m "feat(phase-3): implement DELETE endpoint"
-git commit -m "feat(phase-3): add proj delete CLI command"
+# Code changes -- use /review + /commit
+# test(phase-3): add DELETE endpoint tests
+# feat(phase-3): implement DELETE endpoint
+
+# Doc changes -- direct commit is fine
+git commit -m "docs(phase-3): update status checkboxes"
 ```
 
 **Before Stopping:**
 
 - [ ] Check `git status` for uncommitted changes
-- [ ] Stage all changes (`git add`)
-- [ ] Commit with proper message
+- [ ] Use `/review` for code changes, direct commit for docs-only
 - [ ] Push to remote if on feature branch
 - [ ] Verify no uncommitted changes remain
 
@@ -468,9 +484,10 @@ After task implementation is complete, AUTOMATICALLY:
 - [ ] **STOP - Do NOT proceed to next task group**
 - [ ] Present completion summary to user
 - [ ] Indicate which tasks were completed (e.g., "Tasks 1-2 complete: Filter tests + implementation")
+- [ ] Remind user: "Use `/review` to review code changes before committing"
 - [ ] Wait for user to invoke command again for next task group
 
-**Important:** This command handles ONE task group at a time (typically RED+GREEN pair). The user will invoke the command again with the next task number when ready to continue.
+**Important:** This command handles ONE task group at a time (typically RED+GREEN pair). The user will invoke `/review` to review and commit, then invoke this command again with the next task number when ready to continue.
 
 ---
 
