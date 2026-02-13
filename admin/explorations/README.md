@@ -2,7 +2,7 @@
 
 **Purpose:** Active explorations and proof of concepts  
 **Status:** ✅ Active  
-**Last Updated:** 2026-01-13
+**Last Updated:** 2026-02-13
 
 ---
 
@@ -10,7 +10,8 @@
 
 ### Active Explorations
 
-- **[Template Doc Infrastructure](template-doc-infrastructure/README.md)** - Template-based doc generation and validation for consistent workflow docs (🔴 Scaffolding) ⭐ **NEW**
+- **[Workflow Simplification](workflow-simplification/README.md)** - Simplify feature/phase/task hierarchy and command structure (✅ Expanded) ⭐ **NEW**
+- **[Template Doc Infrastructure](template-doc-infrastructure/README.md)** - Template-based doc generation and validation for consistent workflow docs (🔴 Scaffolding)
 - **[Worktree Feature Workflow](worktree-feature-workflow/README.md)** - Self-contained feature development with manual worktrees and review gates (🔴 Exploration)
 - **[Handoff Command](handoff-command/README.md)** - Managing context handoff between AI chat sessions (🟠 Exploration)
 - **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, and topic unification (🔴 Exploration)
@@ -45,4 +46,4 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2026-01-13
+**Last Updated:** 2026-02-13
