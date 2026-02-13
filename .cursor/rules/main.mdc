@@ -68,7 +68,7 @@ When planning work, classify it:
 
 ### Command Distribution
 
-All templates receive all 19 workflow commands. Only dev-infra internal commands (release automation) stay internal.
+All templates receive all 23 workflow commands. Only dev-infra internal commands (release automation) stay internal.
 
 **See:** [ADR-001: Commands as Guides](../../../admin/decisions/command-simplification/adr-001-commands-as-guides.md)
 
@@ -396,18 +396,18 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v0.8.0 (released 2026-01-10)  
+**Version:** v0.9.0 (released 2026-02-13)  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
-**Updated:** 2026-01-10  
-**Priority:** v0.9.0 planning
+**Updated:** 2026-02-13  
+**Priority:** v0.10.0 planning
 
 ### ✅ Completed
 
 **Template System:**
 
-- ✅ Standard project template (all 19 commands)
-- ✅ Learning project template (all 19 commands)
+- ✅ Standard project template (all 23 commands)
+- ✅ Learning project template (all 23 commands)
 - ✅ Template generator script (2 template types)
 - ✅ Template validation script
 - ✅ Hub-and-spoke documentation pattern
@@ -451,6 +451,9 @@ When modifying templates:
 
 **Commands (Core - Complete):**
 
+- ✅ `/review` - Review agentic changes before committing
+- ✅ `/commit` - Commit from review context
+- ✅ `/handoff` - Session continuity and work handoff
 - ✅ `/fix-plan` - Create fix batches from reviews
 - ✅ `/fix-implement` - Implement fix batches
 - ✅ `/task-phase` - Phase implementation with TDD
@@ -462,6 +465,7 @@ When modifying templates:
 - ✅ `/reflect` - Project reflection and suggestions
 - ✅ `/int-opp` - Internal opportunity capture
 - ✅ `/explore` - Exploration workflow
+- ✅ `/spike` - Time-boxed technical validation
 - ✅ `/research` - Research workflow
 - ✅ `/decision` - ADR creation workflow
 - ✅ `/transition-plan` - Planning from artifacts/ADRs
@@ -471,7 +475,7 @@ When modifying templates:
 
 **Command Simplification (v0.8.0):**
 
-- ✅ All templates now have all 19 commands
+- ✅ All templates now have all 23 commands
 - ✅ Removed experimental-project template (merged into standard)
 - ✅ Removed graduation process (ADR-004 superseded)
 - ✅ ADR-001: Commands as Guides created
@@ -483,26 +487,33 @@ When modifying templates:
 
 ### ✅ Recently Released
 
+**v0.9.0 - New Commands and Template Enhancements (2026-02-13):**
+
+- ✅ 4 new commands: `/spike`, `/review`, `/commit`, `/handoff` (19 → 23 total)
+- ✅ `/explore` two-mode pattern (setup + conduct with human review checkpoint)
+- ✅ Input sources for `/explore` (raw text, start.txt, reflections)
+- ✅ Worktree integration for `/explore` conduct mode
+- ✅ Template-doc-infrastructure: 17 doc-gen templates + specifications
+- ✅ Review-then-commit integration in implementation commands
+- ✅ Sourcery configuration for `.cursor/` and `docs/` ignore
+- ✅ Spike determination tables in explore workflow
+
 **v0.8.0 - Worktree Feature Workflow (2026-01-10):**
 
 - ✅ Worktree feature workflow with draft PRs
 - ✅ `.sourcery.yaml` configuration for doc-aware reviews
 - ✅ `/pr --draft`, `--ready`, `--review` flags
 - ✅ Self-contained feature branches (all docs on feature branch)
-- ✅ "Fix before re-review" pattern documented
-- ✅ Discovery scripts (`worktrees.sh`, `shell-functions.sh`)
-- ✅ 4 ADRs for workflow decisions
-
-**See:** [WORKTREE-WORKFLOW.md](../../docs/WORKTREE-WORKFLOW.md) for complete guide
 
 ### 🟠 In Progress
 
-*No features currently in progress*
+- 🟠 Workflow simplification exploration (`feat/workflow-simplification`)
 
 ### 🟡 Planned
 
 **Future Considerations:**
 
+- 🟡 Workflow simplification (v0.10.0+) -- simplify feature/phase/task hierarchy
 - 🟡 Command branch workflow (`cmd/*` pattern)
 
 ---
@@ -533,6 +544,6 @@ When modifying templates:
 
 ---
 
-**Last Updated:** 2026-01-10  
+**Last Updated:** 2026-02-13  
 **Status:** ✅ Active  
-**Next:** v0.9.0 planning
+**Next:** v0.10.0 planning

@@ -1,7 +1,9 @@
 # Sourcery Configuration
-# Ignore process documentation to focus code review on actual code
+# Focus code review on scripts, tests, CI, and templates
 # See: admin/decisions/worktree-feature-workflow/adr-004-sourcery-configuration.md
 
 ignore:
   - admin/**     # Process docs (explorations, research, decisions, planning)
   - tmp/**       # Temporary files (handoff docs, scratch)
+  - .cursor/**   # AI workflow commands and rules (not code)
+  - docs/**      # User documentation (markdown, not code)

@@ -277,11 +277,31 @@ The script will report:
 
 **Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
 
-**Commit strategy:**
+**For code changes (tests, implementation, scripts):**
 
-- Commit test first: `test(release): add test for [task description]`
-- Commit implementation: `feat(release): implement [task description]`
-- Commit checklist update: `docs(release): update checklist for [task description]`
+Use `/review` to review changes before committing. This forces a deliberate pause to verify agentic code changes.
+
+```
+[AI implements release task]
+    ↓
+/review [task-description]   ← Review in a separate prompt
+    ↓ human review
+/commit                      ← Commit reviewed changes
+```
+
+**For documentation-only changes (checklist updates, release notes):**
+
+Direct commit is fine -- no review pause needed.
+
+```bash
+git commit -m "docs(release): update checklist for [task description]"
+```
+
+**Commit message examples:**
+
+- Code: `test(release): add test for [task description]` (via `/review` + `/commit`)
+- Code: `feat(release): implement [task description]` (via `/review` + `/commit`)
+- Docs: `docs(release): update checklist for [task description]` (direct commit)
 
 **Branch:**
 
@@ -290,14 +310,13 @@ The script will report:
 
 **Before Stopping:**
 - [ ] Check `git status` for uncommitted changes
-- [ ] Stage all changes (`git add`)
-- [ ] Commit with proper message
+- [ ] Use `/review` for code changes, direct commit for docs-only
 - [ ] Push to remote
 - [ ] Verify no uncommitted changes remain
 
 **Checklist:**
 
-- [ ] Changes committed
+- [ ] Code changes reviewed with `/review`
 - [ ] Commit messages descriptive
 - [ ] Commits follow project conventions
 - [ ] Branch is correct
@@ -315,9 +334,10 @@ The script will report:
 - [ ] **STOP - Do NOT proceed to next task**
 - [ ] Present completion summary to user
 - [ ] Indicate which task was completed
+- [ ] Remind user: "Use `/review` to review code changes before committing"
 - [ ] Wait for user to invoke command again for next task
 
-**Important:** This command handles ONE task at a time. The user will invoke the command again with the next task number when ready to continue.
+**Important:** This command handles ONE task at a time. The user will invoke `/review` to review and commit code changes, then invoke this command again with the next task number when ready to continue.
 
 ---
 

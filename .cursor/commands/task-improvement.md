@@ -214,10 +214,25 @@ This command supports CI/CD improvement phase organization:
 
 **Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
 
-**Commit Pattern:**
-- Commit after each logical unit (documentation section, process improvement, workflow integration)
-- Small commits are better than large commits
-- Always commit before stopping (even if work incomplete)
+**For code/workflow changes (scripts, integrations, automation):**
+
+Use `/review` to review changes before committing. This forces a deliberate pause to verify agentic changes.
+
+```
+[AI implements improvement]
+    ↓
+/review [task-description]   ← Review in a separate prompt
+    ↓ human review
+/commit                      ← Commit reviewed changes
+```
+
+**For documentation-only changes (process docs, checklists, templates):**
+
+Direct commit is fine -- no review pause needed.
+
+```bash
+git commit -m "docs(ci/status-tracking-automation): add status update reminders to task-phase command"
+```
 
 **Commit Message Format:**
 - Follow standard format: `type(scope): brief description`
@@ -226,15 +241,16 @@ This command supports CI/CD improvement phase organization:
 
 **Examples:**
 ```bash
-git commit -m "docs(ci/status-tracking-automation): add status update reminders to task-phase command"
-git commit -m "feat(ci/status-tracking-automation): integrate status checks into PR workflow"
+# Code/workflow changes -- use /review + /commit
+# feat(ci/status-tracking-automation): integrate status checks into PR workflow
+
+# Doc changes -- direct commit is fine
 git commit -m "docs(ci/documentation-validation): create validation checklist template"
 ```
 
 **Before Stopping:**
 - [ ] Check `git status` for uncommitted changes
-- [ ] Stage all changes (`git add`)
-- [ ] Commit with proper message
+- [ ] Use `/review` for code/workflow changes, direct commit for docs-only
 - [ ] Push to remote if on feature branch
 - [ ] Verify no uncommitted changes remain
 
@@ -273,6 +289,7 @@ git commit -m "docs(ci/documentation-validation): create validation checklist te
 - [ ] **STOP - Do NOT proceed to next task group**
 - [ ] Present completion summary to user
 - [ ] Indicate which tasks were completed (e.g., "Tasks 1-2 complete: Documentation updates")
+- [ ] Remind user: "Use `/review` to review code/workflow changes before committing"
 - [ ] Wait for user to invoke command again for next task group
 
 **Important:** This command handles ONE task group at a time (typically related process/documentation tasks). The user will invoke the command again with the next task number when ready to continue.

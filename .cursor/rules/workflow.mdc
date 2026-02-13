@@ -67,6 +67,41 @@ alwaysApply: true
 
 ---
 
+## 👀 Review-then-Commit Workflow
+
+**Essential for agentic coding.** Forces a human review pause between AI-generated changes and committing them.
+
+**Commands:** `/review` + `/commit`
+
+### Flow
+
+```
+[AI makes changes]
+    ↓
+/review [description]     ← Stage, capture diff + summary, draft message, STOP
+    ↓ human review        ← KEY PAUSE: review diff, verify changes, refine message
+/commit                   ← Commit with reviewed message, clean up artifacts
+```
+
+### Why This Matters
+
+With AI-assisted development, it's too easy to commit code you haven't actually reviewed. The `/review` command:
+- Stages files and captures a diff + human-readable summary
+- Drafts a conventional commit message
+- **Stops and waits** for human approval
+
+The `/commit` command reads the draft message from the review session and finalizes.
+
+### When to Use
+
+- After any AI implementation (`/task-phase`, `/spike`, etc.)
+- When AI modifies multiple files and you want to verify scope
+- Any time you want a deliberate review pause before committing
+
+**See:** `.cursor/commands/review.md` and `.cursor/commands/commit.md` for complete documentation
+
+---
+
 ## 🔍 Pull Request Review Workflow
 
 ### NEVER Merge Without Review
@@ -273,6 +308,60 @@ For each Sourcery comment, assess:
 - Separate planning updates from implementation commits
 - Better estimation accuracy
 - Cleaner git history
+
+---
+
+## 🧪 Spike Workflow
+
+**A spike is a time-boxed experiment to answer "can it work?" before committing to implementation.**
+
+**Command:** `/spike [topic] [options]`
+
+### When to Spike vs Research
+
+| Situation | Use Spike | Use Research |
+|-----------|-----------|--------------|
+| Technical uncertainty ("can it even work?") | Yes | |
+| Architectural decision with high commitment | Yes | |
+| Need to test against a real environment | Yes | |
+| Comparing well-documented options | | Yes |
+| Investigating best practices | | Yes |
+| Low-risk, well-understood path | | Yes |
+
+### Spike Determination Framework
+
+During exploration, assess each topic:
+
+| Risk Level | Determination | Rationale |
+|------------|---------------|-----------|
+| HIGH | **Spike first** | Hard to pivot once committed |
+| MEDIUM-HIGH | **Consider spike** | Benefits from hands-on validation |
+| MEDIUM | Research only | Depends on other decisions |
+| LOW | Research only | Clear path, low risk |
+
+### Integration with Explore → Research → Decision
+
+```
+/explore [topic]           ← Identifies spike candidates (spike determination table)
+    |
+/spike [topic]             ← Validate high-risk assumptions (2-4 hours)
+    |                        (optional, when technical uncertainty is high)
+    |
+/research --from-explore   ← Investigate remaining questions
+    |                        (spike learnings inform research)
+    |
+/decision --from-research  ← Make decisions (spike-backed = HIGH confidence)
+```
+
+### Key Principles
+
+- **Time-boxed:** 2-4 hours maximum
+- **Throwaway mindset:** Code may be discarded
+- **Learning-focused:** Output is knowledge, not production code
+- **Question-driven:** Define success criteria before starting
+- **Document regardless:** Capture learnings even if time expires
+
+**See:** `.cursor/commands/spike.md` for complete command documentation
 
 ---
 

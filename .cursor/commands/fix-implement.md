@@ -420,6 +420,18 @@ pytest --cov --cov-report=term-missing
 
 **Reference:** [Commit Workflow](../../docs/COMMIT-WORKFLOW.md) - Central commit workflow documentation
 
+**For code changes (fixes, test updates):**
+
+Use `/review` to review changes before committing. This forces a deliberate pause to verify the fix is correct.
+
+```
+[AI implements fix]
+    ↓
+/review [issue-description]   ← Review in a separate prompt
+    ↓ human review
+/commit                       ← Commit reviewed changes
+```
+
 **Commit message format:**
 
 **For PR-Specific Batches:**
@@ -475,11 +487,12 @@ Source PRs: PR #1, PR #2, PR #12"
 
 **Checklist:**
 
+- [ ] Changes reviewed with `/review` (for code changes)
 - [ ] Commit message follows format
 - [ ] Issue number referenced
 - [ ] Batch name included
 - [ ] Source PRs listed (for cross-PR batches)
-- [ ] Changes committed
+- [ ] Changes committed (via `/commit` or direct for docs-only)
 
 ---
 

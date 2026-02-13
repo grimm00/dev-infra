@@ -1,3 +1,15 @@
+# Template Variables
+# 
+# This template uses the following variables (set via dt_set_decision_vars):
+# - ${ADR_NUMBER} - ADR number (e.g., "006")
+# - ${DECISION_TITLE} - Title of the decision
+# - ${TOPIC_NAME} - Kebab-case topic name (e.g., "my-topic")
+# - ${STATUS} - Document status (e.g., "✅ Accepted")
+# - ${DATE} - Creation/update date (ISO format: YYYY-MM-DD)
+# - ${BATCH_NUMBER} - Decision batch number (if applicable)
+#
+# Variables are expanded via envsubst during template rendering.
+
 # ADR-${ADR_NUMBER}: ${DECISION_TITLE}
 
 **Status:** ${STATUS}
@@ -28,13 +40,25 @@
 
 ## Consequences
 
-<!-- AI: List positive and negative consequences -->
+### Positive
+<!-- REQUIRED: At least 2 positive consequences -->
+
+- <!-- AI: First positive consequence -->
+- <!-- AI: Second positive consequence -->
+
+### Negative
+
+- <!-- AI: First negative consequence (trade-off accepted) -->
+- <!-- AI: Second negative consequence (if applicable) -->
 
 ---
 
 ## Alternatives Considered
+<!-- REQUIRED: At least 2 alternatives -->
 
-<!-- EXPAND: Describe alternatives evaluated -->
+| Alternative | Pros | Cons | Why Not Chosen |
+|-------------|------|------|----------------|
+<!-- AI: Fill alternatives table. One row per option. Each row: | Alternative Name | Pros list | Cons list | Reason not chosen | -->
 
 ---
 
