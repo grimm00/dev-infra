@@ -68,7 +68,7 @@ When planning work, classify it:
 
 ### Command Distribution
 
-All templates receive all 19 workflow commands. Only dev-infra internal commands (release automation) stay internal.
+All templates receive all 23 workflow commands. Only dev-infra internal commands (release automation) stay internal.
 
 **See:** [ADR-001: Commands as Guides](../../../admin/decisions/command-simplification/adr-001-commands-as-guides.md)
 
@@ -406,8 +406,8 @@ When modifying templates:
 
 **Template System:**
 
-- ✅ Standard project template (all 19 commands)
-- ✅ Learning project template (all 19 commands)
+- ✅ Standard project template (all 23 commands)
+- ✅ Learning project template (all 23 commands)
 - ✅ Template generator script (2 template types)
 - ✅ Template validation script
 - ✅ Hub-and-spoke documentation pattern
@@ -451,6 +451,9 @@ When modifying templates:
 
 **Commands (Core - Complete):**
 
+- ✅ `/review` - Review agentic changes before committing
+- ✅ `/commit` - Commit from review context
+- ✅ `/handoff` - Session continuity and work handoff
 - ✅ `/fix-plan` - Create fix batches from reviews
 - ✅ `/fix-implement` - Implement fix batches
 - ✅ `/task-phase` - Phase implementation with TDD
@@ -462,6 +465,7 @@ When modifying templates:
 - ✅ `/reflect` - Project reflection and suggestions
 - ✅ `/int-opp` - Internal opportunity capture
 - ✅ `/explore` - Exploration workflow
+- ✅ `/spike` - Time-boxed technical validation
 - ✅ `/research` - Research workflow
 - ✅ `/decision` - ADR creation workflow
 - ✅ `/transition-plan` - Planning from artifacts/ADRs
@@ -471,7 +475,7 @@ When modifying templates:
 
 **Command Simplification (v0.8.0):**
 
-- ✅ All templates now have all 19 commands
+- ✅ All templates now have all 23 commands
 - ✅ Removed experimental-project template (merged into standard)
 - ✅ Removed graduation process (ADR-004 superseded)
 - ✅ ADR-001: Commands as Guides created

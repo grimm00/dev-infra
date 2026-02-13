@@ -1,8 +1,8 @@
 # Lightweight Commands from Helm-Charts
 
 **Source:** `~/Projects/work/helm-charts/.cursor/commands/`
-**Status:** 🟡 Documented
-**Last Updated:** 2026-02-11
+**Status:** 🟠 Partially Integrated
+**Last Updated:** 2026-02-13
 
 ---
 
@@ -130,14 +130,14 @@ Helm-charts has 13 commands total (vs. the 14+ in work-prod). Several are domain
 ## 🚀 Recommended Next Steps
 
 1. **Create a "lightweight command pack"** in dev-infra templates with the 9 portable commands
-2. **Make `/review` + `/commit` a default** in all proj-cli project types
+2. ~~**Make `/review` + `/commit` a default** in all proj-cli project types~~ ✅ Done (2026-02-13)
 3. **Document the "gitignored temp folder" pattern** as the lightweight alternative to `admin/` structure
 4. **Add a "personal workflow" command category** for things like `/reflect --eod` that cross repo boundaries
-5. **Extract the spike command templates** (explore/research/decision docs) as standalone assets
+5. ~~**Extract the spike command templates** (explore/research/decision docs) as standalone assets~~ ✅ Done (2026-02-13)
 
 ---
 
 **Source:** `~/Projects/work/helm-charts/.cursor/commands/`
-**Last Updated:** 2026-02-11
-**Status:** 🟡 Documented
-**Next:** Evaluate which commands to add to proj-cli's lightweight template
+**Last Updated:** 2026-02-13
+**Status:** 🟠 Partially Integrated
+**Next:** Document gitignored temp folder pattern, evaluate personal workflow commands

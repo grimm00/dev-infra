@@ -444,6 +444,19 @@ explorations/[topic]/
 
 ---
 
+## 🧪 Spike Determination
+
+<!-- AI: Assess each theme/question against risk matrix. Flag HIGH risk items for spiking. -->
+
+| Topic | Risk Level | Spike? | Rationale |
+|-------|------------|--------|-----------|
+| [Topic from themes] | [HIGH/MEDIUM-HIGH/MEDIUM/LOW] | [Yes/Consider/No] | [Brief rationale] |
+| [Topic from themes] | [HIGH/MEDIUM-HIGH/MEDIUM/LOW] | [Yes/Consider/No] | [Brief rationale] |
+
+**Risk framework:** HIGH = spike first (hard to pivot), MEDIUM-HIGH = consider spike, MEDIUM/LOW = research only.
+
+---
+
 ## 🚀 Next Steps
 
 Run `/explore [topic] --conduct` to expand this exploration.
@@ -605,11 +618,35 @@ Conduct Mode expands existing scaffolding with detailed analysis, connections, a
 
 ---
 
+## 🧪 Spike Determination
+
+Assess each theme/question against risk levels to determine what needs hands-on validation before research.
+
+| Topic | Risk Level | Spike? | Rationale |
+|-------|------------|--------|-----------|
+| [Topic 1] | [HIGH/MEDIUM-HIGH/MEDIUM/LOW] | [Yes/Consider/No] | [Why it needs/doesn't need validation] |
+| [Topic 2] | [HIGH/MEDIUM-HIGH/MEDIUM/LOW] | [Yes/Consider/No] | [Why it needs/doesn't need validation] |
+
+**Risk Assessment:**
+
+| Risk Level | Determination | Rationale |
+|------------|---------------|-----------|
+| HIGH | **Spike first** | Hard to pivot once committed |
+| MEDIUM-HIGH | **Consider spike** | Benefits from hands-on validation |
+| MEDIUM | Research only | Depends on other decisions |
+| LOW | Research only | Clear path, low risk |
+
+**Spike Candidates:**
+- [Topic flagged HIGH] -- Use `/spike [topic] --from-explore [explore-topic]`
+
+---
+
 ## 🚀 Next Steps
 
-1. Review research topics in `research-topics.md`
-2. Use `/research [topic] --from-explore [topic]` to conduct research
-3. After research, use `/decision [topic] --from-research` to make decisions
+1. If spike candidates identified, run `/spike [topic] --from-explore [topic]` first
+2. Review research topics in `research-topics.md`
+3. Use `/research [topic] --from-explore [topic]` to conduct research
+4. After research, use `/decision [topic] --from-research` to make decisions
 
 ---
 
@@ -953,6 +990,8 @@ start.txt   → /explore --from-start     ← Project initialization
 /explore [topic]              ← Setup: scaffolding (~60-80 lines)
     ↓ human review
 /explore [topic] --conduct    ← Conduct: full exploration (~200-300 lines)
+    ↓                           (includes spike determination table)
+    ├─ HIGH risk topics → /spike --from-explore  ← Validate assumptions
     ↓
 /research --from-explore      ← Research: investigate topics
 ```
@@ -974,7 +1013,9 @@ start.txt   → /explore --from-start     ← Project initialization
 /explore [topic]              ← Setup: scaffolding (~60-80 lines)
     ↓ human review            ← KEY CHECKPOINT: validate direction
 /explore [topic] --conduct    ← Conduct: full exploration (~200-300 lines)
-    ↓
+    ↓                           (includes spike determination table)
+    ├─ HIGH risk? ─────────→ /spike --from-explore  ← Validate assumptions (2-4 hrs)
+    ↓                           (spike learnings feed back into research)
 /research --from-explore      ← Research: investigate topics
     ↓
 /decision --from-research     ← Decisions: create ADRs
@@ -988,6 +1029,7 @@ start.txt   → /explore --from-start     ← Project initialization
 - Quick validation of exploration direction before full investment
 - Course correction with minimal time spent
 - Rejection of dead-end explorations without wasted effort
+- Identification of high-risk topics that need spiking before research
 
 ### Timing Guidance
 
@@ -1217,13 +1259,14 @@ What about in-app badges? Need to think about user preferences too."
 
 **Related Commands:**
 
+- `/spike` - Validate high-risk technical assumptions with time-boxed experiments
 - `/research` - Conduct research on topics identified in exploration
 - `/decision` - Make decisions based on research
 - `/transition-plan` - Transition to feature planning
 
 ---
 
-**Last Updated:** 2025-12-07  
-**Status:** ✅ Active  
+**Last Updated:** 2026-02-13
+**Status:** ✅ Active
 **Next:** Use to initiate exploration cycles for new ideas or proof of concepts
 
