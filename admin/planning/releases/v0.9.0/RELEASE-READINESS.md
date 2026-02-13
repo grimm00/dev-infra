@@ -73,8 +73,8 @@ status: READY
 - [x] Release notes finalized (`/release-finalize`)
 - [x] Version references updated (`/release-finalize`)
 - [x] Release branch created
-- [ ] Release PR created (`/pr --release`)
-- [ ] Merged to main
+- [x] Release PR created (`/pr --release`) - PR #66
+- [x] Merged to main (2026-02-13)
 - [ ] Tagged v0.9.0
 
 ---
@@ -89,12 +89,12 @@ status: READY
 
 ## 🎯 Recommendation
 
-**Status:** 🟢 READY FOR RELEASE
+**Status:** ✅ RELEASED
 
-**Next Steps:**
-1. Create release PR: `/pr --release v0.9.0`
-2. Review and merge to main
-3. Tag v0.9.0
+**Completed:**
+1. ~~Create release PR: `/pr --release v0.9.0`~~ - PR #66
+2. ~~Review and merge to main~~ - Merged 2026-02-13
+3. Tag v0.9.0 - Pending
 
 ---
 
