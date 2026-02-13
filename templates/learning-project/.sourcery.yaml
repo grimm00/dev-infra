@@ -1,5 +1,5 @@
 # Sourcery Configuration
-# Ignore process documentation to focus code review on actual code
+# Focus code review on application code, scripts, and tests
 #
 # Template projects use docs/maintainers/ for process docs
 # (dev-infra uses admin/ instead)
@@ -7,3 +7,4 @@
 ignore:
   - docs/maintainers/**   # Process docs (planning, feedback, decisions)
   - tmp/**                # Temporary files (handoff docs, scratch)
+  - .cursor/**            # AI workflow commands and rules (not code)
