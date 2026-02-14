@@ -40,6 +40,17 @@ Exploring whether the current feature/phase/task hierarchy and command structure
 
 ---
 
+## 📚 Research
+
+| Topic | Status | Link |
+|-------|--------|------|
+| Topic 5: Command Dependency Analysis | ✅ Complete | [Research Document](../../research/workflow-simplification/topic-5-command-dependency-analysis.md) |
+| Topic 1: Feature Plan Structure Usage | ✅ Complete | [Research Document](../../research/workflow-simplification/topic-1-feature-plan-usage.md) |
+| Topic 2: Task Command Interface Design | ✅ Complete | [Research Document](../../research/workflow-simplification/topic-2-task-command-interface-design.md) |
+| Topic 3: Transition Plan Output Format | ✅ Complete | [Research Document](../../research/workflow-simplification/topic-3-transition-plan-output-format.md) |
+
+---
+
 ## 🚀 Next Steps
 
 1. Run `/research workflow-simplification --from-explore workflow-simplification` to investigate topics

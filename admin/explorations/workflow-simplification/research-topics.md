@@ -10,6 +10,8 @@
 
 ### Topic 1: Feature Plan Structure Usage
 
+**Status:** ✅ Complete ([View Research](../../research/workflow-simplification/topic-1-feature-plan-usage.md))
+
 **Question:** How are feature plan structures actually used across projects, and what would be lost by flattening them?
 
 **Context:** The current structure produces 3-5+ files per feature (`feature-plan.md`, `phase-N.md`, `status-and-next-steps.md`). With 1 PR per feature (draft PR workflow), phase documents are no longer PR boundaries. Understanding actual usage patterns will reveal which documents are genuinely referenced during and after implementation vs. which exist as ceremony.
@@ -28,6 +30,8 @@
 
 ### Topic 2: Task Command Interface Design
 
+**Status:** ✅ Complete ([View Research](../../research/workflow-simplification/topic-2-task-command-interface-design.md))
+
 **Question:** What interface would `/task` need to replace `/task-phase` while remaining useful for both simple and complex features?
 
 **Context:** `/task-phase 3 2` is verbose and implies a rigid hierarchy. But the command does more than just identify a task -- it enforces TDD workflow, manages commit strategy, and tracks progress. A simplified interface needs to preserve these behaviors while reducing the naming friction.
@@ -45,6 +49,8 @@
 ---
 
 ### Topic 3: Transition Plan Output Format
+
+**Status:** ✅ Complete ([View Research](../../research/workflow-simplification/topic-3-transition-plan-output-format.md))
 
 **Question:** Can the transition plan produce an ordered work breakdown (flat list) instead of a phase hierarchy, and what does that template look like?
 
@@ -82,6 +88,8 @@
 ---
 
 ### Topic 5: Command Dependency Analysis
+
+**Status:** ✅ Complete ([View Research](../../research/workflow-simplification/topic-5-command-dependency-analysis.md))
 
 **Question:** Which commands reference phase concepts, and what's the refactoring scope?
 
