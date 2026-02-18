@@ -44,7 +44,7 @@ This command supports multiple project organization patterns:
 
 **Key principle:** Follow standardized research workflow, create documents for each research topic, extract requirements discovered during research.
 
-**Two Modes:**
+**Three Modes:**
 
 ### Setup Mode (Default)
 ```
@@ -69,6 +69,22 @@ This command supports multiple project organization patterns:
   → Commits changes
 ```
 
+### Add Topic Mode (`--add-topic`)
+```
+/research [topic] --add-topic N
+  → Reads Topic N from research-topics.md
+  → Scaffolds topic-N-[name].md using research document template
+  → Updates research hub README.md with new topic link
+  → Updates research-summary.md with placeholder entry
+  → Outputs: New topic scaffolded, ready for --conduct
+```
+
+**When to use Add Topic Mode:**
+
+- After `/explore --amend` added a new theme and research topic
+- When research surfaces a question that warrants its own topic
+- Any time a new topic appears in `research-topics.md` after initial scaffolding
+
 ---
 
 ## Usage
@@ -88,12 +104,18 @@ This command supports multiple project organization patterns:
 - `/research experimental-template --conduct --topic-num 1` - Conduct research for topic #1 only
 - `/research experimental-template --conduct --topic-name user-demand` - Conduct specific topic by name
 
+**Add Topic Mode Examples:**
+
+- `/research workflow-simplification --add-topic 6` - Scaffold Topic 6 from research-topics.md
+- `/research auth-system --add-topic 3 --force` - Re-scaffold Topic 3 (overwrite existing)
+
 **Options:**
 
 - `--from-explore [explore-topic]` - Read research topics from exploration document (Setup Mode)
 - `--from-reflect [reflection-file]` - Read opportunities from reflection artifacts (Setup Mode)
 - `--topic [topic]` - Direct topic specification (Setup Mode)
 - `--conduct` - Actually perform research (Conduct Mode)
+- `--add-topic [N]` - Scaffold a single new topic from research-topics.md (requires existing research structure)
 - `--topic-num [N]` - Research specific topic by number (with --conduct)
 - `--topic-name [name]` - Research specific topic by name (with --conduct)
 - `--dry-run` - Show what would be done without making changes
@@ -655,9 +677,83 @@ This directory contains research documents supporting exploration and decision-m
 
 ---
 
+## Add Topic Mode Workflow (`--add-topic`)
+
+**When to use:** After `/explore --amend` adds a new theme and topic to an already-scaffolded research, use Add Topic Mode to scaffold the new topic document into the existing research structure.
+
+### 1. Validate Existing Research Structure
+
+**Checks:**
+
+1. Research directory exists for topic (e.g., `admin/research/[topic]/`)
+2. If not, error: "No research structure found for [topic]. Run `/research [topic] --from-explore` first."
+3. Read `research-topics.md` from exploration directory
+4. Validate topic number N exists in `research-topics.md`
+5. Check `topic-N-[name].md` doesn't already exist (error if it does, unless `--force`)
+
+**Error Messages:**
+
+| Situation | Message |
+|-----------|---------|
+| No research structure | "No research structure found for [topic]. Run `/research [topic] --from-explore` first." |
+| Topic N not in research-topics.md | "Topic N not found in research-topics.md. Check topic number." |
+| Topic document already exists | "Topic N already scaffolded. Use `--force` to re-scaffold." |
+| `--add-topic` + `--conduct` | "Error: --add-topic and --conduct are mutually exclusive. Scaffold first, then conduct." |
+| `--add-topic` + `--from-explore` | "Error: --add-topic and --from-explore are mutually exclusive. Use --from-explore for initial setup." |
+
+---
+
+### 2. Scaffold New Topic Document
+
+1. Read Topic N from `research-topics.md` (Question, Context, Priority, Rationale, Suggested Approach)
+2. Create `topic-N-[name].md` using the standard research document template (same template as Setup Mode Step 3)
+3. Populate template with topic metadata from `research-topics.md`:
+   - Research Question from the topic's Question field
+   - Research Goals derived from the topic's Context and Suggested Approach
+   - Research Methodology from the topic's Suggested Approach
+   - Status set to `🔴 Research`
+
+---
+
+### 3. Update Research Hub
+
+1. Read existing `README.md` in the research directory
+2. Add new topic to the research status table with `🔴 Not Started` status
+3. Add link to new topic document in the Quick Links section
+
+---
+
+### 4. Update Research Summary
+
+1. Read existing `research-summary.md`
+2. Add placeholder entry for Topic N:
+
+```markdown
+### Topic N: [Topic Name] (🔴 Not Started)
+
+*Findings to be added after research is conducted.*
+```
+
+---
+
+### 5. Commit
+
+```bash
+git add research/[topic]/
+git commit -m "docs(research): scaffold topic N ([topic-name]) for [topic]"
+```
+
+**After scaffolding, conduct the new topic:**
+
+```bash
+/research [topic] --conduct --topic-num N
+```
+
+---
+
 ## Conduct Mode Workflow (`--conduct`)
 
-**When to use:** After research structure has been created (Setup Mode), use Conduct Mode to actually perform the research.
+**When to use:** After research structure has been created (Setup Mode or Add Topic Mode), use Conduct Mode to actually perform the research.
 
 ### 1. Identify Research to Conduct
 
@@ -922,9 +1018,31 @@ git push origin develop
 
 ### Research → Decision → Planning Flow
 
-1. **`/research [topic] --from-explore [topic]`** - Conduct research
+```
+/explore [topic]                        ← Setup: scaffolding
+    ↓ human review
+/explore [topic] --conduct              ← Conduct: full exploration
+    ↓
+/research [topic] --from-explore        ← Setup: scaffold all topics
+    ↓
+/research [topic] --conduct --topic-num N  ← Conduct: research topics
+    ↓ (new question from research?)
+/explore [topic] --amend                ← Feedback: add theme + research topic
+    ↓
+/research [topic] --add-topic N         ← Add Topic: scaffold new topic
+    ↓
+/research [topic] --conduct --topic-num N  ← Conduct: research new topic
+    ↓
+/decision [topic] --from-research       ← Decisions: create ADRs
+    ↓
+/transition-plan --from-adr             ← Planning: create implementation plan
+```
+
+**Command Details:**
+
+1. **`/research [topic] --from-explore [topic]`** - Setup research structure
    - Reads research topics from exploration
-   - Creates research documents
+   - Creates research documents for all topics
    - Outputs: Research documents + `requirements.md`
 
 2. **`/research [topic] --from-reflect [reflection-file]`** - Research from reflection
@@ -932,13 +1050,19 @@ git push origin develop
    - Creates research documents
    - Outputs: Research documents + `requirements.md`
 
-3. **`/decision [topic] --from-research`** - Make decisions
+3. **`/research [topic] --add-topic N`** - Scaffold late-arriving topic
+   - Reads Topic N from `research-topics.md` (added by `/explore --amend`)
+   - Scaffolds single topic document into existing research structure
+   - Updates hub and summary
+   - Outputs: New topic ready for `--conduct`
+
+4. **`/decision [topic] --from-research`** - Make decisions
    - Reads research documents
    - Reads requirements document
    - Creates ADR documents
    - Outputs: ADR documents
 
-4. **`/transition-plan --from-adr`** - Transition to planning
+5. **`/transition-plan --from-adr`** - Transition to planning
    - Reads ADR documents
    - Automatically reads requirements if they exist
    - Creates feature plan and phase documents
@@ -1021,6 +1145,30 @@ git push origin develop
 
 ---
 
+### Scenario 5: Add Topic from Exploration Amendment
+
+**Situation:** During research on workflow-simplification, a new question emerged about code ownership boundaries. `/explore --amend` was used to add Theme 5 and Topic 6 to the exploration. Now the research needs a scaffolded document for Topic 6.
+
+**Action:**
+
+```bash
+/research workflow-simplification --add-topic 6
+```
+
+**Output:**
+- `topic-6-dev-infra-code-boundary.md` scaffolded with template
+- Research hub updated with new topic link
+- Research summary updated with placeholder entry
+- Ready for `--conduct --topic-num 6`
+
+**Follow-up:**
+
+```bash
+/research workflow-simplification --conduct --topic-num 6
+```
+
+---
+
 ## Tips
 
 ### When to Use Each Mode
@@ -1034,6 +1182,11 @@ git push origin develop
 - When research structure already exists
 - When ready to actually investigate topics
 - When you have time for web searches and analysis
+
+**Add Topic Mode:**
+- After `/explore --amend` added a new research topic
+- When a new question surfaced during research that warrants its own topic
+- When the exploration was amended and research-topics.md has un-scaffolded topics
 
 ### Best Practices
 
