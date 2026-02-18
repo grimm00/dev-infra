@@ -70,6 +70,8 @@
 
 ### Topic 4: Template Impact Assessment
 
+**Status:** ✅ Complete ([View Research](../../research/workflow-simplification/topic-4-template-impact-assessment.md))
+
 **Question:** How would workflow simplification affect the standard-project and learning-project templates, and is it a breaking change for existing projects?
 
 **Context:** Templates are the product. Changes to the planning structure directly affect every project generated from these templates. The learning-project template has additional complexity (stage-based progression) that may interact differently with a flat work breakdown.

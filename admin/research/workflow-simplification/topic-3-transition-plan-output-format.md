@@ -449,13 +449,125 @@ Approach B is simpler. The `/task` command already manages the TDD workflow (RED
 
 ---
 
+### Finding 8: Single-File Bias Reassessment (Amendment)
+
+Post-research review identified several underweighted tradeoffs in the single-file recommendation:
+
+**Concerns with single-file for complex features (15+ tasks):**
+
+| Concern | Impact | Severity |
+|---------|--------|----------|
+| **AI context waste** | `/task 27` reads entire 180+ line file; only needs ~10 lines for the current task. Phase files (~70 lines) were more focused. | HIGH -- affects every `/task` invocation |
+| **Progressive disclosure violation** | This project's hub-and-spoke pattern exists because flat documents don't scale for human navigation. A 40-task single file breaks this principle. | MEDIUM -- humans can use search/fold |
+| **Concurrent editing** | `/task` checking boxes, user adding notes, `/review` staging changes -- all in one file. Separate files isolate concerns. | MEDIUM -- mitigated by status-file separation |
+| **File growth** | Completed tasks accumulate sub-notes; clean 180-line document could grow to 300+ during implementation. | LOW-MEDIUM -- disciplined usage helps |
+| **Handoff clarity** | "You're on task 27 of a 200-line file" is worse context than "you're in foundation/task-3." | LOW -- `/task next` can report context |
+| **NFR-7 is circular** | "Split the feature if >300 lines" is a constraint imposed to make the model work, not derived from evidence. | LOW -- but intellectually dishonest |
+
+**Proposed tiered approach:**
+
+| Tier | Task Count | Structure | `/transition-plan` Output |
+|------|-----------|-----------|--------------------------|
+| **Simple** | 1-8 tasks | Single `implementation-plan.md` | 1 file, no groups needed |
+| **Medium** | 9-15 tasks | Single `implementation-plan.md` with `###` groups | 1 file, groups recommended |
+| **Complex** | 16+ tasks | Hub `implementation-plan.md` + group files (`tasks/[group].md`) | Hub + N group files |
+
+**The "blueprint" question:** The tier decision must be explicit and codified, not discretionary. `/transition-plan` needs a way to:
+1. Count/estimate tasks from the ADR and requirements
+2. Determine the appropriate tier
+3. Produce the right structure
+4. Record the decision in the output (so `/task` knows what structure to expect)
+
+This suggests an intermediate artifact -- a **feature blueprint** -- that captures the sizing decision before files are created. The blueprint could be:
+- A YAML frontmatter block in `implementation-plan.md` (machine-readable)
+- A separate `blueprint.md` file (human-reviewable)
+- Inline metadata in the ADR (avoids a new file)
+
+**Source:** Post-research review prompted by human challenge: "have we weighed the pros and cons of squashing everything into one file?"
+
+**Relevance:** The original recommendation (always single file) was biased by small-feature evidence. A tiered approach preserves simplicity for simple features while respecting AI context efficiency and human navigation for complex ones. The tier determination mechanism is a design question for the decision phase.
+
+---
+
+### Finding 9: Doc-Gen Templates and Dev-Toolkit Integration (Amendment)
+
+The existing doc-gen system in `scripts/doc-gen/templates/` and dev-toolkit's `dt-doc-gen`/`dt-workflow` tools provide the infrastructure to implement the tiered blueprint approach programmatically rather than relying on AI discretion.
+
+**Current doc-gen planning templates (to be replaced):**
+
+| Template | Variables | Purpose |
+|----------|-----------|---------|
+| `feature-plan.md.tmpl` | `${FEATURE_NAME}`, `${STATUS}`, `${DATE}` | Feature overview + phases |
+| `phase.md.tmpl` | `${PHASE_NUMBER}`, `${PHASE_NAME}`, `${FEATURE_NAME}` | Per-phase goals, tasks, criteria |
+| `status-and-next-steps.md.tmpl` | `${FEATURE_NAME}`, `${STATUS}`, `${DATE}` | Phase-based progress table |
+| `README.md.tmpl` | `${FEATURE_NAME}`, `${TOPIC_NAME}` | Hub linking to feature-plan + phases |
+
+**Proposed replacement templates:**
+
+| Template | New Variables | Tier |
+|----------|--------------|------|
+| `implementation-plan.md.tmpl` | `${TIER}`, `${TASK_COUNT}`, `${GROUP_COUNT}`, `${STRUCTURE}` | Simple/Medium |
+| `implementation-plan-hub.md.tmpl` | Same + `${GROUP_FILES}` | Complex |
+| `task-group.md.tmpl` | `${GROUP_NAME}`, `${TASK_RANGE}`, `${FEATURE_NAME}` | Complex |
+| `status-and-next-steps.md.tmpl` (updated) | Remove phase table, add task progress | All |
+| `README.md.tmpl` (updated) | Remove phase links, add tier-aware links | All |
+
+**Validation rule updates (`planning.yaml`):**
+
+Current subtypes (`feature_plan`, `phase`, `status_and_next_steps`, `planning_hub`) would be replaced/updated:
+- `implementation_plan` -- validates Format B structure, YAML frontmatter with tier metadata
+- `task_group` -- validates group file structure (replaces `phase`)
+- `status_and_next_steps` -- updated validation (task-based progress, not phase-based)
+- `planning_hub` -- updated links and structure
+
+**Two-way dev-infra ↔ dev-toolkit integration:**
+
+```
+dev-infra (standards keeper)              dev-toolkit (CLI implementation)
+──────────────────────────────            ──────────────────────────────
+scripts/doc-gen/templates/planning/  ──→  dt-doc-gen discovers via DT_TEMPLATES_PATH
+  implementation-plan.md.tmpl             dt_render_template() with envsubst
+  implementation-plan-hub.md.tmpl
+  task-group.md.tmpl
+  status-and-next-steps.md.tmpl
+
+validation-rules/planning.yaml       ──→  Compiled to .bash rules for dt-doc-validate
+
+scripts/scaffold-feature.sh          ──→  Basis for dt-workflow transition-plan logic
+  (tier determination)                    dt-workflow wraps and extends
+  (file structure generation)
+  (blueprint production)
+
+                                     ←──  dt-workflow patterns inform script design
+                                          L1/L2/L3 validation tiers
+                                          Context profiles
+                                          Handoff file contracts
+```
+
+**The scaffolding script (`scripts/scaffold-feature.sh`):**
+
+This is the key new artifact. A shell script that:
+1. Accepts: feature name, task count (or derives from requirements), optional `--tier` override
+2. Applies tier thresholds (1-8 simple, 9-15 medium, 16+ complex)
+3. Renders the appropriate templates via `envsubst` with tier-specific variables
+4. Produces the feature directory with the right structure
+5. Is callable from both Cursor commands (`/transition-plan`) and dev-toolkit (`dt-workflow`)
+
+This script acts as the single source of truth for tier logic, ensuring consistency between IDE-driven and CLI-driven workflows.
+
+**Source:** Analysis of `scripts/doc-gen/templates/planning/`, dev-toolkit `bin/dt-doc-gen`, `bin/dt-workflow`, and `lib/doc-gen/templates.sh`
+
+**Relevance:** The blueprint/tier system isn't just a document format -- it's a scaffolding contract that spans three layers: templates (dev-infra), scripts (dev-infra, consumable by both), and CLI tools (dev-toolkit). Getting this right means tier decisions are enforced identically regardless of whether the user invokes `/transition-plan` in Cursor or `dt-workflow transition-plan` on the command line.
+
+---
+
 ## 🔍 Analysis
 
 ### Key Insights
 
 - [x] **Insight 1: Format B (grouped checkbox list) is the clear winner.** It satisfies all requirements (FR-1, FR-3, FR-4, FR-11), works for both small (8 tasks) and large (40+ tasks) features, is trivially machine-parseable, and renders correctly on GitHub with progress indicators.
 
-- [x] **Insight 2: The transition from N+3 files to 2 files is substantial.** Currently: `feature-plan.md` + `transition-plan.md` + N `phase-N.md` + `status-and-next-steps.md`. Proposed: `implementation-plan.md` + `status-and-next-steps.md`. For a 5-phase feature, this is 8 files → 2 files.
+- [x] **Insight 2: The transition from N+3 files to 2 files is substantial for simple/medium features.** Currently: `feature-plan.md` + `transition-plan.md` + N `phase-N.md` + `status-and-next-steps.md`. Proposed simple: `implementation-plan.md` + `status-and-next-steps.md`. For a 5-phase feature, this is 8 files → 2 files (simple) or → hub + group files (complex).
 
 - [x] **Insight 3: Group headings are optional context, not functional structure.** The `/task` command parses checkboxes (`- [ ]` / `- [x]`), ignoring headings. Groups help humans navigate but aren't required. A 3-task feature can skip grouping entirely. This satisfies FR-3 (optional grouping) and NFR-1 (scale from simple to complex).
 
@@ -465,21 +577,37 @@ Approach B is simpler. The `/task` command already manages the TDD workflow (RED
 
 - [x] **Insight 6: Task numbering should be continuous across groups.** Not per-group (Task 1, Task 1) but global (Task 1, Task 2, ... Task N). This enables `/task 7` to unambiguously reference a task regardless of which group it's in.
 
+- [x] **Insight 7: Single-file has real tradeoffs for complex features.** AI context waste (~150 unused lines per `/task` invocation), progressive disclosure violation, and concurrent editing risk are legitimate concerns for 16+ task features. The tiered approach (simple → single file, complex → hub + group files) addresses this without adding boilerplate for small features.
+
+- [x] **Insight 8: Tier determination must be codified, not discretionary.** "Use your judgment" leads to inconsistency across features and between AI assistants. The tier decision needs a concrete input (task count, group count from ADR) and a documented output (blueprint/metadata in the planning document).
+
+- [x] **Insight 9: Doc-gen templates + scaffolding script = the blueprint implementation.** The existing `scripts/doc-gen/` system provides the infrastructure (envsubst rendering, validation YAML, template discovery). A new `scaffold-feature.sh` script implements tier logic and is callable from both Cursor commands and dev-toolkit. Dev-infra as standards keeper means templates, validation rules, and tier logic all live here -- dev-toolkit consumes them.
+
+- [x] **Insight 10: Current planning templates need replacement, not patching.** `feature-plan.md.tmpl` and `phase.md.tmpl` encode the old phase hierarchy. The replacement set (`implementation-plan.md.tmpl`, `implementation-plan-hub.md.tmpl`, `task-group.md.tmpl`) must carry the YAML frontmatter blueprint and tier-specific structure. This is a breaking change in the doc-gen system.
+
 ---
 
 ## 💡 Recommendations
 
-- [x] **Recommendation 1: Adopt Format B (grouped checkbox list) as the single planning document format.** Header with metadata (source, status, dates), Overview section, Tasks section with optional `###` group headings and `- [ ] Task N:` checkboxes, Definition of Done section, Notes section.
+- [x] **Recommendation 1: Adopt Format B (grouped checkbox list) as the core planning format.** Header with metadata (source, status, dates), Overview section, Tasks section with optional `###` group headings and `- [ ] Task N:` checkboxes, Definition of Done section, Notes section. Format B applies at all tiers.
 
 - [x] **Recommendation 2: Name the document `implementation-plan.md`.** Replaces the current `feature-plan.md` + `transition-plan.md` + `phase-N.md` trio. The name reflects its role: the implementation work breakdown.
 
-- [x] **Recommendation 3: Keep `status-and-next-steps.md` as a separate file.** Feature directory becomes exactly 2 files: `implementation-plan.md` (plan) + `status-and-next-steps.md` (runtime tracking). Add `README.md` only for features that need a hub page (optional).
+- [x] **Recommendation 3: Keep `status-and-next-steps.md` as a separate file.** Runtime tracking stays distinct from the plan at all tiers.
 
-- [x] **Recommendation 4: `/transition-plan` produces a single `implementation-plan.md` in one mode.** No scaffolding + expand two-step. One output, one mode. The document includes tasks with descriptions; TDD detail is runtime concern for `/task`.
+- [x] **Recommendation 4 (AMENDED): Use a tiered structure based on task count.** Simple (1-8 tasks): single `implementation-plan.md`. Medium (9-15 tasks): single file with `###` groups. Complex (16+ tasks): hub `implementation-plan.md` + separate group task files (`tasks/[group].md`). This replaces the original "always single file" recommendation.
 
-- [x] **Recommendation 5: Task numbering is global and continuous.** `Task 1` through `Task N`, not reset per group. `/task 7` always means the 7th task in the document.
+- [x] **Recommendation 5: Task numbering is global and continuous.** `Task 1` through `Task N`, not reset per group. `/task 7` always means the 7th task in the document (or hub).
 
-- [x] **Recommendation 6: Use `### Group Name` headings as the optional grouping mechanism.** Groups map to what were previously "phases" but carry no structural requirements. A feature with 3 tasks can have no groups; a feature with 40 tasks should have groups for navigability.
+- [x] **Recommendation 6: Use `### Group Name` headings as the grouping mechanism.** At simple/medium tiers, these are inline in the single file. At complex tier, each group becomes a separate file under `tasks/`.
+
+- [x] **Recommendation 7: `/transition-plan` must produce a feature blueprint with explicit tier determination.** The blueprint captures: task count, group count, tier decision, and resulting file structure. This can be YAML frontmatter in `implementation-plan.md` or a separate metadata block. The blueprint is the contract between `/transition-plan` (producer) and `/task` (consumer).
+
+- [x] **Recommendation 8: Tier thresholds should be codified in the command, not left to discretion.** `/transition-plan` counts tasks from the ADR/requirements, applies the threshold table, and produces the appropriate structure. The user can override with a `--tier` flag if needed.
+
+- [x] **Recommendation 9: Implement tier logic as a `scripts/scaffold-feature.sh` script in dev-infra.** This script is the single source of truth for tier determination and file scaffolding. It uses the doc-gen template system (`envsubst`, `<!-- AI: -->` markers), applies tier thresholds, and produces the feature directory. Both `/transition-plan` (Cursor command) and `dt-workflow` (dev-toolkit CLI) call this script, ensuring consistency. The script also serves as the prototype for eventual dev-toolkit integration.
+
+- [x] **Recommendation 10: Replace current planning templates with tier-aware templates.** `feature-plan.md.tmpl` + `phase.md.tmpl` → `implementation-plan.md.tmpl` + `implementation-plan-hub.md.tmpl` + `task-group.md.tmpl`. Update `planning.yaml` validation rules accordingly. Update `status-and-next-steps.md.tmpl` to remove phase-centric progress table.
 
 ---
 
@@ -487,33 +615,44 @@ Approach B is simpler. The `/task` command already manages the TDD workflow (RED
 
 ### Functional Requirements
 
-- [x] **FR-15: Single implementation plan document format.** `/transition-plan` must produce a single `implementation-plan.md` file with Format B structure: metadata header, overview, grouped checkbox task list (`- [ ] Task N: Description`), definition of done, and notes section.
-- [x] **FR-16: Global continuous task numbering.** Tasks are numbered sequentially across the entire document (Task 1 through Task N), not restarted per group. This ensures `/task N` is unambiguous.
-- [x] **FR-17: Group headings as optional context.** `### Group Name` headings provide human-readable structure but are not parsed or required by `/task`. Small features may omit groups entirely.
-- [x] **FR-18: `/transition-plan` single output mode.** Eliminate the current setup + expand two-step workflow. `/transition-plan` reads ADR/requirements and produces one `implementation-plan.md` with fully described tasks. No scaffolding phase.
-- [x] **FR-19: Feature directory reduces to 2 required files.** `implementation-plan.md` (work breakdown) + `status-and-next-steps.md` (runtime tracking). Optional: `README.md` as hub for complex features.
+- [x] **FR-15 (AMENDED): Tiered implementation plan structure.** `/transition-plan` must produce structure based on task count: Simple (1-8 tasks) → single `implementation-plan.md`; Medium (9-15 tasks) → single file with `###` groups; Complex (16+ tasks) → hub `implementation-plan.md` + `tasks/[group].md` files. All tiers use Format B (GFM checkboxes).
+- [x] **FR-16: Global continuous task numbering.** Tasks are numbered sequentially across the entire document or hub (Task 1 through Task N), not restarted per group. This ensures `/task N` is unambiguous.
+- [x] **FR-17: Group headings as optional context.** `### Group Name` headings provide human-readable structure but are not parsed or required by `/task`. Small features may omit groups entirely. At complex tier, groups become separate files.
+- [x] **FR-18 (AMENDED): `/transition-plan` produces a feature blueprint.** The command reads ADR/requirements, counts tasks and groups, determines the tier (simple/medium/complex), and produces the appropriate file structure. Replaces the current setup + expand two-step workflow.
+- [x] **FR-19 (AMENDED): Feature directory structure scales by tier.** Simple: `implementation-plan.md` + `status-and-next-steps.md` (2 files). Medium: same 2 files. Complex: `implementation-plan.md` (hub) + `tasks/[group].md` files + `status-and-next-steps.md` (3+ files).
+- [x] **FR-20: Feature blueprint with explicit tier metadata.** `implementation-plan.md` must include machine-readable metadata (YAML frontmatter or structured header) declaring: tier (simple/medium/complex), task count, group count, and file structure. This is the contract between `/transition-plan` and `/task`.
+- [x] **FR-21: Codified tier thresholds.** `/transition-plan` must apply documented thresholds (1-8 = simple, 9-15 = medium, 16+ = complex) automatically. User can override with `--tier` flag. Thresholds are configurable but have sensible defaults.
 
 ### Non-Functional Requirements
 
 - [x] **NFR-6: Document should render correctly in GitHub.** GFM task list checkboxes (`- [ ]` / `- [x]`) enable GitHub's automatic progress bars and interactive checkbox toggling. The format must use standard GFM syntax.
-- [x] **NFR-7: Total document length should be manageable.** Target: ~120-180 lines for a typical feature (8-15 tasks). Must not exceed ~300 lines for large features (40+ tasks). If it does, the feature should be split.
+- [x] **NFR-7 (AMENDED): AI context efficiency.** At simple/medium tiers, `/task` reads one file. At complex tier, `/task` reads the hub (for task index) then only the relevant group file (for task detail). This keeps context consumption proportional to the work being done, not the total feature size.
 
 ### Constraints
 
 - [x] **C-6: `/task` command parsing depends on document format.** The `- [ ] Task N: Description` pattern is the contract between `/transition-plan` (producer) and `/task` (consumer). Any format change must update both commands.
+- [x] **C-7: `/task` must handle both single-file and hub+group structures.** The command reads the blueprint metadata to determine which structure it's dealing with, then resolves the correct file for the requested task.
 
 ### Assumptions
 
 - [x] **A-5: TDD detail is a runtime concern, not a planning concern.** The planning document describes "what" (tasks); the `/task` command manages "how" (TDD RED/GREEN/REFACTOR execution). This eliminates the need for expand mode.
 - [x] **A-6: Group headings will informally correspond to previous "phases."** Teams moving from phase-N.md files will naturally use groups that match their former phases. This is acceptable and expected behavior, not a design requirement.
+- [x] **A-7: Task count is knowable at planning time.** The ADR and requirements provide enough information for `/transition-plan` to estimate the number of tasks and groups. The count doesn't need to be exact -- it drives a tier decision, not a precise structure.
 
 ---
 
-## 📐 Proposed Template
+## 📐 Proposed Templates
 
-### `implementation-plan.md` Template
+### Simple/Medium Tier: Single `implementation-plan.md`
 
 ```markdown
+---
+tier: simple  # simple | medium | complex
+tasks: 6
+groups: 2
+structure: single-file
+---
+
 # Implementation Plan: [Feature Name]
 
 **Source:** [Link to ADR or decision document]  
@@ -535,7 +674,7 @@ Approach B is simpler. The `/task` command already manages the TDD workflow (RED
 
 ## Tasks
 
-### [Group 1 Name] (optional heading)
+### [Group 1 Name] (optional heading for medium tier)
 - [ ] Task 1: [Description]
 - [ ] Task 2: [Description]
 
@@ -543,8 +682,6 @@ Approach B is simpler. The `/task` command already manages the TDD workflow (RED
 - [ ] Task 3: [Description]
 - [ ] Task 4: [Description]
 - [ ] Task 5: [Description]
-
-### [Group 3 Name]
 - [ ] Task 6: [Description]
 
 ---
@@ -567,7 +704,96 @@ Approach B is simpler. The `/task` command already manages the TDD workflow (RED
 **Last Updated:** YYYY-MM-DD
 ```
 
-**Target length:** ~80 lines (small feature) to ~180 lines (large feature)
+### Complex Tier: Hub `implementation-plan.md` + Group Files
+
+**Hub file (`implementation-plan.md`):**
+
+```markdown
+---
+tier: complex
+tasks: 28
+groups: 4
+structure: hub-and-groups
+group_files:
+  - tasks/foundation.md
+  - tasks/core-implementation.md
+  - tasks/integration.md
+  - tasks/documentation.md
+---
+
+# Implementation Plan: [Feature Name]
+
+**Source:** [Link to ADR or decision document]  
+**Status:** 🟠 In Progress (12/28 tasks)  
+**Created:** YYYY-MM-DD  
+**Last Updated:** YYYY-MM-DD
+
+---
+
+## Overview
+
+[1-3 sentences from ADR/decision]
+
+**Success Criteria:**
+- [Criterion 1]
+- [Criterion 2]
+
+---
+
+## Task Index
+
+| Group | File | Tasks | Status |
+|-------|------|-------|--------|
+| Foundation | [tasks/foundation.md](tasks/foundation.md) | 1-7 | ✅ Complete (7/7) |
+| Core Implementation | [tasks/core-implementation.md](tasks/core-implementation.md) | 8-18 | 🟠 In Progress (5/11) |
+| Integration | [tasks/integration.md](tasks/integration.md) | 19-24 | 🔴 Not Started (0/6) |
+| Documentation | [tasks/documentation.md](tasks/documentation.md) | 25-28 | 🔴 Not Started (0/4) |
+
+---
+
+## Definition of Done
+
+- [ ] All tasks complete
+- [ ] Tests passing
+- [ ] Documentation updated
+- [ ] PR approved and merged
+
+---
+
+**Last Updated:** YYYY-MM-DD
+```
+
+**Group file (`tasks/core-implementation.md`):**
+
+```markdown
+# Core Implementation
+
+**Group:** Core Implementation (Tasks 8-18)  
+**Parent:** [Implementation Plan](../implementation-plan.md)
+
+---
+
+- [x] Task 8: Implement user model
+- [x] Task 9: Create database migrations
+- [x] Task 10: Implement CRUD endpoints
+- [x] Task 11: Add input validation
+- [x] Task 12: Implement authentication middleware
+- [ ] Task 13: Add rate limiting
+- [ ] Task 14: Implement session management
+- [ ] Task 15: Add error handling middleware
+- [ ] Task 16: Create service layer
+- [ ] Task 17: Implement caching
+- [ ] Task 18: Add logging
+
+---
+
+**Last Updated:** YYYY-MM-DD
+```
+
+**Target lengths:**
+- Simple tier: ~60-80 lines (single file)
+- Medium tier: ~100-150 lines (single file with groups)
+- Complex tier: ~60 lines (hub) + ~30-40 lines per group file
 
 ---
 

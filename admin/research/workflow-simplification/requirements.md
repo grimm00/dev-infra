@@ -185,11 +185,11 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### FR-15: Single Implementation Plan Document Format
+### FR-15 (AMENDED): Tiered Implementation Plan Structure
 
-**Description:** `/transition-plan` must produce a single `implementation-plan.md` file with Format B structure: metadata header, overview, grouped checkbox task list (`- [ ] Task N: Description`), definition of done, and notes section. Replaces current `feature-plan.md` + `transition-plan.md` + `phase-N.md` file set.
+**Description:** `/transition-plan` must produce structure based on task count: Simple (1-8 tasks) → single `implementation-plan.md`; Medium (9-15 tasks) → single file with `###` groups; Complex (16+ tasks) → hub `implementation-plan.md` + `tasks/[group].md` files. All tiers use Format B (GFM checkboxes). Amended from original "always single file" based on reassessment of AI context cost, progressive disclosure, and concurrent editing concerns.
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md)
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
 
 **Priority:** High
 
@@ -199,7 +199,7 @@ This document captures requirements discovered during research on workflow simpl
 
 ### FR-16: Global Continuous Task Numbering
 
-**Description:** Tasks are numbered sequentially across the entire document (Task 1 through Task N), not restarted per group heading. This ensures `/task N` unambiguously references a specific task regardless of which group it belongs to.
+**Description:** Tasks are numbered sequentially across the entire document or hub (Task 1 through Task N), not restarted per group. This ensures `/task N` unambiguously references a specific task regardless of which group it belongs to or which file it's in.
 
 **Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md)
 
@@ -211,7 +211,7 @@ This document captures requirements discovered during research on workflow simpl
 
 ### FR-17: Group Headings as Optional Context
 
-**Description:** `### Group Name` headings within the Tasks section provide human-readable structure but are not parsed or required by `/task`. Small features (3-5 tasks) may omit groups entirely. Groups are informational context, not functional structure.
+**Description:** `### Group Name` headings provide human-readable structure but are not parsed or required by `/task`. Small features may omit groups entirely. At complex tier, groups become separate files under `tasks/`.
 
 **Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md)
 
@@ -221,11 +221,47 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### FR-18: `/transition-plan` Single Output Mode
+### FR-18 (AMENDED): `/transition-plan` Produces Feature Blueprint
 
-**Description:** Eliminate the current setup + expand two-step workflow. `/transition-plan` reads ADR/requirements and produces one `implementation-plan.md` with fully described tasks in a single invocation. No scaffolding phase needed.
+**Description:** The command reads ADR/requirements, counts tasks and groups, determines the tier (simple/medium/complex), and produces the appropriate file structure. Includes machine-readable metadata (YAML frontmatter) declaring tier, task count, group count, and structure. Replaces the current setup + expand two-step workflow.
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md)
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-19 (AMENDED): Feature Directory Structure Scales by Tier
+
+**Description:** Simple: `implementation-plan.md` + `status-and-next-steps.md` (2 files). Medium: same 2 files. Complex: `implementation-plan.md` (hub) + `tasks/[group].md` files + `status-and-next-steps.md` (3+ files). All tiers reduce from current N+3 file structure.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-20: Feature Blueprint with Explicit Tier Metadata
+
+**Description:** `implementation-plan.md` must include YAML frontmatter declaring: tier (simple/medium/complex), task count, group count, and file structure (single-file or hub-and-groups with file list). This metadata is the contract between `/transition-plan` (producer) and `/task` (consumer).
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-21: Codified Tier Thresholds
+
+**Description:** `/transition-plan` must apply documented thresholds (1-8 = simple, 9-15 = medium, 16+ = complex) automatically based on task count from ADR/requirements. User can override with `--tier` flag. Thresholds have sensible defaults but are configurable.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
 
 **Priority:** Medium
 
@@ -233,11 +269,101 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### FR-19: Feature Directory Reduces to 2 Required Files
+### FR-22: Scaffolding Script as Single Source of Truth
 
-**Description:** Feature planning directory becomes `implementation-plan.md` (work breakdown) + `status-and-next-steps.md` (runtime tracking). Optional: `README.md` as hub for complex features. Replaces current N+3 file structure.
+> **⚠️ TENTATIVE:** This requirement assumes dev-infra maintains executable scripts for generated projects. This assumption is under exploration (see [exploration.md Theme 5](../../explorations/workflow-simplification/exploration.md)). The requirement may be revised to a manifest/spec that dev-toolkit implements, rather than a dev-infra script.
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md)
+**Description:** A `scripts/scaffold-feature.sh` script in dev-infra implements tier determination and file scaffolding. It uses the doc-gen template system (`envsubst` variable expansion, `<!-- AI: -->` markers), applies tier thresholds, and produces the feature directory structure. Both Cursor commands (`/transition-plan`) and dev-toolkit CLI (`dt-workflow`) call this script to ensure identical behavior.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+
+**Priority:** High
+
+**Status:** ⚠️ Tentative -- depends on code boundary decision
+
+---
+
+### FR-23: Replace Planning Doc-Gen Templates
+
+> **⚠️ TENTATIVE:** Template replacement is valid regardless of code boundary decision, but the specific template set depends on whether dev-infra or dev-toolkit owns the rendering logic.
+
+**Description:** Replace `feature-plan.md.tmpl` + `phase.md.tmpl` with tier-aware templates: `implementation-plan.md.tmpl` (simple/medium), `implementation-plan-hub.md.tmpl` (complex hub), `task-group.md.tmpl` (complex group files). Update `status-and-next-steps.md.tmpl` to remove phase-centric progress table. Update `planning.yaml` validation rules with new subtypes (`implementation_plan`, `task_group`).
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+
+**Priority:** High
+
+**Status:** ⚠️ Tentative -- template design valid, ownership TBD
+
+---
+
+### FR-24: New Template Variables for Tier System
+
+> **⚠️ TENTATIVE:** Variables are valid regardless of code boundary decision, but deployment mechanism depends on whether dev-infra or dev-toolkit owns rendering.
+
+**Description:** Add variables to the doc-gen variable contract: `${TIER}` (simple/medium/complex), `${TASK_COUNT}`, `${GROUP_COUNT}`, `${STRUCTURE}` (single-file/hub-and-groups), `${GROUP_FILES}` (list of group file paths for complex tier), `${GROUP_NAME}`, `${TASK_RANGE}`. These are used in YAML frontmatter and template rendering.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+
+**Priority:** Medium
+
+**Status:** ⚠️ Tentative -- variables valid, rendering ownership TBD
+
+---
+
+### FR-25: Migration Guide for Existing Projects
+
+**Description:** A migration guide (e.g., `docs/MIGRATION-v0.10.md` or equivalent section in release notes) must document: what changed in the planning structure, how to update an existing project generated from a previous template version, and how to handle in-progress features that use phase files.
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-26: Template Workflow Documentation Update
+
+**Description:** 4-5 workflow documentation files in each template (`WORKFLOW-FEATURE-DEVELOPMENT.md`, `WORKFLOW-OVERVIEW.md`, `WORKFLOW-EXPLORATION-RESEARCH-DECISION.md`, `WORKFLOW-CICD-IMPROVEMENT.md`, and `planning/features/README.md`) must be updated to replace phase-based workflow descriptions with the new task-based flow. Estimated ~400-500 lines of targeted changes.
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-27: Example Document Replacement
+
+**Description:** `examples/example-feature-plan.md` must be replaced with `examples/example-implementation-plan.md` demonstrating the tiered structure (at least one tier, preferably medium as the most instructive).
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-28: Planning Hub Updates
+
+**Description:** `planning/features/README.md` and `planning/README.md` must be updated to remove phase template references, update directory structure examples, and update the Feature Planning Checklist to reference `implementation-plan.md` instead of `phase-N.md`.
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-29: Validation Rule Migration
+
+**Description:** `planning.yaml` must be updated: add `implementation_plan` and `task_group` document types, deprecate (then later remove) the `phase` document type, update `status_and_next_steps` progress table validation to use task counts instead of phase counts. During transition, accept both old and new formats.
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
 
 **Priority:** High
 
@@ -319,13 +445,51 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### NFR-7: Manageable Document Length
+### NFR-7 (AMENDED): AI Context Efficiency
 
-**Description:** Target ~120-180 lines for a typical feature (8-15 tasks). Must not exceed ~300 lines for large features (40+ tasks). If a feature exceeds this, it should be split into multiple features rather than accommodated by a longer document.
+**Description:** At simple/medium tiers, `/task` reads one file. At complex tier, `/task` reads the hub (for task index) then only the relevant group file (for task detail). This keeps context consumption proportional to the work being done, not the total feature size. Amended from original "manageable document length" which imposed an arbitrary 300-line cap.
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md)
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
 
-**Priority:** Low
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-8: Scaffolding Script Callable from Both IDE and CLI
+
+> **⚠️ TENTATIVE:** Assumes dev-infra hosts the scaffolding script. See [exploration Theme 5](../../explorations/workflow-simplification/exploration.md).
+
+**Description:** `scripts/scaffold-feature.sh` must be callable standalone (from Cursor commands), from dev-toolkit's `dt-workflow`, and in CI. It must accept arguments (feature name, tier override), read from stdin or file (ADR/requirements), and produce deterministic output. No interactive prompts unless `--interactive` flag is set.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+
+**Priority:** High
+
+**Status:** ⚠️ Tentative -- depends on code boundary decision
+
+---
+
+### NFR-9: Atomic Template Updates
+
+**Description:** Changes must be applied to both templates simultaneously (standard-project first, then sync to learning-project via template-sync-manifest). No release should ship with divergent planning structures between templates.
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-10: Zero Learning-Project Regressions
+
+**Description:** Stage-based structure (stage0-N directories, practice-apps, reference) must be completely unaffected by planning simplification changes. No test should fail for learning-project-specific features.
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+**Priority:** High
 
 **Status:** 🔴 Pending
 
@@ -381,6 +545,42 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
+### C-7: `/task` Must Handle Both Single-File and Hub+Group Structures
+
+**Description:** At simple/medium tiers, tasks are in a single file. At complex tier, the hub has a task index and tasks live in group files. `/task` reads the YAML frontmatter blueprint metadata to determine which structure it's operating on, then resolves the correct file for the requested task number.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
+
+---
+
+### C-8: Doc-Gen Template Replacement Is a Breaking Change
+
+> **⚠️ TENTATIVE:** Valid constraint regardless of code boundary, but scope depends on decision.
+
+**Description:** Replacing `feature-plan.md.tmpl` and `phase.md.tmpl` with the tier-aware templates is a breaking change for dev-toolkit's `dt-doc-gen` and any validation rules compiled from `planning.yaml`. Dev-toolkit's `templates.sh` type mappings, `type-detection.sh` path patterns, and compiled `.bash` rules all need coordinated updates. The `template-sync-manifest.txt` must also be updated for any shared template files.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+
+---
+
+### C-9: Dev-Infra Templates Are the Single Source of Truth
+
+> **⚠️ TENTATIVE:** This is the existing pattern and likely remains true, but the *scope* of what dev-infra owns (specs only vs. specs + scripts) is under exploration.
+
+**Description:** Dev-toolkit discovers templates from dev-infra via `DT_TEMPLATES_PATH` (defaulting to `~/Projects/dev-infra/scripts/doc-gen/templates`). Any template changes in dev-infra must be propagated to dev-toolkit's template discovery, type detection, and validation rule compilation. Dev-infra owns the contract; dev-toolkit consumes it.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+
+---
+
+### C-10: In-Progress Features Coexist with New Structure
+
+**Description:** Existing projects may have features using the old `phase-N.md` structure when they adopt the new template version. Commands must handle encountering old structure gracefully (at minimum, provide clear error messages pointing to migration guide rather than cryptic failures).
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+---
+
 ## 💭 Assumptions
 
 ### A-1: 1-PR-Per-Feature Is the Standard Workflow
@@ -431,6 +631,22 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
+### A-7: Task Count Is Knowable at Planning Time
+
+**Description:** The ADR and requirements documents provide enough information for `/transition-plan` to estimate the number of tasks and groups. The count doesn't need to be exact -- it drives a tier decision (simple/medium/complex), not a precise structure. Over- or under-estimation by 1-2 tasks at a tier boundary is acceptable.
+
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
+
+---
+
+### A-8: Existing Projects Adopt New Structure for New Features Only
+
+**Description:** We assume existing projects will use the new structure for new features but won't retroactively convert completed or in-progress features. The migration guide supports this "new features only" approach. Historical phase-N.md files remain in place.
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+---
+
 ## 🔗 Related Documents
 
 - [Research Summary](research-summary.md)
@@ -440,9 +656,9 @@ This document captures requirements discovered during research on workflow simpl
 
 ## 🚀 Next Steps
 
-1. Conduct Topic 4 research -- extract remaining requirements
-2. Refine requirements based on all findings
-3. Use `/decision workflow-simplification --from-research` when complete
+1. ~~Conduct Topic 4 research -- extract remaining requirements~~ ✅
+2. All 5 topics complete -- requirements fully captured
+3. Use `/decision workflow-simplification --from-research` to create ADRs
 
 ---
 

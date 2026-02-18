@@ -1,7 +1,7 @@
 # Research Summary - Workflow Simplification
 
 **Purpose:** Summary of all research findings for workflow simplification  
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
 **Created:** 2026-02-13  
 **Last Updated:** 2026-02-14
 
@@ -13,7 +13,7 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 
 **Research Topics:** 5 topics  
 **Research Documents:** 5 documents  
-**Status:** 🟠 In Progress (4/5 complete)
+**Status:** ✅ Complete (5/5 complete)
 
 ---
 
@@ -55,21 +55,27 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 
 ---
 
-### Topic 3: Transition Plan Output Format (✅ Complete)
+### Topic 3: Transition Plan Output Format (✅ Complete, AMENDED)
 
-**Finding:** Three industry formats were evaluated (flat checkbox, grouped checkbox, rich task entries). Format B (grouped checkbox list with optional section headings) is the clear winner -- it works for small features (8 tasks) and large features (40+ tasks), is trivially machine-parseable via `- [ ]` / `- [x]` patterns, and renders with GitHub progress bars. The current N+3 file structure (`feature-plan.md` + `transition-plan.md` + N `phase-N.md` + `status-and-next-steps.md`) reduces to exactly 2 files: `implementation-plan.md` + `status-and-next-steps.md`. The `/transition-plan` expand mode can be eliminated -- TDD detail is a runtime concern managed by `/task`, not a planning concern.
+**Finding:** Three industry formats were evaluated (flat checkbox, grouped checkbox, rich task entries). Format B (grouped checkbox list with optional section headings) is the clear winner for the task format itself. However, post-research reassessment identified single-file bias: for complex features (16+ tasks), a single file causes AI context waste, progressive disclosure violations, and concurrent editing risk. The amended recommendation is a **tiered structure**: simple (1-8 tasks, single file), medium (9-15 tasks, single file with groups), complex (16+ tasks, hub + group files). `/transition-plan` determines the tier automatically from task count and produces a **feature blueprint** (YAML frontmatter metadata) that `/task` reads to understand the structure.
 
-**Recommendation:** Adopt Format B with global continuous task numbering, optional `###` group headings, and a single `/transition-plan` output mode. Name the document `implementation-plan.md`. Keep `status-and-next-steps.md` separate for runtime tracking.
+**Recommendation:** Adopt Format B at all tiers. Use tiered file structure based on codified task count thresholds. `/transition-plan` produces a blueprint with explicit tier metadata. `implementation-plan.md` is the entry point at all tiers. Keep `status-and-next-steps.md` separate.
 
-**Requirements extracted:** FR-15 (document format), FR-16 (global numbering), FR-17 (optional groups), FR-18 (single output mode), FR-19 (2-file directory), NFR-6 (GitHub rendering), NFR-7 (document length), C-6 (format contract), A-5 (TDD runtime), A-6 (group-phase mapping).
+**Requirements extracted:** FR-15 (tiered structure, amended), FR-16 (global numbering), FR-17 (optional groups), FR-18 (blueprint, amended), FR-19 (scales by tier, amended), FR-20 (tier metadata), FR-21 (codified thresholds), FR-22 (scaffolding script), FR-23 (replace planning templates), FR-24 (new template variables), NFR-6 (GitHub rendering), NFR-7 (AI context efficiency, amended), NFR-8 (script callable from IDE+CLI), C-6 (format contract), C-7 (handle both structures), C-8 (template breaking change), C-9 (dev-infra as single source), A-5 (TDD runtime), A-6 (group-phase mapping), A-7 (task count knowable).
 
 **Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md)
 
 ---
 
-### Topic 4: Template Impact Assessment (🔴 Not Started)
+### Topic 4: Template Impact Assessment (✅ Complete)
 
-*Findings to be added after research is conducted.*
+**Finding:** Both templates (standard-project and learning-project) are structurally identical for planning -- one change set covers both. The learning-project's stage-based structure (stage0-N directories) is completely orthogonal to the phase/task planning system and requires zero special handling. The change surface is documentation-heavy (4-5 workflow docs, ~400-500 lines of targeted updates), not structural -- no template directories need to be added or removed. 2 commands rename (task-phase → task, pre-phase-review → plan-review), ~11 commands get content updates, and 1 deprecation stub is added. Doc-gen validation rules (`planning.yaml`) are the structural contract defining the canonical change. The breaking change is moderate: new features in existing projects are unaffected; in-progress features using `--phase` flags need adjustment.
+
+**Recommendation:** Treat as minor version bump (v0.10.0). Ship migration guide. Apply template changes atomically (standard-project first, sync to learning). Include deprecation stub for backward compatibility. Update validation rules first as the contract, then templates, then commands.
+
+**Requirements extracted:** FR-25 (migration guide), FR-26 (workflow doc update), FR-27 (example replacement), FR-28 (planning hub updates), FR-29 (validation rule migration), NFR-9 (atomic template updates), NFR-10 (zero learning-project regressions), C-10 (old structure coexistence), A-8 (new features only adoption).
+
+**Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
 
 ---
 
@@ -81,16 +87,23 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 - [x] **Refactoring cost is HIGH but necessary.** 9 commands need updating, but the alternative is perpetuating ceremony in every generated project.
 - [x] **75% of `/task-phase` is already task-generic.** The rename is primarily path resolution + naming, not a logic rewrite. Lower risk than the 9-command count suggests.
 - [x] **Hybrid interface is optimal.** `/task next` for flow, `/task N` for resume, bare `/task` for status. Industry patterns (Taskwarrior, Taskfile) validate this approach.
-- [x] **Format B (grouped checkbox) is the winning document format.** Works for 8-task and 40-task features. Trivially parseable. GitHub-compatible. Optional `###` headings replace mandatory phase files.
-- [x] **N+3 files collapse to 2 files.** `implementation-plan.md` + `status-and-next-steps.md` replaces `feature-plan.md` + `transition-plan.md` + N `phase-N.md` + `status-and-next-steps.md`.
+- [x] **Format B (grouped checkbox) is the winning task format.** Trivially parseable. GitHub-compatible. Optional `###` headings replace mandatory phase files.
+- [x] **Tiered file structure replaces one-size-fits-all.** Simple (1-8 tasks): single file. Medium (9-15): single file with groups. Complex (16+): hub + group files. Addresses AI context waste and progressive disclosure for complex features.
+- [x] **Feature blueprint with codified tier thresholds.** `/transition-plan` counts tasks, applies thresholds, and produces YAML frontmatter metadata so `/task` knows the structure. No discretion -- thresholds are rules, not guidelines.
 - [x] **TDD detail is runtime, not planning.** Expand mode can be eliminated -- `/task` manages RED/GREEN/REFACTOR at implementation time.
-- [ ] *Additional insights pending from Topic 4.*
+- [ ] **⚠️ Doc-gen templates + tier logic implementation -- ownership TBD.** Research assumed a `scaffold-feature.sh` script in dev-infra, but exploration Theme 5 questions whether dev-infra should maintain executable code for generated projects. The tier-aware templates are valid; the question is where the rendering/scaffolding logic lives (dev-infra script vs. dev-toolkit command vs. manifest-only).
+- [x] **Two-way dev-infra ↔ dev-toolkit relationship confirmed.** Dev-infra owns standards (templates, validation rules). Dev-toolkit consumes them. The boundary between "spec" and "implementation" needs explicit definition (exploration Theme 5).
+- [x] **Both templates share identical planning structure.** Standard and learning templates have the same `docs/maintainers/` hierarchy. A single change set covers both -- zero learning-project-specific work needed.
+- [x] **Learning-project stages are orthogonal to phases.** Stages (content directories) and phases (planning documents) are completely separate concepts with zero interaction. Stage-based learning progression works naturally with flat task planning.
+- [x] **Documentation is the largest change surface, not file structure.** No template directories need to be added or removed. ~400-500 lines of targeted workflow doc updates plus command file changes. This is a documentation-heavy change.
+- [x] **Doc-gen validation rules are the structural contract.** `planning.yaml` defines what "valid" looks like. Updating it first ensures templates and commands can be validated during development.
+- [x] **Breaking change is moderate and manageable.** New features: zero impact. In-progress features: `--phase` flags stop working. Historical features: unaffected. Deprecation stub provides guidance.
 
 ---
 
 ## 📋 Requirements Summary
 
-**19 Functional Requirements, 7 Non-Functional Requirements, 6 Constraints, 6 Assumptions** extracted so far from Topics 1, 2, 3, and 5.
+**29 Functional Requirements (3 tentative), 10 Non-Functional Requirements (1 tentative), 10 Constraints (2 tentative), 8 Assumptions** extracted from all 5 topics (Topics 1, 2, 3 amended x2, 4, and 5). Tentative items depend on code boundary decision (exploration Theme 5).
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -104,11 +117,20 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 - [x] **Hybrid `/task` interface** -- `next` for flow, `N` for explicit, bare for status (from Topic 2)
 - [x] **Stub `/task-phase`** with deprecation notice; remove in next major version (from Topic 2)
 - [x] **Simplify branch/commit naming** -- drop phase numbers from both (from Topic 2)
-- [x] **Adopt Format B** -- grouped checkbox list with optional `###` headings (from Topic 3)
-- [x] **Name document `implementation-plan.md`** -- replaces feature-plan + transition-plan + phase-N trio (from Topic 3)
+- [x] **Adopt Format B at all tiers** -- grouped checkbox list with optional `###` headings (from Topic 3)
+- [x] **Tiered file structure** -- simple (single file), medium (single file + groups), complex (hub + group files) (from Topic 3 amendment)
+- [x] **Feature blueprint with YAML frontmatter** -- `/transition-plan` produces explicit tier metadata (from Topic 3 amendment)
+- [x] **Codified tier thresholds** -- 1-8 simple, 9-15 medium, 16+ complex; no discretion (from Topic 3 amendment)
+- [x] **Name document `implementation-plan.md`** -- entry point at all tiers (from Topic 3)
 - [x] **Keep `status-and-next-steps.md` separate** -- runtime tracking stays distinct from plan (from Topic 3)
-- [x] **Eliminate expand mode** -- `/transition-plan` produces one file in one mode (from Topic 3)
-- [ ] *Additional recommendations pending from Topic 4.*
+- [x] **Eliminate expand mode** -- `/transition-plan` produces blueprint + files in one mode (from Topic 3)
+- [ ] **⚠️ Scaffolding logic ownership TBD** -- tier logic needs an implementation home; dev-infra script vs. dev-toolkit command vs. manifest-only (from Topic 3 amendment, under exploration Theme 5)
+- [x] **Replace planning doc-gen templates** -- `feature-plan.md.tmpl` + `phase.md.tmpl` → tier-aware templates with YAML frontmatter (from Topic 3 amendment; template design valid, ownership TBD)
+- [x] **Minor version bump (v0.10.0)** -- dev-infra is pre-1.0; deprecation stub provides backward compatibility (from Topic 4)
+- [x] **Ship migration guide** -- `docs/MIGRATION-v0.10.md` for existing projects (from Topic 4)
+- [x] **Atomic template updates** -- standard-project first, sync to learning via manifest (from Topic 4)
+- [x] **Update validation rules first** -- `planning.yaml` is the contract; templates and commands follow (from Topic 4)
+- [x] **Workflow doc rewrite as separate task** -- highest effort, lowest risk; can be parallelized (from Topic 4)
 
 ---
 
@@ -116,9 +138,9 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 
 1. ~~Conduct Topic 2 (Task Command Interface Design)~~ ✅
 2. ~~Conduct Topic 3 (Transition Plan Output Format)~~ ✅
-3. Conduct Topic 4 (Template Impact Assessment)
-4. Synthesize all findings and recommendations
-5. Use `/decision workflow-simplification --from-research` when complete
+3. ~~Conduct Topic 4 (Template Impact Assessment)~~ ✅
+4. All 5 topics complete -- ready for decision phase
+5. Use `/decision workflow-simplification --from-research` to create ADRs
 
 ---
 
