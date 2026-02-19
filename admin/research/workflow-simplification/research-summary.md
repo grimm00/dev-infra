@@ -103,7 +103,7 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 - [x] **Tiered file structure replaces one-size-fits-all.** Simple (1-8 tasks): single file. Medium (9-15): single file with groups. Complex (16+): hub + group files. Addresses AI context waste and progressive disclosure for complex features.
 - [x] **Feature blueprint with codified tier thresholds.** `/transition-plan` counts tasks, applies thresholds, and produces YAML frontmatter metadata so `/task` knows the structure. No discretion -- thresholds are rules, not guidelines.
 - [x] **TDD detail is runtime, not planning.** Expand mode can be eliminated -- `/task` manages RED/GREEN/REFACTOR at implementation time.
-- [ ] **⚠️ Doc-gen templates + tier logic implementation -- ownership TBD.** Research assumed a `scaffold-feature.sh` script in dev-infra, but exploration Theme 5 questions whether dev-infra should maintain executable code for generated projects. The tier-aware templates are valid; the question is where the rendering/scaffolding logic lives (dev-infra script vs. dev-toolkit command vs. manifest-only).
+- [x] **Doc-gen templates + tier logic ownership resolved.** Topic 6 confirmed: dev-infra owns specs (templates, validation rules, tier config); dev-toolkit owns implementation (rendering, CLI). No scripts in dev-infra for generated projects.
 - [x] **Two-way dev-infra ↔ dev-toolkit relationship confirmed.** Dev-infra owns standards (templates, validation rules). Dev-toolkit consumes them. The boundary between "spec" and "implementation" needs explicit definition (exploration Theme 5).
 - [x] **Both templates share identical planning structure.** Standard and learning templates have the same `docs/maintainers/` hierarchy. A single change set covers both -- zero learning-project-specific work needed.
 - [x] **Learning-project stages are orthogonal to phases.** Stages (content directories) and phases (planning documents) are completely separate concepts with zero interaction. Stage-based learning progression works naturally with flat task planning.
@@ -115,7 +115,7 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 
 ## 📋 Requirements Summary
 
-**30 Functional Requirements, 10 Non-Functional Requirements, 10 Constraints, 9 Assumptions** extracted from all 6 topics (Topics 1, 2, 3 amended x2, 4, 5, and 6). All tentative items resolved by Topic 6 (FR-22 revised, FR-23/24 confirmed, NFR-8 revised, C-8/C-9 confirmed, FR-30 and A-9 added).
+**25 Functional Requirements, 10 Non-Functional Requirements, 10 Constraints, 9 Assumptions** (consolidated from 30 FRs). Merged 3 pairs, removed 3 superseded/redundant items, added 1 gap (cursor rules file updates). All tentative items resolved. Requirements status: **Final**.
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -153,8 +153,8 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 2. ~~Conduct Topic 3 (Transition Plan Output Format)~~ ✅
 3. ~~Conduct Topic 4 (Template Impact Assessment)~~ ✅
 4. ~~Conduct Topic 6 (Dev-Infra Code Boundary)~~ ✅
-5. All 6 topics complete -- all tentative requirements resolved -- ready for decision phase
-5. Use `/decision workflow-simplification --from-research` to create ADRs
+5. ~~Consolidate requirements (30 → 25 FRs, status: Final)~~ ✅
+6. Use `/decision workflow-simplification --from-research` to create ADRs
 
 ---
 
