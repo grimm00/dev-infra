@@ -1,7 +1,7 @@
 # Research Summary - Workflow Simplification
 
 **Purpose:** Summary of all research findings for workflow simplification  
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
 **Created:** 2026-02-13  
 **Last Updated:** 2026-02-14
 
@@ -13,7 +13,7 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 
 **Research Topics:** 6 topics  
 **Research Documents:** 6 documents  
-**Status:** 🟠 In Progress (5/6 complete)
+**Status:** ✅ Complete (6/6 complete)
 
 ---
 
@@ -79,9 +79,15 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 
 ---
 
-### Topic 6: Dev-Infra Code Boundary (🔴 Not Started)
+### Topic 6: Dev-Infra Code Boundary (✅ Complete)
 
-*Findings to be added after research is conducted.*
+**Finding:** Dev-infra should NOT maintain executable scripts (like `scaffold-feature.sh`) for generated projects. The existing boundary is clean and consistent: dev-infra owns specs (doc-gen templates, validation rules, variable contracts); dev-toolkit owns implementation (rendering, CLI, compilation). No dev-infra scripts are currently shipped to generated projects -- templates contain only README placeholders. ADR-001 (Project Identity) explicitly establishes a "template factory" identity where internal tooling stays internal and templates are products. The industry pattern (GitHub Spec Kit, TypeSpec, Bazel Starters) confirms spec/implementation separation as the standard approach. The AI agent gap period (before dev-toolkit implements `dt-scaffold-feature`) is tolerable because all 24 existing commands already work via "AI reads spec" without backing scripts. The "temporary scripts become permanent" risk is real -- `new-project.sh` grew to 300+ lines and 110+ tests.
+
+**Recommendation:** Revise FR-22 from "scaffolding script" to "tier specification." Add FR-30 for machine-readable tier config. Confirm FR-23, FR-24, C-8, C-9 (remove tentative status). Revise NFR-8 to "spec consumable by IDE and CLI" instead of "script callable." Add A-9 for AI agent gap-period sufficiency.
+
+**Requirements resolved:** FR-22 (REVISED to tier spec), FR-23 (CONFIRMED), FR-24 (CONFIRMED), NFR-8 (REVISED to spec consumable), C-8 (CONFIRMED), C-9 (CONFIRMED). New: FR-30 (tier config), A-9 (AI gap period).
+
+**Source:** [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md)
 
 ---
 
@@ -109,7 +115,7 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 
 ## 📋 Requirements Summary
 
-**29 Functional Requirements (3 tentative), 10 Non-Functional Requirements (1 tentative), 10 Constraints (2 tentative), 8 Assumptions** extracted from all 5 topics (Topics 1, 2, 3 amended x2, 4, and 5). Tentative items depend on code boundary decision (exploration Theme 5).
+**30 Functional Requirements, 10 Non-Functional Requirements, 10 Constraints, 9 Assumptions** extracted from all 6 topics (Topics 1, 2, 3 amended x2, 4, 5, and 6). All tentative items resolved by Topic 6 (FR-22 revised, FR-23/24 confirmed, NFR-8 revised, C-8/C-9 confirmed, FR-30 and A-9 added).
 
 **See:** [requirements.md](requirements.md) for complete requirements document
 
@@ -130,8 +136,9 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 - [x] **Name document `implementation-plan.md`** -- entry point at all tiers (from Topic 3)
 - [x] **Keep `status-and-next-steps.md` separate** -- runtime tracking stays distinct from plan (from Topic 3)
 - [x] **Eliminate expand mode** -- `/transition-plan` produces blueprint + files in one mode (from Topic 3)
-- [ ] **⚠️ Scaffolding logic ownership TBD** -- tier logic needs an implementation home; dev-infra script vs. dev-toolkit command vs. manifest-only (from Topic 3 amendment, under exploration Theme 5)
-- [x] **Replace planning doc-gen templates** -- `feature-plan.md.tmpl` + `phase.md.tmpl` → tier-aware templates with YAML frontmatter (from Topic 3 amendment; template design valid, ownership TBD)
+- [x] **Spec-only ownership for dev-infra** -- tier logic is a specification (tier config + templates + validation rules), NOT a script. Dev-toolkit implements the CLI. (from Topic 6)
+- [x] **Machine-readable tier config** -- `tier-config.yaml` or section in `planning.yaml` with thresholds, file structure, template mappings (from Topic 6)
+- [x] **Replace planning doc-gen templates** -- `feature-plan.md.tmpl` + `phase.md.tmpl` → tier-aware templates with YAML frontmatter (from Topic 3 amendment; ownership confirmed by Topic 6)
 - [x] **Minor version bump (v0.10.0)** -- dev-infra is pre-1.0; deprecation stub provides backward compatibility (from Topic 4)
 - [x] **Ship migration guide** -- `docs/MIGRATION-v0.10.md` for existing projects (from Topic 4)
 - [x] **Atomic template updates** -- standard-project first, sync to learning via manifest (from Topic 4)
@@ -145,7 +152,8 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 1. ~~Conduct Topic 2 (Task Command Interface Design)~~ ✅
 2. ~~Conduct Topic 3 (Transition Plan Output Format)~~ ✅
 3. ~~Conduct Topic 4 (Template Impact Assessment)~~ ✅
-4. All 5 topics complete -- ready for decision phase
+4. ~~Conduct Topic 6 (Dev-Infra Code Boundary)~~ ✅
+5. All 6 topics complete -- all tentative requirements resolved -- ready for decision phase
 5. Use `/decision workflow-simplification --from-research` to create ADRs
 
 ---

@@ -1,7 +1,7 @@
 # Workflow Simplification - Research Hub
 
 **Purpose:** Research findings for simplifying the feature/phase/task hierarchy  
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
 **Created:** 2026-02-13  
 **Last Updated:** 2026-02-14
 
@@ -16,7 +16,7 @@
 - **[Topic 3: Transition Plan Output Format](topic-3-transition-plan-output-format.md)** - Flat work breakdown format (✅ Complete)
 - **[Topic 4: Template Impact Assessment](topic-4-template-impact-assessment.md)** - Template and breaking-change impact (✅ Complete)
 - **[Topic 5: Command Dependency Analysis](topic-5-command-dependency-analysis.md)** - Phase concept embedding, refactoring scope (✅ Complete)
-- **[Topic 6: Dev-Infra Code Boundary](topic-6-dev-infra-code-boundary.md)** - Executable scripts vs. specs-only boundary (🔴 Not Started)
+- **[Topic 6: Dev-Infra Code Boundary](topic-6-dev-infra-code-boundary.md)** - Executable scripts vs. specs-only boundary (✅ Complete)
 
 ### Summary & Requirements
 
@@ -47,10 +47,10 @@ Research for the Workflow Simplification exploration. Topics investigate whether
 | Topic 3: Transition Plan Output Format | ✅ Complete | [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) |
 | Topic 4: Template Impact Assessment | ✅ Complete | [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md) |
 | Topic 5: Command Dependency Analysis | ✅ Complete | [topic-5-command-dependency-analysis.md](topic-5-command-dependency-analysis.md) |
-| Topic 6: Dev-Infra Code Boundary | 🔴 Not Started | [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md) |
+| Topic 6: Dev-Infra Code Boundary | ✅ Complete | [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md) |
 
 ---
 
 **Last Updated:** 2026-02-14  
-**Status:** 🟠 In Progress  
-**Next:** Conduct Topic 6, then `/decision workflow-simplification --from-research`
+**Status:** ✅ Complete  
+**Next:** `/decision workflow-simplification --from-research` to create ADRs

@@ -269,45 +269,39 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### FR-22: Scaffolding Script as Single Source of Truth
+### FR-22 (REVISED): Tier Specification as Single Source of Truth
 
-> **⚠️ TENTATIVE:** This requirement assumes dev-infra maintains executable scripts for generated projects. This assumption is under exploration (see [exploration.md Theme 5](../../explorations/workflow-simplification/exploration.md)). The requirement may be revised to a manifest/spec that dev-toolkit implements, rather than a dev-infra script.
+**Description:** A machine-readable tier configuration in dev-infra (e.g., `tier-config.yaml` or section in `planning.yaml`) defines thresholds (1-8 = simple, 9-15 = medium, 16+ = complex), corresponding file structures, and template mappings. Both Cursor commands and dev-toolkit CLI read this specification. Replaces the original "Scaffolding Script" requirement -- dev-infra owns specs, dev-toolkit owns implementation.
 
-**Description:** A `scripts/scaffold-feature.sh` script in dev-infra implements tier determination and file scaffolding. It uses the doc-gen template system (`envsubst` variable expansion, `<!-- AI: -->` markers), applies tier thresholds, and produces the feature directory structure. Both Cursor commands (`/transition-plan`) and dev-toolkit CLI (`dt-workflow`) call this script to ensure identical behavior.
-
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+**Source:** [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md) (revised from [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md))
 
 **Priority:** High
 
-**Status:** ⚠️ Tentative -- depends on code boundary decision
+**Status:** 🔴 Pending
 
 ---
 
-### FR-23: Replace Planning Doc-Gen Templates
-
-> **⚠️ TENTATIVE:** Template replacement is valid regardless of code boundary decision, but the specific template set depends on whether dev-infra or dev-toolkit owns the rendering logic.
+### FR-23 (CONFIRMED): Replace Planning Doc-Gen Templates
 
 **Description:** Replace `feature-plan.md.tmpl` + `phase.md.tmpl` with tier-aware templates: `implementation-plan.md.tmpl` (simple/medium), `implementation-plan-hub.md.tmpl` (complex hub), `task-group.md.tmpl` (complex group files). Update `status-and-next-steps.md.tmpl` to remove phase-centric progress table. Update `planning.yaml` validation rules with new subtypes (`implementation_plan`, `task_group`).
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment), confirmed by [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md)
 
 **Priority:** High
 
-**Status:** ⚠️ Tentative -- template design valid, ownership TBD
+**Status:** 🔴 Pending
 
 ---
 
-### FR-24: New Template Variables for Tier System
-
-> **⚠️ TENTATIVE:** Variables are valid regardless of code boundary decision, but deployment mechanism depends on whether dev-infra or dev-toolkit owns rendering.
+### FR-24 (CONFIRMED): New Template Variables for Tier System
 
 **Description:** Add variables to the doc-gen variable contract: `${TIER}` (simple/medium/complex), `${TASK_COUNT}`, `${GROUP_COUNT}`, `${STRUCTURE}` (single-file/hub-and-groups), `${GROUP_FILES}` (list of group file paths for complex tier), `${GROUP_NAME}`, `${TASK_RANGE}`. These are used in YAML frontmatter and template rendering.
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment), confirmed by [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md)
 
 **Priority:** Medium
 
-**Status:** ⚠️ Tentative -- variables valid, rendering ownership TBD
+**Status:** 🔴 Pending
 
 ---
 
@@ -364,6 +358,18 @@ This document captures requirements discovered during research on workflow simpl
 **Description:** `planning.yaml` must be updated: add `implementation_plan` and `task_group` document types, deprecate (then later remove) the `phase` document type, update `status_and_next_steps` progress table validation to use task counts instead of phase counts. During transition, accept both old and new formats.
 
 **Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-30: Machine-Readable Tier Configuration
+
+**Description:** Dev-infra must provide a machine-readable tier configuration (e.g., `tier-config.yaml` or a section in `planning.yaml`) that defines: tier thresholds (1-8 = simple, 9-15 = medium, 16+ = complex), file structure per tier, and template mappings per tier. This config is the contract between dev-infra (producer) and dev-toolkit + Cursor commands (consumers).
+
+**Source:** [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md)
 
 **Priority:** High
 
@@ -457,17 +463,15 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### NFR-8: Scaffolding Script Callable from Both IDE and CLI
+### NFR-8 (REVISED): Tier Specification Consumable by Both IDE and CLI
 
-> **⚠️ TENTATIVE:** Assumes dev-infra hosts the scaffolding script. See [exploration Theme 5](../../explorations/workflow-simplification/exploration.md).
+**Description:** The tier specification (templates + tier config + validation rules) must be readable by AI agents (via Cursor command specs), by dev-toolkit CLI (via `DT_TEMPLATES_PATH`), and by CI (for validation). The spec is the interface; how it's consumed is the consumer's concern. Replaces "Scaffolding Script Callable from Both IDE and CLI."
 
-**Description:** `scripts/scaffold-feature.sh` must be callable standalone (from Cursor commands), from dev-toolkit's `dt-workflow`, and in CI. It must accept arguments (feature name, tier override), read from stdin or file (ADR/requirements), and produce deterministic output. No interactive prompts unless `--interactive` flag is set.
-
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+**Source:** [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md) (revised from [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md))
 
 **Priority:** High
 
-**Status:** ⚠️ Tentative -- depends on code boundary decision
+**Status:** 🔴 Pending
 
 ---
 
@@ -553,23 +557,19 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### C-8: Doc-Gen Template Replacement Is a Breaking Change
-
-> **⚠️ TENTATIVE:** Valid constraint regardless of code boundary, but scope depends on decision.
+### C-8 (CONFIRMED): Doc-Gen Template Replacement Is a Breaking Change
 
 **Description:** Replacing `feature-plan.md.tmpl` and `phase.md.tmpl` with the tier-aware templates is a breaking change for dev-toolkit's `dt-doc-gen` and any validation rules compiled from `planning.yaml`. Dev-toolkit's `templates.sh` type mappings, `type-detection.sh` path patterns, and compiled `.bash` rules all need coordinated updates. The `template-sync-manifest.txt` must also be updated for any shared template files.
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment), confirmed by [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md)
 
 ---
 
-### C-9: Dev-Infra Templates Are the Single Source of Truth
+### C-9 (CONFIRMED): Dev-Infra Templates Are the Single Source of Truth
 
-> **⚠️ TENTATIVE:** This is the existing pattern and likely remains true, but the *scope* of what dev-infra owns (specs only vs. specs + scripts) is under exploration.
+**Description:** Dev-toolkit discovers templates from dev-infra via `DT_TEMPLATES_PATH` (defaulting to `~/Projects/dev-infra/scripts/doc-gen/templates`). Any template changes in dev-infra must be propagated to dev-toolkit's template discovery, type detection, and validation rule compilation. Dev-infra owns the contract; dev-toolkit consumes it. Scope confirmed: specs only (templates + validation rules + tier config), not scripts.
 
-**Description:** Dev-toolkit discovers templates from dev-infra via `DT_TEMPLATES_PATH` (defaulting to `~/Projects/dev-infra/scripts/doc-gen/templates`). Any template changes in dev-infra must be propagated to dev-toolkit's template discovery, type detection, and validation rule compilation. Dev-infra owns the contract; dev-toolkit consumes it.
-
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment)
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 9 amendment), confirmed by [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md)
 
 ---
 
@@ -647,6 +647,14 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
+### A-9: AI Agent Sufficiency During Gap Period
+
+**Description:** We assume the period between shipping the new planning structure and dev-toolkit implementing `dt-scaffold-feature` is manageable via AI agents reading the `/transition-plan` command spec. No temporary bridge script is needed. This is consistent with how all 24 existing commands operate (AI reads spec, produces output).
+
+**Source:** [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md)
+
+---
+
 ## 🔗 Related Documents
 
 - [Research Summary](research-summary.md)
@@ -657,8 +665,9 @@ This document captures requirements discovered during research on workflow simpl
 ## 🚀 Next Steps
 
 1. ~~Conduct Topic 4 research -- extract remaining requirements~~ ✅
-2. All 5 topics complete -- requirements fully captured
-3. Use `/decision workflow-simplification --from-research` to create ADRs
+2. ~~Conduct Topic 6 research -- resolve tentative requirements~~ ✅
+3. All 6 topics complete -- requirements fully captured (30 FRs, 10 NFRs, 10 Cs, 9 As)
+4. Use `/decision workflow-simplification --from-research` to create ADRs
 
 ---
 

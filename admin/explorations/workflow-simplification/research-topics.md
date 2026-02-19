@@ -111,6 +111,8 @@
 
 ### Topic 6: Dev-Infra Code Boundary
 
+**Status:** ✅ Complete ([View Research](../../research/workflow-simplification/topic-6-dev-infra-code-boundary.md))
+
 **Question:** Should dev-infra maintain executable scripts (like `scaffold-feature.sh`) for generated projects, or should all executable logic live in dev-toolkit?
 
 **Context:** Topic 3 research produced requirements (FR-22 through FR-24) assuming dev-infra would host a `scaffold-feature.sh` script that implements tier determination and file scaffolding. However, this crosses the template factory boundary established by ADR-001 (Project Identity). Dev-infra produces specs and templates; dev-toolkit produces CLI tools. Scripts that need to run in generated projects create deployment problems (how does the script get there?) and maintenance debt (temporary code that needs tests, CI, sync). The existing dev-infra ↔ dev-toolkit pattern (templates + validation rules in dev-infra, rendering + CLI in dev-toolkit) provides a model for keeping the boundary clean.
