@@ -109,16 +109,36 @@
 
 ---
 
+### Topic 6: Dev-Infra Code Boundary
+
+**Question:** Should dev-infra maintain executable scripts (like `scaffold-feature.sh`) for generated projects, or should all executable logic live in dev-toolkit?
+
+**Context:** Topic 3 research produced requirements (FR-22 through FR-24) assuming dev-infra would host a `scaffold-feature.sh` script that implements tier determination and file scaffolding. However, this crosses the template factory boundary established by ADR-001 (Project Identity). Dev-infra produces specs and templates; dev-toolkit produces CLI tools. Scripts that need to run in generated projects create deployment problems (how does the script get there?) and maintenance debt (temporary code that needs tests, CI, sync). The existing dev-infra ↔ dev-toolkit pattern (templates + validation rules in dev-infra, rendering + CLI in dev-toolkit) provides a model for keeping the boundary clean.
+
+**Priority:** High
+
+**Rationale:** This directly affects the validity of 3 functional requirements (FR-22-24), 1 NFR (NFR-8), and 2 constraints (C-8, C-9) that are currently marked tentative. Resolving this unblocks the decision phase for workflow simplification.
+
+**Suggested Approach:**
+- Review the existing dev-infra ↔ dev-toolkit boundary pattern (template discovery, validation rule compilation)
+- Assess whether the tiered blueprint can be a manifest/spec that dev-toolkit consumes
+- Evaluate the gap period (before dev-toolkit implements scaffolding) -- is "AI follows command spec" sufficient?
+- Determine whether FR-22-24 should be revised as specs/manifests or moved to dev-toolkit scope
+- Consider the "temporary scripts become permanent" risk
+
+---
+
 ## 🎯 Research Workflow
 
 1. Start with **Topic 5** (Command Dependency Analysis) to understand scope
 2. Then **Topic 1** (Feature Plan Structure Usage) to understand value
 3. Then **Topic 2** (Task Command Interface Design) to design the replacement
 4. Then **Topic 3** (Transition Plan Output Format) which follows from 1+2
-5. Finally **Topic 4** (Template Impact Assessment) for implementation planning
+5. Then **Topic 4** (Template Impact Assessment) for implementation planning
+6. Finally **Topic 6** (Dev-Infra Code Boundary) to resolve tentative requirements
 
 **Use:** `/research workflow-simplification --from-explore workflow-simplification` to start research.
 
 ---
 
-**Last Updated:** 2026-02-13
+**Last Updated:** 2026-02-14

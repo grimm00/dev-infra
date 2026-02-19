@@ -1,7 +1,7 @@
 # Research Summary - Workflow Simplification
 
 **Purpose:** Summary of all research findings for workflow simplification  
-**Status:** ✅ Complete  
+**Status:** 🟠 In Progress  
 **Created:** 2026-02-13  
 **Last Updated:** 2026-02-14
 
@@ -11,9 +11,9 @@
 
 Research for simplifying the feature/phase/task hierarchy given the draft PR workflow (1 PR per feature) and spike-driven decisions.
 
-**Research Topics:** 5 topics  
-**Research Documents:** 5 documents  
-**Status:** ✅ Complete (5/5 complete)
+**Research Topics:** 6 topics  
+**Research Documents:** 6 documents  
+**Status:** 🟠 In Progress (5/6 complete)
 
 ---
 
@@ -76,6 +76,12 @@ Research for simplifying the feature/phase/task hierarchy given the draft PR wor
 **Requirements extracted:** FR-25 (migration guide), FR-26 (workflow doc update), FR-27 (example replacement), FR-28 (planning hub updates), FR-29 (validation rule migration), NFR-9 (atomic template updates), NFR-10 (zero learning-project regressions), C-10 (old structure coexistence), A-8 (new features only adoption).
 
 **Source:** [topic-4-template-impact-assessment.md](topic-4-template-impact-assessment.md)
+
+---
+
+### Topic 6: Dev-Infra Code Boundary (🔴 Not Started)
+
+*Findings to be added after research is conducted.*
 
 ---
 
