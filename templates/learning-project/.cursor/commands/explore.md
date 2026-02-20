@@ -35,9 +35,9 @@ This command supports multiple project organization patterns:
 - When you need to identify what questions need answering
 - Before starting research on a topic
 
-**Key principle:** Start with exploration to identify research topics, then move to research phase. Use Setup Mode for quick ideation, then Conduct Mode for detailed exploration after human review.
+**Key principle:** Start with exploration to identify research topics, then move to research phase. Use Setup Mode for quick ideation, then Conduct Mode for detailed exploration after human review. Use Amend Mode when downstream work (research, spikes) surfaces new themes.
 
-**Two Modes:**
+**Three Modes:**
 
 ### Setup Mode (Default)
 
@@ -77,6 +77,27 @@ Expands existing scaffolding with detailed analysis (~200-300 lines).
 - When ready to invest in detailed exploration
 - Before moving to formal research phase
 
+### Amend Mode (`--amend`)
+
+Appends new themes/questions to an already-expanded exploration.
+
+```
+/explore [topic] --amend "description of new theme"
+  → Reads existing expanded exploration
+  → Appends new theme (auto-numbered)
+  → Appends new question to Key Questions
+  → Updates spike determination table
+  → Adds amendment note to metadata
+  → Status stays ✅ Expanded
+```
+
+**When to use Amend Mode:**
+
+- Research surfaced a new question that belongs upstream in the exploration
+- A spike revealed an assumption that needs capturing as a theme
+- Conversation identified a concern not covered in the original exploration
+- Any time the explore→research→decide loop feeds back new discovery
+
 **Workflow with Human Review:**
 
 ```
@@ -85,6 +106,8 @@ Expands existing scaffolding with detailed analysis (~200-300 lines).
 /explore [topic] --conduct ← Conduct: full exploration (~200-300 lines)
     ↓
 /research --from-explore   ← Research: investigate topics
+    ↓ (new question?)      ← Feedback loop
+/explore [topic] --amend   ← Amend: add theme from downstream discovery
 ```
 
 ---
@@ -105,10 +128,16 @@ Expands existing scaffolding with detailed analysis (~200-300 lines).
 - `/explore new-authentication-system --conduct` - Expand existing scaffolding
 - `/explore improve-ci-pipeline --conduct` - Fill in detailed exploration
 
+**Amend Mode Examples:**
+
+- `/explore workflow-simplification --amend "Should dev-infra maintain executable scripts?"` - Add theme from research discovery
+- `/explore auth-system --amend` - Amend interactively (prompts for description)
+
 **Options:**
 
 - `--topic [name]` - Specify topic name (overrides prompt)
 - `--conduct` - Expand scaffolding with detailed exploration (requires existing scaffolding)
+- `--amend [description]` - Append new theme/question to expanded exploration (requires `✅ Expanded` status)
 - `--dry-run` - Show what would be created without creating files
 - `--force` - Overwrite existing scaffolding (setup) or re-expand (conduct)
 
@@ -744,6 +773,15 @@ The command detects which mode to use based on flags and existing content.
 4. If status is `✅ Expanded`, warn and require `--force` to re-expand
 5. If status is `🔴 Scaffolding`, proceed with conduct
 
+**Amend Mode (`--amend`):**
+
+1. Check if topic directory exists
+2. If doesn't exist, error: "No exploration found for [topic]."
+3. Check exploration.md status
+4. If status is `🔴 Scaffolding`, error: "Exploration not yet expanded. Use `--conduct` first, then `--amend`."
+5. If status is `✅ Expanded`, proceed with amend
+6. Read the amend description from flag value or prompt interactively
+
 ### Input Source Validation
 
 Before mode detection, validate input source:
@@ -769,6 +807,9 @@ Before mode detection, validate input source:
 | `--conduct` with no scaffolding | "No exploration scaffolding found for [topic]. Run `/explore [topic]` first." |
 | `--conduct` on already expanded | "Exploration already expanded. Use `--force` to re-expand." |
 | Setup on existing scaffolding | "Scaffolding exists. Use `--conduct` to expand, or `--force` to overwrite." |
+| `--amend` with no exploration | "No exploration found for [topic]. Run `/explore [topic]` first." |
+| `--amend` on scaffolding | "Exploration not yet expanded. Use `--conduct` first, then `--amend`." |
+| `--amend` + `--conduct` | "Error: --amend and --conduct are mutually exclusive" |
 | Multiple input sources | "Error: --input, --from-start, and --from-reflect are mutually exclusive" |
 | Input file not found | "Error: Input file '[path]' not found" |
 | start.txt not found | "Error: start.txt not found in current directory or project root" |
@@ -929,6 +970,44 @@ git push origin develop
 
 ---
 
+### 4b. Amend Mode: Append to Expanded Exploration
+
+**Use when:** Mode detection indicates Amend Mode (`--amend` flag provided, exploration is `✅ Expanded`).
+
+**Reads:** Existing expanded exploration from `explorations/[topic]/`
+
+**Process:**
+
+1. Read existing `exploration.md`
+2. Determine next theme number (count existing `### Theme N:` headings)
+3. Append new theme to the Themes section with full structure (analysis, connections, implications, concerns)
+4. Append corresponding question to Key Questions section
+5. Add row to spike determination table
+6. Read existing `research-topics.md`
+7. Determine next topic number (count existing `### Topic N:` headings)
+8. Append new topic to `research-topics.md` with full structure (Question, Context, Priority, Rationale, Suggested Approach)
+9. Add `**Amended:** YYYY-MM-DD - [reason]` to `exploration.md` metadata
+10. Status remains `✅ Expanded`
+
+**Amend Mode Checklist:**
+
+- [ ] Existing exploration read
+- [ ] New theme appended with full structure (connections, implications, concerns)
+- [ ] New question appended to Key Questions
+- [ ] Spike determination table updated
+- [ ] `research-topics.md` updated with new topic
+- [ ] Amendment note added to metadata
+- [ ] Status unchanged (`✅ Expanded`)
+
+**Commit (docs can push directly):**
+
+```bash
+git add explorations/[topic]/
+git commit -m "docs(explore): amend [topic] exploration with [brief description]"
+```
+
+---
+
 ### 5. Update Explorations Hub
 
 **Update explorations hub:**
@@ -1017,6 +1096,7 @@ start.txt   → /explore --from-start     ← Project initialization
     ├─ HIGH risk? ─────────→ /spike --from-explore  ← Validate assumptions (2-4 hrs)
     ↓                           (spike learnings feed back into research)
 /research --from-explore      ← Research: investigate topics
+    ↓ (new question?) ──────→ /explore [topic] --amend  ← Feedback loop
     ↓
 /decision --from-research     ← Decisions: create ADRs
     ↓
@@ -1030,6 +1110,7 @@ start.txt   → /explore --from-start     ← Project initialization
 - Course correction with minimal time spent
 - Rejection of dead-end explorations without wasted effort
 - Identification of high-risk topics that need spiking before research
+- **Feedback from downstream**: research or spikes can amend the exploration with new themes
 
 ### Timing Guidance
 
@@ -1232,6 +1313,27 @@ What about in-app badges? Need to think about user preferences too."
 
 ---
 
+### Scenario 8: Research Feedback Loop (Amend)
+
+**Situation:** During `/research` on workflow-simplification, you discover a new question about whether dev-infra should maintain executable scripts. This belongs upstream in the exploration.
+
+**Action:**
+
+```bash
+/explore workflow-simplification --amend "Should dev-infra maintain executable 
+scaffolding scripts for generated projects, or stay in specs/templates/manifests?"
+```
+
+**Result:**
+- New Theme 5 appended to existing exploration
+- New Question 5 added to Key Questions
+- Spike determination table updated
+- Amendment metadata recorded
+- Status stays `✅ Expanded`
+- No overwriting of existing themes or analysis
+
+---
+
 ## Tips
 
 ### When to Use
@@ -1239,6 +1341,7 @@ What about in-app badges? Need to think about user preferences too."
 - **New ideas** - Start exploration before jumping to research
 - **Proof of concepts** - Organize thoughts before research
 - **Abstract concepts** - Structure thinking before investigation
+- **Research feedback** - Use `--amend` when downstream work surfaces new questions
 
 ### Best Practices
 
