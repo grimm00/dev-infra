@@ -66,9 +66,28 @@ We are moving from a rigid, multi-file phase structure (feature-plan + phase-N f
 
 ## 📋 Requirements Impact
 
-- **Fulfilled:** FR-1, FR-5, FR-7, FR-12, FR-15, FR-17, FR-20, NFR-1, NFR-2, NFR-5, NFR-7, NFR-8.
-- **Addressed:** C-1, C-2, C-5, C-8, C-9, C-10.
-- **Assumptions Validated:** A-1, A-3, A-5, A-7, A-8, A-9.
+**Functional Requirements (20 of 25 covered; remaining 5 are implementation tasks):**
+- **ADR-001:** FR-1, FR-2, FR-3, FR-12, FR-14, FR-15, FR-16
+- **ADR-002:** FR-5, FR-7, FR-8, FR-9, FR-10, FR-11, FR-13
+- **ADR-003:** FR-17, FR-18
+- **ADR-004:** FR-20, FR-24
+- **Implementation only (no decision needed):** FR-4, FR-19, FR-21, FR-22, FR-23, FR-25
+
+**Non-Functional Requirements (9 of 10 covered):**
+- **ADR-001:** NFR-1, NFR-2, NFR-6, NFR-7
+- **ADR-002:** NFR-5
+- **ADR-003:** NFR-8
+- **ADR-004:** NFR-3, NFR-9, NFR-10
+- **Implementation only:** NFR-4
+
+**Constraints (9 of 10 covered):**
+- **ADR-001:** C-6, C-7
+- **ADR-002:** C-1, C-5
+- **ADR-003:** C-8, C-9
+- **ADR-004:** C-2, C-4, C-10
+- **Implementation only:** C-3
+
+**Assumptions Validated:** A-1, A-2, A-3, A-4, A-5, A-6, A-7, A-8, A-9 (referenced in ADR context sections)
 
 **See:** [requirements.md](../../research/workflow-simplification/requirements.md) for complete requirements
 

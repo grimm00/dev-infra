@@ -35,6 +35,9 @@ We will treat this as a **minor version bump (v0.10.0)** and support a **"new fe
 4.  **Validation Rules:** Updated to accept both `phase` and `implementation_plan` document types during the transition period.
 5.  **Documentation:** Ship a migration guide (`docs/MIGRATION-v0.10.md`) explaining the changes.
 
+**Concurrent Scope:**
+-   Deferred tasks 56 (centralize detection rules for docs-only vs code-phase) and 57 (temp directory path conventions) will be addressed as part of this feature to avoid duplicate refactoring effort across the same command files.
+
 ---
 
 ## Consequences
@@ -79,13 +82,17 @@ The "new features only" approach is the standard pattern for infrastructure migr
 
 ## Requirements Impact
 
-**Requirements Affected:**
--   FR-20 (Migration Guide) - Fulfilled.
--   FR-24 (Validation Rules) - Fulfilled.
--   NFR-3 (Phased Deprecation) - Fulfilled.
--   NFR-9 (Atomic Updates) - Fulfilled.
--   C-2 (Migration Path) - Fulfilled.
--   C-10 (Coexistence) - Fulfilled.
+**Requirements Fulfilled:**
+-   FR-20 (Migration Guide for Existing Projects) - Fulfilled. `docs/MIGRATION-v0.10.md` ships with the release.
+-   FR-24 (Validation Rule Migration) - Fulfilled. Both old and new document types accepted during transition.
+-   NFR-3 (Phased Deprecation Approach) - Fulfilled. New alongside old, then deprecate, then remove.
+-   NFR-9 (Atomic Template Updates) - Fulfilled. Standard-project first, sync to learning-project via manifest.
+-   NFR-10 (Zero Learning-Project Regressions) - Fulfilled. Stage-based structure is orthogonal to planning changes; regression testing required.
+
+**Constraints Acknowledged:**
+-   C-2 (Existing Projects Need Migration Path) - Fulfilled. "New features only" adoption; old features keep old structure.
+-   C-4 (Deferred Tasks 56/57 Concurrent) - Addressed. Included in scope to avoid duplicate refactoring.
+-   C-10 (In-Progress Features Coexist) - Fulfilled. Commands detect which structure is present and handle both gracefully.
 
 ---
 

@@ -81,12 +81,22 @@ The tiered approach balances simplicity and scalability. Research (Topic 3) show
 
 ## Requirements Impact
 
-**Requirements Affected:**
--   FR-1 (Tiered Planning) - Fulfilled.
--   FR-12 (Tiered Structure) - Fulfilled.
--   FR-15 (Feature Blueprint) - Fulfilled.
--   NFR-1 (Scale) - Fulfilled.
--   NFR-7 (Context Efficiency) - Fulfilled.
+**Requirements Fulfilled:**
+-   FR-1 (Tiered Planning Document Per Feature) - Fulfilled.
+-   FR-2 (Preserve Status Tracking) - Fulfilled. `status-and-next-steps.md` retained as a separate file at all tiers.
+-   FR-3 (Machine-Parseable Task List) - Fulfilled. GFM checkboxes (`- [ ]` / `- [x]`) are the format at all tiers.
+-   FR-12 (Tiered Implementation Plan Structure) - Fulfilled.
+-   FR-14 (Group Headings as Optional Context) - Fulfilled. `### Group Name` headings provide human-readable structure but are not required by tooling.
+-   FR-15 (Feature Blueprint) - Fulfilled. YAML frontmatter declares tier and structure.
+-   FR-16 (Codified Tier Thresholds) - Fulfilled. 1-8 = simple, 9-15 = medium, 16+ = complex.
+-   NFR-1 (Scale from Simple to Complex) - Fulfilled.
+-   NFR-2 (Lower Barrier to Entry) - Fulfilled. Fewer files for simple features reduces boilerplate.
+-   NFR-6 (GitHub-Compatible Rendering) - Fulfilled. GFM checkboxes render natively with progress bars.
+-   NFR-7 (AI Context Efficiency) - Fulfilled.
+
+**Constraints Acknowledged:**
+-   C-6 (Parsing Contract) - The `- [ ] Task N: Description` checkbox pattern is the contract between `/transition-plan` (producer) and `/task` (consumer).
+-   C-7 (Handle Both Structures) - `/task` reads the YAML frontmatter blueprint to determine whether it is operating on a single-file or hub+group structure.
 
 ---
 

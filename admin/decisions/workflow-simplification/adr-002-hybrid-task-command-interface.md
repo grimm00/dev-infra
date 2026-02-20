@@ -36,6 +36,10 @@ We will rename `/task-phase` to `/task` and support a **hybrid interface** with 
 -   Tasks are numbered globally (1 to N) across groups/files to ensure unambiguous reference.
 -   Backward compatibility is provided via a `task-phase.md` stub file that points users to `/task`.
 
+**Naming Conventions:**
+-   Branch names drop phase numbers: `feat/[feature]-[desc]` (not `feat/[feature]-phase-N-[desc]`).
+-   Commit scopes use feature/component names: `feat(auth): ...` (not `feat(phase-3): ...`).
+
 ---
 
 ## Consequences
@@ -81,12 +85,19 @@ The hybrid interface is the standard pattern for task runners. It accommodates b
 
 ## Requirements Impact
 
-**Requirements Affected:**
--   FR-5 (Renaming) - Fulfilled.
--   FR-7 (Hybrid Interface) - Fulfilled.
--   FR-8 (Plan Source) - Fulfilled.
--   FR-13 (Global Numbering) - Fulfilled.
--   C-5 (No Aliasing) - Addressed via stub.
+**Requirements Fulfilled:**
+-   FR-5 (Command Renaming) - Fulfilled. `/task-phase` renamed to `/task`, `/pre-phase-review` renamed to `/plan-review`.
+-   FR-7 (Hybrid Task Selection Interface) - Fulfilled. `next`/`N`/bare modes.
+-   FR-8 (Implementation Plan as Task Source) - Fulfilled. `/task` reads from `implementation-plan.md`.
+-   FR-9 (Deprecation Stubs for Renamed Commands) - Fulfilled. Stub files point users to new command names.
+-   FR-10 (Simplified Branch Naming) - Fulfilled. Phase numbers dropped from branch names.
+-   FR-11 (Simplified Commit Scope) - Fulfilled. Feature/component scope replaces phase scope.
+-   FR-13 (Global Continuous Task Numbering) - Fulfilled. Tasks numbered 1 to N across all groups.
+-   NFR-5 (75% of `/task-phase` Logic Is Reusable) - Validated. TDD workflow, task grouping, and commit strategy carry forward unchanged.
+
+**Constraints Acknowledged:**
+-   C-1 (Hard Phase Dependencies in Commands) - 9 commands have hard dependencies on phase files; `/task` is the hub command and must be refactored first to unlock the others.
+-   C-5 (Cursor Has No Command Aliasing) - Addressed via physical stub files for backward compatibility.
 
 ---
 
