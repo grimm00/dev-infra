@@ -10,7 +10,7 @@
 
 ### Active Explorations
 
-- **[AI Prompt Lifecycle](ai-prompt-lifecycle/README.md)** - Understanding LLM mechanics and Cursor prompt assembly to inform command design (🔴 Scaffolding) ⭐ **NEW**
+- **[AI Prompt Lifecycle](ai-prompt-lifecycle/README.md)** - Understanding LLM mechanics and Cursor prompt assembly to inform command design (✅ Expanded) ⭐ **NEW**
 - **[Template Doc Infrastructure](template-doc-infrastructure/README.md)** - Template-based doc generation and validation for consistent workflow docs (🔴 Scaffolding)
 - **[Worktree Feature Workflow](worktree-feature-workflow/README.md)** - Self-contained feature development with manual worktrees and review gates (🔴 Exploration)
 - **[Handoff Command](handoff-command/README.md)** - Managing context handoff between AI chat sessions (🟠 Exploration)
