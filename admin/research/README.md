@@ -10,7 +10,8 @@
 
 ### Active Research
 
-- **[Template Doc Infrastructure](template-doc-infrastructure/README.md)** - Template-based doc generation and validation infrastructure (🟡 Research) ⭐ **NEW**
+- **[AI Prompt Lifecycle](ai-prompt-lifecycle/README.md)** - LLM mechanics, Cursor prompt assembly, command design implications (🔴 Research) ⭐ **NEW**
+- **[Template Doc Infrastructure](template-doc-infrastructure/README.md)** - Template-based doc generation and validation infrastructure (🟡 Research)
 - **[Four-Arm Architecture](four-arm-architecture/README.md)** - How dev-infra, dev-toolkit, proj-cli, and work-prod work together (🔴 Research)
 - **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, topic unification (🔴 Research)
 - **[Project Model Definition](project-model-definition/README.md)** - Unified project model with tiered approach (🔴 Research)
@@ -210,8 +211,8 @@ This research evaluates the current template structure against:
 
 ---
 
-**Last Updated:** 2025-12-31  
+**Last Updated:** 2026-02-20  
 **Status:** ✅ Active  
-**Latest Research:** [Four-Arm Architecture](four-arm-architecture/README.md)
+**Latest Research:** [AI Prompt Lifecycle](ai-prompt-lifecycle/README.md)
 
 
