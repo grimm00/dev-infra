@@ -28,12 +28,14 @@ What is the mechanical reality of how LLM API calls work? Not the marketing abst
 ## 📚 Research Methodology
 
 **Sources:**
-- [x] Anthropic Messages API documentation (docs.anthropic.com/en/api/messages)
-- [x] Anthropic token counting documentation (docs.anthropic.com/en/docs/build-with-claude/token-counting)
-- [x] Anthropic context windows documentation (docs.anthropic.com/en/docs/build-with-claude/context-windows)
-- [x] Anthropic prompt caching documentation (anthropic.com/news/prompt-caching)
-- [x] Anthropic system prompts documentation (docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts)
-- [x] Anthropic pricing documentation
+- [x] [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) - Request structure, parameters, message roles
+- [x] [Anthropic Token Counting](https://docs.anthropic.com/en/docs/build-with-claude/token-counting) - Token counting endpoint, examples, pricing tiers
+- [x] [Anthropic Context Windows](https://docs.anthropic.com/en/docs/build-with-claude/context-windows) - Context window mechanics, limits, management strategies
+- [x] [Anthropic Prompt Caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) - Cache mechanics, breakpoints, automatic caching
+- [x] [Anthropic Prompt Caching Announcement](https://www.anthropic.com/news/prompt-caching) - Use cases, pricing overview
+- [x] [Anthropic System Prompts](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts) - Role prompting, system vs user message guidance
+- [x] [Anthropic Models Overview](https://docs.anthropic.com/en/docs/about-claude/models/overview) - Model specs, context window sizes, max output tokens
+- [x] [Anthropic Pricing](https://docs.anthropic.com/en/docs/about-claude/pricing) - Token pricing, cache write/read rates
 - [x] Empirical measurement: byte counts for all dev-infra rules and command files
 
 ---
@@ -75,7 +77,7 @@ Each message in the array has:
 }
 ```
 
-**Source:** Anthropic Messages API documentation
+**Source:** [Anthropic Messages API](https://docs.anthropic.com/en/api/messages)
 
 **Relevance:** This is the exact structure Cursor must populate when sending our conversations to the API. The system prompt is where Cursor's own instructions and our `.cursor/rules/` files end up. Each command invocation and user message goes into the messages array.
 
@@ -96,7 +98,7 @@ Tokens are sub-word units the model uses to process text. They are not character
 **How to measure:**
 Anthropic provides a free token counting endpoint (`POST /v1/messages/count_tokens`) that accepts the same structure as the Messages API and returns an `input_tokens` count. This is an estimate -- actual usage may differ slightly because Anthropic may add tokens for system optimizations (which are not billed).
 
-**Source:** Anthropic token counting documentation
+**Source:** [Anthropic Token Counting](https://docs.anthropic.com/en/docs/build-with-claude/token-counting)
 
 **Relevance:** Every character in our rules files and command files costs tokens. Markdown-heavy files (headers, tables, code blocks, bullet lists) incur overhead beyond just the text content. Understanding the ~4 chars/token ratio lets us estimate token costs from file sizes.
 
@@ -134,7 +136,7 @@ After each tool call, the model receives an update:
 <system_warning>Token usage: 35000/200000; 165000 remaining</system_warning>
 ```
 
-**Source:** Anthropic context windows documentation
+**Source:** [Anthropic Context Windows](https://docs.anthropic.com/en/docs/build-with-claude/context-windows), [Anthropic Models Overview](https://docs.anthropic.com/en/docs/about-claude/models/overview)
 
 **Relevance:** With 200K tokens and a ~4 chars/token ratio, the context window holds roughly 800K characters. Our 3 rules files (47KB) plus a single large command file (44KB) would be ~23K tokens -- about 11% of the window. This leaves substantial room, but conversation history, Cursor's own system prompt, open file contents, and tool definitions also compete for space.
 
@@ -159,7 +161,7 @@ System prompts and user messages serve fundamentally different roles and are tre
 **Performance impact:**
 Anthropic's documentation shows system prompts with role assignments significantly improve task performance. A legal analysis with a "General Counsel" system prompt produces more critical, actionable output than the same prompt in the user message.
 
-**Source:** Anthropic system prompts documentation, prompt engineering documentation
+**Source:** [Anthropic System Prompts](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts), [Anthropic Prompting Best Practices](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices)
 
 **Relevance:** This directly maps to how Cursor separates rules from commands:
 - `.cursor/rules/*.mdc` files → injected into the **system prompt** (persistent, behavioral)
@@ -196,7 +198,7 @@ Anthropic stores KV cache representations (not raw text) of prompt prefixes. Whe
 **Connection to usage CSV data:**
 In our earlier analysis, we observed "Total Tokens" far exceeding the 200K context window. This is because the CSV aggregates billing across multiple API requests in a session. The "Cache Read" tokens in the CSV represent cached content that was referenced but not re-sent or re-processed at full cost. The "Input (w/o Cache Write)" column showed actual new content per turn was typically 6K-16K tokens, while "Input (w/ Cache Write)" showed the full context at ~100-170K tokens.
 
-**Source:** Anthropic prompt caching documentation, pricing documentation
+**Source:** [Anthropic Prompt Caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching), [Anthropic Pricing](https://docs.anthropic.com/en/docs/about-claude/pricing), [Prompt Caching Announcement](https://www.anthropic.com/news/prompt-caching)
 
 **Relevance:** Caching affects cost but not attention. The model still "sees" the full cached content and processes it. A cached system prompt is just as effective as a non-cached one for guiding behavior. This means our rules files' effectiveness doesn't degrade when cached -- only cost decreases.
 
@@ -273,7 +275,7 @@ Automatically summarizes earlier conversation turns to free up context space. Th
 **Validation error behavior (Claude 3.7+):**
 The API returns an error rather than silently truncating. This forces clients like Cursor to actively manage context rather than hoping for the best.
 
-**Source:** Anthropic context windows documentation
+**Source:** [Anthropic Context Windows](https://docs.anthropic.com/en/docs/build-with-claude/context-windows), [Anthropic Compaction](https://docs.anthropic.com/en/docs/build-with-claude/compaction)
 
 **Relevance:** Cursor must implement its own context management strategy since it controls the API calls. Understanding what strategies are available helps us reason about what Cursor might be doing (Topic 2 territory) and why conversations can degrade in quality over long sessions.
 
