@@ -157,11 +157,11 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### FR-12: Tiered Implementation Plan Structure
+### FR-12: Uniform Implementation Plan Structure
 
-**Description:** `/transition-plan` must produce structure based on task count: Simple (1-8 tasks) → single `implementation-plan.md` (2 files total with status); Medium (9-15 tasks) → single file with `###` group headings (2 files); Complex (16+ tasks) → hub `implementation-plan.md` + `tasks/[group].md` files + `status-and-next-steps.md` (3+ files). All tiers use Format B (GFM checkboxes). All tiers reduce from current N+3 file structure.
+**Description:** `/transition-plan` must produce a uniform structure for every feature: `implementation-plan.md` (task index with GFM checkboxes) + `status-and-next-steps.md` + `tasks/` directory (task detail files). The `tasks/` directory scales naturally -- one file for small features, multiple grouped files for large ones. No tier detection or branching logic. Replaces the tiered approach (Simple/Medium/Complex) with a single predictable layout.
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment). Absorbs old FR-19 (file counts per tier).
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment). **Amended 2026-02-19:** Revised from tiered to uniform structure per ADR-001 amendment.
 
 **Priority:** High
 
@@ -195,9 +195,9 @@ This document captures requirements discovered during research on workflow simpl
 
 ### FR-15: `/transition-plan` Produces Feature Blueprint
 
-**Description:** The command reads ADR/requirements, counts tasks and groups, determines the tier (simple/medium/complex), and produces the appropriate file structure. The `implementation-plan.md` includes machine-readable YAML frontmatter declaring: tier (simple/medium/complex), task count, group count, file structure (single-file or hub-and-groups with file list). This metadata is the contract between `/transition-plan` (producer) and `/task` (consumer). Replaces the current setup + expand two-step workflow with a single pass.
+**Description:** The command reads ADR/requirements, counts tasks and groups, and produces the uniform file structure (`implementation-plan.md` + `status-and-next-steps.md` + `tasks/`). The `implementation-plan.md` includes machine-readable YAML frontmatter declaring: task count, group count, and `tasks/` file list. This metadata is the contract between `/transition-plan` (producer) and `/task` (consumer). Replaces the current setup + expand two-step workflow with a single pass.
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment). Absorbs old FR-20 (YAML frontmatter format).
+**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment). **Amended 2026-02-19:** Removed tier field from frontmatter per ADR-001 amendment.
 
 **Priority:** High
 
@@ -205,23 +205,23 @@ This document captures requirements discovered during research on workflow simpl
 
 ---
 
-### FR-16: Codified Tier Thresholds
+### FR-16: ~~Codified Tier Thresholds~~ (Removed)
 
-**Description:** `/transition-plan` must apply documented thresholds (1-8 = simple, 9-15 = medium, 16+ = complex) automatically based on task count from ADR/requirements. User can override with `--tier` flag. Thresholds have sensible defaults but are configurable.
+**Description:** ~~`/transition-plan` must apply documented thresholds (1-8 = simple, 9-15 = medium, 16+ = complex) automatically based on task count from ADR/requirements.~~
 
-**Source:** [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md) (Finding 8 amendment)
+**Removed 2026-02-19:** Tier thresholds no longer needed. ADR-001 amendment adopted a uniform structure for all features regardless of task count.
 
-**Priority:** Medium
+**Priority:** ~~Medium~~ N/A
 
-**Status:** 🔴 Pending
+**Status:** ❌ Removed
 
 ---
 
-### FR-17: Tier Specification as Single Source of Truth
+### FR-17: Planning Specification as Single Source of Truth
 
-**Description:** A machine-readable tier configuration in dev-infra (e.g., `tier-config.yaml` or section in `planning.yaml`) defines thresholds (1-8 = simple, 9-15 = medium, 16+ = complex), corresponding file structures, and template mappings. Both Cursor commands and dev-toolkit CLI read this specification. Dev-infra owns specs; dev-toolkit owns implementation.
+**Description:** A machine-readable planning configuration in dev-infra (e.g., `planning.yaml`) defines the uniform structure (`implementation-plan.md` + `status-and-next-steps.md` + `tasks/`), the `tasks/` directory contract, and template mappings. Both Cursor commands and dev-toolkit CLI read this specification. Dev-infra owns specs; dev-toolkit owns implementation.
 
-**Source:** [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md), [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md). Absorbs old FR-30 (machine-readable tier config).
+**Source:** [topic-6-dev-infra-code-boundary.md](topic-6-dev-infra-code-boundary.md), [topic-3-transition-plan-output-format.md](topic-3-transition-plan-output-format.md). **Amended 2026-02-19:** Revised from tier config to uniform structure specification per ADR-001 amendment.
 
 **Priority:** High
 

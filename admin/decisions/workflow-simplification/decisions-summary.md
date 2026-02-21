@@ -9,7 +9,7 @@
 
 ## 📋 Decisions Overview
 
-We are moving from a rigid, multi-file phase structure (feature-plan + phase-N files) to a flexible, tiered implementation-plan model. This simplifies the workflow for small features (single file) while preserving scalability for large ones (hub + groups). We are also renaming `/task-phase` to `/task` with a hybrid interface and clarifying the dev-infra/dev-toolkit boundary.
+We are moving from a rigid, multi-file phase structure (feature-plan + phase-N files) to a uniform implementation-plan model with a `tasks/` directory. Every feature gets the same structure regardless of size: `implementation-plan.md` (index) + `status-and-next-steps.md` (tracking) + `tasks/` (details). We are also renaming `/task-phase` to `/task` with a hybrid interface and clarifying the dev-infra/dev-toolkit boundary.
 
 **Decision Points:** 4 decisions
 **Status:** 🔴 Pending
@@ -18,14 +18,16 @@ We are moving from a rigid, multi-file phase structure (feature-plan + phase-N f
 
 ## 🎯 Key Decisions
 
-### Decision 1: Tiered Planning Structure
+### Decision 1: Uniform Planning Structure
 
-**Decision:** Adopt a tiered structure based on task count:
-- **Simple (1-8 tasks):** Single `implementation-plan.md` file.
-- **Medium (9-15 tasks):** Single file with `### Group` headings.
-- **Complex (16+ tasks):** Hub `implementation-plan.md` + `tasks/[group].md` files.
+**Decision:** Adopt a uniform structure for every feature:
+- `implementation-plan.md` -- Task index with GFM checkboxes, optional group headings.
+- `status-and-next-steps.md` -- Runtime tracking (proven pattern retained).
+- `tasks/` directory -- Task details. Scales naturally: one file for small features, multiple grouped files for large ones.
 
-**Status:** Proposed
+No tier detection, no branching logic. Predictability over optimization.
+
+**Status:** Proposed (Amended 2026-02-19)
 
 **ADR:** [adr-001-tiered-planning-structure.md](adr-001-tiered-planning-structure.md)
 
@@ -46,7 +48,7 @@ We are moving from a rigid, multi-file phase structure (feature-plan + phase-N f
 
 ### Decision 3: Spec-Only Dev-Infra Boundary
 
-**Decision:** Dev-infra owns specifications (templates, validation rules, tier config) but NOT executable scripts for generated projects. Dev-toolkit implements the CLI that consumes these specs.
+**Decision:** Dev-infra owns specifications (templates, validation rules, planning config) but NOT executable scripts for generated projects. Dev-toolkit implements the CLI that consumes these specs.
 
 **Status:** Proposed
 
@@ -66,11 +68,12 @@ We are moving from a rigid, multi-file phase structure (feature-plan + phase-N f
 
 ## 📋 Requirements Impact
 
-**Functional Requirements (20 of 25 covered; remaining 5 are implementation tasks):**
-- **ADR-001:** FR-1, FR-2, FR-3, FR-12, FR-14, FR-15, FR-16
+**Functional Requirements (19 of 25 covered; FR-16 removed; remaining 5 are implementation tasks):**
+- **ADR-001:** FR-1, FR-2, FR-3, FR-12 (revised), FR-14, FR-15 (simplified)
 - **ADR-002:** FR-5, FR-7, FR-8, FR-9, FR-10, FR-11, FR-13
-- **ADR-003:** FR-17, FR-18
+- **ADR-003:** FR-17 (revised), FR-18
 - **ADR-004:** FR-20, FR-24
+- **Removed:** FR-16 (tier thresholds no longer needed)
 - **Implementation only (no decision needed):** FR-4, FR-19, FR-21, FR-22, FR-23, FR-25
 
 **Non-Functional Requirements (9 of 10 covered):**
