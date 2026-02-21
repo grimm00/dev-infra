@@ -11,6 +11,8 @@
 ### Reflection Documents
 
 - **[Command System Prior Art](reflection-command-system-prior-art-2026-02-20.md)** - Strategic assessment: command system vs AI coding ecosystem, three investigation areas identified (2026-02-20) ⭐ **NEW**
+- **[Workflow Simplification Research Reflection](reflection-workflow-simplification-research-2026-02-14.md)** - Research cycle reflection: 6 topics, 30 FRs, process self-improvement patterns, feedback loop commands (2026-02-14)
+- **[New Commands Workflow Evolution](reflection-new-commands-workflow-evolution-2026-02-13.md)** - New commands integration + workflow simplification exploration insights (2026-02-13)
 - **[Template Sync Drift Fix Reflection](reflection-template-sync-drift-fix-2025-12-30.md)** - CI improvement reflection: transition-plan workflow validation, CI folder organization suggestions (2025-12-30)
 - **[Transition-Plan Two-Mode Reflection](reflection-transition-plan-two-mode-2025-12-29.md)** - Feature reflection with cross-feature learnings: two-mode pattern, batching, pattern replication (2025-12-29)
 - **[Experimental Template Reflection](reflection-experimental-template-2025-12-15.md)** - Complete feature reflection (4 phases) with learnings and fix analysis (2025-12-15)
@@ -48,6 +50,7 @@ This directory contains project-wide reflection documents that analyze project s
 
 **Recent Reflections:**
 - Command System Prior Art (2026-02-20) - Strategic assessment of command system vs AI coding ecosystem
+- Workflow Simplification Research (2026-02-14) - 6-topic research cycle, process self-improvement, feedback loop commands
 - New Commands Workflow Evolution (2026-02-13) - New commands integration + workflow insights
 
 ---

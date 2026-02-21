@@ -182,57 +182,6 @@ This is a lot of output for what is essentially: "here's what to build, in what 
 
 ---
 
-### Theme 5: Dev-Infra Code Boundary (Emerged from Research)
-
-*Added during Topic 3 research iteration. The tiered blueprint design raised a fundamental question: where does the executable logic live?*
-
-During research, we designed a tiered implementation plan structure (simple/medium/complex) with codified thresholds and YAML frontmatter blueprints. The natural next step was "make a `scaffold-feature.sh` script in dev-infra that implements this." But this assumption deserves scrutiny.
-
-**The core tension:**
-
-Dev-infra's identity is **template factory** -- it produces standards, templates, manifests, and validation rules. Dev-toolkit is the **CLI implementation** -- it takes those standards and makes them executable. When we start putting scripts like `scaffold-feature.sh` in dev-infra, we're blurring that boundary.
-
-**What's already in dev-infra's `scripts/`:**
-
-- `new-project.sh` -- template generator (core product, justified)
-- `validate-templates.sh` -- validation (core product, justified)
-- `create-release-branch.sh`, `check-release-readiness.sh`, `analyze-releases.sh` -- internal tooling (dev-infra only, not shipped to projects)
-- `validate-template-sync.sh` -- CI (internal)
-
-**The proposed additions would be different:**
-
-- `scaffold-feature.sh` -- would need to work in generated projects, not just dev-infra
-- Tier determination logic -- would need to be deployed to every project
-- Template rendering logic -- duplicates what `dt-doc-gen` already does
-
-**Concerns:**
-
-- Scripts in dev-infra that are intended for generated projects create a deployment problem: how do projects get them? Copy at generation time? Symlink? Git submodule? All are messy.
-- If dev-toolkit already has `dt-doc-gen` with template rendering, adding parallel rendering logic to dev-infra is duplication.
-- Scripts written as "prototypes for dev-toolkit" tend to accumulate users and become hard to deprecate.
-- Projects that rely on these scripts before dev-toolkit implements them will have a broken upgrade path.
-
-**The alternative view:**
-
-- Dev-infra already maintains `new-project.sh` -- it's precedent for executable code.
-- The doc-gen templates (`scripts/doc-gen/templates/`) are already the shared contract; scripts that consume them are a natural extension.
-- Dev-toolkit is still in development; waiting for it means the tiered structure has no implementation.
-- Scripts can be explicitly marked as "dev-infra internal" (like release scripts) vs "template product."
-
-**Connections:**
-
-- Template Factory identity (ADR-001) says "templates are products, internal tooling stays internal." Scripts for generated projects are products, not internal tooling -- which side of the line are they on?
-- The doc-gen template system already straddles this: templates live in dev-infra, `dt-doc-gen` lives in dev-toolkit, discovery uses `DT_TEMPLATES_PATH`.
-- This question affects whether FR-22 through FR-24 (scaffolding script requirements added during conversation) are valid or premature.
-
-**Implications:**
-
-- If dev-infra stays specs-only: tier logic is a specification in documentation/templates; dev-toolkit implements it. Dev-infra owns the "what," dev-toolkit owns the "how."
-- If dev-infra maintains scripts: tier logic is a script that dev-toolkit wraps. Dev-infra owns both "what" and a reference "how."
-- Hybrid: dev-infra maintains manifests (YAML/template specs) that describe the tier structure; dev-toolkit AND Cursor commands consume those manifests. No executable scripts in dev-infra beyond what exists today.
-
----
-
 ## ❓ Key Questions
 
 ### Question 1: Does the feature plan structure still add value with 1 PR per feature?
@@ -283,21 +232,7 @@ Dev-infra's identity is **template factory** -- it produces standards, templates
 
 **Research Approach:** Map the current template structure against the proposed simplified structure. Identify what changes, what's removed, and what's new.
 
-### Question 5: Should dev-infra maintain executable scaffolding scripts for generated projects?
-
-**Context:** Research produced requirements (FR-22 through FR-24) assuming dev-infra would host a `scaffold-feature.sh` script. But this crosses the template factory boundary -- dev-infra produces specs and templates, dev-toolkit produces CLI tools. Scripts that need to run in generated projects create deployment problems.
-
-**Sub-questions:**
-- Where is the line between "template product" and "internal tooling"?
-- Can the tiered blueprint be a manifest/spec that dev-toolkit consumes, rather than a script dev-infra executes?
-- What happens to projects that adopt the new planning structure before dev-toolkit implements the scaffolding?
-- Is the doc-gen template set sufficient as the "spec" without an accompanying script?
-
-**Research Approach:** Review the existing dev-infra ↔ dev-toolkit boundary (template discovery, validation rules compilation) to determine whether a manifest-only approach works. Assess whether FR-22 through FR-24 should be moved to dev-toolkit scope or revised as manifest specs.
-
----
-
-### Question 6: Can the transition plan produce a flat work breakdown?
+### Question 5: Can the transition plan produce a flat work breakdown?
 
 **Context:** The transition plan currently produces multiple files. A flat work breakdown (ordered task list in a single document) would be simpler and directly consumable by a `/task` command.
 
@@ -343,7 +278,6 @@ The core insight is that the workflow has evolved organically through several re
 | Rename/simplify `/task-phase` | MEDIUM-HIGH | Consider | Interface change affects all templates and workflow rules; prototype the new interface |
 | Transition plan output format | MEDIUM | No | Design question that can be prototyped on paper before implementation |
 | Impact on generated projects | LOW | No | Follows from whatever we decide for the core structure |
-| Dev-infra code boundary | MEDIUM-HIGH | Consider | Wrong answer creates deployment mess or blocks implementation; affects FR-22-24 validity |
 
 **Risk Assessment:**
 
@@ -378,5 +312,4 @@ The core insight is that the workflow has evolved organically through several re
 
 ---
 
-**Last Updated:** 2026-02-13  
-**Amended:** Theme 5 added during research iteration (code boundary question)
+**Last Updated:** 2026-02-13
