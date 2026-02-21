@@ -27,7 +27,7 @@
 Understanding how LLM prompts work -- from the API level through Cursor-specific assembly -- to make informed decisions about how dev-infra's 28 command files should be structured. Includes foundational AI literacy (tokens, context windows) and practical design implications (command length, structure, injection mechanics).
 
 **Research Topics:** 5 topics  
-**Status:** 🔴 Research
+**Status:** 🟠 In Progress (1 of 5 complete)
 
 ---
 
@@ -35,7 +35,7 @@ Understanding how LLM prompts work -- from the API level through Cursor-specific
 
 | # | Research Topic | Priority | Status | Document |
 |---|----------------|----------|--------|----------|
-| 1 | LLM API Anatomy and Context Windows | 🔴 High | 🔴 Not Started | [topic-1-llm-api-anatomy.md](topic-1-llm-api-anatomy.md) |
+| 1 | LLM API Anatomy and Context Windows | 🔴 High | ✅ Complete | [topic-1-llm-api-anatomy.md](topic-1-llm-api-anatomy.md) |
 | 2 | Cursor IDE Prompt Assembly | 🔴 High | 🔴 Not Started | [topic-2-cursor-prompt-assembly.md](topic-2-cursor-prompt-assembly.md) |
 | 3 | Command File Effectiveness at Scale | 🔴 High | 🔴 Not Started | [topic-3-command-effectiveness.md](topic-3-command-effectiveness.md) |
 | 4 | Claude Code Instruction Architecture | 🟡 Medium | 🔴 Not Started | [topic-4-claude-code-architecture.md](topic-4-claude-code-architecture.md) |
@@ -45,7 +45,7 @@ Understanding how LLM prompts work -- from the API level through Cursor-specific
 
 ## 🚀 Next Steps
 
-1. Conduct Topic 1 (foundational, well-documented)
+1. ~~Conduct Topic 1 (foundational, well-documented)~~ ✅
 2. Conduct Topic 2 (builds on Topic 1, may need community sources)
 3. Conduct Topics 3-5 after foundation is solid
 4. Consolidate requirements
