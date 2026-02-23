@@ -5,15 +5,198 @@
 # Reference: VALIDATION.md (Type-Specific Rules section)
 #
 # Document types covered:
+#   NEW (v0.10.0):
+#   - implementation-plan.md (uniform planning entry point)
+#   - tasks/*.md (task group details)
+#
+#   LEGACY (deprecated, kept for transition per NFR-3):
 #   - feature-plan.md (feature plan)
 #   - phase.md (individual phase document)
+#
+#   SHARED:
 #   - status-and-next-steps.md (progress tracking)
 #   - README.md (feature hub)
 
 ---
 
-# Feature Plan Document
+# ============================================================
+# NEW DOCUMENT TYPES (v0.10.0 — Uniform Planning Structure)
+# ============================================================
+
+# Implementation Plan Document
+implementation_plan:
+  description: "Uniform implementation plan — task index with YAML frontmatter (ADR-001)"
+  path_pattern: "admin/planning/features/*/implementation-plan.md"
+  alternate_patterns:
+    - "docs/maintainers/planning/features/*/implementation-plan.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_CREATED_DATE
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 30
+  
+  metadata_rules:
+    - rule_id: IMPL_PLAN_FRONTMATTER
+      severity: ERROR
+      pattern: "^---\\n"
+      error_code: MISSING_FRONTMATTER
+      error_message: "Missing YAML frontmatter block"
+      fix_suggestion: "Add YAML frontmatter with task_count, groups, and tasks_files fields"
+
+    - rule_id: IMPL_PLAN_TASK_COUNT
+      severity: WARNING
+      pattern: "task_count:\\s*\\d+"
+      error_code: MISSING_TASK_COUNT
+      error_message: "Missing 'task_count' in YAML frontmatter"
+      fix_suggestion: "Add 'task_count: N' to frontmatter"
+  
+  required_sections:
+    - section_id: overview
+      pattern: "^## 📋 Overview"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Overview' section"
+      fix_suggestion: "Add '## 📋 Overview' section after metadata block"
+
+    - section_id: implementation_plan
+      pattern: "^## 📝 Implementation Plan"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Implementation Plan' section"
+      fix_suggestion: "Add '## 📝 Implementation Plan' section with GFM checkbox tasks"
+
+    - section_id: definition_of_done
+      pattern: "^## ✅ Definition of Done"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Definition of Done' section"
+      fix_suggestion: "Add '## ✅ Definition of Done' section after Implementation Plan"
+  
+  optional_sections:
+    - pattern: "^## 🎯 Goals"
+      description: "Feature goals"
+    - pattern: "^## 🔗 Dependencies"
+      description: "Feature dependencies"
+
+  content_patterns:
+    - pattern_id: gfm_checkbox
+      pattern: "- \\[([ x])\\] Task \\d+"
+      severity: INFO
+      error_message: "GFM checkbox task items detected"
+      fix_suggestion: "Tasks should use '- [ ] Task N: Description' format"
+
+  examples:
+    valid: |
+      ---
+      task_count: 8
+      groups:
+        - name: "Setup"
+          file: "tasks/setup.md"
+          tasks: [1, 2, 3]
+        - name: "Implementation"
+          file: "tasks/implementation.md"
+          tasks: [4, 5, 6, 7, 8]
+      tasks_files:
+        - "tasks/setup.md"
+        - "tasks/implementation.md"
+      ---
+      # Implementation Plan: My Feature
+      
+      **Status:** 🟠 In Progress
+      **Created:** 2026-01-01
+      **Last Updated:** 2026-01-15
+      
+      ---
+      
+      ## 📋 Overview
+      
+      Brief feature description.
+      
+      ---
+      
+      ## 📝 Implementation Plan
+      
+      ### Setup
+      - [ ] Task 1: Configure environment
+      - [ ] Task 2: Set up database
+      - [x] Task 3: Create project scaffold
+      
+      ### Implementation
+      - [ ] Task 4: Build API endpoints
+      
+      ---
+      
+      ## ✅ Definition of Done
+      
+      - [ ] All tasks complete
+      - [ ] Tests passing
+
+---
+
+# Task Group Document
+task_group:
+  description: "Task group file within tasks/ directory — detailed task descriptions"
+  path_pattern: "admin/planning/features/*/tasks/*.md"
+  alternate_patterns:
+    - "docs/maintainers/planning/features/*/tasks/*.md"
+  
+  common_rules:
+    - rule_id: COMMON_STATUS_HEADER
+      enabled: true
+    - rule_id: COMMON_LAST_UPDATED
+      enabled: true
+    - rule_id: COMMON_STALE_DATE
+      enabled: true
+      threshold_days: 14
+  
+  metadata_rules:
+    - rule_id: TASK_GROUP_FEATURE_REF
+      severity: WARNING
+      pattern: "^\\*\\*Feature:\\*\\* "
+      error_code: MISSING_FEATURE_REF
+      error_message: "Missing 'Feature:' metadata field"
+      fix_suggestion: "Add '**Feature:** [feature-name]' in metadata"
+
+    - rule_id: TASK_GROUP_NAME
+      severity: WARNING
+      pattern: "^\\*\\*Group:\\*\\* "
+      error_code: MISSING_GROUP_NAME
+      error_message: "Missing 'Group:' metadata field"
+      fix_suggestion: "Add '**Group:** [group-name]' in metadata"
+  
+  required_sections:
+    - section_id: tasks
+      pattern: "^## 📝 Tasks"
+      error_code: MISSING_SECTION
+      error_message: "Missing 'Tasks' section"
+      fix_suggestion: "Add '## 📝 Tasks' section with GFM checkbox task items"
+
+  optional_sections:
+    - pattern: "^## 🔗 Dependencies"
+      description: "Group dependencies"
+    - pattern: "^## 📦 Deliverables"
+      description: "Group deliverables"
+
+  content_patterns:
+    - pattern_id: gfm_checkbox
+      pattern: "- \\[([ x])\\] Task \\d+"
+      severity: INFO
+      error_message: "GFM checkbox task items detected"
+      fix_suggestion: "Tasks should use '- [ ] Task N: Description' format"
+
+---
+
+# ============================================================
+# LEGACY DOCUMENT TYPES (deprecated — kept for transition)
+# ============================================================
+
+# Feature Plan Document (DEPRECATED — use implementation_plan)
 feature_plan:
+  deprecated: true
+  deprecation_message: "Use implementation_plan instead. See docs/MIGRATION-v0.10.md"
   description: "Feature plan validation rules"
   path_pattern: "admin/planning/features/*/feature-plan.md"
   
@@ -95,8 +278,10 @@ feature_plan:
 
 ---
 
-# Phase Document
+# Phase Document (DEPRECATED — use task_group)
 phase:
+  deprecated: true
+  deprecation_message: "Use task_group instead. See docs/MIGRATION-v0.10.md"
   description: "Phase document validation rules"
   path_pattern: "admin/planning/features/*/phase-*.md"
   
@@ -162,10 +347,16 @@ phase:
 
 ---
 
+# ============================================================
+# SHARED DOCUMENT TYPES
+# ============================================================
+
 # Status and Next Steps Document
 status_and_next_steps:
   description: "Status and next steps validation rules"
   path_pattern: "admin/planning/features/*/status-and-next-steps.md"
+  alternate_patterns:
+    - "docs/maintainers/planning/features/*/status-and-next-steps.md"
   
   common_rules:
     - rule_id: COMMON_STATUS_HEADER
@@ -174,14 +365,14 @@ status_and_next_steps:
       enabled: true
     - rule_id: COMMON_STALE_DATE
       enabled: true
-      threshold_days: 7  # Status should be updated frequently
+      threshold_days: 7
   
   required_sections:
-    - section_id: progress_overview
-      pattern: "^## 📊 Progress Overview"
+    - section_id: progress_summary
+      pattern: "^## 📊 Progress (Overview|Summary)"
       error_code: MISSING_SECTION
-      error_message: "Missing 'Progress Overview' section"
-      fix_suggestion: "Add '## 📊 Progress Overview' section with phase status table"
+      error_message: "Missing 'Progress' section"
+      fix_suggestion: "Add '## 📊 Progress Summary' section with status table"
       
     - section_id: next_steps
       pattern: "^## 🚀 Next Steps"
@@ -191,15 +382,26 @@ status_and_next_steps:
   
   optional_sections:
     - pattern: "^## 🔄 Phase Progress"
-      description: "Detailed phase progress"
+      description: "Detailed phase progress (legacy)"
+    - pattern: "^## 📝 Notes"
+      description: "Additional notes"
   
-  # Progress table validation
   content_patterns:
-    - pattern_id: progress_table
+    - pattern_id: progress_table_legacy
       pattern: "\\| Phase \\| Name \\| Status \\|"
-      severity: WARNING
-      error_message: "Missing progress tracking table"
-      fix_suggestion: "Add progress table with columns: Phase, Name, Status, Progress, Notes"
+      severity: INFO
+      error_message: "Legacy phase-based progress table detected"
+      fix_suggestion: "Consider updating to group-based table: | Group | Status | Progress | Notes |"
+
+    - pattern_id: progress_table_new
+      pattern: "\\| Group \\| Status \\| Progress \\|"
+      severity: INFO
+      error_message: "Group-based progress table detected"
+
+    - pattern_id: task_count_progress
+      pattern: "\\d+/\\d+ tasks"
+      severity: INFO
+      error_message: "Task count progress indicator detected"
 
 ---
 
