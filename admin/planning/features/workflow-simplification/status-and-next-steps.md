@@ -1,33 +1,39 @@
 # Status & Next Steps - Workflow Simplification
 
 **Status:** 🟠 In Progress
-**Current Phase:** Implementation
 **Last Updated:** 2026-02-19
 
 ---
 
 ## 📊 Progress Summary
 
-| Phase | Status | Progress | Notes |
+**Overall:** 3/18 tasks complete
+
+| Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Group 1: Foundation & Specs | 🟠 In Progress | 0% | Started Task 1 |
-| Group 2: Command Infrastructure | 🔴 Not Started | 0% | |
-| Group 3: Command Logic Updates | 🔴 Not Started | 0% | |
-| Group 4: Template Assets | 🔴 Not Started | 0% | |
-| Group 5: Documentation & Rules | 🔴 Not Started | 0% | |
-| Group 6: Verification | 🔴 Not Started | 0% | |
+| Foundation & Specs | ✅ Complete | 3/3 tasks | Migration guide, validation rules, structure spec |
+| Command Infrastructure | 🔴 Not Started | 0/4 tasks | |
+| Command Logic Updates | 🔴 Not Started | 0/2 tasks | |
+| Template Assets | 🔴 Not Started | 0/4 tasks | |
+| Documentation & Rules | 🔴 Not Started | 0/3 tasks | |
+| Verification | 🔴 Not Started | 0/2 tasks | |
 
 ---
 
 ## 🚀 Next Steps
 
-1.  Start Group 1 (Foundation & Specs).
-2.  Create `docs/MIGRATION-v0.10.md` (Task 1).
-3.  Update `scripts/doc-gen/validation/planning.yaml` (Task 2).
+1. Open draft PR for implementation work.
+2. Start Group 2 (Command Infrastructure) -- Task 4: Create `/task` command.
+3. Task 5: Create `/plan-review` command.
 
 ---
 
 ## 📝 Notes
 
--   Using the new tiered structure (Medium) for this feature plan ("dogfooding").
--   Manually tracking progress until `/task` is updated.
+- Restructured from `feature-plan.md` to `implementation-plan.md` + `tasks/` (dogfooding the uniform structure).
+- Tasks 1-3 completed: migration guide, validation rules, structure specification.
+- Manually tracking progress until `/task` command is implemented (Task 4).
+
+---
+
+**Last Updated:** 2026-02-19
