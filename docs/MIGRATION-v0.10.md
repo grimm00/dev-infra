@@ -43,10 +43,12 @@ features/my-feature/
 ├── implementation-plan.md       # Task index + YAML frontmatter
 ├── status-and-next-steps.md     # Group-based progress table
 └── tasks/                       # Task details (always present)
-    ├── authentication.md        # Tasks for authentication group
-    ├── api-endpoints.md         # Tasks for API group
-    └── testing.md               # Tasks for testing group
+    ├── 01-authentication.md     # Tasks for authentication group
+    ├── 02-api-endpoints.md      # Tasks for API group
+    └── 03-testing.md            # Tasks for testing group
 ```
+
+Numeric prefixes ensure filesystem sort matches execution order.
 
 ---
 
@@ -120,14 +122,14 @@ The new `implementation-plan.md` includes machine-readable frontmatter:
 task_count: 18
 groups:
   - name: "Foundation & Specs"
-    file: "tasks/foundation-and-specs.md"
+    file: "tasks/01-foundation-and-specs.md"
     tasks: [1, 2, 3]
   - name: "Command Infrastructure"
-    file: "tasks/command-infrastructure.md"
+    file: "tasks/02-command-infrastructure.md"
     tasks: [4, 5, 6, 7]
 tasks_files:
-  - "tasks/foundation-and-specs.md"
-  - "tasks/command-infrastructure.md"
+  - "tasks/01-foundation-and-specs.md"
+  - "tasks/02-command-infrastructure.md"
 ---
 ```
 

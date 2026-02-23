@@ -2,30 +2,30 @@
 task_count: 18
 groups:
   - name: "Foundation & Specs"
-    file: "tasks/foundation-and-specs.md"
+    file: "tasks/01-foundation-and-specs.md"
     tasks: [1, 2, 3]
   - name: "Command Infrastructure"
-    file: "tasks/command-infrastructure.md"
+    file: "tasks/02-command-infrastructure.md"
     tasks: [4, 5, 6, 7]
   - name: "Command Logic Updates"
-    file: "tasks/command-logic-updates.md"
+    file: "tasks/03-command-logic-updates.md"
     tasks: [8, 9]
   - name: "Template Assets"
-    file: "tasks/template-assets.md"
+    file: "tasks/04-template-assets.md"
     tasks: [10, 11, 12, 13]
   - name: "Documentation & Rules"
-    file: "tasks/documentation-and-rules.md"
+    file: "tasks/05-documentation-and-rules.md"
     tasks: [14, 15, 16]
   - name: "Verification"
-    file: "tasks/verification.md"
+    file: "tasks/06-verification.md"
     tasks: [17, 18]
 tasks_files:
-  - "tasks/foundation-and-specs.md"
-  - "tasks/command-infrastructure.md"
-  - "tasks/command-logic-updates.md"
-  - "tasks/template-assets.md"
-  - "tasks/documentation-and-rules.md"
-  - "tasks/verification.md"
+  - "tasks/01-foundation-and-specs.md"
+  - "tasks/02-command-infrastructure.md"
+  - "tasks/03-command-logic-updates.md"
+  - "tasks/04-template-assets.md"
+  - "tasks/05-documentation-and-rules.md"
+  - "tasks/06-verification.md"
 ---
 # Implementation Plan - Workflow Simplification
 

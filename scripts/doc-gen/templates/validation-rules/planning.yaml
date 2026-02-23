@@ -94,14 +94,14 @@ implementation_plan:
       task_count: 8
       groups:
         - name: "Setup"
-          file: "tasks/setup.md"
+          file: "tasks/01-setup.md"
           tasks: [1, 2, 3]
         - name: "Implementation"
-          file: "tasks/implementation.md"
+          file: "tasks/02-implementation.md"
           tasks: [4, 5, 6, 7, 8]
       tasks_files:
-        - "tasks/setup.md"
-        - "tasks/implementation.md"
+        - "tasks/01-setup.md"
+        - "tasks/02-implementation.md"
       ---
       # Implementation Plan: My Feature
       
@@ -519,9 +519,13 @@ structure_specification:
   # File naming and structure within tasks/
   task_file_conventions:
     directory: "tasks/"
-    naming_pattern: "{group-name}.md"
-    naming_style: "kebab-case"
-    description: "One file per group. File name derived from group name."
+    naming_pattern: "{NN}-{group-name}.md"
+    naming_style: "kebab-case with zero-padded numeric prefix"
+    description: "One file per group. Numeric prefix ensures filesystem sort matches execution order."
+    examples:
+      - "01-foundation-and-specs.md"
+      - "02-command-infrastructure.md"
+      - "06-verification.md"
 
   # Parsing contract — how commands find and interpret tasks
   parsing_contract:
