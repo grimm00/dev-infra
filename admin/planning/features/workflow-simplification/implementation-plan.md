@@ -65,10 +65,10 @@ Simplify the feature/phase/task hierarchy in dev-infra templates by moving from 
 - [x] Task 3: Add planning structure specification to `planning.yaml`
 
 ### Command Infrastructure
-- [ ] Task 4: Create `/task` command (hybrid interface: `next`/`N`/bare)
-- [ ] Task 5: Create `/plan-review` command (rename of `/pre-phase-review`)
-- [ ] Task 6: Create deprecation stubs for `task-phase.md` and `pre-phase-review.md`
-- [ ] Task 7: Update `template-sync-manifest.txt` to include new commands and stubs
+- [x] Task 4: Create `/task` command (hybrid interface: `next`/`N`/bare)
+- [x] Task 5: Create `/plan-review` command (rename of `/pre-phase-review`)
+- [x] Task 6: Create deprecation stubs for `task-phase.md` and `pre-phase-review.md`
+- [x] Task 7: Update `template-sync-manifest.txt` to include new commands and stubs
 
 ### Command Logic Updates
 - [ ] Task 8: Update `/transition-plan` to produce uniform structure (preserve two-mode: setup scaffolding + expand per-group)
