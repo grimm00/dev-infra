@@ -460,3 +460,84 @@ status_values:
       description: "Work temporarily paused"
     - value: "❌ Cancelled"
       description: "Work cancelled"
+
+---
+
+# ============================================================
+# STRUCTURE SPECIFICATION (ADR-001 — Uniform Planning)
+# ============================================================
+#
+# Single source of truth for the planning directory layout.
+# Both Cursor commands and dev-toolkit CLI read this specification.
+# Dev-infra owns specs; dev-toolkit owns implementation.
+
+structure_specification:
+  description: "Uniform planning structure contract (ADR-001 amended)"
+  version: "0.10.0"
+
+  # Every feature directory follows this layout, regardless of size.
+  layout:
+    required_files:
+      - name: "implementation-plan.md"
+        description: "Task index with YAML frontmatter and GFM checkboxes"
+        document_type: "implementation_plan"
+      - name: "status-and-next-steps.md"
+        description: "Runtime progress tracking"
+        document_type: "status_and_next_steps"
+    required_directories:
+      - name: "tasks/"
+        description: "Task group detail files — scales naturally with feature size"
+    optional_files:
+      - name: "README.md"
+        description: "Feature hub with quick links"
+        document_type: "planning_hub"
+
+  # YAML frontmatter in implementation-plan.md — contract between
+  # /transition-plan (producer) and /task (consumer).
+  frontmatter_contract:
+    required_fields:
+      - field: "task_count"
+        type: "integer"
+        description: "Total number of tasks across all groups"
+      - field: "groups"
+        type: "array"
+        description: "Ordered list of task groups"
+        item_fields:
+          - field: "name"
+            type: "string"
+            description: "Human-readable group name"
+          - field: "file"
+            type: "string"
+            description: "Relative path to task group file in tasks/"
+          - field: "tasks"
+            type: "array"
+            description: "Task numbers belonging to this group"
+      - field: "tasks_files"
+        type: "array"
+        description: "Ordered list of file paths in tasks/ directory"
+
+  # File naming and structure within tasks/
+  task_file_conventions:
+    directory: "tasks/"
+    naming_pattern: "{group-name}.md"
+    naming_style: "kebab-case"
+    description: "One file per group. File name derived from group name."
+
+  # Parsing contract — how commands find and interpret tasks
+  parsing_contract:
+    task_format: "- [ ] Task N: Description"
+    checkbox_states:
+      unchecked: "[ ]"
+      checked: "[x]"
+    group_heading_format: "### Group Name"
+    global_numbering: true
+    numbering_description: "Tasks numbered 1 to N across all groups. No restart per group."
+
+  # Legacy structure detection (for dual-path commands)
+  legacy_detection:
+    indicators:
+      - file: "feature-plan.md"
+        description: "Legacy feature plan present"
+      - file_pattern: "phase-*.md"
+        description: "Legacy phase files present"
+    behavior: "Commands check for implementation-plan.md first. If absent, fall back to feature-plan.md + phase-*.md."
