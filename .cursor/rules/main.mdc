@@ -92,7 +92,7 @@ All templates receive all 23 workflow commands. Only dev-infra internal commands
 
    - Focus on single topics or phases
    - Link back to hub files
-   - Use descriptive filenames (e.g., `feature-plan.md`, `phase-1.md`)
+   - Use descriptive filenames (e.g., `implementation-plan.md`, `01-foundation.md`)
    - Include status and date metadata
 
 3. **Progressive Disclosure**
@@ -116,8 +116,8 @@ Always use: `YYYY-MM-DD` format (e.g., 2025-12-07)
 
 ### File Naming Conventions
 
-- Use **kebab-case** for file names: `feature-plan.md`, `status-and-next-steps.md`
-- Use **descriptive names**: `phase-1-foundation.md` not `p1.md`
+- Use **kebab-case** for file names: `implementation-plan.md`, `status-and-next-steps.md`
+- Use **descriptive names**: `01-foundation-and-specs.md` not `01.md`
 - README.md files are always **UPPERCASE**
 
 ---
@@ -229,7 +229,7 @@ dev-infra/
 
 - `/fix-plan` - Create fix batches from Sourcery reviews
 - `/fix-implement` - Implement fix batches (planned)
-- `/task-phase` - Phase implementation with TDD (planned)
+- `/task` - Task implementation with TDD
 - `/pr` - Centralized PR creation (planned)
 
 **See:** `admin/planning/commands/` for command planning and integration status
@@ -456,11 +456,11 @@ When modifying templates:
 - ✅ `/handoff` - Session continuity and work handoff
 - ✅ `/fix-plan` - Create fix batches from reviews
 - ✅ `/fix-implement` - Implement fix batches
-- ✅ `/task-phase` - Phase implementation with TDD
+- ✅ `/task` - Task implementation with TDD (replaces `/task-phase`)
 - ✅ `/pr` - Centralized PR creation
 - ✅ `/pr-validation` - PR validation workflow
 - ✅ `/post-pr` - Post-merge documentation
-- ✅ `/pre-phase-review` - Review phase plans before implementation
+- ✅ `/plan-review` - Review implementation plans before work (replaces `/pre-phase-review`)
 - ✅ `/address-review` - Address gaps from pre-phase review
 - ✅ `/reflect` - Project reflection and suggestions
 - ✅ `/int-opp` - Internal opportunity capture

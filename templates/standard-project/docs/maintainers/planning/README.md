@@ -29,7 +29,7 @@ The planning directory organizes all project planning activities using a hub-and
 
 1. **Feature-Based Planning** - Organize work around user-facing features
 2. **Hub-and-Spoke Documentation** - Clear entry points with detailed spoke documents
-3. **Progressive Disclosure** - Overview → Plan → Phases → Analysis
+3. **Progressive Disclosure** - Overview → Plan → Task Groups → Analysis
 4. **Status Tracking** - Consistent indicators and progress monitoring
 5. **Decision Documentation** - Rationale and context preservation
 
@@ -42,10 +42,11 @@ planning/
 ├── features/                   # 📡 SPOKE - Feature planning
 │   └── [feature-name]/        # Individual feature directories
 │       ├── README.md          # Feature hub
-│       ├── feature-plan.md    # High-level plan
+│       ├── implementation-plan.md  # Task index with groups
 │       ├── status-and-next-steps.md # Current status
-│       ├── quick-start.md     # Implementation guide
-│       ├── phase-*.md         # Phase details
+│       ├── tasks/             # Task group details
+│       │   ├── 01-group-name.md
+│       │   └── 02-group-name.md
 │       └── fix/               # Troubleshooting docs
 ├── releases/                  # 📡 SPOKE - Release management
 │   ├── README.md              # Release hub
@@ -69,8 +70,8 @@ planning/
 ### Feature Development Lifecycle
 
 1. **Discovery** - Identify feature opportunity
-2. **Planning** - Create feature-plan.md with phases
-3. **Implementation** - Execute phases with status tracking
+2. **Planning** - Create `implementation-plan.md` with task groups
+3. **Implementation** - Execute tasks with status tracking (`/task`)
 4. **Completion** - Document results and lessons learned
 
 ### Release Management
@@ -80,9 +81,9 @@ planning/
 3. **Release** - Deploy and document
 4. **Post-Release** - Update history and roadmap
 
-### Phase Tracking
+### Task Group Tracking
 
-1. **Definition** - Clear phase boundaries and deliverables
+1. **Definition** - Clear task boundaries and deliverables
 2. **Execution** - Status tracking and progress updates
 3. **Completion** - Results documentation and handoff
 4. **Review** - Lessons learned and process improvement
@@ -113,10 +114,13 @@ planning/
 ### Starting a New Feature
 
 1. Create feature directory: `features/[feature-name]/`
-2. Copy templates from this guide
-3. Create README.md with quick links
-4. Write feature-plan.md with overview
-5. Create phase-1.md with first phase details
+2. Run `/transition-plan` to generate scaffolding, or create manually:
+   - `implementation-plan.md` — Task index with YAML frontmatter
+   - `status-and-next-steps.md` — Progress tracking
+   - `tasks/` directory with group files (e.g., `01-foundation.md`)
+3. Create README.md hub with quick links
+4. Expand task groups: `/transition-plan [feature] --expand --group N`
+5. Implement tasks: `/task next`
 
 ### Planning a Release
 

@@ -13,11 +13,6 @@
 - **[Feature Name 1](feature-name-1/README.md)** - [Brief description] (🟠 In Progress)
 - **[Feature Name 2](feature-name-2/README.md)** - [Brief description] (🟡 Planned)
 
-### Feature Templates
-
-- **[Feature Plan Template](feature-plan-template.md)** - Template for new features
-- **[Phase Template](phase-template.md)** - Template for feature phases
-
 ---
 
 ## 🎯 Overview
@@ -28,7 +23,7 @@ Feature planning organizes development work around user-facing functionality. Ea
 
 1. **User-Centric** - Features solve real user problems
 2. **Hub-and-Spoke** - Clear entry points with detailed documentation
-3. **Phase-Based** - Break features into manageable phases
+3. **Task-Group Based** - Break features into manageable task groups
 4. **Status Tracking** - Consistent progress monitoring
 5. **Fix Integration** - Troubleshooting documentation included
 
@@ -40,13 +35,12 @@ Feature planning organizes development work around user-facing functionality. Ea
 features/
 ├── [feature-name]/
 │   ├── README.md                    # 📍 HUB - Feature overview
-│   ├── feature-plan.md              # High-level plan
-│   ├── status-and-next-steps.md     # Current status
-│   ├── quick-start.md               # Implementation guide
-│   ├── phase-1.md                   # Phase 1 details
-│   ├── phase-2.md                   # Phase 2 details
-│   ├── phase-N.md                   # Additional phases
-│   ├── [topic]-analysis.md          # Analysis documents
+│   ├── implementation-plan.md       # Task index (YAML frontmatter + GFM checkboxes)
+│   ├── status-and-next-steps.md     # Current status and progress
+│   ├── tasks/                       # 📁 Task group details
+│   │   ├── 01-foundation.md         # Group 1 tasks
+│   │   ├── 02-implementation.md     # Group 2 tasks
+│   │   └── 03-polish.md             # Group 3 tasks
 │   ├── fix/                         # 📁 Troubleshooting
 │   │   ├── README.md                # Fix hub
 │   │   └── *.md                     # Fix documentation
@@ -62,23 +56,23 @@ features/
 
 - Identify user problem or opportunity
 - Create feature directory
-- Write initial feature-plan.md
+- Run `/explore` and `/research` for investigation
 
-### 2. Planning Phase
+### 2. Planning
 
-- Define success criteria
-- Break into phases
-- Create phase documents
+- Create ADRs with `/decision` for key decisions
+- Generate plan with `/transition-plan` (creates `implementation-plan.md` + `tasks/`)
+- Review plan with `/plan-review`
 - Set up status tracking
 
-### 3. Implementation Phase
+### 3. Implementation
 
-- Execute phases sequentially
-- Update status documents
+- Execute tasks sequentially with `/task next`
+- Update status documents as groups complete
 - Document decisions and learnings
 - Create fix documentation as needed
 
-### 4. Completion Phase
+### 4. Completion
 
 - Document results and metrics
 - Archive superseded documents
@@ -97,9 +91,9 @@ features/
 
 ### 🟠 In Progress Features
 
-| Feature     | Current Phase | Progress | Next        |
+| Feature     | Current Group | Progress | Next        |
 | ----------- | ------------- | -------- | ----------- |
-| [Feature 1] | Phase 2       | 60%      | [Next step] |
+| [Feature 1] | Group 2       | 5/12     | [Next step] |
 
 ### 🟡 Planned Features
 
@@ -116,95 +110,97 @@ features/
 1. **Create Directory**
 
    ```bash
-   mkdir -p features/[feature-name]
+   mkdir -p features/[feature-name]/tasks
    cd features/[feature-name]
    ```
 
-2. **Copy Templates**
+2. **Generate Plan**
 
-   - Copy `feature-plan-template.md` → `feature-plan.md`
-   - Copy `phase-template.md` → `phase-1.md`
-   - Create `README.md` hub
+   Use `/transition-plan` to scaffold the plan automatically, or create manually:
+   - `implementation-plan.md` — Task index with YAML frontmatter
+   - `status-and-next-steps.md` — Progress tracking
+   - `tasks/01-group-name.md` — Task group files
 
 3. **Customize Content**
 
    - Update feature description and goals
    - Define success criteria
-   - Break into phases
+   - Break into task groups
    - Set up status tracking
 
 4. **Link to Hub**
-   - Add feature to features/README.md
+   - Add feature to `features/README.md`
    - Update project roadmap
    - Create initial status document
 
 ### Feature Planning Checklist
 
-- [ ] Feature directory created
+- [ ] Feature directory created with `tasks/` subdirectory
 - [ ] README.md hub with quick links
-- [ ] feature-plan.md with overview
-- [ ] phase-1.md with first phase details
-- [ ] status-and-next-steps.md created
-- [ ] Feature added to features/README.md
+- [ ] `implementation-plan.md` with overview and task checkboxes
+- [ ] Task group files in `tasks/` (e.g., `01-foundation.md`)
+- [ ] `status-and-next-steps.md` created
+- [ ] Feature added to `features/README.md`
 - [ ] Project roadmap updated
 
 ---
 
 ## 📝 Templates
 
-### Feature Plan Template
+### Implementation Plan Template
 
 ```markdown
-# [Feature Name] - Feature Plan
+---
+task_count: 8
+groups:
+  - name: "Foundation"
+    file: "tasks/01-foundation.md"
+    tasks: [1, 2, 3]
+  - name: "Implementation"
+    file: "tasks/02-implementation.md"
+    tasks: [4, 5, 6, 7, 8]
+tasks_files:
+  - "tasks/01-foundation.md"
+  - "tasks/02-implementation.md"
+---
+# Implementation Plan - [Feature Name]
 
 **Status:** [Status]
 **Created:** [Date]
-**Priority:** [Priority]
 
 ## 📋 Overview
 
 [Feature description and context]
 
-## 🎯 Success Criteria
+## 📝 Implementation Plan
 
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
+### Foundation
+- [ ] Task 1: [Task description]
+- [ ] Task 2: [Task description]
 
-## 📅 Implementation Phases
+### Implementation
+- [ ] Task 3: [Task description]
 
-### Phase 1: [Name]
+## ✅ Definition of Done
 
-**Tasks:**
-
-- [ ] [Task 1]
-- [ ] [Task 2]
-
-## 🚀 Next Steps
-
-[What's next]
+- [ ] All tasks complete
+- [ ] Tests passing
 ```
 
-### Phase Template
+### Task Group Template
 
 ```markdown
-# [Feature Name] - Phase [N]: [Name]
+# [Group Name]
 
+**Feature:** [Feature Name]
+**Group:** [Group Name]
 **Status:** [Status]
-**Duration:** [Duration]
-
-## 📋 Overview
-
-[Phase description]
-
-## 🎯 Goals
-
-- [Goal 1]
-- [Goal 2]
 
 ## 📝 Tasks
 
-- [ ] [Task 1]
-- [ ] [Task 2]
+- [ ] Task N: [Title]
+  - [Description]
+  - [Acceptance criterion]
 
 ## ✅ Completion Criteria
 
@@ -220,7 +216,6 @@ features/
 
 - [Planning Hub](../README.md) - Overall planning overview
 - [Release Process](../releases/README.md) - Release management
-- [Phase Management](../phases/README.md) - Development phases
 
 ### External References
 

@@ -81,9 +81,9 @@ Simplify the feature/phase/task hierarchy in dev-infra templates by moving from 
 - [x] Task 13: Replace `examples/example-feature-plan.md` with `examples/example-implementation-plan.md`
 
 ### Documentation & Rules
-- [ ] Task 14: Update template workflow documentation (`WORKFLOW-*.md`)
-- [ ] Task 15: Update planning hub documentation in templates
-- [ ] Task 16: Update `.cursor/rules/*.mdc` to reflect new structure
+- [x] Task 14: Update template workflow documentation (`WORKFLOW-*.md`)
+- [x] Task 15: Update planning hub documentation in templates
+- [x] Task 16: Update `.cursor/rules/*.mdc` to reflect new structure
 
 ### Verification
 - [ ] Task 17: Verify standard-project generation and new feature workflow
