@@ -15,7 +15,7 @@
 | Command Infrastructure | ✅ Complete | 4/4 tasks | `/task`, `/plan-review`, deprecation stubs, manifest sync |
 | Command Logic Updates | ✅ Complete | 2/2 tasks | `/transition-plan` rewritten, dual-path added to `/pr`, `/post-pr`, `/status` |
 | Template Assets | ✅ Complete | 4/4 tasks | New templates, updated templates, example, deprecation markers |
-| Documentation & Rules | 🔴 Not Started | 0/3 tasks | |
+| Documentation & Rules | 🟠 In Progress | 0/3 tasks | Starting Task 14 |
 | Verification | 🔴 Not Started | 0/2 tasks | |
 
 ---
