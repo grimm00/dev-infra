@@ -71,8 +71,8 @@ Simplify the feature/phase/task hierarchy in dev-infra templates by moving from 
 - [x] Task 7: Update `template-sync-manifest.txt` to include new commands and stubs
 
 ### Command Logic Updates
-- [ ] Task 8: Update `/transition-plan` to produce uniform structure (preserve two-mode: setup scaffolding + expand per-group)
-- [ ] Task 9: Update dependent commands (`/pr`, `/post-pr`, `/status`) to read `implementation-plan.md`
+- [x] Task 8: Update `/transition-plan` to produce uniform structure (preserve two-mode: setup scaffolding + expand per-group)
+- [x] Task 9: Update dependent commands (`/pr`, `/post-pr`, `/status`) to read `implementation-plan.md`
 
 ### Template Assets
 - [ ] Task 10: Create `implementation-plan.md.tmpl` template
