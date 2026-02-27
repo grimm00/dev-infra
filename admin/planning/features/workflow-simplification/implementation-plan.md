@@ -29,7 +29,7 @@ tasks_files:
 ---
 # Implementation Plan - Workflow Simplification
 
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Created:** 2026-02-19
 **Last Updated:** 2026-02-19
 **Source:** [Research Summary](../../../research/workflow-simplification/research-summary.md)
@@ -86,8 +86,8 @@ Simplify the feature/phase/task hierarchy in dev-infra templates by moving from 
 - [x] Task 16: Update `.cursor/rules/*.mdc` to reflect new structure
 
 ### Verification
-- [ ] Task 17: Verify standard-project generation and new feature workflow
-- [ ] Task 18: Verify learning-project generation (regression test)
+- [x] Task 17: Verify standard-project generation and new feature workflow
+- [x] Task 18: Verify learning-project generation (regression test)
 
 ---
 
