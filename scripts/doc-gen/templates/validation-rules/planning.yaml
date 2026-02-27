@@ -435,8 +435,8 @@ planning_hub:
       fix_suggestion: "Add '## 🎯 Overview' section after Quick Links"
   
   optional_sections:
-    - pattern: "^## 📊 Phase Status"
-      description: "Status table of phases"
+    - pattern: "^## 📊 (Phase|Group) Status"
+      description: "Status table of phases or groups"
     - pattern: "^## ✅ Success Criteria"
       description: "Feature success criteria"
     - pattern: "^## 🚀 Next Steps"

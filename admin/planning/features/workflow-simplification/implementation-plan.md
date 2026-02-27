@@ -75,10 +75,10 @@ Simplify the feature/phase/task hierarchy in dev-infra templates by moving from 
 - [x] Task 9: Update dependent commands (`/pr`, `/post-pr`, `/status`) to read `implementation-plan.md`
 
 ### Template Assets
-- [ ] Task 10: Create `implementation-plan.md.tmpl` template
-- [ ] Task 11: Create `task-group.md.tmpl` template for `tasks/` files
-- [ ] Task 12: Update `status-and-next-steps.md.tmpl` to remove phase-centric progress table
-- [ ] Task 13: Replace `examples/example-feature-plan.md` with `examples/example-implementation-plan.md`
+- [x] Task 10: Create `implementation-plan.md.tmpl` template
+- [x] Task 11: Create `task-group.md.tmpl` template for `tasks/` files
+- [x] Task 12: Update `status-and-next-steps.md.tmpl` to remove phase-centric progress table
+- [x] Task 13: Replace `examples/example-feature-plan.md` with `examples/example-implementation-plan.md`
 
 ### Documentation & Rules
 - [ ] Task 14: Update template workflow documentation (`WORKFLOW-*.md`)

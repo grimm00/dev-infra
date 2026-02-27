@@ -1,0 +1,58 @@
+---
+task_count: ${TASK_COUNT}
+groups:
+<!-- AI: Generate YAML group entries, one per group:
+  - name: "Group Name"
+    file: "tasks/NN-group-name.md"
+    tasks: [1, 2, 3]
+-->
+tasks_files:
+<!-- AI: Generate ordered list of task file paths:
+  - "tasks/01-group-name.md"
+  - "tasks/02-group-name.md"
+-->
+---
+# Implementation Plan - ${FEATURE_NAME}
+
+**Status:** ${STATUS}
+**Created:** ${DATE}
+**Last Updated:** ${DATE}
+**Source:** <!-- AI: Path to source document (ADR, reflection, artifact) -->
+
+---
+
+## 📋 Overview
+
+<!-- AI: 2-4 sentence description of the feature and what it achieves -->
+
+**Key Changes:**
+<!-- AI: Bullet list of key changes -->
+
+---
+
+## 🎯 Goals
+
+<!-- AI: Numbered list of goals -->
+
+---
+
+## 📝 Implementation Plan
+
+<!-- AI: For each group, generate a heading and GFM checkbox list:
+
+### Group Name
+- [ ] Task 1: Description
+- [ ] Task 2: Description
+
+Tasks use global numbering (1 to N across all groups).
+-->
+
+---
+
+## ✅ Definition of Done
+
+- [ ] All tasks complete
+- [ ] CI/CD passing
+- [ ] Documentation updated
+- [ ] Templates synced
+<!-- AI: Add feature-specific criteria -->

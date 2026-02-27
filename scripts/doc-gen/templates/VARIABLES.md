@@ -19,7 +19,7 @@
 
 This document lists all variables used in template files. Variables follow the `${VAR_NAME}` syntax and are expanded by `envsubst` at generation time.
 
-**Total Variables:** 29  
+**Total Variables:** 33  
 **Categories:** 7 (Universal, Exploration, Research, Decision, Planning, Fix/Handoff, Metrics)
 
 ---
@@ -149,8 +149,12 @@ Variables for planning and feature workflow templates.
 | `${FEATURE_NAME}` | Feature identifier (kebab-case) | `template-doc-infrastructure` |
 | `${FEATURE_PATH}` | Path to feature directory | `admin/planning/features/template-doc-infrastructure` |
 | `${FEATURE_STATUS}` | Current feature status | `🟠 In Progress` |
-| `${PHASE_NUMBER}` | Current phase number | `2` |
-| `${PHASE_NAME}` | Phase name/description | `Format Specification` |
+| `${TASK_COUNT}` | Total number of tasks in implementation plan | `18` |
+| `${GROUP_NAME}` | Task group display name | `Foundation & Specs` |
+| `${GROUP_INDEX}` | Task group numeric index | `1` |
+| `${SOURCE}` | Path to source artifact (ADR, reflection) | `admin/decisions/workflow-simplification/adr-001.md` |
+| `${PHASE_NUMBER}` | Current phase number (legacy) | `2` |
+| `${PHASE_NAME}` | Phase name/description (legacy) | `Format Specification` |
 | `${ESTIMATED_TIME}` | Estimated duration | `3-4 hours` |
 | `${EFFORT}` | Effort level | `Medium` |
 | `${PRIORITY}` | Priority level | `High` |
@@ -158,18 +162,19 @@ Variables for planning and feature workflow templates.
 ### Templates Using These Variables
 
 - `planning/README.md.tmpl` - Feature hub
-- `planning/feature-plan.md.tmpl` - Feature planning document
-- `planning/phase.md.tmpl` - Phase document
+- `planning/implementation-plan.md.tmpl` - Implementation plan (v0.10.0+)
+- `planning/task-group.md.tmpl` - Task group file (v0.10.0+)
 - `planning/status-and-next-steps.md.tmpl` - Status tracking
+- `planning/feature-plan.md.tmpl` - Feature planning document (legacy)
+- `planning/phase.md.tmpl` - Phase document (legacy)
 
 ### Usage Example
 
 ```markdown
-# ${FEATURE_NAME} - Phase ${PHASE_NUMBER}: ${PHASE_NAME}
+# Implementation Plan - ${FEATURE_NAME}
 
-**Phase:** ${PHASE_NUMBER} - ${PHASE_NAME}  
-**Duration:** ${ESTIMATED_TIME}  
 **Status:** ${STATUS}
+**Source:** ${SOURCE}
 ```
 
 ---
