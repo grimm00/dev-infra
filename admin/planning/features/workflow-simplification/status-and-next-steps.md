@@ -16,7 +16,7 @@
 | Command Logic Updates | ✅ Complete | 2/2 tasks | `/transition-plan` rewritten, dual-path added to `/pr`, `/post-pr`, `/status` |
 | Template Assets | ✅ Complete | 4/4 tasks | New templates, updated templates, example, deprecation markers |
 | Documentation & Rules | ✅ Complete | 3/3 tasks | Planning hubs, phase template deprecated, rules updated |
-| Verification | 🔴 Not Started | 0/2 tasks | |
+| Verification | 🟠 In Progress | 0/2 tasks | Starting Task 17 |
 
 ---
 
