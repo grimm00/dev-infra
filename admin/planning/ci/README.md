@@ -60,12 +60,14 @@ This directory contains planning documentation for CI/CD improvements, workflows
   - Consider bundling with major release
   - Input for broader project restructure
 
-- **[GitHub Release Automation](github-release-automation/README.md)** - Auto-create GitHub Releases from tags (🔴 Not Started, 🔴 High Priority)
-  - Discovered in v0.5.0 release
-  - Eliminates manual `gh release create` step
-  - Effort: LOW (30 minutes)
+- ~~GitHub Release Automation~~ → Moved to Completed (2026-02-28)
 
 ### Completed
+
+- **[GitHub Release Automation](github-release-automation/README.md)** - Auto-create GitHub Releases from tags (✅ Complete - 2026-02-28)
+  - Added `gh release create` step to `create-release-tag.yml`
+  - Uses curated release notes when available, falls back to auto-generated
+  - Closes the tag → release → distribution automation chain
 
 - **[Template Sync Drift Fix](template-sync-drift-fix/README.md)** - Fix template sync drift causing CI failures (✅ Complete - 2025-12-30, PR #57)
   - Synced `status.md` between templates (learning-project → standard-project)

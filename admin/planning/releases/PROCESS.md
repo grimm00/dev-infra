@@ -125,7 +125,11 @@ gh pr create --base main --head release/v0.1.1 --title "Release v0.1.1: New temp
 4. Merge release branch back to `develop`
 5. Delete release branch
 
-**Note:** As of v0.5.0, tag creation is automated via `.github/workflows/create-release-tag.yml`. When a release PR is merged to `main`, the workflow automatically extracts the version from the branch name (`release/vX.Y.Z`) and creates/pushes an annotated tag. This triggers the release distribution workflow.
+**Note:** As of v0.5.0, tag creation is automated via `.github/workflows/create-release-tag.yml`. When a release PR is merged to `main`, the workflow automatically:
+1. Extracts the version from the branch name (`release/vX.Y.Z`)
+2. Creates and pushes an annotated tag
+3. Creates a GitHub Release (uses curated `RELEASE-NOTES.md` when available, falls back to auto-generated notes)
+4. Triggers the release distribution workflow (builds packages, uploads assets)
 
 **Example:**
 ```bash
@@ -136,15 +140,13 @@ gh pr create --base main --head release/v0.1.1 --title "Release v0.1.1: New temp
 # 3. Pushes tag: git push origin v0.1.1
 # 4. Triggers release-distribution workflow
 
-# If manual tag creation needed (fallback):
+# If manual tag/release creation needed (fallback):
 git checkout main
 git pull origin main
 git tag -a v0.1.1 -m "Release v0.1.1: New template types and improvements"
 git push origin v0.1.1
-
-# Create GitHub release (if not auto-created)
 gh release create v0.1.1 \
-  --title "v0.1.1 - New Template Types and Improvements" \
+  --title "Release v0.1.1" \
   --notes-file admin/planning/releases/v0.1.1/RELEASE-NOTES.md
 
 # Merge back to develop

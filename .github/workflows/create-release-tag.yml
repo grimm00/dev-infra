@@ -1,4 +1,4 @@
-name: Create Release Tag
+name: Create Release Tag and GitHub Release
 
 on:
   pull_request:
@@ -70,15 +70,21 @@ jobs:
           
           echo "✅ Created annotated tag: $VERSION"
 
-      - name: Dry-run mode (no tag creation)
+      - name: Dry-run mode (no tag or release creation)
         if: ${{ github.event.inputs.dry_run == 'true' }}
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          echo "::notice::DRY RUN MODE - Tag would be created:"
+          NOTES_FILE="admin/planning/releases/${VERSION}/RELEASE-NOTES.md"
+
+          echo "::notice::DRY RUN MODE - Tag and Release would be created:"
           echo "Tag: $VERSION"
-          echo "Message: Release $VERSION"
-          echo ""
-          echo "See CHANGELOG.md for full release details."
+          echo "Release Title: Release $VERSION"
+
+          if [ -f "$NOTES_FILE" ]; then
+            echo "Release Notes: From $NOTES_FILE (curated)"
+          else
+            echo "Release Notes: Auto-generated from commit history"
+          fi
 
       - name: Push tag
         if: ${{ github.event.inputs.dry_run != 'true' }}
@@ -86,5 +92,27 @@ jobs:
           VERSION="${{ steps.version.outputs.version }}"
           git push origin "$VERSION"
           echo "✅ Pushed tag $VERSION to origin"
+
+      - name: Create GitHub Release
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          NOTES_FILE="admin/planning/releases/${VERSION}/RELEASE-NOTES.md"
+
+          if [ -f "$NOTES_FILE" ]; then
+            echo "Found curated release notes at $NOTES_FILE"
+            gh release create "$VERSION" \
+              --title "Release $VERSION" \
+              --notes-file "$NOTES_FILE"
+          else
+            echo "No curated release notes found, using auto-generated notes"
+            gh release create "$VERSION" \
+              --title "Release $VERSION" \
+              --generate-notes
+          fi
+
+          echo "✅ Created GitHub Release for $VERSION"
           echo "::notice::This will trigger the release-distribution workflow"
 
