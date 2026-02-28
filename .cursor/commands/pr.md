@@ -8,26 +8,93 @@ Centralized command for creating pull requests for phases, fix batches, and draf
 
 **Path Detection:**
 
-This command supports multiple project organization patterns, matching `/task-phase` and `/fix-implement`:
+This command supports multiple project organization patterns, matching `/task` and `/fix-implement`:
 
-1. **Feature-Specific Structure (default):**
+### Dual-Path Detection (v0.10.0+)
+
+**Always check for the uniform structure first, then fall back to legacy phases.**
+
+1. **Uniform Structure (preferred — v0.10.0+):**
+   - Plan: `docs/maintainers/planning/features/[feature-name]/implementation-plan.md`
+   - Tasks: `docs/maintainers/planning/features/[feature-name]/tasks/`
+   - Status: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Dev-infra: Same paths under `admin/planning/features/`
+
+2. **Legacy Phase Structure (fallback):**
    - Phase paths: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
-   - Fix paths: `docs/maintainers/planning/features/[feature-name]/fix/pr##/`
-   - Manual testing: `docs/maintainers/planning/features/[feature-name]/manual-testing.md`
+   - Feature plan: `docs/maintainers/planning/features/[feature-name]/feature-plan.md`
 
-2. **Project-Wide Structure:**
+3. **Fix Structure (unchanged):**
+   - Fix paths: `docs/maintainers/planning/features/[feature-name]/fix/pr##/`
+
+4. **Project-Wide Structure (legacy):**
    - Phase paths: `docs/maintainers/planning/phases/phase-N.md`
    - Fix paths: `docs/maintainers/planning/fix/pr##/`
-   - Manual testing: `docs/maintainers/planning/manual-testing.md`
+
+**Detection logic:**
+
+```
+IF implementation-plan.md exists → Use uniform structure
+  - Read YAML frontmatter for task groups
+  - PR description uses task/group language
+  - Status references implementation-plan.md
+ELSE IF feature-plan.md or phase-*.md exists → Use legacy phase structure
+  - Existing phase PR workflow applies unchanged
+ELSE → Error: no planning structure found
+```
 
 **Feature Detection:**
 
 - Use `--feature` option if provided
 - Otherwise, auto-detect using same logic as other commands:
-  - Check if `docs/maintainers/planning/features/` exists
+  - Check if planning features directory exists
   - If single feature exists, use that feature name
-  - If multiple features exist, search for phase/fix structure in each
+  - If multiple features exist, search for planning structure in each
   - If no features exist, use project-wide structure
+
+### Uniform Structure PR Behavior
+
+When `implementation-plan.md` is detected, `/pr --phase N` is **not applicable**. Instead:
+
+- **`/pr`** (bare) — Create PR for all committed work on the feature branch. PR description includes task progress from `implementation-plan.md` checkboxes.
+- **`/pr --draft`** — Create draft PR (unchanged behavior).
+- **`/pr --ready`** — Mark draft ready for review (unchanged behavior).
+- **`/pr --review`** — Request Sourcery review (unchanged behavior).
+- **`/pr --fix`** — Fix batch PRs (unchanged behavior).
+- **`/pr --release`** — Release PRs (unchanged behavior).
+
+**PR Description for Uniform Structure:**
+
+```markdown
+## [Feature Name]
+
+[Summary from implementation-plan.md overview]
+
+---
+
+## What's Included
+
+### [Group 1 Name]
+- [x] Task 1: [description]
+- [x] Task 2: [description]
+
+### [Group 2 Name]
+- [x] Task 3: [description]
+- [ ] Task 4: [description] (not in this PR)
+
+---
+
+## Progress
+
+[X/N] tasks complete
+
+---
+
+## Related
+
+- **Implementation Plan:** `[path]/implementation-plan.md`
+- **Status:** `[path]/status-and-next-steps.md`
+```
 
 **Release Paths:**
 

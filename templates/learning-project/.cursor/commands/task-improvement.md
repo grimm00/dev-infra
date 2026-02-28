@@ -16,6 +16,8 @@ This command supports CI/CD improvement phase organization:
   - Example: `docs/maintainers/planning/ci/status-tracking-automation/phase-1.md`
   - Use `--improvement [name]` option to specify improvement name
 
+**Note:** This command is for CI/CD improvements only (under `planning/ci/`). For feature implementation, use `/task` which reads the uniform planning structure (`implementation-plan.md` + `tasks/`). See [Migration Guide](../../docs/MIGRATION-v0.10.md).
+
 **Improvement Detection:**
 
 - Use `--improvement` option if provided

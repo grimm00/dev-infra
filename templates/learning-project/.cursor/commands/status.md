@@ -20,20 +20,55 @@ Centralized status management that:
 
 **Status Document Locations:**
 
-1. **Feature-Specific (default):**
+### Dual-Path Detection (v0.10.0+)
+
+**Always check for the uniform structure first, then fall back to legacy phases.**
+
+1. **Uniform Structure (preferred — v0.10.0+):**
+   - Plan: `docs/maintainers/planning/features/[feature-name]/implementation-plan.md`
+   - Tasks: `docs/maintainers/planning/features/[feature-name]/tasks/`
+   - Status: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Dev-infra: Same paths under `admin/planning/features/`
+
+2. **Legacy Feature-Specific (fallback):**
    - Phase docs: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
    - Status doc: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
 
-2. **Project-Wide:**
+3. **Project-Wide (legacy):**
    - Phase docs: `docs/maintainers/planning/phases/phase-N.md`
    - Status doc: `docs/maintainers/planning/status-and-next-steps.md`
 
-3. **CI/CD Improvements:**
+4. **CI/CD Improvements:**
    - Phase docs: `docs/maintainers/planning/ci/[improvement-name]/phase-N.md`
    - No status-and-next-steps.md (CI improvements use different tracking)
 
+5. **Dev-infra Legacy:**
+   - Phase docs: `admin/planning/features/[feature-name]/phase-N.md`
+   - Status doc: `admin/planning/features/[feature-name]/status-and-next-steps.md`
+
+**Detection logic:**
+
+```
+IF implementation-plan.md exists → Use uniform structure
+  - Parse YAML frontmatter for task_count, groups, tasks_files
+  - Progress = checked checkboxes / task_count
+  - Group-based dashboard (not phase-based)
+ELSE IF phase-*.md exists → Use legacy phase structure
+  - Existing phase status workflow applies unchanged
+```
+
+### Uniform Structure Status Behavior
+
+When `implementation-plan.md` is detected:
+
+- **Dashboard:** Shows task/group progress instead of phase progress
+- **`/status`:** Display group-based progress table from `status-and-next-steps.md`
+- **`/status --verbose`:** Show each group with individual task checkboxes
+- **Progress formula:** `completed_tasks / task_count * 100`
+- **Update commands:** Use `/task` for task-level updates (replaces `--task-complete [phase] [task]`)
+
 **Feature Detection:**
-- Auto-detect from current branch name (e.g., `feat/release-readiness-phase-3`)
+- Auto-detect from current branch name (e.g., `feat/workflow-simplification`)
 - Or specify with `--feature [name]`
 
 ---
@@ -490,5 +525,7 @@ Changes:
 
 ---
 
-**Last Updated:** 2025-12-17
+**Last Updated:** 2025-12-09  
+**Status:** ✅ Active  
+**Next:** Integrate with other commands for decoupled status tracking
 

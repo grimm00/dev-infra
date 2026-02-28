@@ -1,6 +1,6 @@
 # PR Command
 
-Centralized command for creating pull requests for phases and fix batches. Provides consistent PR creation workflow with appropriate templates and validation.
+Centralized command for creating pull requests for phases, fix batches, and draft PRs. Provides consistent PR creation workflow with appropriate templates and validation. Also supports draft PR workflow for continuous feedback during feature development.
 
 ---
 
@@ -8,26 +8,93 @@ Centralized command for creating pull requests for phases and fix batches. Provi
 
 **Path Detection:**
 
-This command supports multiple project organization patterns, matching `/task-phase` and `/fix-implement`:
+This command supports multiple project organization patterns, matching `/task` and `/fix-implement`:
 
-1. **Feature-Specific Structure (default):**
+### Dual-Path Detection (v0.10.0+)
+
+**Always check for the uniform structure first, then fall back to legacy phases.**
+
+1. **Uniform Structure (preferred — v0.10.0+):**
+   - Plan: `docs/maintainers/planning/features/[feature-name]/implementation-plan.md`
+   - Tasks: `docs/maintainers/planning/features/[feature-name]/tasks/`
+   - Status: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Dev-infra: Same paths under `admin/planning/features/`
+
+2. **Legacy Phase Structure (fallback):**
    - Phase paths: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
-   - Fix paths: `docs/maintainers/planning/features/[feature-name]/fix/pr##/`
-   - Manual testing: `docs/maintainers/planning/features/[feature-name]/manual-testing.md`
+   - Feature plan: `docs/maintainers/planning/features/[feature-name]/feature-plan.md`
 
-2. **Project-Wide Structure:**
+3. **Fix Structure (unchanged):**
+   - Fix paths: `docs/maintainers/planning/features/[feature-name]/fix/pr##/`
+
+4. **Project-Wide Structure (legacy):**
    - Phase paths: `docs/maintainers/planning/phases/phase-N.md`
    - Fix paths: `docs/maintainers/planning/fix/pr##/`
-   - Manual testing: `docs/maintainers/planning/manual-testing.md`
+
+**Detection logic:**
+
+```
+IF implementation-plan.md exists → Use uniform structure
+  - Read YAML frontmatter for task groups
+  - PR description uses task/group language
+  - Status references implementation-plan.md
+ELSE IF feature-plan.md or phase-*.md exists → Use legacy phase structure
+  - Existing phase PR workflow applies unchanged
+ELSE → Error: no planning structure found
+```
 
 **Feature Detection:**
 
 - Use `--feature` option if provided
 - Otherwise, auto-detect using same logic as other commands:
-  - Check if `docs/maintainers/planning/features/` exists
+  - Check if planning features directory exists
   - If single feature exists, use that feature name
-  - If multiple features exist, search for phase/fix structure in each
+  - If multiple features exist, search for planning structure in each
   - If no features exist, use project-wide structure
+
+### Uniform Structure PR Behavior
+
+When `implementation-plan.md` is detected, `/pr --phase N` is **not applicable**. Instead:
+
+- **`/pr`** (bare) — Create PR for all committed work on the feature branch. PR description includes task progress from `implementation-plan.md` checkboxes.
+- **`/pr --draft`** — Create draft PR (unchanged behavior).
+- **`/pr --ready`** — Mark draft ready for review (unchanged behavior).
+- **`/pr --review`** — Request Sourcery review (unchanged behavior).
+- **`/pr --fix`** — Fix batch PRs (unchanged behavior).
+- **`/pr --release`** — Release PRs (unchanged behavior).
+
+**PR Description for Uniform Structure:**
+
+```markdown
+## [Feature Name]
+
+[Summary from implementation-plan.md overview]
+
+---
+
+## What's Included
+
+### [Group 1 Name]
+- [x] Task 1: [description]
+- [x] Task 2: [description]
+
+### [Group 2 Name]
+- [x] Task 3: [description]
+- [ ] Task 4: [description] (not in this PR)
+
+---
+
+## Progress
+
+[X/N] tasks complete
+
+---
+
+## Related
+
+- **Implementation Plan:** `[path]/implementation-plan.md`
+- **Status:** `[path]/status-and-next-steps.md`
+```
 
 **Release Paths:**
 
@@ -44,6 +111,9 @@ This command supports multiple project organization patterns, matching `/task-ph
 - After completing a phase (use `--phase`)
 - After implementing a fix batch (use `--fix`)
 - After completing release transition steps (use `--release`)
+- To start a feature with early feedback (use `--draft`)
+- To mark a draft PR ready for review (use `--ready`)
+- To request Sourcery review on a draft PR (use `--review`)
 - To create PRs with consistent formatting and validation
 
 **Key principle:** Single command for all PR creation, with context-specific templates and workflows.
@@ -74,6 +144,12 @@ This command supports multiple project organization patterns, matching `/task-ph
    - Creates PR for release transition
    - Uses release-specific template
 
+4. **Draft PR:** `/pr --draft [--feature feature-name]`
+   - Example: `/pr --draft`
+   - Example: `/pr --draft --feature my-feature`
+   - Creates draft PR for early feedback
+   - Use at start of feature for continuous Sourcery review
+
 **Options:**
 
 - `--feature [name]` - Specify feature name (overrides auto-detection)
@@ -81,10 +157,91 @@ This command supports multiple project organization patterns, matching `/task-ph
 - `--no-push` - Create PR description but don't push branch or create PR
 - `--body-file [path]` - Use custom body file instead of generating
 - `--title [title]` - Override default PR title
+- `--force` - (Release mode only) Override blocking readiness checks with justification
+
+**Draft PR Options:**
+
+- `--draft` - Create draft PR for early feedback (use at start of feature)
+- `--ready` - Mark draft PR as ready for review (convert from draft to ready)
+- `--review` - Request Sourcery review on draft PR (triggers `@sourcery-ai review`)
 
 ---
 
 ## Step-by-Step Process
+
+### Pre-Command Branch Validation (BLOCKING)
+
+**CRITICAL:** This validation MUST pass before any PR work begins.
+
+#### 1. Detect Expected Branch
+
+**For Phase PRs (`--phase N`):**
+- Expected pattern: `feat/[feature-name]-phase-N-*` or `feat/phase-N-*`
+- Example: `feat/release-readiness-phase-3-assessment-structure`
+
+**For Fix PRs (`--fix [batch-name]`):**
+- Expected pattern: `fix/[batch-name]`
+- Example: `fix/pr32-batch-high-low-01`
+
+**For Release PRs (`--release [version]`):**
+- Expected pattern: `release/[version]`
+- Example: `release/v0.4.0`
+
+#### 2. Check Current Branch
+
+```bash
+git branch --show-current
+```
+
+#### 3. Branch Mismatch Handling
+
+**If on wrong branch (e.g., `develop`, `main`, or different feature):**
+
+1. **Check for worktree with correct branch:**
+   ```bash
+   git worktree list | grep [expected-branch-pattern]
+   ```
+
+2. **If worktree exists:**
+   ```
+   ⚠️ BRANCH MISMATCH: Currently on 'develop', expected 'feat/[feature]-phase-N-*'
+   
+   Found worktree with expected branch:
+   → /path/to/worktree [feat/feature-phase-3-name]
+   
+   Resolution:
+   1. Switch to worktree: cd /path/to/worktree
+   2. Then re-run: /pr --phase N --feature [feature]
+   ```
+
+3. **If no worktree but branch exists:**
+   ```bash
+   git checkout [expected-branch]
+   ```
+
+4. **If branch doesn't exist:**
+   ```
+   ❌ BLOCKING: Expected branch not found
+   
+   Resolution:
+   1. Create branch from develop: git checkout -b feat/[feature]-phase-N-[desc]
+   2. Ensure phase work is committed to this branch
+   3. Then re-run: /pr --phase N
+   ```
+
+#### 4. Auto-Detection Logic
+
+**Branch pattern matching:**
+- Phase PRs: Search for `feat/*phase-N*` or `feat/*[feature]*phase-N*`
+- Fix PRs: Search for `fix/[batch-name]`
+- Release PRs: Search for `release/[version]`
+
+**Worktree awareness:**
+- Check `git worktree list` for active worktrees
+- If correct branch is in a worktree, direct user to that worktree
+- Do NOT checkout branch that's in use by another worktree
+
+---
 
 ### Mode Selection
 
@@ -152,6 +309,8 @@ This command supports multiple project organization patterns, matching `/task-ph
 - [ ] Code comments added where needed
 
 #### Status Validation
+
+**Note:** For authoritative status update requirements, see [PR Status Update Requirements](../../docs/PR-STATUS-UPDATE-REQUIREMENTS.md). Examples below use placeholder dates (e.g., `2025-12-07`) and phase numbers (e.g., `Phase 3`) for illustration.
 
 **Before PR creation, verify status documents are current:**
 
@@ -829,6 +988,181 @@ gh pr create --title "fix: [Batch Description] ([batch-name])" \
 
 ---
 
+## Draft PR Mode (`--draft`)
+
+### When to Use
+
+Use draft PRs when:
+- Starting a new feature branch
+- Want early Sourcery feedback during development
+- Following self-contained feature branch workflow
+- Not ready for merge but want continuous review
+
+### Workflow
+
+1. Create feature branch from develop
+2. Make first meaningful commit
+3. Run `/pr --draft` to open draft PR
+4. Continue development with regular pushes
+5. Request Sourcery reviews at milestones with `/pr --review`
+6. When complete, run `/pr --ready` to mark ready for merge
+
+### Create Draft PR
+
+**Command:**
+
+```bash
+/pr --draft --feature [feature-name]
+```
+
+**Steps:**
+
+1. **Verify branch:**
+   ```bash
+   git branch --show-current
+   # Expected: feat/[feature-name] or similar
+   ```
+
+2. **Push branch:**
+   ```bash
+   git push -u origin [branch-name]
+   ```
+
+3. **Create draft PR:**
+   ```bash
+   gh pr create --draft \
+     --title "feat: [Feature Name] (WIP)" \
+     --body "[Description - work in progress]" \
+     --base develop
+   ```
+
+4. **Note PR number** for future reference
+
+### Draft PR Template
+
+```markdown
+## [Feature Name] - Work in Progress
+
+**Status:** 🟠 In Progress  
+**Branch:** feat/[feature-name]
+
+---
+
+## Overview
+
+[Brief description of the feature being developed]
+
+---
+
+## Current Progress
+
+- [ ] Phase 1: [Description]
+- [ ] Phase 2: [Description]
+- [ ] Phase N: [Description]
+
+---
+
+## Notes
+
+- This is a draft PR for early feedback
+- Sourcery reviews requested at milestones
+- Will mark ready when feature complete
+```
+
+---
+
+## Mark PR Ready (`--ready`)
+
+### When to Use
+
+Use `--ready` when:
+- Feature development is complete
+- All phases implemented
+- Ready for final review and merge
+- Draft PR exists and needs to be converted
+
+### Command
+
+```bash
+/pr --ready --feature [feature-name]
+```
+
+### Steps
+
+1. **Find PR number:**
+   ```bash
+   gh pr list --state open --head [branch-name]
+   ```
+
+2. **Mark ready:**
+   ```bash
+   gh pr ready [PR-number]
+   ```
+
+3. **Optionally update title (remove WIP):**
+   ```bash
+   gh pr edit [PR-number] --title "feat: [Feature Name]"
+   ```
+
+### Checklist Before Marking Ready
+
+- [ ] All phases complete
+- [ ] All tests passing
+- [ ] Documentation updated
+- [ ] Sourcery issues addressed
+- [ ] Ready for final review
+
+---
+
+## Request Sourcery Review (`--review`)
+
+### Important: Sourcery Does NOT Auto-Review Draft PRs
+
+Draft PRs do not trigger automatic Sourcery reviews. You must manually request a review:
+
+```bash
+/pr --review --feature [feature-name]
+```
+
+### When to Request Review
+
+Request Sourcery review at:
+- After completing a phase
+- After significant changes
+- Before marking PR ready
+- At development milestones
+
+### Command
+
+```bash
+/pr --review --feature [feature-name]
+```
+
+### Steps
+
+1. **Find PR number:**
+   ```bash
+   gh pr list --state open --head [branch-name]
+   ```
+
+2. **Request review:**
+   ```bash
+   gh pr comment [PR-number] --body "@sourcery-ai review"
+   ```
+
+3. **Wait for review** (usually 1-2 minutes)
+
+4. **Save review feedback** (optional):
+   - Copy Sourcery comments to `admin/feedback/sourcery/pr[number].md`
+
+### Note on Review Frequency
+
+- Request review at meaningful milestones, not every commit
+- Each review provides feedback on current state vs. base branch
+- Too frequent reviews may generate noise for incremental changes
+
+---
+
 ## Release PR Mode (`--release`)
 
 ### 1. Load Release Information
@@ -865,6 +1199,86 @@ gh pr create --title "fix: [Batch Description] ([batch-name])" \
 - [ ] Transition plan found
 - [ ] All steps complete
 - [ ] Current branch is release branch
+
+---
+
+### 1a. Validate Release Readiness (NEW)
+
+**Purpose:** Ensure release is ready before creating PR. Critical checks must pass or be explicitly overridden.
+
+**Run readiness check:**
+
+```bash
+# Run the readiness check script
+./scripts/check-release-readiness.sh [version]
+
+# Example:
+./scripts/check-release-readiness.sh v0.4.0
+```
+
+**Evaluate results:**
+
+The script reports:
+- ✅ Passed checks (release branch exists, version format, etc.)
+- ❌ Failed checks (blocking criteria)
+- ⚠️ Warnings (non-blocking issues)
+
+**Blocking Criteria:**
+
+If any of these fail, **do NOT create PR** (unless overridden):
+- Release branch exists
+- CHANGELOG has version entry
+- Release notes file exists
+- No critical open issues blocking release (if configured)
+
+**Non-Blocking Criteria:**
+
+These generate warnings but don't block PR creation:
+- CI status (if temporarily failing)
+- Documentation gaps (if minor)
+
+**If blocking criteria fail:**
+
+```
+⚠️ RELEASE NOT READY - PR creation blocked
+
+Blocking failures:
+- ❌ [Failure 1]
+- ❌ [Failure 2]
+
+To proceed anyway, use: /pr --release [version] --force
+```
+
+**If all checks pass:**
+
+```
+✅ RELEASE READY - Proceeding with PR creation
+
+All blocking criteria passed:
+- ✅ Release branch exists
+- ✅ CHANGELOG has version entry
+- ✅ Release notes file exists
+```
+
+**Override option:**
+
+- `--force` flag allows PR creation despite blocking failures
+- Use with caution - document why override is acceptable
+- Add override justification to PR description
+
+**Generate assessment for PR:**
+
+```bash
+# Generate assessment to include in PR
+./scripts/check-release-readiness.sh [version] --generate > /tmp/readiness-assessment.md
+```
+
+**Checklist:**
+
+- [ ] Readiness check executed
+- [ ] Results evaluated
+- [ ] Blocking criteria passed (or override justified)
+- [ ] Ready to create PR
 
 ---
 
@@ -1190,6 +1604,19 @@ git branch --show-current
 3. `/pr --release [version]` - Create release PR
 4. `/post-pr --release [version]` - Update documentation after merge (if available)
 
+### Draft PR Workflow (Worktree Feature)
+
+1. Start feature: `git checkout -b feat/[feature-name]`
+2. First commit: Make meaningful change, commit
+3. Draft PR: `/pr --draft --feature [feature-name]`
+4. Develop: Multiple commits, regular pushes
+5. Review: `/pr --review` at milestones
+6. Complete: `/pr --ready` when done
+7. Final review: Address any remaining issues
+8. Merge: PR merged to develop
+
+**See:** [ADR-003: Draft PR Review Workflow](../decisions/worktree-feature-workflow/adr-003-draft-pr-review-workflow.md)
+
 ---
 
 ## Common Issues
@@ -1285,7 +1712,7 @@ git branch --show-current
 
 ---
 
-**Last Updated:** 2025-12-07  
+**Last Updated:** 2025-12-10  
 **Status:** ✅ Active  
-**Next:** Use to create PRs for phases, fixes, and releases (supports feature-specific and project-wide structures)
+**Next:** Use to create PRs for phases, fixes, and releases (includes readiness validation for release PRs)
 

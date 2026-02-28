@@ -94,7 +94,7 @@ The `/commit` command reads the draft message from the review session and finali
 
 ### When to Use
 
-- After any AI implementation (`/task-phase`, `/spike`, etc.)
+- After any AI implementation (`/task`, `/spike`, etc.)
 - When AI modifies multiple files and you want to verify scope
 - Any time you want a deliberate review pause before committing
 
@@ -144,7 +144,7 @@ The `/commit` command reads the draft message from the review session and finali
 
 - **Mandatory:** Status updates are required for PR approval
 - **Lenient Approach:** Validation uses warnings, not blockers (to start)
-- **During Work:** Status should be updated during work (per `/task-phase` workflow)
+- **During Work:** Status should be updated during work (per `/task` workflow)
 - **Before PR:** Status must be current before PR creation (per `/pr` command validation)
 - **After Merge:** Status automatically updated by `/post-pr` command
 
@@ -187,45 +187,47 @@ For each Sourcery comment, assess:
 2. **Required Files**
 
    - `README.md` - Feature hub with quick links
-   - `feature-plan.md` - High-level overview and phases
+   - `implementation-plan.md` - Task index with YAML frontmatter and GFM checkboxes
    - `status-and-next-steps.md` - Current progress tracking
-   - `phase-1.md` - First phase details (additional phases as needed)
+   - `tasks/` directory with group files (e.g., `01-foundation.md`)
 
-3. **Feature Plan Structure**
+3. **Implementation Plan Structure**
 
    ```markdown
-   # [Feature Name] - Feature Plan
+   ---
+   task_count: 8
+   groups:
+     - name: "Foundation"
+       file: "tasks/01-foundation.md"
+       tasks: [1, 2, 3]
+   tasks_files:
+     - "tasks/01-foundation.md"
+   ---
+   # Implementation Plan - [Feature Name]
 
    **Status:** [Status Indicator]
    **Created:** [YYYY-MM-DD]
-   **Priority:** [High/Medium/Low]
 
    ## 📋 Overview
 
    [Template feature description]
 
-   ## 🎯 Success Criteria
+   ## 📝 Implementation Plan
 
-   - [ ] Measurable criterion 1
-   - [ ] Measurable criterion 2
+   ### Foundation
+   - [ ] Task 1: [Description]
+   - [ ] Task 2: [Description]
 
-   ## 📅 Implementation Phases
+   ## ✅ Definition of Done
 
-   ### Phase 1: [Name]
-
-   - [ ] Task 1
-   - [ ] Task 2
-
-   ## 🚀 Next Steps
-
-   [Immediate next actions]
+   - [ ] All tasks complete
    ```
 
 ### Template Development Lifecycle
 
 1. **Discovery** - Identify opportunity from real projects
-2. **Planning** - Write feature-plan.md, break into phases
-3. **Implementation** - Execute phases, update templates
+2. **Planning** - Write `implementation-plan.md`, break into task groups
+3. **Implementation** - Execute tasks with `/task`, update templates
 4. **Testing** - Test template generation
 5. **Documentation** - Update user docs and examples
 6. **Release** - Include in next release
@@ -271,33 +273,33 @@ For each Sourcery comment, assess:
 
 - `/fix-plan` - ✅ Create fix batches from reviews
 - `/fix-implement` - ✅ Implement fix batches
-- `/task-phase` - ✅ Phase implementation with TDD
+- `/task` - ✅ Task implementation with TDD (replaces `/task-phase`)
 - `/pr` - ✅ Centralized PR creation
 - `/pr-validation` - ✅ PR validation workflow
 - `/post-pr` - ✅ Post-merge documentation
-- `/pre-phase-review` - ✅ Review phase plans before implementation
-- `/address-review` - ✅ Address gaps from pre-phase review
+- `/plan-review` - ✅ Review implementation plans before work (replaces `/pre-phase-review`)
+- `/address-review` - ✅ Address gaps from plan review
 
 **See:** `.cursor/commands/` for all command documentation
 
 ---
 
-## 🔄 Pre-Phase Review Workflow
+## 🔄 Plan Review Workflow
 
-**Best Practice:** Review phase plans before implementation to catch issues early.
+**Best Practice:** Review implementation plans before starting work to catch issues early.
 
 **Workflow:**
 
 ```
-/pre-phase-review [phase-N]
+/plan-review [feature]
     → Identifies gaps, clarifications needed
     → Creates review document
 
 /address-review [review-path]
-    → Updates phase plan with recommendations
+    → Updates plan with recommendations
     → Commits documentation changes only
 
-/task-phase [phase-N] [task-N]
+/task next
     → Implements tasks with TDD
     → Clean commits, separate from planning
 ```
