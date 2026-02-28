@@ -68,7 +68,7 @@ When planning work, classify it:
 
 ### Command Distribution
 
-All templates receive all 23 workflow commands. Only dev-infra internal commands (release automation) stay internal.
+All templates receive all 26 workflow commands (including 2 deprecation stubs). Only dev-infra internal commands (release automation) stay internal.
 
 **See:** [ADR-001: Commands as Guides](../../../admin/decisions/command-simplification/adr-001-commands-as-guides.md)
 
@@ -406,8 +406,8 @@ When modifying templates:
 
 **Template System:**
 
-- ✅ Standard project template (all 23 commands)
-- ✅ Learning project template (all 23 commands)
+- ✅ Standard project template (all 26 commands)
+- ✅ Learning project template (all 26 commands)
 - ✅ Template generator script (2 template types)
 - ✅ Template validation script
 - ✅ Hub-and-spoke documentation pattern
@@ -475,7 +475,7 @@ When modifying templates:
 
 **Command Simplification (v0.8.0):**
 
-- ✅ All templates now have all 23 commands
+- ✅ All templates now have all 26 commands
 - ✅ Removed experimental-project template (merged into standard)
 - ✅ Removed graduation process (ADR-004 superseded)
 - ✅ ADR-001: Commands as Guides created
