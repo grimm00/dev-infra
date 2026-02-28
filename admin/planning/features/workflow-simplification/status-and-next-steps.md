@@ -1,7 +1,8 @@
 # Status & Next Steps - Workflow Simplification
 
 **Status:** ✅ Complete
-**Last Updated:** 2026-02-19
+**Merged:** PR #68 (2026-02-28)
+**Last Updated:** 2026-02-28
 
 ---
 
@@ -22,8 +23,9 @@
 
 ## 🚀 Next Steps
 
-1. Push feature branch and create PR for merge to develop.
-2. Run `/pr` to create pull request.
+Feature complete and merged. No remaining tasks.
+
+- v0.10.0 release prep: sweep stale command references (see self-review findings in PR #68 discussion)
 
 ---
 
@@ -36,8 +38,8 @@
 - Tasks 10-13 completed: New `implementation-plan.md.tmpl` and `task-group.md.tmpl`, updated `status-and-next-steps.md.tmpl` and `README.md.tmpl`, example plan, deprecation headers on legacy templates.
 - Tasks 14-16 completed: Template planning hubs updated, `PHASE-DOCUMENT-TEMPLATE.md` deprecated, `.cursor/rules/*.mdc` updated for new structure and commands.
 - Tasks 17-18 completed: All validations pass — `validate-templates.sh`, `validate-template-sync.sh`, 173 bats tests green, no regressions in learning-project.
-- **All 18 tasks complete.** Feature ready for PR.
+- **All 18 tasks complete.** Feature merged via PR #68 on 2026-02-28.
 
 ---
 
-**Last Updated:** 2026-02-19
+**Last Updated:** 2026-02-28
