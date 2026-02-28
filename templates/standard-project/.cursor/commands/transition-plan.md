@@ -1,39 +1,38 @@
 # Transition Plan Command
 
-Creates transition planning documents from reflection artifacts or directly from reflection documents. Plans the next stage of the project (feature, release, infrastructure) based on reflection insights.
+Creates implementation planning documents from ADRs, reflection artifacts, or reflection documents. Produces the uniform planning structure (`implementation-plan.md` + `tasks/`) ready for `/task` command execution.
 
 ---
 
 ## Configuration
 
-**Path Detection:**
+**Plan Path Detection:**
 
-This command supports multiple project organization patterns:
+This command writes to the uniform planning structure:
 
-1. **Feature-Specific Structure (default):**
+1. **Dev-Infra Structure:**
+   - Output: `admin/planning/features/[feature-name]/`
+   - Creates: `implementation-plan.md`, `status-and-next-steps.md`, `tasks/`
 
-   - Artifacts: `docs/maintainers/planning/features/[feature-name]/feature-plan.md`
-   - Transition plans: `docs/maintainers/planning/features/[feature-name]/transition-plan.md`
-
-2. **Project-Wide Structure:**
-   - Artifacts: `docs/maintainers/planning/releases/[version]/checklist.md`
-   - Transition plans: `docs/maintainers/planning/releases/[version]/transition-plan.md`
+2. **Template Project Structure (generated projects):**
+   - Output: `docs/maintainers/planning/features/[feature-name]/`
+   - Creates: `implementation-plan.md`, `status-and-next-steps.md`, `tasks/`
 
 **Feature Detection:**
 
 - Use `--feature` option if provided
 - Otherwise, auto-detect:
-  - Check if `docs/maintainers/planning/features/` exists
+  - Check if planning features directory exists (dev-infra or template project)
   - If single feature exists, use that feature name
-  - If multiple features exist, search for artifact files in each
-  - If no features exist, use project-wide structure
+  - If multiple features exist, prompt user to select
+  - If no features exist, create new feature directory
 
-**Artifact Paths:**
+**Source Paths:**
 
-- **Release Artifacts:** `docs/maintainers/planning/releases/[version]/checklist.md` or `release-notes.md`
-- **Feature Artifacts:** `docs/maintainers/planning/features/[feature-name]/feature-plan.md`
-- **CI/CD Artifacts:** `docs/maintainers/planning/ci/[improvement-name]/improvement-plan.md`
-- **Infrastructure Artifacts:** `docs/maintainers/planning/infrastructure/[improvement-name]/improvement-plan.md` (if exists)
+- **ADR Documents:** `admin/decisions/[topic]/` or `docs/maintainers/decisions/[topic]/`
+- **Requirements:** `admin/research/[topic]/requirements.md` or `docs/maintainers/research/[topic]/requirements.md`
+- **Reflection Artifacts:** `admin/planning/features/[feature]/` or `docs/maintainers/planning/features/[feature]/`
+- **Reflection Files:** `admin/planning/notes/reflections/` or `docs/maintainers/planning/notes/reflections/`
 
 ---
 
@@ -41,11 +40,71 @@ This command supports multiple project organization patterns:
 
 **When to use:**
 
+- After creating ADRs with `/decision` command
 - After creating reflection artifacts with `/reflection-artifacts`
-- To plan transition to next stage (feature, release, infrastructure)
-- When ready to move from reflection to implementation planning
+- To plan transition from decisions/research to implementation
+- When ready to create actionable task plans
 
-**Key principle:** Transform reflection artifacts into actionable transition plans ready for implementation, following established planning patterns. For feature transitions, also create detailed phase documents (`phase-#.md`) following work-prod's comprehensive phase structure.
+**Workflow:** Setup → Human Review → Expand → Implement
+
+**Two Modes:**
+
+### Setup Mode (Default)
+
+Creates scaffolding: `implementation-plan.md` (YAML frontmatter + task titles as GFM checkboxes) + `status-and-next-steps.md` (group-based progress table) + `tasks/` directory with scaffolded group files (~60-80 lines each).
+
+**When to use:**
+
+- First run on a new feature
+- After creating ADRs with `/decision`
+- To review group/task breakdown before adding detail
+
+**Output:**
+
+- `implementation-plan.md` — Task index with YAML frontmatter
+- `status-and-next-steps.md` — Progress tracking
+- `tasks/01-group-name.md`, `tasks/02-group-name.md`, etc. — Scaffolded group files
+
+**Status Indicator:** Group files show `🔴 Scaffolding (needs expansion)`
+
+```
+/transition-plan --from-adr decisions/[topic]/
+  → Reads ADR and requirements documents
+  → Creates implementation-plan.md with frontmatter
+  → Creates status-and-next-steps.md
+  → Creates tasks/ directory with scaffolded group files
+  → Outputs: Scaffolding ready for human review
+```
+
+### Expand Mode (`--expand`)
+
+Fills scaffolded group files with detailed TDD tasks, code examples, and implementation notes.
+
+**When to use:**
+
+- After reviewing scaffolding structure
+- When ready to add implementation detail to a group
+- Before starting `/task next` for that group
+
+**Flags:**
+
+- `--group N` — Expand specific group by index (1-based)
+- `--group "Group Name"` — Expand specific group by name
+- `--all` — Expand all groups at once (context-heavy, use sparingly)
+
+**Output:**
+
+- Updated `tasks/NN-group-name.md` files (~200-300 lines with detailed tasks)
+
+**Status Indicator:** Group files show `✅ Expanded`
+
+```
+/transition-plan [feature] --expand --group 1
+  → Reads existing group scaffolding from tasks/01-group-name.md
+  → Fills in detailed tasks, TDD steps, implementation notes
+  → Updates group status to Expanded
+  → Commits changes
+```
 
 ---
 
@@ -53,1015 +112,709 @@ This command supports multiple project organization patterns:
 
 **Command:** `/transition-plan [--from-artifacts|--from-reflection|--from-adr] [options]`
 
-**Examples:**
+**Setup Mode Examples (default):**
 
-- `/transition-plan --from-reflection reflection-2025-12-07-mvp-complete.md` - Create transition plan from reflection (auto-generates artifacts first)
-- `/transition-plan --from-artifacts releases/v0.1.0/checklist.md` - Create transition plan from specific artifact
-- `/transition-plan --from-adr decisions/auth-system/adr-001-auth-system.md` - Create transition plan from ADR document
-- `/transition-plan --from-adr decisions/auth-system/adr-001-auth-system.md --requirements research/auth-system/requirements.md` - Include requirements explicitly
-- `/transition-plan --type release` - Force release transition type
-- `/transition-plan --type feature` - Force feature transition type
-- `/transition-plan --feature my-feature` - Specify feature name
-- `/transition-plan --dry-run` - Show transition plan without creating files
+- `/transition-plan --from-adr decisions/auth-system/` — Create scaffolding from ADRs
+- `/transition-plan --from-artifacts releases/v0.1.0/checklist.md` — Create from artifact
+- `/transition-plan --from-reflection reflection-2026-01-15-mvp-complete.md` — Create from reflection
+- `/transition-plan --dry-run` — Preview scaffolding without creating files
+- `/transition-plan --type release` — Force release transition type
+- `/transition-plan --feature my-feature` — Specify feature name
 
-**Options:**
+**Expand Mode Examples:**
 
-- `--from-reflection FILE` - Use reflection file (auto-generates artifacts first, then creates plans)
-- `--from-artifacts PATH` - Use specific artifact file (e.g., `releases/v0.1.0/checklist.md`)
-- `--from-adr PATH` - Use ADR document (e.g., `decisions/auth-system/adr-001-auth-system.md`)
-- `--requirements PATH` - Use requirements document (optional, auto-detected if exists in research directory)
-- `--feature [name]` - Specify feature name (overrides auto-detection)
-- `--type TYPE` - Force transition type (`feature`, `release`, `ci-cd`, `infrastructure`, `auto`)
-- `--dry-run` - Show transition plan without creating files
+- `/transition-plan my-feature --expand --group 1` — Expand group 1
+- `/transition-plan my-feature --expand --group "Command Infrastructure"` — Expand by name
+- `/transition-plan my-feature --expand --all` — Expand all groups (use sparingly)
+
+**Setup Mode Options:**
+
+- `--from-reflection FILE` — Use reflection file (auto-generates artifacts first)
+- `--from-artifacts PATH` — Use specific artifact file
+- `--from-adr PATH` — Use ADR document(s)
+- `--requirements PATH` — Use requirements document (optional, auto-detected)
+- `--feature [name]` — Specify feature name (overrides auto-detection)
+- `--type TYPE` — Force transition type (`feature`, `release`, `ci-cd`, `auto`)
+- `--dry-run` — Show plan without creating files
+
+**Expand Mode Options:**
+
+- `--expand` — Enter expand mode (fill scaffolding with detail)
+- `--group N` — Expand specific group by index, 1-based (use with `--expand`)
+- `--group "Name"` — Expand specific group by name (use with `--expand`)
+- `--all` — Expand all scaffolded groups (use with `--expand`)
 
 ---
 
-## Step-by-Step Process
+## Setup Mode Workflow
 
-### Mode Selection
+Creates the uniform planning structure. For detailed expansion, use `--expand` (see Expand Mode Workflow).
 
-**Three modes of operation:**
+### Input Sources
 
-1. **Artifact Mode (default):** Create plans from existing artifacts
+All input sources produce the same uniform output structure.
 
-   - Use: `/transition-plan --from-artifacts [path]`
-   - Reads: Artifact files created by `/reflection-artifacts`
-   - Creates: Transition planning documents
+1. **ADR Mode:** `/transition-plan --from-adr decisions/[topic]/`
+   - Reads ADR documents from `/decision` command
+   - Auto-detects requirements in research directory
+   - Most common input source
 
-2. **Reflection Mode:** Create plans from reflection (auto-generates artifacts first)
-   - Use: `/transition-plan --from-reflection [file]`
-   - Reads: Reflection document
+2. **Artifact Mode:** `/transition-plan --from-artifacts [path]`
+   - Reads artifact files created by `/reflection-artifacts`
+
+3. **Reflection Mode:** `/transition-plan --from-reflection [file]`
+   - Reads reflection document
    - Internally calls `/reflection-artifacts` first
-   - Then creates transition plans from artifacts
-
-3. **ADR Mode:** Create plans from ADR documents
-   - Use: `/transition-plan --from-adr [path]`
-   - Reads: ADR document from `/decision` command
-   - Automatically reads requirements if they exist in research directory
-   - Creates: Transition planning documents
-
-**If `--from-reflection` is specified, skip to "From Reflection Mode" section below.**  
-**If `--from-adr` is specified, skip to "From ADR Mode" section below.**
+   - Then creates plan from generated artifacts
 
 ---
 
-### 1. Identify Artifact File (Artifact Mode)
+### Step 1: Load Source Documents
 
-**Detect feature name:**
+**For ADR Mode:**
 
-- Use `--feature` option if provided
-- Otherwise, auto-detect:
-  - Check if `docs/maintainers/planning/features/` exists
-  - If single feature exists, use that feature name
-  - If multiple features exist, search for artifact files in each
-  - If no features exist, use project-wide structure
+1. Locate ADR file(s) at the provided path
+2. Extract topic from path: `decisions/[topic]/adr-001-*.md` → topic
+3. Auto-detect requirements: check `research/[topic]/requirements.md`
+4. Read all ADR documents in the directory (there may be multiple)
+5. Read requirements document (if found)
 
-**Default behavior:**
+**For Artifact Mode:**
 
-- If no artifact specified, look for latest artifacts in planning directories
-- Check `docs/maintainers/planning/releases/` for latest release
-- Check `docs/maintainers/planning/features/[feature-name]/` for latest feature
-- Use most recent artifact
+1. Locate artifact file at the provided path
+2. Read artifact content
 
-**Manual specification:**
+**For Reflection Mode:**
 
-- Use provided artifact path
-- Verify artifact file exists and is readable
+1. Locate reflection file
+2. Internally generate artifacts (call `/reflection-artifacts` workflow)
+3. Use generated artifacts as input
 
-**Commands:**
+**Extract from sources:**
+
+- Decision statements and rationale (from ADRs)
+- Functional requirements (from requirements doc)
+- Non-functional requirements and constraints
+- Implementation guidance and consequences
+- Success criteria
+
+**Checklist:**
+
+- [ ] Source documents located and readable
+- [ ] Requirements auto-detected (if ADR mode)
+- [ ] Key content extracted
+
+---
+
+### Step 2: Determine Transition Type
+
+**Auto-detection logic:**
+
+- **Feature Transition (default):** Most ADRs and artifacts lead to feature planning
+- **Release Transition:** Source path contains `releases/`, or mentions version/release
+- **CI/CD Transition:** Source mentions CI/CD, pipeline, automation
+
+**Manual override:** Use `--type` to force a specific type.
+
+---
+
+### Step 3: Organize into Task Groups
+
+**Parse source content into logical groups and tasks.**
+
+**Grouping principles:**
+
+- Group related tasks by component, concern, or dependency
+- Aim for 2-8 tasks per group
+- Groups should be executable somewhat independently
+- Earlier groups should have fewer external dependencies
+
+**Global task numbering:** Tasks are numbered 1 to N across ALL groups. Numbers never restart per group.
+
+**Group naming:** Use descriptive kebab-case names for file paths:
+- "Foundation & Specs" → `01-foundation-and-specs.md`
+- "Command Infrastructure" → `02-command-infrastructure.md`
+
+**Checklist:**
+
+- [ ] Tasks extracted from source
+- [ ] Tasks organized into logical groups
+- [ ] Global numbering assigned (1 to N)
+- [ ] Group names and file names determined
+- [ ] Group ordering reflects dependency flow
+
+---
+
+### Step 4: Create `implementation-plan.md`
+
+**The central plan file with YAML frontmatter (the contract between `/transition-plan` and `/task`).**
+
+**Template:**
+
+```markdown
+---
+task_count: [N]
+groups:
+  - name: "[Group 1 Name]"
+    file: "tasks/01-group-name.md"
+    tasks: [1, 2, 3]
+  - name: "[Group 2 Name]"
+    file: "tasks/02-group-name.md"
+    tasks: [4, 5, 6, 7]
+tasks_files:
+  - "tasks/01-group-name.md"
+  - "tasks/02-group-name.md"
+---
+# Implementation Plan - [Feature Name]
+
+**Status:** 🔴 Not Started
+**Created:** YYYY-MM-DD
+**Last Updated:** YYYY-MM-DD
+**Source:** [source path or description]
+
+---
+
+## 📋 Overview
+
+[2-4 sentences describing the feature and what it achieves]
+
+**Key Changes:**
+- [Change 1]
+- [Change 2]
+
+---
+
+## 🎯 Goals
+
+1. **[Goal 1]** — [description]
+2. **[Goal 2]** — [description]
+
+---
+
+## 📝 Implementation Plan
+
+### [Group 1 Name]
+- [ ] Task 1: [Task title]
+- [ ] Task 2: [Task title]
+- [ ] Task 3: [Task title]
+
+### [Group 2 Name]
+- [ ] Task 4: [Task title]
+- [ ] Task 5: [Task title]
+
+[... continue for all groups ...]
+
+---
+
+## ✅ Definition of Done
+
+- [ ] All tasks complete
+- [ ] CI/CD passing
+- [ ] Documentation updated
+- [ ] Templates synced
+```
+
+**YAML frontmatter rules (per structure specification):**
+
+- `task_count` must equal the total number of `- [ ]` checkboxes
+- `groups[].tasks[]` arrays must partition 1..task_count without gaps or overlap
+- `groups[].file` must match the corresponding entry in `tasks_files[]`
+- File paths use the `{NN}-{group-name}.md` naming pattern
+
+**Checklist:**
+
+- [ ] YAML frontmatter is valid and internally consistent
+- [ ] Checkbox list matches task_count
+- [ ] Group sections match frontmatter groups
+- [ ] Source attribution included
+
+---
+
+### Step 5: Create `status-and-next-steps.md`
+
+**Template:**
+
+```markdown
+# Status & Next Steps - [Feature Name]
+
+**Status:** 🔴 Not Started
+**Last Updated:** YYYY-MM-DD
+
+---
+
+## 📊 Progress Summary
+
+**Overall:** 0/[N] tasks complete
+
+| Group | Status | Progress | Notes |
+|-------|--------|----------|-------|
+| [Group 1] | 🔴 Not Started | 0/[X] tasks | |
+| [Group 2] | 🔴 Not Started | 0/[Y] tasks | |
+
+---
+
+## 🚀 Next Steps
+
+1. Review scaffolding — verify group/task breakdown.
+2. Expand groups — `/transition-plan [feature] --expand --group 1`.
+3. Start implementation — `/task next`.
+
+---
+
+## 📝 Notes
+
+- Plan generated from [source] on YYYY-MM-DD.
+
+---
+
+**Last Updated:** YYYY-MM-DD
+```
+
+---
+
+### Step 6: Create Task Group Scaffolding Files
+
+**Create `tasks/` directory and one file per group.**
+
+**Scaffolding template (~60-80 lines per file):**
+
+```markdown
+# [Group Name]
+
+**Feature:** [Feature Name]
+**Group:** [Group Name]
+**Status:** 🔴 Scaffolding (needs expansion)
+**Last Updated:** YYYY-MM-DD
+
+---
+
+## 📝 Tasks
+
+> ⚠️ **Scaffolding:** Run `/transition-plan [feature] --expand --group [N]` to add detailed implementation notes.
+
+- [ ] Task [X]: [Title]
+  - [1-2 sentence description from source]
+  - [Key deliverable or acceptance criterion]
+
+- [ ] Task [Y]: [Title]
+  - [1-2 sentence description from source]
+  - [Key deliverable or acceptance criterion]
+
+---
+
+## 🎯 Goals
+
+1. [Goal extracted from source]
+2. [Goal extracted from source]
+
+---
+
+## ✅ Completion Criteria
+
+- [ ] [Criterion 1]
+- [ ] [Criterion 2]
+
+---
+
+## 🔗 Dependencies
+
+- [Dependency on prior group or task, if any]
+
+---
+
+**Last Updated:** YYYY-MM-DD
+```
+
+**File naming:** `tasks/{NN}-{group-name}.md` where NN is zero-padded (01, 02, ...).
+
+**Target:** ~60-80 lines per file. Include task titles, brief descriptions, goals, criteria, and dependencies — but NOT detailed TDD steps, code examples, or implementation notes (those are added in Expand Mode).
+
+**Checklist:**
+
+- [ ] `tasks/` directory created
+- [ ] One file per group with proper naming
+- [ ] Task titles match `implementation-plan.md` checkboxes
+- [ ] Status indicator: `🔴 Scaffolding (needs expansion)`
+- [ ] NO detailed TDD tasks (reserved for Expand Mode)
+
+---
+
+### Step 7: Commit and Present Summary
+
+**Commit scaffolding:**
 
 ```bash
-# Find latest release artifact
-ls -t docs/maintainers/planning/releases/v*/checklist.md | head -1
+git add [feature-directory]/implementation-plan.md
+git add [feature-directory]/status-and-next-steps.md
+git add [feature-directory]/tasks/
+git commit -m "docs([feature]): create implementation plan scaffolding
 
-# Find latest feature artifact (feature-specific)
-ls -t docs/maintainers/planning/features/[feature-name]/feature-plan.md | head -1
+Generate uniform planning structure from [source]:
+- implementation-plan.md ([N] tasks in [M] groups)
+- status-and-next-steps.md
+- tasks/ directory with [M] scaffolded group files
 
-# Find latest feature artifact (project-wide)
-ls -t docs/maintainers/planning/features/*/feature-plan.md | head -1
-
-# Check if artifact exists
-ls docs/maintainers/planning/releases/v0.1.0/checklist.md
+Source: [ADR/artifact/reflection path]"
 ```
 
-**Checklist:**
+**Present summary:**
 
-- [ ] Feature name detected or specified
-- [ ] Artifact file identified (or using default)
-- [ ] File exists and is readable
-- [ ] Artifact type determined (release, feature, ci-cd, infrastructure)
+```
+📋 Setup Complete — [Feature Name]
 
----
+   Source: [ADR/artifact/reflection path]
+   Tasks: [N] tasks in [M] groups
+   Status: 🔴 Scaffolding (needs expansion)
 
-### 2. Determine Transition Type
+   Files Created:
+   - implementation-plan.md (frontmatter + task index)
+   - status-and-next-steps.md (progress tracking)
+   - tasks/01-group-name.md (scaffolding)
+   - tasks/02-group-name.md (scaffolding)
+   ...
 
-**Auto-detection logic:**
-
-1. **Release Transition:**
-
-   - Artifact path contains `releases/`
-   - Artifact filename is `checklist.md` or `release-notes.md`
-   - Artifact content mentions "release", "version", "tag"
-
-2. **Feature Transition:**
-
-   - Artifact path contains `features/`
-   - Artifact filename is `feature-plan.md`
-   - Artifact content mentions "feature", "implementation", "phases"
-
-3. **CI/CD Transition:**
-
-   - Artifact path contains `ci/`
-   - Artifact filename is `improvement-plan.md`
-   - Artifact content mentions "ci", "cd", "pipeline", "automation"
-
-4. **Infrastructure Transition:**
-   - Artifact path contains `infrastructure/`
-   - Artifact filename is `improvement-plan.md`
-   - Artifact content mentions "infrastructure", "monitoring", "logging"
-
-**Manual override:**
-
-- Use `--type` option to force specific type
-- Useful when auto-detection is ambiguous
-
-**Checklist:**
-
-- [ ] Transition type determined (or forced with `--type`)
-- [ ] Type is appropriate for artifact
-- [ ] Type matches project needs
+   Next Steps:
+   1. Review scaffolding — verify group/task breakdown
+   2. Expand groups: /transition-plan [feature] --expand --group 1
+   3. Start implementation: /task next
+```
 
 ---
 
-### 3. Parse Artifact Content
+## Expand Mode Workflow (`--expand`)
 
-**Extract from artifact:**
+**When to use:** After scaffolding is created (Setup Mode) and reviewed, use Expand Mode to fill in detailed implementation guidance.
 
-- Overview/description
-- Success criteria
-- Implementation steps
-- Next steps
-- Priority and effort
-- Benefits
+**Prerequisite:** Group scaffolding files must exist with status `🔴 Scaffolding`.
 
-**Parse implementation steps:**
+---
 
-- Extract actionable steps
-- **Extract ALL phases** from artifact (Phase 1, Phase 2, Phase 3, etc.)
-- Organize into logical phases (if feature)
-- Preserve phase structure, goals, tasks, deliverables, and effort estimates
-- Identify dependencies between phases
-- Estimate effort per phase
+### Step 1: Identify Group(s) to Expand
 
-**Example parsing:**
+**Determine scope:**
+
+1. **Specific Group by index** (`--group N`):
+   - Expand group N (1-based, matches the order in frontmatter)
+   - Example: `/transition-plan my-feature --expand --group 2`
+
+2. **Specific Group by name** (`--group "Name"`):
+   - Expand the group matching the provided name
+   - Example: `/transition-plan my-feature --expand --group "Command Infrastructure"`
+
+3. **All Groups** (`--all`):
+   - Expand all scaffolded groups at once
+   - Use sparingly — context-heavy
+   - Example: `/transition-plan my-feature --expand --all`
+
+**Read group scaffolding:**
+
+1. Parse `implementation-plan.md` frontmatter to locate the group file
+2. Read the group file from `tasks/`
+3. Verify status is `🔴 Scaffolding`
+
+**Error cases:**
+
+- Group already expanded (`✅ Expanded` or `✅ Complete`) → Skip or warn
+- Group file not found → Error with path suggestion
+- No scaffolding groups found → Suggest running setup mode first
+
+**Checklist:**
+
+- [ ] Group(s) to expand identified
+- [ ] Group file(s) exist
+- [ ] Group status is `🔴 Scaffolding`
+
+---
+
+### Step 2: Determine TDD vs Non-TDD
+
+**TDD ordering applies when:**
+- Group involves code implementation (scripts, modules, APIs)
+- Group involves testable functionality
+
+**Non-TDD ordering for:**
+- Documentation-only groups
+- Configuration groups
+- Planning/research groups
+
+| Group Type | Task Order | Example |
+|------------|------------|---------|
+| **Code + Tests (TDD)** | Tests → Implementation → Docs | Write tests, implement code, document |
+| **Scripts (TDD)** | Tests → Script → Integration | Write bats tests, create script, integrate |
+| **Documentation Only** | Create → Link → Verify | Create docs, add links, verify links work |
+| **Configuration** | Plan → Implement → Validate | Define config, apply changes, verify |
+
+---
+
+### Step 3: Expand Tasks with Detail
+
+**Transform task scaffolding into detailed, actionable task descriptions.**
+
+**For TDD tasks (code/scripts):**
 
 ```markdown
-## Implementation Steps
-
-1. Create release directory structure
-2. Create release checklist template
-3. Create release notes template
-4. Document version tagging process
-5. Prepare MVP release (v0.1.0)
+- [ ] Task N: [Title]
+  - **Purpose:** [Why this task exists]
+  - **TDD Flow:**
+    1. **RED:** Write failing test(s) for [specific behavior]
+    2. **GREEN:** Implement minimum code to pass
+    3. **REFACTOR:** Clean up while tests pass
+  - **Files:** [Expected files to create/modify]
+  - **Acceptance:** [How to verify this task is done]
 ```
 
-**For Feature Artifacts with Phases:**
-
-- Extract **ALL phases** from artifact (e.g., Phase 1, Phase 2, Phase 3, Phase 4, etc.)
-- Preserve phase structure: Goal, Tasks, Deliverables, Estimated Effort
-- Include prerequisites between phases
-- Maintain phase numbering and naming
-
-**Checklist:**
-
-- [ ] Artifact content parsed
-- [ ] **ALL phases extracted** (not just Phase 1 and Phase 2)
-- [ ] Implementation steps extracted
-- [ ] Phase structure preserved (goals, tasks, deliverables, effort)
-- [ ] Dependencies identified
-- [ ] Effort estimated
-
----
-
-### 4. Create Transition Planning Documents
-
-**For Release Transition:**
-
-**Location:** `docs/maintainers/planning/releases/vX.Y.Z/`
-
-**Documents created:**
-
-- `transition-plan.md` - Detailed transition plan
-- Update `checklist.md` - Add transition-specific checklist items
-
-**Transition Plan Template:**
+**For documentation tasks:**
 
 ```markdown
-# Release Transition Plan - vX.Y.Z
-
-**Version:** vX.Y.Z  
-**Status:** 🔴 Not Started  
-**Created:** YYYY-MM-DD  
-**Source:** [artifact-file]  
-**Type:** Release
-
----
-
-## Overview
-
-[Extracted from artifact overview]
-
-## Transition Goals
-
-[Extracted from artifact success criteria]
-
-## Pre-Transition Checklist
-
-- [ ] All prerequisites met
-- [ ] Release artifacts reviewed
-- [ ] Release checklist complete
-- [ ] Release notes prepared
-
-## Transition Steps
-
-[Extracted from artifact implementation steps, organized chronologically]
-
-**IMPORTANT:** Extract **ALL steps** from the artifact. Do not limit to just 2 steps.
-
-1. **Step 1: [Name]**
-
-   - [ ] Task 1
-   - [ ] Task 2
-   - Estimated: [X] hours
-
-2. **Step 2: [Name]**
-
-   - [ ] Task 1
-   - [ ] Task 2
-   - Estimated: [X] hours
-
-3. **Step 3: [Name]**
-   - [ ] Task 1
-   - [ ] Task 2
-   - Estimated: [X] hours
-
-[Continue extracting ALL steps from artifact. Include Step 3, Step 4, Step 5, etc. as they exist in the artifact.]
-
-## Post-Transition
-
-- [ ] Release tagged
-- [ ] Release notes published
-- [ ] Documentation updated
-- [ ] Monitoring active (if applicable)
-
-## Definition of Done
-
-- [ ] All transition steps complete
-- [ ] Release successful
-- [ ] Post-transition tasks complete
-- [ ] Ready for next stage
+- [ ] Task N: [Title]
+  - **Purpose:** [Why this task exists]
+  - **Steps:**
+    1. [Step 1]
+    2. [Step 2]
+  - **Files:** [Expected files to create/modify]
+  - **Acceptance:** [How to verify this task is done]
 ```
 
----
-
-**For Feature Transition:**
-
-**Location:** `docs/maintainers/planning/features/[feature-name]/`
-
-**Documents created:**
-
-- `transition-plan.md` - Detailed transition plan
-- `phase-1.md`, `phase-2.md`, `phase-3.md`, etc. - Detailed phase documents (one per phase)
-- Update `feature-plan.md` - Add transition-specific details
-
-**Transition Plan Template:**
+**For command tasks (Cursor commands):**
 
 ```markdown
-# Feature Transition Plan - [Feature Name]
-
-**Feature:** [Feature Name]  
-**Status:** 🔴 Not Started  
-**Created:** YYYY-MM-DD  
-**Source:** [artifact-file]  
-**Type:** Feature
-
----
-
-## Overview
-
-[Extracted from artifact overview]
-
-## Transition Goals
-
-[Extracted from artifact success criteria]
-
-## Pre-Transition Checklist
-
-- [ ] Feature plan reviewed
-- [ ] Prerequisites identified
-- [ ] Dependencies resolved
-- [ ] Resources allocated
-
-## Transition Steps
-
-[Extracted from artifact implementation steps, organized into phases]
-
-**IMPORTANT:** Extract **ALL phases** from the artifact (Phase 1, Phase 2, Phase 3, Phase 4, etc.). Do not stop at Phase 2.
-
-### Phase 1: [Phase Name]
-
-**Goal:** [Extracted from artifact phase goal]
-
-**Estimated Effort:** [X] hours/days
-
-**Prerequisites:**
-
-- [ ] [Prerequisite 1]
-- [ ] [Prerequisite 2]
-
-**Tasks:**
-
-- [ ] Task 1
-- [ ] Task 2
-- [ ] Task 3
-
-**Deliverables:**
-
-- [Deliverable 1]
-- [Deliverable 2]
-
-**Definition of Done:**
-
-- [ ] All tasks complete
-- [ ] Deliverables created
-- [ ] Ready for Phase 2
-
----
-
-### Phase 2: [Phase Name]
-
-**Goal:** [Extracted from artifact phase goal]
-
-**Estimated Effort:** [X] hours/days
-
-**Prerequisites:**
-
-- [ ] Phase 1 complete
-- [ ] [Additional prerequisites]
-
-**Tasks:**
-
-- [ ] Task 1
-- [ ] Task 2
-- [ ] Task 3
-
-**Deliverables:**
-
-- [Deliverable 1]
-- [Deliverable 2]
-
-**Definition of Done:**
-
-- [ ] All tasks complete
-- [ ] Deliverables created
-- [ ] Ready for Phase 3 (or post-transition if last phase)
-
----
-
-### Phase 3: [Phase Name]
-
-[Continue extracting ALL phases from artifact. Include Phase 3, Phase 4, Phase 5, etc. as they exist in the artifact.]
-
-**Goal:** [Extracted from artifact phase goal]
-
-**Estimated Effort:** [X] hours/days
-
-**Prerequisites:**
-
-- [ ] Phase 2 complete
-- [ ] [Additional prerequisites]
-
-**Tasks:**
-
-- [ ] Task 1
-- [ ] Task 2
-
-**Deliverables:**
-
-- [Deliverable 1]
-
-**Definition of Done:**
-
-- [ ] All tasks complete
-- [ ] Deliverables created
-- [ ] Ready for post-transition (if last phase)
-
-## Post-Transition
-
-- [ ] Feature complete
-- [ ] Documentation updated
-- [ ] Tests passing
-- [ ] Ready for next feature
-
-## Definition of Done
-
-- [ ] All phases complete
-- [ ] Feature implemented
-- [ ] Tests passing
-- [ ] Documentation updated
+- [ ] Task N: [Title]
+  - **Purpose:** [Why this task exists]
+  - **Key behaviors:** [What the command must do]
+  - **Porting from:** [Existing command to port logic from, if any]
+  - **Files:** [Command file path]
+  - **Acceptance:** [How to verify — manual test scenarios]
 ```
 
+**Expansion adds:**
+
+| Section | Scaffolding | After Expansion |
+|---------|-------------|-----------------|
+| Tasks | Titles + 1-2 line description | Full detail with steps, files, acceptance |
+| Implementation Notes | None | Patterns, tips, porting guidance |
+| Dependencies | Brief | Specific task-level dependencies |
+
+**Target expansion:**
+- Scaffolding: ~60-80 lines
+- Expanded: ~150-300 lines
+- Added: ~100-200 lines of detail
+
 ---
 
-**For CI/CD Transition:**
+### Step 4: Update Group Status
 
-**Location:** `docs/maintainers/planning/ci/[improvement-name]/`
-
-**Documents created:**
-
-- `transition-plan.md` - Detailed transition plan
-- `phase-1.md`, `phase-2.md`, `phase-3.md`, etc. - Detailed phase documents (one per step, treating steps as phases)
-
-**Note:** CI/CD improvements use `/task-improvement` command (not `/task-phase`) because they have different structure and workflow (process/documentation vs. TDD).
-
-**Transition Plan Template:**
+**Update group file header:**
 
 ```markdown
-# CI/CD Transition Plan - [Improvement Name]
+# Before:
+**Status:** 🔴 Scaffolding (needs expansion)
 
-**Improvement:** [Improvement Name]  
-**Status:** 🔴 Not Started  
-**Created:** YYYY-MM-DD  
-**Source:** [artifact-file]  
-**Type:** CI/CD
-
----
-
-## Overview
-
-[Extracted from artifact overview]
-
-## Transition Goals
-
-[Extracted from artifact benefits]
-
-## Pre-Transition Checklist
-
-- [ ] Improvement plan reviewed
-- [ ] CI/CD infrastructure ready
-- [ ] Dependencies identified
-- [ ] Rollback plan prepared (if applicable)
-
-## Transition Steps
-
-[Extracted from artifact implementation steps]
-
-**IMPORTANT:** Extract **ALL steps** from the artifact. Do not limit to just 2 steps.
-
-1. **Step 1: [Name]**
-
-   - [ ] Task 1
-   - [ ] Task 2
-   - Estimated: [X] hours
-
-2. **Step 2: [Name]**
-
-   - [ ] Task 1
-   - [ ] Task 2
-   - Estimated: [X] hours
-
-3. **Step 3: [Name]**
-   - [ ] Task 1
-   - [ ] Task 2
-   - Estimated: [X] hours
-
-[Continue extracting ALL steps from artifact. Include Step 3, Step 4, Step 5, etc. as they exist in the artifact.]
-
-## Post-Transition
-
-- [ ] Improvement deployed
-- [ ] CI/CD pipeline verified
-- [ ] Documentation updated
-- [ ] Monitoring active (if applicable)
-
-## Definition of Done
-
-- [ ] All steps complete
-- [ ] CI/CD improvement active
-- [ ] Tests passing
-- [ ] Documentation updated
+# After:
+**Status:** ✅ Expanded
 ```
 
----
-
-### 5. Create Phase Documents (Feature and CI/CD Transitions)
-
-**When to create:**
-
-- For feature transitions with phases (always)
-- For CI/CD transitions with steps (treat steps as phases, use `/task-improvement` command)
-
-**Process:**
-
-1. **Extract phases/steps from transition plan:**
-
-   - **For Feature Transitions:** Parse `transition-plan.md` for phase sections (Phase 1, Phase 2, etc.)
-   - **For CI/CD Transitions:** Parse `transition-plan.md` for step sections (Step 1, Step 2, etc.) and treat as phases
-   - Extract phase/step number, name, goal, tasks, deliverables, prerequisites, effort
-   - Identify all phases/steps (Phase/Step 1, Phase/Step 2, Phase/Step 3, etc.)
-
-2. **For each phase/step, create `phase-#.md` file:**
-
-   - Use phase document template (see `docs/PHASE-DOCUMENT-TEMPLATE.md`)
-   - Populate with extracted phase/step information
-   - **For Feature Transitions:** Expand tasks with TDD flow structure (RED → GREEN → REFACTOR)
-   - **For CI/CD Transitions:** Expand tasks with process/documentation workflow (may not need TDD)
-   - Add project-specific implementation notes
-
-3. **Phase document structure:**
-   - Header: Phase number, name, duration, status, prerequisites
-   - Overview: What phase delivers, success definition
-   - Goals: Numbered list of phase goals
-   - Tasks: Detailed TDD flow with sub-tasks
-   - Completion Criteria: Checklist of completion requirements
-   - Deliverables: What gets created/delivered
-   - Dependencies: Prerequisites, external dependencies, blocks
-   - Risks: Risk assessment with mitigation (if applicable)
-   - Progress Tracking: Status tracking by category
-   - Implementation Notes: TDD workflow, patterns, examples
-   - Related Documents: Links to related docs
-
-**File locations:**
-
-- Feature-specific: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
-- Project-wide: `docs/maintainers/planning/phases/phase-N.md`
-- CI/CD improvements: `docs/maintainers/planning/ci/[improvement-name]/phase-N.md`
-
-**Phase document template:**
-
-Reference: `docs/PHASE-DOCUMENT-TEMPLATE.md`
-
-**Key sections to populate:**
-
-- **Header:** Extract from transition plan phase header
-- **Overview:** Expand phase goal into detailed overview with success definition
-- **Goals:** Extract and expand phase goals
-- **Tasks:** Expand transition plan tasks into detailed TDD flow:
-  - Group tasks into RED/GREEN pairs where applicable
-  - Add detailed sub-tasks with checkboxes
-  - Include code examples where applicable
-  - Add testing commands and manual testing steps
-- **Completion Criteria:** Extract from transition plan "Definition of Done"
-- **Deliverables:** Extract from transition plan deliverables
-- **Dependencies:** Extract prerequisites, add external dependencies if known
-- **Risks:** Add risk assessment if applicable
-- **Progress Tracking:** Add status tracking sections
-- **Implementation Notes:** Add TDD workflow guidance, patterns, examples
-- **Related Documents:** Link to previous/next phases, feature plan, hub
-
-**Checklist:**
-
-- [ ] All phases/steps extracted from transition plan
-- [ ] Phase documents created (`phase-1.md`, `phase-2.md`, etc.)
-- [ ] Phase documents follow template structure
-- [ ] Tasks expanded with appropriate workflow (TDD for features, process workflow for CI/CD)
-- [ ] Implementation notes added
-- [ ] Related documents linked
-- [ ] Phase documents are detailed (~200-300+ lines)
-
-**Note:**
-
-- **Feature transitions:** Phase documents should be comprehensive and actionable, following work-prod's phase document structure with TDD flow. They serve as the primary implementation guide for each phase. Use `/task-phase` command to implement.
-- **CI/CD transitions:** Phase documents should be comprehensive and actionable, following the phase document template structure. Tasks may focus on documentation, process improvements, and workflow integration rather than TDD. They serve as the primary implementation guide for each improvement step. Use `/task-improvement` command to implement (not `/task-phase`).
-
----
-
-### 6. Update Planning Hubs
-
-**Update relevant hub files:**
-
-1. **Release Hub:**
-
-   - File: `docs/maintainers/planning/releases/README.md`
-   - Update release status
-   - Add transition plan link
-
-2. **Feature Hub:**
-
-   - File: `docs/maintainers/planning/features/README.md` (if exists)
-   - Update feature status
-   - Add transition plan link
-   - Add phase document links (if created)
-
-3. **CI/CD Hub:**
-   - File: `docs/maintainers/planning/ci/README.md` (if exists)
-   - Update improvement status
-   - Add transition plan link
-   - Add phase document links (if created)
-
-**Checklist:**
-
-- [ ] Release hub updated (if release transition)
-- [ ] Feature hub updated (if feature transition)
-- [ ] Phase document links added to feature hub (if phase documents created)
-- [ ] CI/CD hub updated (if CI/CD transition)
-- [ ] Phase document links added to CI/CD hub (if phase documents created)
-- [ ] Hub links verified
-
----
-
-### 7. Summary Report
-
-**Present to user:**
+**Remove scaffolding placeholder:**
 
 ```markdown
-## Transition Plan Complete
-
-**Source:** [artifact-file or reflection-file]
-**Type:** [Release/Feature/CI/CD/Infrastructure]
-
-### Transition Planning Documents Created
-
-- `transition-plan.md` - Detailed transition plan
-- `phase-1.md`, `phase-2.md`, `phase-3.md`, etc. - Detailed phase documents (for feature transitions)
-- Updated artifact files with transition details
-
-### Transition Steps
-
-- [N] steps/phases identified
-- Estimated effort: [X] hours
-- Estimated duration: [Y] days
-
-### Phase Documents (Feature Transitions)
-
-- [N] phase documents created
-- Each phase document includes: Overview, Goals, Tasks (TDD flow), Completion Criteria, Deliverables, Dependencies, Implementation Notes
-- Phase documents follow work-prod structure (~300+ lines each)
-
-### Next Steps
-
-1. Review transition plan
-2. Review phase documents (if created)
-3. Begin implementation when ready
-4. Use `/task-phase` to implement phases (reads `phase-#.md` files)
-5. Use `/task-release` or `/pr` commands for releases
+# Remove this:
+> ⚠️ **Scaffolding:** Run `/transition-plan [feature] --expand --group [N]` ...
 ```
 
 ---
 
-## From Reflection Mode
+### Step 5: Commit and Present Summary
 
-**When to use:**
+**Commit expanded group:**
 
-- When reflection exists but artifacts haven't been created yet
-- To streamline workflow (one command instead of two)
-- When starting fresh from reflection
+```bash
+git add [feature-directory]/tasks/NN-group-name.md
+git commit -m "docs([feature]): expand [group-name] group scaffolding
 
-**Key principle:** Internally calls `/reflection-artifacts` first, then creates transition plans from generated artifacts.
+Expand [Group Name] from ~[X] to ~[Y] lines with detailed tasks:
+- Task N: [title]
+- Task M: [title]
+..."
+```
 
----
+**Present summary:**
 
-### 1. Load Reflection File
+```
+✅ Expand Complete — [Group Name]
 
-**File location:**
+   Status: 🔴 Scaffolding → ✅ Expanded
+   Lines: ~[X] → ~[Y] (+[Z])
+   Tasks: [N] tasks with detailed descriptions
 
-- Feature-specific: `docs/maintainers/planning/features/[feature-name]/reflections/reflection-*.md`
-- Project-wide: `docs/maintainers/planning/notes/reflections/reflection-*.md`
-- Alternative: `docs/maintainers/planning/reflections/reflection-*.md`
-- Manual: `--from-reflection reflection-2025-12-07-mvp-complete.md`
-
-**Extract from reflection:**
-
-- "Actionable Suggestions" section
-- "Recommended Next Steps" section
-- Current state information
-
-**Checklist:**
-
-- [ ] Reflection file found
-- [ ] File is readable and well-formatted
-- [ ] Actionable suggestions identified
+   Next Steps:
+   - Review expanded group file
+   - Expand next group: /transition-plan [feature] --expand --group [N+1]
+   - Or start implementation: /task next
+```
 
 ---
 
-### 2. Generate Artifacts (Internal Call)
+## Input Source Details
 
-**Process:**
+### From ADR Mode (`--from-adr`)
 
-1. Internally call `/reflection-artifacts` workflow
-2. Generate artifacts from reflection
-3. Store artifacts in appropriate directories
-4. Continue with transition plan creation
+1. **Load ADR document(s)** from the provided path
+2. **Auto-detect requirements:** Check `research/[topic]/requirements.md`
+3. **Extract:** Decision statements, consequences, rationale, requirements impact
+4. **Extract from requirements (if found):** FRs, NFRs, constraints, assumptions
+5. **Organize into groups** based on implementation scope
 
-**Artifacts generated:**
+### From Artifact Mode (`--from-artifacts`)
 
-- Release artifacts (if release suggestions found)
-- Feature artifacts (if feature suggestions found)
-- CI/CD artifacts (if CI/CD suggestions found)
+1. **Load artifact file** from the provided path
+2. **Extract:** Overview, success criteria, implementation steps
+3. **Determine transition type** from artifact content/path
+4. **Organize into groups** based on artifact structure
 
-**Checklist:**
+### From Reflection Mode (`--from-reflection`)
 
-- [ ] Artifacts generated successfully
-- [ ] Artifacts placed in correct directories
-- [ ] Artifact types determined
-
----
-
-### 3. Create Transition Plans from Artifacts
-
-**Process:**
-
-- Use generated artifacts as input
-- Follow "Artifact Mode" workflow (steps 2-6 above)
-- Create transition plans from artifacts
-
-**Checklist:**
-
-- [ ] Transition plans created from artifacts
-- [ ] Plans follow appropriate templates
-- [ ] Plans are actionable
+1. **Load reflection file**
+2. **Internally call** `/reflection-artifacts` to generate artifacts
+3. **Use generated artifacts** as input (follows Artifact Mode from here)
 
 ---
 
-## From ADR Mode
+## Release Transition Type
 
-**When to use:**
+**When `--type release` is detected or forced:**
 
-- When ADR documents exist from `/decision` command
-- To transition from decisions to feature planning
-- When research and decisions are complete
+Output structure is the same (uniform), but content is release-focused:
 
-**Key principle:** Read ADR documents and automatically read requirements if they exist in research directory, then create transition plans.
+- Groups are release steps (e.g., "Version Updates", "Changelog", "Testing", "Distribution")
+- Tasks are release checklist items
+- `implementation-plan.md` source references the release version
 
----
-
-### 1. Load ADR Document
-
-**File location:**
-
-- ADR: `docs/maintainers/decisions/[topic]/adr-[number]-[decision-name].md`
-- Manual: `--from-adr decisions/auth-system/adr-001-auth-system.md`
-
-**Extract from ADR:**
-
-- Decision statement
-- Consequences (positive and negative)
-- Alternatives considered
-- Decision rationale
-- Requirements impact
-
-**Checklist:**
-
-- [ ] ADR file found
-- [ ] File is readable and well-formatted
-- [ ] Decision statement identified
+The uniform structure works for both features and releases — the content differs, not the layout.
 
 ---
 
-### 2. Auto-Detect Requirements
+## Error Handling
 
-**Automatic detection:**
+**Source not found:**
+```
+❌ No ADR documents found at: decisions/[topic]/
+   Verify the path exists and contains adr-*.md files.
+```
 
-1. **Extract topic from ADR path:**
-   - ADR path: `decisions/[topic]/adr-001-[decision].md`
-   - Topic: `[topic]`
+**Feature directory already has a plan:**
+```
+⚠️ Feature '[name]' already has an implementation-plan.md.
+   Options:
+   1. Use --force to overwrite
+   2. Edit the existing plan directly
+   3. Use a different feature name
+```
 
-2. **Check for requirements document:**
-   - Path: `docs/maintainers/research/[topic]/requirements.md`
-   - If exists, read automatically
-   - If `--requirements` specified, use that path instead
+**Group already expanded:**
+```
+⚠️ Group [N] ([name]) is already expanded (status: ✅ Expanded).
+   Use --force to re-expand (overwrites existing detail).
+```
 
-3. **Extract from requirements:**
-   - Functional requirements
-   - Non-functional requirements
-   - Constraints
-   - Assumptions
-
-**Checklist:**
-
-- [ ] Topic extracted from ADR path
-- [ ] Requirements document checked
-- [ ] Requirements read (if exists)
-- [ ] Requirements extracted
-
----
-
-### 3. Determine Transition Type
-
-**Auto-detection logic:**
-
-- **Feature Transition (default):** Most ADRs lead to feature planning
-- **CI/CD Transition:** If ADR mentions CI/CD, pipeline, automation
-- **Infrastructure Transition:** If ADR mentions infrastructure, monitoring, logging
-
-**Manual override:**
-
-- Use `--type` option to force specific type
-
-**Checklist:**
-
-- [ ] Transition type determined
-- [ ] Type is appropriate for ADR content
-
----
-
-### 4. Parse ADR and Requirements Content
-
-**Extract from ADR:**
-
-- Decision statement → Feature/improvement description
-- Consequences → Benefits and risks
-- Alternatives considered → Options evaluated
-- Decision rationale → Context and justification
-- Requirements impact → Requirements to consider
-
-**Extract from requirements (if exists):**
-
-- Functional requirements → Feature requirements
-- Non-functional requirements → Quality requirements
-- Constraints → Implementation constraints
-- Assumptions → Planning assumptions
-
-**Organize into phases:**
-
-- Break down implementation into logical phases
-- Use decision rationale to inform phase structure
-- Use requirements to define phase deliverables
-
-**Checklist:**
-
-- [ ] ADR content parsed
-- [ ] Requirements content parsed (if exists)
-- [ ] Implementation steps identified
-- [ ] Phases organized
-
----
-
-### 5. Create Transition Planning Documents
-
-**Follow same structure as Artifact Mode (step 4 above):**
-
-- Create transition plan document
-- Include decision context
-- Include requirements (if available)
-- Organize into phases
-
-**For Feature Transitions:**
-
-- Create `feature-plan.md` with decision context
-- Create `transition-plan.md` with phase breakdown
-- Include requirements in feature plan
-
-**For CI/CD Transitions:**
-
-- Create `improvement-plan.md` with decision context
-- Create `transition-plan.md` with step breakdown
-- Include requirements in improvement plan
-
-**Checklist:**
-
-- [ ] Transition plan created
-- [ ] Decision context included
-- [ ] Requirements included (if available)
-- [ ] Phases/steps organized
-
----
-
-### 6. Create Phase Documents
-
-**Follow same structure as Artifact Mode (step 5 above):**
-
-- Extract phases from transition plan
-- Create detailed `phase-#.md` files
-- Include requirements in phase documents
-- Link to ADR and research documents
-
-**For Feature Transitions:**
-
-- Use `/task-phase` workflow (TDD)
-- Include requirements in phase deliverables
-- Reference ADR in phase documents
-
-**For CI/CD Transitions:**
-
-- Use `/task-improvement` workflow (process/documentation)
-- Include requirements in improvement steps
-- Reference ADR in phase documents
-
-**Checklist:**
-
-- [ ] Phase documents created
-- [ ] Requirements included in phases
-- [ ] ADR referenced in phase documents
-- [ ] Research documents linked
-
----
-
-### 7. Update Planning Hubs
-
-**Follow same structure as Artifact Mode (step 6 above):**
-
-- Update feature/CI/CD hub
-- Add transition plan link
-- Add phase document links
-- Reference ADR and requirements
-
-**Checklist:**
-
-- [ ] Planning hubs updated
-- [ ] Links added
-- [ ] ADR and requirements referenced
-
----
-
-## Common Issues
-
-### Issue: No Artifacts Found
-
-**Solution:**
-
-- Run `/reflection-artifacts` first to generate artifacts
-- Or use `--from-reflection` to auto-generate artifacts
-- Check artifact directory paths
-
-### Issue: Transition Type Ambiguous
-
-**Solution:**
-
-- Use `--type` option to force specific type
-- Review artifact content to determine type
-- Check artifact file path for type hints
-
-### Issue: Artifact Content Incomplete
-
-**Solution:**
-
-- Review artifact file for completeness
-- Update artifact with additional context
-- Re-run `/reflection-artifacts` if needed
+**No scaffolding found:**
+```
+❌ No scaffolded groups found for feature '[name]'.
+   Run setup mode first: /transition-plan --from-adr [path]
+```
 
 ---
 
 ## Tips
 
-### Before Running
+### When to Use Each Mode
 
-- Ensure artifacts exist (or use `--from-reflection`)
-- Review artifact content for completeness
-- Determine desired transition type
+**Setup Mode (default):**
+- First time creating a plan from a new source
+- When you want to review group/task breakdown before adding detail
+- When working with unfamiliar ADRs or artifacts
 
-### During Planning
+**Expand Mode (`--expand`):**
+- After scaffolding has been reviewed and approved
+- When ready to add implementation detail to a specific group
+- Before starting `/task next` for that group
 
-- Review extracted steps for accuracy
-- Organize steps chronologically
-- Identify dependencies between steps
+**Incremental vs Batch:**
 
-### After Planning
+| Approach | Flag | When to Use |
+|----------|------|-------------|
+| **Incremental** | `--group N` | Complex features, review each group |
+| **Batch** | `--all` | Simple features, already reviewed scaffolding |
 
-- Review transition plan for completeness
-- Update plan with additional context if needed
-- Begin implementation when ready
+**Rule of Thumb:** If unsure → Use Setup Mode first, review, then expand one group at a time.
 
----
+### Expansion Best Practices
 
-## Reference
-
-**Artifact Files:**
-
-- Releases: `docs/maintainers/planning/releases/vX.Y.Z/checklist.md`
-- Features: `docs/maintainers/planning/features/[feature-name]/feature-plan.md`
-- CI/CD: `docs/maintainers/planning/ci/[improvement-name]/improvement-plan.md`
-
-**Reflection Files:**
-
-- Feature-specific: `docs/maintainers/planning/features/[feature-name]/reflections/reflection-*.md`
-- Project-wide: `docs/maintainers/planning/notes/reflections/reflection-*.md`
-
-**Transition Plans:**
-
-- `docs/maintainers/planning/releases/vX.Y.Z/transition-plan.md`
-- `docs/maintainers/planning/features/[feature-name]/transition-plan.md`
-- `docs/maintainers/planning/ci/[improvement-name]/transition-plan.md`
-
-**Related Commands:**
-
-- `/explore` - Start exploration and identify research topics
-- `/research` - Conduct research and extract requirements
-- `/decision` - Make decisions and create ADR documents
-- `/reflection-artifacts` - Generate artifacts from reflection (run first, or auto-called)
-- `/reflect` - Create reflection documents (if available)
-- `/task-phase` - Implement feature phase tasks (reads `phase-#.md` files created by this command)
-- `/task-improvement` - Implement CI/CD improvement phase tasks (reads `phase-#.md` files created by this command)
-- `/task-release` - Implement release transition tasks
-- `/pre-phase-review` - Review phase plans before implementation
-
-**Related Templates:**
-
-- `docs/PHASE-DOCUMENT-TEMPLATE.md` - Template for phase documents (used when creating phase-#.md files)
-- `/pr` - Create PRs for completed work
+- Expand one group at a time to stay within context limits
+- Review expanded content before moving to the next group
+- Use `--all` only for small features (≤3 groups, ≤10 tasks)
 
 ---
 
-**Last Updated:** 2025-12-07  
-**Status:** ✅ Active  
-**Next:** Use after `/decision` to transition from ADRs to planning, or use `--from-reflection` or `--from-artifacts` for other workflows (supports feature-specific and project-wide structures)
+## Common Scenarios
+
+### Scenario 1: ADR → Scaffolding → Expand → Implement
+
+```bash
+# Step 1: Create scaffolding from ADRs
+/transition-plan --from-adr decisions/auth-system/
+
+# Step 2: Human review — verify group/task breakdown
+
+# Step 3: Expand group 1
+/transition-plan auth-system --expand --group 1
+
+# Step 4: Implement group 1
+/task next
+/task next
+...
+
+# Step 5: Expand group 2
+/transition-plan auth-system --expand --group 2
+
+# Step 6: Implement group 2
+/task next
+...
+```
+
+### Scenario 2: Quick Feature (Small Scope)
+
+```bash
+# Scaffold + expand all at once
+/transition-plan --from-adr decisions/small-fix/
+/transition-plan small-fix --expand --all
+
+# Implement
+/task next
+```
+
+### Scenario 3: Reflection → Plan
+
+```bash
+# One command: generates artifacts internally, then scaffolds
+/transition-plan --from-reflection reflection-2026-01-15-sprint-review.md
+
+# Review and expand as usual
+/transition-plan my-feature --expand --group 1
+```
+
+---
+
+## Related Commands
+
+- `/task` — Implement tasks from the plan (reads `implementation-plan.md`)
+- `/plan-review` — Review plan before implementation
+- `/decision` — Create ADR documents (common input source)
+- `/research` — Research topics and extract requirements
+- `/explore` — Explore topics and identify research needs
+- `/reflection-artifacts` — Generate artifacts from reflections
+- `/reflect` — Create reflection documents
+
+---
+
+**Last Updated:** 2026-02-19
+**Status:** ✅ Active
+**Next:** Use after `/decision` to create implementation plans from ADRs (uniform structure, two-mode: setup + expand)

@@ -1,0 +1,45 @@
+# Status & Next Steps - Workflow Simplification
+
+**Status:** ✅ Complete
+**Merged:** PR #68 (2026-02-28)
+**Last Updated:** 2026-02-28
+
+---
+
+## 📊 Progress Summary
+
+**Overall:** 18/18 tasks complete ✅
+
+| Group | Status | Progress | Notes |
+|-------|--------|----------|-------|
+| Foundation & Specs | ✅ Complete | 3/3 tasks | Migration guide, validation rules, structure spec |
+| Command Infrastructure | ✅ Complete | 4/4 tasks | `/task`, `/plan-review`, deprecation stubs, manifest sync |
+| Command Logic Updates | ✅ Complete | 2/2 tasks | `/transition-plan` rewritten, dual-path added to `/pr`, `/post-pr`, `/status` |
+| Template Assets | ✅ Complete | 4/4 tasks | New templates, updated templates, example, deprecation markers |
+| Documentation & Rules | ✅ Complete | 3/3 tasks | Planning hubs, phase template deprecated, rules updated |
+| Verification | ✅ Complete | 2/2 tasks | All validations pass, 173 bats tests green, no regressions |
+
+---
+
+## 🚀 Next Steps
+
+Feature complete and merged. No remaining tasks.
+
+- v0.10.0 release prep: sweep stale command references (see self-review findings in PR #68 discussion)
+
+---
+
+## 📝 Notes
+
+- Restructured from `feature-plan.md` to `implementation-plan.md` + `tasks/` (dogfooding the uniform structure).
+- Tasks 1-3 completed: migration guide, validation rules, structure specification.
+- Tasks 4-7 completed: `/task` command, `/plan-review` command, deprecation stubs, template sync.
+- Tasks 8-9 completed: `/transition-plan` rewritten for uniform structure, dual-path detection added to `/pr`, `/post-pr`, `/status`.
+- Tasks 10-13 completed: New `implementation-plan.md.tmpl` and `task-group.md.tmpl`, updated `status-and-next-steps.md.tmpl` and `README.md.tmpl`, example plan, deprecation headers on legacy templates.
+- Tasks 14-16 completed: Template planning hubs updated, `PHASE-DOCUMENT-TEMPLATE.md` deprecated, `.cursor/rules/*.mdc` updated for new structure and commands.
+- Tasks 17-18 completed: All validations pass — `validate-templates.sh`, `validate-template-sync.sh`, 173 bats tests green, no regressions in learning-project.
+- **All 18 tasks complete.** Feature merged via PR #68 on 2026-02-28.
+
+---
+
+**Last Updated:** 2026-02-28

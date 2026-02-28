@@ -68,7 +68,7 @@ When planning work, classify it:
 
 ### Command Distribution
 
-All templates receive all 23 workflow commands. Only dev-infra internal commands (release automation) stay internal.
+All templates receive all 26 workflow commands (including 2 deprecation stubs). Only dev-infra internal commands (release automation) stay internal.
 
 **See:** [ADR-001: Commands as Guides](../../../admin/decisions/command-simplification/adr-001-commands-as-guides.md)
 
@@ -92,7 +92,7 @@ All templates receive all 23 workflow commands. Only dev-infra internal commands
 
    - Focus on single topics or phases
    - Link back to hub files
-   - Use descriptive filenames (e.g., `feature-plan.md`, `phase-1.md`)
+   - Use descriptive filenames (e.g., `implementation-plan.md`, `01-foundation.md`)
    - Include status and date metadata
 
 3. **Progressive Disclosure**
@@ -116,8 +116,8 @@ Always use: `YYYY-MM-DD` format (e.g., 2025-12-07)
 
 ### File Naming Conventions
 
-- Use **kebab-case** for file names: `feature-plan.md`, `status-and-next-steps.md`
-- Use **descriptive names**: `phase-1-foundation.md` not `p1.md`
+- Use **kebab-case** for file names: `implementation-plan.md`, `status-and-next-steps.md`
+- Use **descriptive names**: `01-foundation-and-specs.md` not `01.md`
 - README.md files are always **UPPERCASE**
 
 ---
@@ -229,7 +229,7 @@ dev-infra/
 
 - `/fix-plan` - Create fix batches from Sourcery reviews
 - `/fix-implement` - Implement fix batches (planned)
-- `/task-phase` - Phase implementation with TDD (planned)
+- `/task` - Task implementation with TDD
 - `/pr` - Centralized PR creation (planned)
 
 **See:** `admin/planning/commands/` for command planning and integration status
@@ -396,18 +396,18 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v0.9.0 (released 2026-02-13)  
+**Version:** v0.10.0 (released 2026-02-28)  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
-**Updated:** 2026-02-13  
-**Priority:** v0.10.0 planning
+**Updated:** 2026-02-28  
+**Priority:** Post-release
 
 ### ✅ Completed
 
 **Template System:**
 
-- ✅ Standard project template (all 23 commands)
-- ✅ Learning project template (all 23 commands)
+- ✅ Standard project template (all 26 commands)
+- ✅ Learning project template (all 26 commands)
 - ✅ Template generator script (2 template types)
 - ✅ Template validation script
 - ✅ Hub-and-spoke documentation pattern
@@ -456,11 +456,11 @@ When modifying templates:
 - ✅ `/handoff` - Session continuity and work handoff
 - ✅ `/fix-plan` - Create fix batches from reviews
 - ✅ `/fix-implement` - Implement fix batches
-- ✅ `/task-phase` - Phase implementation with TDD
+- ✅ `/task` - Task implementation with TDD (replaces `/task-phase`)
 - ✅ `/pr` - Centralized PR creation
 - ✅ `/pr-validation` - PR validation workflow
 - ✅ `/post-pr` - Post-merge documentation
-- ✅ `/pre-phase-review` - Review phase plans before implementation
+- ✅ `/plan-review` - Review implementation plans before work (replaces `/pre-phase-review`)
 - ✅ `/address-review` - Address gaps from pre-phase review
 - ✅ `/reflect` - Project reflection and suggestions
 - ✅ `/int-opp` - Internal opportunity capture
@@ -471,21 +471,18 @@ When modifying templates:
 - ✅ `/transition-plan` - Planning from artifacts/ADRs
 - ✅ `/task-release` - Release task implementation (with readiness check)
 
-### ✅ Recently Completed
-
-**Command Simplification (v0.8.0):**
-
-- ✅ All templates now have all 23 commands
-- ✅ Removed experimental-project template (merged into standard)
-- ✅ Removed graduation process (ADR-004 superseded)
-- ✅ ADR-001: Commands as Guides created
-
-**Fix Management:**
-
-- ✅ 8 cross-PR fix batches complete (28 issues fixed)
-- ✅ `/fix-review` → `/fix-plan` → `/fix-implement` workflow validated
-
 ### ✅ Recently Released
+
+**v0.10.0 - Workflow Simplification (2026-02-28):**
+
+- ✅ Uniform planning structure: `implementation-plan.md` + `tasks/` for every feature
+- ✅ New `/task` command (replaces `/task-phase`) with hybrid `next`/`N`/bare interface
+- ✅ New `/plan-review` command (replaces `/pre-phase-review`)
+- ✅ `/transition-plan` rewritten for uniform output (two-mode preserved)
+- ✅ Dual-path detection in `/pr`, `/post-pr`, `/status` for migration
+- ✅ Migration guide (`docs/MIGRATION-v0.10.md`), doc-gen templates, planning spec
+- ✅ 26 commands synced to both templates (including 2 deprecation stubs)
+- ✅ New `/discuss` command, `/explore --amend`, `/research --add-topic`, `/research --consolidate`
 
 **v0.9.0 - New Commands and Template Enhancements (2026-02-13):**
 
@@ -507,13 +504,13 @@ When modifying templates:
 
 ### 🟠 In Progress
 
-- 🟠 Workflow simplification exploration (`feat/workflow-simplification`)
+- (none currently)
 
 ### 🟡 Planned
 
 **Future Considerations:**
 
-- 🟡 Workflow simplification (v0.10.0+) -- simplify feature/phase/task hierarchy
+- 🟡 Command reference consistency sweep, stale count cleanup
 - 🟡 Command branch workflow (`cmd/*` pattern)
 
 ---
@@ -544,6 +541,6 @@ When modifying templates:
 
 ---
 
-**Last Updated:** 2026-02-13  
+**Last Updated:** 2026-02-28  
 **Status:** ✅ Active  
-**Next:** v0.10.0 planning
+**Next:** v0.11.0 planning

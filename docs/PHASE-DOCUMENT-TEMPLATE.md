@@ -1,13 +1,25 @@
 # Phase Document Template
 
-**Purpose:** Template for creating detailed phase documents following work-prod structure  
-**Status:** ✅ Active Template  
+> **DEPRECATED (v0.10.0):** This template uses the legacy phase-based structure.
+> For new features, use the **uniform planning structure** instead:
+>
+> - **Implementation plan template:** `scripts/doc-gen/templates/planning/implementation-plan.md.tmpl`
+> - **Task group template:** `scripts/doc-gen/templates/planning/task-group.md.tmpl`
+> - **Example:** `scripts/doc-gen/templates/planning/examples/example-implementation-plan.md`
+> - **Migration guide:** `docs/MIGRATION-v0.10.md`
+>
+> Use `/transition-plan` to generate the new structure automatically.
+
+**Purpose:** Template for creating detailed phase documents (legacy)  
+**Status:** ⚠️ Deprecated — use `implementation-plan.md` + `tasks/` structure  
 **Created:** 2025-12-07  
-**Last Updated:** 2025-12-07
+**Last Updated:** 2026-02-19
 
 ---
 
 ## 📋 How to Use This Template
+
+> **Note:** For new features, use `/transition-plan` instead. This template is kept for existing features that still use the phase-based structure.
 
 1. Copy this template when creating a new phase document
 2. Replace all `[PLACEHOLDER]` sections with actual values
@@ -16,7 +28,7 @@
 5. Include code examples and testing commands where applicable
 
 **Template Location:** `docs/PHASE-DOCUMENT-TEMPLATE.md`  
-**Usage:** Copy and customize for each phase
+**Usage:** Copy and customize for each phase (legacy projects only)
 
 ---
 

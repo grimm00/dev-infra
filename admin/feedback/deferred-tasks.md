@@ -10,11 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 54
+**Total Tasks:** 57
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
 - 🟡 **MEDIUM**: 28 tasks
-- 🟢 **LOW**: 18 tasks (1 fixed)
+- 🟢 **LOW**: 21 tasks (1 fixed)
 - 📋 **Workflow**: 1 task
 
 ---
@@ -324,7 +324,7 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 ---
 
-**Last Updated:** 2025-12-31  
+**Last Updated:** 2026-02-13  
 **Status:** 📋 Active Backlog
 
 ---
@@ -545,3 +545,16 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 ### Deferred from PR #58
 
 - Task 54: Centralize artifact naming in release workflow (MEDIUM priority, LOW effort) - Currently upload step hardcodes `PACKAGE_NAME="dev-infra-..."` instead of using `steps.get_version.outputs.package_name`. Values are same now but could diverge. (PR58-#1)
+
+---
+
+## PR #66 Additions
+
+**Date:** 2026-02-13
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #66 (Release v0.9.0)
+
+- Task 55: Pre-checked Goal 1 in research topic template (LOW priority, LOW effort) - Template has `[x]` on Goal 1 as a structural example but could mislead status tracking. Change to `[ ]`. (PR66-#1)
+- Task 56: Centralize docs-only vs code-phase detection rules (LOW priority, MEDIUM effort) - Detection rules duplicated across `/task-phase`, `/task-release`, `/task-improvement`. Consider a shared reference doc. Workflow simplification exploration will likely address. (PR66-Overall-#1)
+- Task 57: Centralize temp directory path conventions (LOW priority, MEDIUM effort) - Three-path temp directory conventions repeated across multiple commands. Document once and link. Workflow simplification exploration will likely address. (PR66-Overall-#2)

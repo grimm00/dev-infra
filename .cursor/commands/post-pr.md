@@ -8,28 +8,57 @@ Use this command after a PR is merged to update all relevant documentation. This
 
 **Path Detection:**
 
-This command supports multiple project organization patterns, matching `/task-phase` and `/pr`:
+This command supports multiple project organization patterns, matching `/task` and `/pr`:
 
-1. **Feature-Specific Structure (default):**
+### Dual-Path Detection (v0.10.0+)
+
+**Always check for the uniform structure first, then fall back to legacy phases.**
+
+1. **Uniform Structure (preferred — v0.10.0+):**
+   - Plan: `docs/maintainers/planning/features/[feature-name]/implementation-plan.md`
+   - Tasks: `docs/maintainers/planning/features/[feature-name]/tasks/`
+   - Status: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Dev-infra: Same paths under `admin/planning/features/`
+
+2. **Legacy Phase Structure (fallback):**
    - Phase paths: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
-   - Status document: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
+   - Status: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
    - Fix paths: `docs/maintainers/planning/features/[feature-name]/fix/pr##/`
-   - Manual testing: `docs/maintainers/planning/features/[feature-name]/manual-testing.md`
 
-2. **Project-Wide Structure:**
+3. **Project-Wide Structure (legacy):**
    - Phase paths: `docs/maintainers/planning/phases/phase-N.md`
-   - Status document: `docs/maintainers/planning/status-and-next-steps.md` (if exists)
-   - Fix paths: `docs/maintainers/planning/fix/pr##/`
-   - Manual testing: `docs/maintainers/planning/manual-testing.md` (if exists)
+   - Status: `docs/maintainers/planning/status-and-next-steps.md` (if exists)
+
+**Detection logic:**
+
+```
+IF implementation-plan.md exists → Use uniform structure
+  - Mark tasks complete in implementation-plan.md checkboxes
+  - Update group status in task group files
+  - Update status-and-next-steps.md with group-based progress
+ELSE IF phase-*.md exists → Use legacy phase structure
+  - Existing phase post-PR workflow applies unchanged
+ELSE → Error: no planning structure found
+```
 
 **Feature Detection:**
 
 - Use `--feature` option if provided
 - Otherwise, auto-detect using same logic as other commands:
-  - Check if `docs/maintainers/planning/features/` exists
+  - Check if planning features directory exists
   - If single feature exists, use that feature name
-  - If multiple features exist, search for phase/fix structure in each
+  - If multiple features exist, search for planning structure in each
   - If no features exist, use project-wide structure
+
+### Uniform Structure Post-PR Behavior
+
+When `implementation-plan.md` is detected:
+
+- **Mark tasks complete:** Check off `- [x]` for completed tasks in `implementation-plan.md`
+- **Update group files:** Mark completed groups as `✅ Complete` in `tasks/NN-group-name.md`
+- **Update status:** Refresh progress counts in `status-and-next-steps.md`
+- **Determine next steps:** Identify next incomplete group/task
+- **Commit message:** `docs([feature]): update status after PR #[N] merge`
 
 **Release Paths:**
 
