@@ -2,7 +2,7 @@
 
 **Version:** v0.10.0  
 **Release Date:** 2026-02-28  
-**Status:** 🔴 Draft - Needs Review
+**Status:** ✅ Final
 
 ---
 

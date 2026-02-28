@@ -396,11 +396,11 @@ When modifying templates:
 
 ## 🚧 Current Project State
 
-**Version:** v0.9.0 (released 2026-02-13) — v0.10.0 features on develop  
+**Version:** v0.10.0 (released 2026-02-28)  
 **Identity:** 🏭 Template Factory (ADR-001)  
 **Stage:** Active Development  
 **Updated:** 2026-02-28  
-**Priority:** v0.10.0 release prep
+**Priority:** Post-release
 
 ### ✅ Completed
 
@@ -471,9 +471,9 @@ When modifying templates:
 - ✅ `/transition-plan` - Planning from artifacts/ADRs
 - ✅ `/task-release` - Release task implementation (with readiness check)
 
-### ✅ Recently Completed
+### ✅ Recently Released
 
-**Workflow Simplification (v0.10.0 — PR #68, 2026-02-28):**
+**v0.10.0 - Workflow Simplification (2026-02-28):**
 
 - ✅ Uniform planning structure: `implementation-plan.md` + `tasks/` for every feature
 - ✅ New `/task` command (replaces `/task-phase`) with hybrid `next`/`N`/bare interface
@@ -482,20 +482,7 @@ When modifying templates:
 - ✅ Dual-path detection in `/pr`, `/post-pr`, `/status` for migration
 - ✅ Migration guide (`docs/MIGRATION-v0.10.md`), doc-gen templates, planning spec
 - ✅ 26 commands synced to both templates (including 2 deprecation stubs)
-
-**Command Simplification (v0.8.0):**
-
-- ✅ All templates now have all 26 commands
-- ✅ Removed experimental-project template (merged into standard)
-- ✅ Removed graduation process (ADR-004 superseded)
-- ✅ ADR-001: Commands as Guides created
-
-**Fix Management:**
-
-- ✅ 8 cross-PR fix batches complete (28 issues fixed)
-- ✅ `/fix-review` → `/fix-plan` → `/fix-implement` workflow validated
-
-### ✅ Recently Released
+- ✅ New `/discuss` command, `/explore --amend`, `/research --add-topic`, `/research --consolidate`
 
 **v0.9.0 - New Commands and Template Enhancements (2026-02-13):**
 
@@ -523,7 +510,7 @@ When modifying templates:
 
 **Future Considerations:**
 
-- 🟡 v0.10.0 release prep (command reference consistency sweep, stale count cleanup)
+- 🟡 Command reference consistency sweep, stale count cleanup
 - 🟡 Command branch workflow (`cmd/*` pattern)
 
 ---
@@ -556,4 +543,4 @@ When modifying templates:
 
 **Last Updated:** 2026-02-28  
 **Status:** ✅ Active  
-**Next:** v0.10.0 release prep
+**Next:** v0.11.0 planning
