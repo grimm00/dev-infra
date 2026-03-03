@@ -558,3 +558,14 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - Task 55: Pre-checked Goal 1 in research topic template (LOW priority, LOW effort) - Template has `[x]` on Goal 1 as a structural example but could mislead status tracking. Change to `[ ]`. (PR66-#1)
 - Task 56: Centralize docs-only vs code-phase detection rules (LOW priority, MEDIUM effort) - Detection rules duplicated across `/task-phase`, `/task-release`, `/task-improvement`. Consider a shared reference doc. Workflow simplification exploration will likely address. (PR66-Overall-#1)
 - Task 57: Centralize temp directory path conventions (LOW priority, MEDIUM effort) - Three-path temp directory conventions repeated across multiple commands. Document once and link. Workflow simplification exploration will likely address. (PR66-Overall-#2)
+
+---
+
+## PR #70 Additions
+
+**Date:** 2026-02-28
+**Status:** ✅ Deferred issues added to backlog
+
+### Deferred from PR #70 (GitHub Release Automation)
+
+- Task 58: Pin or document expected `gh` CLI version (LOW priority, LOW effort) - Workflow depends on `--generate-notes` and `--notes-file` flags. These are stable since gh 2.x but documenting the minimum expected version would be safer. (PR70-Overall-#2)

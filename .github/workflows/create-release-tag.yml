@@ -101,6 +101,11 @@ jobs:
           VERSION="${{ steps.version.outputs.version }}"
           NOTES_FILE="admin/planning/releases/${VERSION}/RELEASE-NOTES.md"
 
+          if gh release view "$VERSION" > /dev/null 2>&1; then
+            echo "::warning::GitHub Release $VERSION already exists, skipping creation"
+            exit 0
+          fi
+
           if [ -f "$NOTES_FILE" ]; then
             echo "Found curated release notes at $NOTES_FILE"
             gh release create "$VERSION" \
