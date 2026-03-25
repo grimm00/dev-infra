@@ -103,12 +103,37 @@
 
 ---
 
+### Topic 9: Templates as Structural Schemas
+
+**Question:** Can dev-infra's templates serve as living structural contracts that agents validate against, not just initial generators? What does a template-as-schema look like?
+
+**Priority:** Medium-High
+
+**Context:** Currently templates define initial document shape and are forgotten. If agents could reference templates as "this is what an exploration should look like," they'd produce more consistent outputs across sessions. This is essentially a type system for knowledge artifacts. The feasibility depends on how agents consume structural references and whether validation adds value without adding rigidity.
+
+**Method:** Research + consider spike -- analyze the schema concept, potentially prototype with one artifact type (exploration template)
+
+---
+
+### Topic 10: Materialized Workflow State and Orchestration
+
+**Question:** What would a pipeline orchestrator look like for the explore → decision workflow? Can tracker files / document status markers enable automated multi-agent handoff?
+
+**Priority:** Medium-High
+
+**Context:** The existing status indicators in documents (`🔴`, `🟠`, `✅`) are already proto-tracker state. An orchestrator could read these to determine pipeline readiness and spawn appropriate agents. Combined with structural schemas (Topic 9), this enables validated handoff. But the toolbox model from issue #72 (non-linear workflows) complicates a strict linear state machine. The earlier idea of a CLI calling agents in a loop maps directly to this.
+
+**Method:** Spike -- requires runtime experimentation with subagent coordination, tracker file patterns, and failure mode testing
+
+---
+
 ## 🎯 Research Workflow
 
 1. Address Topics 1-3 first (High priority -- core architecture decisions)
 2. Spike Topic 4 if subagent integration looks promising
 3. Topics 5-7 inform the migration strategy after core decisions are made
 4. Topic 8 is optional -- useful for grounding but not blocking
+5. Topics 9-10 are interconnected (schemas enable orchestration) -- research 9 first, then spike 10
 
 ---
 

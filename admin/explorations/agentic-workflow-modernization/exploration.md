@@ -2,6 +2,7 @@
 
 **Status:** 🟠 In Progress
 **Created:** 2026-03-25
+**Amended:** 2026-03-25 - Added themes 7-8 from /discuss session (templates as structural schemas, orchestration and tracker state)
 
 ---
 
@@ -157,6 +158,63 @@ This is potentially the highest-impact gap between dev-infra's current system an
 
 ---
 
+### Theme 7: Templates as Structural Schemas
+
+Dev-infra's templates currently serve as generators -- they define the initial shape of a document or project, then are forgotten. But templates could serve a second, more powerful role: **structural contracts** that agents reference throughout the lifecycle, not just at creation time.
+
+In software, schemas (database schemas, API contracts, type systems) enforce structural agreement between independent actors. A TypeScript compiler won't let you pass the wrong shape. A database migration fails if the schema doesn't match. But in document-driven agentic workflows, there's no equivalent. When an agent edits an exploration document in a later session, it has no reference for "what is the expected shape of an exploration document?" It relies on lengthy command instructions or infers from the existing content.
+
+If templates were treated as **living structural contracts**, agents could:
+
+- Validate that a document still conforms to its expected shape after edits
+- Understand what sections are expected without loading the full command instructions
+- Use the template as a lightweight reference (cheaper than loading the full skill/command)
+- Enable orchestration (Theme 8) by providing machine-checkable completion criteria
+
+This is essentially proposing a **type system for knowledge artifacts**. The template defines the type; the document is an instance. Agents that understand the type can work with instances more reliably across sessions and contexts.
+
+**Connections:**
+- Relates to Theme 1 (rules decomposition) -- templates-as-schemas could replace some always-on rule content with on-demand structural references
+- Relates to Theme 8 (orchestration) -- schemas are the contracts that make automated handoff trustworthy
+- Relates to Theme 2 (skills migration) -- a skill's reference materials could include structural schemas for its output artifacts
+- Connects to the `ai-prompt-lifecycle` exploration -- how agents consume context shapes how schemas should be exposed
+
+**Concerns:**
+- Rigidity vs flexibility: the more structure you add for automation, the more constrained humans become when deviating intentionally
+- Schema drift: if templates evolve but existing documents don't get migrated, validation breaks
+- Overhead: maintaining schemas alongside templates and commands adds another artifact to keep in sync
+
+---
+
+### Theme 8: Orchestration and Materialized Workflow State
+
+Dev-infra's explore → research → decision → transition-plan pipeline is currently human-driven: the user invokes each command at the right time. But the pipeline could be partially automated using **materialized workflow state** -- tracker files that encode what phase the work is in, what's been completed, and what's ready for the next step.
+
+The status indicators already embedded in documents (`🔴 Scaffolding`, `🟠 In Progress`, `✅ Expanded`) are proto-tracker state. An orchestrator could read these markers to determine pipeline readiness. Combined with structural schemas (Theme 7), this enables a model where:
+
+1. An orchestrator reads tracker state → spawns the appropriate agent
+2. The agent creates/modifies artifacts conforming to the relevant schema
+3. The agent updates tracker state → orchestrator validates and decides next step
+4. Human checkpoints remain at key decision points (explore → research, decision → implementation)
+
+This is the pattern that Cursor Cloud Agents, Devin, and similar systems use for multi-step autonomous work. The tracker file acts as a shared state machine that's readable by both humans and agents. It's analogous to a Makefile for knowledge work: file existence and content signal completion.
+
+The earlier idea of a CLI running an infinite loop with agents and subagents -- calling from explore through decision -- maps to this. Each phase becomes a subagent invocation, and the tracker file is the baton that passes between them.
+
+**Connections:**
+- Relates to Theme 7 (structural schemas) -- schemas make the handoff trustworthy by providing machine-checkable completion criteria
+- Relates to Theme 6 (subagent integration) -- orchestration is the coordination layer above individual subagents
+- Relates to Theme 3 (Superpowers) -- Superpowers' auto-triggering is a simpler version of this (skill-level triggers vs pipeline-level orchestration)
+- Relates to issue #72's toolbox model -- the orchestrator doesn't have to be a strict linear pipeline; it can be a state machine where any tool can be invoked based on what's needed
+
+**Concerns:**
+- Autonomy vs control: fully automated pipelines risk running ahead of human understanding. The `/discuss` insight (thinking ≠ doing) applies at the pipeline level too
+- Complexity: building a reliable orchestrator is significantly more work than maintaining manual commands
+- Failure modes: what happens when an agent produces a document that doesn't validate? The system needs graceful degradation, not hard stops
+- The explore → research flow isn't always linear (issue #72's toolbox model). An orchestrator that assumes linearity would be too rigid
+
+---
+
 ## ❓ Key Questions
 
 1. **Which rules content should decompose into skills vs. stay as always-on rules?** What's the sorting criteria, and how do we handle content that straddles the boundary?
@@ -175,6 +233,10 @@ This is potentially the highest-impact gap between dev-infra's current system an
 
 8. **What's the maintenance cost delta?** 26 commands + 3 rules vs. N skills + leaner rules + fewer commands. Is the total maintenance burden better or worse?
 
+9. **Can templates serve as structural schemas for agent-validated artifacts?** What would a template-as-schema look like in practice? How would agents reference and validate against it? What's the overhead vs the consistency gain?
+
+10. **What does a materialized workflow state / orchestrator look like for the explore → decision pipeline?** Is it a tracker file, embedded document status, or something else? Where are the human checkpoints, and how does the system handle non-linear workflows (issue #72's toolbox model)?
+
 ---
 
 ## 🧪 Spike Determination
@@ -186,6 +248,8 @@ This is potentially the highest-impact gap between dev-infra's current system an
 | Superpowers installation & evaluation | MEDIUM | Consider | Installing Superpowers in a test project and observing its behavior firsthand would inform the comparison |
 | Subagent-per-task delegation | HIGH | **Yes** | Subagent behavior (context limitations, coordination) can only be evaluated through runtime experimentation |
 | Cross-platform skill portability | MEDIUM | Consider | Testing a skill in Claude Code vs Cursor would reveal portability gaps |
+| Templates as structural schemas | MEDIUM-HIGH | Consider | Building a prototype schema for one artifact type (e.g., exploration) and testing agent validation behavior would reveal feasibility |
+| Orchestrator with tracker state | HIGH | **Yes** | Pipeline orchestration with subagents can only be validated through runtime experimentation -- too many unknowns in failure modes and agent coordination |
 
 **Risk Assessment:**
 
@@ -199,6 +263,7 @@ This is potentially the highest-impact gap between dev-infra's current system an
 **Spike Candidates:**
 - Subagent-per-task delegation -- `/spike subagent-task-delegation`
 - Single command-to-skill migration -- `/spike command-to-skill-migration`
+- Orchestrator with tracker state -- `/spike pipeline-orchestrator`
 
 ---
 
