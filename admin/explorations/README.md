@@ -2,7 +2,7 @@
 
 **Purpose:** Active explorations and proof of concepts  
 **Status:** ✅ Active  
-**Last Updated:** 2026-02-20
+**Last Updated:** 2026-03-25
 
 ---
 
@@ -10,7 +10,8 @@
 
 ### Active Explorations
 
-- **[AI Prompt Lifecycle](ai-prompt-lifecycle/README.md)** - Understanding LLM mechanics and Cursor prompt assembly to inform command design (✅ Expanded) ⭐ **NEW**
+- **[Agentic Workflow Modernization](agentic-workflow-modernization/README.md)** - Evaluate skills/rules/commands taxonomy and modernize dev-infra's workflow architecture (🟠 In Progress) ⭐ **NEW**
+- **[AI Prompt Lifecycle](ai-prompt-lifecycle/README.md)** - Understanding LLM mechanics and Cursor prompt assembly to inform command design (✅ Expanded)
 - **[Workflow Simplification](workflow-simplification/README.md)** - Simplify feature/phase/task hierarchy and command structure (✅ Expanded) ⭐ **NEW**
 - **[Template Doc Infrastructure](template-doc-infrastructure/README.md)** - Template-based doc generation and validation for consistent workflow docs (🔴 Scaffolding)
 - **[Worktree Feature Workflow](worktree-feature-workflow/README.md)** - Self-contained feature development with manual worktrees and review gates (🔴 Exploration)
@@ -47,4 +48,4 @@ This directory contains active explorations, proof of concepts, and abstract ide
 
 ---
 
-**Last Updated:** 2026-02-20
+**Last Updated:** 2026-03-25
