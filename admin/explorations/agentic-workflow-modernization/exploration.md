@@ -2,7 +2,8 @@
 
 **Status:** 🟠 In Progress
 **Created:** 2026-03-25
-**Amended:** 2026-03-25 - Added themes 7-8 from /discuss session (templates as structural schemas, orchestration and tracker state)
+**Amended:** 2026-03-25 - Added themes from /discuss session (templates as structural schemas, orchestration and tracker state)
+**Restructured:** 2026-03-25 - Merged overlapping themes, added constraints section, reordered by dependency, added conversion mechanics theme
 
 ---
 
@@ -14,54 +15,19 @@ The core tension: dev-infra's command system was built before skills existed. So
 
 ---
 
-## 🔍 Themes
+## 🛡️ Constraints: Unique Value to Preserve
 
-### Theme 1: Rules Decomposition and Context Efficiency
+These patterns have no equivalent in the broader ecosystem. Any modernization that loses them would be a regression. They apply as constraints across all themes.
 
-The three `.mdc` files (`main.mdc`, `workflow.mdc`, `template.mdc`) load into every conversation regardless of task relevance. They contain a mix of:
-
-- **Passive behavioral guidance** (project identity, branching strategy, commit format, documentation standards) -- genuinely belongs in always-on rules
-- **Procedural knowledge** (release process, PR review workflow, TDD patterns, template validation steps) -- better suited to on-demand loading via skills
-- **Current project state** (version, completed features, in-progress work) -- arguably belongs in rules but could be auto-generated
-
-The skills model offers progressive disclosure: agent sees name + description, loads full content only when relevant. This directly addresses the context overhead problem. But the decomposition isn't trivial -- some procedural knowledge is tightly coupled to behavioral guidance (e.g., "always follow Git Flow" is a rule, but the detailed branching strategy is procedural).
-
-**Connections:**
-- Relates to Theme 3 (Superpowers comparison) -- Superpowers' skills also use progressive loading
-- Relates to Theme 5 (what stays as commands) -- decomposition affects what's left
-
-**Concerns:**
-- Risk of over-decomposing: too many small skills could be harder to maintain than a few comprehensive rules
-- Discovery problem: if the agent doesn't load a skill when it should, the workflow breaks silently
-- Migration complexity: rules have been refined over months; splitting them risks losing nuance
+- **`/discuss` (read-only discussion mode)** -- The insight that agentic coding conflates thinking with doing is genuinely novel. No workflow system, including Superpowers, formalizes this distinction.
+- **Granular exploration pipeline** -- `/explore` → `/research` → `/decision` → `/transition-plan` is richer than any single "brainstorming" phase. The toolbox model from issue #72 makes this even stronger.
+- **Review-then-commit two-step** -- The explicit human pause between AI changes and committing is more disciplined than automatic review.
+- **Hub-and-spoke documentation** -- Feature planning, status tracking, and documentation-driven development have no ecosystem equivalent.
+- **Separation of exploration modes** -- Setup vs amend (post issue #72) preserves the mapping-vs-investigating distinction.
 
 ---
 
-### Theme 2: Commands-to-Skills Migration Path
-
-Dev-infra's 26+ commands span a wide spectrum of complexity:
-
-- **Simple triggers** (`/commit`, `/review`) -- appropriate as commands
-- **Moderate workflows** (`/fix-plan`, `/fix-implement`, `/pr`) -- could be either commands or skills
-- **Complex procedural workflows** (`/explore`, `/research`, `/task`, `/transition-plan`) -- natural candidates for skills with progressive disclosure and auto-detection
-
-The skills model adds two capabilities commands don't have: (1) agent auto-detection based on context, and (2) progressive loading of reference materials. Both are relevant for the complex workflows. A `/task` skill could be detected when the agent sees implementation plan files; an `/explore` skill could activate when the agent detects unstructured thoughts.
-
-The agentskills.io standard also makes skills cross-platform (Claude Code, Codex, Gemini CLI). Commands are Cursor-specific. If dev-infra templates are meant to be tool-agnostic, skills are the more portable format.
-
-**Connections:**
-- Relates to Theme 1 (rules decomposition) -- some rule content may become skill reference material
-- Relates to Theme 4 (what dev-infra has that the ecosystem doesn't)
-- Issue #72 is relevant here -- if `/explore --conduct` is removed, the explore workflow changes what a skill version would look like
-
-**Concerns:**
-- Commands and skills share the `/` menu in Cursor, but the invocation semantics differ
-- Auto-detection could trigger workflows the user didn't intend (the `/discuss` insight: conflating thinking with doing)
-- Not all 26 commands need migration -- the question is which ones benefit most from the skills model
-
----
-
-### Theme 3: Superpowers Overlap and Differentiation
+## 📊 Reference: Superpowers Comparison
 
 Superpowers implements a seven-phase opinionated workflow (brainstorming → worktrees → planning → subagents → TDD → review → branch finishing). Dev-infra independently arrived at most of these patterns:
 
@@ -75,108 +41,115 @@ Superpowers implements a seven-phase opinionated workflow (brainstorming → wor
 | Code review | `/review` + `/commit` | Explicit human pause, two-step |
 | Branch finishing | `/post-pr`, `/pr --ready` | Draft PR integration |
 
-The key philosophical difference: Superpowers enforces workflow automatically via skills that trigger without user invocation. Dev-infra's system is modular and explicitly invoked. There's a case for both approaches, and potentially a hybrid.
-
-Superpowers' "subagent-driven development" (fresh context per task) is the one area with no dev-infra equivalent. Cursor's native Task tool now supports this pattern. This may be a genuine gap.
-
-**Connections:**
-- Relates to Theme 2 (migration path) -- adopting the auto-detection model partially closes the gap with Superpowers
-- Relates to Theme 5 (what stays as commands) -- some enforcement could become automatic
-
-**Concerns:**
-- Adopting Superpowers wholesale would mean replacing a highly customized system with an opinionated one
-- Superpowers is third-party and may evolve in directions that don't align with dev-infra's goals
-- Auto-enforcement risks the same problem `/discuss` was created to solve: premature formalization
+The key philosophical difference: Superpowers enforces workflow automatically via skills that trigger without user invocation. Dev-infra's system is modular and explicitly invoked. Superpowers' "subagent-driven development" (fresh context per task) is the one area with no dev-infra equivalent.
 
 ---
 
-### Theme 4: Unique Value to Preserve
+## 🔍 Themes
 
-Several dev-infra patterns have no equivalent in the broader ecosystem and should be explicitly preserved in any modernization:
+### Theme 1: Three-Layer Redistribution
 
-- **`/discuss` (read-only discussion mode)** -- The insight that agentic coding conflates thinking with doing is genuinely novel. No workflow system, including Superpowers, formalizes this distinction.
-- **Granular exploration pipeline** -- `/explore` → `/research` → `/decision` → `/transition-plan` is richer than any single "brainstorming" phase. The toolbox model from issue #72 makes this even stronger.
-- **Review-then-commit two-step** -- The explicit human pause between AI changes and committing is more disciplined than automatic review.
-- **Hub-and-spoke documentation** -- Feature planning, status tracking, and documentation-driven development have no ecosystem equivalent.
-- **Separation of exploration modes** -- Setup vs amend (post issue #72) preserves the mapping-vs-investigating distinction.
+The central question of this exploration: how to redistribute everything currently in rules + commands across the three-layer model (rules, skills, commands).
 
-These aren't just "nice to haves" -- they represent hard-won process insights. A modernization that loses them would be a regression.
+**Rules content to sort:**
 
-**Connections:**
-- Relates to Theme 2 (migration path) -- these should be preserved as skills or commands, not dissolved
-- Relates to Theme 3 (Superpowers) -- these are differentiators, not gaps
+The three `.mdc` files (`main.mdc`, `workflow.mdc`, `template.mdc`) load into every conversation regardless of task relevance. They contain a mix of:
 
-**Concerns:**
-- Portability: if these stay as Cursor commands, they don't travel to other platforms
-- Maintenance burden: 26+ commands is significant to maintain across two templates and dev-infra itself
+- **Passive behavioral guidance** (project identity, branching strategy, commit format, documentation standards) -- genuinely belongs in always-on rules
+- **Procedural knowledge** (release process, PR review workflow, TDD patterns, template validation steps) -- better suited to on-demand loading via skills
+- **Current project state** (version, completed features, in-progress work) -- arguably belongs in rules but could be auto-generated
 
----
+**Commands content to sort:**
 
-### Theme 5: What Stays as Commands
+The 26+ commands span a wide spectrum:
 
-Not everything should migrate. The rules/skills/commands taxonomy suggests:
+- **Simple triggers** (`/commit`, `/review`, `/status`) -- appropriate as commands; don't benefit from auto-detection or progressive disclosure
+- **Moderate workflows** (`/fix-plan`, `/fix-implement`, `/pr`) -- could be either; threshold question is whether auto-detection or reference materials add value
+- **Complex procedural workflows** (`/explore`, `/research`, `/task`, `/transition-plan`) -- natural candidates for skills with progressive disclosure and auto-detection
 
-- **Rules** -- Passive behavioral guidance (project identity, standards, conventions)
-- **Skills** -- Procedural multi-step workflows with reference materials (explore, research, task)
-- **Commands** -- Simple triggers the user explicitly invokes (`/commit`, `/review`, `/status`)
-
-Some commands are genuinely just saved prompts. `/commit` reads a draft message and commits. `/status` reports project state. These don't benefit from auto-detection or progressive disclosure. They should remain commands.
-
-The interesting middle ground: commands like `/pr` and `/fix-plan` that are moderate complexity. They're multi-step but not heavy enough to justify skill infrastructure. The threshold question is: would this benefit from auto-detection or reference materials?
+The skills model offers progressive disclosure (agent sees name + description, loads full content only when relevant) and auto-detection (agent decides when to invoke based on context). Both address real problems: context overhead for rules, and discoverability for commands.
 
 **Connections:**
-- Relates to Theme 2 (migration path) -- this is the sorting criteria
-- Relates to Theme 1 (rules decomposition) -- rules + skills + commands should cover everything currently in rules + commands
+- Gated by Theme 2 (auto-detection decision) -- the sorting criteria depend on whether auto-detection is part of the model
+- Informed by Theme 3 (conversion mechanics) -- practical constraints of the skill format may affect what's worth migrating
 
 **Concerns:**
-- The `/` menu mixing skills and commands could be confusing if some `/` items are skills and some are commands
+- Risk of over-decomposing: too many small skills could be harder to maintain than a few comprehensive rules
+- Discovery problem: if the agent doesn't load a skill when it should, the workflow breaks silently
+- Migration complexity: rules have been refined over months; splitting them risks losing nuance
+- The `/` menu mixing skills and commands could be confusing
 - Maintaining both skills and commands for the same workflows during migration creates duplication
 
 ---
 
-### Theme 6: Subagent Integration
+### Theme 2: Auto-Detection vs Explicit Invocation
 
-Cursor's native Task tool spins up isolated subagents with fresh context. Superpowers uses this as "subagent-driven development" -- one task per subagent, each reviewed against the plan.
+This is the core design decision that gates everything else. If the answer is "always explicit," skills are just portable commands with progressive loading. If the answer is "hybrid," the architecture changes fundamentally.
 
-Dev-infra's `/task` command currently runs everything in a single conversation context. For larger features with many tasks, this means context accumulates and degrades. Subagent-per-task could:
+Superpowers enforces workflow automatically via skills that trigger without user invocation. Dev-infra's `/discuss` command exists precisely because auto-formalization is a problem -- the insight that agentic coding conflates thinking with doing. The tension between discipline (auto-enforcement) and autonomy (explicit invocation) is real.
 
-- Give each task a clean context window
-- Allow parallel task execution
-- Enforce task isolation (one task can't accidentally affect another)
-- Improve review quality (each task is self-contained)
+Possible positions:
 
-This is potentially the highest-impact gap between dev-infra's current system and the ecosystem.
+- **Always explicit** -- Skills replace commands for portability and progressive loading, but the user always invokes. Simplest migration, preserves dev-infra's philosophy.
+- **Selective auto-detection** -- Some skills auto-detect (e.g., `/task` activates when implementation plan files are present), others stay explicit. Requires careful design of detection criteria.
+- **Full auto-enforcement** -- Superpowers model. Agent decides the workflow. Conflicts with `/discuss` philosophy.
 
 **Connections:**
-- Relates to Theme 3 (Superpowers) -- this is Superpowers' most novel contribution
-- Relates to Theme 2 (migration path) -- a skills-based `/task` could integrate subagent delegation
+- Gates Theme 1 (redistribution) -- the sorting criteria for commands-to-skills depends on this decision
+- Relates to Theme 5 (orchestration) -- auto-detection at the skill level vs pipeline-level orchestration are related but different questions
 
 **Concerns:**
-- Subagent context is limited -- no access to conversation history or user messages
-- Coordination between subagents requires careful task specification
-- Not all tasks benefit from isolation; some need prior context
+- Auto-detection could trigger workflows the user didn't intend
+- Selective auto-detection requires maintaining detection criteria alongside the skills themselves
+- The hybrid model is the most flexible but also the most complex to reason about
 
 ---
 
-### Theme 7: Templates as Structural Schemas
+### Theme 3: Command-to-Skill Conversion Mechanics
+
+Before deciding *what* to migrate, we need to understand *how*. Dev-infra has never built a Cursor skill. The file format is different (`.md` SKILL.md with YAML frontmatter in a directory vs `.md` command file), the directory structure is different (`.cursor/skills/skill-name/SKILL.md` + reference files vs `.cursor/commands/name.md`), and the activation model is different.
+
+Practical questions:
+
+- What does a skill directory look like for a complex workflow like `/explore`?
+- How do reference materials (template schemas, examples) integrate?
+- What's the description sweet spot for auto-detection without false positives?
+- How does the 500-line SKILL.md limit affect commands that are currently 500+ lines?
+- Can skill reference materials replace the always-on rule content (procedural knowledge moves to skill references)?
+- How does template sync validation work for skills across two templates + dev-infra?
+
+The agentskills.io standard also makes skills cross-platform (Claude Code, Codex, Gemini CLI). Commands are Cursor-specific. If dev-infra templates are meant to be tool-agnostic, skills are the more portable format.
+
+**Connections:**
+- Informs Theme 1 (redistribution) -- practical constraints of skill format affect what's worth migrating
+- Relates to Theme 4 (schemas) -- schemas could be skill reference materials
+- Issue #72 is relevant -- if `/explore --conduct` is removed, the explore skill becomes simpler
+
+**Concerns:**
+- The 500-line limit may force decomposition of complex commands that work well as monoliths
+- Testing skills is different from testing commands -- no existing test infrastructure
+- Template sync validation would need to handle skills as a third artifact type
+
+---
+
+### Theme 4: Templates as Structural Schemas
 
 Dev-infra's templates currently serve as generators -- they define the initial shape of a document or project, then are forgotten. But templates could serve a second, more powerful role: **structural contracts** that agents reference throughout the lifecycle, not just at creation time.
 
-In software, schemas (database schemas, API contracts, type systems) enforce structural agreement between independent actors. A TypeScript compiler won't let you pass the wrong shape. A database migration fails if the schema doesn't match. But in document-driven agentic workflows, there's no equivalent. When an agent edits an exploration document in a later session, it has no reference for "what is the expected shape of an exploration document?" It relies on lengthy command instructions or infers from the existing content.
+In software, schemas (database schemas, API contracts, type systems) enforce structural agreement between independent actors. But in document-driven agentic workflows, there's no equivalent. When an agent edits an exploration document in a later session, it has no reference for "what is the expected shape of an exploration document?" It relies on lengthy command instructions or infers from the existing content.
 
 If templates were treated as **living structural contracts**, agents could:
 
 - Validate that a document still conforms to its expected shape after edits
 - Understand what sections are expected without loading the full command instructions
 - Use the template as a lightweight reference (cheaper than loading the full skill/command)
-- Enable orchestration (Theme 8) by providing machine-checkable completion criteria
+- Enable orchestration (Theme 5) by providing machine-checkable completion criteria
 
-This is essentially proposing a **type system for knowledge artifacts**. The template defines the type; the document is an instance. Agents that understand the type can work with instances more reliably across sessions and contexts.
+This is essentially proposing a **type system for knowledge artifacts**. The template defines the type; the document is an instance.
 
 **Connections:**
-- Relates to Theme 1 (rules decomposition) -- templates-as-schemas could replace some always-on rule content with on-demand structural references
-- Relates to Theme 8 (orchestration) -- schemas are the contracts that make automated handoff trustworthy
-- Relates to Theme 2 (skills migration) -- a skill's reference materials could include structural schemas for its output artifacts
+- Relates to Theme 3 (conversion mechanics) -- schemas could be skill reference materials
+- Enables Theme 5 (orchestration) -- schemas are the contracts that make automated handoff trustworthy
 - Connects to the `ai-prompt-lifecycle` exploration -- how agents consume context shapes how schemas should be exposed
 
 **Concerns:**
@@ -186,56 +159,50 @@ This is essentially proposing a **type system for knowledge artifacts**. The tem
 
 ---
 
-### Theme 8: Orchestration and Materialized Workflow State
+### Theme 5: Subagent Integration and Orchestration
 
-Dev-infra's explore → research → decision → transition-plan pipeline is currently human-driven: the user invokes each command at the right time. But the pipeline could be partially automated using **materialized workflow state** -- tracker files that encode what phase the work is in, what's been completed, and what's ready for the next step.
+*This theme combines the subagent-per-task question with the broader orchestration question, since orchestration depends on subagent capabilities.*
 
-The status indicators already embedded in documents (`🔴 Scaffolding`, `🟠 In Progress`, `✅ Expanded`) are proto-tracker state. An orchestrator could read these markers to determine pipeline readiness. Combined with structural schemas (Theme 7), this enables a model where:
+**Subagent-per-task:**
 
-1. An orchestrator reads tracker state → spawns the appropriate agent
-2. The agent creates/modifies artifacts conforming to the relevant schema
-3. The agent updates tracker state → orchestrator validates and decides next step
-4. Human checkpoints remain at key decision points (explore → research, decision → implementation)
+Cursor's native Task tool spins up isolated subagents with fresh context. Superpowers uses this as "subagent-driven development" -- one task per subagent, each reviewed against the plan. Dev-infra's `/task` command currently runs everything in a single conversation context. For larger features with many tasks, context accumulates and degrades. Subagent-per-task could give each task a clean context window, allow parallel execution, enforce isolation, and improve review quality.
 
-This is the pattern that Cursor Cloud Agents, Devin, and similar systems use for multi-step autonomous work. The tracker file acts as a shared state machine that's readable by both humans and agents. It's analogous to a Makefile for knowledge work: file existence and content signal completion.
+**Pipeline orchestration:**
 
-The earlier idea of a CLI running an infinite loop with agents and subagents -- calling from explore through decision -- maps to this. Each phase becomes a subagent invocation, and the tracker file is the baton that passes between them.
+Dev-infra's explore → research → decision → transition-plan pipeline is currently human-driven. But it could be partially automated using **materialized workflow state** -- tracker files that encode what phase the work is in, what's been completed, and what's ready for the next step.
+
+The status indicators already embedded in documents (`🔴 Scaffolding`, `🟠 In Progress`, `✅ Expanded`) are proto-tracker state. Combined with structural schemas (Theme 4), an orchestrator could read these markers to determine pipeline readiness, spawn appropriate agents, validate output, and determine the next step -- with human checkpoints at key decision points.
+
+This maps to the earlier idea of a CLI running an infinite loop with agents and subagents -- each phase as a subagent invocation, with the tracker file as the baton.
+
+**Dependency chain:** Schemas (Theme 4) enable validation → subagents enable task delegation → orchestration coordinates the pipeline.
 
 **Connections:**
-- Relates to Theme 7 (structural schemas) -- schemas make the handoff trustworthy by providing machine-checkable completion criteria
-- Relates to Theme 6 (subagent integration) -- orchestration is the coordination layer above individual subagents
-- Relates to Theme 3 (Superpowers) -- Superpowers' auto-triggering is a simpler version of this (skill-level triggers vs pipeline-level orchestration)
-- Relates to issue #72's toolbox model -- the orchestrator doesn't have to be a strict linear pipeline; it can be a state machine where any tool can be invoked based on what's needed
+- Depends on Theme 4 (schemas) -- schemas make handoff trustworthy
+- Depends on Theme 2 (auto-detection) -- orchestration is auto-detection at the pipeline level
+- Relates to the Superpowers comparison -- Superpowers' auto-triggering is a simpler version of this
 
 **Concerns:**
-- Autonomy vs control: fully automated pipelines risk running ahead of human understanding. The `/discuss` insight (thinking ≠ doing) applies at the pipeline level too
+- Subagent context is limited -- no access to conversation history or user messages
+- Coordination between subagents requires careful task specification
+- Autonomy vs control: fully automated pipelines risk running ahead of human understanding
 - Complexity: building a reliable orchestrator is significantly more work than maintaining manual commands
-- Failure modes: what happens when an agent produces a document that doesn't validate? The system needs graceful degradation, not hard stops
 - The explore → research flow isn't always linear (issue #72's toolbox model). An orchestrator that assumes linearity would be too rigid
+- Failure modes: what happens when an agent produces a document that doesn't validate?
 
 ---
 
 ## ❓ Key Questions
 
-1. **Which rules content should decompose into skills vs. stay as always-on rules?** What's the sorting criteria, and how do we handle content that straddles the boundary?
+1. **How should rules and commands redistribute across the three-layer model?** What's the sorting criteria for rules content (always-on vs on-demand) and command content (command vs skill)?
 
-2. **Which of the 26 commands benefit most from skills migration?** Need to assess each against: auto-detection value, progressive disclosure value, cross-platform portability value, and migration cost.
+2. **Should dev-infra adopt auto-detection, stay explicit, or go hybrid?** This gates the redistribution criteria. How do you get the discipline benefits of auto-enforcement without the premature formalization problem?
 
-3. **Should dev-infra adopt any Superpowers concepts directly, or just draw inspiration?** Specifically: should auto-enforcement (skills triggering without user invocation) be part of the model, or does explicit invocation remain a design principle?
+3. **What does a command-to-skill conversion look like in practice?** File format, directory structure, reference materials, 500-line limit, detection descriptions, testing, template sync.
 
-4. **How does issue #72's toolbox model affect the skills architecture?** If explore loses `--conduct`, the explore skill becomes simpler. Does the toolbox model (explore maps, research/spike investigate) map cleanly to a skills-based architecture?
+4. **Can templates serve as structural schemas for agent-validated artifacts?** What does a template-as-schema look like? How do agents reference and validate against it? What's the overhead vs the consistency gain?
 
-5. **What does subagent integration look like for `/task`?** Can the task workflow delegate individual implementation tasks to subagents while maintaining plan awareness?
-
-6. **What's the migration strategy?** All-at-once vs. incremental? Which commands first? How to maintain backward compatibility during transition?
-
-7. **How does cross-platform portability factor in?** Is dev-infra committed to Cursor, or should the workflow system work across Claude Code, Codex, and other tools?
-
-8. **What's the maintenance cost delta?** 26 commands + 3 rules vs. N skills + leaner rules + fewer commands. Is the total maintenance burden better or worse?
-
-9. **Can templates serve as structural schemas for agent-validated artifacts?** What would a template-as-schema look like in practice? How would agents reference and validate against it? What's the overhead vs the consistency gain?
-
-10. **What does a materialized workflow state / orchestrator look like for the explore → decision pipeline?** Is it a tracker file, embedded document status, or something else? Where are the human checkpoints, and how does the system handle non-linear workflows (issue #72's toolbox model)?
+5. **What do subagent integration and pipeline orchestration look like?** Can `/task` delegate to subagents? Can tracker state enable automated pipeline handoff? Where are the human checkpoints?
 
 ---
 
@@ -243,36 +210,27 @@ The earlier idea of a CLI running an infinite loop with agents and subagents -- 
 
 | Topic | Risk Level | Spike? | Rationale |
 |-------|------------|--------|-----------|
-| Rules → skills decomposition | MEDIUM | No | Can be evaluated through analysis, not runtime behavior |
-| Command → skill migration (single command) | MEDIUM-HIGH | Consider | Converting one command (e.g., `/explore`) to a skill and testing auto-detection behavior would validate the approach |
-| Superpowers installation & evaluation | MEDIUM | Consider | Installing Superpowers in a test project and observing its behavior firsthand would inform the comparison |
+| Three-layer redistribution | MEDIUM | No | Can be evaluated through analysis of existing rules/commands content |
+| Auto-detection vs explicit | MEDIUM | No | Design decision informed by research into both models |
+| Command-to-skill conversion | MEDIUM-HIGH | **Yes** | Converting one command (e.g., `/explore`) to a skill and testing auto-detection would validate the approach |
+| Templates as structural schemas | MEDIUM-HIGH | Consider | Prototyping a schema for one artifact type (exploration) would reveal feasibility |
 | Subagent-per-task delegation | HIGH | **Yes** | Subagent behavior (context limitations, coordination) can only be evaluated through runtime experimentation |
-| Cross-platform skill portability | MEDIUM | Consider | Testing a skill in Claude Code vs Cursor would reveal portability gaps |
-| Templates as structural schemas | MEDIUM-HIGH | Consider | Building a prototype schema for one artifact type (e.g., exploration) and testing agent validation behavior would reveal feasibility |
-| Orchestrator with tracker state | HIGH | **Yes** | Pipeline orchestration with subagents can only be validated through runtime experimentation -- too many unknowns in failure modes and agent coordination |
+| Pipeline orchestration | HIGH | **Yes** | Too many unknowns in failure modes and agent coordination; depends on subagent spike results |
 
-**Risk Assessment:**
-
-| Risk Level | Determination | Rationale |
-|------------|---------------|-----------|
-| HIGH | **Spike first** | Hard to pivot once committed |
-| MEDIUM-HIGH | **Consider spike** | Benefits from hands-on validation |
-| MEDIUM | Research only | Can be analyzed from documentation |
-| LOW | Research only | Clear path, low risk |
-
-**Spike Candidates:**
-- Subagent-per-task delegation -- `/spike subagent-task-delegation`
-- Single command-to-skill migration -- `/spike command-to-skill-migration`
-- Orchestrator with tracker state -- `/spike pipeline-orchestrator`
+**Spike Candidates (ordered by dependency):**
+1. Command-to-skill conversion -- `/spike command-to-skill-migration` (unblocks Theme 1 and 3)
+2. Subagent-per-task delegation -- `/spike subagent-task-delegation` (unblocks Theme 5)
+3. Pipeline orchestration -- `/spike pipeline-orchestrator` (depends on #2)
 
 ---
 
 ## 🚀 Next Steps
 
-1. If spike candidates warrant it, run `/spike subagent-task-delegation` to test Cursor's Task tool for task-level delegation
-2. Review research topics in `research-topics.md`
-3. Use `/research agentic-workflow-modernization --from-explore` to investigate individual topics
-4. Address issue #72 changes to `/explore` as a parallel or prerequisite workstream
+1. Resolve issue #72 (explore refactor) as a prerequisite -- it changes the shape of the explore workflow that would be a spike target
+2. Spike command-to-skill conversion using one representative command
+3. Research auto-detection vs explicit invocation (Topic 2) -- this is the gating design decision
+4. Research three-layer redistribution (Topic 1) once the auto-detection decision is made
+5. Spike subagent delegation and orchestration as a later workstream
 
 ---
 
