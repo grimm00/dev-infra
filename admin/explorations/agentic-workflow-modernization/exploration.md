@@ -4,6 +4,7 @@
 **Created:** 2026-03-25
 **Amended:** 2026-03-25 - Added themes from /discuss session (templates as structural schemas, orchestration and tracker state)
 **Restructured:** 2026-03-25 - Merged overlapping themes, added constraints section, reordered by dependency, added conversion mechanics theme
+**Amended:** 2026-03-25 - Added Theme 6 (dual-distribution model), updated Themes 2-3 and reference section with marketplace findings
 
 ---
 
@@ -27,9 +28,9 @@ These patterns have no equivalent in the broader ecosystem. Any modernization th
 
 ---
 
-## 📊 Reference: Superpowers Comparison
+## 📊 Reference: Superpowers / Hex Comparison
 
-Superpowers implements a seven-phase opinionated workflow (brainstorming → worktrees → planning → subagents → TDD → review → branch finishing). Dev-infra independently arrived at most of these patterns:
+Superpowers (marketed as "Hex" in the DRW UP Claude Marketplace) implements a seven-phase opinionated workflow (brainstorming → worktrees → planning → subagents → TDD → review → branch finishing). **Hex is already deployed in the team marketplace** (v2.1.0) alongside dev-infra's commands. Dev-infra independently arrived at most of these patterns:
 
 | Superpowers Phase | Dev-Infra Equivalent | Dev-Infra Advantage |
 |-------------------|---------------------|---------------------|
@@ -94,6 +95,8 @@ Possible positions:
 - **Selective auto-detection** -- Some skills auto-detect (e.g., `/task` activates when implementation plan files are present), others stay explicit. Requires careful design of detection criteria.
 - **Full auto-enforcement** -- Superpowers model. Agent decides the workflow. Conflicts with `/discuss` philosophy.
 
+**Key finding from /discuss:** The SKILL.md frontmatter supports `disable-model-invocation: true`, which prevents auto-detection at the individual skill level. This means the choice isn't global -- each skill can independently opt in or out of auto-detection. This supports a hybrid model where most dev-infra skills are explicit-only while specific ones (e.g., structural validation) could auto-detect.
+
 **Connections:**
 - Gates Theme 1 (redistribution) -- the sorting criteria for commands-to-skills depends on this decision
 - Relates to Theme 5 (orchestration) -- auto-detection at the skill level vs pipeline-level orchestration are related but different questions
@@ -107,18 +110,26 @@ Possible positions:
 
 ### Theme 3: Command-to-Skill Conversion Mechanics
 
-Before deciding *what* to migrate, we need to understand *how*. Dev-infra has never built a Cursor skill. The file format is different (`.md` SKILL.md with YAML frontmatter in a directory vs `.md` command file), the directory structure is different (`.cursor/skills/skill-name/SKILL.md` + reference files vs `.cursor/commands/name.md`), and the activation model is different.
+Before deciding *what* to migrate, we need to understand *how*. The skill format differs from commands: a `SKILL.md` with YAML frontmatter in a directory (with optional reference files) vs a single `.md` command file.
 
-Practical questions:
+**Key finding from /discuss:** The format gap is smaller than expected. A real-world skill has been built (`update-pr-description` in the DRW UP Claude Marketplace), confirming the format is understood. The same SKILL.md works in both Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The skill directory structure naturally accommodates reference materials, templates, and configs -- meaning dev-infra's doc templates can live *inside* the skill as structural schemas.
 
-- What does a skill directory look like for a complex workflow like `/explore`?
-- How do reference materials (template schemas, examples) integrate?
-- What's the description sweet spot for auto-detection without false positives?
-- How does the 500-line SKILL.md limit affect commands that are currently 500+ lines?
-- Can skill reference materials replace the always-on rule content (procedural knowledge moves to skill references)?
+**The marketplace plugin format** wraps skills with distribution metadata:
+
+```
+plugin-name/
+├── .claude-plugin/plugin.json   # metadata (name, version, author, keywords)
+├── README.md                     # install/usage docs
+└── skills/skill-name/
+    └── SKILL.md                  # the actual skill (+ reference files)
+```
+
+Remaining practical questions:
+
+- How do complex multi-mode commands (e.g., `/explore` with setup/amend) decompose into the skill format?
+- How does the 500-line SKILL.md limit affect commands that are currently 500+ lines? (Progressive disclosure via reference files likely solves this)
 - How does template sync validation work for skills across two templates + dev-infra?
-
-The agentskills.io standard also makes skills cross-platform (Claude Code, Codex, Gemini CLI). Commands are Cursor-specific. If dev-infra templates are meant to be tool-agnostic, skills are the more portable format.
+- What's the description sweet spot for auto-detection without false positives?
 
 **Connections:**
 - Informs Theme 1 (redistribution) -- practical constraints of skill format affect what's worth migrating
@@ -192,6 +203,31 @@ This maps to the earlier idea of a CLI running an infinite loop with agents and 
 
 ---
 
+### Theme 6: Dual-Distribution Model
+
+Dev-infra serves two audiences that require different distribution channels:
+
+1. **Team (work):** The DRW UP Claude Marketplace is the distribution channel for Claude Code skills. The team already uses this marketplace (Hex, daily-summary, deploy-app-to-k8s, review-briefing, etc.). Publishing dev-infra's workflow skills here makes them accessible to teammates who use Claude Code as their primary agent. The marketplace provides versioning, metadata (`plugin.json`), install mechanisms, and discovery.
+
+2. **Personal / local projects:** Dev-infra templates continue to seed new projects with `.cursor/skills/` (or `.cursor/commands/` for simple triggers). This serves personal projects, open source work, and any context where the team marketplace isn't relevant. Dev-infra remains the source of truth; the marketplace is a distribution target.
+
+The critical insight: **the same SKILL.md artifact works in both channels.** Cursor reads from `.cursor/skills/`, Claude Code reads from `.agents/skills/`, and the marketplace wraps both with distribution metadata. Dev-infra develops and tests skills locally (Cursor), then packages for the marketplace (Claude plugin format) when ready to share.
+
+This dual model means dev-infra's identity as a "template factory" expands: it produces not just project templates, but also **portable workflow skills** that can be distributed through multiple channels.
+
+**Connections:**
+- Directly addresses issue #73 (command drift) -- marketplace versioning solves freshness
+- Directly addresses issue #76 (portable commands) -- skills replace the ad-hoc curl workflow
+- Relates to Theme 1 (redistribution) -- the distribution model affects what stays as commands (simple triggers for Cursor only) vs skills (portable across channels)
+- Relates to Theme 3 (conversion mechanics) -- the marketplace format is the target packaging
+
+**Concerns:**
+- Maintaining two distribution channels (templates + marketplace) could create sync drift at a different level
+- Not all skills are appropriate for the team marketplace (some are personal workflow preferences)
+- The marketplace has its own conventions and review expectations that may affect skill design
+
+---
+
 ## ❓ Key Questions
 
 1. **How should rules and commands redistribute across the three-layer model?** What's the sorting criteria for rules content (always-on vs on-demand) and command content (command vs skill)?
@@ -203,6 +239,8 @@ This maps to the earlier idea of a CLI running an infinite loop with agents and 
 4. **Can templates serve as structural schemas for agent-validated artifacts?** What does a template-as-schema look like? How do agents reference and validate against it? What's the overhead vs the consistency gain?
 
 5. **What do subagent integration and pipeline orchestration look like?** Can `/task` delegate to subagents? Can tracker state enable automated pipeline handoff? Where are the human checkpoints?
+
+6. **How should dev-infra manage dual distribution (templates + marketplace)?** What's the workflow for developing a skill locally, testing in Cursor, and publishing to the Claude marketplace? Which skills are team-appropriate vs personal-only? How does sync work between the two channels?
 
 ---
 
@@ -216,6 +254,7 @@ This maps to the earlier idea of a CLI running an infinite loop with agents and 
 | Templates as structural schemas | MEDIUM-HIGH | Consider | Prototyping a schema for one artifact type (exploration) would reveal feasibility |
 | Subagent-per-task delegation | HIGH | **Yes** | Subagent behavior (context limitations, coordination) can only be evaluated through runtime experimentation |
 | Pipeline orchestration | HIGH | **Yes** | Too many unknowns in failure modes and agent coordination; depends on subagent spike results |
+| Dual distribution workflow | LOW | No | The marketplace format is known; the workflow is a design question, not a technical risk |
 
 **Spike Candidates (ordered by dependency):**
 1. Command-to-skill conversion -- `/spike command-to-skill-migration` (unblocks Theme 1 and 3)

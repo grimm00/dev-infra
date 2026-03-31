@@ -3,6 +3,7 @@
 **Status:** 🟠 In Progress
 **Created:** 2026-03-25
 **Restructured:** 2026-03-25 - Reordered by dependency, scoped narrower, removed spike-only items, flagged downstream topics
+**Amended:** 2026-03-25 - Updated Topics 1, 3, 5 with marketplace findings; added Topic 6 (dual distribution)
 
 ---
 
@@ -14,9 +15,9 @@
 
 **Priority:** High (gates all other decisions)
 
-**Context:** Superpowers enforces workflows automatically. Dev-infra's `/discuss` command exists precisely because auto-formalization is a problem. This is the core design decision: if the answer is "always explicit," skills are just portable commands with progressive loading and the migration is simpler. If "hybrid," the architecture changes fundamentally. Look for real-world experience with both models, failure modes of auto-detection, and hybrid patterns that balance discipline with autonomy.
+**Context:** Superpowers (Hex) enforces workflows automatically and is already deployed in the team marketplace. Dev-infra's `/discuss` command exists precisely because auto-formalization is a problem. The SKILL.md frontmatter supports `disable-model-invocation: true` for per-skill opt-out of auto-detection, enabling a hybrid model without a global decision. The question narrows to: which skills should auto-detect and which should be explicit-only?
 
-**Method:** Research -- compare outcomes of both models in practice, look for hybrid approaches, examine Superpowers' and Cursor's auto-detection behavior
+**Method:** Research -- examine `disable-model-invocation` behavior across platforms, review Hex's auto-detection patterns, define criteria for when auto-detection is appropriate vs harmful
 
 ---
 
@@ -40,9 +41,9 @@
 
 **Priority:** High
 
-**Context:** Dev-infra has never built a Cursor skill. The file format differs (SKILL.md with YAML frontmatter in a directory vs single `.md` command file), the 500-line limit may force decomposition, reference materials are a new concept, and detection descriptions need to be precise without false positives. Additionally, template sync validation would need to handle skills as a third artifact type.
+**Context:** A real-world skill has already been built (`update-pr-description` for the DRW UP Claude Marketplace), so the basic format is understood. The same SKILL.md works in Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The remaining question is how *complex multi-mode commands* decompose -- commands like `/explore` (setup + amend modes, input sources, worktree integration) that are 500+ lines. The skill directory structure naturally supports reference files (templates, configs), which is where doc templates would live.
 
-**Scope:** Focus on one representative command (e.g., `/explore` post-issue-#72) and design its skill equivalent on paper. Document: directory structure, SKILL.md content, reference materials, detection description, what rule content it absorbs. This is the "anatomy" of a conversion, not the full migration.
+**Scope:** Focus on one complex command (e.g., `/explore` post-issue-#72) and design its skill equivalent: SKILL.md (core contract), reference files (templates, examples), `plugin.json` (marketplace metadata). Compare against `update-pr-description` as the known-good simple case.
 
 **Method:** Research + spike candidate -- design on paper first, then `/spike command-to-skill-migration` to validate
 
@@ -64,13 +65,25 @@
 
 ### Topic 5: Cross-Platform Portability
 
-**Question:** How portable are skills across Cursor, Claude Code, Codex, and Gemini CLI? Does the agentskills.io standard actually work?
+**Question:** What are the remaining portability gaps between Cursor and Claude Code for skill execution? Does the same SKILL.md behave identically on both platforms?
 
-**Priority:** Medium (informational, doesn't gate architecture)
+**Priority:** Medium (largely answered, but edge cases may exist)
 
-**Context:** If dev-infra templates are meant to be tool-agnostic, portability matters. But if the user base is primarily Cursor, the investment may not be justified. This topic informs the *weight* given to portability in the redistribution rubric (Topic 2), not the architecture itself.
+**Context:** The core portability question is answered: the same SKILL.md works in Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The DRW UP Claude Marketplace already distributes skills in this format. The remaining question is behavioral: do both platforms handle `disable-model-invocation`, reference file loading, and progressive disclosure the same way? Are there edge cases in how Cursor vs Claude Code parse frontmatter or load reference materials?
 
-**Method:** Research -- documentation review, community feedback on agentskills.io adoption
+**Method:** Research -- targeted testing of specific behavioral differences, not broad standard evaluation
+
+---
+
+### Topic 6: Dual-Distribution Workflow
+
+**Question:** How should dev-infra manage the develop → test → publish workflow across two distribution channels (templates for personal/local projects, Claude marketplace for team)?
+
+**Priority:** Medium
+
+**Context:** Dev-infra serves two audiences: personal/local projects (via templates that seed `.cursor/skills/`) and the team (via the DRW UP Claude Marketplace with `plugin.json` + marketplace install). The same SKILL.md artifact works in both, but the distribution packaging differs. Questions: What's the workflow for developing locally, testing in Cursor, and publishing to the marketplace? Which skills are team-appropriate? How to keep the two channels in sync? Does dev-infra's existing template sync validation extend to cover skills?
+
+**Method:** Research / design -- define the workflow, identify sync points, assess which skills to publish
 
 ---
 
@@ -100,15 +113,17 @@ These can only be answered after Topics 1-3 are resolved.
 ## 🎯 Research Workflow
 
 ```
-Topic 1: Auto-detection decision      ← GATE: determines architecture direction
+Topic 1: Auto-detection decision      ← GATE (narrowed by disable-model-invocation finding)
     ↓
 Topic 2: Redistribution rubric        ← Apply to representative sample
     ↓
-Topic 3: Conversion mechanics          ← Design one skill on paper → spike to validate
+Topic 3: Conversion mechanics          ← Design one complex skill → spike to validate
     ↓
-Topic 4: Structural schemas            ← Design one schema → consider spike
+Topic 4: Structural schemas            ← Design one schema as skill reference material
     |
-Topic 5: Portability                   ← Informational, feeds into rubric weighting
+Topic 5: Portability edge cases        ← Behavioral differences between Cursor & Claude Code
+    |
+Topic 6: Dual-distribution workflow    ← Templates + marketplace sync design
     
 [After architecture decisions]
     ↓
