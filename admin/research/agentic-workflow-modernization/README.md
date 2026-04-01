@@ -45,7 +45,7 @@ Two spikes have already been completed and inform this research:
 
 | Topic | Priority | Status | Document |
 |-------|----------|--------|----------|
-| 1: Auto-Detection vs Explicit | High (GATE) | 🔴 Not Started | [topic-1-auto-detection.md](topic-1-auto-detection.md) |
+| 1: Auto-Detection vs Explicit | High (GATE) | ✅ Complete | [topic-1-auto-detection.md](topic-1-auto-detection.md) |
 | 2: Redistribution Criteria | High | 🔴 Not Started | [topic-2-redistribution-criteria.md](topic-2-redistribution-criteria.md) |
 | 3: Conversion Mechanics | High | 🔴 Not Started | [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md) |
 | 4: Structural Schemas | Medium-High | 🔴 Not Started | [topic-4-structural-schemas.md](topic-4-structural-schemas.md) |

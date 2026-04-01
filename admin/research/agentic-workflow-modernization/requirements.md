@@ -70,6 +70,14 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
+### C-3: Marketplace Distribution of Explicit-Only Skills Is Blocked
+
+**Description:** Skills with `disable-model-invocation: true` cannot be distributed via Cursor marketplace plugins due to a known bug (reported March 2026, unresolved): the flag completely hides plugin-delivered skills from the `/` command palette, making them invisible and uninvokable. Skills requiring this flag must be distributed via repo/template path only until the bug is resolved.
+
+**Source:** [topic-1-auto-detection.md](topic-1-auto-detection.md) -- Finding 1; [Cursor Forum bug report](https://forum.cursor.com/t/disable-model-invocation-true-completely-hides-plugin-delivered-skills-from-command-palette/155748)
+
+---
+
 ### C-2: SKILL.md Body Limited to 500 Lines
 
 **Description:** The Cursor skills specification limits SKILL.md to 500 lines. Complex commands with reference templates must externalize content to reference files within the skill directory.
@@ -96,7 +104,31 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
-## 🔗 Related Documents
+### FR-4: Workflow Skills Must Disable Auto-Detection
+
+**Description:** All user-triggered workflow skills (skills that initiate side effects such as file writes, git operations, or subagent dispatch) must set `disable-model-invocation: true` in their SKILL.md frontmatter. Auto-detection is prohibited for these skills -- invocation must be explicitly initiated by the user via `/skill-name`.
+
+**Source:** [topic-1-auto-detection.md](topic-1-auto-detection.md) -- Finding 1, Finding 3, Finding 7
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-5: Passive Background Knowledge May Use Auto-Detection
+
+**Description:** Passive background knowledge extracted from always-on rules (e.g., code conventions, documentation patterns, hub-and-spoke structural rules) may use `user-invocable: false` for automatic loading. The skill must meet all four auto-detect eligibility criteria: (1) read-only, (2) no side effects if loaded uninvited, (3) domain-scoped to relevant contexts, (4) not a workflow a user would invoke on-demand.
+
+**Source:** [topic-1-auto-detection.md](topic-1-auto-detection.md) -- Finding 2, Finding 6
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+## ⚠️ Constraints (continued)
 
 - [Research Summary](research-summary.md)
 - [Research Hub](README.md)

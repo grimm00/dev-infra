@@ -45,8 +45,21 @@ Procedural skills (sequential steps, reference files for templates) and behavior
 
 *Findings to be added as research is conducted.*
 
-### Topic 1: Auto-Detection vs Explicit Invocation (🔴 Not Started)
-*Findings to be added.*
+### Topic 1: Auto-Detection vs Explicit Invocation (✅ Complete)
+
+**Recommendation: Hybrid model -- explicit for workflows, auto-detect for passive background knowledge.**
+
+The research converges on a clear answer supported by platform convergence (both Cursor and Claude Code 2.1 landed on explicit-first independently), empirical failure rates (context-loading-to-application gaps make auto-detection unreliable for critical workflows), and the architecture of dev-infra's commands (workflow-triggered, not ambient).
+
+Key finding: `disable-model-invocation: true` works reliably for repo/template-distributed skills but has a known bug for marketplace-distributed skills (complete invisibility from command palette). This creates a constraint on the dual-distribution model.
+
+Criteria for auto-detect eligibility (all four required):
+1. Read-only background knowledge
+2. No side effects if loaded uninvited
+3. Domain-scoped (relevant only in certain contexts)
+4. Not a workflow a user would want to invoke on-demand
+
+**Source:** [topic-1-auto-detection.md](topic-1-auto-detection.md)
 
 ### Topic 2: Redistribution Criteria (🔴 Not Started)
 *Findings to be added.*
