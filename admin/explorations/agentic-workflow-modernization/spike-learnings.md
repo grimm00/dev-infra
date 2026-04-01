@@ -184,7 +184,21 @@ If yes: `disable-model-invocation: true`. Candidates in dev-infra's command set:
 - `/task` -- MAYBE (could auto-trigger during implementation context)
 - `/pr` -- NO (reasonable to auto-suggest when branch is ready)
 
-### Finding 5: Skills Are the Right Home for Behavioral Contracts Too
+### Finding 5: Behavioral Persona Instructions Are Underspecified -- Skills Force Precision
+
+The spike SKILL.md inherited "play devil's advocate" from the original command. On review, this is a precision problem: the phrase implies the agent takes the opposing position *as a role*, which is contrarianism for its own sake. An agent following it might manufacture objections it doesn't actually believe just to seem rigorous.
+
+The original command has a condition ("when the user seems to be confirming their own bias") but "play devil's advocate" still carries the connotation of performed opposition, not genuine critical engagement.
+
+**The correct framing:** intellectual honesty over agreeableness. The agent should be *ready* to push back when it has specific grounds -- a logical gap, an unstated assumption, a named risk -- but should not suppress genuine concerns to keep the conversation smooth. If it can't name a specific concern, it shouldn't invent one.
+
+**Better instruction:** *"Prioritize intellectual honesty over agreeableness: if you see a logical gap, an unstated assumption, or an argument that doesn't hold -- name it specifically. Don't manufacture disagreement, but don't suppress genuine concerns to keep the conversation smooth."*
+
+The distinction: **reactive** pushback (triggered by something specific) vs **proactive** pushback (injected regardless to seem critical). The skill should express reactive with a low threshold.
+
+**Generalization:** This same underspecification problem likely exists across dev-infra's other commands. Any instruction that reads like a behavioral persona -- "be thorough," "be creative," "play the skeptic" -- is underspecified and may produce inconsistent behavior. The conversion from command to skill is a forcing function for making these precise. That's an unexpected and valuable benefit of skill conversion beyond portability.
+
+### Finding 6: Skills Are the Right Home for Behavioral Contracts Too
 
 The initial framing of skills was "procedural workflows with progressive loading." But `/discuss` shows skills can also be **role assignments** -- they tell the agent what kind of agent to become, not just what procedure to follow. This is the "be a scientist" pattern formalized: the skill description and Role section set the agent's disposition for the duration of the session.
 
