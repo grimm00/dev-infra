@@ -5,6 +5,8 @@
 **Amended:** 2026-03-25 - Added themes from /discuss session (templates as structural schemas, orchestration and tracker state)
 **Restructured:** 2026-03-25 - Merged overlapping themes, added constraints section, reordered by dependency, added conversion mechanics theme
 **Amended:** 2026-03-25 - Added Theme 6 (dual-distribution model), updated Themes 2-3 and reference section with marketplace findings
+**Amended:** 2026-03-25 - Added Themes 7-8 from /discuss session (conversation as orchestration, agent roles and behavioral contracts)
+**Amended:** 2026-03-25 - Widened Theme 8 (agent identity + alignment), added Theme 9 (AGENTS.md as portable identity layer)
 
 ---
 
@@ -228,6 +230,97 @@ This dual model means dev-infra's identity as a "template factory" expands: it p
 
 ---
 
+### Theme 7: Conversation as Lightweight Orchestration
+
+The `/discuss` session surfaced a natural reframe: the chat itself is already an orchestration layer. Rather than building a formal pipeline orchestrator (Theme 5), the user drives orchestration conversationally -- providing context, dispatching subagents inline, and analyzing outputs as they arrive. The agent doesn't need tracker files or machine-readable state; the conversation *is* the state.
+
+This is meaningfully different from Theme 5's vision of a CLI running automated loops. Conversation-as-orchestration is human-in-the-loop by design: the user reads results, decides what to do next, and launches the next subagent with context from the previous one. The chat window becomes the coordination surface.
+
+This pattern already works today -- the Task tool can be invoked mid-conversation, outputs returned and analyzed, then follow-up tasks launched based on what was learned. The friction points are: subagents can't read conversation history (they need explicit context hand-off), outputs need to be somewhere they can be referenced (files or direct return), and parallel subagents require careful prompt construction to avoid overlap.
+
+**Connections:**
+- Complements Theme 5 (orchestration) -- conversation-driven is the low-infrastructure version; tracker-state is the higher-autonomy version
+- Relates to Theme 2 (auto-detection) -- conversation-driven orchestration is inherently explicit, not auto-triggered
+- The chat transcript itself becomes a lightweight artifact -- not a structured document, but a record of decisions and outputs
+
+**Implications:**
+- Research and spike topics could be run as parallel subagents within a single conversation, with the user synthesizing results
+- This is viable *now* without any infrastructure build; it's the pragmatic entry point before investing in formal orchestration
+- The `/discuss` command's read-only guarantee matters here: keeping discussion separate from execution preserves the user's ability to reason before dispatching
+
+**Concerns:**
+- Conversation state is ephemeral -- if the session ends, the orchestration context is lost unless artifacts were written
+- Parallelism is limited by the user's ability to manage multiple subagent outputs in one session
+- Context hand-off to subagents requires discipline: the user must write clear, self-contained task descriptions or the subagent lacks the context to do good work
+
+---
+
+### Theme 8: Agent Identity, Behavioral Contracts, and Alignment
+
+Commands don't just trigger actions -- they establish behavioral contracts. `/discuss` doesn't just mean "read-only"; it means "be a collaborator who pushes back rather than validating whatever I say." The invocation carries an expectation about *how the agent should behave*, not just *what it should do*.
+
+This generalizes. Each command in dev-infra's pipeline implies a distinct agent role:
+
+- `/discuss` → **Collaborator**: engage critically, offer pushback, don't formalize
+- `/explore` → **Mapper**: survey territory, organize thoughts, don't commit to solutions
+- `/research` → **Investigator**: deep-dive specific questions, surface evidence
+- `/spike` → **Experimentalist**: hands-on validation, throwaway mindset, learning-focused
+- `/task` → **Implementer**: execute with discipline, TDD, review-then-commit
+- `/review` → **Auditor**: read-only assessment, no changes
+
+The behavioral contract is what makes `/discuss` consistently useful -- it's not just a mode switch, it's a role assignment that shapes how the agent interprets everything in the conversation. The contrast with Cursor's built-in "Ask mode" is instructive: Ask mode is a Cursor-specific switch with no behavioral semantics beyond read-only. `/discuss` infuses the agent with the *spirit* of discussion: intellectual engagement, willingness to disagree, and deliberate restraint from premature action.
+
+**Agent identity at the rules/configuration level:** This goes deeper than individual commands. The Cursor agent (this chat) can be configured at the rules level to have a default disposition -- "your default role in this repo is collaborator; you read before writing; you spawn subagents only when explicitly directed." This is a different layer from commands invoking behavioral shifts: it's the agent being *constituted* with an identity, not just told what to do next. The architectural inversion this implies: instead of `/discuss` shifting away from an implementation-happy default, the default is collaborative and implementation commands (`/task`, `/pr`) are the explicit departures.
+
+**Alignment as the purpose of documentation:** Human organizational alignment is ambient -- culture, osmosis, 1:1s. Agent alignment must be explicit and portable. Every subagent starts with zero context; alignment doesn't transfer automatically. This reframes dev-infra's documentation artifacts: narratives and explorations aren't just human-readable records -- they're **briefing documents** for agents. The constraints section ("Unique Value to Preserve") is an alignment artifact. A subagent given the narrative before doing work can make tradeoff decisions that align with the project's intent rather than optimizing locally. The *why* matters as much as the *what*, because agents given rules without rationale will follow the letter but not the spirit.
+
+**The discussion agent as briefing writer:** When the discussion agent (this chat) holds the alignment context -- narratives, constraints, philosophical intent -- it becomes the natural source of task briefs for implementation subagents. It doesn't just orchestrate; it *transmits alignment* to workers who would otherwise start fresh. This is the project lead role: understand the whole, brief the parts.
+
+**Connections:**
+- Directly informs Theme 3 (conversion mechanics) -- the skill description isn't just a capability summary; it encodes the behavioral contract
+- Relates to Theme 2 (auto-detection) -- behavioral contracts may be the clearest argument against auto-detection for certain roles (`/discuss` should never auto-trigger)
+- Connects to Theme 7 (conversation orchestration) -- when dispatching subagents conversationally, explicit role assignments in task briefs improve output quality
+- Connects to Theme 9 (AGENTS.md) -- the rules-level identity configuration needs a portable expression; AGENTS.md is the candidate
+
+**Concerns:**
+- Behavioral contracts are harder to test than functional ones -- how do you validate that an agent is "pushing back appropriately"?
+- Role definitions could drift from actual behavior over time; they need to be grounded in real usage patterns
+- Some roles have fuzzy boundaries (when does /explore become /research?)
+- Configuring the agent's default as "collaborator" risks friction when the user needs to move fast -- the explicit mode-switch overhead may not always be worth the discipline gain
+
+---
+
+### Theme 9: AGENTS.md as Portable Identity Layer
+
+Cursor's `.mdc` rules files are Cursor-specific. The agent identity configuration discussed in Theme 8 -- "collaborator by default, implementer on explicit command" -- only works in Cursor if expressed as `.mdc` rules. But `AGENTS.md` is emerging as a cross-platform convention: a markdown file at the repo root that is automatically included in agent context regardless of the tool (Cursor, Claude Code, OpenAI Codex, and others). It's the portable equivalent of always-applied rules.
+
+The helm-charts repo's `AGENTS.md` illustrates what this looks like in practice today: entirely operational (structure, conventions, testing patterns, release process). It tells agents *what the repo is and how things are done* -- the conventions layer. What it lacks is the behavioral and directional layers that make agent work aligned rather than merely correct.
+
+A layered `AGENTS.md` structure would address this gap:
+
+- **Identity/Rules layer** -- behavioral defaults, the collaborator disposition, constraints on what the agent should never do. Points to a skill or states the behavioral contract inline. This is the portable equivalent of Cursor's always-applied behavioral rules.
+- **Conventions layer** -- what the helm-charts file already has. Repo-specific, operational, how things are done.
+- **Roadmap layer** -- directional context: what's in flight, what's planned, what's being explored. The alignment layer that enables tradeoff decisions without having to ask. *This may not need to be part of an initial implementation -- it's the most valuable but also the most expensive to maintain.*
+- **Other** -- team context, ownership, escalation paths as needed.
+
+The hub-and-spoke question applies here: does AGENTS.md contain all content inline (guaranteed to be read, harder to share across repos) or does it reference other files (more elegant, but depends on whether the agent follows the references)? This is an open empirical question -- platform behavior on file references in AGENTS.md needs testing.
+
+The critical insight for dev-infra: if AGENTS.md carries the identity and conventions layers, and SKILL.md carries the procedural workflows, the `.mdc` rules files can be slimmed down to Cursor-specific concerns only (glob-based auto-attach, IDE-specific hints). The three-layer model becomes four: AGENTS.md (portable identity) + rules (Cursor-specific) + skills (portable procedural) + commands (simple triggers).
+
+**Connections:**
+- Directly enables Theme 8 (agent identity) -- AGENTS.md is the portable mechanism for expressing default behavioral disposition
+- Relates to Theme 5 (cross-platform portability, Topic 5) -- AGENTS.md portability and file-reference behavior needs empirical testing
+- Informs Theme 1 (redistribution) -- the sorting criteria changes if AGENTS.md is a first-class layer alongside rules/skills/commands
+- Relates to Theme 6 (dual distribution) -- AGENTS.md ships with templates, not the marketplace; it's repo-local by nature
+
+**Concerns:**
+- AGENTS.md portability and platform support is not fully confirmed -- needs research to establish what tools actually read it and how consistently
+- Hub-and-spoke AGENTS.md (with file references) may not work if platforms don't follow references; monolithic inline content is safer but harder to maintain
+- A Roadmap layer in AGENTS.md would be high-value but high-maintenance; stale roadmap context may be worse than no roadmap
+- Adding AGENTS.md as a fourth layer increases the total surface to maintain; only worth it if the portability gain is real
+
+---
+
 ## ❓ Key Questions
 
 1. **How should rules and commands redistribute across the three-layer model?** What's the sorting criteria for rules content (always-on vs on-demand) and command content (command vs skill)?
@@ -242,6 +335,14 @@ This dual model means dev-infra's identity as a "template factory" expands: it p
 
 6. **How should dev-infra manage dual distribution (templates + marketplace)?** What's the workflow for developing a skill locally, testing in Cursor, and publishing to the Claude marketplace? Which skills are team-appropriate vs personal-only? How does sync work between the two channels?
 
+7. **Can the conversation itself serve as the orchestration layer?** What are the practical limits of dispatching subagents conversationally? What context hand-off discipline is required? When does this break down and require formal orchestration?
+
+8. **How do agent identity and behavioral contracts translate into portable configuration?** Can the default disposition ("collaborator by default") be configured at the rules/AGENTS.md level? How do behavioral contracts in SKILL.md descriptions hold across platforms and sessions?
+
+9. **Is AGENTS.md a reliable portable equivalent of Cursor's always-applied rules?** Which tools actually read it, and how consistently? Does it support hub-and-spoke references or must it be self-contained? What belongs in AGENTS.md vs `.mdc` rules vs SKILL.md?
+
+10. **Does the Roadmap layer in AGENTS.md belong in v0.11.0?** What's the minimum viable roadmap section -- enough to enable agent alignment without becoming a maintenance burden?
+
 ---
 
 ## 🧪 Spike Determination
@@ -255,11 +356,15 @@ This dual model means dev-infra's identity as a "template factory" expands: it p
 | Subagent-per-task delegation | HIGH | **Yes** | Subagent behavior (context limitations, coordination) can only be evaluated through runtime experimentation |
 | Pipeline orchestration | HIGH | **Yes** | Too many unknowns in failure modes and agent coordination; depends on subagent spike results |
 | Dual distribution workflow | LOW | No | The marketplace format is known; the workflow is a design question, not a technical risk |
+| Conversation-as-orchestration | MEDIUM-HIGH | **Yes** | Practical limits (context hand-off, parallel subagent output management) can only be discovered through experimentation |
+| Behavioral contracts in skill descriptions | MEDIUM | No | Design question; can be evaluated by drafting one skill description and comparing platform behavior |
+| AGENTS.md portability and platform support | MEDIUM-HIGH | **Yes** | Whether platforms follow file references and behave consistently can only be confirmed empirically |
 
 **Spike Candidates (ordered by dependency):**
-1. Command-to-skill conversion -- `/spike command-to-skill-migration` (unblocks Theme 1 and 3)
-2. Subagent-per-task delegation -- `/spike subagent-task-delegation` (unblocks Theme 5)
-3. Pipeline orchestration -- `/spike pipeline-orchestrator` (depends on #2)
+1. Command-to-skill conversion -- `/spike command-to-skill-migration` (unblocks Themes 1 and 3)
+2. Conversation-as-orchestration -- `/spike conversation-orchestration` (unblocks Theme 7; run research topics as parallel subagents as the spike itself)
+3. Subagent-per-task delegation -- `/spike subagent-task-delegation` (unblocks Theme 5)
+4. Pipeline orchestration -- `/spike pipeline-orchestrator` (depends on #3)
 
 ---
 
@@ -267,10 +372,11 @@ This dual model means dev-infra's identity as a "template factory" expands: it p
 
 1. Resolve issue #72 (explore refactor) as a prerequisite -- it changes the shape of the explore workflow that would be a spike target
 2. Spike command-to-skill conversion using one representative command
-3. Research auto-detection vs explicit invocation (Topic 2) -- this is the gating design decision
-4. Research three-layer redistribution (Topic 1) once the auto-detection decision is made
-5. Spike subagent delegation and orchestration as a later workstream
+3. Research auto-detection vs explicit invocation (Topic 1) -- this is the gating design decision
+4. Research three-layer redistribution (Topic 2) once the auto-detection decision is made
+5. Run research topics as parallel subagents -- this is itself the conversation-orchestration spike (Topic 7)
+6. Spike subagent delegation and pipeline orchestration as a later workstream
 
 ---
 
-**Last Updated:** 2026-03-25
+**Last Updated:** 2026-03-25 (Amended: Themes 7-8 added)

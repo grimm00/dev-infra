@@ -4,6 +4,8 @@
 **Created:** 2026-03-25
 **Restructured:** 2026-03-25 - Reordered by dependency, scoped narrower, removed spike-only items, flagged downstream topics
 **Amended:** 2026-03-25 - Updated Topics 1, 3, 5 with marketplace findings; added Topic 6 (dual distribution)
+**Amended:** 2026-03-25 - Added Topics 7-8 from /discuss session (conversation orchestration, behavioral contracts)
+**Amended:** 2026-03-25 - Widened Topic 8 (agent identity + alignment); added Topics 9-10 (AGENTS.md portability, roadmap layer)
 
 ---
 
@@ -87,6 +89,60 @@
 
 ---
 
+### Topic 7: Conversation as Lightweight Orchestration
+
+**Question:** What are the practical limits and required disciplines for using the chat conversation itself as the orchestration layer for multi-agent workflows?
+
+**Priority:** Medium-High
+
+**Context:** The /discuss session revealed that the chat is already a natural orchestration surface -- the user provides context, dispatches subagents inline via the Task tool, and synthesizes outputs conversationally. This is viable today without building formal infrastructure. The open questions are practical: what context hand-off must be included in each subagent task description for it to do good work? What happens when parallel subagents produce outputs that need to be compared? When does conversation-driven orchestration break down and require formal tracker state?
+
+**Method:** Spike -- the limits can only be discovered by running multi-subagent workflows and observing failure modes. Start with research topics as parallel subagents.
+
+---
+
+### Topic 8: Behavioral Contracts in Skill Descriptions
+
+**Question:** How do the behavioral expectations embedded in dev-infra's commands translate into SKILL.md descriptions that hold across platforms and sessions?
+
+**Priority:** Medium
+
+**Context:** Dev-infra's commands work because they establish behavioral contracts, not just capability descriptions. `/discuss` works because it infuses the agent with a collaborator role: pushback, no premature formalization, intellectual engagement. This is different from Cursor's Ask mode, which is a functional switch (read-only) with no behavioral semantics. If these behavioral contracts can be captured in skill descriptions, the commands gain portability and consistency. If not, the behavioral fidelity depends on platform-specific behavior.
+
+**Scope:** Draft the skill description for one high-behavioral-contract command (`/discuss`) and test whether the behavior is consistent in Cursor vs Claude Code. Compare against a low-behavioral-contract command (`/commit`) as a control.
+
+**Method:** Research + spike -- draft descriptions first, then empirically test behavioral consistency
+
+---
+
+### Topic 9: AGENTS.md Portability and Platform Support
+
+**Question:** Is AGENTS.md a reliable portable equivalent of Cursor's always-applied rules? What do platforms actually do with it?
+
+**Priority:** High (gates Theme 9 and the four-layer model)
+
+**Context:** The helm-charts repo already has an AGENTS.md that functions as a conventions document. The open question is behavioral: which tools (Cursor, Claude Code, Codex) actually read AGENTS.md, how consistently, and does it support hub-and-spoke references to other files or must it be self-contained? If platforms don't follow file references, the elegant layered structure breaks down. If portability is inconsistent across tools, AGENTS.md can't serve as the foundation for cross-platform agent identity.
+
+**Scope:** Test AGENTS.md behavior in Cursor and Claude Code. Specifically: (1) is it auto-loaded without configuration, (2) do file path references get followed and loaded, (3) is there any frontmatter or metadata support, (4) does subdirectory AGENTS.md work (per-directory scoping)?
+
+**Method:** Spike -- empirical testing in a throwaway project on both platforms
+
+---
+
+### Topic 10: Roadmap Layer in AGENTS.md
+
+**Question:** What's the right scope and format for a roadmap section in AGENTS.md, and does it belong in dev-infra's initial AGENTS.md implementation?
+
+**Priority:** Low (explicitly deferred from initial implementation)
+
+**Context:** A roadmap layer in AGENTS.md would give agents directional context -- what's in flight, what's planned, what's being explored -- enabling aligned tradeoff decisions without having to ask. The helm-charts AGENTS.md has no such layer; a new agent working there has no awareness of what's being planned. But a stale roadmap may be worse than no roadmap, and maintaining a roadmap section adds overhead. The question is: what's the minimum viable version that delivers alignment value without becoming a maintenance burden?
+
+**Scope:** Design a minimal roadmap section format -- possibly just a pointer to a planning document or a 3-5 line "current focus" statement. Compare against the cost of keeping it current. Assess whether the value justifies inclusion in v0.11.0 or should be deferred.
+
+**Method:** Research / design -- no spike needed; this is a format and scoping decision
+
+---
+
 ## 🔬 Spike-Only Items (Not Research Topics)
 
 These are addressed through spikes, not research. They're tracked in the exploration's spike determination table.
@@ -96,6 +152,8 @@ These are addressed through spikes, not research. They're tracked in the explora
 | Subagent-per-task delegation | `/spike subagent-task-delegation` | -- |
 | Pipeline orchestration with tracker state | `/spike pipeline-orchestrator` | Subagent spike results |
 | Superpowers hands-on evaluation | Install and try in throwaway project | -- (optional) |
+| Conversation-as-orchestration limits | `/spike conversation-orchestration` | -- (run research topics as parallel subagents as the spike itself) |
+| AGENTS.md platform behavior | `/spike agents-md-portability` | -- (test in throwaway project on Cursor + Claude Code) |
 
 ---
 
@@ -124,7 +182,15 @@ Topic 4: Structural schemas            ← Design one schema as skill reference 
 Topic 5: Portability edge cases        ← Behavioral differences between Cursor & Claude Code
     |
 Topic 6: Dual-distribution workflow    ← Templates + marketplace sync design
-    
+    |
+Topic 7: Conversation orchestration   ← Practical limits of chat-as-pipeline (also a spike)
+    |
+Topic 8: Behavioral contracts          ← Skill descriptions + agent identity configuration
+    |
+Topic 9: AGENTS.md portability        ← GATE for four-layer model (empirical spike)
+    |
+Topic 10: Roadmap layer scope         ← Deferred; design only, no spike needed
+
 [After architecture decisions]
     ↓
 Downstream: Maintenance cost, issue #72 interaction

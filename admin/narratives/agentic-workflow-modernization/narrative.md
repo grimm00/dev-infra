@@ -82,6 +82,26 @@ This is the three-layer architecture:
 
 Layer 1 is the immediate work. Layer 2 is mostly built. Layer 3 is the vision.
 
+### Act 5: The Identity and Alignment Turn
+
+A subsequent discussion pushed the architecture further, from *what agents do* to *what agents are*.
+
+**The cursor agent is configurable.** Cursor's "Agent" chat isn't just a command executor -- it's a configurable identity. Cursor's always-applied `.mdc` rules already do this implicitly (the "Response Style" section in `main.mdc` is behavioral configuration, buried under project context). But the insight was sharper: the rules layer could configure the agent's *default disposition* at the foundational level. Instead of `/discuss` shifting away from an implementation-happy default, the default could be collaborative -- and implementation commands (`/task`, `/pr`) would be the explicit departures. This is an architectural inversion.
+
+**Agent alignment must be explicit.** Human organizations align through culture, osmosis, 1:1s. Agents can't. Every subagent starts with zero context; alignment doesn't transfer automatically. This reframed dev-infra's entire documentation artifact system: narratives and explorations aren't just human-readable records -- they're **briefing documents**. The constraints section ("Unique Value to Preserve") is an alignment artifact. A subagent given the narrative before working has the *why*, which shapes tradeoff decisions. The reason documentation-driven development works isn't just human maintainability -- it's that it makes agent alignment reproducible.
+
+**The discussion agent as briefing writer.** When the discussion chat holds alignment context -- narratives, constraints, philosophical intent -- it becomes the natural source of task briefs for implementation subagents. Not just an orchestrator, but a *transmitter of alignment* to workers who would otherwise start fresh. This is the project lead role: understand the whole, brief the parts.
+
+**AGENTS.md as the portable identity layer.** Cursor's `.mdc` rules are Cursor-specific. But `AGENTS.md` is emerging as a cross-platform convention read by multiple tools (Cursor, Claude Code, Codex). The helm-charts repo already has one -- operational content only (conventions, testing patterns, release process). What it lacks is the behavioral and directional layers. A layered AGENTS.md could provide:
+
+- **Identity layer** -- behavioral defaults, the collaborator disposition, constraints
+- **Conventions layer** -- what the helm-charts file already has
+- **Roadmap layer** -- directional context for aligned tradeoff decisions (deferred; high value, high maintenance)
+
+This creates a four-layer model: AGENTS.md (portable identity) + `.mdc` rules (Cursor-specific) + skills (portable procedural) + commands (simple triggers). The roadmap layer is the most strategically valuable but also the most expensive to maintain -- a minimum viable "current focus" statement may be sufficient for an initial implementation.
+
+The full architecture now has a name: the **briefed agent system**. Distinct agents with defined roles, aligned through explicit artifacts, coordinated conversationally or through orchestration. The discussion chat is the project lead. The artifacts are the shared context. The skills are the role definitions. AGENTS.md is the onboarding document.
+
 ---
 
 ## What Was Learned
@@ -91,13 +111,16 @@ Layer 1 is the immediate work. Layer 2 is mostly built. Layer 3 is the vision.
 - **Dev-infra's workflow innovations are genuinely ahead of the ecosystem** in several areas (discussion mode, granular pipeline, review discipline). The modernization is about better packaging and execution, not about catching up.
 - **The skill format is the convergence point.** Same SKILL.md works in Cursor and Claude Code. The marketplace provides distribution. Templates provide local seeding. This is the target format.
 - **Artifacts have been inter-agent interfaces all along.** The hub-and-spoke documentation, the status indicators, the template structures — these are proto-schemas for an agent-driven pipeline. Formalizing them as structural schemas completes the picture.
+- **AGENTS.md is the portable identity layer.** The four-layer model (AGENTS.md + `.mdc` rules + skills + commands) gives each layer a clear role. The `.mdc` rules can slim down to Cursor-specific concerns; AGENTS.md carries the portable always-on context.
+- **Documentation-driven development is also alignment infrastructure.** The real value of narratives, explorations, and constraints sections isn't just human readability -- it's that they make agent alignment reproducible across sessions and subagents.
 - **Issue #72 (explore refactor) is a prerequisite** — it simplifies the explore workflow before converting it to a skill.
 
 ### For the Engineer
 
 - **The apprentice paradox.** Being junior in domain knowledge while advanced in process knowledge creates real friction in organizations that only evaluate the first kind. But the work speaks for itself — especially when the industry converges on the same patterns you independently developed.
 - **Don't underestimate what you've built.** The assumption coming back was "I'm probably behind." The reality was the opposite. Time away from a project can distort your sense of its value.
-- **`/discuss` proved its value in this very session.** Multiple ideas (structural schemas, orchestration, the marketplace insight, the artifacts-as-interfaces reframe) emerged through discussion and were promoted to formal artifacts only when they were ready. The command did exactly what it was designed to do: separate thinking from doing.
+- **`/discuss` proved its value in this very session.** Multiple ideas (structural schemas, orchestration, the marketplace insight, the artifacts-as-interfaces reframe, agent identity, AGENTS.md) emerged through discussion and were promoted to formal artifacts only when they were ready. The command did exactly what it was designed to do: separate thinking from doing.
+- **The "be a scientist" insight ages well.** What once felt like a clever chatbot trick -- giving an agent a role persona via markdown -- turns out to be the foundation of a serious multi-agent architecture. The difference is formalism, portability, and the understanding of *why* it works.
 - **Narratives capture what other artifacts miss.** The exploration document has the themes. The research topics have the questions. But the *story* of how the thinking evolved — the sequence of insights, the moments of realization — only exists in a narrative.
 
 ---
@@ -105,10 +128,14 @@ Layer 1 is the immediate work. Layer 2 is mostly built. Layer 3 is the vision.
 ## The Commits
 
 ```
-9893a20 docs(explore): create agentic-workflow-modernization exploration
-a2a0449 docs(explore): amend agentic-workflow-modernization with themes 7-8
-ba6548d docs(explore): restructure agentic-workflow-modernization exploration
-84ea688 docs(explore): amend agentic-workflow-modernization with marketplace context
+529a5b8 docs(explore): create agentic-workflow-modernization exploration
+7f6481f docs(explore): amend agentic-workflow-modernization with themes 7-8
+994a854 docs(explore): restructure agentic-workflow-modernization exploration
+2835cfa docs(explore): amend agentic-workflow-modernization with marketplace context
+52fd914 docs(narrative): capture agentic-workflow-modernization session narrative
+725448c docs(commands): add /narrative command for post-completion storytelling
+37c2519 docs: anonymize company-specific references in exploration artifacts
+[pending] docs(explore): amend with agent identity, AGENTS.md, and alignment themes
 ```
 
 ---
@@ -128,4 +155,4 @@ ba6548d docs(explore): restructure agentic-workflow-modernization exploration
 
 ---
 
-**Last Updated:** 2026-03-25
+**Last Updated:** 2026-03-25 (Amended: Act 5 added — identity, alignment, AGENTS.md)
