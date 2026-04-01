@@ -112,3 +112,132 @@ New questions revealed by this spike (feed back to research):
 ---
 
 **Last Updated:** 2026-03-25
+
+---
+
+---
+
+# Spike Learnings: Command-to-Skill Conversion (Spike B)
+
+**Exploration:** `admin/explorations/agentic-workflow-modernization/`
+**Created:** 2026-03-25
+**Time-box:** ~1 hour
+**Test case:** `/discuss` command → SKILL.md
+**Result:** Validated
+
+---
+
+## Questions Answered
+
+- [x] Q1: Can a high-behavioral-contract command be converted to a SKILL.md that preserves its behavioral fidelity? -- **Yes.** The Behavior Rules section translates almost directly. The "be a collaborator who pushes back" contract survives in the Role section.
+- [x] Q2: Does the 500-line limit require decomposition for `/discuss`? -- **No.** 267-line command → 143-line SKILL.md. 46% reduction by removing motivational content (Why This Exists), common scenarios, integration pipeline diagrams, and redundant tips. Headroom for complex commands without reference files.
+- [x] Q3: What is the right `disable-model-invocation` decision for a behavioral command? -- **Always true for `/discuss`.** Auto-detection would violate the behavioral contract -- the skill exists precisely to prevent premature auto-action. This is a categorical finding: any command whose value is the *deliberate choice to invoke it* must have `disable-model-invocation: true`.
+- [x] Q4: What should the `description` field contain for a non-auto-detecting skill? -- **User-facing clarity, not detection optimization.** Since the skill won't auto-invoke, the description is for the user browsing the skills list and for the agent understanding the skill's purpose when the skill list is loaded. Write for understanding, not trigger matching.
+- [x] Q5: Are reference files needed for `/discuss`? -- **No.** Common scenarios (60 lines) are illustrative, not load-bearing. Reference files are most valuable for skills with large templates or external configs, not for behavioral skills.
+
+---
+
+## Key Findings
+
+### Finding 1: Two Distinct Skill Archetypes
+
+`update-pr-description` and `discuss` represent two fundamentally different skill types that need different SKILL.md structures:
+
+| Dimension | Procedural Skill (update-pr-description) | Behavioral Skill (discuss) |
+|-----------|------------------------------------------|----------------------------|
+| Structure | prerequisites → steps → output | role assumption → engagement rules → optional output |
+| Core content | Executable commands, merge logic | Constraints, active behavior during conversation |
+| Line count | 208 lines | 143 lines |
+| Reference files | Not needed (logic is inline) | Not needed (behavior is inline) |
+| `disable-model-invocation` | `true` (avoid false positives on "create PR") | `true` (violation of contract if auto-invoked) |
+| Portability concern | Output format (gh CLI availability) | Behavioral fidelity across platforms |
+
+The 26 dev-infra commands will decompose into these two archetypes (and hybrids). Recognizing the archetype upfront shapes the SKILL.md structure.
+
+### Finding 2: What Gets Cut in Conversion
+
+The 267 → 143 line reduction came from removing:
+- **Why This Exists** (motivation): Useful for humans reading the command file, not needed by the agent executing the skill. An agent doesn't need to know the history of why the skill exists.
+- **Common Scenarios** (4 examples, ~60 lines): Illustrative but not load-bearing. The agent doesn't execute scenarios; it follows constraints. If scenario guidance matters, it should be in the Role/During section, not as example narratives.
+- **Integration pipeline diagram**: Useful for human understanding of where the command fits; the agent uses Related Skills for this instead.
+- **Redundant tips**: "Be honest about uncertainty" is implied by the behavioral contract, not a separate instruction.
+
+**Rule of thumb:** Everything that reads like "here's how a human thinks about this command" gets cut. Only what the agent needs to execute the skill correctly stays.
+
+### Finding 3: The Behavioral Contract Compresses Well
+
+The original 8-point Behavior Rules section (DO NOT/DO) compressed to the Absolute Constraints + Role sections with no loss of fidelity. The contract actually reads more clearly in the skill -- the original command buries the behavioral intent under motivational prose. The skill puts it front and center.
+
+Key addition in the skill that wasn't explicit in the command: **"Every user message is a thought to engage with, not a directive to act on."** This is implied in the command but made explicit in the skill's Role section. The compression forced a clearer statement of the core contract.
+
+### Finding 4: `disable-model-invocation: true` Is a First-Class Design Decision
+
+For `/discuss` the decision is trivially obvious in retrospect: auto-detection would break the fundamental purpose of the skill. But this finding generalizes. For every command being converted, the first question should be:
+
+> "Is part of this command's value the deliberate act of invoking it?"
+
+If yes: `disable-model-invocation: true`. Candidates in dev-infra's command set:
+- `/discuss` -- YES (deliberate mode-switch)
+- `/review` -- YES (deliberate human pause before commit)
+- `/commit` -- YES (deliberate finalization after review)
+- `/explore` -- MAYBE (could auto-trigger on unstructured thoughts, but the user prefers explicit)
+- `/task` -- MAYBE (could auto-trigger during implementation context)
+- `/pr` -- NO (reasonable to auto-suggest when branch is ready)
+
+### Finding 5: Skills Are the Right Home for Behavioral Contracts Too
+
+The initial framing of skills was "procedural workflows with progressive loading." But `/discuss` shows skills can also be **role assignments** -- they tell the agent what kind of agent to become, not just what procedure to follow. This is the "be a scientist" pattern formalized: the skill description and Role section set the agent's disposition for the duration of the session.
+
+This reframes the redistribution rubric (Topic 2): the sorting criteria for commands isn't just "procedural vs simple trigger" but "procedural vs behavioral vs hybrid." Behavioral skills need the Role archetype; procedural skills need the steps archetype.
+
+---
+
+## Edge Cases Examined
+
+| Case | Decision | Rationale |
+|------|----------|-----------|
+| Auto-invocation | Disabled (`disable-model-invocation: true`) | Would violate the behavioral contract |
+| Common scenarios in SKILL.md | Removed | Not load-bearing; 143 lines without them |
+| Reference files | Not needed | No templates or configs; behavior is inline |
+| Why This Exists section | Removed | Motivational context for humans, not agents |
+| Description field purpose | User-facing clarity | Not a detection trigger (auto-detect off) |
+
+---
+
+## Go / No-Go
+
+**Recommendation:** Go
+
+**Rationale:** Command-to-skill conversion is feasible and produces a cleaner behavioral contract than the original command format. The 500-line limit is not a practical constraint for most commands. The `disable-model-invocation` decision is the most important design choice and is easy to reason about once the question is framed correctly.
+
+**What changes vs original plan:**
+- Scope for Topic 3 (conversion mechanics) can expand to include the behavioral archetype -- not just the procedural case from `update-pr-description`
+- The redistribution rubric (Topic 2) needs a three-way sort: procedural skill / behavioral skill / simple trigger (command), not two-way
+- Reference files are most relevant for skills with large templates (e.g., `/explore` with its exploration.md template, research-topics.md template, etc.) -- that's where the structural schemas insight (Theme 4) connects most directly
+
+---
+
+## Refined Questions
+
+1. Is the behavioral archetype reusable? Could a `role-context.md` reference file define the "discussant" role and be referenced by multiple related skills?
+2. For hybrid commands (e.g., `/task` which is both procedural and has a behavioral component -- TDD discipline, review-then-commit), how does the skill structure handle both?
+3. The 4 common scenarios in `/discuss` were cut -- but for more complex commands, do scenarios belong in a reference file or should they stay out entirely?
+4. How does the marketplace `plugin.json` wrapping affect skill design? Does the description field in SKILL.md frontmatter differ from marketplace metadata?
+
+---
+
+## Spike Code
+
+**Location:** `admin/explorations/agentic-workflow-modernization/spike/discuss-skill/`
+**Files:**
+- `SKILL.md` -- draft skill (143 lines)
+**Keep or discard:** Keep as reference -- this is the template for behavioral skill conversion
+
+---
+
+## Next Steps
+
+- [ ] Update exploration and research topics with behavioral archetype finding (amend Theme 1 and Topic 2)
+- [ ] Design the hybrid archetype for commands like `/task` (procedural + behavioral)
+- [ ] Run Phase 2 research: Topics 1-3 are now informed by both spikes
+- [ ] When converting `/explore`, use reference files for its templates -- that's where the structural schemas insight lands
