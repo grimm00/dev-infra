@@ -41,7 +41,7 @@
 
 **Priority:** High
 
-**Context:** A real-world skill has already been built (`update-pr-description` for the DRW UP Claude Marketplace), so the basic format is understood. The same SKILL.md works in Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The remaining question is how *complex multi-mode commands* decompose -- commands like `/explore` (setup + amend modes, input sources, worktree integration) that are 500+ lines. The skill directory structure naturally supports reference files (templates, configs), which is where doc templates would live.
+**Context:** A real-world skill has already been built (`update-pr-description` for the team's internal Claude marketplace), so the basic format is understood. The same SKILL.md works in Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The remaining question is how *complex multi-mode commands* decompose -- commands like `/explore` (setup + amend modes, input sources, worktree integration) that are 500+ lines. The skill directory structure naturally supports reference files (templates, configs), which is where doc templates would live.
 
 **Scope:** Focus on one complex command (e.g., `/explore` post-issue-#72) and design its skill equivalent: SKILL.md (core contract), reference files (templates, examples), `plugin.json` (marketplace metadata). Compare against `update-pr-description` as the known-good simple case.
 
@@ -69,7 +69,7 @@
 
 **Priority:** Medium (largely answered, but edge cases may exist)
 
-**Context:** The core portability question is answered: the same SKILL.md works in Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The DRW UP Claude Marketplace already distributes skills in this format. The remaining question is behavioral: do both platforms handle `disable-model-invocation`, reference file loading, and progressive disclosure the same way? Are there edge cases in how Cursor vs Claude Code parse frontmatter or load reference materials?
+**Context:** The core portability question is answered: the same SKILL.md works in Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The team's internal Claude marketplace already distributes skills in this format. The remaining question is behavioral: do both platforms handle `disable-model-invocation`, reference file loading, and progressive disclosure the same way? Are there edge cases in how Cursor vs Claude Code parse frontmatter or load reference materials?
 
 **Method:** Research -- targeted testing of specific behavioral differences, not broad standard evaluation
 
@@ -81,7 +81,7 @@
 
 **Priority:** Medium
 
-**Context:** Dev-infra serves two audiences: personal/local projects (via templates that seed `.cursor/skills/`) and the team (via the DRW UP Claude Marketplace with `plugin.json` + marketplace install). The same SKILL.md artifact works in both, but the distribution packaging differs. Questions: What's the workflow for developing locally, testing in Cursor, and publishing to the marketplace? Which skills are team-appropriate? How to keep the two channels in sync? Does dev-infra's existing template sync validation extend to cover skills?
+**Context:** Dev-infra serves two audiences: personal/local projects (via templates that seed `.cursor/skills/`) and the team (via an internal Claude plugin marketplace with `plugin.json` + marketplace install). The same SKILL.md artifact works in both, but the distribution packaging differs. Questions: What's the workflow for developing locally, testing in Cursor, and publishing to the marketplace? Which skills are team-appropriate? How to keep the two channels in sync? Does dev-infra's existing template sync validation extend to cover skills?
 
 **Method:** Research / design -- define the workflow, identify sync points, assess which skills to publish
 

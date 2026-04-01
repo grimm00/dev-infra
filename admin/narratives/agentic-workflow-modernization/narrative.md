@@ -9,7 +9,7 @@
 
 Dev-infra is a template factory that encodes workflow discipline into project templates. Over 10 months, it accumulated 26 Cursor commands, 3 always-applied rule files, and a sophisticated pipeline for taking ideas from exploration through to implementation. The commands encode genuine process innovations: read-only discussion mode (`/discuss`), granular exploration pipelines, review-then-commit discipline, and documentation-driven development.
 
-But the ecosystem moved. Cursor formalized a three-layer model (rules guide, skills do, commands trigger). Claude Code emerged as a primary agent platform at DRW. The team built an internal plugin marketplace. Superpowers (deployed as "Hex" in the marketplace) established an opinionated workflow with subagent-driven development. And the author's own 26 commands were being curl'd into other repos as untracked files — a signal that the value was real but the distribution model was broken.
+But the ecosystem moved. Cursor formalized a three-layer model (rules guide, skills do, commands trigger). Claude Code emerged as a primary agent platform at the company. The team built an internal plugin marketplace. Superpowers (deployed as "Hex" in the marketplace) established an opinionated workflow with subagent-driven development. And the author's own 26 commands were being curl'd into other repos as untracked files — a signal that the value was real but the distribution model was broken.
 
 Coming back to the project after time away, the question was: is dev-infra behind, or is it still relevant?
 
@@ -54,7 +54,7 @@ Two ideas emerged from discussion that expanded the scope:
 
 ### Act 3: The Marketplace Discovery
 
-The exploration pivoted when the DRW UP Claude Marketplace entered the picture. Key discoveries:
+The exploration pivoted when the team's internal Claude plugin marketplace entered the picture. Key discoveries:
 
 - **Hex (Superpowers) is already deployed** in the team marketplace (v2.1.0). The comparison isn't theoretical — it's "my workflow vs the thing my teammates already use."
 - **A skill has already been built.** The `update-pr-description` skill exists in the marketplace, confirming the format is understood.
@@ -123,8 +123,8 @@ ba6548d docs(explore): restructure agentic-workflow-modernization exploration
 | Issue #73 (Command Drift) | GitHub issue #73 |
 | Issue #75 (Narrative Command) | GitHub issue #75 |
 | Issue #76 (Portable Commands) | GitHub issue #76 |
-| Marketplace Skill | `update-pr-description` in DRW UP Claude Marketplace |
-| Hex (Superpowers) | `plugins/workflows/hex/` in DRW UP Claude Marketplace |
+| Marketplace Skill | `update-pr-description` in team's internal Claude marketplace |
+| Hex (Superpowers) | `plugins/workflows/hex/` in team's internal Claude marketplace |
 
 ---
 

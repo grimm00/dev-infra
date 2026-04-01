@@ -30,7 +30,7 @@ These patterns have no equivalent in the broader ecosystem. Any modernization th
 
 ## 📊 Reference: Superpowers / Hex Comparison
 
-Superpowers (marketed as "Hex" in the DRW UP Claude Marketplace) implements a seven-phase opinionated workflow (brainstorming → worktrees → planning → subagents → TDD → review → branch finishing). **Hex is already deployed in the team marketplace** (v2.1.0) alongside dev-infra's commands. Dev-infra independently arrived at most of these patterns:
+Superpowers (deployed as "Hex" in the team's internal Claude plugin marketplace) implements a seven-phase opinionated workflow (brainstorming → worktrees → planning → subagents → TDD → review → branch finishing). **Hex is already deployed in the team marketplace** (v2.1.0) alongside dev-infra's commands. Dev-infra independently arrived at most of these patterns:
 
 | Superpowers Phase | Dev-Infra Equivalent | Dev-Infra Advantage |
 |-------------------|---------------------|---------------------|
@@ -112,7 +112,7 @@ Possible positions:
 
 Before deciding *what* to migrate, we need to understand *how*. The skill format differs from commands: a `SKILL.md` with YAML frontmatter in a directory (with optional reference files) vs a single `.md` command file.
 
-**Key finding from /discuss:** The format gap is smaller than expected. A real-world skill has been built (`update-pr-description` in the DRW UP Claude Marketplace), confirming the format is understood. The same SKILL.md works in both Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The skill directory structure naturally accommodates reference materials, templates, and configs -- meaning dev-infra's doc templates can live *inside* the skill as structural schemas.
+**Key finding from /discuss:** The format gap is smaller than expected. A real-world skill has been built (`update-pr-description` for the team's internal Claude marketplace), confirming the format is understood. The same SKILL.md works in both Cursor (`.cursor/skills/`) and Claude Code (`.agents/skills/`). The skill directory structure naturally accommodates reference materials, templates, and configs -- meaning dev-infra's doc templates can live *inside* the skill as structural schemas.
 
 **The marketplace plugin format** wraps skills with distribution metadata:
 
@@ -207,7 +207,7 @@ This maps to the earlier idea of a CLI running an infinite loop with agents and 
 
 Dev-infra serves two audiences that require different distribution channels:
 
-1. **Team (work):** The DRW UP Claude Marketplace is the distribution channel for Claude Code skills. The team already uses this marketplace (Hex, daily-summary, deploy-app-to-k8s, review-briefing, etc.). Publishing dev-infra's workflow skills here makes them accessible to teammates who use Claude Code as their primary agent. The marketplace provides versioning, metadata (`plugin.json`), install mechanisms, and discovery.
+1. **Team (work):** The team's internal Claude plugin marketplace is the distribution channel for Claude Code skills. The team already uses this marketplace (Hex, daily-summary, and domain-specific plugins). Publishing dev-infra's workflow skills here makes them accessible to teammates who use Claude Code as their primary agent. The marketplace provides versioning, metadata (`plugin.json`), install mechanisms, and discovery.
 
 2. **Personal / local projects:** Dev-infra templates continue to seed new projects with `.cursor/skills/` (or `.cursor/commands/` for simple triggers). This serves personal projects, open source work, and any context where the team marketplace isn't relevant. Dev-infra remains the source of truth; the marketplace is a distribution target.
 
