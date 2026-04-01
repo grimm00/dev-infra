@@ -61,8 +61,17 @@ Criteria for auto-detect eligibility (all four required):
 
 **Source:** [topic-1-auto-detection.md](topic-1-auto-detection.md)
 
-### Topic 2: Redistribution Criteria (🔴 Not Started)
-*Findings to be added.*
+### Topic 2: Three-Layer Redistribution Criteria (✅ Complete)
+
+**Key output: The Redistribution Decision Tree and four content type framework.**
+
+The rubric: rules guide, skills do, commands trigger. Dev-infra's always-apply `.mdc` files contain four distinct content types that belong in different layers: (1) portable conventions → AGENTS.md, (2) Cursor behavioral config → slim `.mdc`, (3) procedural reference → skill reference files, (4) mutable project state → remove entirely.
+
+Every dev-infra command has enough complexity to warrant skill treatment. Multi-mode commands (explore, research, pr, task) use Strategy A decomposition: SKILL.md core ≤500 lines + `references/` per mode. No command is a "simple trigger."
+
+Critical finding: `main.mdc` currently carries ~120 lines of mutable project state (v0.10.0 release history, planned features) as always-on context. This is actively harmful -- it forces the agent to reason with stale information. Removal is the highest-priority redistribution action.
+
+**Source:** [topic-2-redistribution-criteria.md](topic-2-redistribution-criteria.md)
 
 ### Topic 3: Conversion Mechanics (🔴 Not Started)
 *Findings to be added.*

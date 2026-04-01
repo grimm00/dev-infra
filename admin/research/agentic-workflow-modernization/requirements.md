@@ -104,6 +104,54 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
+### FR-6: Rules Content Must Be Separated Into Four Types
+
+**Description:** The content currently in always-apply `.mdc` rules must be categorized and redistributed by type: (1) portable conventions (git flow, naming, structure) → AGENTS.md; (2) Cursor-specific behavioral config (agent response style, guardrails) → trimmed `.mdc` rule; (3) procedural reference material (workflow descriptions, checklists) → skill `references/` files; (4) mutable project state (version numbers, completion status, planned features) → removed from always-on context entirely.
+
+**Source:** [topic-2-redistribution-criteria.md](topic-2-redistribution-criteria.md) -- Finding 2, Finding 5
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-7: Multi-Mode Commands Must Use Strategy A Decomposition
+
+**Description:** Commands with ≥3 modes or >500 lines (e.g., `/explore`, `/research`, `/pr`, `/task`) must be implemented as a skill using Strategy A: SKILL.md core (≤500 lines, handles routing and key guardrails) plus a `references/` directory containing per-mode detail documents. The single user-facing invocation surface (`/skill-name`) must be preserved. Per-mode reference files load progressively on demand.
+
+**Source:** [topic-2-redistribution-criteria.md](topic-2-redistribution-criteria.md) -- Finding 3, Finding 4
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-8: Mutable Project State Must Be Removed from Always-On Context
+
+**Description:** Current version numbers, release history, task completion status, and planned feature lists must be removed from always-apply `.mdc` rules. This content goes stale on every release and forces the agent to reason with outdated information. Replace with a single pointer: "Current state: see admin/planning/status-and-next-steps.md" and provide the file explicitly when needed.
+
+**Source:** [topic-2-redistribution-criteria.md](topic-2-redistribution-criteria.md) -- Finding 2
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-9: Hybrid Skills Must Encode Both Steps and Behavioral Contract
+
+**Description:** Commands that combine procedural steps with behavioral disposition guidance (e.g., `/task` with TDD cycle steps + "only one task in-progress at a time") must be implemented as hybrid skills. The SKILL.md description must communicate both the procedural archetype and the behavioral contract. The body must explicitly separate the step-by-step instructions from the behavioral guardrails.
+
+**Source:** [topic-2-redistribution-criteria.md](topic-2-redistribution-criteria.md) -- Finding 3, Analysis
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ### FR-4: Workflow Skills Must Disable Auto-Detection
 
 **Description:** All user-triggered workflow skills (skills that initiate side effects such as file writes, git operations, or subagent dispatch) must set `disable-model-invocation: true` in their SKILL.md frontmatter. Auto-detection is prohibited for these skills -- invocation must be explicitly initiated by the user via `/skill-name`.
