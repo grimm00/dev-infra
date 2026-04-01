@@ -10,7 +10,8 @@
 
 ### Active Research
 
-- **[AI Prompt Lifecycle](ai-prompt-lifecycle/README.md)** - LLM mechanics, Cursor prompt assembly, command design implications (🔴 Research) ⭐ **NEW**
+- **[Agentic Workflow Modernization](agentic-workflow-modernization/README.md)** - Rules/skills/commands redistribution, AGENTS.md portability, four-layer model (🔴 Research) ⭐ **NEW**
+- **[AI Prompt Lifecycle](ai-prompt-lifecycle/README.md)** - LLM mechanics, Cursor prompt assembly, command design implications (🔴 Research)
 - **[Template Doc Infrastructure](template-doc-infrastructure/README.md)** - Template-based doc generation and validation infrastructure (🟡 Research)
 - **[Four-Arm Architecture](four-arm-architecture/README.md)** - How dev-infra, dev-toolkit, proj-cli, and work-prod work together (🔴 Research)
 - **[Explore Two-Mode Enhancement](explore-two-mode/README.md)** - Enhancing `/explore` with two-mode pattern, input sources, topic unification (🔴 Research)
