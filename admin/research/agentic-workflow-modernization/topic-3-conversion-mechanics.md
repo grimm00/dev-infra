@@ -2,10 +2,11 @@
 
 **Research Topic:** Agentic Workflow Modernization
 **Question:** What does it concretely look like to convert a complex dev-infra command into a Cursor skill?
-**Status:** ✅ Complete
+**Status:** ✅ Complete (with caveats -- see Finding 7, Finding 8)
 **Priority:** High
 **Created:** 2026-03-25
 **Completed:** 2026-03-25
+**Amended:** 2026-03-25 -- added gaps from post-research /discuss: accuracy evidence caveat (Finding 7), nested directory instability (Finding 8), disable-model-invocation portability gap (Finding 9)
 
 ---
 
@@ -223,11 +224,67 @@ The sync script would compare directory trees recursively. This requires extendi
 
 ---
 
+### Finding 7: The Accuracy Degradation Claim for References-as-Branches Is Inferred, Not Directly Measured
+
+**Status: Gap -- spike needed before FR-10 is treated as a hard requirement.**
+
+Finding 2 cited ComplexBench (NeurIPS 2024) to argue that externalizing mode branches to `references/` still causes accuracy degradation because "instruction composition degrades at the model level, not the disk level." This is a reasonable extrapolation, but it is an extrapolation. ComplexBench measures nested boolean constraint composition in a single prompt -- not specifically the pattern of a routing stub in SKILL.md loading mode-specific reference files.
+
+**What the evidence directly supports:**
+- Long instruction sets cause accuracy degradation (Same Task, More Tokens, ACL 2024: 0.92→0.68 from 250→3K tokens)
+- A single 1375-line `/explore` as one skill is harmful -- this is solidly supported
+- Separate skills per workflow are lighter, unambiguous, and well-supported by the spec
+
+**What requires empirical validation:**
+- Whether a 200-line SKILL.md routing stub that progressively loads mode-specific reference files causes measurable degradation vs. separate skills
+- Whether the model reliably loads and follows reference file content when instructed to do so mid-workflow
+- Whether the user experience (one skill name with internal mode dispatch) is actually worse than three separate skill names
+
+**Implication for FR-10:** The *length* argument alone justifies separate skills for commands with 1000+ lines. But the specific claim that "references-as-branches fails even for shorter skills" needs a spike before it becomes a hard architectural rule. FR-10 should be treated as a strong recommendation with a pending spike to validate or falsify the references-as-branches pattern at realistic skill sizes (~300-400 lines total).
+
+**Proposed spike:** Convert `/explore` twice -- once as a 3-skill family, once as a single `explore` skill with `references/setup-mode.md`, `references/conduct-mode.md`, `references/amend-mode.md` -- and compare invocation reliability and output quality across 10 invocations each.
+
+**Source:** Post-research /discuss session; [agentskills.io/specification](https://agentskills.io/specification); SkillsBench (2026) shows skills help +13-23% but doesn't address multi-mode patterns
+
+---
+
+### Finding 8: Nested Skill Directory Discovery Is Unstable in Cursor
+
+The Cursor community forum (January--February 2026) documents that skills in subdirectories (e.g., `./frontend/.cursor/frontend-guidelines/SKILL.md`) worked intermittently in Cursor 2.4 but broke again in 2.4.36 for multiple users. The issue has no official resolution.
+
+**Implication:** The user's instinct to package a skill family (e.g., `explore`, `explore-conduct`, `explore-amend`) in a parent `explore/` directory as nested skills is attractive but unreliable today. The agentskills.io spec doesn't explicitly forbid nesting but all examples and guidance assume flat structure under the skills directory. The spec note "keep file references one level deep from SKILL.md" further suggests deep nesting is not the intended pattern.
+
+**Safe packaging approach:** Use naming convention for family grouping (`explore`, `explore-conduct`, `explore-amend` as flat siblings), not directory nesting. The `explore/` base skill's `assets/` directory can hold shared templates; sibling skills reference them via relative paths if needed (though this goes one level outside spec's strict file reference guidance).
+
+**Source:** [Cursor forum: Skill from subdirectories?](https://forum.cursor.com/t/skill-from-subdirectories/149657); [agentskills.io/specification](https://agentskills.io/specification)
+
+---
+
+### Finding 9: `disable-model-invocation` Is Cursor-Specific -- Not in the agentskills.io Spec
+
+The agentskills.io specification (confirmed from the live spec) defines these frontmatter fields: `name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`. There is **no `disable-model-invocation` field in the portable spec**.
+
+`disable-model-invocation: true` is a Cursor extension. This has a direct portability consequence: a skill authored with this flag for explicit-only invocation in Cursor will not have that behavior enforced when installed in Claude Code, Codex, or other spec-compliant agents. Those agents will apply their own auto-invocation heuristics.
+
+**Implication for Topic 5 (Cross-Platform Portability):** This is a significant finding for the portability topic. The explicit-only guarantee from FR-1 and FR-4 is Cursor-specific. The closest portable equivalent is the description field -- writing descriptions that clearly say "only use when explicitly invoked by the user via /skill-name" may influence other agents' routing, but it's not enforced.
+
+**Implication for FR-1 and FR-4:** These requirements are implementable in Cursor but their enforcement is platform-dependent. The requirements should be annotated as "Cursor-specific enforcement; description-based guidance for other platforms."
+
+**Source:** Direct review of [agentskills.io/specification](https://agentskills.io/specification) -- `disable-model-invocation` absent from field table; confirmed Cursor-only via [trycursor.com/docs/context/skills](https://www.trycursor.com/docs/context/skills)
+
+---
+
 ## 🔍 Analysis
 
-### The Core Insight: Strategy A Was the Wrong Model
+### The Core Insight: Strategy A Is Likely the Wrong Model (Spike Needed to Confirm)
 
-Topic 2 (FR-7) proposed "Strategy A: SKILL.md core + `references/` per mode." The empirical evidence from Finding 2 shows this is still a multi-mode skill -- just with the mode branches externalized into reference files. The degradation is about **instruction composition** at the model level, not file size at the disk level. A routing stub in SKILL.md that says "load `references/conduct-mode.md` for conduct mode" still forces the model to hold all mode branches in working attention.
+Topic 2 (FR-7) proposed "Strategy A: SKILL.md core + `references/` per mode." Finding 2 argues this is still a multi-mode skill -- just with the mode branches externalized into reference files. Finding 7 adds an important caveat: the accuracy degradation claim specifically for the references-as-branches pattern is inferred from general instruction composition research, not directly measured.
+
+**What is confirmed:** The length argument is solid. A single 1375-line `/explore` as one skill is harmful by direct evidence. Separate skills each under 250 lines solve the length problem definitively.
+
+**What needs a spike:** Whether a 200-300 line routing stub + reference files causes meaningful degradation compared to separate skills at the same total line count. This is the specific claim in FR-10 that goes beyond the length evidence.
+
+**Recommendation stance:** Treat separate skills as the strongly preferred pattern -- it solves the length problem, the routing ambiguity problem, and aligns with the "one skill, one workflow" principle. But hold FR-10 as a recommendation pending a spike rather than a hard architectural constraint. The spike (Finding 7) should be run as part of the `/explore` pilot conversion.
 
 The correct decomposition is **separate skills per workflow** (Finding 3). This:
 - Eliminates mode-switching entirely -- each skill description is unambiguous routing signal
@@ -250,11 +307,13 @@ This family totals ~450 lines across 3 SKILL.md files, vs. 1375 lines in a singl
 The manifest is currently 26 flat command files. After migration, it becomes ~60-80 skill files across ~30 skill directories (one per current command, many split into 2-4 skills). The flat-file tracking approach (Option A) can handle this with no tooling changes -- the manifest just grows. Full directory tracking (Option B) is the right end state but not urgent for the first migration wave.
 
 **Key Insights:**
-- [x] Insight 1: Multi-mode skills are empirically harmful -- one skill, one workflow is the correct decomposition unit
+- [x] Insight 1: Long skills (1000+ lines) are empirically harmful; one skill, one workflow is the correct decomposition unit -- though the specific references-as-branches variant needs a spike to confirm
 - [x] Insight 2: Reference files are progressive disclosure within a workflow, not mode branches
 - [x] Insight 3: Doc-gen templates belong in `assets/`, structural guidance in `references/`
 - [x] Insight 4: `plugin.json` is marketplace metadata only -- behavioral contract lives in SKILL.md
 - [x] Insight 5: Template sync can extend to skills incrementally using the existing flat-file approach
+- [x] Insight 6: `disable-model-invocation` is Cursor-specific -- not in the portable agentskills.io spec; explicit-only enforcement is platform-dependent
+- [x] Insight 7: Nested skill directory discovery in Cursor is unstable; flat naming convention is the safe packaging approach for skill families
 
 ---
 
@@ -270,9 +329,10 @@ The manifest is currently 26 flat command files. After migration, it becomes ~60
 
 ## 📋 Requirements Discovered
 
-- [x] **FR-10: Multi-Mode Commands Must Decompose Into Separate Skills, One Per Workflow** -- supersedes FR-7's "Strategy A." Commands with distinct modes (setup/conduct/amend, etc.) must become separate skills with distinct names and descriptions. Mode parameter flags (`--conduct`, `--amend`) become separate skill names (`explore-conduct`, `explore-amend`). Shared logic between skills is accepted duplication until three or more real consumers exist.
+- [x] **FR-10: Multi-Mode Commands Should Decompose Into Separate Skills, One Per Workflow** -- supersedes FR-7's "Strategy A." Commands with distinct modes (setup/conduct/amend, etc.) should become separate skills with distinct names and descriptions. Mode parameter flags (`--conduct`, `--amend`) become separate skill names (`explore-conduct`, `explore-amend`). Shared logic between skills is accepted duplication until three or more real consumers exist.
   - Source: Finding 2, Finding 3
-  - Priority: High -- FR-7 was incorrect and must be corrected before implementation
+  - **Caveat (Finding 7):** The accuracy degradation argument for references-as-branches specifically is inferred, not directly measured. The length argument alone (1000+ line commands) is sufficient justification for the largest commands. Treat as strong recommendation; confirm via spike before applying to shorter multi-mode commands (~300-400 lines total).
+  - Priority: High for commands >500 lines; Medium for shorter multi-mode commands pending spike validation
 
 - [x] **FR-11: Doc-Gen Templates Must Live in Skill `assets/` Directories** -- document templates currently embedded inline in commands must be externalized to `assets/` within the owning skill directory. The SKILL.md must instruct the agent to use the canonical template from `assets/`, with a fallback to memory-generated structure. This makes templates independently versionable and validatable.
   - Source: Finding 1, Finding 4
@@ -287,6 +347,10 @@ The manifest is currently 26 flat command files. After migration, it becomes ~60
   - Priority: Medium (required at migration time, not before)
 
 - [x] **Note: FR-7 Must Be Revised** -- FR-7 ("Strategy A decomposition") should be superseded by FR-10. The revision should be applied during `--consolidate` to avoid conflicting requirements.
+
+- [x] **Note: FR-1 and FR-4 Are Cursor-Specific** (Finding 9) -- `disable-model-invocation: true` is not in the portable agentskills.io spec. FR-1 ("Explicit-Only Skills Must Suppress Auto-Detection") and FR-4 ("Workflow Skills Must Disable Auto-Detection") are implementable and enforced in Cursor but not portable. During `--consolidate`, annotate both FRs with: "Cursor enforcement: `disable-model-invocation: true`; portable mitigation: description field guidance." This has direct implications for Topic 5 (Cross-Platform Portability).
+
+- [x] **Spike Candidate: References-as-Branches vs. Separate Skills** (from Finding 7) -- Convert `/explore` in both forms and compare reliability across 10 invocations. This validates or falsifies FR-10's application to shorter multi-mode commands. Add to spike-only items in `research-topics.md`.
 
 ---
 

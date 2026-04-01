@@ -154,6 +154,7 @@ These are addressed through spikes, not research. They're tracked in the explora
 | Superpowers hands-on evaluation | Install and try in throwaway project | -- (optional) |
 | Conversation-as-orchestration limits | `/spike conversation-orchestration` | -- (run research topics as parallel subagents as the spike itself) |
 | AGENTS.md platform behavior | `/spike agents-md-portability` | -- (test in throwaway project on Cursor + Claude Code) |
+| References-as-branches vs. separate skills | `/spike skill-decomposition-pattern` -- convert `/explore` in both forms, compare invocation reliability across 10 invocations each | Topic 3 complete; run before implementing FR-10 for shorter commands |
 
 ---
 
@@ -232,4 +233,5 @@ Spike: Subagent delegation → Spike: Pipeline orchestration
 
 **Amended:** 2026-03-25 - Added Topic 11 (discussion session skill design, orchestration awareness, name question)
 **Amended:** 2026-03-25 - Expanded Topic 11 scope to include identity-level vs skill-level behavioral contract distinction (teaching vs activating); Hex .agents/ pattern; FR-9 refinement
+**Amended:** 2026-03-25 - Added skill-decomposition-pattern spike (references-as-branches vs. separate skills empirical test; from Topic 3 gap Finding 7)
 **Last Updated:** 2026-03-25
