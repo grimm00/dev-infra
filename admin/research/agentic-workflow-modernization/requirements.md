@@ -176,6 +176,56 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
+### FR-10: Multi-Mode Commands Must Decompose Into Separate Skills, One Per Workflow
+
+**Description:** Commands with distinct modes (setup/conduct/amend, etc.) must be implemented as separate skills with distinct names and routing descriptions -- not as a single skill with mode branches or a routing stub in SKILL.md. Mode parameter flags (`--conduct`, `--amend`) become separate skill names (`explore-conduct`, `explore-amend`). Shared logic between skills is accepted duplication until three or more real consumers exist.
+
+**Supersedes:** FR-7 ("Strategy A decomposition") -- FR-7 should be removed during `--consolidate`.
+
+**Source:** [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md) -- Finding 2, Finding 3 (ComplexBench NeurIPS 2024 evidence; "one skill, one workflow" principle)
+
+**Priority:** High -- FR-7 was incorrect; this correction is required before any implementation
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-11: Doc-Gen Templates Must Live in Skill `assets/` Directories
+
+**Description:** Document templates currently embedded inline in commands (e.g., the canonical exploration.md structure inside `/explore`, research document templates inside `/research`) must be externalized to `assets/` within the owning skill directory. SKILL.md must instruct the agent to use the canonical template from `assets/`, with a fallback to memory-generated structure. Assets make templates independently versionable and validatable.
+
+**Source:** [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md) -- Finding 1, Finding 4
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-12: SKILL.md Must Be Operationally Complete Without Companion Files
+
+**Description:** The core workflow of any skill must be understandable and executable from SKILL.md alone, even if `assets/`, `references/`, and `scripts/` fail to load. Companion files are supplementary, not load-bearing. A skill whose essential behavior requires a reference file to function violates the Agent Skills specification constraint and will break on clients that only load SKILL.md.
+
+**Source:** [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md) -- Finding 1 (Agent Layer spec constraint); [Agent Layer Skill Design Guide](https://agent-layer.dev/skill-design/)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-13: Template Sync Manifest Must Track Skill Files
+
+**Description:** When commands migrate to skills, `scripts/template-sync-manifest.txt` must be updated to track skill files (`SKILL.md`, asset templates in `assets/`) instead of command files. Initial approach: list each skill file individually (no tooling change required). Future: directory-level tracking via `validate-template-sync.sh` extension.
+
+**Source:** [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md) -- Finding 6
+
+**Priority:** Medium (required at migration time, not before)
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints (continued)
 
 - [Research Summary](research-summary.md)

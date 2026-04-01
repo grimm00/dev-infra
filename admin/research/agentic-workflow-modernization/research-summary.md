@@ -73,8 +73,24 @@ Critical finding: `main.mdc` currently carries ~120 lines of mutable project sta
 
 **Source:** [topic-2-redistribution-criteria.md](topic-2-redistribution-criteria.md)
 
-### Topic 3: Conversion Mechanics (🔴 Not Started)
-*Findings to be added.*
+### Topic 3: Conversion Mechanics (✅ Complete)
+
+**Key output: FR-7 is wrong -- multi-mode commands must decompose into separate skills, not a single skill with mode branches in references/.**
+
+The critical finding overturns Topic 2's FR-7 (Strategy A decomposition). Empirical evidence from ComplexBench (NeurIPS 2024) and related research shows that multi-mode skills with conditional branching degrade model performance catastrophically -- from 0.881 (flat composition) to 0.083 (nested multi-layer). Even externalizing mode branches to `references/` doesn't fix the problem because instruction composition degradation is about the model's working attention, not disk layout.
+
+The correct decomposition: one skill per workflow. `/explore` (1375 lines, 3 modes) becomes 3 separate skills (`explore`, `explore-conduct`, `explore-amend`), each under 250 lines with unambiguous activation descriptions.
+
+Additional findings:
+- `assets/` is where doc-gen templates live (structural schemas in practice)
+- `references/` is for supplementary guidance within a single workflow, not mode branches
+- SKILL.md must be operationally complete without companion files (spec constraint)
+- `plugin.json` carries marketplace metadata only; behavioral contract lives in SKILL.md
+- Template sync manifest extends incrementally: list each skill file individually
+
+New requirements: FR-10 (replaces FR-7), FR-11 (doc-gen templates in assets/), FR-12 (SKILL.md completeness), FR-13 (template sync extension).
+
+**Source:** [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md)
 
 ### Topic 4: Structural Schemas (🔴 Not Started)
 *Findings to be added.*
@@ -98,8 +114,11 @@ Critical finding: `main.mdc` currently carries ~120 lines of mutable project sta
 - [x] Insight: AGENTS.md is not a drop-in replacement for always-applied `.mdc` rules -- it is a separate, lower-priority, inline-only layer
 - [x] Insight: Two skill archetypes exist and require different conversion approaches and invocation strategies
 - [x] Insight: `disable-model-invocation: true` is mandatory for behavioral skills like `/discuss`
-- [ ] Insight: Auto-detection criteria (Topic 1 -- pending)
-- [ ] Insight: Redistribution rubric (Topic 2 -- pending)
+- [x] Insight: Auto-detection criteria -- hybrid model (explicit for workflows, auto-detect for passive background knowledge)
+- [x] Insight: Redistribution rubric -- four content types in rules; "rules guide, skills do, commands trigger"
+- [x] Insight: Multi-mode commands decompose into separate skills per workflow, not per flag argument (overturns FR-7)
+- [x] Insight: Doc-gen templates belong in `assets/`, supplementary guidance in `references/`, executable scripts in `scripts/`
+- [x] Insight: SKILL.md must be operationally complete on its own -- companion files are always supplementary
 
 ---
 
@@ -107,20 +126,21 @@ Critical finding: `main.mdc` currently carries ~120 lines of mutable project sta
 
 See [requirements.md](requirements.md) for complete requirements document.
 
-**Current counts (from spikes):**
-- Functional Requirements: 3 (draft, from spike learnings)
+**Current counts (Topics 1-3 + spikes):**
+- Functional Requirements: 13 (FR-1 through FR-13; note FR-7 is flagged for supersession by FR-10)
 - Non-Functional Requirements: 0
-- Constraints: 2
-- Assumptions: 2
+- Constraints: 3 (C-1, C-2, C-3)
+- Assumptions: 2 (A-1, A-2)
 
 ---
 
 ## 🚀 Next Steps
 
-1. Conduct Topic 1 (auto-detection) -- gating decision
-2. Conduct Topic 2 (redistribution rubric) after Topic 1
-3. Conduct Topic 3 (conversion mechanics)
-4. Run Topics 4-8 as parallel subagents (meta-experiment for Topic 7)
+1. ~~Conduct Topic 1 (auto-detection)~~ ✅ Complete
+2. ~~Conduct Topic 2 (redistribution rubric)~~ ✅ Complete
+3. ~~Conduct Topic 3 (conversion mechanics)~~ ✅ Complete
+4. Conduct Topics 4-8 (structural schemas, portability, dual-distribution, conversation orchestration, behavioral contracts)
+5. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10 is the key cleanup item
 
 ---
 

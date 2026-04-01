@@ -47,7 +47,7 @@ Two spikes have already been completed and inform this research:
 |-------|----------|--------|----------|
 | 1: Auto-Detection vs Explicit | High (GATE) | ✅ Complete | [topic-1-auto-detection.md](topic-1-auto-detection.md) |
 | 2: Redistribution Criteria | High | ✅ Complete | [topic-2-redistribution-criteria.md](topic-2-redistribution-criteria.md) |
-| 3: Conversion Mechanics | High | 🔴 Not Started | [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md) |
+| 3: Conversion Mechanics | High | ✅ Complete | [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md) |
 | 4: Structural Schemas | Medium-High | 🔴 Not Started | [topic-4-structural-schemas.md](topic-4-structural-schemas.md) |
 | 5: Cross-Platform Portability | Medium | 🔴 Not Started | [topic-5-cross-platform-portability.md](topic-5-cross-platform-portability.md) |
 | 6: Dual-Distribution Workflow | Medium | 🔴 Not Started | [topic-6-dual-distribution.md](topic-6-dual-distribution.md) |
@@ -70,10 +70,11 @@ Two spikes have already been completed and inform this research:
 
 ## 🚀 Next Steps
 
-1. Conduct Topic 1 (auto-detection) -- this is the gating decision
-2. Conduct Topic 2 (redistribution rubric) once Topic 1 is resolved
-3. Conduct Topic 3 (conversion mechanics) -- informed by Spike B learnings
-4. Run Topics 4-8 as parallel subagents (this IS the conversation-orchestration spike)
+1. ~~Conduct Topic 1 (auto-detection)~~ ✅ Complete
+2. ~~Conduct Topic 2 (redistribution rubric)~~ ✅ Complete
+3. ~~Conduct Topic 3 (conversion mechanics)~~ ✅ Complete -- **NOTE: FR-7 superseded by FR-10**
+4. Conduct Topics 4-8 (structural schemas, portability, dual-distribution, conversation orchestration, behavioral contracts)
+5. Run `--consolidate` after all topics complete
 
 ---
 
