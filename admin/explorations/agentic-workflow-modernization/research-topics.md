@@ -168,6 +168,26 @@ These can only be answered after Topics 1-3 are resolved.
 
 ---
 
+---
+
+### Topic 11: Discussion Session Skill Design -- Orchestration Awareness and Name
+
+**Question:** Does the `/discuss` skill need a second behavioral contract layer (orchestration awareness), and does the name still fit its actual role?
+
+**Context:** The Spike B conversion established the defensive behavioral contract (read-only, no side effects, engage critically). A subsequent discussion session identified that this contract is the floor, not the ceiling. The discussion session occupies five stances -- discuss, materialize, delegate, review, iterate -- and its affirmative role is to help the user navigate transitions between them. The skill should recognize when discussion has crystallized enough to warrant materialization, and when materialization is ready for delegation. Two implementation options exist: (A) encode orchestration awareness in the `/discuss` skill itself, or (B) create a session-init meta-skill (Superpowers-style hook) that injects the five-stance model into every conversation, regardless of whether `/discuss` is invoked. The name question is separate but related: "discuss" captures the read-only contract but may undersell the session's role as the judgment/orchestration layer.
+
+**Priority:** Medium (Topic 8 covers behavioral contract precision; this topic extends that specifically for the discuss skill and raises the naming question)
+
+**Rationale:** The Spike B SKILL.md is already drafted but missing this layer. Resolving it before the `/discuss` skill is finalized avoids rework. The naming question has user-visible behavioral implications -- it shapes what users expect from the command.
+
+**Suggested Approach:**
+- Review the five-stance model against current `/discuss` command behavior to identify what's missing
+- Evaluate Option A vs Option B on cost and coverage
+- Survey alternative names and assess behavioral signal tradeoffs
+- Decision: update the spike SKILL.md with orchestration awareness layer, or create a separate session-init skill
+
+---
+
 ## 🎯 Research Workflow
 
 ```
@@ -201,4 +221,5 @@ Spike: Subagent delegation → Spike: Pipeline orchestration
 
 ---
 
+**Amended:** 2026-03-25 - Added Topic 11 (discussion session skill design, orchestration awareness, name question)
 **Last Updated:** 2026-03-25

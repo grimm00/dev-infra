@@ -7,6 +7,7 @@
 **Amended:** 2026-03-25 - Added Theme 6 (dual-distribution model), updated Themes 2-3 and reference section with marketplace findings
 **Amended:** 2026-03-25 - Added Themes 7-8 from /discuss session (conversation as orchestration, agent roles and behavioral contracts)
 **Amended:** 2026-03-25 - Widened Theme 8 (agent identity + alignment), added Theme 9 (AGENTS.md as portable identity layer)
+**Amended:** 2026-03-25 - Added Theme 10 (discussion session as five-stance orchestration layer, hooks extension model)
 
 ---
 
@@ -321,6 +322,49 @@ The critical insight for dev-infra: if AGENTS.md carries the identity and conven
 
 ---
 
+### Theme 10: The Discussion Session as Five-Stance Orchestration Layer
+
+Theme 7 captured "conversation as lightweight orchestration" as an architectural pattern. A sharper realization emerged from using that pattern in practice: the discussion session doesn't just *enable* orchestration -- it *is* the orchestration layer. And it operates not as a pipeline phase but as a session that can occupy five distinct stances at any moment in the workflow:
+
+1. **Discuss** -- Accumulating context, making judgments, thinking through implications. The session is building the shared understanding that makes delegation safe. No side effects.
+2. **Materialize** -- Crystallizing conversation-only insights (preferences, nuances, unstated assumptions) into artifacts that cold-start subagents can consume. This is the interface preparation step. Without it, delegated work produces generic output that misses the context that only exists in the session.
+3. **Delegate** -- Spinning subagents with specific artifacts as context and specific, bounded deliverables. The session hands off work while retaining judgment of the output.
+4. **Review** -- Reading subagent output back into the parent conversation, challenging it, synthesizing it. The session reclaims judgment after delegation.
+5. **Iterate** -- Amending artifacts, re-delegating, or advancing to decisions. The loop back.
+
+These aren't sequential phases. The session can discuss → materialize → discuss again before delegating. It can review → loop back to discuss if the subagent output opened new questions. Materialize and discuss interleave until delegation is safe. The direction is a gradient, not a pipeline.
+
+**The Hook Extension Model**
+
+Hooks are how the conversation layer extends its reach into longer-running, lower-judgment work without requiring constant human attention. When the session has validated that a transition is mechanical -- no remaining judgment call -- it can define a hook: "when artifact X reaches state Y, trigger subagent Z." The hook executes without the session; the session re-engages when the hook returns output or hits an exception.
+
+This is the automation layer built on top of conversational orchestration, not a replacement. The conversation decides *which* transitions are mechanical; the hooks execute them reliably. The session retains ownership of judgment; automation handles execution.
+
+The hooks model is deliberately expensive to adopt early. A workflow needs several manual cycles through the conversation before it's possible to identify which transitions are truly mechanical and which still contain implicit judgment calls. Premature hooks automate decisions that should stay human.
+
+**Artifacts as Formal Interface Contracts (Strongest Here)**
+
+In conversational orchestration, artifacts are informal context -- the session covers for gaps in artifact quality through judgment and follow-up. In hook-based orchestration, the artifact is self-sufficient. The hook fires on a condition; the subagent starts cold; if the artifact is missing a field, there is no fallback. This is the context in which structural schemas (Theme 4/Topic 4) shift from quality improvement to correctness requirement. A schema-validated artifact is one a hook can depend on.
+
+**The Name Question**
+
+The command is called `/discuss`, and the name signals "thinking mode, not doing mode." That signal is valuable -- it shapes user behavior toward the read-only contract. But the session described here does substantially more than discuss: it accumulates the context subagents cannot replicate, navigates a five-stance orchestration cycle, decides when to materialize and when to delegate, and synthesizes delegated output back into project direction. Whether `/discuss` undersells this role -- or whether the name is precisely correct because it constrains expectations in the right direction -- is an open design question. The name is a behavioral contract as much as the skill description is.
+
+**Connections:**
+- Directly extends Theme 7 (conversation as orchestration) -- Theme 7 is the architectural pattern; Theme 10 is the operational model
+- Relates to Theme 4 (structural schemas) -- schemas become correctness requirements in the hook-based model, not just quality improvements
+- Connects to Theme 8 (behavioral contracts) -- the discussion session's behavioral contract is currently underspecified; Theme 10 identifies what's missing (the five stances, orchestration awareness)
+- Connects to Theme 3 (conversion mechanics) -- the `/discuss` command conversion is incomplete; the skill needs the orchestration awareness layer
+- Raises Theme 9 (AGENTS.md) consideration -- a session-init meta-skill (Option B) that injects the five-stance model into every conversation is distinct from a per-skill `/discuss` approach
+
+**Concerns:**
+- The hooks model is expensive early: premature automation of judgment calls is a documented failure pattern in agentic systems
+- The five-stance model may add friction if encoded too rigidly; the value is in the mental model, not in formalizing every transition
+- Option B (session-init meta-skill) is more powerful but has no tested implementation in dev-infra's context
+- A name change for `/discuss` would be a breaking behavioral contract change -- users have built habits around the current name and expectations
+
+---
+
 ## ❓ Key Questions
 
 1. **How should rules and commands redistribute across the three-layer model?** What's the sorting criteria for rules content (always-on vs on-demand) and command content (command vs skill)?
@@ -343,6 +387,8 @@ The critical insight for dev-infra: if AGENTS.md carries the identity and conven
 
 10. **Does the Roadmap layer in AGENTS.md belong in v0.11.0?** What's the minimum viable roadmap section -- enough to enable agent alignment without becoming a maintenance burden?
 
+11. **Does the `/discuss` skill need a second behavioral contract layer -- orchestration awareness?** The current contract (read-only, no side effects, engage critically) is the defensive layer. The five-stance model (discuss/materialize/delegate/review/iterate) is the affirmative layer: the skill should help the user navigate when to materialize and when to delegate, not just refrain from acting. And should the command still be called `/discuss`, or does the name now undersell its role as the judgment/orchestration layer of the entire workflow?
+
 ---
 
 ## 🧪 Spike Determination
@@ -358,6 +404,7 @@ The critical insight for dev-infra: if AGENTS.md carries the identity and conven
 | Dual distribution workflow | LOW | No | The marketplace format is known; the workflow is a design question, not a technical risk |
 | Conversation-as-orchestration | MEDIUM-HIGH | **Yes** | Practical limits (context hand-off, parallel subagent output management) can only be discovered through experimentation |
 | Behavioral contracts in skill descriptions | MEDIUM | No | Design question; can be evaluated by drafting one skill description and comparing platform behavior |
+| Discussion session as orchestration layer (five stances + hooks) | MEDIUM-HIGH | Consider | The five-stance model needs validation against real workflow cycles; hooks model requires empirical test to identify mechanical vs judgment transitions |
 | AGENTS.md portability and platform support | MEDIUM-HIGH | **Yes** | Whether platforms follow file references and behave consistently can only be confirmed empirically |
 
 **Spike Candidates (ordered by dependency):**
@@ -379,4 +426,4 @@ The critical insight for dev-infra: if AGENTS.md carries the identity and conven
 
 ---
 
-**Last Updated:** 2026-03-25 (Amended: Themes 7-8 added)
+**Last Updated:** 2026-03-25 (Amended: Theme 10 + Question 11 added)

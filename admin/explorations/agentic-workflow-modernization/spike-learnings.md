@@ -238,6 +238,41 @@ This reframes the redistribution rubric (Topic 2): the sorting criteria for comm
 3. The 4 common scenarios in `/discuss` were cut -- but for more complex commands, do scenarios belong in a reference file or should they stay out entirely?
 4. How does the marketplace `plugin.json` wrapping affect skill design? Does the description field in SKILL.md frontmatter differ from marketplace metadata?
 
+### Finding 6: The Defensive Behavioral Contract Is Incomplete -- The Affirmative Layer Is Missing
+
+The Spike B SKILL.md captured the defensive contract of `/discuss` cleanly: read-only, no side effects, engage critically, treat every user message as a thought to engage with not a directive to act on. This is correct and valuable. But a subsequent discussion session revealed it's the floor, not the ceiling.
+
+The discussion session -- this parent conversation -- does substantially more than refuse to create files. It is the persistent orchestration layer for the entire workflow. It occupies five distinct stances at any moment:
+
+| Stance | What the session is doing |
+|--------|--------------------------|
+| **Discuss** | Accumulating context, making judgments, thinking through implications. Building the understanding that makes delegation safe. |
+| **Materialize** | Crystallizing conversation-only insights (preferences, nuances, unstated assumptions) into artifacts that cold-start subagents can consume. The interface preparation step before delegation. |
+| **Delegate** | Handing off bounded work to subagents with specific artifacts as context and specific deliverables. Retaining judgment of the output. |
+| **Review** | Reading subagent output back in, challenging it, synthesizing it. Reclaiming judgment after delegation. |
+| **Iterate** | Amending artifacts, re-delegating, or advancing to decisions. The loop back into discuss or materialize. |
+
+These aren't sequential phases. The session cycles between them non-linearly -- discuss and materialize can interleave many times before delegation happens. Review can loop back to discuss if subagent output opens new questions. The direction is a gradient, not a pipeline.
+
+**What the current skill is missing:** The affirmative role. The skill knows what NOT to do. It doesn't help the user understand *when* they're ready to materialize, when materialization is good enough to delegate, or when a review output should trigger re-discussion vs advance to the next step. An orchestration-aware behavioral skill would name these stances and help the user navigate transitions between them -- without enforcing a rigid sequence.
+
+**Two implementation options:**
+
+- **Option A:** Encode the five-stance model in the `/discuss` SKILL.md itself. The skill becomes "orchestration-aware discussion mode" -- same read-only contract, but with active guidance on when to shift stances.
+- **Option B:** Create a session-init meta-skill (Superpowers-style) that injects the five-stance model into every conversation at session start, regardless of whether `/discuss` is invoked. Every conversation in the project starts orchestration-aware. The `/discuss` skill stays focused on the read-only discussion contract.
+
+Option B is more powerful (it covers all conversations, not just explicit `/discuss` invocations) but more expensive to implement and test. Option A is lower friction.
+
+**The Name Question**
+
+"Discuss" accurately names the read-only contract -- it signals "thinking mode, not doing mode" and shapes user behavior toward that contract. But it undersells the session's actual role. The session is the judgment layer, the context accumulator that subagents cannot replicate, the decision point for when to delegate and when to hold. Whether the name matters depends on what behavior we want to encourage:
+
+- If the goal is preserving the read-only discipline → "discuss" is correct; changing it risks confusing the contract
+- If the goal is signaling the full role → alternatives like `/think`, `/lead`, `/guide` better capture the orchestration layer
+- Middle path: keep `/discuss` as the command name, but the SKILL.md description explicitly names the richer role it plays
+
+The naming question has user-visible behavioral implications and is worth a deliberate decision rather than an incidental one. It is captured as part of Topic 11 (research-topics.md) for resolution alongside the skill design decision.
+
 ---
 
 ## Spike Code
