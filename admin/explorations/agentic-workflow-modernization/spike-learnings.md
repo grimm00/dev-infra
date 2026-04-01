@@ -275,6 +275,39 @@ The naming question has user-visible behavioral implications and is worth a deli
 
 ---
 
+### Finding 7: Behavioral Contracts Operate at Two Levels -- Identity vs Skill
+
+**Insight from:** `/discuss` session on `/task` hybrid archetype and agent identity
+
+**The core distinction:**
+
+A `/task` skill that says "apply TDD discipline" is not *teaching* TDD -- it's *activating* a professional identity the agent already carries. The skill is a role signal, not a tutorial. A skill that conflates the two ends up re-explaining foundational competence, bloating the file and making it instructional rather than disciplining.
+
+**Two-level model:**
+
+| Level | What it carries | Where it lives |
+|-------|----------------|----------------|
+| **Identity-level** | Professional competence: "you are a software developer who understands TDD, code quality, separation of concerns" | AGENTS.md / session-init meta-skill |
+| **Skill-level** | Role activation and repo-specific constraints: "you are the implementer now; use feature branches; update status during work" | SKILL.md behavioral section |
+
+**Practical implication for `/task`:**
+
+The behavioral section of a `/task` skill should read as *constraints and activations*, not instructions. Good: "Apply TDD discipline as the implementer role." Bad: "TDD means writing a failing test first, then writing the minimum code to pass it, then refactoring..." The latter assumes the agent doesn't know TDD. The former trusts the identity layer.
+
+**The Hex `.agents/` mechanism:**
+
+Hex/Superpowers separates agent identity from individual skills by using `.agents/` for both. The `.agents/agents/` path (or equivalent) can hold agent configuration that defines the professional baseline. A `software-developer.md` agent definition establishes the foundational identity once; all skills that activate the implementer role build on top without repeating it.
+
+**Impact on FR-9 (hybrid skill spec):**
+
+FR-9 should distinguish between the two contract levels. A hybrid skill spec is not "a skill that has both procedural steps and behavioral instructions." It is a skill whose behavioral section activates role identity and applies repo-specific constraints, while the procedural section encodes workflow steps. The skill *trusts* the identity layer to supply competence; it doesn't rebuild it.
+
+**Impact on the `/discuss` skill (Spike B):**
+
+The draft `SKILL.md` for `/discuss` (143 lines) is a behavioral skill. It should similarly trust that the agent already knows what intellectual engagement means -- its behavioral section should activate the discussant role and constrain it (no side effects, push back thoughtfully, don't formalize prematurely) rather than explain what a good discussion looks like in the abstract. The current draft is close; this finding refines the framing.
+
+---
+
 ## Spike Code
 
 **Location:** `admin/explorations/agentic-workflow-modernization/spike/discuss-skill/`

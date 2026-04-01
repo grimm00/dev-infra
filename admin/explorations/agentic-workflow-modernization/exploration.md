@@ -8,6 +8,7 @@
 **Amended:** 2026-03-25 - Added Themes 7-8 from /discuss session (conversation as orchestration, agent roles and behavioral contracts)
 **Amended:** 2026-03-25 - Widened Theme 8 (agent identity + alignment), added Theme 9 (AGENTS.md as portable identity layer)
 **Amended:** 2026-03-25 - Added Theme 10 (discussion session as five-stance orchestration layer, hooks extension model)
+**Amended:** 2026-03-25 - Refined Theme 8 (teaching vs activating distinction; identity-level vs skill-level behavioral contracts; Hex .agents/agents/ pattern)
 
 ---
 
@@ -270,6 +271,19 @@ This generalizes. Each command in dev-infra's pipeline implies a distinct agent 
 - `/review` → **Auditor**: read-only assessment, no changes
 
 The behavioral contract is what makes `/discuss` consistently useful -- it's not just a mode switch, it's a role assignment that shapes how the agent interprets everything in the conversation. The contrast with Cursor's built-in "Ask mode" is instructive: Ask mode is a Cursor-specific switch with no behavioral semantics beyond read-only. `/discuss` infuses the agent with the *spirit* of discussion: intellectual engagement, willingness to disagree, and deliberate restraint from premature action.
+
+**Teaching vs activating -- two levels of behavioral contract:** The `/task` role list above ("Implementer: execute with discipline, TDD, review-then-commit") hints at a critical distinction. The behavioral instruction in a skill is not a tutorial. A `/task` skill that explains TDD step-by-step is teaching competence the agent already has. The real contract is activation: "engage as a professional software developer who understands what TDD discipline implies in this codebase." The model already knows TDD; the skill just makes that identity active and authoritative for this invocation.
+
+This implies behavioral contracts operate at two distinct levels:
+
+| Level | What it carries | Where it lives |
+|-------|----------------|----------------|
+| **Identity-level** | Professional competence: "you are a software developer who understands TDD, code quality, separation of concerns" | AGENTS.md / session-init meta-skill |
+| **Skill-level** | Role activation and constraints: "you are the implementer now; apply TDD discipline; update status during work" | SKILL.md behavioral section |
+
+A skill that conflates the two ends up re-teaching what the agent already knows, bloating the skill and making it feel instructional rather than disciplining. The correct split: AGENTS.md establishes the professional identity once; `/task` activates the implementer role and applies repo-specific constraints on top. The skill becomes lighter and more portable because it doesn't carry foundational competence.
+
+**The Hex `.agents/` mechanism:** Hex/Superpowers uses `.agents/` for both skills and potentially for agent configuration files -- agent identity definitions that establish the professional baseline all skills build on. A `.agents/agents/software-developer.md` (or equivalent) would encode "this agent thinks like a software developer" once, separating foundational identity from individual skill invocations. This is the mechanism that makes the identity-level/skill-level split operational rather than theoretical.
 
 **Agent identity at the rules/configuration level:** This goes deeper than individual commands. The Cursor agent (this chat) can be configured at the rules level to have a default disposition -- "your default role in this repo is collaborator; you read before writing; you spawn subagents only when explicitly directed." This is a different layer from commands invoking behavioral shifts: it's the agent being *constituted* with an identity, not just told what to do next. The architectural inversion this implies: instead of `/discuss` shifting away from an implementation-happy default, the default is collaborative and implementation commands (`/task`, `/pr`) are the explicit departures.
 

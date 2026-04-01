@@ -176,7 +176,16 @@ These can only be answered after Topics 1-3 are resolved.
 
 **Context:** The Spike B conversion established the defensive behavioral contract (read-only, no side effects, engage critically). A subsequent discussion session identified that this contract is the floor, not the ceiling. The discussion session occupies five stances -- discuss, materialize, delegate, review, iterate -- and its affirmative role is to help the user navigate transitions between them. The skill should recognize when discussion has crystallized enough to warrant materialization, and when materialization is ready for delegation. Two implementation options exist: (A) encode orchestration awareness in the `/discuss` skill itself, or (B) create a session-init meta-skill (Superpowers-style hook) that injects the five-stance model into every conversation, regardless of whether `/discuss` is invoked. The name question is separate but related: "discuss" captures the read-only contract but may undersell the session's role as the judgment/orchestration layer.
 
-**Priority:** Medium (Topic 8 covers behavioral contract precision; this topic extends that specifically for the discuss skill and raises the naming question)
+**Expanded Scope (2026-03-25):** This topic also covers the **identity-level vs skill-level behavioral contract distinction** that surfaced during discussion of the `/task` hybrid archetype. The question is not unique to `/discuss` -- it applies to all behavioral and hybrid skills:
+
+- **Identity-level contracts** (professional competence: "you are a software developer who understands TDD") belong in AGENTS.md or a session-init layer. They establish foundational capability once.
+- **Skill-level contracts** (role activation and repo-specific constraints: "engage as implementer; use feature branches; update status during work") belong in SKILL.md. They activate and constrain the identity.
+
+A skill that conflates the two layers re-teaches competence the agent already has, bloating the file and making it instructional rather than disciplining. FR-9 (hybrid skill spec) should explicitly encode this distinction: hybrid skill behavioral sections activate role identity and apply constraints -- they don't rebuild foundational knowledge.
+
+**Related:** The Hex `.agents/agents/` pattern is the mechanism that makes this split operational -- a separate agent definition file establishing professional baseline, which all skills build on without repeating.
+
+**Priority:** Medium (Topic 8 covers behavioral contract precision; this topic extends that specifically for the discuss skill, raises the naming question, and now also scopes the identity/skill contract split)
 
 **Rationale:** The Spike B SKILL.md is already drafted but missing this layer. Resolving it before the `/discuss` skill is finalized avoids rework. The naming question has user-visible behavioral implications -- it shapes what users expect from the command.
 
@@ -222,4 +231,5 @@ Spike: Subagent delegation → Spike: Pipeline orchestration
 ---
 
 **Amended:** 2026-03-25 - Added Topic 11 (discussion session skill design, orchestration awareness, name question)
+**Amended:** 2026-03-25 - Expanded Topic 11 scope to include identity-level vs skill-level behavioral contract distinction (teaching vs activating); Hex .agents/ pattern; FR-9 refinement
 **Last Updated:** 2026-03-25
