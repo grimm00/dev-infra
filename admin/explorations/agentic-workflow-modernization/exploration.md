@@ -9,6 +9,7 @@
 **Amended:** 2026-03-25 - Widened Theme 8 (agent identity + alignment), added Theme 9 (AGENTS.md as portable identity layer)
 **Amended:** 2026-03-25 - Added Theme 10 (discussion session as five-stance orchestration layer, hooks extension model)
 **Amended:** 2026-03-25 - Refined Theme 8 (teaching vs activating distinction; identity-level vs skill-level behavioral contracts; Hex .agents/agents/ pattern)
+**Amended:** 2026-03-25 - Integrated research findings from Topics 1-4 into Themes 1, 3, 4, 9; updated spike table; added Related Explorations section
 
 ---
 
@@ -72,6 +73,8 @@ The 26+ commands span a wide spectrum:
 - **Moderate workflows** (`/fix-plan`, `/fix-implement`, `/pr`) -- could be either; threshold question is whether auto-detection or reference materials add value
 - **Complex procedural workflows** (`/explore`, `/research`, `/task`, `/transition-plan`) -- natural candidates for skills with progressive disclosure and auto-detection
 
+**Research update (Topic 2):** The "simple triggers" category doesn't actually apply to dev-infra. An audit of commands like `/commit`, `/review`, and `/pr` found that even the apparently simple ones carry enough procedural complexity, branching logic, and behavioral guidance to warrant skill treatment. The rubric crystallized as: "rules guide, skills do, commands trigger" -- but dev-infra has no commands that are simple enough to remain as bare triggers. All 26 commands are skill candidates.
+
 The skills model offers progressive disclosure (agent sees name + description, loads full content only when relevant) and auto-detection (agent decides when to invoke based on context). Both address real problems: context overhead for rules, and discoverability for commands.
 
 **Connections:**
@@ -128,22 +131,26 @@ plugin-name/
     └── SKILL.md                  # the actual skill (+ reference files)
 ```
 
-Remaining practical questions:
+**Research update (Topic 3):** The multi-mode decomposition question is now answered. The correct pattern is **one skill, one workflow** -- separate skills per mode, not a single skill with mode branches in reference files. `/explore` (1375 lines, 3 modes) becomes `explore`, `explore-conduct`, `explore-amend` as three separate skills, each under 250 lines. The evidence comes from ComplexBench (NeurIPS 2024) showing multi-mode conditional branching degrades accuracy from 0.881 to 0.083, and the Agent Layer Skill Design Guide's "one skill, one workflow" principle.
 
-- How do complex multi-mode commands (e.g., `/explore` with setup/amend) decompose into the skill format?
-- How does the 500-line SKILL.md limit affect commands that are currently 500+ lines? (Progressive disclosure via reference files likely solves this)
-- How does template sync validation work for skills across two templates + dev-infra?
-- What's the description sweet spot for auto-detection without false positives?
+**Caveat (Topic 3, Finding 7):** The accuracy claim specifically for references-as-branches is inferred from general instruction composition research, not directly measured for that specific pattern. The length argument (1000+ line skills are harmful) is solid. A spike is recommended before treating the one-skill-one-workflow rule as a hard constraint for shorter multi-mode commands (~300-400 lines total).
+
+**Additional research findings:**
+- Doc-gen templates belong in `assets/` (static resources the agent fills in), not `references/`
+- SKILL.md must be operationally complete without companion files -- companion directories are supplementary, not load-bearing
+- `plugin.json` is marketplace metadata only; the behavioral contract lives entirely in SKILL.md
+- Template sync manifest extends incrementally by listing each skill file individually
 
 **Connections:**
 - Informs Theme 1 (redistribution) -- practical constraints of skill format affect what's worth migrating
-- Relates to Theme 4 (schemas) -- schemas could be skill reference materials
-- Issue #72 is relevant -- if `/explore --conduct` is removed, the explore skill becomes simpler
+- Relates to Theme 4 (schemas) -- templates as `assets/` are structural schemas in practice
+- Issue #72 is relevant -- if `/explore --conduct` is removed, the explore skill family becomes simpler
 
 **Concerns:**
-- The 500-line limit may force decomposition of complex commands that work well as monoliths
+- Flat naming convention for skill families (`explore`, `explore-conduct`, `explore-amend`) is reliable but nesting is unstable (Cursor community reports regressions in 2.4.36)
+- The one-skill-one-workflow principle increases the total number of skills (~60-80 from 26 commands) -- maintenance surface grows
 - Testing skills is different from testing commands -- no existing test infrastructure
-- Template sync validation would need to handle skills as a third artifact type
+- Template sync manifest grows from 26 flat files to ~60-80 skill files across ~30 directories
 
 ---
 
@@ -162,15 +169,24 @@ If templates were treated as **living structural contracts**, agents could:
 
 This is essentially proposing a **type system for knowledge artifacts**. The template defines the type; the document is an instance.
 
+**Research update (Topic 4):** The structural schema system already exists. The `template-doc-infrastructure` feature (ADR-002 + ADR-004, January 2026) designed 17 document types, 5 common patterns, 3 placeholder types (`${VAR}`, `<!-- AI: -->`, `<!-- EXPAND: -->`), and a layered validation architecture (`dt-doc-validate`). The 19 `.tmpl` files in `scripts/doc-gen/templates/` ARE structural schemas -- they define required sections, content markers, and type-specific constraints.
+
+**The gap is packaging, not design.** Templates move to `assets/` within the owning skill, serving a dual role: generation guidance (what to create) AND inter-skill interface contract (what downstream skills expect). When `explore-conduct` generates an exploration from `assets/exploration-full.md`, the `research` skill knows exactly what sections to find. Template changes are API changes.
+
+**Additional findings:**
+- Markdown schema validation tools have matured (mdschema, contextlint, doc-structure-lint) -- may replace the planned custom `dt-doc-validate`
+- Agent self-validation is a lightweight new layer: skills instruct the agent to verify output against the template structure before committing
+- The migration path is template relocation + annotation, not redesign (rename `.tmpl` → `.md`, add consistent `<!-- REQUIRED: -->` markers)
+
 **Connections:**
-- Relates to Theme 3 (conversion mechanics) -- schemas could be skill reference materials
-- Enables Theme 5 (orchestration) -- schemas are the contracts that make automated handoff trustworthy
+- Relates to Theme 3 (conversion mechanics) -- templates live in `assets/` within each skill
+- Enables Theme 5 (orchestration) -- schemas are the contracts that make automated handoff trustworthy; in the hooks model (Theme 10), schemas shift from quality improvement to correctness requirement
 - Connects to the `ai-prompt-lifecycle` exploration -- how agents consume context shapes how schemas should be exposed
 
 **Concerns:**
 - Rigidity vs flexibility: the more structure you add for automation, the more constrained humans become when deviating intentionally
 - Schema drift: if templates evolve but existing documents don't get migrated, validation breaks
-- Overhead: maintaining schemas alongside templates and commands adds another artifact to keep in sync
+- Template changes as API changes means modifying a template in one skill can break downstream skills -- template sync validation is the enforcement mechanism
 
 ---
 
@@ -328,9 +344,12 @@ The critical insight for dev-infra: if AGENTS.md carries the identity and conven
 - Informs Theme 1 (redistribution) -- the sorting criteria changes if AGENTS.md is a first-class layer alongside rules/skills/commands
 - Relates to Theme 6 (dual distribution) -- AGENTS.md ships with templates, not the marketplace; it's repo-local by nature
 
+**Research update (Topic 3, Finding 9):** `disable-model-invocation: true` is **Cursor-specific** -- it does not appear in the agentskills.io specification. The portable spec defines `name`, `description`, `license`, `compatibility`, `metadata`, and `allowed-tools`. The explicit-only enforcement from FR-1 and FR-4 works in Cursor but has no portable equivalent. The closest portable mitigation is description-field guidance ("only use when explicitly invoked via /skill-name"), which is not enforced. This sharpens the portability question: the four-layer model works in Cursor, but portability to Claude Code and Codex depends on platform-specific behavioral guarantees.
+
 **Concerns:**
-- AGENTS.md portability and platform support is not fully confirmed -- needs research to establish what tools actually read it and how consistently
-- Hub-and-spoke AGENTS.md (with file references) may not work if platforms don't follow references; monolithic inline content is safer but harder to maintain
+- AGENTS.md portability and platform support is partially confirmed (Spike A): Cursor reads it at lowest priority; Claude Code CLI does not read it natively; file references are not followed (content must be inline)
+- Hub-and-spoke AGENTS.md (with file references) is confirmed not to work (Spike A, Finding 4); monolithic inline content is the only reliable approach
+- `disable-model-invocation` as a Cursor-only feature means the explicit-only guarantee is platform-dependent
 - A Roadmap layer in AGENTS.md would be high-value but high-maintenance; stale roadmap context may be worse than no roadmap
 - Adding AGENTS.md as a fourth layer increases the total surface to maintain; only worth it if the portability gain is real
 
@@ -407,37 +426,59 @@ The command is called `/discuss`, and the name signals "thinking mode, not doing
 
 ## 🧪 Spike Determination
 
-| Topic | Risk Level | Spike? | Rationale |
-|-------|------------|--------|-----------|
-| Three-layer redistribution | MEDIUM | No | Can be evaluated through analysis of existing rules/commands content |
-| Auto-detection vs explicit | MEDIUM | No | Design decision informed by research into both models |
-| Command-to-skill conversion | MEDIUM-HIGH | **Yes** | Converting one command (e.g., `/explore`) to a skill and testing auto-detection would validate the approach |
-| Templates as structural schemas | MEDIUM-HIGH | Consider | Prototyping a schema for one artifact type (exploration) would reveal feasibility |
-| Subagent-per-task delegation | HIGH | **Yes** | Subagent behavior (context limitations, coordination) can only be evaluated through runtime experimentation |
-| Pipeline orchestration | HIGH | **Yes** | Too many unknowns in failure modes and agent coordination; depends on subagent spike results |
-| Dual distribution workflow | LOW | No | The marketplace format is known; the workflow is a design question, not a technical risk |
-| Conversation-as-orchestration | MEDIUM-HIGH | **Yes** | Practical limits (context hand-off, parallel subagent output management) can only be discovered through experimentation |
-| Behavioral contracts in skill descriptions | MEDIUM | No | Design question; can be evaluated by drafting one skill description and comparing platform behavior |
-| Discussion session as orchestration layer (five stances + hooks) | MEDIUM-HIGH | Consider | The five-stance model needs validation against real workflow cycles; hooks model requires empirical test to identify mechanical vs judgment transitions |
-| AGENTS.md portability and platform support | MEDIUM-HIGH | **Yes** | Whether platforms follow file references and behave consistently can only be confirmed empirically |
+| Topic | Risk Level | Spike? | Status |
+|-------|------------|--------|--------|
+| Three-layer redistribution | MEDIUM | No -- research only | ✅ Topic 2 complete |
+| Auto-detection vs explicit | MEDIUM | No -- research only | ✅ Topic 1 complete |
+| Command-to-skill conversion (behavioral) | MEDIUM-HIGH | **Spike B** | ✅ Complete -- `/discuss` converted 267→143 lines |
+| Command-to-skill conversion (multi-mode) | MEDIUM-HIGH | **Spike needed** | 🔴 Pending -- references-as-branches vs separate skills |
+| Templates as structural schemas | MEDIUM-HIGH | No -- research resolved | ✅ Topic 4 -- schema system exists (ADR-002/004) |
+| Subagent-per-task delegation | HIGH | **Yes** | 🔴 Pending |
+| Pipeline orchestration | HIGH | **Yes** | 🔴 Pending (depends on subagent spike) |
+| Dual distribution workflow | LOW | No -- design question | 🔴 Topic 6 pending |
+| Conversation-as-orchestration | MEDIUM-HIGH | **Yes** | 🔴 Pending |
+| Behavioral contracts in skill descriptions | MEDIUM | No -- Spike B covered | ✅ Validated behavioral archetype |
+| Discussion session as orchestration layer | MEDIUM-HIGH | Consider | 🔴 Five-stance model needs real-cycle validation |
+| AGENTS.md portability and platform support | MEDIUM-HIGH | **Spike A** | ✅ Complete -- Cursor lowest priority; Claude Code doesn't read; file refs not followed |
 
-**Spike Candidates (ordered by dependency):**
-1. Command-to-skill conversion -- `/spike command-to-skill-migration` (unblocks Themes 1 and 3)
-2. Conversation-as-orchestration -- `/spike conversation-orchestration` (unblocks Theme 7; run research topics as parallel subagents as the spike itself)
-3. Subagent-per-task delegation -- `/spike subagent-task-delegation` (unblocks Theme 5)
-4. Pipeline orchestration -- `/spike pipeline-orchestrator` (depends on #3)
+**Completed Spikes:**
+1. ✅ Spike A: AGENTS.md portability -- Partially validated (four-layer model adjusted)
+2. ✅ Spike B: Command-to-skill conversion -- Validated (two archetypes; behavioral contracts compress and clarify)
+
+**Remaining Spike Candidates (ordered by priority):**
+1. Skill-decomposition-pattern -- convert `/explore` both ways, compare reliability (validates FR-10; run before `--consolidate`)
+2. Conversation-as-orchestration -- run research topics as parallel subagents as the spike itself
+3. Subagent-per-task delegation -- runtime experimentation with subagent context and coordination
+4. Pipeline orchestration -- depends on #3
 
 ---
 
 ## 🚀 Next Steps
 
-1. Resolve issue #72 (explore refactor) as a prerequisite -- it changes the shape of the explore workflow that would be a spike target
-2. Spike command-to-skill conversion using one representative command
-3. Research auto-detection vs explicit invocation (Topic 1) -- this is the gating design decision
-4. Research three-layer redistribution (Topic 2) once the auto-detection decision is made
-5. Run research topics as parallel subagents -- this is itself the conversation-orchestration spike (Topic 7)
-6. Spike subagent delegation and pipeline orchestration as a later workstream
+**Completed:**
+1. ~~Spike A: AGENTS.md portability~~ ✅ -- Partially validated (Cursor lowest priority; Claude Code doesn't read it; file refs not followed)
+2. ~~Spike B: Command-to-skill conversion~~ ✅ -- Validated (two archetypes: procedural vs behavioral; `/discuss` converted 267→143 lines)
+3. ~~Topic 1: Auto-detection~~ ✅ -- Hybrid model: explicit for workflows, auto-detect for passive background knowledge
+4. ~~Topic 2: Redistribution criteria~~ ✅ -- Four content types in rules; all 26 commands warrant skill treatment; mutable state must be removed
+5. ~~Topic 3: Conversion mechanics~~ ✅ -- One skill, one workflow; FR-7 superseded by FR-10; templates in `assets/`; spike needed for references-as-branches pattern
+6. ~~Topic 4: Structural schemas~~ ✅ -- Schema system already exists (ADR-002/004); gap is packaging in skills, not design
+
+**In Progress:**
+7. Conduct Topics 5-8 (portability, dual-distribution, conversation orchestration, behavioral contracts)
+8. Run skill-decomposition-pattern spike before `--consolidate` (validates FR-10 for shorter commands)
+9. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10 is the key cleanup item
+
+**Future:**
+10. `/decision agentic-workflow-modernization --from-research` after consolidation
+11. Spike subagent delegation and pipeline orchestration as a later workstream
 
 ---
 
-**Last Updated:** 2026-03-25 (Amended: Theme 10 + Question 11 added)
+## 🔗 Related Explorations
+
+- **[AI Prompt Lifecycle](../ai-prompt-lifecycle/README.md)** -- Direct predecessor exploring how Cursor assembles prompts and whether 1000+ line commands are fully consumed. Topic 3 (command effectiveness at scale) and Topic 4 (Claude Code instruction architecture) are now partially answered by this exploration's research. The two explorations converge on the same decision space.
+- **[Workflow Simplification](../workflow-simplification/README.md)** -- The v0.10.0 work that unified planning structure and simplified `/task`. Informed the command decomposition analysis in Topics 2-3.
+
+---
+
+**Last Updated:** 2026-03-25 (Amended: research findings from Topics 1-4 integrated into Themes 1, 3, 4, 9)
