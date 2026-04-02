@@ -226,6 +226,44 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
+### FR-14: Templates Must Be Relocated to Skill `assets/` During Migration
+
+**Description:** The 19 `.tmpl` files in `scripts/doc-gen/templates/` must be moved to `assets/` within the skill that owns the document type during the skills migration. Files are renamed from `.tmpl` to `.md` (they are already valid markdown). The original `scripts/doc-gen/templates/` directory is retained as a compatibility layer until `dt-doc-gen` is updated to reference the new locations.
+
+**Source:** [topic-4-structural-schemas.md](topic-4-structural-schemas.md) -- Finding 1, Finding 5
+
+**Priority:** Medium (required during migration, not before)
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-15: Procedural Skills Must Include Agent Self-Validation Step
+
+**Description:** Skills that generate or modify structured documents must include a verification step in SKILL.md: compare the output against the template structure in `assets/`, verify all required sections (marked with `<!-- REQUIRED: -->`) are present, and fix any structural gaps before committing. This is a lightweight supplement to external validation (`dt-doc-validate`) and CI enforcement, not a replacement.
+
+**Source:** [topic-4-structural-schemas.md](topic-4-structural-schemas.md) -- Finding 6, Finding 4
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
+## 🎯 Non-Functional Requirements
+
+### NFR-1: Template Changes Must Be Treated as Interface Contract Changes
+
+**Description:** Modifications to a template in a skill's `assets/` directory must be assessed for downstream impact on consuming skills. Templates serve as inter-skill interface contracts: when `explore-conduct` generates an exploration from `assets/exploration-full.md`, the `research` skill expects specific sections to exist. Breaking changes to a template's required sections must be communicated to downstream skill authors. Template sync validation (FR-13) is the enforcement mechanism.
+
+**Source:** [topic-4-structural-schemas.md](topic-4-structural-schemas.md) -- Analysis (inter-skill interface contracts)
+
+**Priority:** High (architectural principle)
+
+**Status:** 🔴 Pending
+
+---
+
 ## ⚠️ Constraints (continued)
 
 - [Research Summary](research-summary.md)

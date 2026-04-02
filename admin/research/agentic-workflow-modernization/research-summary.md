@@ -92,8 +92,22 @@ New requirements: FR-10 (replaces FR-7), FR-11 (doc-gen templates in assets/), F
 
 **Source:** [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md)
 
-### Topic 4: Structural Schemas (🔴 Not Started)
-*Findings to be added.*
+### Topic 4: Structural Schemas (✅ Complete)
+
+**Key output: The structural schema system already exists (ADR-002 + ADR-004) -- the gap is packaging in skills, not design.**
+
+The `template-doc-infrastructure` feature (v0.9.0) already designed 17 document types, 5 common patterns, 3 placeholder types, and a layered validation architecture. The existing `.tmpl` files in `scripts/doc-gen/templates/` ARE structural schemas -- they define required sections, content markers, and type-specific constraints.
+
+The packaging answer: templates move to `assets/` within the owning skill. They serve a dual role: generation guidance (what to create) AND interface contract (what downstream skills expect). When `explore-conduct` generates an exploration from `assets/exploration-full.md`, the `research` skill knows exactly what sections to find.
+
+Additional findings:
+- Markdown schema validation tools have matured (mdschema, contextlint, doc-structure-lint) -- may replace planned custom `dt-doc-validate`
+- Agent self-validation is a lightweight new layer: skills can instruct the agent to verify its output against the template structure
+- Template changes are API changes -- modifying a template affects all downstream skills in the pipeline
+
+New requirements: FR-14 (template relocation to assets/), FR-15 (agent self-validation step), NFR-1 (template changes as interface contract changes).
+
+**Source:** [topic-4-structural-schemas.md](topic-4-structural-schemas.md)
 
 ### Topic 5: Cross-Platform Portability (🔴 Not Started)
 *Findings to be added.*
@@ -126,9 +140,9 @@ New requirements: FR-10 (replaces FR-7), FR-11 (doc-gen templates in assets/), F
 
 See [requirements.md](requirements.md) for complete requirements document.
 
-**Current counts (Topics 1-3 + spikes):**
-- Functional Requirements: 13 (FR-1 through FR-13; note FR-7 is flagged for supersession by FR-10)
-- Non-Functional Requirements: 0
+**Current counts (Topics 1-4 + spikes):**
+- Functional Requirements: 15 (FR-1 through FR-15; note FR-7 is flagged for supersession by FR-10)
+- Non-Functional Requirements: 1 (NFR-1)
 - Constraints: 3 (C-1, C-2, C-3)
 - Assumptions: 2 (A-1, A-2)
 
