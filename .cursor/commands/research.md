@@ -91,6 +91,7 @@ This command supports multiple project organization patterns:
 ```
 /research [topic] --consolidate
   → Validates all topics are complete
+  → Reconciles exploration with research findings (mandatory/recommended)
   → Reads all requirements (FRs, NFRs, Constraints, Assumptions)
   → Cross-references against research findings and recommendations
   → Identifies: redundancies, superseded items, gaps, stale descriptions
@@ -107,6 +108,7 @@ This command supports multiple project organization patterns:
 - When research topics were conducted over multiple sessions (drift accumulates)
 - When later topics superseded or refined findings from earlier topics
 - When `/explore --amend` added topics that overlap with original requirements
+- When the exploration's themes may be stale relative to research findings (exploration reconciliation)
 
 ---
 
@@ -1069,7 +1071,58 @@ git push origin develop
 
 ---
 
-### 2. Read All Artifacts
+### 2. Exploration Reconciliation
+
+**Purpose:** Research often overturns, refines, or answers the exploration's open questions. Before cleaning up requirements, verify the exploration still reflects what research found. If it doesn't, the decision phase inherits stale framing.
+
+**Process:**
+
+1. Read `exploration.md` themes and key questions from the exploration directory
+2. Read `research-summary.md` and completed topic documents
+3. Cross-reference each theme against research findings:
+   - Is the theme's framing still accurate?
+   - Has research answered the theme's open questions?
+   - Are the theme's concerns addressed or contradicted?
+   - Is the spike determination table current (completed spikes, new candidates)?
+4. Categorize discrepancies by severity:
+
+| Severity | Meaning | Action |
+|----------|---------|--------|
+| **Mandatory** | Theme contradicted or overturned by research | Must amend before proceeding to decisions |
+| **Recommended** | Theme significantly refined but not contradicted | Should amend for accuracy; skippable if time-constrained |
+
+5. Present reconciliation report:
+
+```markdown
+## Exploration Reconciliation
+
+### Mandatory (N items)
+| Theme | Discrepancy | Research Source |
+|-------|-------------|---------------|
+| Theme N: [name] | [what's stale or wrong] | Topic N |
+
+### Recommended (N items)
+| Theme | Refinement | Research Source |
+|-------|-----------|---------------|
+| Theme N: [name] | [what's changed] | Topic N |
+
+### Spike Table Updates
+- N spikes completed since last exploration update
+- N new spike candidates identified by research
+```
+
+6. **STOP and wait for human review**
+7. User decides which items to address:
+   - **Mandatory:** Run `/explore --amend` for each (or batch into a single amend)
+   - **Recommended:** User decides -- amend now or note for later
+   - **No items:** Skip -- proceed to requirements analysis
+8. After amendments (if any), continue to Step 3
+
+**Note:** This step is non-blocking. If the user chooses to skip all amendments, consolidation continues. The value is in surfacing discrepancies, not enforcing corrections.
+
+---
+
+### 3. Read All Artifacts
 
 Read the following documents in full:
 
@@ -1084,7 +1137,7 @@ Build a mental model of:
 
 ---
 
-### 3. Analyze Requirements
+### 4. Analyze Requirements
 
 For each requirement, assess against these categories:
 
@@ -1135,7 +1188,7 @@ Look for:
 
 ---
 
-### 4. Present Analysis for Review
+### 5. Present Analysis for Review
 
 **CRITICAL: STOP and wait for human approval.**
 
@@ -1180,7 +1233,7 @@ Present the proposed changes in a structured summary:
 
 ---
 
-### 5. Apply Changes
+### 6. Apply Changes
 
 After human approval:
 
@@ -1194,7 +1247,7 @@ After human approval:
 
 ---
 
-### 6. Update Research Summary
+### 7. Update Research Summary
 
 1. Update `research-summary.md` Requirements Summary section with new counts
 2. Fix any stale checkboxes in Key Insights (e.g., items resolved by later topics still showing unchecked)
@@ -1202,7 +1255,7 @@ After human approval:
 
 ---
 
-### 7. Commit
+### 8. Commit
 
 ```bash
 git add admin/research/[topic]/
@@ -1224,12 +1277,13 @@ Requirements status: Draft → Final"
 
 **After consolidation, you should have:**
 
-1. ✅ All requirements reviewed for redundancy, gaps, and staleness
-2. ✅ Human-approved changes applied
-3. ✅ requirements.md status changed to Final
-4. ✅ Research summary counts updated
-5. ✅ Stale insights/checkboxes fixed
-6. ✅ Changes committed
+1. ✅ Exploration reconciled with research findings (mandatory/recommended items addressed)
+2. ✅ All requirements reviewed for redundancy, gaps, and staleness
+3. ✅ Human-approved changes applied
+4. ✅ requirements.md status changed to Final
+5. ✅ Research summary counts updated
+6. ✅ Stale insights/checkboxes fixed
+7. ✅ Changes committed
 
 **Next step:** Use `/decision [topic] --from-research` -- the decision phase now receives clean, non-redundant requirements.
 
@@ -1471,7 +1525,7 @@ Requirements status: Draft → Final"
 
 ---
 
-**Last Updated:** 2026-02-14  
+**Last Updated:** 2026-03-25  
 **Status:** ✅ Active  
 **Next:** Use Setup Mode to create structure, Conduct Mode to research, Consolidate Mode to clean up before decisions
 
