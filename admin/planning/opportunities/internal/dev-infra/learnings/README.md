@@ -28,7 +28,8 @@
 
 ### Learning Documents
 
-- **[Fix Management Workflow Learnings](fix-management-workflow-learnings.md)** - Learnings from completing all 8 cross-PR fix batches (28 issues) ⭐ **NEW**
+- **[Requirements and Design Prior Art](requirements-and-design-prior-art.md)** - Team engineering proposal that informed the design step discovery in agentic-workflow-modernization ⭐ **NEW**
+- **[Fix Management Workflow Learnings](fix-management-workflow-learnings.md)** - Learnings from completing all 8 cross-PR fix batches (28 issues)
 - **[Command Adaptation Template Learnings](command-adaptation-template-learnings.md)** - Learnings from creating the Command Adaptation Template feature
 - **[Cursor Commands Integration Learnings](cursor-commands-integration-learnings.md)** - Learnings from adapting 14 workflow automation commands
 - **[Status Tracking Automation Learnings](status-tracking-automation-learnings.md)** - Learnings from implementing Status Tracking Automation CI/CD improvement
@@ -51,16 +52,16 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 23  
+**Total Learning Documents:** 24  
 **Feature-Specific Learnings:** 9 features (22 phases + 5 fix batches + 1 release total)  
 **CI/CD Improvement Learnings:** 2 improvements  
 **Status:** ✅ Active
 
 **Recent Additions:**
-- **Template Doc Infrastructure Learnings (2026-01-16)** - Phase 1 Template Creation: ADR-driven structure, placeholder conventions, batch task organization ⭐ **NEW**
-- Explore Two-Mode Learnings (2026-01-13) - Phase 1 Command Structure: task-based docs, timing guidance, human review checkpoint
-- Worktree Feature Workflow Learnings (2026-01-09) - Draft PR workflow, fix-before-re-review pattern, dogfooding insights
+- **Requirements and Design Prior Art (2026-04-02)** - Team proposal that informed design step discovery ⭐ **NEW**
+- Template Doc Infrastructure Learnings (2026-01-16) - Phase 1 Template Creation: ADR-driven structure, placeholder conventions
+- Explore Two-Mode Learnings (2026-01-13) - Phase 1 Command Structure: task-based docs, timing guidance
 
 ---
 
-**Last Updated:** 2026-01-16
+**Last Updated:** 2026-04-02

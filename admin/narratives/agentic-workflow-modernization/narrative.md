@@ -102,6 +102,30 @@ This creates a four-layer model: AGENTS.md (portable identity) + `.mdc` rules (C
 
 The full architecture now has a name: the **briefed agent system**. Distinct agents with defined roles, aligned through explicit artifacts, coordinated conversationally or through orchestration. The discussion chat is the project lead. The artifacts are the shared context. The skills are the role definitions. AGENTS.md is the onboarding document.
 
+### Act 6: The Design Gap and a Portability Correction
+
+After completing Topics 1-4 and two spikes, a `/discuss` session surfaced something that had been nagging: the pipeline has a structural gap. Research produces individual findings and requirements per-topic. Decision commits to an approach. Transition-plan decomposes into implementation tasks. But nothing composes the individual requirements into a coherent designed system. Nobody asks: "What does the user actually experience when we ship 60-80 skills? Is the naming discoverable? Can we ship Stage 1 without breaking people on the old commands?"
+
+The gap has a name: **design**. It sits between decision and transition-plan.
+
+```
+/explore → /research → /decision → /design → /transition-plan → /task
+```
+
+Two specific problems made this visible:
+
+**Cross-cutting NFRs aren't captured by per-topic research.** Usability, shippability, maintainability, migration safety -- these are quality attributes of the *designed system*, not findings from investigation. FR-1 through FR-15 are technical requirements discovered topic-by-topic. None of them ask "will the user enjoy using this?" or "can each stage be released independently?" Those questions need a design step that applies quality lenses to the whole.
+
+**Staging is a design decision, not a task decomposition.** Agentic workflow modernization is too large to ship at once. "Slim the rules first, then convert 3 pilot skills, then migrate the rest" is a *design* decision about how the system evolves -- not something transition-plan should invent while also breaking down individual tasks. The staging question requires thinking about what the user's experience is at each stage boundary and whether the system is coherent there.
+
+Two artifacts were created: an internal opportunity document capturing the systemic insight (the pipeline needs a `/design` command for any complex feature), and a design directory stub (`admin/designs/agentic-workflow-modernization/`) with a 7-section design document template ready to fill in after the remaining research completes. The sections: System Overview, Cross-Cutting Quality Attributes, Component Design, Interaction Design, Staging Plan, Open Questions / Risks, NFR Checklist.
+
+The design document's most important innovation: Section 7 (NFR Checklist) is an accountability mechanism. It forces explicit sign-off against each quality attribute. "Did we address usability? Here's how. Shippability? Here's how." Without it, quality attributes are aspirational, not verified.
+
+**Topic 5 (Cross-Platform Portability)** was also conducted in this session, yielding a critical correction: Topic 3 Finding 9 had claimed `disable-model-invocation: true` was Cursor-specific. It's not. Claude Code's official documentation explicitly supports it with identical semantics. This was the most pessimistic portability finding from earlier research -- and it was wrong. The actual portability story is substantially better than the earlier assessment suggested.
+
+The full portability picture: skills (SKILL.md format, frontmatter, companion directories, invocation control) are **fully portable** between Cursor and Claude Code. The gap is only in the context layer (AGENTS.md vs CLAUDE.md, requiring a dual-file strategy) and in three Claude Code-specific features that break silently on Cursor (`context: fork`, `$ARGUMENTS`, `` !`command` ``). The practical distribution answer: `.claude/skills/` as the single canonical location, discovered by both platforms.
+
 ---
 
 ## What Was Learned
@@ -113,6 +137,8 @@ The full architecture now has a name: the **briefed agent system**. Distinct age
 - **Artifacts have been inter-agent interfaces all along.** The hub-and-spoke documentation, the status indicators, the template structures — these are proto-schemas for an agent-driven pipeline. Formalizing them as structural schemas completes the picture.
 - **AGENTS.md is the portable identity layer.** The four-layer model (AGENTS.md + `.mdc` rules + skills + commands) gives each layer a clear role. The `.mdc` rules can slim down to Cursor-specific concerns; AGENTS.md carries the portable always-on context.
 - **Documentation-driven development is also alignment infrastructure.** The real value of narratives, explorations, and constraints sections isn't just human readability -- it's that they make agent alignment reproducible across sessions and subagents.
+- **The pipeline needs a design step.** Research → decision → transition-plan skips the holistic "how does this work as a system?" question. Cross-cutting quality attributes and staging need explicit design, not ad-hoc handling during task decomposition.
+- **Portability is better than expected.** The skill layer is fully portable between Cursor and Claude Code. The gap is only in the context layer (AGENTS.md vs CLAUDE.md). The earlier pessimism about `disable-model-invocation` being Cursor-only was incorrect.
 - **Issue #72 (explore refactor) is a prerequisite** — it simplifies the explore workflow before converting it to a skill.
 
 ### For the Engineer
@@ -136,6 +162,9 @@ The full architecture now has a name: the **briefed agent system**. Distinct age
 725448c docs(commands): add /narrative command for post-completion storytelling
 37c2519 docs: anonymize company-specific references in exploration artifacts
 [pending] docs(explore): amend with agent identity, AGENTS.md, and alignment themes
+[pending] docs(research): conduct topic 5 (cross-platform portability) — corrects Topic 3 Finding 9
+[pending] docs(int-opp): capture design step gap in pipeline
+[pending] docs(design): create design stub for agentic-workflow-modernization
 ```
 
 ---
@@ -146,6 +175,9 @@ The full architecture now has a name: the **briefed agent system**. Distinct age
 |----------|----------|
 | Exploration | `admin/explorations/agentic-workflow-modernization/exploration.md` |
 | Research Topics | `admin/explorations/agentic-workflow-modernization/research-topics.md` |
+| Research Hub | `admin/research/agentic-workflow-modernization/README.md` |
+| Design Stub | `admin/designs/agentic-workflow-modernization/design.md` |
+| Design Gap Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/design-step-in-pipeline.md` |
 | Issue #72 (Explore Refactor) | GitHub issue #72 |
 | Issue #73 (Command Drift) | GitHub issue #73 |
 | Issue #75 (Narrative Command) | GitHub issue #75 |
@@ -155,4 +187,4 @@ The full architecture now has a name: the **briefed agent system**. Distinct age
 
 ---
 
-**Last Updated:** 2026-03-25 (Amended: Act 5 added — identity, alignment, AGENTS.md)
+**Last Updated:** 2026-04-02 (Amended: Act 6 — design gap, portability correction, Topic 5 complete)

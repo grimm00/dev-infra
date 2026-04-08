@@ -3,7 +3,7 @@
 **Purpose:** Summary of all research findings
 **Status:** 🔴 Research
 **Created:** 2026-03-25
-**Last Updated:** 2026-03-25
+**Last Updated:** 2026-04-02
 
 ---
 
@@ -109,8 +109,23 @@ New requirements: FR-14 (template relocation to assets/), FR-15 (agent self-vali
 
 **Source:** [topic-4-structural-schemas.md](topic-4-structural-schemas.md)
 
-### Topic 5: Cross-Platform Portability (🔴 Not Started)
-*Findings to be added.*
+### Topic 5: Cross-Platform Portability (✅ Complete)
+
+**Key output: Portability is better than expected -- and Topic 3 Finding 9 was wrong.**
+
+The critical correction: `disable-model-invocation: true` IS supported by Claude Code, not Cursor-only. Both major platforms enforce it. The earlier annotation on FR-1 and FR-4 ("Cursor-specific enforcement") must be corrected.
+
+The core skill system (SKILL.md format, frontmatter, companion directories, progressive loading, invocation control) is **fully portable** between Cursor and Claude Code. Cursor auto-discovers `.claude/skills/`, making it the optimal single distribution path.
+
+Three Claude Code-specific features break silently on Cursor: `context: fork` (subagent execution), `$ARGUMENTS` substitution, and `` !`command` `` shell preprocessing. Portable skills must avoid these.
+
+The context layer remains split: AGENTS.md (Cursor + others) and CLAUDE.md (Claude Code). A dual-file strategy is required. AGENTS.md support in Claude Code remains an open feature request with no resolution timeline.
+
+Behavioral fidelity may actually be better on Claude Code than Cursor -- Anthropic's upstream LLM integration provides deeper behavioral consistency than Cursor's prompt-engineering approach.
+
+New requirements: FR-16 (`.claude/skills/` as canonical location), FR-17 (portable skill constraints), C-4 (dual-file context strategy).
+
+**Source:** [topic-5-cross-platform-portability.md](topic-5-cross-platform-portability.md)
 
 ### Topic 6: Dual-Distribution Workflow (🔴 Not Started)
 *Findings to be added.*
@@ -133,6 +148,10 @@ New requirements: FR-14 (template relocation to assets/), FR-15 (agent self-vali
 - [x] Insight: Multi-mode commands decompose into separate skills per workflow, not per flag argument (overturns FR-7)
 - [x] Insight: Doc-gen templates belong in `assets/`, supplementary guidance in `references/`, executable scripts in `scripts/`
 - [x] Insight: SKILL.md must be operationally complete on its own -- companion files are always supplementary
+- [x] Insight: `disable-model-invocation: true` is cross-platform (Cursor + Claude Code) -- Topic 3 Finding 9 correction
+- [x] Insight: `.claude/skills/` is the optimal single distribution path -- both platforms discover it
+- [x] Insight: Three Claude Code features break silently on Cursor: `context: fork`, `$ARGUMENTS`, `` !`command` ``
+- [x] Insight: Behavioral fidelity may be better on Claude Code than Cursor (upstream LLM vs prompt engineering)
 
 ---
 
@@ -140,11 +159,11 @@ New requirements: FR-14 (template relocation to assets/), FR-15 (agent self-vali
 
 See [requirements.md](requirements.md) for complete requirements document.
 
-**Current counts (Topics 1-4 + spikes):**
-- Functional Requirements: 15 (FR-1 through FR-15; note FR-7 is flagged for supersession by FR-10)
+**Current counts (Topics 1-5 + spikes):**
+- Functional Requirements: 17 (FR-1 through FR-17; note FR-7 is flagged for supersession by FR-10; FR-1/FR-4 annotations need correction per Topic 5)
 - Non-Functional Requirements: 1 (NFR-1)
-- Constraints: 3 (C-1, C-2, C-3)
-- Assumptions: 2 (A-1, A-2)
+- Constraints: 4 (C-1, C-2, C-3, C-4)
+- Assumptions: 2 (A-1, A-2; A-2 upgraded to validated per Topic 5)
 
 ---
 
@@ -153,8 +172,10 @@ See [requirements.md](requirements.md) for complete requirements document.
 1. ~~Conduct Topic 1 (auto-detection)~~ ✅ Complete
 2. ~~Conduct Topic 2 (redistribution rubric)~~ ✅ Complete
 3. ~~Conduct Topic 3 (conversion mechanics)~~ ✅ Complete
-4. Conduct Topics 4-8 (structural schemas, portability, dual-distribution, conversation orchestration, behavioral contracts)
-5. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10 is the key cleanup item
+4. ~~Conduct Topic 4 (structural schemas)~~ ✅ Complete
+5. ~~Conduct Topic 5 (cross-platform portability)~~ ✅ Complete -- **Topic 3 Finding 9 corrected**
+6. Conduct Topics 6-8 (dual-distribution, conversation orchestration, behavioral contracts)
+7. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10 and FR-1/FR-4 annotation corrections are key cleanup items
 
 ---
 

@@ -3,7 +3,7 @@
 **Source:** Research on agentic workflow modernization
 **Status:** Draft
 **Created:** 2026-03-25
-**Last Updated:** 2026-03-25
+**Last Updated:** 2026-04-02
 
 ---
 
@@ -250,6 +250,30 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
+### FR-16: Template-Distributed Skills Must Use `.claude/skills/` as Canonical Location
+
+**Description:** Skills distributed through dev-infra templates must be placed in `.claude/skills/[skill-name]/SKILL.md`. Both Cursor (via cross-platform discovery of `.claude/skills/`) and Claude Code (natively) read from this location. Do not distribute to `.cursor/skills/` -- it is not discovered by Claude Code. This eliminates duplication and provides a single canonical path.
+
+**Source:** [topic-5-cross-platform-portability.md](topic-5-cross-platform-portability.md) -- Finding 4
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-17: Portable Skills Must Not Use Platform-Breaking Features
+
+**Description:** Skills intended for cross-platform use (template-distributed, dual-distribution) must not use: `context: fork`, `$ARGUMENTS` / `$N` substitution, `` !`command` `` shell preprocessing, or `${CLAUDE_SKILL_DIR}`. These Claude Code-specific features break silently on platforms that don't support them (Cursor, Codex). Platform-specific skills (clearly marked, not template-distributed) may use them.
+
+**Source:** [topic-5-cross-platform-portability.md](topic-5-cross-platform-portability.md) -- Finding 2
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Template Changes Must Be Treated as Interface Contract Changes
@@ -264,7 +288,15 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
-## ⚠️ Constraints (continued)
+### C-4: AGENTS.md and CLAUDE.md Require Dual-File Strategy
+
+**Description:** The context layer (project conventions, behavioral identity) cannot be served from a single file across both platforms. AGENTS.md is not supported by Claude Code (confirmed April 2026, open feature requests with no resolution timeline). CLAUDE.md is not supported by Cursor. Dev-infra must maintain both files with synchronized content. Sync drift between the two files is a maintenance risk that should be managed via template sync validation or a generation script.
+
+**Source:** [topic-5-cross-platform-portability.md](topic-5-cross-platform-portability.md) -- Finding 5
+
+---
+
+## 🔗 Related Documents
 
 - [Research Summary](research-summary.md)
 - [Research Hub](README.md)
