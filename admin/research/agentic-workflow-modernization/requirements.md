@@ -322,6 +322,30 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
+### FR-22: Skills Must Document Their Position on the Orchestration Spectrum
+
+**Description:** Each skill's SKILL.md should indicate whether the workflow is conversationally orchestrated (human judgment at each step), hybrid (structured with human gates), or automated (pipeline, no human needed). This helps users and agents understand how much autonomy to apply and whether subagent dispatch is appropriate.
+
+**Source:** [topic-7-conversation-orchestration.md](topic-7-conversation-orchestration.md) -- Finding 5, Analysis
+
+**Priority:** Low (nice-to-have metadata, not blocking)
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-23: Session Resume Must Load Current Workflow State
+
+**Description:** When a conversation session begins and the user references a topic (e.g., `/research --conduct --topic-num 7`), the agent must read the research hub README status table and the latest requirements summary before beginning work. This compensates for the conversational model's lack of persistent state by grounding the agent in the committed artifacts.
+
+**Source:** [topic-7-conversation-orchestration.md](topic-7-conversation-orchestration.md) -- Findings 3, 4
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Template Changes Must Be Treated as Interface Contract Changes
@@ -348,6 +372,18 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
+### NFR-3: Research/Planning/Design Workflows Must Remain Conversationally Orchestrated
+
+**Description:** The agentic workflow modernization must not introduce pipeline infrastructure for judgment-intensive workflows (research, planning, design, discussion). These workflows are human-paced, sequential, and judgment-dependent. The implicit pipeline through commands (discuss → research → review → commit) provides adequate structure. Formal orchestration (DAGs, typed state, checkpointing) is reserved for implementation and CI/CD phases.
+
+**Source:** [topic-7-conversation-orchestration.md](topic-7-conversation-orchestration.md) -- Findings 1, 2, 4
+
+**Priority:** High (architectural constraint)
+
+**Status:** 🔴 Pending
+
+---
+
 ### C-4: AGENTS.md and CLAUDE.md Require Dual-File Strategy
 
 **Description:** The context layer (project conventions, behavioral identity) cannot be served from a single file across both platforms. AGENTS.md is not supported by Claude Code (confirmed April 2026, open feature requests with no resolution timeline). CLAUDE.md is not supported by Cursor. Dev-infra must maintain both files with synchronized content. Sync drift between the two files is a maintenance risk that should be managed via template sync validation or a generation script.
@@ -366,7 +402,7 @@ This document captures requirements discovered during research on redistributing
 
 ## 🚀 Next Steps
 
-1. Conduct Topics 7-8 research; extract additional requirements
+1. Conduct Topic 8 research; extract additional requirements
 2. Run `--consolidate` after all topics complete (FR-7 supersession, FR-1/FR-4 corrections, C-3 impact downgrade)
 3. Use `/decision agentic-workflow-modernization --from-research` to make architectural decisions
 

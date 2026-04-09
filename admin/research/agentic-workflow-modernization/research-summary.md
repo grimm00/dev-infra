@@ -143,8 +143,21 @@ New requirements: FR-18 (template-first authoring), FR-19 (publish script), FR-2
 
 **Source:** [topic-6-dual-distribution.md](topic-6-dual-distribution.md)
 
-### Topic 7: Conversation as Orchestration (🔴 Not Started)
-*Findings to be added.*
+### Topic 7: Conversation as Orchestration (✅ Complete)
+
+**Key output: Conversational orchestration is the right model for research/planning/design. Don't over-engineer it.**
+
+The industry has converged on three orchestration tiers (1-3 agents in-process, 3-10 with local orchestrator, 10+ cloud async). Dev-infra sits squarely at Tier 1, and that's correct. The meta-experiment (conducting Topics 1-6 serially in conversation) demonstrated that serial conversational research works well -- the original hypothesis that parallel subagents were needed was wrong because research topics have sequential dependencies.
+
+The conversation model provides four things pipelines don't: judgment at every step, cross-topic context accumulation, lateral movement via `/discuss`, and zero ceremony. It lacks three things: cross-session persistence, parallel execution, and formal progress tracking. For dev-infra's solo-developer research workflow, the lacking features are non-blocking.
+
+The breakover point from conversation to pipeline is state complexity, not agent count. Dev-infra would need formal orchestration only if: multiple people researched simultaneously, tasks had enforceable dependencies, or >10 active items exceeded mental tracking capacity.
+
+Critical insight: dev-infra's command sequence (discuss → research → review → commit) is already an implicit pipeline with human judgment gates -- it just uses conversation as the execution engine.
+
+New requirements: NFR-3 (research/planning must stay conversational), FR-22 (orchestration spectrum metadata in skills), FR-23 (session resume must load workflow state).
+
+**Source:** [topic-7-conversation-orchestration.md](topic-7-conversation-orchestration.md)
 
 ### Topic 8: Behavioral Contracts (🔴 Not Started)
 *Findings to be added.*
@@ -170,6 +183,11 @@ New requirements: FR-18 (template-first authoring), FR-19 (publish script), FR-2
 - [x] Insight: C-3 marketplace bug is naturally avoided by the audience split (templates for Cursor, marketplace for Claude Code)
 - [x] Insight: Monorepo marketplace (marketplace/ in dev-infra) is the right model for dev-infra's scale
 - [x] Insight: `plugin.json` adds minimal overhead -- skills don't change for marketplace distribution
+- [x] Insight: Conversational orchestration is the right model for research/planning/design -- don't over-engineer
+- [x] Insight: Breakover point is state complexity, not agent count -- dev-infra is well within conversational sufficiency
+- [x] Insight: The implicit pipeline (discuss → research → review → commit) already works as human-gated orchestration
+- [x] Insight: Parallel subagent dispatch is counterproductive for sequential research with inter-topic dependencies
+- [x] Insight: Different workflow phases belong at different points on the orchestration spectrum
 
 ---
 
@@ -177,9 +195,9 @@ New requirements: FR-18 (template-first authoring), FR-19 (publish script), FR-2
 
 See [requirements.md](requirements.md) for complete requirements document.
 
-**Current counts (Topics 1-6 + spikes):**
-- Functional Requirements: 21 (FR-1 through FR-21; note FR-7 is flagged for supersession by FR-10; FR-1/FR-4 annotations need correction per Topic 5)
-- Non-Functional Requirements: 2 (NFR-1, NFR-2)
+**Current counts (Topics 1-7 + spikes):**
+- Functional Requirements: 23 (FR-1 through FR-23; note FR-7 is flagged for supersession by FR-10; FR-1/FR-4 annotations need correction per Topic 5)
+- Non-Functional Requirements: 3 (NFR-1, NFR-2, NFR-3)
 - Constraints: 4 (C-1, C-2, C-3, C-4; C-3 impact downgraded per Topic 6 audience split finding)
 - Assumptions: 2 (A-1, A-2; A-2 upgraded to validated per Topic 5)
 
@@ -193,8 +211,9 @@ See [requirements.md](requirements.md) for complete requirements document.
 4. ~~Conduct Topic 4 (structural schemas)~~ ✅ Complete
 5. ~~Conduct Topic 5 (cross-platform portability)~~ ✅ Complete -- **Topic 3 Finding 9 corrected**
 6. ~~Conduct Topic 6 (dual-distribution)~~ ✅ Complete -- template-first authoring, publish script, C-3 audience split
-7. Conduct Topics 7-8 (conversation orchestration, behavioral contracts)
-8. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10, FR-1/FR-4 annotation corrections, and C-3 impact downgrade are key cleanup items
+7. ~~Conduct Topic 7 (conversation orchestration)~~ ✅ Complete -- conversational model validated, breakover criteria defined
+8. Conduct Topic 8 (behavioral contracts)
+9. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10, FR-1/FR-4 annotation corrections, and C-3 impact downgrade are key cleanup items
 
 ---
 
