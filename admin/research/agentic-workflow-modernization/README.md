@@ -50,7 +50,7 @@ Two spikes have already been completed and inform this research:
 | 3: Conversion Mechanics | High | ✅ Complete | [topic-3-conversion-mechanics.md](topic-3-conversion-mechanics.md) |
 | 4: Structural Schemas | Medium-High | ✅ Complete | [topic-4-structural-schemas.md](topic-4-structural-schemas.md) |
 | 5: Cross-Platform Portability | Medium | ✅ Complete | [topic-5-cross-platform-portability.md](topic-5-cross-platform-portability.md) |
-| 6: Dual-Distribution Workflow | Medium | 🔴 Not Started | [topic-6-dual-distribution.md](topic-6-dual-distribution.md) |
+| 6: Dual-Distribution Workflow | Medium | ✅ Complete | [topic-6-dual-distribution.md](topic-6-dual-distribution.md) |
 | 7: Conversation Orchestration | Medium-High | 🔴 Not Started | [topic-7-conversation-orchestration.md](topic-7-conversation-orchestration.md) |
 | 8: Behavioral Contracts | Medium | 🔴 Not Started | [topic-8-behavioral-contracts.md](topic-8-behavioral-contracts.md) |
 | 9: AGENTS.md Portability | High | ✅ Spiked | [topic-9-agents-md-portability.md](topic-9-agents-md-portability.md) |
@@ -74,9 +74,10 @@ Two spikes have already been completed and inform this research:
 2. ~~Conduct Topic 2 (redistribution rubric)~~ ✅ Complete
 3. ~~Conduct Topic 3 (conversion mechanics)~~ ✅ Complete -- **NOTE: FR-7 superseded by FR-10**
 4. ~~Conduct Topic 5 (cross-platform portability)~~ ✅ Complete -- **NOTE: Topic 3 Finding 9 corrected (disable-model-invocation IS cross-platform)**
-5. Conduct Topics 6-8 (dual-distribution, conversation orchestration, behavioral contracts)
-6. Run `--consolidate` after all topics complete
+5. ~~Conduct Topic 6 (dual-distribution)~~ ✅ Complete -- **template-first authoring, publish script, C-3 audience split**
+6. Conduct Topics 7-8 (conversation orchestration, behavioral contracts)
+7. Run `--consolidate` after all topics complete
 
 ---
 
-**Last Updated:** 2026-04-02
+**Last Updated:** 2026-04-09

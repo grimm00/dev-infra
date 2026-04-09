@@ -274,6 +274,54 @@ This document captures requirements discovered during research on redistributing
 
 ---
 
+### FR-18: Skills Must Be Authored in Templates as Canonical Source
+
+**Description:** The canonical location for all dev-infra skills is `templates/standard-project/.claude/skills/[skill-name]/`. Skills are developed, tested, and versioned here. The marketplace is a downstream distribution target, not an authoring location. Template sync (FR-13) ensures `learning-project` stays in parity.
+
+**Source:** [topic-6-dual-distribution.md](topic-6-dual-distribution.md) -- Findings 1, 6
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-19: Marketplace Distribution Must Use a Publish Script
+
+**Description:** A `publish-marketplace.sh` script must copy publishable skills from the canonical template location to `marketplace/plugins/[plugin-name]/skills/`, bump the `plugin.json` version field, and validate the result. The script must accept a `--dry-run` flag. Skills are not published automatically -- the publish step is explicit and versioned.
+
+**Source:** [topic-6-dual-distribution.md](topic-6-dual-distribution.md) -- Findings 2, 3, 6
+
+**Priority:** Medium (required at marketplace launch, not before)
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-20: CI Must Verify Source-to-Marketplace Sync
+
+**Description:** A CI check must compare publishable skills in `templates/standard-project/.claude/skills/` against their copies in `marketplace/plugins/*/skills/`. Drift must fail CI with a clear message identifying which files diverged. This complements intra-template sync (FR-13) -- they are independent checks.
+
+**Source:** [topic-6-dual-distribution.md](topic-6-dual-distribution.md) -- Findings 5, 6
+
+**Priority:** Medium (required at marketplace launch)
+
+**Status:** 🔴 Pending
+
+---
+
+### FR-21: Each Skill Must Declare Its Distribution Channels
+
+**Description:** A publish matrix document (or metadata within the skill) must declare whether each skill is distributed via templates, marketplace, or both. Background knowledge skills (FR-5) are template-only. Team utility skills may be marketplace-only. Workflow skills default to both. This prevents accidental overpublishing or underpublishing.
+
+**Source:** [topic-6-dual-distribution.md](topic-6-dual-distribution.md) -- Finding 7
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## 🎯 Non-Functional Requirements
 
 ### NFR-1: Template Changes Must Be Treated as Interface Contract Changes
@@ -283,6 +331,18 @@ This document captures requirements discovered during research on redistributing
 **Source:** [topic-4-structural-schemas.md](topic-4-structural-schemas.md) -- Analysis (inter-skill interface contracts)
 
 **Priority:** High (architectural principle)
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-2: Marketplace Updates Must Not Overwrite Project Customizations
+
+**Description:** When a user installs or upgrades a marketplace plugin, the plugin's skills are installed to Claude Code's plugin cache, not to the project's `.claude/skills/` directory. Project-local skill customizations (made after template generation) must not be affected by marketplace updates. This is inherently satisfied by Claude Code's plugin caching model but must be documented as a design constraint.
+
+**Source:** [topic-6-dual-distribution.md](topic-6-dual-distribution.md) -- Finding 3
+
+**Priority:** Medium (architectural constraint)
 
 **Status:** 🔴 Pending
 
@@ -306,10 +366,10 @@ This document captures requirements discovered during research on redistributing
 
 ## 🚀 Next Steps
 
-1. Conduct Topics 1-8 research; extract additional requirements
-2. Run `--consolidate` after all topics complete
+1. Conduct Topics 7-8 research; extract additional requirements
+2. Run `--consolidate` after all topics complete (FR-7 supersession, FR-1/FR-4 corrections, C-3 impact downgrade)
 3. Use `/decision agentic-workflow-modernization --from-research` to make architectural decisions
 
 ---
 
-**Last Updated:** 2026-03-25
+**Last Updated:** 2026-04-09

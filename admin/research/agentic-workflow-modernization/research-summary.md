@@ -127,8 +127,21 @@ New requirements: FR-16 (`.claude/skills/` as canonical location), FR-17 (portab
 
 **Source:** [topic-5-cross-platform-portability.md](topic-5-cross-platform-portability.md)
 
-### Topic 6: Dual-Distribution Workflow (🔴 Not Started)
-*Findings to be added.*
+### Topic 6: Dual-Distribution Workflow (✅ Complete)
+
+**Key output: Template-first authoring with a publish script to marketplace. Distribution channels are snapshots, not live sync.**
+
+Dev-infra serves two audiences through two channels: personal/local projects via template generation (skills seeded into `.claude/skills/` at creation) and the team via Claude Code marketplace (plugin package with `marketplace.json`). Both channels are inherently snapshot-based -- there is no live sync mechanism, and none is needed.
+
+The template-sync-manifest extends to skills with zero tooling changes (just replace command paths with skill paths). A new `publish-marketplace.sh` script copies publishable skills from the canonical template location to a `marketplace/` directory within the dev-infra repo (monorepo model), bumps the `plugin.json` version, and validates. A CI check verifies source-to-marketplace parity alongside the existing intra-template sync check.
+
+Critical finding: C-3 (Cursor marketplace bug hiding `disable-model-invocation` skills) is naturally avoided by the audience split. Cursor users get skills via template distribution (project-local, no marketplace involved). Claude Code users get skills via marketplace (where the bug doesn't exist). The dual-distribution model turns the bug into a non-issue.
+
+Skills are categorized by distribution channel: workflow skills (both channels), behavioral skills (both), team utility skills (marketplace only), background knowledge (template only). A publish matrix document prevents accidental overpublishing.
+
+New requirements: FR-18 (template-first authoring), FR-19 (publish script), FR-20 (source-to-marketplace CI), FR-21 (distribution channel declaration), NFR-2 (marketplace updates must not overwrite project customizations).
+
+**Source:** [topic-6-dual-distribution.md](topic-6-dual-distribution.md)
 
 ### Topic 7: Conversation as Orchestration (🔴 Not Started)
 *Findings to be added.*
@@ -152,6 +165,11 @@ New requirements: FR-16 (`.claude/skills/` as canonical location), FR-17 (portab
 - [x] Insight: `.claude/skills/` is the optimal single distribution path -- both platforms discover it
 - [x] Insight: Three Claude Code features break silently on Cursor: `context: fork`, `$ARGUMENTS`, `` !`command` ``
 - [x] Insight: Behavioral fidelity may be better on Claude Code than Cursor (upstream LLM vs prompt engineering)
+- [x] Insight: Distribution channels are snapshots, not live sync -- "keeping in sync" is a publish step
+- [x] Insight: Template-sync-manifest extends to skill files with zero tooling changes
+- [x] Insight: C-3 marketplace bug is naturally avoided by the audience split (templates for Cursor, marketplace for Claude Code)
+- [x] Insight: Monorepo marketplace (marketplace/ in dev-infra) is the right model for dev-infra's scale
+- [x] Insight: `plugin.json` adds minimal overhead -- skills don't change for marketplace distribution
 
 ---
 
@@ -159,10 +177,10 @@ New requirements: FR-16 (`.claude/skills/` as canonical location), FR-17 (portab
 
 See [requirements.md](requirements.md) for complete requirements document.
 
-**Current counts (Topics 1-5 + spikes):**
-- Functional Requirements: 17 (FR-1 through FR-17; note FR-7 is flagged for supersession by FR-10; FR-1/FR-4 annotations need correction per Topic 5)
-- Non-Functional Requirements: 1 (NFR-1)
-- Constraints: 4 (C-1, C-2, C-3, C-4)
+**Current counts (Topics 1-6 + spikes):**
+- Functional Requirements: 21 (FR-1 through FR-21; note FR-7 is flagged for supersession by FR-10; FR-1/FR-4 annotations need correction per Topic 5)
+- Non-Functional Requirements: 2 (NFR-1, NFR-2)
+- Constraints: 4 (C-1, C-2, C-3, C-4; C-3 impact downgraded per Topic 6 audience split finding)
 - Assumptions: 2 (A-1, A-2; A-2 upgraded to validated per Topic 5)
 
 ---
@@ -174,9 +192,10 @@ See [requirements.md](requirements.md) for complete requirements document.
 3. ~~Conduct Topic 3 (conversion mechanics)~~ ✅ Complete
 4. ~~Conduct Topic 4 (structural schemas)~~ ✅ Complete
 5. ~~Conduct Topic 5 (cross-platform portability)~~ ✅ Complete -- **Topic 3 Finding 9 corrected**
-6. Conduct Topics 6-8 (dual-distribution, conversation orchestration, behavioral contracts)
-7. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10 and FR-1/FR-4 annotation corrections are key cleanup items
+6. ~~Conduct Topic 6 (dual-distribution)~~ ✅ Complete -- template-first authoring, publish script, C-3 audience split
+7. Conduct Topics 7-8 (conversation orchestration, behavioral contracts)
+8. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10, FR-1/FR-4 annotation corrections, and C-3 impact downgrade are key cleanup items
 
 ---
 
-**Last Updated:** 2026-03-25
+**Last Updated:** 2026-04-09
