@@ -189,6 +189,37 @@ The value of formalizing this into a pipeline is low for dev-infra's current sca
 
 ---
 
+### Finding 8: The Human Is a Concurrent Agent, Not Just a Gate (Post-Research Amendment)
+
+**Added:** 2026-04-10 (surfaced during `/discuss` after Topics 7-8 were conducted)
+
+Topic 7's orchestration model frames the workflow as serial: agent produces → human reviews → next step. But empirical observation during the research itself reveals a **dual-track structure**: the human and agent work concurrently with asynchronous sync points.
+
+**Evidence from the research process itself:**
+- While the agent was conducting Topic 8 research (auditing commands, running web searches, writing findings), the user was simultaneously reading Topic 7 findings, forming opinions, and connecting insights to their broader project landscape (proj-cli, work-prod, the design step gap)
+- The Topic 6 reframing (marketplace as team subset, not dev-infra-hosted) came entirely from the user's concurrent thinking track -- it was not derived from any agent research
+- The `/discuss` sessions after Topics 6 and 7 were not "review gates" in the traditional pipeline sense -- they were the user bringing parallel processing results back into the shared context
+
+**The actual workflow structure:**
+
+```
+Human track:  [reading] [thinking] [connecting to other projects] [forming opinion]
+Agent track:  [researching] [writing findings] [updating requirements]
+Sync points:  /discuss ←── where the tracks merge
+```
+
+**Implication for skill design:** The sync-point skills (discuss, review, plan-review) should be designed knowing the human arrives with their own parallel findings, not with a blank slate waiting for options. The distinction is:
+- **"Here are the options, which do you pick?"** -- agent leads, human gates (the current implicit model)
+- **"What are you seeing from your side?"** -- agent acknowledges the human has been working too (the actual dynamic)
+
+This dual-track model doesn't need to be encoded in every skill's body. It's a property of the workflow that sync-point skills inherit. The `/discuss` command already functions as the primary sync mechanism. What needs encoding is the *posture* of sync-point skills: they should invite the human's concurrent outputs rather than only presenting the agent's.
+
+**Relevance:** Refines NFR-3 (conversational orchestration) by adding that "conversational" doesn't mean "serial" -- it means "dual-track with async sync." Also informs the design gap (the `/design` step should explicitly leverage both tracks).
+
+**Source:** Empirical observation during Topics 6-8 research and `/discuss` sessions
+
+---
+
 ## 🔍 Analysis
 
 ### The Orchestration Spectrum
@@ -236,6 +267,8 @@ The agentic workflow modernization should not try to move research workflows rig
 - [x] Insight 3: The implicit pipeline (discuss → research → review → commit) already works; formalizing it adds overhead without proportional value
 - [x] Insight 4: Parallel subagent dispatch is counterproductive for sequential research topics with inter-topic dependencies
 - [x] Insight 5: Different workflow phases (research vs implementation vs validation) belong at different points on the orchestration spectrum
+- [x] Insight 6: The human is a concurrent agent, not just a gate -- "conversational" means dual-track with async sync, not serial handoff
+- [x] Insight 7: Sync-point skills (discuss, review, plan-review) should invite the human's parallel findings, not just present the agent's options
 
 ---
 
@@ -278,4 +311,4 @@ The agentic workflow modernization should not try to move research workflows rig
 
 ---
 
-**Last Updated:** 2026-04-09
+**Last Updated:** 2026-04-10

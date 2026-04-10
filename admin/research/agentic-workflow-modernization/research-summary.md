@@ -1,9 +1,9 @@
 # Research Summary - Agentic Workflow Modernization
 
 **Purpose:** Summary of all research findings
-**Status:** 🔴 Research
+**Status:** ✅ Consolidated
 **Created:** 2026-03-25
-**Last Updated:** 2026-04-02
+**Last Updated:** 2026-04-10
 
 ---
 
@@ -129,17 +129,19 @@ New requirements: FR-16 (`.claude/skills/` as canonical location), FR-17 (portab
 
 ### Topic 6: Dual-Distribution Workflow (✅ Complete)
 
-**Key output: Template-first authoring with a publish script to marketplace. Distribution channels are snapshots, not live sync.**
+**Key output: Dev-infra is the superset; team marketplace is a curated subset in a separate repo. No publish script or marketplace directory needed in dev-infra.**
 
 Dev-infra serves two audiences through two channels: personal/local projects via template generation (skills seeded into `.claude/skills/` at creation) and the team via Claude Code marketplace (plugin package with `marketplace.json`). Both channels are inherently snapshot-based -- there is no live sync mechanism, and none is needed.
 
-The template-sync-manifest extends to skills with zero tooling changes (just replace command paths with skill paths). A new `publish-marketplace.sh` script copies publishable skills from the canonical template location to a `marketplace/` directory within the dev-infra repo (monorepo model), bumps the `plugin.json` version, and validates. A CI check verifies source-to-marketplace parity alongside the existing intra-template sync check.
+**Reframed (2026-04-10):** The original analysis proposed a `marketplace/` directory inside dev-infra with a publish script and CI check. This was overbuilt. The simpler model: dev-infra authors all skills in `.claude/skills/` format (which is already 1:1 marketplace-compatible). The team marketplace is a separate repo that cherry-picks a curated subset of dev-infra's skills. Shipment is a manual copy + PR to the team marketplace repo. No publish script, no `marketplace/` directory, no source-to-marketplace CI in dev-infra.
 
-Critical finding: C-3 (Cursor marketplace bug hiding `disable-model-invocation` skills) is naturally avoided by the audience split. Cursor users get skills via template distribution (project-local, no marketplace involved). Claude Code users get skills via marketplace (where the bug doesn't exist). The dual-distribution model turns the bug into a non-issue.
+The template-sync-manifest extends to skills with zero tooling changes (just replace command paths with skill paths). Intra-template sync remains dev-infra's only CI concern.
 
-Skills are categorized by distribution channel: workflow skills (both channels), behavioral skills (both), team utility skills (marketplace only), background knowledge (template only). A publish matrix document prevents accidental overpublishing.
+Critical finding: C-3 (Cursor marketplace bug) is naturally avoided by the audience split. Additionally, Cursor discovers Claude Code plugin cache skills with `plugin:skill` namespacing (empirically confirmed with Hex plugin), meaning team marketplace skills are accessible to Cursor users without separate packaging.
 
-New requirements: FR-18 (template-first authoring), FR-19 (publish script), FR-20 (source-to-marketplace CI), FR-21 (distribution channel declaration), NFR-2 (marketplace updates must not overwrite project customizations).
+Skills are categorized by distribution channel: workflow skills (both channels), behavioral skills (both), team utility skills (marketplace only), background knowledge (template only). A publish matrix document guides cherry-picking.
+
+New requirements: FR-18 (template-first authoring), FR-19 (1:1 format compatibility, reframed from publish script), ~~FR-20 (withdrawn)~~, FR-21 (distribution channel declaration), NFR-2 (marketplace updates must not overwrite project customizations).
 
 **Source:** [topic-6-dual-distribution.md](topic-6-dual-distribution.md)
 
@@ -155,12 +157,31 @@ The breakover point from conversation to pipeline is state complexity, not agent
 
 Critical insight: dev-infra's command sequence (discuss → research → review → commit) is already an implicit pipeline with human judgment gates -- it just uses conversation as the execution engine.
 
+**Post-research amendment (2026-04-10):** Finding 8 added -- the human is a concurrent agent, not just a gate. The workflow is dual-track (human reading/thinking/connecting in parallel with agent researching/writing) with async sync via `/discuss`. Sync-point skills should invite the human's parallel findings rather than only presenting the agent's options. This refines NFR-3: "conversational" means dual-track with async sync, not serial handoff.
+
 New requirements: NFR-3 (research/planning must stay conversational), FR-22 (orchestration spectrum metadata in skills), FR-23 (session resume must load workflow state).
 
 **Source:** [topic-7-conversation-orchestration.md](topic-7-conversation-orchestration.md)
 
-### Topic 8: Behavioral Contracts (🔴 Not Started)
-*Findings to be added.*
+### Topic 8: Behavioral Contracts (✅ Complete)
+
+**Key output: Five-property quality rubric for behavioral instructions. Contracts over personas, outcomes over roles, delta over comprehensive.**
+
+An audit of all 31 dev-infra commands reveals that behavioral instruction precision is a concentrated problem (6 of 31 commands: discuss, narrative, reflect, int-opp, pr-validation, spike), not a systemic one. Instructions cluster into three tiers: Tier 1 (precise, testable), Tier 2 (directional but unverifiable), and Tier 3 (persona-based, untestable). The conversion to skills is the natural audit checkpoint.
+
+The industry has converged on "contracts, not personas" (2025-2026): the Prompt Contract model (Goal, Constraints, Output Schema, Failure Conditions), the Prompt Tinkerer anti-pattern (emphasis markers don't enforce rules), the delta principle (only specify what differs from baseline model behavior), and the persona anti-pattern (role conditioning degrades reliability when irrelevant to the task).
+
+Hex/Superpowers plugins (28 SKILL.md files analyzed) demonstrate the target architecture: complex behavioral guidance achieved entirely through named rules ("Iron Laws"), rationalization tables ("Thought → Reality"), forbidden response lists, gate conditions, and gotchas sections -- no personas needed.
+
+A five-property quality rubric emerges: behavioral instructions must be (1) observable, (2) bounded, (3) outcome-framed, (4) delta-only, (5) failure-aware. The discuss spike's "play devil's advocate" → "name genuine concerns specifically" transformation validates the rubric and generalizes to all Tier 3 instructions.
+
+The behavioral contract has a dual location: description (frontmatter) routes invocation, body enforces behavior. Cross-session consistency comes from structural anchors (named rules, examples, gates), not from emphasis markers.
+
+**Post-research amendment (2026-04-10):** Finding 9 added -- the escalation ladder (prompt → skill → hook → tool → verify) applies to both the agent and the human. Long markdown files are fragile for both participants. The three-state arc: (1) current (long prose), (2) after skill conversion (lean skills, still prose enforcement), (3) after hooks/CLI integration (skills carry judgment only, hooks enforce rules, CLI surfaces state). This connects agentic-workflow-modernization (delta principle, escalation ladder) with workflow-simplification (NFR-7 context proportionality, AI context waste).
+
+New requirements: FR-24 (five-property rubric as quality gate), FR-25 (gotchas section required), FR-26 (dual-location pattern for description vs body), FR-27 (design must allocate guidance to enforcement layers).
+
+**Source:** [topic-8-behavioral-contracts.md](topic-8-behavioral-contracts.md)
 
 ---
 
@@ -178,16 +199,27 @@ New requirements: NFR-3 (research/planning must stay conversational), FR-22 (orc
 - [x] Insight: `.claude/skills/` is the optimal single distribution path -- both platforms discover it
 - [x] Insight: Three Claude Code features break silently on Cursor: `context: fork`, `$ARGUMENTS`, `` !`command` ``
 - [x] Insight: Behavioral fidelity may be better on Claude Code than Cursor (upstream LLM vs prompt engineering)
-- [x] Insight: Distribution channels are snapshots, not live sync -- "keeping in sync" is a publish step
+- [x] Insight: Distribution channels are snapshots, not live sync -- shipment is a cherry-pick + PR, not a publish script
 - [x] Insight: Template-sync-manifest extends to skill files with zero tooling changes
 - [x] Insight: C-3 marketplace bug is naturally avoided by the audience split (templates for Cursor, marketplace for Claude Code)
-- [x] Insight: Monorepo marketplace (marketplace/ in dev-infra) is the right model for dev-infra's scale
-- [x] Insight: `plugin.json` adds minimal overhead -- skills don't change for marketplace distribution
+- [x] Insight: Dev-infra is the superset; team marketplace is a curated subset in a separate repo -- no marketplace directory needed in dev-infra
+- [x] Insight: `.claude/skills/` format is already 1:1 marketplace-compatible -- the copy is frictionless
+- [x] Insight: Cursor discovers Claude Code plugin cache skills with `plugin:skill` namespacing (empirically confirmed)
 - [x] Insight: Conversational orchestration is the right model for research/planning/design -- don't over-engineer
 - [x] Insight: Breakover point is state complexity, not agent count -- dev-infra is well within conversational sufficiency
 - [x] Insight: The implicit pipeline (discuss → research → review → commit) already works as human-gated orchestration
 - [x] Insight: Parallel subagent dispatch is counterproductive for sequential research with inter-topic dependencies
 - [x] Insight: Different workflow phases belong at different points on the orchestration spectrum
+- [x] Insight: The human is a concurrent agent, not just a gate -- dual-track with async sync via `/discuss`
+- [x] Insight: Sync-point skills should invite the human's parallel findings, not just present the agent's options
+- [x] Insight: The escalation ladder applies to both tracks -- hooks/CLI reduce cognitive load for human and agent alike
+- [x] Insight: Three-state arc: current (long prose) → after skills (lean, still prose enforcement) → after hooks/CLI (skills carry judgment only)
+- [x] Insight: Behavioral instruction precision is concentrated (6 of 31 commands), not systemic -- conversion is the natural audit checkpoint
+- [x] Insight: Industry convergence: contracts over personas, outcomes over roles, delta over comprehensive
+- [x] Insight: Five-property rubric for reliable behavioral contracts: observable, bounded, outcome-framed, delta-only, failure-aware
+- [x] Insight: Hex/Superpowers demonstrate the target: named rules, rationalization tables, forbidden responses, gates, gotchas -- no personas
+- [x] Insight: Behavioral contract dual location: description routes invocation, body enforces behavior
+- [x] Insight: Cross-session consistency from structural anchors (named rules, examples, gates), not emphasis markers
 
 ---
 
@@ -195,11 +227,15 @@ New requirements: NFR-3 (research/planning must stay conversational), FR-22 (orc
 
 See [requirements.md](requirements.md) for complete requirements document.
 
-**Current counts (Topics 1-7 + spikes):**
-- Functional Requirements: 23 (FR-1 through FR-23; note FR-7 is flagged for supersession by FR-10; FR-1/FR-4 annotations need correction per Topic 5)
+**Final counts (after consolidation 2026-04-10):**
+- Functional Requirements: 22 (FR-1 through FR-22, renumbered)
 - Non-Functional Requirements: 3 (NFR-1, NFR-2, NFR-3)
-- Constraints: 4 (C-1, C-2, C-3, C-4; C-3 impact downgraded per Topic 6 audience split finding)
-- Assumptions: 2 (A-1, A-2; A-2 upgraded to validated per Topic 5)
+- Constraints: 4 (C-1, C-2, C-3 mitigated, C-4)
+- Assumptions: 2 (A-1, A-2 validated)
+
+**Consolidation actions:** Merged old FR-1→FR-4, FR-2→FR-24, FR-11→FR-14. Removed old FR-7 (superseded), FR-20 (withdrawn). Corrected FR-1/FR-4 cross-platform annotations, downgraded C-3, validated A-2, upgraded FR-8 priority. All FRs renumbered sequentially. See [requirements.md](requirements.md) for the authoritative list.
+
+**Note:** Topic documents below reference pre-consolidation FR numbers. See requirements.md for the renumbering map (each FR includes its pre-consolidation ID).
 
 ---
 
@@ -210,11 +246,13 @@ See [requirements.md](requirements.md) for complete requirements document.
 3. ~~Conduct Topic 3 (conversion mechanics)~~ ✅ Complete
 4. ~~Conduct Topic 4 (structural schemas)~~ ✅ Complete
 5. ~~Conduct Topic 5 (cross-platform portability)~~ ✅ Complete -- **Topic 3 Finding 9 corrected**
-6. ~~Conduct Topic 6 (dual-distribution)~~ ✅ Complete -- template-first authoring, publish script, C-3 audience split
+6. ~~Conduct Topic 6 (dual-distribution)~~ ✅ Complete -- template-first authoring, 1:1 format shipment, C-3 audience split (reframed 2026-04-10: marketplace is team-owned, not dev-infra-hosted)
 7. ~~Conduct Topic 7 (conversation orchestration)~~ ✅ Complete -- conversational model validated, breakover criteria defined
-8. Conduct Topic 8 (behavioral contracts)
-9. Run `--consolidate` after all topics complete -- FR-7 supersession by FR-10, FR-1/FR-4 annotation corrections, and C-3 impact downgrade are key cleanup items
+8. ~~Conduct Topic 8 (behavioral contracts)~~ ✅ Complete -- five-property rubric, contracts over personas, Hex/Superpowers target architecture
+9. ~~Run `--consolidate`~~ ✅ Complete (2026-04-10) -- merged 3 FRs, removed 2, renumbered to FR-1 through FR-22, status Draft → Final
+10. Use `/decision agentic-workflow-modernization --from-research` to make architectural decisions
 
 ---
 
-**Last Updated:** 2026-04-09
+**Last Updated:** 2026-04-10
+

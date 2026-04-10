@@ -344,12 +344,12 @@ The critical insight for dev-infra: if AGENTS.md carries the identity and conven
 - Informs Theme 1 (redistribution) -- the sorting criteria changes if AGENTS.md is a first-class layer alongside rules/skills/commands
 - Relates to Theme 6 (dual distribution) -- AGENTS.md ships with templates, not the marketplace; it's repo-local by nature
 
-**Research update (Topic 3, Finding 9):** `disable-model-invocation: true` is **Cursor-specific** -- it does not appear in the agentskills.io specification. The portable spec defines `name`, `description`, `license`, `compatibility`, `metadata`, and `allowed-tools`. The explicit-only enforcement from FR-1 and FR-4 works in Cursor but has no portable equivalent. The closest portable mitigation is description-field guidance ("only use when explicitly invoked via /skill-name"), which is not enforced. This sharpens the portability question: the four-layer model works in Cursor, but portability to Claude Code and Codex depends on platform-specific behavioral guarantees.
+**Research correction (Topic 5, corrects Topic 3 Finding 9):** `disable-model-invocation: true` is **cross-platform** -- both Cursor and Claude Code enforce it with identical semantics. The earlier annotation from Topic 3 Finding 9 claiming this was Cursor-specific was incorrect. Claude Code's official documentation explicitly supports the flag. The explicit-only enforcement from FR-1 and FR-4 works on both major platforms. The portability story is substantially better than the earlier assessment suggested.
 
 **Concerns:**
 - AGENTS.md portability and platform support is partially confirmed (Spike A): Cursor reads it at lowest priority; Claude Code CLI does not read it natively; file references are not followed (content must be inline)
 - Hub-and-spoke AGENTS.md (with file references) is confirmed not to work (Spike A, Finding 4); monolithic inline content is the only reliable approach
-- `disable-model-invocation` as a Cursor-only feature means the explicit-only guarantee is platform-dependent
+- ~~`disable-model-invocation` as a Cursor-only feature~~ Corrected by Topic 5: cross-platform (both Cursor and Claude Code enforce it)
 - A Roadmap layer in AGENTS.md would be high-value but high-maintenance; stale roadmap context may be worse than no roadmap
 - Adding AGENTS.md as a fourth layer increases the total surface to maintain; only worth it if the portability gain is real
 

@@ -1,6 +1,6 @@
 # Narrative: Agentic Workflow Modernization — From Commands to Roles
 
-**Date:** 2026-03-25
+**Date:** 2026-03-25 → 2026-04-10
 **Branch:** `develop`
 
 ---
@@ -126,6 +126,78 @@ The design document's most important innovation: Section 7 (NFR Checklist) is an
 
 The full portability picture: skills (SKILL.md format, frontmatter, companion directories, invocation control) are **fully portable** between Cursor and Claude Code. The gap is only in the context layer (AGENTS.md vs CLAUDE.md, requiring a dual-file strategy) and in three Claude Code-specific features that break silently on Cursor (`context: fork`, `$ARGUMENTS`, `` !`command` ``). The practical distribution answer: `.claude/skills/` as the single canonical location, discovered by both platforms.
 
+### Act 7: Distribution Reframed (Topics 5-6)
+
+Topic 6 investigated the dual-distribution question: how should skills reach personal projects (via templates) versus the team (via marketplace)? The initial research proposed an elaborate model: a `marketplace/` directory inside dev-infra, a `publish-marketplace.sh` script, a CI check verifying source-to-marketplace sync, and a monorepo architecture.
+
+Then the user read the findings.
+
+The reframing came not from additional research but from the user's own concurrent thinking track -- they had been processing the research alongside their work on proj-cli and proj-clone. The insight was sharper and simpler than what the agent had produced: the team marketplace is not dev-infra's concern. Dev-infra is the superset. The team marketplace is a curated subset in a separate team-owned repo. Skills authored in `.claude/skills/` format are already 1:1 marketplace-compatible. Shipment is a cherry-pick and a PR. No publish script. No marketplace directory in dev-infra. No source-to-marketplace CI.
+
+This collapsed three proposed requirements into one structural constraint (FR-19: skills must be authored in marketplace-compatible format) and outright withdrew FR-20 (source-to-marketplace CI). The "overbuilt" label on the original Finding 9 is a useful artifact: it shows what happens when the agent researches industry patterns without the user's simplifying judgment about what the project actually needs.
+
+An empirical test confirmed a separate finding: creating a test skill at `.claude/skills/foo-test/SKILL.md` and invoking it as `/foo-test` in Cursor confirmed that Cursor discovers skills from the `.claude/skills/` directory. A further discovery: Cursor scans Claude Code's plugin cache and surfaces installed plugin skills with `plugin:skill` namespacing (the Hex plugin's skills appeared as `hex:brainstorm`, `hex:write-plan`, etc.). This means team marketplace skills are automatically available to Cursor users without any separate packaging step.
+
+### Act 8: The Human Track Revealed (Topic 7)
+
+Topic 7 was a meta-experiment. The research question -- "can conversation serve as the orchestration layer?" -- was answered by the research process itself. Topics 1-8 were conducted serially in conversation sessions. The parallel subagent hypothesis (run Topics 4-8 simultaneously) proved unnecessary because research topics had sequential dependencies: Topic 5 depended on Topic 3's findings, Topic 6 depended on Topic 5's portability conclusions, and so on.
+
+The conversation model provided four things a pipeline couldn't: judgment at every step, cross-topic context accumulation, lateral movement via `/discuss`, and zero ceremony. It lacked three things: cross-session persistence, parallel execution, and formal progress tracking. For a solo developer's research workflow, the lacking features were non-blocking.
+
+But the real insight came after the research was written up, during a `/discuss` session. The user observed that they had been reading Topic 7's findings while the agent was simultaneously conducting Topic 8 -- and that this wasn't unusual. Throughout the research, the human had been operating as a concurrent agent: reading prior topics, forming opinions, connecting dots to other projects, building mental models that only surfaced when they returned to chat. The Topic 6 reframing was the clearest evidence: that insight came entirely from the user's parallel processing, not from anything the agent researched.
+
+This reframed the orchestration model. Topic 7 had described the workflow as serial: agent produces, human reviews, next step happens. The reality was dual-track:
+
+```
+Human track:  [reading] [thinking] [connecting to other projects] [forming opinion]
+Agent track:  [researching] [writing findings] [updating requirements]
+Sync points:  /discuss ←── where the tracks merge
+```
+
+The implication for skill design: sync-point skills (discuss, review, plan-review) should be designed knowing the human arrives with parallel processing results. The question isn't "here are the options, which do you pick?" but "what are you seeing from your side?"
+
+### Act 9: Contracts, Not Personas (Topic 8)
+
+Topic 8 started with a focused question -- "what makes a behavioral instruction reliable?" -- and produced the most actionable framework of the entire research.
+
+An audit of all 31 dev-infra commands revealed that behavioral instruction precision was a concentrated problem, not a systemic one. Only 6 commands (discuss, narrative, reflect, int-opp, pr-validation, spike) had significant behavioral content. The other 25 were purely procedural. The problematic instructions clustered into recognizable patterns: persona framing ("play devil's advocate"), unbounded scope ("identify connections the user might not have seen"), and vague qualifiers ("be thorough," "search thoroughly").
+
+The industry had converged on the answer. Multiple independent sources (2025-2026) agreed: persona-based instructions degrade reliability. The replacement is a contract model: Goal (testable success criteria), Constraints (boundary box enforced by code), Output Schema (typed interface), Failure Conditions (what constitutes breach). The meta-principle from Iqbal's "Stop Writing Prompts, Start Writing Contracts" (2026): "Prompting in production is interface design, not communication."
+
+Analysis of 28 SKILL.md files across the Hex and Superpowers plugins revealed the target architecture. Complex behavioral guidance was achieved entirely without personas, through five structural mechanisms: named rules ("Iron Laws" in ASCII art fences), rationalization tables ("Thought → Reality" pre-emption of known failure modes), forbidden response lists (banning performative agreement), gate conditions (binary checks at decision points), and gotchas sections (cases where the model would do something plausible but wrong). Anthropic identified the gotchas section as "the highest-signal content in any skill."
+
+A five-property quality rubric emerged: behavioral instructions must be (1) observable -- compliance determinable from output, (2) bounded -- the agent can determine when it has done enough, (3) outcome-framed -- describes what to produce, not who to be, (4) delta-only -- adds information the model wouldn't have by default, (5) failure-aware -- specifies what NOT to do.
+
+The Spike B transformation ("play devil's advocate" → "name genuine concerns specifically; don't manufacture disagreement") validated the rubric and generalized: every Tier 3 instruction has a Tier 1 rewrite following the same pattern. Replace the persona with an observable behavior. Add a failure mode. Make the trigger condition specific.
+
+Then the discussion sessions pushed the research further.
+
+The user connected Topic 8's escalation ladder (prompt → skill → hook → tool restriction → verify) with their interest in CLI tools, hooks, and proj-cli. The insight: the escalation ladder applies to both tracks. A 400-line command file is fragile for the agent (accuracy degradation above 800 tokens, lost-in-the-middle effects) AND fragile for the human (can't hold in working memory, skims, misses the critical line). The skill decomposition fixes the agent side. Hooks and CLI fix the human side.
+
+This crystallized into a three-state arc:
+
+| State | Agent Input | Human Input | Enforcement |
+|-------|------------|-------------|-------------|
+| **Current** | Long `.mdc` rules + `.md` commands | Same prose files | Prose ("make sure you do X") |
+| **After skill conversion** | Lean skills + templates | Shorter skills, still prose rules | Prose in skill body |
+| **After hooks/CLI integration** | Skills carry only judgment work | CLI surfaces state; hooks enforce rules | Deterministic |
+
+The user noted: "Even me as a human could benefit from hooks and automation to focus on work that matters." This is the clearest statement of the research's bottom line: the modernized architecture isn't just about making the agent more effective. It's about making both participants -- human and agent -- spend their attention on judgment, not on parsing prose for deterministic rules.
+
+The two research efforts converge here. Workflow-simplification's NFR-7 (context consumption proportional to work) and agentic-workflow-modernization's escalation ladder are the same principle applied at different scales. The design step (FR-27) is where the allocation happens: skill body for judgment, hooks for deterministic rules, CLI for state surfacing, human sync points for cross-project connections.
+
+### Act 10: The Narrative Gap
+
+Between April 2 and April 10, three research topics were completed, the distribution model was reframed, two post-research amendments captured emergent insights (the dual-track observation and the escalation ladder), and multiple `/discuss` sessions produced refinements that changed requirements. None of it was reflected in this narrative.
+
+The gap exemplifies the dual-track problem from Act 8. The human was processing insights -- reading research, forming reactions, connecting to other projects, having discussions that reshaped findings -- but the capture happened only in the research artifacts (topic documents, requirements, research summary). The story of how the thinking evolved went unrecorded.
+
+This is partly a discipline problem (the user noted they hadn't been routinely using `/narrative`). But it's also a workflow design problem. The current pipeline doesn't have a natural trigger for narrative updates. `/review` captures diffs. `/commit` finalizes changes. `/post-pr` updates status documents. Nothing says "the story has advanced -- update the narrative."
+
+The act of writing this update -- catching up on 8 days of research evolution in a single narrative extension -- is itself evidence. The insights don't flow as naturally when reconstructed after the fact. The Topic 6 reframing was a sharp moment when it happened; documented 8 days later, it reads as a bullet point. The dual-track observation was a genuine discovery during a `/discuss` session; captured retrospectively, it risks sounding like something that was always obvious.
+
+The lesson: narratives should be extended incrementally, as part of the research workflow, not batched at the end. Whether this means `/research --conduct` should prompt a narrative update, or `/discuss --summary` should feed into the narrative, is a design question for the `/design` step.
+
 ---
 
 ## What Was Learned
@@ -140,6 +212,11 @@ The full portability picture: skills (SKILL.md format, frontmatter, companion di
 - **The pipeline needs a design step.** Research → decision → transition-plan skips the holistic "how does this work as a system?" question. Cross-cutting quality attributes and staging need explicit design, not ad-hoc handling during task decomposition.
 - **Portability is better than expected.** The skill layer is fully portable between Cursor and Claude Code. The gap is only in the context layer (AGENTS.md vs CLAUDE.md). The earlier pessimism about `disable-model-invocation` being Cursor-only was incorrect.
 - **Issue #72 (explore refactor) is a prerequisite** — it simplifies the explore workflow before converting it to a skill.
+- **Distribution simplifies to superset/subset.** Dev-infra is the superset of all skills. The team marketplace is a curated subset in a separate repo. No publish script, no marketplace directory, no source-to-marketplace CI in dev-infra. Skills in `.claude/skills/` format are already 1:1 marketplace-compatible.
+- **The workflow is dual-track, not serial.** The human and agent work concurrently with async sync via `/discuss`. The human arrives at sync points with parallel processing results (cross-project connections, reframings, priority judgments) that the agent doesn't have. Sync-point skills should invite those results, not just present options.
+- **The escalation ladder applies to both participants.** Hooks and CLI reduce cognitive load for the human (deterministic enforcement, state surfacing) just as they reduce token cost for the agent (fewer non-judgment instructions). The three-state arc -- prose → lean skills → hooks/CLI -- is the architectural roadmap.
+- **Two research efforts converge.** Workflow-simplification's NFR-7 (context proportional to work) and agentic-workflow-modernization's escalation ladder are the same principle at different scales. The design step is where the allocation happens.
+- **Behavioral contracts have a rubric.** Five properties: observable, bounded, outcome-framed, delta-only, failure-aware. The Hex/Superpowers plugin skills demonstrate the target: named rules, rationalization tables, gotchas -- no personas.
 
 ### For the Engineer
 
@@ -148,6 +225,9 @@ The full portability picture: skills (SKILL.md format, frontmatter, companion di
 - **`/discuss` proved its value in this very session.** Multiple ideas (structural schemas, orchestration, the marketplace insight, the artifacts-as-interfaces reframe, agent identity, AGENTS.md) emerged through discussion and were promoted to formal artifacts only when they were ready. The command did exactly what it was designed to do: separate thinking from doing.
 - **The "be a scientist" insight ages well.** What once felt like a clever chatbot trick -- giving an agent a role persona via markdown -- turns out to be the foundation of a serious multi-agent architecture. The difference is formalism, portability, and the understanding of *why* it works.
 - **Narratives capture what other artifacts miss.** The exploration document has the themes. The research topics have the questions. But the *story* of how the thinking evolved — the sequence of insights, the moments of realization — only exists in a narrative.
+- **The human is a co-researcher, not just a reviewer.** The dual-track model was visible throughout: reading research while the agent conducted the next topic, forming reframings from parallel thinking, connecting dots to other projects. The best insights (Topic 6 reframing, escalation ladder on both tracks) came from the human's concurrent processing, not from the agent's research.
+- **Form your thoughts before handing them off.** A self-correction during the `/discuss` sessions: "lazily formed" discussion points that hand all the thinking to the agent aren't productive. The agent can help refine and challenge, but the human needs to do their own judgment work. The dual-track model works because both tracks are active.
+- **The narrative gap is real.** Eight days of research, reframings, and emergent insights went uncaptured in the narrative. The retrospective reconstruction loses the sharpness of the moments. Narratives should be extended incrementally, not batched.
 
 ---
 
@@ -161,10 +241,27 @@ The full portability picture: skills (SKILL.md format, frontmatter, companion di
 52fd914 docs(narrative): capture agentic-workflow-modernization session narrative
 725448c docs(commands): add /narrative command for post-completion storytelling
 37c2519 docs: anonymize company-specific references in exploration artifacts
-[pending] docs(explore): amend with agent identity, AGENTS.md, and alignment themes
-[pending] docs(research): conduct topic 5 (cross-platform portability) — corrects Topic 3 Finding 9
-[pending] docs(int-opp): capture design step gap in pipeline
-[pending] docs(design): create design stub for agentic-workflow-modernization
+cfc36ab docs(explore): amend with agent identity, AGENTS.md, and alignment themes
+84dc9c9 docs(spike): document AGENTS.md portability spike learnings
+e3020f8 docs(spike): document command-to-skill conversion spike learnings
+b3871c1 docs(spike): add finding on behavioral persona underspecification
+d3e2636 docs(research): scaffold agentic-workflow-modernization research
+184c3a2 docs(research): conduct topic 1 - auto-detection vs explicit invocation
+55265a6 docs(research): conduct topic 2 - three-layer redistribution criteria
+b50c013 docs(explore): amend agentic-workflow-modernization with orchestration model
+862b7fc docs(research): conduct Topic 3 -- command-to-skill conversion mechanics
+9595842 docs(research): amend Topic 3 with three gaps from post-research discussion
+003d3b8 docs(research): conduct Topic 4 -- templates as structural schemas
+1155360 docs(explore): amend exploration with research findings from Topics 1-4
+c9fd4cb docs(explore): capture identity-level vs skill-level behavioral contract distinction
+f2a54fb docs(research): conduct Topic 5 portability, identify design gap, capture prior art
+c138584 docs(research): conduct Topic 6 -- dual-distribution workflow
+d5e5afa docs(research): conduct Topic 7 -- conversation as orchestration
+[uncommitted] docs(research): conduct Topic 8 -- behavioral contracts
+[uncommitted] docs(research): reframe Topic 6 -- superset/subset distribution model
+[uncommitted] docs(research): amend Topic 7 -- dual-track observation
+[uncommitted] docs(research): amend Topic 8 -- escalation ladder on both tracks
+[uncommitted] docs(narrative): extend narrative with Acts 7-10
 ```
 
 ---
@@ -175,9 +272,16 @@ The full portability picture: skills (SKILL.md format, frontmatter, companion di
 |----------|----------|
 | Exploration | `admin/explorations/agentic-workflow-modernization/exploration.md` |
 | Research Topics | `admin/explorations/agentic-workflow-modernization/research-topics.md` |
+| Spike Learnings | `admin/explorations/agentic-workflow-modernization/spike-learnings.md` |
 | Research Hub | `admin/research/agentic-workflow-modernization/README.md` |
+| Research Summary | `admin/research/agentic-workflow-modernization/research-summary.md` |
+| Requirements | `admin/research/agentic-workflow-modernization/requirements.md` |
+| Topic 6: Dual-Distribution | `admin/research/agentic-workflow-modernization/topic-6-dual-distribution.md` |
+| Topic 7: Conversation Orchestration | `admin/research/agentic-workflow-modernization/topic-7-conversation-orchestration.md` |
+| Topic 8: Behavioral Contracts | `admin/research/agentic-workflow-modernization/topic-8-behavioral-contracts.md` |
 | Design Stub | `admin/designs/agentic-workflow-modernization/design.md` |
 | Design Gap Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/design-step-in-pipeline.md` |
+| Cross-Platform Discovery Test | `.claude/skills/foo-test/SKILL.md` |
 | Issue #72 (Explore Refactor) | GitHub issue #72 |
 | Issue #73 (Command Drift) | GitHub issue #73 |
 | Issue #75 (Narrative Command) | GitHub issue #75 |
@@ -187,4 +291,4 @@ The full portability picture: skills (SKILL.md format, frontmatter, companion di
 
 ---
 
-**Last Updated:** 2026-04-02 (Amended: Act 6 — design gap, portability correction, Topic 5 complete)
+**Last Updated:** 2026-04-10 (Amended: Acts 7-10 — distribution reframing, dual-track observation, behavioral contracts, narrative gap)

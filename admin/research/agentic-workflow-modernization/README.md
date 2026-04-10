@@ -1,9 +1,9 @@
 # Agentic Workflow Modernization - Research Hub
 
 **Purpose:** Research for modernizing dev-infra's workflow architecture (rules, skills, commands, AGENTS.md)
-**Status:** 🔴 Research
+**Status:** ✅ Consolidated
 **Created:** 2026-03-25
-**Last Updated:** 2026-03-25
+**Last Updated:** 2026-04-10
 
 ---
 
@@ -36,8 +36,8 @@ Two spikes have already been completed and inform this research:
 - **Spike B:** Command-to-skill conversion -- Validated (two archetypes: procedural vs behavioral; behavioral contracts compress and clarify)
 
 **Research Topics:** 10 (Topics 9 and 10 are low-effort: 9 is spiked, 10 is deferred design)
-**Active Research:** Topics 1-8
-**Status:** 🔴 Research
+**Completed:** Topics 1-8 (all consolidated)
+**Status:** ✅ Consolidated
 
 ---
 
@@ -52,7 +52,7 @@ Two spikes have already been completed and inform this research:
 | 5: Cross-Platform Portability | Medium | ✅ Complete | [topic-5-cross-platform-portability.md](topic-5-cross-platform-portability.md) |
 | 6: Dual-Distribution Workflow | Medium | ✅ Complete | [topic-6-dual-distribution.md](topic-6-dual-distribution.md) |
 | 7: Conversation Orchestration | Medium-High | ✅ Complete | [topic-7-conversation-orchestration.md](topic-7-conversation-orchestration.md) |
-| 8: Behavioral Contracts | Medium | 🔴 Not Started | [topic-8-behavioral-contracts.md](topic-8-behavioral-contracts.md) |
+| 8: Behavioral Contracts | Medium | ✅ Complete | [topic-8-behavioral-contracts.md](topic-8-behavioral-contracts.md) |
 | 9: AGENTS.md Portability | High | ✅ Spiked | [topic-9-agents-md-portability.md](topic-9-agents-md-portability.md) |
 | 10: Roadmap Layer Scope | Low | 🟡 Deferred | [topic-10-roadmap-layer.md](topic-10-roadmap-layer.md) |
 
@@ -76,10 +76,11 @@ Two spikes have already been completed and inform this research:
 4. ~~Conduct Topic 5 (cross-platform portability)~~ ✅ Complete -- **NOTE: Topic 3 Finding 9 corrected (disable-model-invocation IS cross-platform)**
 5. ~~Conduct Topic 6 (dual-distribution)~~ ✅ Complete -- **template-first authoring, publish script, C-3 audience split**
 6. ~~Conduct Topic 7 (conversation orchestration)~~ ✅ Complete -- **conversational model validated, breakover criteria defined**
-7. Conduct Topic 8 (behavioral contracts)
-8. Run `--consolidate` after all topics complete
+7. ~~Conduct Topic 8 (behavioral contracts)~~ ✅ Complete -- five-property rubric, contracts over personas
+8. ~~Run `--consolidate`~~ ✅ Complete (2026-04-10) -- 22 FRs, 3 NFRs, 4 Constraints, 2 Assumptions (Final)
+9. Use `/decision agentic-workflow-modernization --from-research` to make architectural decisions
 
 ---
 
-**Last Updated:** 2026-04-09
+**Last Updated:** 2026-04-10
 
