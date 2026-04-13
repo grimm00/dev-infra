@@ -98,7 +98,7 @@ The proposed skill family architecture (parent skill with shared behavioral cont
 
 - **No automatic inheritance:** Test A confirmed that directory nesting provides zero implicit context sharing. The parent's behavioral contract does NOT propagate to children automatically.
 - **Explicit reference is sufficient:** Adding "read `../SKILL.md` for family conventions" to child skills is trivially reliable. Each child controls whether it opts into family context. No magic, no surprises.
-- **Directory grouping serves humans:** Related skills live together for maintenance and navigation. The grouping is organizational, not behavioral.
+- **Directory grouping serves humans AND agents:** Related skills live together for human maintenance/navigation. For agents, the parent SKILL.md functions as a progressive disclosure index — reducing search from 60-80 flat descriptions to one family orientation, then the right child. Same pattern as Topic 1's skill-level progressive disclosure, applied at the family level.
 - **Platform divergence is thin:** Claude Code auto-discovers nested skills; Cursor requires explicit attachment. Same files, different discovery — a per-platform adapter, not a content fork.
 
 **Spike source:** [nested-skill-discovery.md](../../explorations/agentic-workflow-modernization/spike/nested-skill-discovery.md)
@@ -106,6 +106,30 @@ The proposed skill family architecture (parent skill with shared behavioral cont
 **C3-3: Template sync is not a day-one requirement.**
 
 Consistent with C2-3. Skills stabilize in dev-infra first, then propagate to templates. First downstream delivery will be a batch of stable skills, not an incremental trickle.
+
+---
+
+## Cross-Cutting Principle: Explicit Over Implicit
+
+*Emerged from spike discussion (2026-04-13). Applies across all sections.*
+
+**CP-1: The system should prefer explicit, deterministic mechanisms over implicit, probabilistic ones.**
+
+This principle surfaces repeatedly across the research, interview, and spike work:
+
+| Domain | Implicit (fragile) | Explicit (reliable) |
+|---|---|---|
+| Invocation | Auto-detection | `disable-model-invocation: true` (FR-2) |
+| Behavioral contracts | Persona role-play | Observable, bounded, outcome-framed rules (FR-19) |
+| Enforcement | Prose rules in skill body | Hooks and CLI tools (FR-22, escalation ladder) |
+| Context sharing | Automatic directory inheritance | Explicit "read parent" instruction (spike) |
+| Commit safety | "Never commit without review" instruction | Pre-commit hook (deterministic gate) |
+
+**Requirement implications:**
+
+- **FR-22 (enforcement layer allocation) priority elevated:** The escalation ladder is not just a design-phase concern — it's a foundational architectural principle. Each deterministic rule moved out of prose and into hooks/CLI is an instance of this principle.
+- **New cross-cutting constraint candidate:** "When a behavior can be enforced deterministically (hook, tool, validation), it MUST NOT rely on probabilistic enforcement (prose instruction in a skill body)." This could become a new NFR during the decision phase.
+- **Skill family parent SKILL.md serves dual purpose:** routing index for agents (progressive disclosure) AND shared behavioral contract for children (explicit opt-in). Both roles are explicit, not magical.
 
 ---
 

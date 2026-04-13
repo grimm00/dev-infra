@@ -66,12 +66,45 @@ The same directory layout works in both -- files are identical, only discovery d
 
 ---
 
+## Deeper Insight: Explicit Over Implicit as a Unifying Principle
+
+*Added 2026-04-13 from /discuss session.*
+
+The spike result (explicit "read parent" over automatic inheritance) is an instance of a principle that runs through the entire research:
+
+| Research Finding | Implicit (fragile) | Explicit (reliable) |
+|---|---|---|
+| FR-2: Invocation control | Auto-detection | `disable-model-invocation: true` |
+| Topic 8: Behavioral contracts | Persona role-play | Outcome-based contracts with observable properties |
+| Topic 8: Enforcement | Prose rules ("never commit") | Hooks (deterministic pre-commit gate) |
+| This spike: Context sharing | Automatic inheritance | Explicit "read parent" instruction |
+
+**The principle:** Take what's implicit and probabilistic, make it explicit and deterministic. Each move on this list reduces the system's dependence on the model "getting it right" and increases the surface area of deterministic guarantees.
+
+### Directory Grouping Benefits Both Humans AND Agents
+
+The initial spike conclusion ("directory grouping serves humans") understates the agent benefit. The parent SKILL.md functions as a **progressive disclosure index** for agents:
+
+- **Without grouping:** Agent scans 60-80 flat skill descriptions to find relevant ones (context waste)
+- **With grouping:** Agent reads one parent SKILL.md (~50 tokens of orientation), then loads only the right child (focused context)
+
+This is the same progressive disclosure pattern Topic 1 identified as valuable. The parent is a lightweight routing index -- it reduces the agent's search space without loading unnecessary content.
+
+| Benefit | Humans | Agents |
+|---------|--------|--------|
+| Navigation | File explorer grouping | Reduced search space |
+| Context | README-like orientation | Progressive disclosure (parent -> child) |
+| Behavioral contract | Shared conventions visible in one file | Explicit opt-in reference loads family rules |
+| Graceful degradation | Can browse without reading every file | Can operate without loading every sibling |
+
 ## Connection to Research
 
+- **Topic 1 (Auto-Detection):** Progressive disclosure for skills (load description first, full content on match) -- parent SKILL.md is the same pattern at the family level
 - **Topic 3 (Conversion Mechanics):** FR-7 (one skill per workflow) is compatible with directory grouping -- decomposition is about SKILL.md content, directory layout is about organization
 - **Topic 5 (Cross-Platform Portability):** Live demonstration of the portability gap -- same structure, different discovery
 - **Topic 6 (Dual Distribution):** Skill content is 1:1 between dev-infra authoring and marketplace shipping; discovery is the only platform-specific concern
 - **Topic 8 (Behavioral Contracts):** Parent SKILL.md is where family-wide gotchas and behavioral rules live -- children reference when needed, self-contained when not (consistent with FR-8)
+- **Topic 8 Finding 9 (Escalation Ladder):** The "explicit over implicit" principle applies to context sharing the same way it applies to enforcement -- don't depend on the probabilistic layer when the deterministic layer works
 
 ---
 
