@@ -198,6 +198,22 @@ The act of writing this update -- catching up on 8 days of research evolution in
 
 The lesson: narratives should be extended incrementally, as part of the research workflow, not batched at the end. Whether this means `/research --conduct` should prompt a narrative update, or `/discuss --summary` should feed into the narrative, is a design question for the `/design` step.
 
+### Act 11: The Decision Interview and What Emerged From It
+
+With all 8 topics consolidated into 22 final requirements, the next pipeline step was decisions. But the user noticed something about the `/decision` command itself: it takes all requirements and has the agent produce ADRs with minimal human involvement. This was the same rubber-stamp problem that had been accumulating -- the agent does the analysis, the human approves. The dual-track model from Act 8 said both participants should bring their processing. The decision command wasn't doing that.
+
+This triggered two int-opps in quick succession. First, a redesign of `/decision` around three patterns from decision science: an interview step (surface human priorities before the agent does analysis), options-not-answers (present 2-3 approaches with tradeoffs, not a recommendation), and thin-slice clustering (group requirements into decision clusters, decide each independently). Second, a broader observation about pipeline phases: they don't have explicit "start" signals. The decision interview -- a file the human fills out before the agent begins -- became the first example of a phase start signal.
+
+The interview itself proved the concept immediately. Section 1 answers revealed that the v1 scope was the thinking pipeline (explore, research, transition-plan, review, commit, discuss, int-opp) -- not all 26 commands. This came from the human's priorities, not from technical analysis. The user also identified a friction point the research hadn't: explore's conduct mode overlaps with research and should be deprecated. And a "model" concept emerged -- using real-world professional roles (Release Manager, Researcher, Planner) as decomposition lenses for organizing skills. Not runtime agents, but domain models in the programming sense.
+
+Section 2 removed constraints wholesale: sole user means clean cutover, no backward compatibility needed, mixed state is fine, no downstream dependencies. Section 3 validated the skill family architecture through a spike.
+
+The spike tested whether parent SKILL.md behavioral contracts automatically propagate to child skills in nested directories. They don't -- Cursor provides zero implicit inheritance through directory nesting. But the user's conclusion was more interesting than the test result: "maybe this exercise and caution is a bit overblown... AI is quite like an actual agent, and I don't think it's a heavy mental burden to go 'check things in a parent file.'" The explicit reference pattern (child says "read the parent for family conventions") was trivially reliable and preferable to magic. The parent SKILL.md serves dual purpose: a progressive disclosure index for agents (reducing search from 80 flat descriptions to one family orientation), and a shared behavioral contract that children opt into explicitly.
+
+From this spike emerged the session's sharpest insight: a cross-cutting principle that unified findings from across the entire research. **Explicit over implicit.** It appeared everywhere: `disable-model-invocation: true` over auto-detection, behavioral contracts over persona role-play, hooks over prose enforcement rules, explicit "read parent" over automatic inheritance, pre-commit hooks over "never commit without review" instructions. Each instance was the same move: take something implicit and probabilistic, make it explicit and deterministic. The research had been arriving at this principle from eight different angles without naming it. The decision interview discussions finally named it.
+
+The principle was captured as CP-1 in the v1 scope document with a candidate NFR: "When a behavior can be enforced deterministically, it MUST NOT rely on probabilistic enforcement." This reframed FR-22 (enforcement layer allocation) from a medium-priority design concern to a foundational architectural principle.
+
 ---
 
 ## What Was Learned
@@ -217,6 +233,9 @@ The lesson: narratives should be extended incrementally, as part of the research
 - **The escalation ladder applies to both participants.** Hooks and CLI reduce cognitive load for the human (deterministic enforcement, state surfacing) just as they reduce token cost for the agent (fewer non-judgment instructions). The three-state arc -- prose → lean skills → hooks/CLI -- is the architectural roadmap.
 - **Two research efforts converge.** Workflow-simplification's NFR-7 (context proportional to work) and agentic-workflow-modernization's escalation ladder are the same principle at different scales. The design step is where the allocation happens.
 - **Behavioral contracts have a rubric.** Five properties: observable, bounded, outcome-framed, delta-only, failure-aware. The Hex/Superpowers plugin skills demonstrate the target: named rules, rationalization tables, gotchas -- no personas.
+- **Explicit over implicit is the unifying principle.** Invocation control, behavioral contracts, enforcement mechanisms, context sharing, commit safety -- the research arrived at the same answer from eight angles. Make it explicit and deterministic. Don't depend on the probabilistic layer when the deterministic layer works.
+- **Skill families work through explicit reference, not automatic inheritance.** Parent SKILL.md serves dual purpose: progressive disclosure index for agents and shared behavioral contract for children. The spike confirmed directory nesting provides zero implicit propagation -- and that's preferable.
+- **The decision interview is the first pipeline start signal.** The human fills it out before the agent begins analysis. This pattern generalizes: each pipeline phase should have an explicit start artifact.
 
 ### For the Engineer
 
@@ -228,6 +247,8 @@ The lesson: narratives should be extended incrementally, as part of the research
 - **The human is a co-researcher, not just a reviewer.** The dual-track model was visible throughout: reading research while the agent conducted the next topic, forming reframings from parallel thinking, connecting dots to other projects. The best insights (Topic 6 reframing, escalation ladder on both tracks) came from the human's concurrent processing, not from the agent's research.
 - **Form your thoughts before handing them off.** A self-correction during the `/discuss` sessions: "lazily formed" discussion points that hand all the thinking to the agent aren't productive. The agent can help refine and challenge, but the human needs to do their own judgment work. The dual-track model works because both tracks are active.
 - **The narrative gap is real.** Eight days of research, reframings, and emergent insights went uncaptured in the narrative. The retrospective reconstruction loses the sharpness of the moments. Narratives should be extended incrementally, not batched.
+- **The interview is doing the human's judgment work.** Questions like "which 5 commands would you convert first?" forced priority thinking that the requirements doc couldn't. The honest "I don't know" on that question was itself a signal -- it revealed that the value proposition isn't format conversion but behavioral precision.
+- **Naming the principle matters.** "Explicit over implicit" was visible in the research from Topic 1 onward, but it took the spike discussion to name it as a single principle. Naming it changed how everything else was understood -- it went from eight separate findings to one architectural stance.
 
 ---
 
@@ -257,11 +278,12 @@ c9fd4cb docs(explore): capture identity-level vs skill-level behavioral contract
 f2a54fb docs(research): conduct Topic 5 portability, identify design gap, capture prior art
 c138584 docs(research): conduct Topic 6 -- dual-distribution workflow
 d5e5afa docs(research): conduct Topic 7 -- conversation as orchestration
-[uncommitted] docs(research): conduct Topic 8 -- behavioral contracts
-[uncommitted] docs(research): reframe Topic 6 -- superset/subset distribution model
-[uncommitted] docs(research): amend Topic 7 -- dual-track observation
-[uncommitted] docs(research): amend Topic 8 -- escalation ladder on both tracks
-[uncommitted] docs(narrative): extend narrative with Acts 7-10
+5841bfc docs(research): consolidate agentic-workflow-modernization requirements
+b60dec1 docs(int-opp): capture decision command human involvement gap
+f6ad03e docs(int-opp): capture pipeline phase start signals gap
+ae12386 docs(spike): document nested skill discovery and context sharing results
+f8b02c7 docs(spike): capture explicit-over-implicit principle from spike discussion
+[uncommitted] docs(narrative): extend narrative with Act 11 -- decision interview and principle
 ```
 
 ---
@@ -281,6 +303,12 @@ d5e5afa docs(research): conduct Topic 7 -- conversation as orchestration
 | Topic 8: Behavioral Contracts | `admin/research/agentic-workflow-modernization/topic-8-behavioral-contracts.md` |
 | Design Stub | `admin/designs/agentic-workflow-modernization/design.md` |
 | Design Gap Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/design-step-in-pipeline.md` |
+| Decision Interview | `admin/decisions/agentic-workflow-modernization/decision-interview.md` |
+| V1 Scope (incremental) | `admin/decisions/agentic-workflow-modernization/v1-scope.md` |
+| Nested Skill Discovery Spike | `admin/explorations/agentic-workflow-modernization/spike/nested-skill-discovery.md` |
+| Skill Family Test Fixtures | `.claude/skills/explore/` (parent + explore-test + explore-test-b) |
+| Decision Command Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/decision-command-human-involvement.md` |
+| Pipeline Start Signals Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/pipeline-phase-start-signals.md` |
 | Cross-Platform Discovery Test | `.claude/skills/foo-test/SKILL.md` |
 | Issue #72 (Explore Refactor) | GitHub issue #72 |
 | Issue #73 (Command Drift) | GitHub issue #73 |
@@ -291,4 +319,4 @@ d5e5afa docs(research): conduct Topic 7 -- conversation as orchestration
 
 ---
 
-**Last Updated:** 2026-04-10 (Amended: Acts 7-10 — distribution reframing, dual-track observation, behavioral contracts, narrative gap)
+**Last Updated:** 2026-04-13 (Amended: Act 11 — decision interview, skill family spike, explicit-over-implicit principle)
