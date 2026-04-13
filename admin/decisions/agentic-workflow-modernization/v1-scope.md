@@ -1,0 +1,151 @@
+# V1 Scope — Agentic Workflow Modernization
+
+**Purpose:** Incrementally-built scope document derived from decision interview discussions
+**Status:** 🟠 In Progress
+**Created:** 2026-04-13
+**Last Updated:** 2026-04-13
+
+**Source:** [decision-interview.md](decision-interview.md)
+**Requirements:** [requirements.md](../../research/agentic-workflow-modernization/requirements.md)
+
+---
+
+## Section 1: User Experience Priorities
+
+### Conclusions
+
+**C1-1: V1 scope is the thinking pipeline.**
+
+The most-used commands (explore, research, transition-plan, review, commit, int-opp, discuss) form a cohesive thinking-to-artifact pipeline. These commands have the highest frequency, highest judgment-content ratio, and the most to gain from skill conversion. Estimated ~10-15 skills total. Mechanical commands (release automation, fix management) are explicitly deferred to v2+.
+
+**C1-2: Explore's conduct mode is deprecated.**
+
+Conduct overlaps with research. Explore should be a one-pass theme extractor with amend capability — lighter, faster, more focused. Depth work belongs in research. This simplifies skill decomposition (no explore-conduct skill needed) and is a design input from lived experience, not the requirements doc.
+
+**C1-3: Role-based "models" inform skill grouping.**
+
+Real-world professional roles (e.g., what a Release Manager does) serve as decomposition lenses for organizing skills — not as runtime agents. Studying a role's responsibilities informs how skills are grouped, named, and scoped. For the thinking pipeline, the candidate models are:
+
+- **Thinker** — explore, discuss, int-opp (organizing and reacting to ideas)
+- **Researcher** — research setup, conduct, consolidate (investigating questions)
+- **Planner** — transition-plan, task (converting knowledge into action)
+- **Reviewer** — review, commit (quality gate before permanence)
+
+Whether these become directories, naming prefixes, or just a mental framework is a design decision deferred until implementation.
+
+**C1-4: The value proposition is behavioral precision, not format conversion.**
+
+Converting commands to skills 1:1 with the same content wouldn't produce a noticeable UX difference. The real gains come from what the skill format enables: richer behavioral contracts (FR-19), gotchas sections (FR-20), context efficiency (FR-4/FR-5), and progressive loading. V1 must demonstrate these advantages, not just migrate syntax.
+
+### Requirement Impact
+
+| Requirement | V1 Relevance | Rationale |
+|---|---|---|
+| FR-7 (multi-mode decomposition) | **Direct** | Explore and research both have modes |
+| FR-19 (five-property rubric) | **Direct** | Thinking pipeline is the most behavioral |
+| FR-20 (gotchas sections) | **Direct** | High-signal for judgment-heavy skills |
+| FR-4 (rules content separation) | **Direct** | Enables context efficiency gains |
+| FR-5 (remove mutable state) | **Direct** | Quick win, high impact |
+| FR-2 (disable auto-detection) | **Direct** | All workflow skills need this |
+| FR-8 (SKILL.md self-contained) | **Direct** | Structural constraint on all skills |
+| FR-12 (`.claude/skills/` location) | **Direct** | Canonical path for all skills |
+| FR-13 (no platform-breaking features) | **Direct** | Portability constraint |
+| FR-21 (dual-location description) | **Direct** | Structural pattern for all skills |
+| FR-9 (template sync for skills) | **Follows** | Needed after skills exist, not before |
+| FR-10 (doc-gen template relocation) | **Follows** | Only when generating skills are converted |
+| FR-14 (canonical source in templates) | **Follows** | Authoring location, not blocking |
+| FR-15 (marketplace-compatible format) | **Structural** | Informs design but not a v1 experience goal |
+| FR-16 (distribution channel declaration) | **Deferred** | v2 concern |
+| FR-17 (orchestration spectrum metadata) | **Deferred** | Nice-to-have, not blocking |
+
+---
+
+## Section 2: Backward Compatibility and Migration
+
+### Conclusions
+
+**C2-1: No backward compatibility constraint. Clean cutover per command.**
+
+Sole user means no deprecation period, no coexistence wrappers, no "old commands call new skills" bridges. When a command becomes a skill, the command file is deleted. Migration is atomic per command — convert, verify, remove. This eliminates the assumed gradual migration complexity from the research phase.
+
+**C2-2: Mixed state is acceptable and functions as a validation gate.**
+
+Having some workflows as skills and others as commands is tolerable indefinitely. More importantly, it serves as a natural go/no-go signal: if v1 skill conversions work well, that success motivates v2. If they don't, the blast radius is limited to the thinking pipeline.
+
+**C2-3: No downstream project dependencies on current commands.**
+
+No other projects currently consume dev-infra commands, so there's no external compatibility pressure. Distribution to downstream projects via template-distributed skills (FR-12, FR-14) is seen as an upgrade over template-distributed commands. The template path is sufficient for v1; marketplace distribution is a bonus, not a requirement.
+
+### Migration Implications
+
+- No versioned deprecation cycle needed (no "announce, wait, remove")
+- Migration pace is dictated solely by implementation readiness, not compatibility timelines
+- When skills eventually reach downstream projects via templates, backward compatibility *will* start to matter — but that's a v2+ concern with v1 learnings to inform it
+
+---
+
+## Section 3: Skill Count and Maintenance
+
+### Conclusions
+
+**C3-1: 60-80 skills sounds high but role-model decomposition makes it manageable.**
+
+The raw number feels overwhelming, but grouping skills by professional role (Thinker, Researcher, Planner, Reviewer) reduces cognitive load from "pick from N" to "pick a role, then pick from 2-4." The role model manages perceived complexity, though maintenance burden of individual files remains.
+
+**C3-2: Skill families validated via spike — explicit reference pattern, not automatic inheritance.**
+
+The proposed skill family architecture (parent skill with shared behavioral contract + focused sub-skills) works, but not through automatic inheritance. Spike findings (2026-04-13):
+
+- **No automatic inheritance:** Test A confirmed that directory nesting provides zero implicit context sharing. The parent's behavioral contract does NOT propagate to children automatically.
+- **Explicit reference is sufficient:** Adding "read `../SKILL.md` for family conventions" to child skills is trivially reliable. Each child controls whether it opts into family context. No magic, no surprises.
+- **Directory grouping serves humans:** Related skills live together for maintenance and navigation. The grouping is organizational, not behavioral.
+- **Platform divergence is thin:** Claude Code auto-discovers nested skills; Cursor requires explicit attachment. Same files, different discovery — a per-platform adapter, not a content fork.
+
+**Spike source:** [nested-skill-discovery.md](../../explorations/agentic-workflow-modernization/spike/nested-skill-discovery.md)
+
+**C3-3: Template sync is not a day-one requirement.**
+
+Consistent with C2-3. Skills stabilize in dev-infra first, then propagate to templates. First downstream delivery will be a batch of stable skills, not an incremental trickle.
+
+---
+
+## Section 4: Rules and Context
+
+_Awaiting interview answers._
+
+---
+
+## Section 5: Behavioral Skills and Quality
+
+_Awaiting interview answers._
+
+---
+
+## Section 6: Infrastructure and Tooling
+
+_Awaiting interview answers._
+
+---
+
+## Section 7: Risk and Pace
+
+_Awaiting interview answers._
+
+---
+
+## Section 8: Open-Ended
+
+_Awaiting interview answers._
+
+---
+
+## 🔗 Related Documents
+
+- [Decision Interview](decision-interview.md) — Raw interview answers
+- [Requirements](../../research/agentic-workflow-modernization/requirements.md) — 22 FRs, 3 NFRs, 4 Constraints, 2 Assumptions
+- [Research Summary](../../research/agentic-workflow-modernization/research-summary.md)
+- [Exploration](../../explorations/agentic-workflow-modernization/exploration.md)
+
+---
+
+**Last Updated:** 2026-04-13
