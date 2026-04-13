@@ -16,6 +16,7 @@
 - **[research-prior-art-audit.md](research-prior-art-audit.md)** - Add "Prior Art / Existing Solutions Audit" step to `/research` conduct mode (🔴 Not Started, MEDIUM priority)
 - **[research-consolidate-exploration-reconciliation.md](research-consolidate-exploration-reconciliation.md)** - Add exploration reconciliation step to `/research --consolidate` (✅ Complete, MEDIUM priority)
 - **[decision-command-human-involvement.md](decision-command-human-involvement.md)** - Restructure `/decision` with interview step, options-not-answers, and thin-slice clustering (🔴 Not Started, HIGH priority)
+- **[pipeline-phase-start-signals.md](pipeline-phase-start-signals.md)** - Pipeline phases need explicit start signals and clear I/O boundaries (🔴 Not Started, MEDIUM priority)
 
 ---
 
@@ -34,8 +35,9 @@ This directory contains actionable improvement checklists based on learnings fro
 | `/research` Prior Art Audit | 🔴 Not Started | MEDIUM | LOW (~1 hr) |
 | `/research --consolidate` Exploration Reconciliation | ✅ Complete | MEDIUM | LOW (~30 min) |
 | `/decision` Human Involvement | 🔴 Not Started | HIGH | MEDIUM |
+| Pipeline Phase Start Signals | 🔴 Not Started | MEDIUM | MEDIUM |
 
-**Total Improvement Documents:** 5  
+**Total Improvement Documents:** 6  
 **Status:** ✅ Active
 
 ---
