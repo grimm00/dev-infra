@@ -1,9 +1,9 @@
 # V1 Scope — Agentic Workflow Modernization
 
 **Purpose:** Incrementally-built scope document derived from decision interview discussions
-**Status:** 🟠 In Progress
+**Status:** ✅ Interview Complete
 **Created:** 2026-04-13
-**Last Updated:** 2026-04-13
+**Last Updated:** 2026-04-14
 
 **Source:** [decision-interview.md](decision-interview.md)
 **Requirements:** [requirements.md](../../research/agentic-workflow-modernization/requirements.md)
@@ -171,19 +171,59 @@ The discuss command works well today. The skill conversion must be at least as g
 
 ## Section 6: Infrastructure and Tooling
 
-_Awaiting interview answers._
+### Conclusions
+
+**C6-1: Hooks and CLI deferred to post-v1. V1 is skill conversion only.**
+
+The three-state arc (prose -> skills -> hooks/CLI) is the long-term vision, but v1 stops at state two. Building tooling infrastructure (pre-commit hooks for deterministic enforcement, CLI for state surfacing) is valuable but not required to prove the skill conversion thesis. CP-1 applies: deterministic gotchas that *should* be hooks start as documented gotchas in skill bodies, and migrate to hooks when that infrastructure exists.
+
+**C6-2: proj-cli and proj-clone are parallel efforts, not v1 dependencies.**
+
+These tools address the project lifecycle (creation, cloning, template distribution) -- a separate concern from workflow skill conversion. They converge later in the distribution story (v2+) but have no blocking relationship with v1. The skill distribution path for v1 is dev-infra authoring only; template sync and marketplace are post-v1.
+
+**C6-3: Team marketplace is future. Auto-detection / contextual routing is an exploration candidate.**
+
+Shipping skills to the team marketplace is explicitly deferred. However, the rotation lead's observation (agent auto-detecting design questions and switching to plan mode) surfaced a new insight: for team users unfamiliar with the workflow, contextual intent detection may be as important as explicit invocation. This creates a tension with CP-1 (explicit over implicit) that has a nuanced resolution: CP-1 governs the *experienced user path*, while auto-detection serves as an *onboarding ramp* for new users. This distinction warrants its own exploration when team distribution becomes relevant.
 
 ---
 
 ## Section 7: Risk and Pace
 
-_Awaiting interview answers._
+### Conclusions
+
+**C7-1: Primary risk is competitive positioning, not technical failure.**
+
+The biggest worry isn't that the conversion fails technically -- it's that the result isn't compelling enough to stand as an alternative to Hex/Superpowers. This reframes quality as a market concern, not just an engineering concern. C1-4 (behavioral precision as value proposition) and C5-1 (strict rubric) are the direct mitigations: if the skills are demonstrably more precise than existing alternatives, the positioning follows.
+
+**C7-2: Secondary risk: under-investing in implicit invocation patterns.**
+
+The explicit-over-implicit principle (CP-1) is sound for v1, but there's an acknowledged concern that fully dismissing implicit patterns may miss UX opportunities. The nuance: even with explicit invocation, a child skill can still explicitly reference its parent. The risk is not about abandoning CP-1 but about not exploring where implicit mechanisms (auto-detection, contextual routing) add genuine value on top of explicit foundations. This is a design-phase concern, not a v1 blocker.
+
+**C7-3: Small, polished v1. Thinking pipeline only.**
+
+Confirms the quality-over-breadth strategy from C1-1. 3-5 core skills (or the full thinking pipeline if role grouping keeps it coherent), fully rubric-compliant, with populated gotchas. This is the minimum surface area that demonstrates the thesis. Success with this set justifies v2 expansion; failure keeps blast radius contained (C2-2).
+
+**C7-4: 8-16+ hours per week available. Stages should be session-completable.**
+
+Substantial time investment is possible. This means stages can be meaningful (convert a full role-group per stage, not one skill at a time) but should still be completable in 1-2 focused sessions to maintain momentum and the feedback loop of "shipped a stage." At 8-16 hours/week, a 3-5 skill v1 is realistic within a few weeks, not months.
 
 ---
 
 ## Section 8: Open-Ended
 
-_Awaiting interview answers._
+### Conclusions
+
+**C8-1: Chat-as-runtime is an under-researched execution environment.**
+
+The research examined what skills should contain and how they should be structured, but not the medium they execute in. Chat sessions have properties that affect skill behavior: context window decay, instruction dilution over long conversations, behavioral drift mid-session. Understanding these properties is a prerequisite for robust skill design at scale. The ai-prompt-lifecycle research in dev-infra is a starting point. This is a candidate for a future exploration or research topic, not a v1 blocker, but it's the kind of foundational understanding that separates "skills that work in demos" from "skills that work in real sessions."
+
+**C8-2: UX north star is "in control and enriched through slowing down."**
+
+The value proposition is the opposite of "10x faster with AI." Users should feel more engaged with their work -- whether projects, ideas, or support tickets -- through structured deceleration. This directly validates the thinking pipeline focus (C1-1): explore, research, discuss, and decision are all tools for slowing down to think better. If a skill makes the user feel rushed, confused, or bypassed, it has failed regardless of technical correctness. This north star should inform every design decision and rubric evaluation.
+
+**C8-3: Domain knowledge ramp and modernization investment are complementary, not competing.**
+
+Building workflow infrastructure while still learning the team's domain is a valid position -- the tools being built are the same ones needed to learn effectively. The risk is context-switching fatigue, but the available time (C7-4) provides buffer. The incomplete thought in the interview ("I don't know where I o...") suggests this tension is felt but not fully articulated -- worth revisiting as implementation progresses.
 
 ---
 
@@ -196,4 +236,4 @@ _Awaiting interview answers._
 
 ---
 
-**Last Updated:** 2026-04-13
+**Last Updated:** 2026-04-14
