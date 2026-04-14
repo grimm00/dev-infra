@@ -17,6 +17,8 @@
 - **[research-consolidate-exploration-reconciliation.md](research-consolidate-exploration-reconciliation.md)** - Add exploration reconciliation step to `/research --consolidate` (✅ Complete, MEDIUM priority)
 - **[decision-command-human-involvement.md](decision-command-human-involvement.md)** - Restructure `/decision` with interview step, options-not-answers, and thin-slice clustering (🔴 Not Started, HIGH priority)
 - **[pipeline-phase-start-signals.md](pipeline-phase-start-signals.md)** - Pipeline phases need explicit start signals and clear I/O boundaries (🔴 Not Started, MEDIUM priority)
+- **[rules-layer-exploration.md](rules-layer-exploration.md)** - Rules layer deserves its own exploration to understand unique capabilities (🔴 Not Started, LOW priority)
+- **[conventions-md-gap.md](conventions-md-gap.md)** - CONVENTIONS.md fills a shared human+agent conventions gap, simplifying AGENTS.md (🔴 Not Started, LOW priority)
 
 ---
 
@@ -36,8 +38,10 @@ This directory contains actionable improvement checklists based on learnings fro
 | `/research --consolidate` Exploration Reconciliation | ✅ Complete | MEDIUM | LOW (~30 min) |
 | `/decision` Human Involvement | 🔴 Not Started | HIGH | MEDIUM |
 | Pipeline Phase Start Signals | 🔴 Not Started | MEDIUM | MEDIUM |
+| Rules Layer Exploration | 🔴 Not Started | LOW | MEDIUM |
+| CONVENTIONS.md Gap | 🔴 Not Started | LOW | LOW |
 
-**Total Improvement Documents:** 6  
+**Total Improvement Documents:** 8  
 **Status:** ✅ Active
 
 ---

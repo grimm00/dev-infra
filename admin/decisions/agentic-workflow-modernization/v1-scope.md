@@ -135,7 +135,19 @@ This principle surfaces repeatedly across the research, interview, and spike wor
 
 ## Section 4: Rules and Context
 
-_Awaiting interview answers._
+### Conclusions
+
+**C4-1: Aggressive rules slimming is acceptable for v1. Rules layer exploration deferred.**
+
+The `.mdc` files can be aggressively reduced for v1 (keep only Cursor-specific config, move everything else to skills or AGENTS.md). However, the rules layer has unique capabilities (glob-based auto-attachment, always-on presence, Cursor-specific behavioral config) that deserve their own exploration -- not as part of this modernization, but as a separate effort to understand what rules are uniquely good at. Captured as an int-opp.
+
+**C4-2: Mutable project state removed (FR-5 confirmed). State tracking is a four-arm architecture concern.**
+
+Project state (version numbers, completion status) should be removed from always-on rules as FR-5 requires. State tracking beyond "point to existing files" is a separate concern that belongs to the four-arm architecture (dev-infra + work-prod + proj-cli + dev-toolkit), not to the workflow modernization. See [four-arm-architecture exploration](../../explorations/four-arm-architecture) for context.
+
+**C4-3: AGENTS.md remains needed. CONVENTIONS.md gap identified and deferred.**
+
+AGENTS.md continues to serve agent-specific behavioral config. A CONVENTIONS.md file was identified as filling a gap: shared human+agent conventions currently burden AGENTS.md. CONVENTIONS.md would let AGENTS.md point to shared conventions and focus on agent-specific config. However, this is a gap discovered during research, not a requirement of this modernization -- deferred as a separate int-opp. The C-4 dual-file strategy (AGENTS.md + CLAUDE.md) remains acceptable for v1.
 
 ---
 
