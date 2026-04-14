@@ -20,6 +20,7 @@
 - **[rules-layer-exploration.md](rules-layer-exploration.md)** - Rules layer deserves its own exploration to understand unique capabilities (🔴 Not Started, LOW priority)
 - **[conventions-md-gap.md](conventions-md-gap.md)** - CONVENTIONS.md fills a shared human+agent conventions gap, simplifying AGENTS.md (🔴 Not Started, LOW priority)
 - **[skill-config-rendering.md](skill-config-rendering.md)** - Helm-style values files for per-platform skill config rendering (🔴 Not Started, LOW priority, ⚠️ Iffy)
+- **[quality-attribute-catalog.md](quality-attribute-catalog.md)** - Standing quality attribute catalog for /design step, retroactively applicable (🔴 Not Started, MEDIUM priority)
 
 ---
 
@@ -42,8 +43,9 @@ This directory contains actionable improvement checklists based on learnings fro
 | Rules Layer Exploration | 🔴 Not Started | LOW | MEDIUM |
 | CONVENTIONS.md Gap | 🔴 Not Started | LOW | LOW |
 | Skill Config Rendering (Helm-Style) | 🔴 Not Started | LOW | MEDIUM |
+| Quality Attribute Catalog | 🔴 Not Started | MEDIUM | LOW |
 
-**Total Improvement Documents:** 9  
+**Total Improvement Documents:** 10  
 **Status:** ✅ Active
 
 ---
