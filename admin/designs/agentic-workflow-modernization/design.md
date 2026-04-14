@@ -64,6 +64,30 @@ The risk is skill quality regression (C5-3). ADR-004's seven-step conversion wor
 
 Not a constraint for v1 (C2-1). No external consumers of current commands. When skills eventually reach downstream projects via templates, backward compatibility will matter -- but that's a v2+ concern informed by v1 learnings.
 
+### Portability
+
+Fully addressed by Topic 5 research and ADR-005. Skills are portable between Cursor and Claude Code. The gap is only in the context layer (AGENTS.md vs CLAUDE.md, requiring dual-file strategy per C-4). Three Claude Code-specific features are prohibited in portable skills (FR-13): `context: fork`, `$ARGUMENTS`, `` !`command` ``. Portability is enforced during the conversion quality gate (ADR-004, step 6).
+
+### Context Efficiency
+
+The primary motivation for content redistribution (ADR-003). Always-on context drops from ~1,500 lines to ~50. Mutable project state removed entirely (FR-5). Skills load only when invoked -- a research workflow loads ~200-400 lines of research-conduct, not 1,500 lines of everything. NFR-7 from workflow-simplification research (context consumption proportional to work) is directly satisfied.
+
+### Lifecycle
+
+For v1: installation is template seeding (`new-project.sh` generates the project with skills pre-installed), setup is zero (self-contained skills, no config), uninstallation is directory deletion (self-contained per FR-8), and updates are `git pull` (sole user). For v2+ when skills reach downstream projects and the team marketplace, lifecycle becomes a first-class concern: versioning, update notifications, customization preservation (NFR-2). Deferred.
+
+### Testability
+
+Covered by the conversion process (ADR-004). Each skill conversion includes a regression test (step 7): the skill must perform at least as well as the command it replaces. Behavioral skills are tested against the five-property rubric (FR-19) -- each property is independently verifiable from output. Discuss is the quality benchmark (C5-3). No additional design-level testability concerns for v1.
+
+### Observability
+
+Not applicable for v1. Skills are static markdown files consumed by agents at invocation time. There is no runtime, no state machine, no background process to observe. If future hooks/CLI infrastructure introduces stateful behavior (three-state arc, state 3), observability would become relevant.
+
+### Security
+
+Not applicable for v1. Skills contain no secrets, no access control mechanisms, no authentication flows. The content is workflow guidance (markdown). If marketplace distribution introduces plugin signing or access-scoped skills, security would become relevant.
+
 ---
 
 ## 3. Component Design
@@ -307,6 +331,12 @@ After Stage 1, the developer has skills for Thinker workflows and commands for e
 - [x] **Maintainability** — Addressed in Section 2 (Maintainability) and Section 3 (Component Design). Per-skill maintenance, family parents reduce shared convention drift, AGENTS.md dual-file is the primary ongoing cost.
 - [x] **Migration Safety** — Addressed in Section 2 (Migration Safety). Clean cutover per command, seven-step conversion with regression testing, sole user validates immediately.
 - [x] **Backward Compatibility** — Addressed in Section 2 (Backward Compatibility). Not a v1 constraint (C2-1). Becomes relevant at v2+ when skills reach downstream projects.
+- [x] **Portability** — Addressed in Section 2 (Portability) and ADR-005. Fully portable skill layer, dual-file context layer, enforced during conversion.
+- [x] **Context Efficiency** — Addressed in Section 2 (Context Efficiency) and ADR-003. ~1,500 → ~50 always-on lines. Skills load on demand.
+- [x] **Lifecycle** — Addressed in Section 2 (Lifecycle). V1 is simple (template seeding, git pull, directory deletion). V2+ deferred.
+- [x] **Testability** — Addressed in Section 2 (Testability) and ADR-004. Regression testing per conversion, rubric is verifiable.
+- [ ] **Observability** — N/A for v1. No runtime to observe. Revisit if hooks/CLI introduce stateful behavior.
+- [ ] **Security** — N/A for v1. No secrets or access control. Revisit if marketplace introduces signing.
 
 ---
 
