@@ -1,6 +1,6 @@
 # Narrative: Agentic Workflow Modernization — From Commands to Roles
 
-**Date:** 2026-03-25 → 2026-04-10
+**Date:** 2026-03-25 → 2026-04-14
 **Branch:** `develop`
 
 ---
@@ -214,6 +214,36 @@ From this spike emerged the session's sharpest insight: a cross-cutting principl
 
 The principle was captured as CP-1 in the v1 scope document with a candidate NFR: "When a behavior can be enforced deterministically, it MUST NOT rely on probabilistic enforcement." This reframed FR-22 (enforcement layer allocation) from a medium-priority design concern to a foundational architectural principle.
 
+### Act 12: The Decision Phase — Thin-Slice Clustering in Practice
+
+The interview produced 22 conclusions (C1-1 through C8-3) plus the cross-cutting principle CP-1. But conclusions aren't decisions. The next step was to cluster the 22 requirements against the interview conclusions and make actual architectural choices.
+
+The int-opp for `/decision` redesign had proposed three patterns: interview (done), options-not-answers, and thin-slice clustering. This session tested the remaining two.
+
+**Thin-slice clustering** grouped the 22 FRs, 3 NFRs, 4 Constraints, and 2 Assumptions into five decision clusters:
+
+1. **V1 Skill Selection** — which skills, what order, how staged
+2. **Skill Architecture** — structure, naming, families, decomposition
+3. **Content Redistribution** — rules → skills + AGENTS.md mapping
+4. **Quality and Conversion Process** — rubric, gotchas, conversion workflow
+5. **Distribution and Portability** — location, cross-platform, what's deferred
+
+The clustering revealed that the interview had already pre-decided most of Clusters 3-5. Aggressive rules slimming (C4-1), strict rubric (C5-1), and heavy distribution deferral (C6-1/C6-3) meant these clusters were ratification exercises, not genuine option analysis. Only Clusters 1 and 2 had real choices.
+
+**Options-not-answers** worked exactly as designed for those two clusters:
+
+For Cluster 1, three options were presented: minimal (one role group), full pipeline (one pass), or staged (role groups as stages). The user chose Option C (staged) — which aligned with session-completable stages (C7-4) and mixed state as validation gate (C2-2). The staged approach structures implementation as: Thinker (discuss, explore-start, explore-amend, int-opp) → Researcher (research-setup, research-conduct, research-consolidate, spike) → Planner (decision, transition-plan, plan-review) → Reviewer (review, commit, handoff). ~16 skills across 4 stages.
+
+For Cluster 2, three architecture options were presented: flat (all skills at same level), family directories (parents for multi-mode, flat for single-mode), or role-group directories (deep nesting by role). The user chose Option B (family directories) with a clarifying note: "The mental model of option C should be how we kind of think about engineering skills, but not in a role-playing way." The role model informs design reasoning; the file system reflects actual command-mode relationships.
+
+The batched ratification of Clusters 3-5 surfaced one genuine discussion point: the user questioned whether skills should live in a separate repo, noting that skills "are going to be versioned and be complex to a point of needing its own space for maintenance." The pushback centered on timing: no independent consumers exist yet (sole user), the four-arm architecture doesn't need a fifth arm yet, and skills authored alongside their research/decision context preserves traceability. The user agreed to author in dev-infra for v1 and revisit extraction when team distribution creates consumer demand.
+
+A separate insight emerged during the Cluster 5 discussion. The user connected the earlier Helm-style values file idea to the auto-detection platform split: skills authored with `disable-model-invocation: true` for Cursor (manual invocation) could have that flag toggled off when shipped to Claude Code (auto-detection). Same skill content, different frontmatter per platform. The user realized they'd already arrived at the solution in the interview (Section 6.3): Claude Code is where auto-detection happens, and modification for auto-detection is a distribution concern. The insight was captured as an int-opp with an "iffy" confidence marker — cheap to revert if static copies prove simpler.
+
+**Process observation:** The decision phase took ~2 hours including discussion. The interview had done the heavy lifting over ~6 hours across prior sessions. The thin-slice clustering turned a potentially overwhelming decision surface (22 FRs × multiple options each) into five focused conversations. Three of those five were mostly "yes, the interview already decided this."
+
+The learnings document for the decision interview exercise noted this as a key finding: the interview is a *scoping* tool, not just a *priority* tool. By the time decisions need to be made, the interview has already narrowed the option space so dramatically that most clusters become ratification.
+
 ---
 
 ## What Was Learned
@@ -236,6 +266,10 @@ The principle was captured as CP-1 in the v1 scope document with a candidate NFR
 - **Explicit over implicit is the unifying principle.** Invocation control, behavioral contracts, enforcement mechanisms, context sharing, commit safety -- the research arrived at the same answer from eight angles. Make it explicit and deterministic. Don't depend on the probabilistic layer when the deterministic layer works.
 - **Skill families work through explicit reference, not automatic inheritance.** Parent SKILL.md serves dual purpose: progressive disclosure index for agents and shared behavioral contract for children. The spike confirmed directory nesting provides zero implicit propagation -- and that's preferable.
 - **The decision interview is the first pipeline start signal.** The human fills it out before the agent begins analysis. This pattern generalizes: each pipeline phase should have an explicit start artifact.
+- **Thin-slice clustering makes decisions tractable.** 22 FRs grouped into 5 clusters, with the interview pre-deciding 3 of them. The option surface went from overwhelming to manageable.
+- **The interview is a scoping tool, not just a priority tool.** By decision time, most clusters were ratification. The real decisions (skill selection staging, architecture) were the ones the interview couldn't pre-answer because they required seeing the full option space.
+- **Skills repo extraction is a v2+ concern.** The user's instinct that skills might need their own repo was valid, but authoring in dev-infra first is safer while there are no independent consumers.
+- **Content/config separation matters even before rendering.** The Helm-style values file insight (platform-specific frontmatter, shared body) informs v1 skill design even though the rendering mechanism is deferred.
 
 ### For the Engineer
 
@@ -249,6 +283,8 @@ The principle was captured as CP-1 in the v1 scope document with a candidate NFR
 - **The narrative gap is real.** Eight days of research, reframings, and emergent insights went uncaptured in the narrative. The retrospective reconstruction loses the sharpness of the moments. Narratives should be extended incrementally, not batched.
 - **The interview is doing the human's judgment work.** Questions like "which 5 commands would you convert first?" forced priority thinking that the requirements doc couldn't. The honest "I don't know" on that question was itself a signal -- it revealed that the value proposition isn't format conversion but behavioral precision.
 - **Naming the principle matters.** "Explicit over implicit" was visible in the research from Topic 1 onward, but it took the spike discussion to name it as a single principle. Naming it changed how everything else was understood -- it went from eight separate findings to one architectural stance.
+- **The decision process validated the interview redesign.** The int-opp for `/decision` proposed interview → options → thin-slice. Running it for real confirmed: the interview did the heavy lifting, options-not-answers worked for genuine choices, and thin-slice clustering made 22 requirements manageable. The process itself is now a learnings document.
+- **Questioning your own architecture is valuable, not wasteful.** The user's "should skills be a separate repo?" question seemed like scope creep mid-decision. It was actually the kind of judgment the interview was designed to surface — sensing that artifact complexity might outgrow its current home. Deferring it was the right call, but asking it was the right instinct.
 
 ---
 
@@ -283,7 +319,16 @@ b60dec1 docs(int-opp): capture decision command human involvement gap
 f6ad03e docs(int-opp): capture pipeline phase start signals gap
 ae12386 docs(spike): document nested skill discovery and context sharing results
 f8b02c7 docs(spike): capture explicit-over-implicit principle from spike discussion
-[uncommitted] docs(narrative): extend narrative with Act 11 -- decision interview and principle
+fb11b62 docs(narrative): extend narrative with Act 11 -- decision interview and principle
+8d8b9bf docs(decisions): capture Section 5 conclusions (behavioral quality)
+ca947c9 docs(decisions): capture Sections 6-8 conclusions, complete interview
+7682bf3 docs(learnings): capture decision interview exercise learnings
+9702641 docs(int-opp): capture Helm-style skill config rendering idea
+892f29a docs(decisions): create decisions hub with cluster overview
+6f140cd docs(decisions): ADR-001 V1 skill selection — staged by role groups
+610b0b3 docs(decisions): ADR-002 skill architecture — family dirs for multi-mode
+318a31a docs(decisions): ADR-003 through ADR-005 — redistribution, quality, distribution
+6f6368a docs(decisions): complete decisions summary and update hub status
 ```
 
 ---
@@ -310,6 +355,15 @@ f8b02c7 docs(spike): capture explicit-over-implicit principle from spike discuss
 | Decision Command Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/decision-command-human-involvement.md` |
 | Pipeline Start Signals Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/pipeline-phase-start-signals.md` |
 | Cross-Platform Discovery Test | `.claude/skills/foo-test/SKILL.md` |
+| Decisions Hub | `admin/decisions/agentic-workflow-modernization/README.md` |
+| ADR-001: V1 Skill Selection | `admin/decisions/agentic-workflow-modernization/adr-001-v1-skill-selection.md` |
+| ADR-002: Skill Architecture | `admin/decisions/agentic-workflow-modernization/adr-002-skill-architecture.md` |
+| ADR-003: Content Redistribution | `admin/decisions/agentic-workflow-modernization/adr-003-content-redistribution.md` |
+| ADR-004: Quality and Conversion | `admin/decisions/agentic-workflow-modernization/adr-004-quality-and-conversion.md` |
+| ADR-005: Distribution and Portability | `admin/decisions/agentic-workflow-modernization/adr-005-distribution-and-portability.md` |
+| Decisions Summary | `admin/decisions/agentic-workflow-modernization/decisions-summary.md` |
+| Decision Interview Learnings | `admin/planning/opportunities/internal/dev-infra/learnings/decision-interview-exercise-learnings.md` |
+| Skill Config Rendering Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/skill-config-rendering.md` |
 | Issue #72 (Explore Refactor) | GitHub issue #72 |
 | Issue #73 (Command Drift) | GitHub issue #73 |
 | Issue #75 (Narrative Command) | GitHub issue #75 |
@@ -319,4 +373,4 @@ f8b02c7 docs(spike): capture explicit-over-implicit principle from spike discuss
 
 ---
 
-**Last Updated:** 2026-04-13 (Amended: Act 11 — decision interview, skill family spike, explicit-over-implicit principle)
+**Last Updated:** 2026-04-14 (Amended: Act 12 — decision phase, thin-slice clustering, 5 ADRs accepted)
