@@ -153,7 +153,19 @@ AGENTS.md continues to serve agent-specific behavioral config. A CONVENTIONS.md 
 
 ## Section 5: Behavioral Skills and Quality
 
-_Awaiting interview answers._
+### Conclusions
+
+**C5-1: Five-property rubric applied strictly during each conversion. No Tier 2/3 instructions shipped.**
+
+The conversion is the audit checkpoint. Every behavioral instruction gets rubric-tested (observable, bounded, outcome-framed, delta-only, failure-aware) as part of the conversion process. This means conversion is slower (precision work per skill, not just format migration) but output quality is high from day one. This is how v1 demonstrates C1-4 (value comes from behavioral precision, not format conversion).
+
+**C5-2: Gotchas populated upfront from audit + personal experience.**
+
+Two sources feed gotchas sections: the Topic 8 audit (~15 Tier 3 instructions across 6 commands) and the user's lived experience with failure modes. Some gotchas that are deterministic rules (not judgment calls) may eventually move to hooks per CP-1, but they start documented in the skill body.
+
+**C5-3: Discuss skill must not degrade from current command quality.**
+
+The discuss command works well today. The skill conversion must be at least as good -- this is a regression constraint, not a gate. Discuss can be converted in parallel with other skills but gets extra scrutiny because it's the most behavioral command and degradation would be most noticeable. Spike B (267 -> 143 lines) already demonstrated the conversion improves precision.
 
 ---
 
