@@ -19,6 +19,7 @@
 - **[pipeline-phase-start-signals.md](pipeline-phase-start-signals.md)** - Pipeline phases need explicit start signals and clear I/O boundaries (🔴 Not Started, MEDIUM priority)
 - **[rules-layer-exploration.md](rules-layer-exploration.md)** - Rules layer deserves its own exploration to understand unique capabilities (🔴 Not Started, LOW priority)
 - **[conventions-md-gap.md](conventions-md-gap.md)** - CONVENTIONS.md fills a shared human+agent conventions gap, simplifying AGENTS.md (🔴 Not Started, LOW priority)
+- **[skill-config-rendering.md](skill-config-rendering.md)** - Helm-style values files for per-platform skill config rendering (🔴 Not Started, LOW priority, ⚠️ Iffy)
 
 ---
 
@@ -40,11 +41,12 @@ This directory contains actionable improvement checklists based on learnings fro
 | Pipeline Phase Start Signals | 🔴 Not Started | MEDIUM | MEDIUM |
 | Rules Layer Exploration | 🔴 Not Started | LOW | MEDIUM |
 | CONVENTIONS.md Gap | 🔴 Not Started | LOW | LOW |
+| Skill Config Rendering (Helm-Style) | 🔴 Not Started | LOW | MEDIUM |
 
-**Total Improvement Documents:** 8  
+**Total Improvement Documents:** 9  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2026-04-10
+**Last Updated:** 2026-04-14
 
