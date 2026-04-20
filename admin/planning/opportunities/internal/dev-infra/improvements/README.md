@@ -21,6 +21,7 @@
 - **[conventions-md-gap.md](conventions-md-gap.md)** - CONVENTIONS.md fills a shared human+agent conventions gap, simplifying AGENTS.md (🔴 Not Started, LOW priority)
 - **[skill-config-rendering.md](skill-config-rendering.md)** - Helm-style values files for per-platform skill config rendering (🔴 Not Started, LOW priority, ⚠️ Iffy)
 - **[quality-attribute-catalog.md](quality-attribute-catalog.md)** - Standing quality attribute catalog for /design step, retroactively applicable (🔴 Not Started, MEDIUM priority)
+- **[feature-first-directory-structure.md](feature-first-directory-structure.md)** - Restructure admin/ from phase-first to feature-first (🔴 Not Started, HIGH priority)
 
 ---
 
@@ -44,8 +45,9 @@ This directory contains actionable improvement checklists based on learnings fro
 | CONVENTIONS.md Gap | 🔴 Not Started | LOW | LOW |
 | Skill Config Rendering (Helm-Style) | 🔴 Not Started | LOW | MEDIUM |
 | Quality Attribute Catalog | 🔴 Not Started | MEDIUM | LOW |
+| Feature-First Directory Structure | 🔴 Not Started | HIGH | HIGH |
 
-**Total Improvement Documents:** 10  
+**Total Improvement Documents:** 11  
 **Status:** ✅ Active
 
 ---
