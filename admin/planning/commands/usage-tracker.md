@@ -68,6 +68,7 @@ This document tracks command usage in dev-infra to support graduation decisions.
 
 | Date | Command | Context | Result | Evidence |
 |------|---------|---------|--------|----------|
+| 2026-04-22 | `/int-opp` | PR body generation primitive (from /discuss on `/pr` vs `update-pr-description` skill) | ✅ Success | pr-body-generation-primitive.md |
 | 2025-12-16 | `/reflect` | Work-prod integration reflection | ✅ Success | new doc created |
 | 2025-12-16 | `/int-opp` | Work-prod docs gap analysis | ✅ Success | commit 5df0bd9 |
 | 2025-12-16 | `/int-opp` | Documentation structure learnings | ✅ Success | new doc created |

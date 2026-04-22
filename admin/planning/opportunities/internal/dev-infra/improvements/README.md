@@ -22,6 +22,7 @@
 - **[skill-config-rendering.md](skill-config-rendering.md)** - Helm-style values files for per-platform skill config rendering (🔴 Not Started, LOW priority, ⚠️ Iffy)
 - **[quality-attribute-catalog.md](quality-attribute-catalog.md)** - Standing quality attribute catalog for /design step, retroactively applicable (🔴 Not Started, MEDIUM priority)
 - **[feature-first-directory-structure.md](feature-first-directory-structure.md)** - Restructure admin/ from phase-first to feature-first (🔴 Not Started, HIGH priority)
+- **[pr-body-generation-primitive.md](pr-body-generation-primitive.md)** - Prune performative content from `/pr` templates; reuse `update-pr-description` skill as PR/release cluster primitive (🔴 Not Started, MEDIUM priority)
 
 ---
 
@@ -46,11 +47,12 @@ This directory contains actionable improvement checklists based on learnings fro
 | Skill Config Rendering (Helm-Style) | 🔴 Not Started | LOW | MEDIUM |
 | Quality Attribute Catalog | 🔴 Not Started | MEDIUM | LOW |
 | Feature-First Directory Structure | 🔴 Not Started | HIGH | HIGH |
+| PR Body Generation Primitive | 🔴 Not Started | MEDIUM | LOW / MEDIUM |
 
-**Total Improvement Documents:** 11  
+**Total Improvement Documents:** 12  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2026-04-14
+**Last Updated:** 2026-04-22
 
