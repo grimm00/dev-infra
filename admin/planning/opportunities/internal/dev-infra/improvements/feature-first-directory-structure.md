@@ -38,11 +38,36 @@ This structure encodes an implicit assumption: **workflow phases are the primary
 
 ## Core Insight
 
-**Services are the primary organizational unit; features are the work within a service; phases are steps within a feature's lifecycle.**
+**The top-level dimension adapts to the project; the work unit is the middle level; phases are steps (when applicable) at the leaf level.**
 
-Engineering teams organize by service, then feature, then work-phase. The current admin/ structure inverts this by placing phases at the top level, which creates two problems: features fragment across phase directories, and services (which dev-infra has despite not naming them) have no home at all.
+Engineering teams organize by domain first (service, category, area), then by scoped work unit (feature, ticket, investigation), then by lifecycle step (when the work has phases). The current admin/ structure inverts this by placing phases at the top level, which creates two problems: work units fragment across phase directories, and the natural top-level dimension (whatever it is for that project) has no home at all.
 
-Dev-infra is actually a **multi-service project** that has been masquerading as single-service:
+### The General Pattern
+
+```
+admin/
+└── [top-level-dimension]/
+    └── [work-unit]/
+        ├── [cross-cutting artifacts at unit root]
+        └── [phase subdirs, if the unit has a lifecycle]
+```
+
+### Top-Level Dimension Adapts Per Project
+
+Different project types have different natural top-level dimensions:
+
+| Project Type | Top-Level Dimension | Work Unit | Example |
+|--------------|--------------------|-|---------|
+| dev-infra | Service (domain) | Feature | `services/ai-workflow/features/agentic-workflow-modernization/` |
+| support-shark | Work category | Ticket | `categories/tickets/t-1234/` |
+| Product repo | Service (bounded context) | Feature | `services/auth/features/sso-integration/` |
+| Personal knowledge base | Life area | Project | `areas/work/projects/[name]/` |
+
+The structure isn't "services at the top" — it's "**choose your top-level dimension**, then work unit, then phases (optional)." The flexibility is the point.
+
+### Dev-Infra's Top-Level Dimension: Services
+
+Dev-infra is a **multi-service project** that has been masquerading as single-service:
 
 - **AI workflow authoring** — commands, skills, rules, the thinking pipeline modernization
 - **Template generation** — new-project.sh, templates, template sync
@@ -50,11 +75,21 @@ Dev-infra is actually a **multi-service project** that has been masquerading as 
 
 Grouping features by service reduces cognitive load dramatically (expand the service you care about, collapse the rest) and creates natural extraction seams for future repo splits.
 
+### Why Phase-First Fails Beyond dev-infra
+
+The current structure assumes **all work follows the full feature lifecycle** (explore → research → decision → design → transition → task). This fails for:
+
+- **Support tickets** (support-shark): investigate → fix → close. Most tickets skip the pipeline.
+- **One-off investigations:** scoped question, brief answer, done. No design step.
+- **Experiments:** hypothesis → test → learn. Lifecycle doesn't match the full pipeline.
+
+The adaptive top-level model accommodates all of these. Phase-first cannot.
+
 ---
 
 ## Proposed Solution
 
-Restructure `admin/` to be **service-first, feature-second, phase-third**:
+For **dev-infra specifically**, restructure `admin/` to be **service-first, feature-second, phase-third**. (Other projects adopt the same three-level pattern with their own top-level dimension.)
 
 ```
 admin/
@@ -247,11 +282,30 @@ This reframes the restructure as more than a directory cleanup. It's a social co
 
 ---
 
+## Validation Across Projects
+
+### Dev-Infra (current session)
+
+- `requirements.md` pigeonholed under `research/` because phase-first implied research was the only requirement generator
+- `v1-scope.md` had no natural home (ended up in `decisions/` as a placement of convenience)
+- Feature traceability fragmented across 6+ top-level directories
+
+### Support-Shark (Jira ticket hub)
+
+- Phase-first cannot accommodate ticket-based work (tickets don't follow the full feature lifecycle)
+- A desired `jira/ticket-1234/` directory has no phase-first home
+- The adaptive top-level model accommodates this as `categories/tickets/t-1234/`
+
+Two independent failure modes in two different projects = the phase-first structure has a real bug, not just a personal preference. This is a generalizable workflow pattern, not a dev-infra-specific fix.
+
+---
+
 ## Open Questions
 
 - **Service naming:** Are the initial services (`ai-workflow`, `template-generation`, `release-management`, possibly `meta`) the right split? Worth one focused session to validate.
 - **Cross-service features:** How should features like `workflow-simplification` that span multiple services be handled? (Proposed: primary-service filing + cross-reference.)
 - **Meta/strategy features:** Does `dev-infra-identity-and-focus` belong in a `meta` service or at the admin root? Could go either way.
+- **Mixed work units in one project:** Can a project have both features AND tickets AND investigations (each with different lifecycles) coexisting under different top-level dimensions? Likely yes, but needs a worked example.
 - **Partial-scope artifacts:** How do `admin/planning/features/[topic]/` directories map to the new structure? Likely consolidate into the feature directory under the service.
 - **Template structure:** Does this affect `docs/maintainers/` in templates, or is that structure separate? Parallel restructure likely needed.
 - **Relationship to four-arm architecture:** Each "arm" (dev-infra, work-prod, proj-cli, dev-toolkit) is a separate project. The service layer inside dev-infra is a sub-arm structure. Does this pattern suggest work-prod and proj-cli should also organize this way?
