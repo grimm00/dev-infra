@@ -204,6 +204,41 @@ Enumerate services, move everything, update all paths, in one coordinated migrat
 
 ---
 
+## Capstone: Tool Injection vs Framework Marriage
+
+The restructure is not just aesthetic. It changes dev-infra's social contract with downstream projects.
+
+### The Current Contract (Heavyhanded, Marriage-Like)
+
+The phase-first `admin/` structure says to an adopting project: *"Here is dev-infra's worldview. Your directory looks exactly like ours. Your phases are `research`, `decisions`, `designs`, `narratives`. You will internalize our mental model before you get any value."*
+
+This is a high-commitment contract. Adopters must be ideologically aligned before they try anything. They "marry into" dev-infra's philosophy. If they have their own conventions, there's no partial adoption path — it's all or nothing.
+
+### The Proposed Contract (Light, Tool-Like)
+
+The service-first structure says: *"Here are distinct tools (`ai-workflow`, `template-generation`). Pick the ones that solve your problems. The patterns inside each are self-contained — you don't need to understand all of them to use one."*
+
+This is a low-commitment contract. Adopters can try one service without buying into the others. They can combine dev-infra's services with their own conventions. Adoption is additive, not substitutive.
+
+### Why This Matters
+
+1. **Adoption threshold lowers.** Heavy contracts gatekeep. Light tools welcome.
+2. **Consumer autonomy is respected.** Other projects have their own conventions. The modular structure admits that dev-infra's way isn't the only way — it's a useful way.
+3. **Extraction becomes a non-event.** If a service becomes its own repo, adopters who used only that service never notice. The boundary was already there.
+4. **Matches successful tool patterns.** Hex is a plugin. Cursor skills are discrete. Unix philosophy is small tools that compose. All work because adoption is additive.
+
+### Identity Refinement
+
+ADR-001 of dev-infra-identity-and-focus established dev-infra as a "template factory." This restructure refines that identity: **dev-infra is a factory producing tools, not a framework imposing structure.** A factory doesn't marry you to anything — it produces artifacts you use as you see fit.
+
+The current phase-first structure is subtly frameworky ("here's how you organize features"). The service-first structure is factory-like ("here are services we've built — use the ones that fit").
+
+### Implication
+
+This reframes the restructure as more than a directory cleanup. It's a social contract update. Worth considering whether this deserves its own ADR when the restructure happens, or at least a callout in the ADR that captures the structural decision.
+
+---
+
 ## Related Int-Opps
 
 - [pipeline-phase-start-signals.md](pipeline-phase-start-signals.md) — Start signals need a home that cross-cutting artifacts can share
