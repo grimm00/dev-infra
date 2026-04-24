@@ -23,7 +23,7 @@ With agentic coding, every command tends to produce artifacts. When you're react
 
 The command loads relevant context based on the topic reference:
 
-1. **Exploration context:** `admin/explorations/[topic]/exploration.md`, `research-topics.md`
+1. **Exploration context:** `admin/services/[service]/explorations/[topic]/exploration.md`, `research-topics.md`
 2. **Research context:** `admin/research/[topic]/` -- hub, summary, topic documents, requirements
 3. **Decision context:** `admin/decisions/[topic]/` -- ADRs
 4. **Planning context:** `admin/planning/features/[feature]/` -- plans, status
@@ -215,7 +215,7 @@ Most features are probably simple or medium."
 **Situation:** You want to think through the tradeoffs of two approaches before committing.
 
 ```
-/discuss workflow-simplification --context admin/research/workflow-simplification/topic-3-transition-plan-output-format.md "Walk me through specs-only vs scripts vs hybrid for the tier logic"
+/discuss workflow-simplification --context admin/services/ai-workflow/features/workflow-simplification/research/topic-3-transition-plan-output-format.md "Walk me through specs-only vs scripts vs hybrid for the tier logic"
 ```
 
 **AI behavior:** Reads the specific document, analyzes each approach, presents structured comparison. Does NOT update any documents.

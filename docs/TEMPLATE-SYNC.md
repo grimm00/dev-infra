@@ -202,7 +202,7 @@ Developer makes change to standard-project command
 
 - **Template Usage:** [docs/TEMPLATE-USAGE.md](TEMPLATE-USAGE.md)
 - **Project Types:** [docs/PROJECT-TYPES.md](PROJECT-TYPES.md)
-- **ADR-001: Commands as Guides:** [admin/decisions/command-simplification/adr-001-commands-as-guides.md](../admin/decisions/command-simplification/adr-001-commands-as-guides.md)
+- **ADR-001: Commands as Guides:** [admin/services/ai-workflow/features/command-simplification/decisions/adr-001-commands-as-guides.md](../admin/services/ai-workflow/features/command-simplification/decisions/adr-001-commands-as-guides.md)
 
 ---
 

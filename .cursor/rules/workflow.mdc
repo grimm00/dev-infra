@@ -443,10 +443,10 @@ ignore:
 ```
 
 **Related ADRs:**
-- [ADR-001: Worktree Location](../../admin/decisions/worktree-feature-workflow/adr-001-worktree-location-and-naming.md)
-- [ADR-002: Self-Contained Branches](../../admin/decisions/worktree-feature-workflow/adr-002-self-contained-feature-branches.md)
-- [ADR-003: Draft PR Workflow](../../admin/decisions/worktree-feature-workflow/adr-003-draft-pr-review-workflow.md)
-- [ADR-004: Sourcery Configuration](../../admin/decisions/worktree-feature-workflow/adr-004-sourcery-configuration.md)
+- [ADR-001: Worktree Location](../../admin/services/meta/features/worktree-feature-workflow/decisions/adr-001-worktree-location-and-naming.md)
+- [ADR-002: Self-Contained Branches](../../admin/services/meta/features/worktree-feature-workflow/decisions/adr-002-self-contained-feature-branches.md)
+- [ADR-003: Draft PR Workflow](../../admin/services/meta/features/worktree-feature-workflow/decisions/adr-003-draft-pr-review-workflow.md)
+- [ADR-004: Sourcery Configuration](../../admin/services/meta/features/worktree-feature-workflow/decisions/adr-004-sourcery-configuration.md)
 
 ---
 

@@ -5,7 +5,7 @@ alwaysApply: true
 # Dev-Infra Template Repository - Cursor AI Rules
 
 **Purpose:** Guide AI assistance to align with dev-infra template best practices and workflows  
-**Identity:** 🏭 Template Factory ([ADR-001](../../../admin/decisions/dev-infra-identity-and-focus/adr-001-project-identity.md))  
+**Identity:** 🏭 Template Factory ([ADR-001](../../../admin/services/meta/features/dev-infra-identity-and-focus/decisions/adr-001-project-identity.md))  
 **Last Updated:** 2025-12-15  
 **Status:** ✅ Active
 
@@ -45,7 +45,7 @@ This is a development infrastructure template repository that provides standardi
 
 ## 🏭 Project Identity: Template Factory
 
-**Decision:** [ADR-001: Project Identity](../../../admin/decisions/dev-infra-identity-and-focus/adr-001-project-identity.md)
+**Decision:** [ADR-001: Project Identity](../../../admin/services/meta/features/dev-infra-identity-and-focus/decisions/adr-001-project-identity.md)
 
 **Dev-infra's primary identity is "template factory."**
 
@@ -70,7 +70,7 @@ When planning work, classify it:
 
 All templates receive all 26 workflow commands (including 2 deprecation stubs). Only dev-infra internal commands (release automation) stay internal.
 
-**See:** [ADR-001: Commands as Guides](../../../admin/decisions/command-simplification/adr-001-commands-as-guides.md)
+**See:** [ADR-001: Commands as Guides](../../../admin/services/ai-workflow/features/command-simplification/decisions/adr-001-commands-as-guides.md)
 
 ---
 

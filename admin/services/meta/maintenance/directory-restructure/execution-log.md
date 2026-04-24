@@ -1,7 +1,7 @@
 # Directory Restructure — Execution Log
 
 **Purpose:** Running log of migrations and issues encountered
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Created:** 2026-04-24
 **Last Updated:** 2026-04-24
 
@@ -114,6 +114,82 @@ Updated `feature-first-directory-structure.md` to reflect:
 - Explicit text: "All pre-formal thinking lives here, not at feature level"
 - Why pre-formal lives at service level (4 reasons)
 - Optional `discussions/` directory for /discuss session captures
+
+---
+
+## 2026-04-24 — Phases 4–8: Full Migration ✅
+
+### Phase 4: Migrate Remaining Features by Service
+
+Migrated all 32 remaining features across 4 services in 6 git commits.
+
+**ai-workflow (12 features):**
+- workflow-simplification, command-simplification, command-adaptation-template
+- command-testing-integration, command-distribution, command-branch-workflow
+- explore-two-mode, decision-two-mode, reflect-two-mode
+- transition-plan-two-mode, handoff-command, ai-prompt-lifecycle
+
+**template-generation (7 features):**
+- template-restructure (with historical ADRs 0001 + roadmap)
+- template-architecture, template-doc-infrastructure, template-metadata
+- template-generation-testing-automation, templates-enhancement, directory-selection
+
+**release-management (3 features):**
+- release-readiness, release-automation-v2, ci-cd-workflow-improvements (with historical ADR 0002)
+
+**meta (9 features):**
+- dev-infra-identity-and-focus, four-arm-architecture, worktree-feature-workflow
+- project-model-definition, global-command-distribution, work-prod-integration
+- work-prod-analysis-service, proj-cli-focused-role, terraform-style-project-management
+
+**Total files migrated:** ~400+ across 32 features
+
+**Pattern applied per feature:**
+- Service-level explorations created for all features with `exploration.md`
+- `outcomes.md` created at service-level exploration for each topic
+- `requirements.md` promoted to feature root (16 features)
+- Feature root `README.md` created for each feature
+- Stale exploration `README.md` hubs removed
+- All `fix/`, `tasks/`, `testing/` planning subdirs preserved
+
+**Straggler handling:**
+- Loose `admin/research/` files migrated to template-restructure/research/ and meta/maintenance/structure-snapshots/
+- Top-level README hubs in old directories removed
+
+---
+
+### Phase 5: Command Path Updates
+
+Updated 15 command files with new service-first paths:
+- Fixed 4 broken `adr-004-graduation-process.md` links → `adr-001-project-identity.md`
+- Updated detection checks: `admin/explorations/` → `admin/services/`
+- Updated path templates in explore.md, spike.md, research.md, decision.md, discuss.md
+- Updated planning path templates in pr.md, task.md, plan-review.md, status.md, etc.
+
+---
+
+### Phase 6: Template Parallel Restructure
+
+**Skipped.** Templates (`templates/standard-project/docs/maintainers/`, `templates/learning-project/docs/maintainers/`) use a flat phase-first structure appropriate for small-scale projects (2-5 features). Service-first is specific to dev-infra's scale (30+ features). No restructure needed.
+
+---
+
+### Phase 7: Verification
+
+- Old phase-first directories (`admin/explorations/`, `admin/research/`, `admin/decisions/`, `admin/designs/`, `admin/narratives/`) are all empty and removed
+- `admin/planning/features/` is empty and removed
+- 7 broken Markdown navigation hyperlinks fixed across migrated service docs
+- docs/, .cursor/rules/, scripts/doc-gen/templates/ navigation links updated
+- 85 remaining old-path prose mentions are historical context (not broken links)
+- All commits preserve git rename history (R-type moves)
+
+---
+
+### Phase 8: Cleanup
+
+- All old phase-first directories removed (no git-tracked content remaining)
+- `admin/planning/` retained for releases, ci, commands, notes, opportunities (non-feature content)
+- `admin/services/` is now the single source of truth for all feature work
 
 ---
 

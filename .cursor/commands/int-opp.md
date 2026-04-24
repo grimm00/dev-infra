@@ -322,7 +322,7 @@ This directory contains actionable improvement checklists based on learnings fro
 1. **Auto-detect feature name:**
 
    - Check git branch name (e.g., `feat/templates-enhancement-phase-5` → `templates-enhancement`)
-   - Check current directory context (if in `admin/planning/features/[feature-name]/`)
+   - Check current directory context (if in `admin/services/[service]/features/[feature-name]/planning/`)
    - Check recent commits for feature name
    - Check phase document location (if exists)
 
@@ -1143,7 +1143,7 @@ Related: Fix Management Workflow"
    docs(commands): update usage tracker - /int-opp
    ```
 
-**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/services/meta/features/dev-infra-identity-and-focus/decisions/adr-001-project-identity.md).
 
 ---
 

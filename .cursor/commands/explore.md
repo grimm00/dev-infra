@@ -866,12 +866,12 @@ Create worktree for this exploration? [Y/n]
 
 **Location Detection:**
 
-- **Dev-Infra:** `admin/explorations/[topic]/`
+- **Dev-Infra:** `admin/services/[service]/explorations/[topic]/`
 - **Template Structure:** `docs/maintainers/planning/explorations/[topic]/`
 - **Project-Wide:** `docs/maintainers/planning/explorations/[topic]/`
 
 **Auto-detection:**
-- Check if `admin/explorations/` exists → use dev-infra structure
+- Check if `admin/services/` exists → use dev-infra structure
 - Check if `docs/maintainers/planning/explorations/` exists → use template structure
 - Otherwise → use project-wide structure
 
@@ -1013,7 +1013,7 @@ git commit -m "docs(explore): amend [topic] exploration with [brief description]
 **Update explorations hub:**
 
 **File location (auto-detected):**
-- **Dev-Infra:** `admin/explorations/README.md`
+- **Dev-Infra:** `admin/services/[service]/explorations/`
 - **Template Structure:** `docs/maintainers/planning/explorations/README.md`
 - **Project-Wide:** `docs/maintainers/planning/explorations/README.md`
 
@@ -1355,7 +1355,7 @@ scaffolding scripts for generated projects, or stay in specs/templates/manifests
 
 **Exploration Structure:**
 
-- **Dev-Infra:** `admin/explorations/[topic]/`
+- **Dev-Infra:** `admin/services/[service]/explorations/[topic]/`
 - **Template Structure:** `docs/maintainers/planning/explorations/[topic]/`
 - **Project-Wide:** `docs/maintainers/planning/explorations/[topic]/`
 - Research Topics: `[explorations-path]/[topic]/research-topics.md`

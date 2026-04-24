@@ -86,4 +86,4 @@ See [Worktree Workflow](WORKTREE-WORKFLOW.md) for details.
 ---
 
 **Last Updated:** 2026-01-13  
-**Related:** [ADR-001: Two-Mode Pattern](../admin/decisions/explore-two-mode/adr-001-two-mode-pattern.md)
+**Related:** [ADR-001: Two-Mode Pattern](../admin/services/ai-workflow/features/explore-two-mode/decisions/adr-001-two-mode-pattern.md)

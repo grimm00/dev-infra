@@ -28,7 +28,7 @@ Centralized status management that:
    - Plan: `docs/maintainers/planning/features/[feature-name]/implementation-plan.md`
    - Tasks: `docs/maintainers/planning/features/[feature-name]/tasks/`
    - Status: `docs/maintainers/planning/features/[feature-name]/status-and-next-steps.md`
-   - Dev-infra: Same paths under `admin/planning/features/`
+   - Dev-infra: Same paths under `admin/services/[service]/features/`
 
 2. **Legacy Feature-Specific (fallback):**
    - Phase docs: `docs/maintainers/planning/features/[feature-name]/phase-N.md`
@@ -43,8 +43,8 @@ Centralized status management that:
    - No status-and-next-steps.md (CI improvements use different tracking)
 
 5. **Dev-infra Legacy:**
-   - Phase docs: `admin/planning/features/[feature-name]/phase-N.md`
-   - Status doc: `admin/planning/features/[feature-name]/status-and-next-steps.md`
+   - Phase docs: `admin/services/[service]/features/[feature-name]/planning/phase-N.md`
+   - Status doc: `admin/services/[service]/features/[feature-name]/planning/status-and-next-steps.md`
 
 **Detection logic:**
 

@@ -569,7 +569,7 @@ gh pr view [pr-number] --json state,title,headRefName
 
 - Feature-specific: `docs/maintainers/planning/features/[feature-name]/manual-testing.md`
 - Project-wide: `docs/maintainers/planning/manual-testing.md` (if exists)
-- Dev-infra: `admin/planning/features/[feature-name]/manual-testing.md`
+- Dev-infra: `admin/services/[service]/features/[feature-name]/planning/manual-testing.md`
 
 **Check if guide exists:**
 
@@ -578,7 +578,7 @@ gh pr view [pr-number] --json state,title,headRefName
 ls docs/maintainers/planning/features/[feature-name]/manual-testing.md
 
 # Or for dev-infra
-ls admin/planning/features/[feature-name]/manual-testing.md
+ls admin/services/[service]/features/[feature-name]/planning/manual-testing.md
 ```
 
 **If guide does NOT exist:**
