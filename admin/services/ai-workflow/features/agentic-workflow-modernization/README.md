@@ -1,7 +1,7 @@
 # Agentic Workflow Modernization
 
 **Purpose:** Convert dev-infra's 26 Cursor commands to portable skills with precise behavioral contracts; slim rules layer; establish cross-platform distribution
-**Status:** 🟠 Decision + Design Complete; Stage 1 (Thinker) pending
+**Status:** 🟠 Stage 1 transition plan ready; implementation pending
 **Created:** 2026-03-25
 **Migrated to new structure:** 2026-04-24
 
@@ -13,7 +13,7 @@ This feature re-architects dev-infra's workflow system for the age of AI-assiste
 
 **Current pipeline position:**
 ```
-/explore ✅ → /research ✅ → /decision ✅ → /design ✅ → /transition-plan (next) → /task
+/explore ✅ → /research ✅ → /decision ✅ → /design ✅ → /transition-plan ✅ → /task (next)
 ```
 
 ---
@@ -38,6 +38,7 @@ This feature was promoted from a service-level exploration:
 - **[decisions/](decisions/)** — 5 ADRs + interview + summary + hub
 - **[designs/](designs/)** — Holistic design document (7 sections, 11 quality attributes assessed)
 - **[spikes/](spikes/)** — Skill family discovery, SKILL.md experiments, learnings
+- **[planning/](planning/)** — Stage 1 implementation plan (17 tasks across 5 groups)
 
 ---
 
@@ -61,10 +62,11 @@ This feature was promoted from a service-level exploration:
 | Research (10 topics) | ✅ Complete |
 | Decision interview + 5 ADRs | ✅ Complete |
 | Design document | ✅ Complete |
-| Transition plan | 🔴 Pending |
+| Transition plan (Stage 1) | ✅ Scaffolding complete |
 | Stage 1 execution (Thinker skills) | 🔴 Pending |
+| Stage 2-4 execution | 🔴 Pending |
 
-**Next concrete step:** `/transition-plan` decomposing Stage 1 into tasks.
+**Next concrete step:** Expand task groups (`/transition-plan ... --expand --group N`) and begin `/task next` for Group 1 (Foundation).
 
 ---
 
