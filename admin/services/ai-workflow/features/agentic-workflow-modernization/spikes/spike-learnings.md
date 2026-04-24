@@ -1,6 +1,6 @@
 # Spike Learnings: AGENTS.md Portability
 
-**Exploration:** `admin/explorations/agentic-workflow-modernization/`
+**Exploration:** `../exploration.md`
 **Created:** 2026-03-25
 **Time-box:** ~1 hour (research-heavy spike; empirical testing deferred where noted)
 **Result:** Partially Validated
@@ -97,7 +97,7 @@ New questions revealed by this spike (feed back to research):
 
 ## Spike Code
 
-**Location:** `admin/explorations/agentic-workflow-modernization/spike/`
+**Location:** `.` (this directory)
 **Keep or discard:** Keep as reference (test plan + reference conventions file)
 
 ---
@@ -119,7 +119,7 @@ New questions revealed by this spike (feed back to research):
 
 # Spike Learnings: Command-to-Skill Conversion (Spike B)
 
-**Exploration:** `admin/explorations/agentic-workflow-modernization/`
+**Exploration:** `../exploration.md`
 **Created:** 2026-03-25
 **Time-box:** ~1 hour
 **Test case:** `/discuss` command → SKILL.md
@@ -310,7 +310,7 @@ The draft `SKILL.md` for `/discuss` (143 lines) is a behavioral skill. It should
 
 ## Spike Code
 
-**Location:** `admin/explorations/agentic-workflow-modernization/spike/discuss-skill/`
+**Location:** `discuss-skill/`
 **Files:**
 - `SKILL.md` -- draft skill (143 lines)
 **Keep or discard:** Keep as reference -- this is the template for behavioral skill conversion

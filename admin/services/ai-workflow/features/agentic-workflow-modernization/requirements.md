@@ -452,7 +452,7 @@ This document captures requirements discovered during research on redistributing
 
 1. ~~Run `--consolidate`~~ ✅ Complete (2026-04-10)
 2. Use `/decision agentic-workflow-modernization --from-research` to make architectural decisions
-3. Fill in design document (`admin/designs/agentic-workflow-modernization/design.md`)
+3. Fill in design document (`designs/design.md`)
 
 ---
 

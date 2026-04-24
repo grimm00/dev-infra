@@ -14,7 +14,7 @@ AGENTS.md was auto-loaded.
 ## Test 2: File Reference Following
 
 Add a section to AGENTS.md that says:
-"For detailed workflow conventions, see `admin/explorations/agentic-workflow-modernization/spike/referenced-conventions.md`"
+"For detailed workflow conventions, see `referenced-conventions.md`"
 
 Create that file with distinctive content. Ask the agent about conventions.
 Does it read the referenced file?

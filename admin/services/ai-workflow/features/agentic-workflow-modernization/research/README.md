@@ -60,11 +60,11 @@ Two spikes have already been completed and inform this research:
 
 ## 🔗 Related Artifacts
 
-- **Exploration:** `admin/explorations/agentic-workflow-modernization/exploration.md`
-- **Research Topics:** `admin/explorations/agentic-workflow-modernization/research-topics.md`
-- **Spike Learnings:** `admin/explorations/agentic-workflow-modernization/spike-learnings.md`
-- **Draft Discuss Skill:** `admin/explorations/agentic-workflow-modernization/spike/discuss-skill/SKILL.md`
-- **Narrative:** `admin/narratives/agentic-workflow-modernization/narrative.md`
+- **Exploration:** `../exploration.md`
+- **Research Topics:** `../research-topics.md`
+- **Spike Learnings:** `../spikes/spike-learnings.md`
+- **Draft Discuss Skill:** `../spikes/discuss-skill/SKILL.md`
+- **Narrative:** `../narrative.md`
 
 ---
 

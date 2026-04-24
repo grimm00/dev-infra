@@ -118,24 +118,19 @@ Order minimizes broken state at each step:
 - [x] Create `admin/services/template-generation/README.md` + subdirectories
 - [x] Create `admin/services/release-management/README.md` + subdirectories
 
-### Phase 3: Migrate One Feature End-to-End (Validation)
+### Phase 3: Migrate One Feature End-to-End (Validation) ✅
 
-Pick one feature — **agentic-workflow-modernization** is a good candidate because it has the most artifacts and we know the shape well. Migrate it fully:
+Migrated **agentic-workflow-modernization** end-to-end. See [execution-log.md](execution-log.md) for details.
 
-- [ ] Create `admin/services/ai-workflow/features/agentic-workflow-modernization/`
-- [ ] Move `admin/research/agentic-workflow-modernization/*` → `features/agentic-workflow-modernization/research/`
-- [ ] Move `admin/decisions/agentic-workflow-modernization/*` → `features/agentic-workflow-modernization/decisions/`
-- [ ] Move `admin/designs/agentic-workflow-modernization/*` → `features/agentic-workflow-modernization/designs/`
-- [ ] Move `admin/narratives/agentic-workflow-modernization/narrative.md` → `features/agentic-workflow-modernization/narrative.md`
-- [ ] Move `admin/explorations/agentic-workflow-modernization/exploration.md` → `features/agentic-workflow-modernization/exploration.md`
-- [ ] Move `admin/explorations/agentic-workflow-modernization/spike/*` → `features/agentic-workflow-modernization/spikes/`
-- [ ] Move `admin/explorations/agentic-workflow-modernization/spike-learnings.md` → `features/agentic-workflow-modernization/spikes/spike-learnings.md`
-- [ ] Promote `requirements.md` from `research/` to feature root
-- [ ] Promote `v1-scope.md` from `decisions/` to feature root
-- [ ] Update internal markdown links within the feature directory
-- [ ] Verify all files accessible, no broken links within the migrated feature
+- [x] Create `admin/services/ai-workflow/features/agentic-workflow-modernization/`
+- [x] Move all research, decisions, designs, narrative, exploration, spike files
+- [x] Promote `requirements.md` and `v1-scope.md` to feature root
+- [x] Create feature root `README.md`
+- [x] Update 34 internal markdown links across 6 files
+- [x] Verify no broken paths within the feature or from outside
+- [x] Remove empty source directories
 
-**Checkpoint:** At this point we have one feature fully in the new structure. Evaluate whether the pattern feels right before continuing.
+**Checkpoint:** Evaluate whether the pattern feels right before continuing to Phase 4.
 
 ### Phase 4: Migrate Remaining Features by Service
 

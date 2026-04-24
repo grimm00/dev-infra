@@ -118,7 +118,7 @@ Two specific problems made this visible:
 
 **Staging is a design decision, not a task decomposition.** Agentic workflow modernization is too large to ship at once. "Slim the rules first, then convert 3 pilot skills, then migrate the rest" is a *design* decision about how the system evolves -- not something transition-plan should invent while also breaking down individual tasks. The staging question requires thinking about what the user's experience is at each stage boundary and whether the system is coherent there.
 
-Two artifacts were created: an internal opportunity document capturing the systemic insight (the pipeline needs a `/design` command for any complex feature), and a design directory stub (`admin/designs/agentic-workflow-modernization/`) with a 7-section design document template ready to fill in after the remaining research completes. The sections: System Overview, Cross-Cutting Quality Attributes, Component Design, Interaction Design, Staging Plan, Open Questions / Risks, NFR Checklist.
+Two artifacts were created: an internal opportunity document capturing the systemic insight (the pipeline needs a `/design` command for any complex feature), and a design directory stub (`designs/`) with a 7-section design document template ready to fill in after the remaining research completes. The sections: System Overview, Cross-Cutting Quality Attributes, Component Design, Interaction Design, Staging Plan, Open Questions / Risks, NFR Checklist.
 
 The design document's most important innovation: Section 7 (NFR Checklist) is an accountability mechanism. It forces explicit sign-off against each quality attribute. "Did we address usability? Here's how. Shippability? Here's how." Without it, quality attributes are aspirational, not verified.
 
@@ -337,31 +337,31 @@ ca947c9 docs(decisions): capture Sections 6-8 conclusions, complete interview
 
 | Artifact | Location |
 |----------|----------|
-| Exploration | `admin/explorations/agentic-workflow-modernization/exploration.md` |
-| Research Topics | `admin/explorations/agentic-workflow-modernization/research-topics.md` |
-| Spike Learnings | `admin/explorations/agentic-workflow-modernization/spike-learnings.md` |
-| Research Hub | `admin/research/agentic-workflow-modernization/README.md` |
-| Research Summary | `admin/research/agentic-workflow-modernization/research-summary.md` |
-| Requirements | `admin/research/agentic-workflow-modernization/requirements.md` |
-| Topic 6: Dual-Distribution | `admin/research/agentic-workflow-modernization/topic-6-dual-distribution.md` |
-| Topic 7: Conversation Orchestration | `admin/research/agentic-workflow-modernization/topic-7-conversation-orchestration.md` |
-| Topic 8: Behavioral Contracts | `admin/research/agentic-workflow-modernization/topic-8-behavioral-contracts.md` |
-| Design Stub | `admin/designs/agentic-workflow-modernization/design.md` |
+| Exploration | `exploration.md` |
+| Research Topics | `research-topics.md` |
+| Spike Learnings | `spikes/spike-learnings.md` |
+| Research Hub | `research/README.md` |
+| Research Summary | `research/research-summary.md` |
+| Requirements | `requirements.md` |
+| Topic 6: Dual-Distribution | `research/topic-6-dual-distribution.md` |
+| Topic 7: Conversation Orchestration | `research/topic-7-conversation-orchestration.md` |
+| Topic 8: Behavioral Contracts | `research/topic-8-behavioral-contracts.md` |
+| Design | `designs/design.md` |
 | Design Gap Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/design-step-in-pipeline.md` |
-| Decision Interview | `admin/decisions/agentic-workflow-modernization/decision-interview.md` |
-| V1 Scope (incremental) | `admin/decisions/agentic-workflow-modernization/v1-scope.md` |
-| Nested Skill Discovery Spike | `admin/explorations/agentic-workflow-modernization/spike/nested-skill-discovery.md` |
+| Decision Interview | `decisions/decision-interview.md` |
+| V1 Scope (incremental) | `v1-scope.md` |
+| Nested Skill Discovery Spike | `spikes/nested-skill-discovery.md` |
 | Skill Family Test Fixtures | `.claude/skills/explore/` (parent + explore-test + explore-test-b) |
 | Decision Command Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/decision-command-human-involvement.md` |
 | Pipeline Start Signals Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/pipeline-phase-start-signals.md` |
 | Cross-Platform Discovery Test | `.claude/skills/foo-test/SKILL.md` |
-| Decisions Hub | `admin/decisions/agentic-workflow-modernization/README.md` |
-| ADR-001: V1 Skill Selection | `admin/decisions/agentic-workflow-modernization/adr-001-v1-skill-selection.md` |
-| ADR-002: Skill Architecture | `admin/decisions/agentic-workflow-modernization/adr-002-skill-architecture.md` |
-| ADR-003: Content Redistribution | `admin/decisions/agentic-workflow-modernization/adr-003-content-redistribution.md` |
-| ADR-004: Quality and Conversion | `admin/decisions/agentic-workflow-modernization/adr-004-quality-and-conversion.md` |
-| ADR-005: Distribution and Portability | `admin/decisions/agentic-workflow-modernization/adr-005-distribution-and-portability.md` |
-| Decisions Summary | `admin/decisions/agentic-workflow-modernization/decisions-summary.md` |
+| Decisions Hub | `decisions/README.md` |
+| ADR-001: V1 Skill Selection | `decisions/adr-001-v1-skill-selection.md` |
+| ADR-002: Skill Architecture | `decisions/adr-002-skill-architecture.md` |
+| ADR-003: Content Redistribution | `decisions/adr-003-content-redistribution.md` |
+| ADR-004: Quality and Conversion | `decisions/adr-004-quality-and-conversion.md` |
+| ADR-005: Distribution and Portability | `decisions/adr-005-distribution-and-portability.md` |
+| Decisions Summary | `decisions/decisions-summary.md` |
 | Decision Interview Learnings | `admin/planning/opportunities/internal/dev-infra/learnings/decision-interview-exercise-learnings.md` |
 | Skill Config Rendering Int-Opp | `admin/planning/opportunities/internal/dev-infra/improvements/skill-config-rendering.md` |
 | Issue #72 (Explore Refactor) | GitHub issue #72 |

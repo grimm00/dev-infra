@@ -16,7 +16,7 @@ Does AGENTS.md provide reliable always-on context feeding across both Cursor and
 
 ## 🔍 Research Summary
 
-This topic was empirically tested in Spike A (`agents-md-portability`). Key findings are documented in `admin/explorations/agentic-workflow-modernization/spike-learnings.md`.
+This topic was empirically tested in Spike A (`agents-md-portability`). Key findings are documented in `../spikes/spike-learnings.md`.
 
 **Spike A Findings:**
 
@@ -58,5 +58,5 @@ This topic was empirically tested in Spike A (`agents-md-portability`). Key find
 
 ---
 
-**Source:** `admin/explorations/agentic-workflow-modernization/spike-learnings.md` (Spike A section)
+**Source:** `../spikes/spike-learnings.md` (Spike A section)
 **Last Updated:** 2026-03-25

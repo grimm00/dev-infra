@@ -48,7 +48,8 @@ This restructure fixes all four. It's a prerequisite for agentic-workflow-modern
 | Bootstrap meta service | ✅ Complete (this directory) |
 | Migration plan | ✅ Complete (see plan.md) |
 | Service scaffolding (Phase 2) | ✅ Complete (ai-workflow, template-generation, release-management) |
-| Execute migration (Phase 3+) | 🔴 Not started |
+| Validation feature migration (Phase 3) | ✅ Complete (agentic-workflow-modernization) |
+| Remaining features migration (Phase 4) | 🔴 Not started (pending checkpoint review) |
 | Update command path references | 🔴 Not started |
 | Update CI scripts | 🔴 Not started |
 | Update templates (docs/maintainers/) | 🔴 Not started |
