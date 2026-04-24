@@ -11,9 +11,9 @@ Reviews implementation plans before work begins. Ensures the plan is complete, d
 This command reads the uniform planning structure (`implementation-plan.md` + `tasks/`):
 
 1. **Dev-Infra Structure:**
-   - Plan: `admin/planning/features/[feature-name]/implementation-plan.md`
-   - Tasks: `admin/planning/features/[feature-name]/tasks/`
-   - Status: `admin/planning/features/[feature-name]/status-and-next-steps.md`
+   - Plan: `admin/services/[service]/features/[feature-name]/planning/implementation-plan.md`
+   - Tasks: `admin/services/[service]/features/[feature-name]/planning/tasks/`
+   - Status: `admin/services/[service]/features/[feature-name]/planning/status-and-next-steps.md`
 
 2. **Template Project Structure (generated projects):**
    - Plan: `docs/maintainers/planning/features/[feature-name]/implementation-plan.md`
@@ -228,7 +228,7 @@ If `implementation-plan.md` is not found but `feature-plan.md` + `phase-*.md` ex
 
 **Location:**
 
-- Dev-infra: `admin/planning/features/[feature-name]/plan-review-YYYY-MM-DD.md`
+- Dev-infra: `admin/services/[service]/features/[feature-name]/planning/plan-review-YYYY-MM-DD.md`
 - Template project: `docs/maintainers/planning/features/[feature-name]/plan-review-YYYY-MM-DD.md`
 
 **Report structure:**

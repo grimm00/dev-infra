@@ -11,7 +11,7 @@ Creates implementation planning documents from ADRs, reflection artifacts, or re
 This command writes to the uniform planning structure:
 
 1. **Dev-Infra Structure:**
-   - Output: `admin/planning/features/[feature-name]/`
+   - Output: `admin/services/[service]/features/[topic]/planning/`
    - Creates: `implementation-plan.md`, `status-and-next-steps.md`, `tasks/`
 
 2. **Template Project Structure (generated projects):**

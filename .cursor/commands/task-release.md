@@ -500,7 +500,7 @@ chore: Release [version]
    docs(commands): update usage tracker - /task-release
    ```
 
-**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/decisions/dev-infra-identity-and-focus/adr-004-graduation-process.md).
+**Why:** Tracks command maturity for graduation decisions per [ADR-004](../admin/services/meta/features/dev-infra-identity-and-focus/decisions/adr-001-project-identity.md).
 
 **Note:** This command needs ≥3 uses before graduation consideration. Current uses: 2.
 

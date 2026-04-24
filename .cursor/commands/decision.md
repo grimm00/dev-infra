@@ -13,7 +13,7 @@ This command supports multiple project organization patterns:
 1. **Dev-Infra Structure (default):**
    - Decisions: `admin/decisions/[topic]/`
    - Research: `admin/research/[topic]/`
-   - Requirements: `admin/research/[topic]/requirements.md`
+   - Requirements: `admin/services/[service]/features/[topic]/requirements.md`
 
 2. **Template Structure (for generated projects):**
    - Decisions: `docs/maintainers/decisions/[topic]/`
@@ -81,17 +81,17 @@ This command supports multiple project organization patterns:
 **Read research documents:**
 
 1. **Read research summary:**
-   - **Dev-Infra:** `admin/research/[topic]/research-summary.md`
+   - **Dev-Infra:** `admin/services/[service]/features/[topic]/research/research-summary.md`
    - **Template Structure:** `docs/maintainers/research/[topic]/research-summary.md`
    - Extract key findings and recommendations
 
 2. **Read research documents:**
-   - **Dev-Infra:** `admin/research/[topic]/research-*.md`
+   - **Dev-Infra:** `admin/services/[service]/features/[topic]/research/research-*.md`
    - **Template Structure:** `docs/maintainers/research/[topic]/research-*.md`
    - Extract findings and analysis
 
 3. **Read requirements (if exists):**
-   - **Dev-Infra:** `admin/research/[topic]/requirements.md`
+   - **Dev-Infra:** `admin/services/[service]/features/[topic]/requirements.md`
    - **Template Structure:** `docs/maintainers/research/[topic]/requirements.md`
    - Extract functional and non-functional requirements
 
@@ -130,7 +130,7 @@ This command supports multiple project organization patterns:
 
 **Location Detection:**
 
-- **Dev-Infra:** `admin/decisions/[topic]/`
+- **Dev-Infra:** `admin/services/[service]/features/[topic]/decisions/`
 - **Template Structure:** `docs/maintainers/decisions/[topic]/`
 - **Project-Wide:** `docs/maintainers/decisions/[topic]/`
 
@@ -614,7 +614,7 @@ This directory contains Architecture Decision Records (ADRs) documenting key dec
 
 **Decision Structure:**
 
-- **Dev-Infra:** `admin/decisions/[topic]/`
+- **Dev-Infra:** `admin/services/[service]/features/[topic]/decisions/`
 - **Template Structure:** `docs/maintainers/decisions/[topic]/`
 - **Project-Wide:** `docs/maintainers/decisions/[topic]/`
 - ADRs: `[decisions-path]/[topic]/adr-[number]-[decision-name].md`
