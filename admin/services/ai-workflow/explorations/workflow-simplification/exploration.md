@@ -307,7 +307,7 @@ The core insight is that the workflow has evolved organically through several re
 
 - **[Spike Workflow Framework](../../planning/opportunities/external/dev-toolkit/spike-workflow-framework.md)** - The catalyst for this exploration
 - **[Worktree Feature Workflow](../../docs/WORKTREE-WORKFLOW.md)** - Draft PR workflow (1 PR per feature)
-- **[ADR-003: Draft PR Workflow](../../admin/decisions/worktree-feature-workflow/adr-003-draft-pr-review-workflow.md)** - Decision that reduced PRs per feature
+- **[ADR-003: Draft PR Workflow](../../../meta/features/worktree-feature-workflow/decisions/adr-003-draft-pr-review-workflow.md)** - Decision that reduced PRs per feature
 - **[Reflection: New Commands Workflow Evolution](../../planning/notes/reflections/reflection-new-commands-workflow-evolution-2026-02-13.md)** - Review posture shift insights
 
 ---

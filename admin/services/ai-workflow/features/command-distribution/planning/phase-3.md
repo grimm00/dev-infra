@@ -414,7 +414,7 @@ Document the command distribution pattern as a cross-arm standard following the 
    ```markdown
    ## 📚 Related Documentation
 
-   - **[ADR-001: Command Distribution Ownership](../admin/decisions/four-arm-architecture/adr-001-command-distribution-ownership.md)** - Architecture decision
+   - **[ADR-001: Command Distribution Ownership](../../../../meta/features/four-arm-architecture/decisions/adr-001-command-distribution-ownership.md)** - Architecture decision
    - **[Command Distribution Standard](../admin/planning/standards/command-distribution/README.md)** - Process standard
    - **[Global Commands Guide](GLOBAL-COMMANDS.md)** - User guide for global commands
    - **[Template Usage](TEMPLATE-USAGE.md)** - How to use dev-infra templates

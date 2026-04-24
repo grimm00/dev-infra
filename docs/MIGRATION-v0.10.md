@@ -155,8 +155,8 @@ A: Yes. Each feature directory is independent. You can have some features with `
 
 ## Related
 
-- [ADR-001: Uniform Planning Structure](../admin/decisions/workflow-simplification/adr-001-tiered-planning-structure.md)
-- [ADR-004: Migration Strategy](../admin/decisions/workflow-simplification/adr-004-migration-strategy.md)
+- [ADR-001: Uniform Planning Structure](../admin/services/ai-workflow/features/workflow-simplification/decisions/adr-001-tiered-planning-structure.md)
+- [ADR-004: Migration Strategy](../admin/services/ai-workflow/features/workflow-simplification/decisions/adr-004-migration-strategy.md)
 
 ---
 

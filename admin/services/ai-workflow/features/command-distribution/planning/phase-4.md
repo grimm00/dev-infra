@@ -46,8 +46,8 @@ Validate that the integration architecture meets ADR-003 requirements: all integ
 
    ## 📋 Quick Links
 
-   - **[ADR-003: Integration Architecture](../admin/decisions/four-arm-architecture/adr-003-integration-architecture.md)** - Requirements source
-   - **[Requirements](../admin/research/four-arm-architecture/requirements.md)** - Full requirements list
+   - **[ADR-003: Integration Architecture](../../../../meta/features/four-arm-architecture/decisions/adr-003-integration-architecture.md)** - Requirements source
+   - **[Requirements](../../../../meta/features/four-arm-architecture/requirements.md)** - Full requirements list
 
    ---
 
@@ -263,7 +263,7 @@ Validate that the integration architecture meets ADR-003 requirements: all integ
 
    ## 📋 Quick Links
 
-   - **[ADR-003: Integration Architecture](../admin/decisions/four-arm-architecture/adr-003-integration-architecture.md)** - Decision record
+   - **[ADR-003: Integration Architecture](../../../../meta/features/four-arm-architecture/decisions/adr-003-integration-architecture.md)** - Decision record
    - **[XDG Base Directory Spec](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)** - Standard reference
 
    ---
@@ -458,7 +458,7 @@ Validate that the integration architecture meets ADR-003 requirements: all integ
 
    ## 🔗 Related Documents
 
-   - [ADR-003: Integration Architecture](../admin/decisions/four-arm-architecture/adr-003-integration-architecture.md)
+   - [ADR-003: Integration Architecture](../../../../meta/features/four-arm-architecture/decisions/adr-003-integration-architecture.md)
    - [Integration Validation Checklist](INTEGRATION-VALIDATION.md)
    - [proj-cli Config Source](https://github.com/grimm00/proj-cli/blob/main/src/proj/config.py)
 
