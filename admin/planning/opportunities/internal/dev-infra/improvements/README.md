@@ -22,6 +22,7 @@
 - **[skill-config-rendering.md](skill-config-rendering.md)** - Helm-style values files for per-platform skill config rendering (🔴 Not Started, LOW priority, ⚠️ Iffy)
 - **[quality-attribute-catalog.md](quality-attribute-catalog.md)** - Standing quality attribute catalog for /design step, retroactively applicable (🔴 Not Started, MEDIUM priority)
 - **[feature-first-directory-structure.md](feature-first-directory-structure.md)** - Restructure admin/ to service-first, feature-second, phase-third hierarchy (🔴 Not Started, HIGH priority)
+- **[artifact-emission-strategy.md](artifact-emission-strategy.md)** - Move skills from L1 (raw file paths) toward L2/L3 (content + placement guidance); opt-in artifacts (🔴 Not Started, MEDIUM priority)
 - **[pr-body-generation-primitive.md](pr-body-generation-primitive.md)** - Prune performative content from `/pr` templates; reuse `update-pr-description` skill as PR/release cluster primitive (🔴 Not Started, MEDIUM priority)
 
 ---
@@ -48,11 +49,12 @@ This directory contains actionable improvement checklists based on learnings fro
 | Quality Attribute Catalog | 🔴 Not Started | MEDIUM | LOW |
 | Service/Feature/Phase Directory Structure | 🔴 Not Started | HIGH | HIGH |
 | PR Body Generation Primitive | 🔴 Not Started | MEDIUM | LOW / MEDIUM |
+| Artifact Emission Strategy (L0-L3 abstraction) | 🔴 Not Started | MEDIUM | HIGH |
 
-**Total Improvement Documents:** 12  
+**Total Improvement Documents:** 13  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2026-04-22
+**Last Updated:** 2026-04-24
 
