@@ -112,11 +112,11 @@ Order minimizes broken state at each step:
 - [x] Create `admin/services/meta/maintenance/directory-restructure/`
 - [x] Service enumeration validated
 
-### Phase 2: Service Scaffolding
+### Phase 2: Service Scaffolding (done)
 
-- [ ] Create `admin/services/ai-workflow/README.md` + subdirectories (explorations/, features/, maintenance/)
-- [ ] Create `admin/services/template-generation/README.md` + subdirectories
-- [ ] Create `admin/services/release-management/README.md` + subdirectories
+- [x] Create `admin/services/ai-workflow/README.md` + subdirectories (explorations/, features/, maintenance/)
+- [x] Create `admin/services/template-generation/README.md` + subdirectories
+- [x] Create `admin/services/release-management/README.md` + subdirectories
 
 ### Phase 3: Migrate One Feature End-to-End (Validation)
 

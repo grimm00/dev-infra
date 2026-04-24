@@ -47,7 +47,8 @@ This restructure fixes all four. It's a prerequisite for agentic-workflow-modern
 | Service enumeration | ✅ Complete |
 | Bootstrap meta service | ✅ Complete (this directory) |
 | Migration plan | ✅ Complete (see plan.md) |
-| Execute migration | 🔴 Not started |
+| Service scaffolding (Phase 2) | ✅ Complete (ai-workflow, template-generation, release-management) |
+| Execute migration (Phase 3+) | 🔴 Not started |
 | Update command path references | 🔴 Not started |
 | Update CI scripts | 🔴 Not started |
 | Update templates (docs/maintainers/) | 🔴 Not started |
