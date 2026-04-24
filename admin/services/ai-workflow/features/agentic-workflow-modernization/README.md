@@ -25,8 +25,12 @@ This feature re-architects dev-infra's workflow system for the age of AI-assiste
 - **[requirements.md](requirements.md)** — 22 FRs, 3 NFRs, 4 Constraints, 2 Assumptions (consolidated)
 - **[v1-scope.md](v1-scope.md)** — 22 conclusions (C1-1 through C8-3) + CP-1 (Explicit Over Implicit)
 - **[narrative.md](narrative.md)** — Story of how the thinking evolved (12 acts)
-- **[exploration.md](exploration.md)** — 10 themes, constraints, spike determinations
-- **[research-topics.md](research-topics.md)** — 11 research topics (10 conducted)
+
+### Provenance
+
+This feature was promoted from a service-level exploration:
+
+- **[../../explorations/agentic-workflow-modernization/](../../explorations/agentic-workflow-modernization/)** — Original exploration that produced this feature (10 themes, research topics, outcomes record)
 
 ### Phase Directories
 

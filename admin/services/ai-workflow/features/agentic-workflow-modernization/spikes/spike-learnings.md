@@ -1,6 +1,6 @@
 # Spike Learnings: AGENTS.md Portability
 
-**Exploration:** `../exploration.md`
+**Exploration:** `../../../explorations/agentic-workflow-modernization/exploration.md`
 **Created:** 2026-03-25
 **Time-box:** ~1 hour (research-heavy spike; empirical testing deferred where noted)
 **Result:** Partially Validated
@@ -119,7 +119,7 @@ New questions revealed by this spike (feed back to research):
 
 # Spike Learnings: Command-to-Skill Conversion (Spike B)
 
-**Exploration:** `../exploration.md`
+**Exploration:** `../../../explorations/agentic-workflow-modernization/exploration.md`
 **Created:** 2026-03-25
 **Time-box:** ~1 hour
 **Test case:** `/discuss` command → SKILL.md

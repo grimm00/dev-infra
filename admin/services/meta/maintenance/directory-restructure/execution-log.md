@@ -71,12 +71,49 @@ Empty directories removed:
 
 ### Checkpoint: Does the pattern feel right?
 
-**To evaluate before Phase 4.** Validate:
-- [ ] Feature root is navigable (README + 5 cross-cutting root files + 4 phase dirs feels clean?)
-- [ ] Cross-cutting promotion feels correct (requirements.md and v1-scope.md at root)
-- [ ] Spikes consolidation feels right (spike-learnings + individual spike files all under spikes/)
-- [ ] `research-topics.md` at feature root (transitional artifact) — does it feel out of place?
-- [ ] Stale README removal was correct (vs preserving for historical reference)
+**Evaluated 2026-04-24.** All checkpoints validated except `research-topics.md` placement, which prompted refinement (see below).
+
+- [x] Feature root is navigable
+- [x] Cross-cutting promotion correct (requirements.md, v1-scope.md at root)
+- [x] Spikes consolidation correct
+- [x] Stale README removal correct
+- [x] `research-topics.md` placement → refined to service-level exploration (see Phase 3.5)
+
+---
+
+## 2026-04-24 — Phase 3.5: Service-Level Exploration Refinement ✅
+
+Discussion surfaced that **all pre-formal thinking should live at service level**, not feature level. Rationale:
+
+- One exploration can fan out to multiple features (or features + maintenance + answered questions)
+- Single source of truth: no duplication, no ambiguity
+- Clean feature directories: features start with what was committed to, not initial brainstorming
+- Matches cognitive flow: brainstorm at service scope, crystallize into feature scope
+
+### Files moved (3 changes)
+
+- `features/agentic-workflow-modernization/exploration.md` → `explorations/agentic-workflow-modernization/exploration.md`
+- `features/agentic-workflow-modernization/research-topics.md` → `explorations/agentic-workflow-modernization/research-topics.md`
+- New file: `explorations/agentic-workflow-modernization/outcomes.md` — documents what the exploration produced (1 feature + 9 int-opps + 3 spikes)
+
+### Link updates
+
+5 references updated:
+- `features/.../narrative.md` (Related Artifacts table): 2 entries
+- `features/.../research/README.md` (Pipeline Context): 2 entries
+- `features/.../spikes/spike-learnings.md` (Exploration pointer): 1 entry × 2 (replace_all)
+
+### Feature README updated
+
+Added "Provenance" section linking back to service-level exploration. Removed Cross-Cutting entries for exploration.md and research-topics.md (no longer at feature root).
+
+### Int-opp amendment
+
+Updated `feature-first-directory-structure.md` to reflect:
+- `research-topics.md` belongs at service-level exploration (added to structure diagram)
+- Explicit text: "All pre-formal thinking lives here, not at feature level"
+- Why pre-formal lives at service level (4 reasons)
+- Optional `discussions/` directory for /discuss session captures
 
 ---
 

@@ -73,13 +73,25 @@ Every current admin/ topic maps to one of four services.
 
 ## Target Structure Per Topic
 
-For each topic, artifacts consolidate into a single work-unit directory:
+For each topic, artifacts split between service-level explorations (pre-formal thinking) and feature-level (formal artifacts):
+
+### Service-level exploration (pre-formal thinking)
+
+```
+admin/services/[service]/explorations/[topic]/
+├── exploration.md               ← from admin/explorations/[topic]/exploration.md
+├── research-topics.md           ← from admin/explorations/[topic]/research-topics.md (if exists)
+└── outcomes.md                  ← NEW: documents what fanned out (feature/maintenance/answered)
+```
+
+### Feature-level (formal artifacts)
 
 ```
 admin/services/[service]/features/[topic]/
+├── README.md                    ← NEW: feature hub with provenance link to exploration
 ├── requirements.md              ← from admin/research/[topic]/requirements.md (if exists)
 ├── v1-scope.md                  ← from admin/decisions/[topic]/v1-scope.md (if exists)
-├── exploration.md               ← from admin/explorations/[topic]/exploration.md (if exists)
+├── narrative.md                 ← from admin/narratives/[topic]/narrative.md (if exists)
 ├── research/                    ← from admin/research/[topic]/
 │   ├── README.md
 │   ├── research-summary.md
@@ -90,15 +102,16 @@ admin/services/[service]/features/[topic]/
 │   └── adr-*.md
 ├── designs/                     ← from admin/designs/[topic]/ (if exists)
 │   └── design.md
-├── narrative.md                 ← from admin/narratives/[topic]/narrative.md (if exists)
-├── planning/                    ← from admin/planning/features/[topic]/
-│   ├── feature-plan.md
-│   ├── implementation-plan.md
-│   └── phase-*.md
-└── spikes/                      ← from admin/explorations/[topic]/spike/ (if exists)
+├── spikes/                      ← from admin/explorations/[topic]/spike/ (if exists)
+└── planning/                    ← from admin/planning/features/[topic]/ (if exists)
+    ├── feature-plan.md
+    ├── implementation-plan.md
+    └── phase-*.md
 ```
 
-Note: `exploration.md` and `narrative.md` are single-file phases and live at the feature root. `research/`, `decisions/`, `designs/`, `planning/`, `spikes/` are subdirectories.
+**Key rule:** Pre-formal thinking (`exploration.md`, `research-topics.md`) lives at service-level explorations, not feature-level. Features link back to the exploration that birthed them via README provenance section. This avoids duplication and keeps feature directories focused on committed work.
+
+`narrative.md` is a single-file phase and lives at the feature root. `research/`, `decisions/`, `designs/`, `planning/`, `spikes/` are subdirectories.
 
 ---
 

@@ -99,10 +99,12 @@ admin/
 ├── services/
 │   ├── ai-workflow/
 │   │   ├── README.md                           ← service overview
-│   │   ├── explorations/                       ← service-level questions
+│   │   ├── explorations/                       ← service-level questions (pre-formal thinking)
 │   │   │   └── [topic]/
-│   │   │       ├── exploration.md              ← questions asked
-│   │   │       └── outcomes.md                 ← what came of it (features? maintenance? answered?)
+│   │   │       ├── exploration.md              ← questions asked, themes identified
+│   │   │       ├── research-topics.md          ← (optional) themes → research questions
+│   │   │       ├── outcomes.md                 ← what came of it (features? maintenance? answered?)
+│   │   │       └── discussions/                ← (optional) /discuss session captures
 │   │   ├── features/                           ← new capabilities (full pipeline)
 │   │   │   ├── agentic-workflow-modernization/
 │   │   │   │   ├── requirements.md             ← cross-cutting, feature root
@@ -161,12 +163,24 @@ admin/
 
 ### Work Categories
 
-**`explorations/`** — Questions asked at the service level. Can fan out to:
-- **A. Feature(s):** exploration leads to new capability → promote to `features/[name]/`
+**`explorations/`** — Questions asked at the service level. **All pre-formal thinking lives here, not at feature level.** Can fan out to:
+- **A. Feature(s):** exploration leads to new capability → promote to `features/[name]/`. Exploration stays at service level as provenance; the feature starts clean with formal artifacts (requirements, research, etc.).
 - **B. Maintenance item(s):** exploration surfaces structural/CI/tooling work → promote to `maintenance/[name]/`
 - **C. Answered questions:** exploration concludes without action → stays in `explorations/` with `outcomes.md` documenting the conclusion
 
-Explorations do NOT inherit the full feature pipeline. Their artifacts are `exploration.md` and optionally `outcomes.md`. If exploration reveals feature-worthy work, a new feature directory is created that references the exploration.
+Explorations do NOT inherit the full feature pipeline. Their artifacts are:
+- `exploration.md` — themes identified, questions asked
+- `research-topics.md` (optional) — bridge from themes to research questions, when produced
+- `outcomes.md` — records what fanned out (links to features/maintenance, or "answered without action")
+- `discussions/` (optional) — captures of `/discuss` sessions during exploration
+
+When exploration reveals feature-worthy work, a new feature directory is created. The feature's README links back to the service-level exploration as provenance. The exploration content is **not** duplicated into the feature.
+
+**Why pre-formal thinking lives at service level (not feature level):**
+- One exploration can fan out to multiple features (or features + maintenance items)
+- Single source of truth: no duplication, no ambiguity about where pre-formal thinking lives
+- Clean feature directories: features start with what was committed to, not initial brainstorming
+- Matches the cognitive flow: brainstorm at service scope first, then crystallize into feature scope
 
 **`features/`** — New capabilities that go through the full thinking pipeline (requirements → research → decisions → designs → transition-plan → task). Each feature is self-contained with cross-cutting artifacts at its root.
 

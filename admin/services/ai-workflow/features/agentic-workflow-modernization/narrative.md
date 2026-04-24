@@ -337,8 +337,8 @@ ca947c9 docs(decisions): capture Sections 6-8 conclusions, complete interview
 
 | Artifact | Location |
 |----------|----------|
-| Exploration | `exploration.md` |
-| Research Topics | `research-topics.md` |
+| Exploration | `../../explorations/agentic-workflow-modernization/exploration.md` |
+| Research Topics | `../../explorations/agentic-workflow-modernization/research-topics.md` |
 | Spike Learnings | `spikes/spike-learnings.md` |
 | Research Hub | `research/README.md` |
 | Research Summary | `research/research-summary.md` |
