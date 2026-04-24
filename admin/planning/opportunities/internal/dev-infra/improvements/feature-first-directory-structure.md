@@ -6,7 +6,7 @@
 **Priority:** HIGH
 **Effort:** HIGH (filesystem migration + command path updates + link rewrites)
 **Created:** 2026-04-14
-**Last Updated:** 2026-04-14
+**Last Updated:** 2026-04-24
 
 ---
 
@@ -69,9 +69,12 @@ The structure isn't "services at the top" — it's "**choose your top-level dime
 
 Dev-infra is a **multi-service project** that has been masquerading as single-service:
 
-- **AI workflow authoring** — commands, skills, rules, the thinking pipeline modernization
-- **Template generation** — new-project.sh, templates, template sync
-- **Release management** — release automation, readiness, distribution
+- **AI workflow authoring** (`ai-workflow`) — commands, skills, rules, the thinking pipeline modernization
+- **Template generation** (`template-generation`) — new-project.sh, templates, template sync
+- **Release management** (`release-management`) — release automation, readiness, distribution
+- **Meta** (`meta`) — dev-infra about itself: identity, process, structure, worktree workflow, directory organization
+
+The **meta** service is particularly important. It holds things that are about the project's own process and structure, not about its external products. Without a meta service, concerns like dev-infra-identity-and-focus, worktree-feature-workflow, and the directory restructure itself have no natural home.
 
 Grouping features by service reduces cognitive load dramatically (expand the service you care about, collapse the rest) and creates natural extraction seams for future repo splits.
 
@@ -89,53 +92,104 @@ The adaptive top-level model accommodates all of these. Phase-first cannot.
 
 ## Proposed Solution
 
-For **dev-infra specifically**, restructure `admin/` to be **service-first, feature-second, phase-third**. (Other projects adopt the same three-level pattern with their own top-level dimension.)
+For **dev-infra specifically**, restructure `admin/` to be **service-first, then work-category, then work-unit, then phase**. Three work categories live under each service: `explorations/`, `features/`, and `maintenance/`. (Other projects adopt the same pattern with their own top-level dimension.)
 
 ```
 admin/
 ├── services/
 │   ├── ai-workflow/
 │   │   ├── README.md                           ← service overview
-│   │   └── features/
-│   │       ├── agentic-workflow-modernization/
-│   │       │   ├── requirements.md             ← cross-cutting, feature root
-│   │       │   ├── v1-scope.md                 ← cross-cutting, feature root
-│   │       │   ├── exploration.md              ← single-file phase
-│   │       │   ├── research/
-│   │       │   │   ├── README.md
-│   │       │   │   ├── research-summary.md
-│   │       │   │   └── topic-*.md
-│   │       │   ├── decisions/
-│   │       │   │   ├── README.md
-│   │       │   │   ├── decision-interview.md
-│   │       │   │   └── adr-*.md
-│   │       │   ├── designs/
-│   │       │   │   └── design.md
-│   │       │   ├── explorations/               ← sub-artifacts like spikes
-│   │       │   │   └── spike/
-│   │       │   └── narrative.md
-│   │       └── workflow-simplification/
-│   │           └── ... (same structure)
+│   │   ├── explorations/                       ← service-level questions
+│   │   │   └── [topic]/
+│   │   │       ├── exploration.md              ← questions asked
+│   │   │       └── outcomes.md                 ← what came of it (features? maintenance? answered?)
+│   │   ├── features/                           ← new capabilities (full pipeline)
+│   │   │   ├── agentic-workflow-modernization/
+│   │   │   │   ├── requirements.md             ← cross-cutting, feature root
+│   │   │   │   ├── v1-scope.md
+│   │   │   │   ├── research/
+│   │   │   │   │   ├── README.md
+│   │   │   │   │   ├── research-summary.md
+│   │   │   │   │   └── topic-*.md
+│   │   │   │   ├── decisions/
+│   │   │   │   │   ├── README.md
+│   │   │   │   │   ├── decision-interview.md
+│   │   │   │   │   └── adr-*.md
+│   │   │   │   ├── designs/
+│   │   │   │   │   └── design.md
+│   │   │   │   ├── spikes/                     ← feature-level spikes
+│   │   │   │   │   └── [name]/
+│   │   │   │   └── narrative.md
+│   │   │   └── workflow-simplification/
+│   │   │       └── ... (same structure)
+│   │   └── maintenance/                        ← structural, CI, tooling (lighter pipeline)
+│   │       └── [name]/
+│   │           └── [lightweight phases]
 │   ├── template-generation/
 │   │   ├── README.md
-│   │   └── features/
-│   │       ├── template-doc-infrastructure/
-│   │       └── experimental-template/
-│   └── release-management/
+│   │   ├── explorations/
+│   │   ├── features/
+│   │   │   ├── template-doc-infrastructure/
+│   │   │   └── experimental-template/
+│   │   └── maintenance/
+│   ├── release-management/
+│   │   ├── README.md
+│   │   ├── explorations/
+│   │   ├── features/
+│   │   │   └── release-automation-v2/
+│   │   └── maintenance/
+│   └── meta/                                   ← dev-infra about itself
 │       ├── README.md
-│       └── features/
-│           └── release-automation-v2/
+│       ├── explorations/
+│       ├── features/
+│       │   ├── dev-infra-identity-and-focus/
+│       │   └── worktree-feature-workflow/
+│       └── maintenance/
+│           └── directory-restructure/          ← THIS WORK lives here
 └── planning/
     └── opportunities/                          ← stays (cross-service)
 ```
 
-### Three Levels, Each With a Purpose
+### Four Levels, Each With a Purpose
 
 | Level | Purpose | Changes when... |
 |-------|---------|-----------------|
 | **Service** | Product/domain grouping | A new product area emerges (rare) |
-| **Feature** | Scoped work unit | A new feature begins (often) |
-| **Phase** | Workflow step within a feature | Every feature has these subdirectories |
+| **Work category** | Kind of work (exploration, feature, maintenance) | Fixed — these three categories are structural |
+| **Work unit** | Scoped piece of work | A new unit begins (often) |
+| **Phase** | Workflow step within a unit (optional) | Only for units with lifecycles (features) |
+
+### Work Categories
+
+**`explorations/`** — Questions asked at the service level. Can fan out to:
+- **A. Feature(s):** exploration leads to new capability → promote to `features/[name]/`
+- **B. Maintenance item(s):** exploration surfaces structural/CI/tooling work → promote to `maintenance/[name]/`
+- **C. Answered questions:** exploration concludes without action → stays in `explorations/` with `outcomes.md` documenting the conclusion
+
+Explorations do NOT inherit the full feature pipeline. Their artifacts are `exploration.md` and optionally `outcomes.md`. If exploration reveals feature-worthy work, a new feature directory is created that references the exploration.
+
+**`features/`** — New capabilities that go through the full thinking pipeline (requirements → research → decisions → designs → transition-plan → task). Each feature is self-contained with cross-cutting artifacts at its root.
+
+**`maintenance/`** — Structural refactoring, CI improvements, tooling, infrastructure, housekeeping. Lighter pipeline than features — typically just planning and execution, no research/decision/design formality unless the scope grows.
+
+### Why This Fixes the "Explorations Treated Like Features" Problem
+
+The current `admin/explorations/[topic]/` treats every exploration as a feature-in-waiting. In reality, many explorations:
+- Answer a question and need no implementation
+- Surface CI or tooling improvements (not features)
+- Reveal that the right action is nothing
+
+The new structure makes this explicit: an exploration's outcome is documented, and it's promoted to the right work category — or stays archived if no action is warranted. Explorations never get forced down a feature-shaped pipeline just because they happen to exist.
+
+### Cross-Cutting Artifacts Live at the Work-Unit Root
+
+For features specifically, cross-cutting artifacts belong at the feature root, not under a phase directory:
+
+- `requirements.md` — shaped throughout the lifecycle (research, interview, spikes), not owned by research
+- `v1-scope.md` — synthesis from interview + ADRs, not owned by decisions
+- `status-and-next-steps.md` — current state, not tied to any phase
+
+This addresses the original pigeonholing problem: cross-cutting content has a natural home at the root of the thing it cuts across.
 
 ### Key Properties
 
@@ -165,12 +219,12 @@ These are legitimately cross-service concerns and belong at the admin top level.
 
 Before migration, enumerate services clearly. Current proposed set:
 
-| Service | Scope | Example Features |
-|---------|-------|------------------|
-| `ai-workflow` | Commands, skills, rules, agentic workflow | agentic-workflow-modernization, workflow-simplification |
-| `template-generation` | Templates, new-project.sh, template sync | template-doc-infrastructure, experimental-template, templates-enhancement |
-| `release-management` | Release automation, readiness, distribution | release-automation-v2, release-readiness |
-| `meta` (maybe) | Identity/strategy/process itself | dev-infra-identity-and-focus, worktree-feature-workflow |
+| Service | Scope | Example Features | Example Maintenance |
+|---------|-------|------------------|---------------------|
+| `ai-workflow` | Commands, skills, rules, agentic workflow | agentic-workflow-modernization, workflow-simplification | (future: skill sync, command lifecycle tooling) |
+| `template-generation` | Templates, new-project.sh, template sync | template-doc-infrastructure, experimental-template, templates-enhancement | Template sync validation, generator improvements |
+| `release-management` | Release automation, readiness, distribution | release-automation-v2, release-readiness | CI improvements for releases |
+| `meta` | Dev-infra about itself: identity, process, structure | dev-infra-identity-and-focus, worktree-feature-workflow | **directory-restructure (this work)**, template sync infrastructure |
 
 If services can't be named clearly in one session, that signals the service layer isn't ready to commit to — stop at feature-first restructure and revisit later.
 
@@ -206,11 +260,26 @@ If services can't be named clearly in one session, that signals the service laye
 3. **Blocks workflow evolution.** The proposed design step, interview-as-start-signal, cross-cutting artifacts — all require a home that the current structure doesn't naturally provide.
 4. **Service-first supports eventual extraction.** If AI workflow authoring becomes its own repo (per ADR-005 of agentic-workflow-modernization, future skills repo consideration), the service directory is the natural extraction boundary. Doing this now with one service's worth of features is cheaper than doing it later with more.
 
-### Why NOT Immediately
+### Recommended Timing (Updated 2026-04-24)
 
-The agentic-workflow-modernization feature is mid-lifecycle (decisions done, design done, about to enter transition planning). Mid-implementation restructuring creates migration overhead on a feature still in motion.
+**Restructure first, before agentic-workflow-modernization transition planning.**
 
-**Recommended timing:** Complete transition planning for agentic-workflow-modernization, then do the restructure as a standalone feature before beginning Stage 1 skill conversion. This way, Stage 1 work happens against the cleaner structure.
+Original recommendation was to restructure between transition planning and Stage 1 conversion. Revised reasoning:
+
+1. **Stage 1 skills reference feature paths in their bodies.** If skills are authored before the restructure, every converted skill needs path updates after. Cleaner to author against permanent paths.
+2. **Restructure is lower effort than Stage 1 conversion.** Structural refactoring with no behavioral requirements vs 5 skills × strict rubric × regression testing.
+3. **Restructure validates the proposed pattern.** If service boundaries reveal problems, we adjust before committing to workflow migration. Otherwise we risk migrating twice.
+4. **Framed as maintenance, not a feature.** Under the refined model, directory restructure lives in `services/meta/maintenance/directory-restructure/`. Lighter pipeline — planning + execution, no research/decisions/design formality needed.
+
+### Framing: This Work Is Maintenance
+
+The restructure itself exemplifies the work-category distinction this int-opp proposes:
+
+- **Not a feature:** No new capability, just structural refactoring of existing infrastructure
+- **Not an exploration:** The thinking is already done (this int-opp + discussion)
+- **Is maintenance:** Structural improvement to how dev-infra organizes its own artifacts
+
+Therefore it lives under `meta/maintenance/` and gets the lighter pipeline: service enumeration + migration plan + execution + verification. No formal requirements, research, decision, or design phases.
 
 ---
 
@@ -312,4 +381,4 @@ Two independent failure modes in two different projects = the phase-first struct
 
 ---
 
-**Last Updated:** 2026-04-14
+**Last Updated:** 2026-04-24
