@@ -9,7 +9,7 @@
 
 ## 📝 Tasks
 
-- [ ] Task 1: Audit current `.mdc` rules content and classify by destination
+- [x] Task 1: Audit current `.mdc` rules content and classify by destination
   - **Purpose:** Map every section of the existing 1,623 lines to its four-type destination (FR-4) before making changes
   - **Steps:**
     1. Read `.cursor/rules/main.mdc` (546 lines, 16 sections)

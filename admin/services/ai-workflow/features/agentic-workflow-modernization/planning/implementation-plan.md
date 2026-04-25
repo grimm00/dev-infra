@@ -61,7 +61,7 @@ Convert the **Thinker** role group of dev-infra commands to skills, plus the fou
 ## 📝 Implementation Plan
 
 ### Foundation (Rules + AGENTS.md)
-- [ ] Task 1: Audit current `.mdc` rules content and classify by destination (four-type separation per FR-4)
+- [x] Task 1: Audit current `.mdc` rules content and classify by destination (four-type separation per FR-4)
 - [ ] Task 2: Draft AGENTS.md with portable conventions (~150-200 lines, FR-1 inline)
 - [ ] Task 3: Draft CLAUDE.md mirroring AGENTS.md content (C-1, C-4)
 - [ ] Task 4: Slim `.mdc` rules to ~50 lines (Cursor-specific config only, FR-5 mutable state removed)
