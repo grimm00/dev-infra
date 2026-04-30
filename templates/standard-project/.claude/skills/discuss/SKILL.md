@@ -130,26 +130,51 @@ do NOT write to any file unless the user explicitly asks.
 ## Gotchas
 
 Common failure modes when running `/discuss`. Each names the mistake and the
-correct alternative.
+correct alternative. Built from the Topic 8 audit of behavioral instructions
+across dev-infra commands and from real `/discuss` sessions during the
+agentic-workflow-modernization feature.
 
 **Treating a thought as a directive.** When the user says "we should probably do X,"
 the temptation is to start implementing X. Don't. Ask what they want to think
-through about X, or note that X sounds promotable to `/explore --amend`.
+through about X, or note that X sounds promotable to `/explore --amend`. The whole
+reason this skill exists is that agentic coding conflates thinking with doing.
 
 **Manufacturing disagreement to seem critical.** Pushing back on every point isn't
-intellectual honesty — it's contrarianism. If a user's reasoning is sound, agree and
-move on. Save pushback for actual gaps.
+intellectual honesty — it's contrarianism (Topic 8, Finding 2: "personas degrade
+reliability"). If a user's reasoning is sound, agree and move on. Save pushback
+for actual logical gaps, unstated assumptions, or contradictions with prior
+research findings.
 
 **Producing a summary unprompted.** The summary is for `--summary` or when the user
-asks. Don't generate one mid-discussion or as a closing flourish.
+asks. Don't generate one mid-discussion as a checkpoint or as a closing flourish.
+Mid-discussion summaries interrupt the user's thinking; closing summaries
+prematurely terminate a still-active thread.
 
 **Writing to files when the discussion sparks a "good idea."** No matter how good
 the idea is, this skill never writes. State that the idea is worth capturing and
-suggest the appropriate command. The user runs it.
+suggest the appropriate command (`/explore --amend`, `/int-opp`, `/research --add-topic`).
+The user runs it. This is the firewall — if you breach it, the skill's contract is
+broken and the user can't trust `/discuss` for tentative thinking again.
 
 **Treating "I wonder if..." as a research request.** Tentative musing is the
 substrate of `/discuss`. Engage with it as thinking, not as a question that needs
-to be researched right now.
+to be researched right now. Resist the urge to enumerate "let me check three things
+for you" — that's `/research` behavior, not `/discuss`.
+
+**Surfacing more than two connections per response.** It's tempting to demonstrate
+breadth by linking the user's point to every related artifact. Don't. Cap at two,
+and only when directly relevant. Tangential links dilute the connections that
+actually matter and signal the agent isn't tracking what the user cares about.
+
+**Resolving uncertainty the user wants to sit with.** When the user says "I'm not
+sure about X," the goal isn't to give them a definitive answer — it's to help them
+articulate what they're uncertain about. Ask what makes them uncertain, or surface
+the considerations that bear on it. Don't close the question prematurely.
+
+**Following every wander instead of anchoring.** Discussions often surface adjacent
+topics. Engage with adjacency only when the user pulls the thread; otherwise note
+the connection and stay on the original topic. If the wander is significant, flag
+it as potentially worth a separate `/discuss` or `/explore`.
 
 ## When to Use
 
