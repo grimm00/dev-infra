@@ -17,7 +17,7 @@
   - Output: a tier-classified inventory of every behavioral instruction in the discuss command
   - Reference: Spike B already validated a transformation (267 → 143 lines); use it as guidance
 
-- [ ] Task 6: Convert discuss to SKILL.md applying five-property rubric (FR-19) and dual-location pattern (FR-21)
+- [x] Task 6: Convert discuss to SKILL.md applying five-property rubric (FR-19) and dual-location pattern (FR-21)
   - Create `templates/standard-project/.claude/skills/discuss/SKILL.md`
   - Frontmatter: dual-location description (routing only), `disable-model-invocation: true` (FR-2)
   - Body: separate `## Workflow` from `## Behavioral Contract` (FR-6 hybrid encoding)
