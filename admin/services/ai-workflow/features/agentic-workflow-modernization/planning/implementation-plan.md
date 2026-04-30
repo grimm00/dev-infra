@@ -69,7 +69,7 @@ Convert the **Thinker** role group of dev-infra commands to skills, plus the fou
 ### Discuss Conversion (Thesis Validation)
 - [x] Task 5: Audit discuss command for behavioral instructions; classify by precision tier (Topic 8 audit)
 - [x] Task 6: Convert discuss to SKILL.md applying five-property rubric (FR-19) and dual-location pattern (FR-21)
-- [ ] Task 7: Populate gotchas section from Topic 8 audit findings + lived experience (FR-20)
+- [x] Task 7: Populate gotchas section from Topic 8 audit findings + lived experience (FR-20)
 
 ### Explore Family
 - [ ] Task 8: Design parent `explore/SKILL.md` (orientation + family conventions for child skills)

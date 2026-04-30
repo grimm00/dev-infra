@@ -7,12 +7,12 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 6/17 tasks complete
+**Overall:** 7/17 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Foundation (Rules + AGENTS.md) | ✅ Complete | 4/4 tasks | Prerequisite for all skill conversion |
-| Discuss Conversion (Thesis Validation) | 🟠 In Progress | 2/3 tasks | Critical go/no-go signal for Stages 2-4 |
+| Discuss Conversion (Thesis Validation) | ✅ Complete | 3/3 tasks | Thesis validated — ready to scale to other skills |
 | Explore Family | 🔴 Not Started | 0/4 tasks | Validates family pattern for multi-mode skills |
 | Single-Mode Skills | 🔴 Not Started | 0/3 tasks | int-opp + narrative |
 | Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Delete commands, regression test, final sweep |
@@ -21,9 +21,9 @@
 
 ## 🚀 Next Steps
 
-1. **Expand Group 2** — add detailed task specs for Discuss Conversion (thesis validation)
-2. **Start Group 2** — `/task next` to begin Task 5 (audit discuss command)
-3. **Thesis validation** — discuss skill conversion is the go/no-go signal for Stages 2-4
+1. **PR Group 2** — create draft PR for Discuss Conversion work (thesis-validation milestone)
+2. **Expand Group 3** — add detailed task specs for Explore Family
+3. **Start Group 3** — `/task next` to begin the explore family conversion (validates multi-mode pattern)
 
 ---
 

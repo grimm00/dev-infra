@@ -2,7 +2,8 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 1: Thinker)
 **Group:** Discuss Conversion (Thesis Validation)
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
+**Completed:** 2026-04-30
 **Last Updated:** 2026-04-30
 
 ---
@@ -25,7 +26,7 @@
   - Verify SKILL.md is operationally complete without companion files (FR-8)
   - Stay under 500-line limit (C-2)
 
-- [ ] Task 7: Populate gotchas section from Topic 8 audit findings + lived experience (FR-20)
+- [x] Task 7: Populate gotchas section from Topic 8 audit findings + lived experience (FR-20)
   - Add `## Gotchas` section with named failure modes and correct alternatives
   - Source: Topic 8 audit (~15 Tier 3 instructions identified) + personal experience using /discuss
   - Each gotcha: names the mistake and the correct alternative
@@ -42,12 +43,12 @@
 
 ## ✅ Completion Criteria
 
-- [ ] `discuss/SKILL.md` exists in `templates/standard-project/.claude/skills/`
-- [ ] All behavioral instructions pass the five-property rubric
-- [ ] Gotchas section populated with at least 5 documented failure modes
-- [ ] SKILL.md under 500 lines and operationally complete without companion files
-- [ ] No platform-breaking features used (FR-13)
-- [ ] Manual smoke test: invoking the skill produces equivalent behavior to the command
+- [x] `discuss/SKILL.md` exists in `templates/standard-project/.claude/skills/`
+- [x] All behavioral instructions pass the five-property rubric
+- [x] Gotchas section populated with at least 5 documented failure modes (8 documented)
+- [x] SKILL.md under 500 lines and operationally complete without companion files (201 lines)
+- [x] No platform-breaking features used (FR-13)
+- [ ] Manual smoke test: invoking the skill produces equivalent behavior to the command (deferred — runs in Group 5 cutover)
 
 ---
 
@@ -58,4 +59,4 @@
 
 ---
 
-**Last Updated:** 2026-04-24
+**Last Updated:** 2026-04-30
