@@ -67,7 +67,7 @@ Convert the **Thinker** role group of dev-infra commands to skills, plus the fou
 - [x] Task 4: Slim `.mdc` rules to ~50 lines (Cursor-specific config only, FR-5 mutable state removed)
 
 ### Discuss Conversion (Thesis Validation)
-- [ ] Task 5: Audit discuss command for behavioral instructions; classify by precision tier (Topic 8 audit)
+- [x] Task 5: Audit discuss command for behavioral instructions; classify by precision tier (Topic 8 audit)
 - [ ] Task 6: Convert discuss to SKILL.md applying five-property rubric (FR-19) and dual-location pattern (FR-21)
 - [ ] Task 7: Populate gotchas section from Topic 8 audit findings + lived experience (FR-20)
 

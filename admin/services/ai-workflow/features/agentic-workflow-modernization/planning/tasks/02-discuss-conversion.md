@@ -11,7 +11,7 @@
 
 > ⚠️ **Scaffolding:** Run `/transition-plan agentic-workflow-modernization --expand --group 2` to add detailed implementation notes.
 
-- [ ] Task 5: Audit discuss command for behavioral instructions; classify by precision tier
+- [x] Task 5: Audit discuss command for behavioral instructions; classify by precision tier
   - Read `.cursor/commands/discuss.md` in full
   - Apply Topic 8's tier classification: Tier 1 (Precise — keep as-is), Tier 2 (Mixed — rewrite), Tier 3 (Vague/Problematic — rewrite or remove)
   - Output: a tier-classified inventory of every behavioral instruction in the discuss command
