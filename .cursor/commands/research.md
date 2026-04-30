@@ -187,12 +187,12 @@ This command supports multiple project organization patterns:
 
 **Location Detection:**
 
-- **Dev-Infra:** `admin/research/[topic]/`
+- **Dev-Infra:** `admin/services/[service]/features/[topic]/research/`
 - **Template Structure:** `docs/maintainers/research/[topic]/`
 - **Project-Wide:** `docs/maintainers/research/[topic]/`
 
 **Auto-detection:**
-- Check if `admin/research/` exists → use dev-infra structure
+- Check if `admin/services/` exists → use dev-infra structure
 - Check if `docs/maintainers/research/` exists → use template structure
 - Otherwise → use project-wide structure
 
@@ -590,7 +590,7 @@ This document captures requirements discovered during research on [topic].
 **Update research hub:**
 
 **File location (auto-detected):**
-- **Dev-Infra:** `admin/research/README.md`
+- **Dev-Infra:** `admin/services/[service]/features/[topic]/`
 - **Template Structure:** `docs/maintainers/research/README.md`
 - **Project-Wide:** `docs/maintainers/research/README.md`
 
@@ -663,7 +663,7 @@ This directory contains research documents supporting exploration and decision-m
 3. **Stage all changes:**
 
    ```bash
-   git add admin/research/[topic]/  # or docs/maintainers/research/[topic]/
+   git add admin/services/[service]/features/[topic]/research/  # or docs/maintainers/research/[topic]/
    ```
 
 4. **Commit with proper message:**
@@ -1008,7 +1008,7 @@ Add any new requirements discovered during research:
 **Commit with clear message:**
 
 ```bash
-git add admin/research/[topic]/
+git add admin/services/[service]/features/[topic]/research/
 git commit -m "docs(research): conduct [topic-name] research
 
 Completed research for [topic]:
@@ -1258,7 +1258,7 @@ After human approval:
 ### 8. Commit
 
 ```bash
-git add admin/research/[topic]/
+git add admin/services/[service]/features/[topic]/research/
 git commit -m "docs(research): consolidate [topic] requirements
 
 Reviewed N requirements across M categories:
@@ -1512,7 +1512,7 @@ Requirements status: Draft → Final"
 
 **Research Structure:**
 
-- **Dev-Infra:** `admin/research/[topic]/`
+- **Dev-Infra:** `admin/services/[service]/features/[topic]/research/`
 - **Template Structure:** `docs/maintainers/research/[topic]/`
 - **Project-Wide:** `docs/maintainers/research/[topic]/`
 - Requirements: `[research-path]/[topic]/requirements.md`

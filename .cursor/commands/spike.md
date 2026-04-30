@@ -12,8 +12,8 @@ This command supports multiple project organization patterns:
 
 1. **Dev-Infra Structure (default):**
    - Explorations: `admin/explorations/[topic]/`
-   - Spike learnings: `admin/explorations/[topic]/spike-learnings.md`
-   - Spike code: `admin/explorations/[topic]/spike/`
+   - Spike learnings: `admin/services/[service]/features/[topic]/spikes/spike-learnings.md`
+   - Spike code: `admin/services/[service]/features/[topic]/spikes/`
 
 2. **Template Structure (for generated projects):**
    - Explorations: `docs/maintainers/planning/explorations/[topic]/`
@@ -25,7 +25,7 @@ This command supports multiple project organization patterns:
    - Spike code: `tests/tmp/explorations/[topic]/spike/`
 
 **Auto-detection:**
-- Check if `admin/explorations/` exists -> use dev-infra structure
+- Check if `admin/services/` exists -> use dev-infra structure
 - Check if `docs/maintainers/planning/explorations/` exists -> use template structure
 - Otherwise -> use lightweight structure (gitignored temp folder)
 
@@ -193,7 +193,7 @@ Before building anything, state clearly what must be true for the spike to succe
 
 **Spike code location:**
 
-- **Dev-Infra:** `admin/explorations/[topic]/spike/`
+- **Dev-Infra:** `admin/services/[service]/features/[topic]/spikes/`
 - **Template:** `docs/maintainers/planning/explorations/[topic]/spike/`
 - **Lightweight:** `tests/tmp/explorations/[topic]/spike/`
 
@@ -462,7 +462,7 @@ This command is for **spikes** -- the quickest, most focused validation.
 
 **Spike Structure:**
 
-- **Dev-Infra:** `admin/explorations/[topic]/spike-learnings.md`
+- **Dev-Infra:** `admin/services/[service]/features/[topic]/spikes/spike-learnings.md`
 - **Template Structure:** `docs/maintainers/planning/explorations/[topic]/spike-learnings.md`
 - **Lightweight:** `tests/tmp/explorations/[topic]/spike-learnings.md`
 - Spike code: `[explorations-path]/[topic]/spike/`

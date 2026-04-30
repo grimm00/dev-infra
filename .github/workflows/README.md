@@ -239,7 +239,7 @@ Each workflow declares required permissions:
 - **[Release Process](../../admin/planning/releases/PROCESS.md)** - Full release process documentation
 - **[Multi-Environment Testing](../../admin/planning/ci/multi-environment-testing/)** - Testing workflow details
 - **[Release Distribution](../../admin/planning/ci/release-distribution/)** - Distribution workflow details
-- **[Release Automation v2](../../admin/planning/features/release-automation-v2/)** - Tag creation automation feature
+- **[Release Automation v2](../../admin/services/release-management/features/release-automation-v2/planning/)** - Tag creation automation feature
 
 ---
 

@@ -11,9 +11,9 @@ Implement tasks from an implementation plan, following TDD workflow with review-
 This command reads the uniform planning structure (`implementation-plan.md` + `tasks/`):
 
 1. **Dev-Infra Structure:**
-   - Plan: `admin/planning/features/[feature-name]/implementation-plan.md`
-   - Tasks: `admin/planning/features/[feature-name]/tasks/`
-   - Status: `admin/planning/features/[feature-name]/status-and-next-steps.md`
+   - Plan: `admin/services/[service]/features/[feature-name]/planning/implementation-plan.md`
+   - Tasks: `admin/services/[service]/features/[feature-name]/planning/tasks/`
+   - Status: `admin/services/[service]/features/[feature-name]/planning/status-and-next-steps.md`
 
 2. **Template Project Structure (generated projects):**
    - Plan: `docs/maintainers/planning/features/[feature-name]/implementation-plan.md`
@@ -520,7 +520,7 @@ Tasks are listed as GFM checkboxes in `implementation-plan.md`:
 ❌ No implementation-plan.md found for feature '[name]'.
 
    Searched:
-   - admin/planning/features/[name]/implementation-plan.md
+   - admin/services/[service]/features/[name]/implementation-plan.md
    - docs/maintainers/planning/features/[name]/implementation-plan.md
 
    If using legacy phase structure, use `/task-phase` instead.
