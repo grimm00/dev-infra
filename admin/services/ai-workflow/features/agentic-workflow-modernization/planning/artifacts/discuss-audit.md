@@ -77,10 +77,10 @@ These are user-facing tips, not agent behavioral instructions. Excluded from tie
 
 | Tier | Count | % | Instructions |
 |------|-------|---|-------------|
-| **Tier 1** | 13 | 65% | B1-B6, B8-B9, W1-W2, W4, D1, S1, S3, S4 |
-| **Tier 2** | 5 | 25% | B7, W3, D5, E1, S2 |
-| **Tier 3** | 3 | 15% | D2, D3, D4 |
-| **Total** | 21 | | (excluding procedural steps and user-facing tips) |
+| **Tier 1** | 15 | 65% | B1-B6, B8-B9, W1-W2, W4, D1, S1, S3, S4 |
+| **Tier 2** | 5 | 22% | B7, W3, D5, E1, S2 |
+| **Tier 3** | 3 | 13% | D2, D3, D4 |
+| **Total** | 23 | | (excluding procedural steps and user-facing tips) |
 
 ---
 
