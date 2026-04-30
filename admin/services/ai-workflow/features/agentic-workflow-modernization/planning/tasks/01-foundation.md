@@ -79,7 +79,7 @@
 
 ---
 
-- [ ] Task 3: Draft CLAUDE.md mirroring AGENTS.md content
+- [x] Task 3: Draft CLAUDE.md mirroring AGENTS.md content
   - **Purpose:** Provide identical always-on context for Claude Code CLI users (C-1, C-4)
   - **Steps:**
     1. Copy AGENTS.md content to `CLAUDE.md` at the repo root
