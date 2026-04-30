@@ -1,17 +1,17 @@
 # Status & Next Steps — Stage 1: Thinker
 
 **Status:** 🟠 In Progress
-**Last Updated:** 2026-04-24
+**Last Updated:** 2026-04-30
 
 ---
 
 ## 📊 Progress Summary
 
-**Overall:** 3/17 tasks complete
+**Overall:** 4/17 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Foundation (Rules + AGENTS.md) | 🟠 In Progress | 3/4 tasks | Prerequisite for all skill conversion |
+| Foundation (Rules + AGENTS.md) | ✅ Complete | 4/4 tasks | Prerequisite for all skill conversion |
 | Discuss Conversion (Thesis Validation) | 🔴 Not Started | 0/3 tasks | Critical go/no-go signal for Stages 2-4 |
 | Explore Family | 🔴 Not Started | 0/4 tasks | Validates family pattern for multi-mode skills |
 | Single-Mode Skills | 🔴 Not Started | 0/3 tasks | int-opp + narrative |
@@ -21,9 +21,9 @@
 
 ## 🚀 Next Steps
 
-1. **Review scaffolding** — verify the group/task breakdown reflects the design's Stage 1 work items
-2. **Expand Group 1** — `/transition-plan agentic-workflow-modernization --expand --group 1` to add detailed task specs for Foundation work
-3. **Start implementation** — `/task next` to begin Task 1 (audit `.mdc` rules)
+1. **Expand Group 2** — add detailed task specs for Discuss Conversion (thesis validation)
+2. **Start Group 2** — `/task next` to begin Task 5 (audit discuss command)
+3. **Thesis validation** — discuss skill conversion is the go/no-go signal for Stages 2-4
 
 ---
 
@@ -37,4 +37,4 @@
 
 ---
 
-**Last Updated:** 2026-04-24
+**Last Updated:** 2026-04-30

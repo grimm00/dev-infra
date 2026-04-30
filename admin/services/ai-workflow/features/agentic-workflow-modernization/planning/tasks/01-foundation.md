@@ -2,8 +2,9 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 1: Thinker)
 **Group:** Foundation (Rules + AGENTS.md)
-**Status:** 🟠 In Progress
-**Last Updated:** 2026-04-24
+**Status:** ✅ Complete
+**Completed:** 2026-04-30
+**Last Updated:** 2026-04-30
 
 ---
 
@@ -91,7 +92,7 @@
 
 ---
 
-- [ ] Task 4: Slim `.mdc` rules to ~50 lines
+- [x] Task 4: Slim `.mdc` rules to ~50 lines
   - **Purpose:** Reduce always-on Cursor context to only what's Cursor-specific (ADR-003)
   - **Steps:**
     1. Create a new `.cursor/rules/cursor-config.mdc` (~50 lines) containing ONLY:
@@ -178,4 +179,4 @@ If anything breaks, check whether the issue is AGENTS.md content (needs more det
 
 ---
 
-**Last Updated:** 2026-04-24
+**Last Updated:** 2026-04-30
