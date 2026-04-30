@@ -57,7 +57,7 @@
 
 ---
 
-- [ ] Task 2: Draft AGENTS.md with portable conventions
+- [x] Task 2: Draft AGENTS.md with portable conventions
   - **Purpose:** Create the portable always-on context layer shared between Cursor and Claude Code
   - **Steps:**
     1. Using the audit classification from Task 1, extract all "portable convention" content
