@@ -12,7 +12,7 @@
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Foundation (Rules + AGENTS.md) | ✅ Complete | 4/4 tasks | Prerequisite for all skill conversion |
-| Discuss Conversion (Thesis Validation) | 🔴 Not Started | 0/3 tasks | Critical go/no-go signal for Stages 2-4 |
+| Discuss Conversion (Thesis Validation) | 🟠 In Progress | 0/3 tasks | Critical go/no-go signal for Stages 2-4 |
 | Explore Family | 🔴 Not Started | 0/4 tasks | Validates family pattern for multi-mode skills |
 | Single-Mode Skills | 🔴 Not Started | 0/3 tasks | int-opp + narrative |
 | Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Delete commands, regression test, final sweep |
