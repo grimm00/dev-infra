@@ -17,7 +17,7 @@
   - This is a "skill family parent" per ADR-002, validated by the nested skill discovery spike
   - Frontmatter follows same pattern as child skills
 
-- [ ] Task 9: Convert explore-start (setup mode) with explicit parent reference (CP-1)
+- [x] Task 9: Convert explore-start (setup mode) with explicit parent reference (CP-1)
   - Create `templates/standard-project/.claude/skills/explore/explore-start/SKILL.md`
   - Body includes explicit instruction: "Before responding, read `../SKILL.md` for family conventions"
   - Apply five-property rubric (FR-19), dual-location description (FR-21), gotchas (FR-20)

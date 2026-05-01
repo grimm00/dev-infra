@@ -73,7 +73,7 @@ Convert the **Thinker** role group of dev-infra commands to skills, plus the fou
 
 ### Explore Family
 - [x] Task 8: Design parent `explore/SKILL.md` (orientation + family conventions for child skills)
-- [ ] Task 9: Convert explore-start (setup mode) with explicit parent reference (CP-1)
+- [x] Task 9: Convert explore-start (setup mode) with explicit parent reference (CP-1)
 - [ ] Task 10: Convert explore-amend with explicit parent reference (CP-1)
 - [ ] Task 11: Validate family pattern works on both Cursor and Claude Code (manual test)
 
