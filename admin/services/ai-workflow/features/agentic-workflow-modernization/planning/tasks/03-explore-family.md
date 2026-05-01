@@ -35,7 +35,7 @@
 
 ---
 
-- [ ] Task 10: Convert explore-amend with explicit parent reference (CP-1)
+- [x] Task 10: Convert explore-amend with explicit parent reference (CP-1)
   - **Purpose:** Create the mutation skill that appends new themes and questions to an existing exploration
   - **Steps:**
     1. Read amend-mode sections from `.cursor/commands/explore.md` (lines 80-99, 776-783, 950-1005)
