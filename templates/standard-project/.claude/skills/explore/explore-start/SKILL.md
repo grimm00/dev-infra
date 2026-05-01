@@ -97,17 +97,17 @@ research-topics.md.
 
 ## 🔍 Themes
 
-### Theme 1: [Name]
-- [Context-rich bullet preserving user's words]
+### Theme 1: [Descriptive Name]
+- [Core concern preserving user's words]
 - [Why this matters or who it affects]
-- [What the concern implies]
-- [Related considerations]
+- [What the concern implies for the project]
+- [Related considerations or adjacent concerns]
 
-### Theme 2: [Name]
-- [Context-rich bullet preserving user's words]
+### Theme 2: [Descriptive Name]
+- [Core concern preserving user's words]
 - [Why this matters or who it affects]
-- [What the concern implies]
-- [Related considerations]
+- [What the concern implies for the project]
+- [Related considerations or adjacent concerns]
 
 ---
 
