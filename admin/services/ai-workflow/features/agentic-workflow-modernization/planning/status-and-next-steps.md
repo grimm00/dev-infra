@@ -13,7 +13,7 @@
 |-------|--------|----------|-------|
 | Foundation (Rules + AGENTS.md) | ✅ Complete | 4/4 tasks | Prerequisite for all skill conversion |
 | Discuss Conversion (Thesis Validation) | ✅ Complete | 3/3 tasks | Thesis validated — ready to scale to other skills |
-| Explore Family | 🔴 Not Started | 0/4 tasks | Validates family pattern for multi-mode skills |
+| Explore Family | 🟠 In Progress | 0/4 tasks | Validates family pattern for multi-mode skills |
 | Single-Mode Skills | 🔴 Not Started | 0/3 tasks | int-opp + narrative |
 | Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Delete commands, regression test, final sweep |
 
@@ -21,9 +21,9 @@
 
 ## 🚀 Next Steps
 
-1. **PR Group 2** — create draft PR for Discuss Conversion work (thesis-validation milestone)
-2. **Expand Group 3** — add detailed task specs for Explore Family
-3. **Start Group 3** — `/task next` to begin the explore family conversion (validates multi-mode pattern)
+1. **Complete Group 3** — convert explore family (parent + explore-start + explore-amend)
+2. **Validate family pattern** — manual test on Cursor (Task 11)
+3. **PR Group 3** — create PR for Explore Family work
 
 ---
 
