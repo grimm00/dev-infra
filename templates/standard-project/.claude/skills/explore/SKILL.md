@@ -43,10 +43,11 @@ once and use consistently within a single invocation:
 | Structure | Explorations path |
 |-----------|-------------------|
 | Dev-infra | `admin/services/[service]/explorations/[topic]/` |
-| Template project | `docs/maintainers/planning/explorations/[topic]/` |
+| Template project | `docs/maintainers/explorations/[topic]/` |
 
 **Detection rule:** if `admin/services/` exists, use dev-infra paths; otherwise
-use template project paths.
+use template project paths. Explorations are top-level peers of `planning/`,
+`research/`, and `decisions/` — never nested under `planning/`.
 
 ### Output Sizing
 
