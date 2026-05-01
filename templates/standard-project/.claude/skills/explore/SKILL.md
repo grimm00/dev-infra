@@ -52,9 +52,14 @@ use template project paths.
 
 | Artifact | Target size |
 |----------|-------------|
-| Exploration scaffolding (start) | ~60–80 lines |
-| Research topics scaffolding (start) | ~20–30 lines |
+| Exploration (start) | ~80–120 lines |
+| Research topics (start) | ~25–40 lines |
 | Amended theme (amend) | ~15–25 lines per theme added |
+
+Explorations are **self-sufficient artifacts**, not scaffolding. Each theme
+should have enough context (~4-6 bullets) to stand alone. Research topics
+include a Context line per topic. The user decides the next step: research,
+amend, or implement directly.
 
 ### Commit Discipline
 
