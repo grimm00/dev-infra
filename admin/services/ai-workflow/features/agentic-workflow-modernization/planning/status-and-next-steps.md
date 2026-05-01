@@ -7,13 +7,13 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 7/17 tasks complete
+**Overall:** 8/17 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Foundation (Rules + AGENTS.md) | ✅ Complete | 4/4 tasks | Prerequisite for all skill conversion |
 | Discuss Conversion (Thesis Validation) | ✅ Complete | 3/3 tasks | Thesis validated — ready to scale to other skills |
-| Explore Family | 🟠 In Progress | 0/4 tasks | Validates family pattern for multi-mode skills |
+| Explore Family | 🟠 In Progress | 1/4 tasks | Validates family pattern for multi-mode skills |
 | Single-Mode Skills | 🔴 Not Started | 0/3 tasks | int-opp + narrative |
 | Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Delete commands, regression test, final sweep |
 

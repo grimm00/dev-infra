@@ -11,7 +11,7 @@
 
 > ⚠️ **Scaffolding:** Run `/transition-plan agentic-workflow-modernization --expand --group 3` to add detailed implementation notes.
 
-- [ ] Task 8: Design parent `explore/SKILL.md` (orientation + family conventions)
+- [x] Task 8: Design parent `explore/SKILL.md` (orientation + family conventions)
   - Create `templates/standard-project/.claude/skills/explore/SKILL.md`
   - Parent provides: orientation (what the explore family does), available children list, family-level conventions for child skills to opt into
   - This is a "skill family parent" per ADR-002, validated by the nested skill discovery spike
