@@ -2,7 +2,7 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 2: Researcher)  
 **Group:** Research Family Foundation  
-**Status:** 🟠 In Progress — Tasks 1–2 complete  
+**Status:** ✅ Expanded — Group 1 execution complete  
 **Last Updated:** 2026-05-02
 
 ---
@@ -27,7 +27,7 @@
   - **Files:** `templates/standard-project/.claude/skills/research/SKILL.md`
   - **Acceptance:** Parent exists; references explore for exploration paths; documents v1 filename split (`research-*.md` vs `topic-N-*.md`); no procedural mode steps in body.
 
-- [ ] Task 3: Convert research-setup (scaffolding mode)
+- [x] Task 3: Convert research-setup (scaffolding mode)
   - **Purpose:** Capture initial setup + add-topic behavior in one child skill per group plan (add-topic final placement verified in Task 6).
   - **Steps:**
     1. Extract setup Steps 1–7 and Add Topic workflow from the command audit / source command.
@@ -50,8 +50,8 @@
 
 - [x] Research command audit complete with mode/instruction classification
 - [x] Parent SKILL.md authored with family conventions
-- [ ] research-setup skill passes five-property rubric (behavioral contract + gotchas)
-- [ ] Family directory structure in place: `research/SKILL.md`, `research/research-setup/SKILL.md`
+- [x] research-setup skill passes five-property rubric (behavioral contract + gotchas)
+- [x] Family directory structure in place: `research/SKILL.md`, `research/research-setup/SKILL.md`
 
 ---
 
