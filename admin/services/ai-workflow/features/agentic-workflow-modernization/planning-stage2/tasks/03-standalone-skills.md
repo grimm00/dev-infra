@@ -18,7 +18,7 @@
   - **Files:** `planning-stage2/artifacts/spike-command-audit.md`
   - **Acceptance:** Audit cites command sections; time-box contract called out; tiers documented; file linkable from this group file.
 
-- [ ] Task 9: Convert spike to SKILL.md
+- [x] Task 9: Convert spike to SKILL.md
   - **Purpose:** Replace `/spike` with a standalone skill: procedural flow (questions → success criteria → minimal build → `spike-learnings.md` → commit) plus **time-boxed behavioral contract** and **gotchas**, mirroring int-opp/narrative one-shot skills (flat directory, templates co-located).
   - **Steps:**
     1. Read Task 8 audit and Stage 1 patterns in `int-opp/SKILL.md` / `narrative/SKILL.md`.
