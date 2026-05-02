@@ -1,7 +1,7 @@
 # Status & Next Steps — Stage 1: Thinker
 
 **Status:** 🟠 In Progress
-**Last Updated:** 2026-05-01
+**Last Updated:** 2026-05-02
 
 ---
 
@@ -15,15 +15,19 @@
 | Discuss Conversion (Thesis Validation) | ✅ Complete | 3/3 tasks | Thesis validated — ready to scale to other skills |
 | Explore Family | ✅ Complete | 4/4 tasks | Family pattern validated on Cursor; Claude Code deferred to plugin system |
 | Single-Mode Skills | ✅ Complete | 3/3 tasks | Both pass rubric; templates-as-assets pattern established |
-| Cutover and Quality Gate | 🟠 In Progress | 2/3 tasks | Install skills, archive commands, regression test, final sweep |
+| Cutover and Quality Gate | 🟠 In Progress | 2/3 tasks | Tasks 15-16 merged (PR #85); Task 17 (final sweep) remains |
 
 ---
 
 ## 🚀 Next Steps
 
-1. **PR Group 4** — create PR for Single-Mode Skills work
-2. **Expand Group 5** — add detailed task specs for Cutover and Quality Gate
-3. **Start Group 5** — delete commands, regression test, final sweep
+1. **Task 17: Final quality gate sweep** — verify all Stage 1 exit criteria, run CI, update status, log Stage 1 → Stage 2 decision
+
+---
+
+## 📝 Milestones
+
+- **PR #85 merged** (2026-05-02): Skills installed at root `.claude/skills/`, 4 commands archived, template commands archived, template-sync-manifest updated, discuss regression test passed, Sourcery review clean (1 LOW issue fixed inline)
 
 ---
 
@@ -37,4 +41,4 @@
 
 ---
 
-**Last Updated:** 2026-05-01
+**Last Updated:** 2026-05-02
