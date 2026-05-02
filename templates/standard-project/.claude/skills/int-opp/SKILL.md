@@ -31,8 +31,10 @@ as the starting structure for each document type:
 | `templates/improvements.md` | Documenting actionable items for other projects |
 | `templates/project-hub.md` | Creating a new project's opportunity directory |
 
-Read the appropriate template, fill in the placeholders, and write the result.
-Do not invent a format from scratch.
+Copy the appropriate template to the target path, then fill in the placeholders
+in place. Omit or mark N/A for sections that don't apply — the template is a
+prompt for what to consider, not a mandatory checklist. Do not invent a format
+from scratch.
 
 ## Options
 

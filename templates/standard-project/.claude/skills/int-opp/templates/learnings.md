@@ -49,4 +49,11 @@
 
 ---
 
+## 📝 Additional Notes
+
+[Anything that doesn't fit cleanly in the sections above. Recurring themes
+here may become their own section in future template iterations.]
+
+---
+
 **Last Updated:** YYYY-MM-DD
