@@ -569,3 +569,16 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 ### Deferred from PR #70 (GitHub Release Automation)
 
 - Task 58: Pin or document expected `gh` CLI version (LOW priority, LOW effort) - Workflow depends on `--generate-notes` and `--notes-file` flags. These are stable since gh 2.x but documenting the minimum expected version would be safer. (PR70-Overall-#2)
+
+---
+
+## PR #87 Additions
+
+**Date:** 2026-05-02  
+**Status:** Deferred items from Sourcery (no CRITICAL/HIGH on this PR)
+
+- **PR87-#1 (🟢 LOW):** Rephrase Task 7 acceptance: “optional manual line noted honest” → “noted honestly” (or equivalent). Location: `planning-stage2/tasks/02-research-child-skills.md`.
+- **PR87-#2 (🟢 LOW):** In `research-conduct/SKILL.md`, clarify topic-order sentence (“higher priority conducts first” → e.g. “higher-priority topics are conducted first”).
+- **PR87-Overall-#1 (🟡 MEDIUM):** Document handling of partially scaffolded research dirs (missing `research-summary.md` or topic files): route to research-setup vs stop.
+- **PR87-Overall-#2 (🟡 MEDIUM):** Define acceptable `web_search` failure modes and whether retries are expected before documenting abort in conduct.
+- **PR87-Overall-#3 (🟡 MEDIUM):** In `research-consolidate`, specify behavior when no paired exploration exists (skip with note vs error).
