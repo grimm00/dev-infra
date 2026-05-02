@@ -61,10 +61,10 @@ Convert the **Researcher** role group of dev-infra commands to skills. This stag
 - [x] Task 3: Convert research-setup (scaffolding mode — creates research directory structure)
 
 ### Research Child Skills
-- [ ] Task 4: Convert research-conduct (most complex: source evaluation + finding quality + requirement discovery)
-- [ ] Task 5: Convert research-consolidate (procedural with merge logic)
-- [ ] Task 6: Verify research-add-topic belongs in research-setup or warrants separate skill
-- [ ] Task 7: Validate research family pattern works end-to-end (parent → setup → conduct → consolidate)
+- [x] Task 4: Convert research-conduct (most complex: source evaluation + finding quality + requirement discovery)
+- [x] Task 5: Convert research-consolidate (procedural with merge logic)
+- [x] Task 6: Verify research-add-topic belongs in research-setup or warrants separate skill
+- [x] Task 7: Validate research family pattern works end-to-end (parent → setup → conduct → consolidate)
 
 ### Standalone Skills (Spike + Reflect)
 - [ ] Task 8: Audit spike command for behavioral instructions

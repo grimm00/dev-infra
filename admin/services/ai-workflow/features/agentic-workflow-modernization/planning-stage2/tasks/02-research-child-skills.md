@@ -2,7 +2,7 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 2: Researcher)
 **Group:** Research Child Skills
-**Status:** ✅ Expanded
+**Status:** ✅ Complete
 **Last Updated:** 2026-05-02
 
 ---
@@ -38,7 +38,7 @@
   - **Files:** Rationale recorded in **Task 6 decision** below (no new skill unless warranted).
   - **Acceptance:** Decision states placement + rationale; parent/children references stay consistent.
 
-- [ ] Task 7: Validate research family pattern works end-to-end
+- [x] Task 7: Validate research family pattern works end-to-end
   - **Purpose:** Smoke the v1 family: parent orientation → setup → conduct → consolidate; CP-1 (children reference parent).
   - **Steps:**
     1. Read `research/SKILL.md`, `research-setup/SKILL.md`, `research-conduct/SKILL.md`, `research-consolidate/SKILL.md`.
@@ -62,8 +62,8 @@
 - [x] research-conduct passes five-property rubric
 - [x] research-consolidate passes five-property rubric
 - [x] research-add-topic placement decided with documented rationale
-- [ ] Full family flow tested: setup → conduct → consolidate
-- [ ] All children reference parent correctly
+- [x] Full family flow tested: setup → conduct → consolidate
+- [x] All children reference parent correctly
 
 ---
 
@@ -84,6 +84,24 @@
 2. **Behavioral overlap:** Add-topic is “late scaffold” only: same templates, hub/summary updates, and exploration sync rules as setup. A separate skill would duplicate half of **research-setup** or split one behavioral surface across two files without reducing complexity.
 3. **Naming clarity:** **research-setup** description and modes table already expose add-topic; the parent **research** skill routes “`--add-topic` equivalent” to **research-setup**. No user-facing gap.
 4. **Split trigger (future):** Introduce `research-add-topic` only if add-topic gains a distinct contract (e.g., multi-file merges, cross-feature topic imports) that would overcrowd setup.
+
+---
+
+## Task 7 validation log
+
+**Date:** 2026-05-02  
+**Checks (repository static review):**
+
+| Check | Result |
+|-------|--------|
+| Parent `research/SKILL.md` lists setup, conduct, consolidate with correct roles | ✅ |
+| `research-setup`, `research-conduct`, `research-consolidate` each instruct `read ../SKILL.md` early (CP-1) | ✅ |
+| Parent pipeline diagram order: setup → conduct → consolidate | ✅ |
+| Conduct skill does not scaffold new research trees (setup-only) | ✅ |
+| Consolidate skill does not perform web search / conduct | ✅ |
+| research-setup still owns add-topic workflow; Task 6 decision aligned | ✅ |
+
+**IDE / Cursor manual invocation:** Not executed in this agent run — optional pass for the human after merge.
 
 ---
 
