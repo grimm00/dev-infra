@@ -45,7 +45,7 @@
     2. Confirm parent lists children and pipeline; each child starts with `read ../SKILL.md`; conduct does not duplicate setup/add-topic; consolidate does not duplicate conduct.
     3. *(Human / Cursor)* Optional: invoke skills with attachment in IDE per project workflow — record result in validation log below.
   - **Files:** Validation log in this document (**Task 7 validation log**).
-  - **Acceptance:** All automated checks in the log pass; optional manual line noted honest (completed or deferred to human).
+  - **Acceptance:** All automated checks in the log pass; optional manual line noted honestly (completed or deferred to human).
 
 ---
 

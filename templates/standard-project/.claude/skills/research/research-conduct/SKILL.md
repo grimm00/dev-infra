@@ -46,7 +46,7 @@ initial research directory structure (that is **research-setup**).
 | Single topic | `--topic-num N` / `--topic-name slug` / natural language: only that topic’s document. |
 
 **Topic order (all topics):** Use the hub **Research Status** table top-to-bottom,
-but **stable-sort** rows so **higher priority conducts first**. Map emojis/labels
+but **stable-sort** rows so **higher-priority topics are conducted first**. Map emojis/labels
 to order: 🔴 High (or “High”) before Medium before Low before unknown/unset.
 Within the same priority band, keep the table’s top-to-bottom order.
 
