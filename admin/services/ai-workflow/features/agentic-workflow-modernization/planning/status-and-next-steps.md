@@ -14,7 +14,7 @@
 | Foundation (Rules + AGENTS.md) | ✅ Complete | 4/4 tasks | Prerequisite for all skill conversion |
 | Discuss Conversion (Thesis Validation) | ✅ Complete | 3/3 tasks | Thesis validated — ready to scale to other skills |
 | Explore Family | ✅ Complete | 4/4 tasks | Family pattern validated on Cursor; Claude Code deferred to plugin system |
-| Single-Mode Skills | 🔴 Not Started | 0/3 tasks | int-opp + narrative |
+| Single-Mode Skills | 🟠 In Progress | 0/3 tasks | int-opp + narrative |
 | Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Delete commands, regression test, final sweep |
 
 ---
