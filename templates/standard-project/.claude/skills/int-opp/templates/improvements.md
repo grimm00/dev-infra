@@ -15,6 +15,8 @@
 
 ## 🎯 Improvements
 
+<!-- Repeat this block for each category/item -->
+
 ### [Category Name]
 
 - [ ] **[Improvement Title]**

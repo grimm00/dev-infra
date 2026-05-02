@@ -15,6 +15,8 @@
 
 ## ✅ What Worked Well
 
+<!-- Repeat this block for each item -->
+
 ### [Pattern or Category]
 
 **Why it worked:** [Explanation]
@@ -23,6 +25,8 @@
 ---
 
 ## 🟡 What Needs Improvement
+
+<!-- Repeat this block for each item -->
 
 ### [Issue or Category]
 
@@ -33,6 +37,8 @@
 ---
 
 ## 💡 Unexpected Discoveries
+
+<!-- Repeat this block for each item -->
 
 ### [Discovery]
 
