@@ -119,7 +119,10 @@ it alongside the code changes. Questions that get resolved during review can be
 deleted; questions that need deeper work get promoted to the appropriate workflow
 (explore, research, decision) by the human.
 
-If no open questions surfaced, skip this step.
+If no open questions surfaced, skip this step entirely — do not create
+the file. Questions must come from genuine uncertainty encountered during
+task execution (unclear spec, conflicting patterns, design forks). Do NOT
+fabricate questions to fill the template.
 
 ### Step 6: Report
 
@@ -135,7 +138,7 @@ Present a summary to the human:
 **Review:** [N comments, N fixed inline, N deferred]
 
 ### Open Questions
-- [N] questions written to planning/open-questions.md (or "None")
+- [N] questions in planning/open-questions.md, or "None — no genuine uncertainties encountered"
 
 ### Discoveries
 - [Anything unexpected encountered during execution]
