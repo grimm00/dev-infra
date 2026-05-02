@@ -9,7 +9,7 @@
 
 ## 📝 Tasks
 
-- [ ] Task 8: Audit spike command for behavioral instructions
+- [x] Task 8: Audit spike command for behavioral instructions
   - **Purpose:** Classify spike’s judgment-heavy guidance with the same Tier 1–3 frame as Stage 2 research audit; isolate the **time-boxed behavioral contract** (criteria-before-build, throwaway scope, stop-at-timer, evidence-backed learnings) for Task 9.
   - **Steps:**
     1. Read `.cursor/commands/spike.md` end-to-end; note procedural steps vs tone/judgment sections (Key principles, Guidance for the spike, Tips).
