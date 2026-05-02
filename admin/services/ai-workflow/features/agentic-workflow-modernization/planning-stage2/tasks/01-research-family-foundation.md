@@ -2,7 +2,7 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 2: Researcher)  
 **Group:** Research Family Foundation  
-**Status:** 🟠 In Progress — Task 1 complete  
+**Status:** 🟠 In Progress — Tasks 1–2 complete  
 **Last Updated:** 2026-05-02
 
 ---
@@ -18,7 +18,7 @@
   - **Files:** `planning-stage2/artifacts/research-command-audit.md`
   - **Acceptance:** Audit committed; includes mode→skill table and tier table(s); references Topic 8 / Stage 1 discuss audit pattern.
 
-- [ ] Task 2: Design parent `research/SKILL.md` (orientation + family conventions)
+- [x] Task 2: Design parent `research/SKILL.md` (orientation + family conventions)
   - **Purpose:** Give children a single place for path detection, topic naming, commit scope, and pipeline orientation (mirror `explore/SKILL.md`).
   - **Steps:**
     1. Read `templates/standard-project/.claude/skills/explore/SKILL.md` for tone and structure.
@@ -49,7 +49,7 @@
 ## ✅ Completion Criteria
 
 - [x] Research command audit complete with mode/instruction classification
-- [ ] Parent SKILL.md authored with family conventions
+- [x] Parent SKILL.md authored with family conventions
 - [ ] research-setup skill passes five-property rubric (behavioral contract + gotchas)
 - [ ] Family directory structure in place: `research/SKILL.md`, `research/research-setup/SKILL.md`
 
