@@ -32,6 +32,17 @@ Accept **one** setup source only (explore **or** reflect **or** direct). Error
 if mutually exclusive flags would collide (same rules as legacy command:
 `--add-topic` excludes initial `--from-explore`).
 
+**Natural-language invocation:** Map user intent to the same modes without
+requiring CLI flags. Examples: “Scaffold research from exploration *auth*” →
+Setup with from-explore; “Add topic 4 to this research” → Add topic with *N=4*.
+Confirm `N` and whether to overwrite when a target file already exists (equivalent
+to `--force`).
+
+**Layout detection failure:** After checking `../SKILL.md` path rules, if the
+repo matches **none** of the known layouts, **stop** and report which predicates
+were evaluated (`admin/services/`, `docs/maintainers/research/`, etc.). Do not
+create a new research tree under an assumed or ad-hoc root.
+
 ---
 
 ## Setup Mode Workflow
