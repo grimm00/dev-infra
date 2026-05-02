@@ -21,7 +21,7 @@ tasks_files:
 ---
 # Implementation Plan — Stage 2: Researcher (Agentic Workflow Modernization)
 
-**Status:** 🔴 Not Started
+**Status:** 🟠 In Progress
 **Created:** 2026-05-02
 **Last Updated:** 2026-05-02
 **Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 2 of 4-stage v1
@@ -56,9 +56,9 @@ Convert the **Researcher** role group of dev-infra commands to skills. This stag
 ## 📝 Implementation Plan
 
 ### Research Family Foundation
-- [ ] Task 1: Audit research command modes and classify behavioral instructions
-- [ ] Task 2: Design parent `research/SKILL.md` (orientation + family conventions)
-- [ ] Task 3: Convert research-setup (scaffolding mode — creates research directory structure)
+- [x] Task 1: Audit research command modes and classify behavioral instructions
+- [x] Task 2: Design parent `research/SKILL.md` (orientation + family conventions)
+- [x] Task 3: Convert research-setup (scaffolding mode — creates research directory structure)
 
 ### Research Child Skills
 - [ ] Task 4: Convert research-conduct (most complex: source evaluation + finding quality + requirement discovery)
