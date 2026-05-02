@@ -20,5 +20,3 @@
 - **Purpose:** [What this project does]
 
 ---
-
-**Last Updated:** YYYY-MM-DD
