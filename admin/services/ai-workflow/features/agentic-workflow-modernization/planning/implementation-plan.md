@@ -85,7 +85,7 @@ Convert the **Thinker** role group of dev-infra commands to skills, plus the fou
 ### Cutover and Quality Gate
 - [ ] Task 15: Delete converted command files (.cursor/commands/{discuss,explore,int-opp,narrative}.md)
 - [ ] Task 16: Run regression test on discuss skill against recent /discuss usage; capture observed behavior
-- [ ] Task 17: Final quality gate sweep across all 5 skills + foundation work; verify Stage 1 exit criteria met
+- [x] Task 17: Final quality gate sweep across all 5 skills + foundation work; verify Stage 1 exit criteria met
 
 ---
 

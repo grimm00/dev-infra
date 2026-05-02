@@ -1,13 +1,14 @@
 # Status & Next Steps — Stage 1: Thinker
 
-**Status:** 🟠 In Progress
-**Last Updated:** 2026-05-01
+**Status:** ✅ Stage 1 Complete
+**Completed:** 2026-05-02
+**Last Updated:** 2026-05-02
 
 ---
 
 ## 📊 Progress Summary
 
-**Overall:** 14/17 tasks complete
+**Overall:** 17/17 tasks complete ✅
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
@@ -15,15 +16,15 @@
 | Discuss Conversion (Thesis Validation) | ✅ Complete | 3/3 tasks | Thesis validated — ready to scale to other skills |
 | Explore Family | ✅ Complete | 4/4 tasks | Family pattern validated on Cursor; Claude Code deferred to plugin system |
 | Single-Mode Skills | ✅ Complete | 3/3 tasks | Both pass rubric; templates-as-assets pattern established |
-| Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Delete commands, regression test, final sweep |
+| Cutover and Quality Gate | ✅ Complete | 3/3 tasks | Skills installed, commands archived, CI green, all exit criteria met |
 
 ---
 
 ## 🚀 Next Steps
 
-1. **PR Group 4** — create PR for Single-Mode Skills work
-2. **Expand Group 5** — add detailed task specs for Cutover and Quality Gate
-3. **Start Group 5** — delete commands, regression test, final sweep
+1. **Stage 1 complete** — all 17 tasks done, all 5 groups closed
+2. **Decision:** Proceed to Stage 2 (Researcher) when ready
+3. **Stage 2 planning:** Create implementation plan for research family conversion
 
 ---
 
