@@ -150,8 +150,8 @@ project's recent artifacts (phase docs, commits, status) to fill in context.
 Don't interview them for 10 minutes before creating the document.
 
 **Creating an opportunity directory that already exists.** Check first.
-Overwriting an existing project hub destroys previously captured learnings
-links. Always check if the directory exists before creating.
+Overwriting an existing project hub destroys links to previously captured
+learnings. Always check if the directory exists before creating.
 
 **Mixing learnings and improvements in one document.** If both types are
 present, create two documents — one learning, one improvement. They serve
