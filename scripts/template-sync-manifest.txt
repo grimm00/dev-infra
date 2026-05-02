@@ -9,13 +9,13 @@
 .cursor/commands/commit.md
 .cursor/commands/cursor-rules.md
 .cursor/commands/decision.md
-.cursor/commands/discuss.md
-.cursor/commands/explore.md
+.cursor/commands/archived/discuss.md
+.cursor/commands/archived/explore.md
 .cursor/commands/handoff.md
 .cursor/commands/fix-implement.md
 .cursor/commands/fix-plan.md
 .cursor/commands/fix-review.md
-.cursor/commands/int-opp.md
+.cursor/commands/archived/int-opp.md
 .cursor/commands/plan-review.md
 .cursor/commands/post-pr.md
 .cursor/commands/pre-phase-review.md

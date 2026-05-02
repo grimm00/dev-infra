@@ -2,8 +2,7 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 1: Thinker)
 **Group:** Cutover and Quality Gate
-**Status:** ✅ Complete
-**Completed:** 2026-05-02
+**Status:** 🟠 In Progress
 **Last Updated:** 2026-05-02
 
 ---
@@ -66,7 +65,7 @@
 
 ---
 
-- [x] Task 17: Final quality gate sweep + Stage 1 exit criteria
+- [ ] Task 17: Final quality gate sweep + Stage 1 exit criteria
   - **Purpose:** Verify all Stage 1 exit criteria are met before declaring completion
   - **Steps:**
     1. **Verify Stage 1 exit criteria** (from design.md Section 5):
