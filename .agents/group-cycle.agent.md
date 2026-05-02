@@ -15,6 +15,8 @@ questions the agent surfaced during execution.
 | `group` | yes | Group number or name (e.g., `02-discuss-conversion`) |
 | `service` | yes | Service path (e.g., `ai-workflow`) |
 | `base_branch` | no | Branch to base work on (default: `develop`) |
+| `first_group` | no | Set to `true` if this is the first group in a stage (default: `false`) |
+| `prior_pr` | no | PR number of the previous group's merged PR (required if not first_group) |
 
 ## Worktree Setup
 
@@ -33,10 +35,31 @@ for the human to inspect. The human removes it after merge.
 
 ## Pipeline
 
+### Step 0: Prior Group Closeout (skip if `first_group` is true)
+
+Before starting new work, close out the previous group cycle:
+
+1. **Post-PR:** Run the post-PR workflow for the prior group's merged PR (`prior_pr`):
+   - Update status documents (progress, milestones, next steps)
+   - Update implementation plan checkboxes
+   - Check for deferred Sourcery issues
+   - Commit documentation updates
+
+2. **Pre-phase review:** Review what was learned in the prior group before
+   expanding the next one:
+   - Read the prior group's task file and any open questions from its PR
+   - Check if discoveries or open questions affect the current group's scope
+   - Note any adjustments needed in the current group's task specs
+
+Both of these happen on the worktree branch before plan expansion begins.
+
 ### Step 1: Plan Expansion
 
 If the group's task file has tasks without detailed specs (steps, acceptance
 criteria, files), expand them using the transition-plan skill.
+
+If Step 0 surfaced adjustments from the prior group, incorporate them during
+expansion.
 
 Skip if all tasks already have detailed specs.
 
