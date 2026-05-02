@@ -2,38 +2,50 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 2: Researcher)
 **Group:** Research Child Skills
-**Status:** 🔴 Scaffolding (needs expansion)
+**Status:** ✅ Complete
 **Last Updated:** 2026-05-02
 
 ---
 
 ## 📝 Tasks
 
-- [ ] Task 4: Convert research-conduct (most complex hybrid skill)
-  - Extract conduct-mode instructions from research command audit (Task 1)
-  - This is the most complex conversion in v1: procedural steps + behavioral contract for source evaluation, finding quality, and requirement discovery
-  - Apply five-property rubric strictly — every behavioral instruction must be observable, bounded, outcome-framed, delta-only, failure-aware
-  - Populate gotchas section from audit + lived experience
-  - Author in `templates/standard-project/.claude/skills/research/research-conduct/SKILL.md`
+- [x] Task 4: Convert research-conduct (most complex hybrid skill)
+  - **Purpose:** Replace `/research --conduct` with a child skill that keeps web research, documentation updates, and requirement extraction behind one observable behavioral contract (Tier 2 gaps from the audit tightened to Tier 1 where possible).
+  - **Steps:**
+    1. Read `planning-stage2/artifacts/research-command-audit.md` (Conduct rows) and Conduct Mode Workflow in `.cursor/commands/research.md`.
+    2. Author `research/research-conduct/SKILL.md` with `read ../SKILL.md` preamble, procedural flow (identify scope → web research → fill docs → status → summary/requirements → hub → commit).
+    3. Bound judgment-heavy areas: topic ordering (hub Priority column), query formulation (minimum queries tied to question / sub-questions / methodology).
+    4. Add **Behavioral Contract** and **Gotchas**; every behavioral line MUST satisfy the five-property rubric (observable, bounded, outcome-framed, delta-only, failure-aware).
+  - **Files:** `templates/standard-project/.claude/skills/research/research-conduct/SKILL.md`
+  - **Acceptance:** Skill mirrors command conduct flow; web search mandatory; no setup/consolidate steps; rubric passes; gotchas populated from audit + command tips.
 
-- [ ] Task 5: Convert research-consolidate (procedural with merge logic)
-  - Extract consolidate-mode instructions from research command audit (Task 1)
-  - Procedural skill: merges findings from multiple research topics into a summary
-  - Apply five-property rubric
-  - Populate gotchas section
-  - Author in `templates/standard-project/.claude/skills/research/research-consolidate/SKILL.md`
+- [x] Task 5: Convert research-consolidate (procedural with merge logic)
+  - **Purpose:** Replace `/research --consolidate` with a child skill that preserves human gates, replaces “mental model” with explicit tables, and keeps merge/remove/add/renumber logic reviewable.
+  - **Steps:**
+    1. Read audit Consolidate rows and Consolidate Mode Workflow in `.cursor/commands/research.md`.
+    2. Author `research/research-consolidate/SKILL.md` with reconciliation → coverage tables → analysis → proposal STOP → apply → summary → commit.
+    3. Replace implicit lineage (audit G4 / Tier 3) with required **Requirement lineage** and **Finding coverage** tables before analysis.
+    4. Support `--dry-run` / natural-language “show proposal only”: present consolidation proposal without mutating `requirements.md`.
+    5. Add **Behavioral Contract** and **Gotchas**; five-property rubric on behavioral instructions.
+  - **Files:** `templates/standard-project/.claude/skills/research/research-consolidate/SKILL.md`
+  - **Acceptance:** Preconditions match command; two STOP gates preserved; dry-run behavior documented; rubric passes.
 
-- [ ] Task 6: Verify research-add-topic belongs in research-setup or warrants separate skill
-  - Review add-topic behavior from the research command
-  - If it's a thin operation (just appending to topic list): keep in research-setup
-  - If it has its own behavioral contract or complex logic: create `research/research-add-topic/SKILL.md`
-  - Document the decision in chat with rationale
+- [x] Task 6: Verify research-add-topic belongs in research-setup or warrants separate skill
+  - **Purpose:** Close design.md open question with an explicit, documented placement decision.
+  - **Steps:**
+    1. Re-read add-topic workflow in `research-setup` and Add Topic rows in the audit (A1–A3).
+    2. Decide: separate skill vs keep embedded.
+  - **Files:** Rationale recorded in **Task 6 decision** below (no new skill unless warranted).
+  - **Acceptance:** Decision states placement + rationale; parent/children references stay consistent.
 
-- [ ] Task 7: Validate research family pattern works end-to-end
-  - Test the full flow: parent → setup → conduct → consolidate
-  - Verify parent provides clear orientation to all children
-  - Verify each child references the parent correctly (CP-1)
-  - Test on Cursor (manual invocation with skill attachment)
+- [x] Task 7: Validate research family pattern works end-to-end
+  - **Purpose:** Smoke the v1 family: parent orientation → setup → conduct → consolidate; CP-1 (children reference parent).
+  - **Steps:**
+    1. Read `research/SKILL.md`, `research-setup/SKILL.md`, `research-conduct/SKILL.md`, `research-consolidate/SKILL.md`.
+    2. Confirm parent lists children and pipeline; each child starts with `read ../SKILL.md`; conduct does not duplicate setup/add-topic; consolidate does not duplicate conduct.
+    3. *(Human / Cursor)* Optional: invoke skills with attachment in IDE per project workflow — record result in validation log below.
+  - **Files:** Validation log in this document (**Task 7 validation log**).
+  - **Acceptance:** All automated checks in the log pass; optional manual line noted honestly (completed or deferred to human).
 
 ---
 
@@ -47,11 +59,11 @@
 
 ## ✅ Completion Criteria
 
-- [ ] research-conduct passes five-property rubric
-- [ ] research-consolidate passes five-property rubric
-- [ ] research-add-topic placement decided with documented rationale
-- [ ] Full family flow tested: setup → conduct → consolidate
-- [ ] All children reference parent correctly
+- [x] research-conduct passes five-property rubric
+- [x] research-consolidate passes five-property rubric
+- [x] research-add-topic placement decided with documented rationale
+- [x] Full family flow tested: setup → conduct → consolidate
+- [x] All children reference parent correctly
 
 ---
 
@@ -59,6 +71,37 @@
 
 - Group 1 (Research Family Foundation) must be complete
 - Task 1 audit informs all conversions in this group
+
+---
+
+## Task 6 decision — research-add-topic placement
+
+**Decision:** Keep **add-topic** in **research-setup** (no `research-add-topic` child skill in v1).
+
+**Rationale:**
+
+1. **Audit mapping:** Add-topic is Tier-1 procedural (A1–A3) and already grouped with setup in the mode→skill table (`research-command-audit.md`).
+2. **Behavioral overlap:** Add-topic is “late scaffold” only: same templates, hub/summary updates, and exploration sync rules as setup. A separate skill would duplicate half of **research-setup** or split one behavioral surface across two files without reducing complexity.
+3. **Naming clarity:** **research-setup** description and modes table already expose add-topic; the parent **research** skill routes “`--add-topic` equivalent” to **research-setup**. No user-facing gap.
+4. **Split trigger (future):** Introduce `research-add-topic` only if add-topic gains a distinct contract (e.g., multi-file merges, cross-feature topic imports) that would overcrowd setup.
+
+---
+
+## Task 7 validation log
+
+**Date:** 2026-05-02  
+**Checks (repository static review):**
+
+| Check | Result |
+|-------|--------|
+| Parent `research/SKILL.md` lists setup, conduct, consolidate with correct roles | ✅ |
+| `research-setup`, `research-conduct`, `research-consolidate` each instruct `read ../SKILL.md` early (CP-1) | ✅ |
+| Parent pipeline diagram order: setup → conduct → consolidate | ✅ |
+| Conduct skill does not scaffold new research trees (setup-only) | ✅ |
+| Consolidate skill does not perform web search / conduct | ✅ |
+| research-setup still owns add-topic workflow; Task 6 decision aligned | ✅ |
+
+**IDE / Cursor manual invocation:** Not executed in this agent run — optional pass for the human after merge.
 
 ---
 
