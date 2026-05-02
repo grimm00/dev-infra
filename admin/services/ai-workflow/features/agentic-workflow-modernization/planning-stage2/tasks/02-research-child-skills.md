@@ -30,7 +30,7 @@
   - **Files:** `templates/standard-project/.claude/skills/research/research-consolidate/SKILL.md`
   - **Acceptance:** Preconditions match command; two STOP gates preserved; dry-run behavior documented; rubric passes.
 
-- [ ] Task 6: Verify research-add-topic belongs in research-setup or warrants separate skill
+- [x] Task 6: Verify research-add-topic belongs in research-setup or warrants separate skill
   - **Purpose:** Close design.md open question with an explicit, documented placement decision.
   - **Steps:**
     1. Re-read add-topic workflow in `research-setup` and Add Topic rows in the audit (A1–A3).
@@ -61,7 +61,7 @@
 
 - [x] research-conduct passes five-property rubric
 - [x] research-consolidate passes five-property rubric
-- [ ] research-add-topic placement decided with documented rationale
+- [x] research-add-topic placement decided with documented rationale
 - [ ] Full family flow tested: setup → conduct → consolidate
 - [ ] All children reference parent correctly
 
@@ -71,6 +71,19 @@
 
 - Group 1 (Research Family Foundation) must be complete
 - Task 1 audit informs all conversions in this group
+
+---
+
+## Task 6 decision — research-add-topic placement
+
+**Decision:** Keep **add-topic** in **research-setup** (no `research-add-topic` child skill in v1).
+
+**Rationale:**
+
+1. **Audit mapping:** Add-topic is Tier-1 procedural (A1–A3) and already grouped with setup in the mode→skill table (`research-command-audit.md`).
+2. **Behavioral overlap:** Add-topic is “late scaffold” only: same templates, hub/summary updates, and exploration sync rules as setup. A separate skill would duplicate half of **research-setup** or split one behavioral surface across two files without reducing complexity.
+3. **Naming clarity:** **research-setup** description and modes table already expose add-topic; the parent **research** skill routes “`--add-topic` equivalent” to **research-setup**. No user-facing gap.
+4. **Split trigger (future):** Introduce `research-add-topic` only if add-topic gains a distinct contract (e.g., multi-file merges, cross-feature topic imports) that would overcrowd setup.
 
 ---
 
