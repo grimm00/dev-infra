@@ -101,11 +101,12 @@ Once all tasks in the group are complete:
 1. Push the branch
 2. Create PR to `develop` using `gh pr create` with a placeholder body
 3. Title: `feat([feature]): [Group name] (Group N)`
-4. Run the **update-pr-description** skill to generate the PR body. Read the
-   skill at `.cursor/skills/update-pr-description/SKILL.md` (or
-   `~/.cursor/skills/update-pr-description/SKILL.md` if not in-repo) and
-   follow it exactly. The skill produces four sections: Summary, Why, After
-   Merge, Follow-ups — based on the diff and commit history.
+4. **Generate the PR body (mandatory).** Read `~/.cursor/skills/update-pr-description/SKILL.md`
+   and execute every step — gather context, generate four sections (Summary, Why,
+   After Merge, Follow-ups), and write back via `gh pr edit --body-file`. After
+   the write, verify the body was updated: `gh pr view --json body -q .body`
+   must contain `## Summary`. If it still shows the placeholder, re-run. Do not
+   leave a placeholder body on the PR.
 
 ### Step 4: PR Validation
 
@@ -149,11 +150,22 @@ Each row gets: **Priority**, **Impact**, **Effort**, **Action**.
 
 #### 4d. Act on Findings
 
-- **CRITICAL / HIGH:** Fix inline on the PR branch. Commit with message:
-  `docs([feature]): address Sourcery feedback — [brief description]`.
-  If a fix fails after 3 attempts, stop and report (three-strikes rule).
-- **MEDIUM / LOW:** Defer. Add to `admin/feedback/deferred-tasks.md` if the
-  file exists, and note them in the PR body's Follow-ups section.
+**Always fix inline:**
+- Priority is CRITICAL or HIGH (any effort)
+- Effort is LOW regardless of priority (typos, grammar, one-line fixes — if it
+  takes under 5 minutes, just do it)
+
+**Use judgment — weigh and fix inline when it makes sense:**
+- HIGH impact + LOW effort, even at MEDIUM or LOW priority — high-leverage
+  quick wins are worth doing now, but assess whether the change is safe
+
+**Defer everything else:**
+- MEDIUM or LOW priority items at MEDIUM or higher effort — add to
+  `admin/feedback/deferred-tasks.md` if the file exists, and note in the PR
+  body's Follow-ups section
+
+Commit fixes with: `docs([feature]): address Sourcery feedback — [brief description]`.
+If a fix fails after 3 attempts, stop and report (three-strikes rule).
 
 #### 4e. Commit Review Artifacts
 
