@@ -582,3 +582,13 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - **PR87-Overall-#1 (🟡 MEDIUM):** Document handling of partially scaffolded research dirs (missing `research-summary.md` or topic files): route to research-setup vs stop.
 - **PR87-Overall-#2 (🟡 MEDIUM):** Define acceptable `web_search` failure modes and whether retries are expected before documenting abort in conduct.
 - **PR87-Overall-#3 (🟡 MEDIUM):** In `research-consolidate`, specify behavior when no paired exploration exists (skip with note vs error).
+
+---
+
+## PR #88 Additions
+
+**Date:** 2026-05-02  
+**Status:** Sourcery overall comments triaged
+
+- ~~**PR88-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** `--actionable-only` missing from reflect Options table~~ — ✅ Fixed inline
+- **PR88-Overall-#2 (🟡 MEDIUM):** Generalize reflect workflow “recent merged PRs” step: phrase as provider-agnostic list with `gh pr list` as example (portability).

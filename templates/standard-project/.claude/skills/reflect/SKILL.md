@@ -60,6 +60,7 @@ detect paths → gather → patterns → opportunities & risks → suggestions �
 | `/reflect --technical-debt` | Emphasize risk/defect themes |
 | `/reflect --include-fixes` | Pull deferred fix hubs into “Potential Issues” |
 | `--include-learnings` / `--include-learnings all` | As in Path detection |
+| `/reflect --actionable-only` | Emit Current State plus suggestion-shaped sections only |
 
 If flags conflict, prefer explicit `--feature` and the narrowest scope flag the user repeated last.
 
