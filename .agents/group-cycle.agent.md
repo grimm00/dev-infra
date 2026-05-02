@@ -87,13 +87,13 @@ Do NOT skip tasks or reorder them. Do NOT continue past a blocker.
 Once all tasks in the group are complete:
 
 1. Push the branch
-2. Create PR to `develop` using `gh pr create`
+2. Create PR to `develop` using `gh pr create` with a placeholder body
 3. Title: `feat([feature]): [Group name] (Group N)`
-4. Body must include:
-   - **Summary:** What changed and why (1-3 sentences)
-   - **Tasks completed:** Checklist of tasks with brief descriptions
-   - **Open questions:** Any items surfaced during execution that need human judgment (see Open Questions below)
-   - **Discoveries:** Anything unexpected — better approaches found, missing prerequisites, design considerations
+4. Run the **update-pr-description** skill to generate the PR body. Read the
+   skill at `.cursor/skills/update-pr-description/SKILL.md` (or
+   `~/.cursor/skills/update-pr-description/SKILL.md` if not in-repo) and
+   follow it exactly. The skill produces four sections: Summary, Why, After
+   Merge, Follow-ups — based on the diff and commit history.
 
 ### Step 4: PR Validation
 
