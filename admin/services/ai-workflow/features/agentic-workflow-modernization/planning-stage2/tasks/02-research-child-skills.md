@@ -9,7 +9,7 @@
 
 ## 📝 Tasks
 
-- [ ] Task 4: Convert research-conduct (most complex hybrid skill)
+- [x] Task 4: Convert research-conduct (most complex hybrid skill)
   - **Purpose:** Replace `/research --conduct` with a child skill that keeps web research, documentation updates, and requirement extraction behind one observable behavioral contract (Tier 2 gaps from the audit tightened to Tier 1 where possible).
   - **Steps:**
     1. Read `planning-stage2/artifacts/research-command-audit.md` (Conduct rows) and Conduct Mode Workflow in `.cursor/commands/research.md`.
@@ -59,7 +59,7 @@
 
 ## ✅ Completion Criteria
 
-- [ ] research-conduct passes five-property rubric
+- [x] research-conduct passes five-property rubric
 - [ ] research-consolidate passes five-property rubric
 - [ ] research-add-topic placement decided with documented rationale
 - [ ] Full family flow tested: setup → conduct → consolidate
