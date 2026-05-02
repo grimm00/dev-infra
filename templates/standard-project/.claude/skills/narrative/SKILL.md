@@ -31,7 +31,6 @@ mark N/A for sections that don't apply.
 | Template | When to use |
 |----------|-------------|
 | `templates/narrative.md` | Always — the core narrative document |
-| `templates/pr-description.md` | When `--pr` flag is provided |
 | `templates/demo-notes.md` | When `--demo` flag is provided |
 
 ## Options
@@ -39,7 +38,6 @@ mark N/A for sections that don't apply.
 | Invocation | Behavior |
 |------------|----------|
 | `/narrative [topic]` | Create narrative for the named topic |
-| `/narrative [topic] --pr` | Also generate a PR-ready condensed version |
 | `/narrative [topic] --demo` | Also generate demo talking points |
 
 ## Workflow
@@ -83,9 +81,11 @@ Consider:
 Copy `templates/narrative.md` to the output path. Fill in each section
 with specifics from the gathered context.
 
-If `--pr` is provided, also copy `templates/pr-description.md` and write
-a condensed version. If `--demo`, copy `templates/demo-notes.md` and write
-talking points adapted to the specified audience.
+If `--demo` is provided, also copy `templates/demo-notes.md` and write
+talking points adapted to the specified audience. For PR descriptions,
+use `/pr` with the `update-pr-description` skill instead — it produces
+descriptions grounded in the actual diff, which is more actionable for
+reviewers than a narrative summary.
 
 ### 4. Commit and stop
 
@@ -140,11 +140,6 @@ was wrong by 3x, say so. Sanitized narratives are useless for learning.
 artifacts. The story isn't done until the work is done. If the user invokes
 this mid-implementation, push back — suggest completing the work first or
 using `/discuss` to think through the current state.
-
-**Generating a PR description without a narrative.** If `--pr` is provided,
-the PR description should be a *condensed version* of the narrative, not an
-independently generated document. Write the narrative first, then distill
-the PR description from it.
 
 **Filling every template section with filler.** The template has sections
 for Testing, Architecture Decisions, and Discoveries. If this was a
