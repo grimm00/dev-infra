@@ -7,7 +7,7 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 15/17 tasks complete
+**Overall:** 16/17 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
@@ -15,7 +15,7 @@
 | Discuss Conversion (Thesis Validation) | ✅ Complete | 3/3 tasks | Thesis validated — ready to scale to other skills |
 | Explore Family | ✅ Complete | 4/4 tasks | Family pattern validated on Cursor; Claude Code deferred to plugin system |
 | Single-Mode Skills | ✅ Complete | 3/3 tasks | Both pass rubric; templates-as-assets pattern established |
-| Cutover and Quality Gate | 🟠 In Progress | 1/3 tasks | Install skills, archive commands, regression test, final sweep |
+| Cutover and Quality Gate | 🟠 In Progress | 2/3 tasks | Install skills, archive commands, regression test, final sweep |
 
 ---
 

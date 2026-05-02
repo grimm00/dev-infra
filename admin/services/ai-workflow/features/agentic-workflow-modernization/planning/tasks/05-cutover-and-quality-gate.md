@@ -44,7 +44,7 @@
 
 ---
 
-- [ ] Task 16: Regression test discuss skill
+- [x] Task 16: Regression test discuss skill
   - **Purpose:** Validate C5-3 quality benchmark — discuss skill must perform at least as well as the command
   - **Steps:**
     1. Copy latest skills to ai-test workspace (or verify they're current)
