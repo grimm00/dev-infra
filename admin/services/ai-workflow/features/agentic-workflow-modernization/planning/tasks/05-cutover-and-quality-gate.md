@@ -2,15 +2,14 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 1: Thinker)
 **Group:** Cutover and Quality Gate
-**Status:** ✅ Complete
-**Completed:** 2026-05-02
+**Status:** 🟠 In Progress
 **Last Updated:** 2026-05-02
 
 ---
 
 ## 📝 Tasks
 
-- [x] Task 15: Install skills + archive commands
+- [ ] Task 15: Install skills + archive commands
   - **Purpose:** Complete the clean cutover (C2-1) — skills replace commands, no coexistence
   - **Steps:**
     1. **Clean up spike artifacts** at root `.claude/skills/`:
@@ -45,7 +44,7 @@
 
 ---
 
-- [x] Task 16: Regression test discuss skill
+- [ ] Task 16: Regression test discuss skill
   - **Purpose:** Validate C5-3 quality benchmark — discuss skill must perform at least as well as the command
   - **Steps:**
     1. Copy latest skills to ai-test workspace (or verify they're current)
@@ -66,7 +65,7 @@
 
 ---
 
-- [x] Task 17: Final quality gate sweep + Stage 1 exit criteria
+- [ ] Task 17: Final quality gate sweep + Stage 1 exit criteria
   - **Purpose:** Verify all Stage 1 exit criteria are met before declaring completion
   - **Steps:**
     1. **Verify Stage 1 exit criteria** (from design.md Section 5):
