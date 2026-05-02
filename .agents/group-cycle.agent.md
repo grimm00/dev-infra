@@ -97,13 +97,56 @@ Once all tasks in the group are complete:
 
 ### Step 4: PR Validation
 
-Wait 60 seconds for CI to start, then run PR validation:
+Wait 60 seconds for CI to start, then validate the PR.
 
-1. Check CI status
-2. Run Sourcery review (`dt-review`) if available
-3. Fill out priority matrix for any comments
-4. Fix CRITICAL/HIGH issues inline
-5. Commit fixes if needed
+#### 4a. CI Status
+
+```bash
+gh pr checks [pr-number]
+```
+
+Document passing/failing checks. If a check fails, check the known issues
+registry at `admin/planning/ci/multi-environment-testing/known-issues.md`. Known
+issues don't block; new failures get 3 retry attempts before stopping.
+
+#### 4b. Sourcery Review (dt-review)
+
+Run the review tool and save output:
+
+```bash
+mkdir -p admin/feedback/sourcery
+dt-review [pr-number] admin/feedback/sourcery/pr[number].md
+```
+
+If `dt-review` is not available (`which dt-review` returns nothing), skip this
+sub-step and note it in the report. Do not block on a missing tool.
+
+#### 4c. Priority Matrix
+
+For every comment in the review file, fill out the priority matrix table using
+the prescribed tiers:
+
+| Priority | Meaning |
+|----------|---------|
+| CRITICAL | Security vulnerabilities, data loss, breaking changes, test failures |
+| HIGH | Performance issues, missing error handling, maintainability concerns |
+| MEDIUM | Style improvements, refactoring opportunities, documentation gaps |
+| LOW | Naming suggestions, style preferences, optional enhancements |
+
+Each row gets: **Priority**, **Impact**, **Effort**, **Action**.
+
+#### 4d. Act on Findings
+
+- **CRITICAL / HIGH:** Fix inline on the PR branch. Commit with message:
+  `docs([feature]): address Sourcery feedback — [brief description]`.
+  If a fix fails after 3 attempts, stop and report (three-strikes rule).
+- **MEDIUM / LOW:** Defer. Add to `admin/feedback/deferred-tasks.md` if the
+  file exists, and note them in the PR body's Follow-ups section.
+
+#### 4e. Commit Review Artifacts
+
+Commit the Sourcery review file (with filled matrix) and any deferred-tasks
+updates to the PR branch.
 
 ### Step 5: Open Questions File
 
