@@ -19,7 +19,7 @@
   - **Files:** `templates/standard-project/.claude/skills/research/research-conduct/SKILL.md`
   - **Acceptance:** Skill mirrors command conduct flow; web search mandatory; no setup/consolidate steps; rubric passes; gotchas populated from audit + command tips.
 
-- [ ] Task 5: Convert research-consolidate (procedural with merge logic)
+- [x] Task 5: Convert research-consolidate (procedural with merge logic)
   - **Purpose:** Replace `/research --consolidate` with a child skill that preserves human gates, replaces “mental model” with explicit tables, and keeps merge/remove/add/renumber logic reviewable.
   - **Steps:**
     1. Read audit Consolidate rows and Consolidate Mode Workflow in `.cursor/commands/research.md`.
@@ -60,7 +60,7 @@
 ## ✅ Completion Criteria
 
 - [x] research-conduct passes five-property rubric
-- [ ] research-consolidate passes five-property rubric
+- [x] research-consolidate passes five-property rubric
 - [ ] research-add-topic placement decided with documented rationale
 - [ ] Full family flow tested: setup → conduct → consolidate
 - [ ] All children reference parent correctly
