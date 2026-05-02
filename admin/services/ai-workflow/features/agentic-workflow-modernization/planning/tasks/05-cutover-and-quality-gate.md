@@ -9,7 +9,7 @@
 
 ## 📝 Tasks
 
-- [ ] Task 15: Install skills + archive commands
+- [x] Task 15: Install skills + archive commands
   - **Purpose:** Complete the clean cutover (C2-1) — skills replace commands, no coexistence
   - **Steps:**
     1. **Clean up spike artifacts** at root `.claude/skills/`:
