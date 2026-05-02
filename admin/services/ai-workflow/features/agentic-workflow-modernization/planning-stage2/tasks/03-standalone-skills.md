@@ -28,7 +28,7 @@
   - **Files:** `templates/standard-project/.claude/skills/spike/SKILL.md`, `templates/standard-project/.claude/skills/spike/templates/spike-learnings.md`
   - **Acceptance:** Skill is self-contained (no parent read); dry-run/document-learnings/time-box/force behaviors preserved; rubric passes; gotchas populated from audit + command tips.
 
-- [ ] Task 10: Audit reflect command for behavioral instructions
+- [x] Task 10: Audit reflect command for behavioral instructions
   - **Purpose:** Classify reflect’s hybrid surface (long procedural report + synthesis judgment); isolate **personal-growth / suggestion-quality contract** for Task 11.
   - **Steps:**
     1. Read `.cursor/commands/reflect.md`; separate path/config, procedural steps (Steps 1–6, 8), vs tone/synthesis guidance (Tips, suggestion quality).
