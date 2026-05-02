@@ -18,6 +18,21 @@ questions the agent surfaced during execution.
 | `first_group` | no | Set to `true` if this is the first group in a stage (default: `false`) |
 | `prior_pr` | no | PR number of the previous group's merged PR (required if not first_group) |
 
+## Skills & Commands
+
+Read these files **before** the step that needs them. Follow each one exactly.
+
+| Step | Skill / Command | Path |
+|------|----------------|------|
+| Step 0 — post-PR | post-pr | `.cursor/commands/post-pr.md` |
+| Step 0 — pre-phase review | pre-phase-review | `.cursor/commands/pre-phase-review.md` |
+| Step 1 — plan expansion | transition-plan | `.cursor/commands/transition-plan.md` |
+| Step 3 — PR body | update-pr-description | `~/.cursor/skills/update-pr-description/SKILL.md` |
+| Step 4 — PR validation | pr-validation | `.cursor/commands/pr-validation.md` (reference only — Step 4 sub-steps are self-contained) |
+
+Paths starting with `.` are relative to the repo root (inside the worktree).
+Paths starting with `~/` are global (user home directory).
+
 ## Worktree Setup
 
 Before starting the pipeline, create an isolated worktree:
@@ -39,24 +54,21 @@ for the human to inspect. The human removes it after merge.
 
 Before starting new work, close out the previous group cycle:
 
-1. **Post-PR:** Run the post-PR workflow for the prior group's merged PR (`prior_pr`):
-   - Update status documents (progress, milestones, next steps)
-   - Update implementation plan checkboxes
-   - Check for deferred Sourcery issues
-   - Commit documentation updates
+1. **Post-PR:** Read `.cursor/commands/post-pr.md` and follow it for the prior
+   group's merged PR (`prior_pr`). Key outputs: status document updates,
+   implementation plan checkboxes, deferred Sourcery issue check.
 
-2. **Pre-phase review:** Review what was learned in the prior group before
-   expanding the next one:
-   - Read the prior group's task file and any open questions from its PR
-   - Check if discoveries or open questions affect the current group's scope
-   - Note any adjustments needed in the current group's task specs
+2. **Pre-phase review:** Read `.cursor/commands/pre-phase-review.md` and follow
+   it. Review the prior group's task file and any open questions from its PR.
+   Note adjustments that affect the current group's scope.
 
 Both of these happen on the worktree branch before plan expansion begins.
 
 ### Step 1: Plan Expansion
 
-If the group's task file has tasks without detailed specs (steps, acceptance
-criteria, files), expand them using the transition-plan skill.
+Read `.cursor/commands/transition-plan.md` and follow its expand semantics. If
+the group's task file has tasks without detailed specs (steps, acceptance
+criteria, files), expand them.
 
 If Step 0 surfaced adjustments from the prior group, incorporate them during
 expansion.
