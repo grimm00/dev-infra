@@ -7,23 +7,23 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 11/17 tasks complete
+**Overall:** 14/17 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Foundation (Rules + AGENTS.md) | ✅ Complete | 4/4 tasks | Prerequisite for all skill conversion |
 | Discuss Conversion (Thesis Validation) | ✅ Complete | 3/3 tasks | Thesis validated — ready to scale to other skills |
 | Explore Family | ✅ Complete | 4/4 tasks | Family pattern validated on Cursor; Claude Code deferred to plugin system |
-| Single-Mode Skills | 🔴 Not Started | 0/3 tasks | int-opp + narrative |
+| Single-Mode Skills | ✅ Complete | 3/3 tasks | Both pass rubric; templates-as-assets pattern established |
 | Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Delete commands, regression test, final sweep |
 
 ---
 
 ## 🚀 Next Steps
 
-1. **PR Group 3** — create PR for Explore Family work
-2. **Expand Group 4** — add detailed task specs for Single-Mode Skills
-3. **Start Group 4** — `/task next` to begin int-opp and narrative conversions
+1. **PR Group 4** — create PR for Single-Mode Skills work
+2. **Expand Group 5** — add detailed task specs for Cutover and Quality Gate
+3. **Start Group 5** — delete commands, regression test, final sweep
 
 ---
 
