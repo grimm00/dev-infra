@@ -78,7 +78,7 @@ Convert the **Thinker** role group of dev-infra commands to skills, plus the fou
 - [x] Task 11: Validate family pattern works on both Cursor and Claude Code (manual test)
 
 ### Single-Mode Skills
-- [ ] Task 12: Convert int-opp (single-mode procedural skill)
+- [x] Task 12: Convert int-opp (single-mode procedural skill)
 - [ ] Task 13: Convert narrative (single-mode hybrid skill — procedural steps + behavioral contract)
 - [ ] Task 14: Verify both skills pass five-property rubric and self-containment requirement (FR-8)
 

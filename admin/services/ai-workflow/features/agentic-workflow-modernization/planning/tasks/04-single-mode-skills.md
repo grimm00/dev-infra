@@ -9,7 +9,7 @@
 
 ## 📝 Tasks
 
-- [ ] Task 12: Convert int-opp (single-mode procedural skill)
+- [x] Task 12: Convert int-opp (single-mode procedural skill)
   - **Purpose:** Convert the 1,152-line `/int-opp` command into a flat skill focused on capturing internal improvement opportunities
   - **Steps:**
     1. Read `.cursor/commands/int-opp.md` — identify the core procedural workflow (project detection, directory creation, learning capture, improvement classification)
