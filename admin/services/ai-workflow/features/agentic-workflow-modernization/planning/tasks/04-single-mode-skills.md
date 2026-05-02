@@ -2,7 +2,8 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 1: Thinker)
 **Group:** Single-Mode Skills
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
+**Completed:** 2026-05-01
 **Last Updated:** 2026-05-01
 
 ---
@@ -62,7 +63,7 @@
 
 ---
 
-- [ ] Task 14: Verify both skills pass five-property rubric and self-containment requirement (FR-8)
+- [x] Task 14: Verify both skills pass five-property rubric and self-containment requirement (FR-8)
   - **Purpose:** Final quality gate before Group 5 (Cutover) — verify both skills meet the standard established by discuss and explore
   - **Steps:**
     1. Re-read `int-opp/SKILL.md` — check every behavioral instruction against the rubric (observable, bounded, outcome-framed, delta-only, failure-aware)
@@ -91,11 +92,12 @@
 
 ## ✅ Completion Criteria
 
-- [ ] `int-opp/SKILL.md` exists
-- [ ] `narrative/SKILL.md` exists
-- [ ] Both pass five-property rubric
-- [ ] Both have populated gotchas sections (at least 5 each)
-- [ ] Both under 500 lines and operationally complete without companion files
+- [x] `int-opp/SKILL.md` exists (165 lines + 3 templates)
+- [x] `narrative/SKILL.md` exists (148 lines + 2 templates)
+- [x] Both pass five-property rubric (all 10 behavioral instructions verified)
+- [x] Both have populated gotchas sections (int-opp: 6, narrative: 5)
+- [x] Both under 500 lines and operationally complete without companion files
+- [x] Templates-as-assets pattern applied (first use in Stage 1)
 - [ ] Manual smoke test deferred to Group 5 (Cutover)
 
 ---
