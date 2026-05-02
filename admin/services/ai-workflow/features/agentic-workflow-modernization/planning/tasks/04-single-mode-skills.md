@@ -34,7 +34,7 @@
 
 ---
 
-- [ ] Task 13: Convert narrative (single-mode hybrid skill)
+- [x] Task 13: Convert narrative (single-mode hybrid skill)
   - **Purpose:** Convert the 302-line `/narrative` command into a skill that creates "story of the work" documents
   - **Steps:**
     1. Read `.cursor/commands/narrative.md` — identify the procedural workflow (gather context, identify story arc, write narrative) and behavioral contract (tone, evidence-grounding, structure)
