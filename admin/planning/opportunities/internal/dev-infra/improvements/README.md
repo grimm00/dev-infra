@@ -24,6 +24,7 @@
 - **[feature-first-directory-structure.md](feature-first-directory-structure.md)** - Restructure admin/ to service-first, feature-second, phase-third hierarchy (🔴 Not Started, HIGH priority)
 - **[artifact-emission-strategy.md](artifact-emission-strategy.md)** - Move skills from L1 (raw file paths) toward L2/L3 (content + placement guidance); opt-in artifacts (🔴 Not Started, MEDIUM priority)
 - **[pr-body-generation-primitive.md](pr-body-generation-primitive.md)** - Prune performative content from `/pr` templates; reuse `update-pr-description` skill as PR/release cluster primitive (🔴 Not Started, MEDIUM priority)
+- **[skill-toolbelt-colocated-scripts.md](skill-toolbelt-colocated-scripts.md)** - Give skills co-located scripts for deterministic scaffolding; agent focuses on judgment (🟡 Planned, HIGH priority)
 
 ---
 
