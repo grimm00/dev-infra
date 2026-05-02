@@ -67,10 +67,10 @@ Convert the **Researcher** role group of dev-infra commands to skills. This stag
 - [x] Task 7: Validate research family pattern works end-to-end (parent → setup → conduct → consolidate)
 
 ### Standalone Skills (Spike + Reflect)
-- [ ] Task 8: Audit spike command for behavioral instructions
-- [ ] Task 9: Convert spike to SKILL.md (time-boxed behavioral contract)
-- [ ] Task 10: Audit reflect command for behavioral instructions
-- [ ] Task 11: Convert reflect to SKILL.md (personal growth behavioral contract)
+- [x] Task 8: Audit spike command for behavioral instructions
+- [x] Task 9: Convert spike to SKILL.md (time-boxed behavioral contract)
+- [x] Task 10: Audit reflect command for behavioral instructions
+- [x] Task 11: Convert reflect to SKILL.md (personal growth behavioral contract)
 
 ### Cutover and Quality Gate
 - [ ] Task 12: Install skills + archive commands (research, spike, reflect)

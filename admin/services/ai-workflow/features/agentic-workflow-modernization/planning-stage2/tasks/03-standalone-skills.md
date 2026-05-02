@@ -2,7 +2,7 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 2: Researcher)
 **Group:** Standalone Skills (Spike + Reflect)
-**Status:** ✅ Expanded
+**Status:** ✅ Complete
 **Last Updated:** 2026-05-02
 
 ---
@@ -37,7 +37,7 @@
   - **Files:** `planning-stage2/artifacts/reflect-command-audit.md`
   - **Acceptance:** Audit covers scopes/flags; hybrid pattern explicit; template vs dev-infra paths documented.
 
-- [ ] Task 11: Convert reflect to SKILL.md
+- [x] Task 11: Convert reflect to SKILL.md
   - **Purpose:** Standalone hybrid skill: procedural flow (gather → patterns → opportunities/issues → structured suggestions → reflection file → hub optional → docs-branch commit) plus **behavioral contract** for honest, evidence-backed reflection; mirror narrative hybrid section.
   - **Steps:**
     1. Read Task 10 audit and `narrative/SKILL.md` hybrid + template pattern.
@@ -58,10 +58,10 @@
 
 ## ✅ Completion Criteria
 
-- [ ] spike skill passes five-property rubric
-- [ ] reflect skill passes five-property rubric
-- [ ] Both include populated gotchas sections
-- [ ] Both authored in `templates/standard-project/.claude/skills/`
+- [x] spike skill passes five-property rubric
+- [x] reflect skill passes five-property rubric
+- [x] Both include populated gotchas sections
+- [x] Both authored in `templates/standard-project/.claude/skills/`
 
 ---
 
