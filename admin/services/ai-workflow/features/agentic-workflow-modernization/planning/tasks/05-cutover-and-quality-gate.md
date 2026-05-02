@@ -2,7 +2,7 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 1: Thinker)
 **Group:** Cutover and Quality Gate
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Last Updated:** 2026-05-02
 
 ---
@@ -65,16 +65,16 @@
 
 ---
 
-- [ ] Task 17: Final quality gate sweep + Stage 1 exit criteria
+- [x] Task 17: Final quality gate sweep + Stage 1 exit criteria
   - **Purpose:** Verify all Stage 1 exit criteria are met before declaring completion
   - **Steps:**
     1. **Verify Stage 1 exit criteria** (from design.md Section 5):
-       - [ ] All 5 skills pass five-property rubric (verified in Task 14)
-       - [ ] Discuss regression test passes (verified in Task 16)
-       - [ ] Explore family pattern validated (verified in Task 11)
-       - [ ] AGENTS.md + CLAUDE.md in place (verified in Tasks 2-3)
-       - [ ] `.mdc` rules slimmed (verified in Task 4)
-       - [ ] Templates-as-assets pattern established (Tasks 12-13)
+       - [x] All 5 skills pass five-property rubric (verified in Task 14)
+       - [x] Discuss regression test passes (verified in Task 16)
+       - [x] Explore family pattern validated (verified in Task 11)
+       - [x] AGENTS.md + CLAUDE.md in place (verified in Tasks 2-3)
+       - [x] `.mdc` rules slimmed (verified in Task 4)
+       - [x] Templates-as-assets pattern established (Tasks 12-13)
     2. **Verify CI passes** after cutover:
        - Run `bats tests/` locally
        - Push and verify GitHub Actions pass
@@ -103,16 +103,16 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Production skills installed at root `.claude/skills/` (dev-infra is a consumer of its own templates)
-- [ ] Spike artifacts cleaned up from `.claude/skills/`
-- [ ] 4 command files archived to `.cursor/commands/archived/`
-- [ ] Template commands archived (3 per template × 2 templates)
-- [ ] Template-sync-manifest updated
-- [ ] CI passes after cutover
-- [ ] Discuss regression test documented (observed quality vs command-era baseline)
-- [ ] Stage 1 exit criteria from design.md Section 5 verified
-- [ ] Decision logged: proceed to Stage 2, or pause for adjustment
-- [ ] Status document updated to reflect Stage 1 completion
+- [x] Production skills installed at root `.claude/skills/` (dev-infra is a consumer of its own templates)
+- [x] Spike artifacts cleaned up from `.claude/skills/`
+- [x] 4 command files archived to `.cursor/commands/archived/`
+- [x] Template commands archived (3 per template × 2 templates)
+- [x] Template-sync-manifest updated
+- [x] CI passes after cutover (173 bats tests pass, GitHub Actions all green)
+- [x] Discuss regression test documented (observed quality vs command-era baseline)
+- [x] Stage 1 exit criteria from design.md Section 5 verified
+- [x] Decision logged: proceed to Stage 2, or pause for adjustment
+- [x] Status document updated to reflect Stage 1 completion
 
 ---
 

@@ -25,7 +25,7 @@ tasks_files:
 ---
 # Implementation Plan — Stage 1: Thinker (Agentic Workflow Modernization)
 
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Created:** 2026-04-24
 **Last Updated:** 2026-05-02
 **Source:** [ADRs 1-5 + design.md](../decisions/) → Stage 1 of 4-stage v1
@@ -85,23 +85,23 @@ Convert the **Thinker** role group of dev-infra commands to skills, plus the fou
 ### Cutover and Quality Gate
 - [x] Task 15: Install skills + archive converted command files (.cursor/commands/{discuss,explore,int-opp,narrative}.md)
 - [x] Task 16: Run regression test on discuss skill against recent /discuss usage; capture observed behavior
-- [ ] Task 17: Final quality gate sweep across all 5 skills + foundation work; verify Stage 1 exit criteria met
+- [x] Task 17: Final quality gate sweep across all 5 skills + foundation work; verify Stage 1 exit criteria met
 
 ---
 
 ## ✅ Definition of Done
 
-- [ ] AGENTS.md and CLAUDE.md exist with synchronized content (~150-200 lines each)
-- [ ] `.mdc` rules slimmed to ~50 lines containing only Cursor-specific config
-- [ ] 5 skills exist in `templates/standard-project/.claude/skills/`: discuss, explore (parent), explore-start, explore-amend, int-opp, narrative (note: parent counts as a 6th file but represents the explore "skill family")
-- [ ] All 5 skills pass the five-property quality rubric
-- [ ] All 5 skills include populated gotchas sections
-- [ ] Discuss skill demonstrates no quality regression vs discuss command (C5-3)
-- [ ] Explore family pattern works (parent + 2 children, explicit parent reference confirmed)
-- [ ] Removed command files: discuss.md, explore.md, int-opp.md, narrative.md
-- [ ] No skills use platform-breaking features (FR-13)
-- [ ] CI passes after cutover
-- [ ] Stage 1 exit criteria from design.md Section 5 verified
+- [x] AGENTS.md and CLAUDE.md exist with synchronized content (~150-200 lines each)
+- [x] `.mdc` rules slimmed to ~50 lines containing only Cursor-specific config (40 lines)
+- [x] 5 skills exist in `templates/standard-project/.claude/skills/`: discuss, explore (parent), explore-start, explore-amend, int-opp, narrative
+- [x] All 5 skills pass the five-property quality rubric
+- [x] All 5 skills include populated gotchas sections
+- [x] Discuss skill demonstrates no quality regression vs discuss command (C5-3)
+- [x] Explore family pattern works (parent + 2 children, explicit parent reference confirmed)
+- [x] Removed command files: discuss.md, explore.md, int-opp.md, narrative.md (archived to `.cursor/commands/archived/`)
+- [x] No skills use platform-breaking features (FR-13)
+- [x] CI passes after cutover (173 bats tests, GitHub Actions green)
+- [x] Stage 1 exit criteria from design.md Section 5 verified
 
 ---
 
