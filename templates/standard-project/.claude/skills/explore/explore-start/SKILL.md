@@ -50,8 +50,8 @@ Sanitize the topic name per family conventions (kebab-case). Then check whether
 an exploration already exists at the detected path:
 
 - **No existing directory:** proceed to step 2.
-- **Existing exploration:** warn and suggest `/explore-amend` to append new themes,
-  or `--force` to overwrite.
+- **Existing exploration:** warn and suggest `/explore-amend` to append new themes.
+  Do not overwrite — the existing exploration contains user-reviewed content.
 
 ### 2. Extract themes and questions
 

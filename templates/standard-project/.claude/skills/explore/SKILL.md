@@ -26,8 +26,8 @@ explore-start → (human review) → research → decision → transition-plan �
 | **explore-start** | New exploration: organize raw thoughts into themes and research questions |
 | **explore-amend** | Append a new theme or question to an existing expanded exploration |
 
-**Conduct mode is deprecated.** Explorations go from scaffolding (start) directly
-to research. Do not create or invoke an `explore-conduct` skill.
+**Conduct mode is deprecated.** Explorations are created complete by explore-start.
+Do not create or invoke an `explore-conduct` skill.
 
 ## Family Conventions
 

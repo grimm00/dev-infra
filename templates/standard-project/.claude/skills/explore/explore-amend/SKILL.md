@@ -98,6 +98,10 @@ amendments. The amendment log is an append-only record.
 
 ### 7. Append a new topic to `research-topics.md`
 
+If `research-topics.md` does not exist or is missing the `## 📋 Topics Identified`
+section, error and suggest running `/explore-start` to recreate the exploration.
+Do not create `research-topics.md` from scratch — that's explore-start's job.
+
 Insert a new topic at the end of the `## 📋 Topics Identified` section:
 
 ```markdown
