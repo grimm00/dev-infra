@@ -66,6 +66,14 @@ and confirm intent.
 
 ---
 
+### Duplicate / superseded PRs (merged vs closed)
+
+Parallel PRs occasionally target the same base (experiment, model rerun, aborted
+duplicate). **Authoritative lineage uses the merged PR only** — verify with GitHub (`state: MERGED`). **Ignore** superseded siblings that **`CLOSED` without `mergedAt`** (e.g., cancel the duplicate once the real merge ships). Populate **`prior_pr` in Dispatch Inputs only from merged PR numbers**.
+
+---
+
+
 ## Step 4: Build Inputs
 
 From the gathered context, assemble the agent input block:
@@ -80,7 +88,7 @@ From the gathered context, assemble the agent input block:
 | `service` | [detected from plan path] |
 | `base_branch` | `develop` |
 | `first_group` | `true` / `false` (based on whether prior groups exist) |
-| `prior_pr` | #[number] (from last merged group PR, if not first_group) |
+| `prior_pr` | #[merged PR] from the cutover actually merged into `develop` — **omit** closed-without-merge duplicates (`gh pr view <n> --json state,mergedAt`). Omit entirely when Step 0 isn’t needed. |
 ```
 
 ---
@@ -102,6 +110,6 @@ in the confirmation prompt.
 |-------|------|------|
 | develop is up to date | Continue | Pull first |
 | No stale worktrees | Continue | Offer cleanup |
-| Prior group PR merged | Continue | Warn — merge first or confirm skip |
+| `prior_pr` is merged (not superseded sibling) | Continue | Warn — wrong PR#, closed dup, merge first |
 | Group matches next expected | Continue | Warn — confirm intent |
 | All inputs resolved | Dispatch | Ask user for missing values |

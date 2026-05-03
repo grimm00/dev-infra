@@ -16,7 +16,7 @@ questions the agent surfaced during execution.
 | `service` | yes | Service path (e.g., `ai-workflow`) |
 | `base_branch` | no | Branch to base work on (default: `develop`) |
 | `first_group` | no | Set to `true` if this is the first group in a stage (default: `false`) |
-| `prior_pr` | no | PR number of the previous group's merged PR (required if not first_group) |
+| `prior_pr` | no | The **merged** PR that landed the prior group's commits on **`base_branch`**. Prefer `gh pr view <n> --json state,mergedAt` — if `CLOSED` with `mergedAt: null`, that's a superseded/aborted sibling (duplicate run, canceled experiment): **do not use it**; use the sibling that actually merged instead. Omit `prior_pr` when Step 0 closeout isn't needed — same posture as **`first_group`**: merges already absorbed, no sweep (see Step 0). |
 
 ## Skills & Commands
 
@@ -50,9 +50,13 @@ for the human to inspect. The human removes it after merge.
 
 ## Pipeline
 
-### Step 0: Prior Group Closeout (skip if `first_group` is true)
+### Step 0: Prior Group Closeout (skip if `first_group` is true OR `prior_pr` is omitted)
 
-Before starting new work, close out the previous group cycle:
+**Skip entirely** when **`first_group` is `true`** *or* **`prior_pr` is omitted**.
+
+When **`prior_pr` is present**, validate it merged into the eventual base lineage (merged state in GitHub — not merely open). Closed-without-merge numbers are mistakes for closeout targets.
+
+Otherwise close out the previous group cycle:
 
 1. **Post-PR:** Read `.cursor/commands/post-pr.md` and follow it for the prior
    group's merged PR (`prior_pr`). Key outputs: status document updates,
@@ -257,3 +261,6 @@ Present a summary to the human:
   command errors) get 3 retry attempts. After that, stop and report.
 - **Stay in the worktree.** All file operations happen inside the worktree.
   Do not modify the main workspace.
+- **Authoritative PR for Step 0:** `prior_pr` must be merged into the base lineage.
+  Do not chase closed-but-not-merge duplicates competing for the same cutover —
+  ask the human if numbers disagree with `gh pr view`.
