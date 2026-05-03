@@ -2,7 +2,7 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 3: Planner)
 **Group:** Decision Skill
-**Status:** ✅ Expanded
+**Status:** ✅ Complete
 **Last Updated:** 2026-05-02
 
 ---

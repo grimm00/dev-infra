@@ -24,15 +24,16 @@ tasks_files:
 **Status:** 🟠 In Progress
 **Created:** 2026-05-02
 **Last Updated:** 2026-05-02
-**Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 3 of 4-stage v1
+**Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 3 of 4-stage v1  
+**Group 1 merged:** PR #92 (2026-05-03)
 
 ---
 
 ## 📋 Overview
 
-Convert the **Planner** role group of dev-infra commands to skills. This stage converts decision (632 lines, hybrid with interview pattern), transition-plan (820 lines, two-mode procedural), and plan-review (416 lines, procedural). The open question from design.md — whether transition-plan decomposes into two skills or stays single — is resolved during implementation.
+Convert the **Planner** role group of dev-infra commands to skills. This stage converts decision (632 lines, hybrid with interview pattern), transition-plan (820 lines, **single write-plan skill** with Setup + Expand), and plan-review (416 lines, procedural).
 
-**Skills converted in this stage:** decision, write-plan (possibly write-plan-setup + write-plan-expand), plan-review
+**Skills converted in this stage:** decision, write-plan (single skill; Setup + Expand workflows), plan-review
 **Entry criteria:** Stage 2 go decision (logged ✅ 2026-05-02)
 
 **New convention introduced:** Skills adopt an `assets/` + `references/` directory structure. Template-heavy content (scaffolding files, checklists) lives in `assets/` as copyable files. A `references/structure.yaml` declares the skill's expected I/O shape — input modes, output directories, singleton vs. collection files. This convention is established during write-plan (Group 2) and adopted by all Stage 3 skills.
@@ -40,7 +41,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 **Key Changes:**
 
 - decision: hybrid skill — procedural interview workflow + behavioral contract for ADR quality. Bakes in the interview pattern from this feature's own research. Follow-up: extract inline templates into `assets/`.
-- transition-plan → write-plan: largest command (820 lines). Two modes (setup/expand) — assess decomposition vs single skill during audit. **First skill to adopt `assets/` + `references/` convention** (most template-heavy).
+- transition-plan → write-plan: largest command (820 lines); **single skill** with Setup + Expand (Group 2 decision). **First skill to adopt `assets/` + `references/` convention** (most template-heavy).
 - plan-review: procedural review skill — ensures stage plans account for prior learnings and cross-checks consistency. Adopts the new convention.
 - 3 commands archived after conversion (decision, transition-plan, plan-review).
 
@@ -49,7 +50,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 ## 🎯 Goals
 
 1. **Convert the interview-pattern skill** — decision is the first skill with a structured human-interview workflow baked in. Validates hybrid encoding at a new level of interactivity.
-2. **Resolve the write-plan decomposition question** — design.md Section 6 defers this to implementation time. The audit decides: single skill (if modes are thin enough) or family (setup + expand).
+2. **Resolve the write-plan decomposition question** — design.md Section 6 deferred to implementation time. **Resolved in Group 2:** single `write-plan` skill (Setup + Expand workflows); see `tasks/02-write-plan-skill.md`.
 3. **Complete the Planner role group** — plan-review rounds out the stage; full thinking pipeline becomes skill-based after merge.
 4. **Apply proven patterns** — Stage 1 and 2 established: five-property rubric, templates-as-assets, family pattern, clean cutover, regression test. Reuse, don't reinvent.
 
@@ -63,10 +64,10 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] Task 3: Validate decision skill against a recent ADR produced under the command
 
 ### Write-Plan Skill
-- [ ] Task 4: Audit transition-plan command modes and classify behavioral instructions
-- [ ] Task 5: Resolve decomposition — single skill vs family (write-plan-setup + write-plan-expand)
-- [ ] Task 6: Convert transition-plan to write-plan SKILL.md(s) per decomposition decision
-- [ ] Task 7: Validate write-plan skill against Stage 3's own scaffolding (meta-test)
+- [x] Task 4: Audit transition-plan command modes and classify behavioral instructions
+- [x] Task 5: Resolve decomposition — single skill vs family (write-plan-setup + write-plan-expand)
+- [x] Task 6: Convert transition-plan to write-plan SKILL.md(s) per decomposition decision
+- [x] Task 7: Validate write-plan skill against Stage 3's own scaffolding (meta-test)
 
 ### Plan-Review Skill
 - [ ] Task 8: Audit plan-review command and classify behavioral instructions
@@ -82,11 +83,11 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 ## ✅ Definition of Done
 
 - [x] decision skill exists with interview workflow and ADR behavioral contract
-- [ ] write-plan decomposition decided and implemented (single or family)
+- [x] write-plan decomposition decided and implemented (single or family)
 - [ ] plan-review skill exists with staged-planning path support
 - [ ] All skills pass five-property rubric with populated gotchas
 - [ ] Self-containment (FR-8) verified for each skill
-- [ ] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml`
+- [ ] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml` *(write-plan done; decision/plan-review pending)*
 - [ ] 3 commands archived: decision.md, transition-plan.md, plan-review.md
 - [ ] CI passes after cutover
 - [ ] Stage 3 exit criteria from design.md Section 5 verified

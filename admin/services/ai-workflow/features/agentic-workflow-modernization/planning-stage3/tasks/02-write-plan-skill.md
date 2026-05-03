@@ -2,49 +2,50 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 3: Planner)
 **Group:** Write-Plan Skill
-**Status:** 🔴 Scaffolding (needs expansion)
+**Status:** ✅ Expanded
 **Last Updated:** 2026-05-02
 
 ---
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 2` to add detailed implementation notes.
+- [x] Task 4: Audit transition-plan command modes and classify behavioral instructions
+  - **Purpose:** Evidence for decomposition and template extraction before SKILL work.
+  - **Steps:**
+    1. Read `.cursor/commands/transition-plan.md` end-to-end; map Setup vs Expand vs shared regions.
+    2. Classify major sections per ADR-004 tiers; flag template fences for `assets/`.
+    3. Estimate behavioral overlap between modes (sequential pipeline vs independent workflows).
+    4. Write `planning-stage3/artifacts/transition-plan-command-audit.md`.
+  - **Files:** `planning-stage3/artifacts/transition-plan-command-audit.md`
+  - **Acceptance:** Artifact has mode matrix, tier table, template inventory, five-property notes.
 
-- [ ] Task 4: Audit transition-plan command modes and classify behavioral instructions
-  - Read `.cursor/commands/transition-plan.md` (820 lines — largest Stage 3 command)
-  - Map setup mode vs expand mode: identify shared logic, mode-specific logic, mode boundaries
-  - Classify instructions against precision tiers; note which are mode-specific
-  - **Identify template-extractable content:** directory scaffolding structures, file templates (implementation-plan.md, status-and-next-steps.md, task file skeletons) — these become `assets/`
-  - Produce audit artifact at `planning-stage3/artifacts/transition-plan-command-audit.md`
+- [x] Task 5: Resolve decomposition — single skill vs family
+  - **Purpose:** Close design.md Section 6 open question with data.
+  - **Steps:**
+    1. Apply audit heuristic: shared **contract** (paths, YAML, output shape) vs mode-specific steps.
+    2. Compare to research family rationale (independent lifecycles vs sequential phases).
+    3. Record decision + rationale below (**Decomposition decision**).
+  - **Files:** This section + audit recommendation (cross-check).
+  - **Acceptance:** Single vs family stated; references audit; aligns with Task 6 layout.
 
-- [ ] Task 5: Resolve decomposition — single skill vs family
-  - design.md Section 6 open question: "may decompose into write-plan-setup and write-plan-expand, or stay single if modes are thin enough"
-  - Use audit data: if modes share <30% behavioral instructions, family pattern (like research); if >70% shared, single skill with mode sections
-  - Document decision with rationale in task file
+- [x] Task 6: Convert transition-plan command to write-plan SKILL.md(s) per decomposition decision
+  - **Purpose:** Ship portable skill with `assets/` + `references/structure.yaml`.
+  - **Steps:**
+    1. Add `templates/standard-project/.claude/skills/write-plan/SKILL.md` (Setup + Expand, input modes including `from_design`).
+    2. Add `assets/implementation-plan.md`, `assets/status-and-next-steps.md`, `assets/task-group-skeleton.md` from command templates.
+    3. Add `references/structure.yaml` (inputs, planning roots including `planning-stageN/`, outputs).
+    4. Apply five-property rubric; populate gotchas (≥6).
+  - **Files:** `templates/standard-project/.claude/skills/write-plan/**`
+  - **Acceptance:** Directory matches convention; no 800-line template paste inside SKILL.
 
-- [ ] Task 6: Convert transition-plan command to write-plan SKILL.md(s) per decomposition decision
-  - **Skill directory structure (new convention):**
-    ```
-    skills/write-plan/
-    ├── SKILL.md                          # behavioral contract + workflow
-    ├── assets/
-    │   ├── implementation-plan.md        # copyable template
-    │   ├── status-and-next-steps.md      # copyable template
-    │   └── task-group-skeleton.md        # copyable template for task files
-    └── references/
-        └── structure.yaml               # declares expected output structure
-    ```
-  - If family: parent SKILL.md + `write-plan-setup/SKILL.md` + `write-plan-expand/SKILL.md` (assets live in parent, shared by children)
-  - `references/structure.yaml` must declare: output directories, singleton files, collection files (task groups), and input modes (`--from-artifacts`, `--from-design`, etc.)
-  - Apply five-property rubric; populate gotchas
-  - Consider `--from-design` as a natural input mode addition (this stage used design.md as input)
-
-- [ ] Task 7: Validate write-plan skill against Stage 3's own scaffolding
-  - Meta-test: this stage's planning was created using the command; validate the skill can produce equivalent output
-  - Verify `assets/` templates match what the command would generate
-  - Verify `references/structure.yaml` accurately describes the output shape
-  - Document verdict in task file's Validation Log
+- [x] Task 7: Validate write-plan skill against Stage 3's own scaffolding
+  - **Purpose:** Meta-test that the skill could reproduce this stage’s planning tree shape.
+  - **Steps:**
+    1. Compare `assets/*` to `planning-stage3/implementation-plan.md`, `status-and-next-steps.md`, and group file headers.
+    2. Cross-check `references/structure.yaml` to actual dirs (`tasks/`, singletons, `planning-stage3` note).
+    3. Record **Validation Log** verdict.
+  - **Files:** This task file (Validation Log)
+  - **Acceptance:** GO/NO-GO with concrete file references.
 
 ---
 
@@ -59,20 +60,52 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Audit artifact with mode mapping, tier classification, and template inventory
-- [ ] Decomposition decision documented with rationale
-- [ ] SKILL.md(s) in templates with rubric pass and gotchas
-- [ ] `assets/` directory with copyable templates
-- [ ] `references/structure.yaml` with output schema
-- [ ] Validation log with meta-test verdict
+- [x] Audit artifact with mode mapping, tier classification, and template inventory
+- [x] Decomposition decision documented with rationale
+- [x] SKILL.md in templates with rubric pass and gotchas
+- [x] `assets/` directory with copyable templates
+- [x] `references/structure.yaml` with output schema
+- [x] Validation log with meta-test verdict
+
+---
+
+## Decomposition decision (Task 5)
+
+**Verdict:** **Single skill:** `write-plan` with two workflows (**Setup** and **Expand**) in one `SKILL.md`.
+
+**Evidence (from audit):**
+- Setup-only and Expand-only *steps* split roughly 40% / 22% of instruction units, with ~38% shared tables and contracts — raw counts alone suggest a family, but the **shared rubric surface** (path roots, frontmatter validity, file naming, error classes) is what agents must not get wrong in either phase.
+- Expand **depends** on Setup artifacts; the modes are **sequential phases** of one capability, unlike **research** (research-setup / research-conduct / research-consolidate as separable invocations).
+
+**design.md §6:** “May decompose into write-plan-setup and write-plan-expand, or stay single if modes are thin enough” — modes are **thick in prose** but **thin as separate products**; a family would duplicate structure.yaml and path rules or force a parent read for every child, yielding little clarity gain.
+
+**If we chose family anyway:** Parent + two children with `read ../SKILL.md` pattern — **deferred** unless product feedback demands separate invocations.
+
+---
+
+## 📋 Validation Log (Task 7)
+
+**Date:** 2026-05-02  
+**Reference tree:** `planning-stage3/`
+
+| Check | Result | Notes |
+|-------|--------|-------|
+| `implementation-plan.md` shape vs `assets/implementation-plan.md` | Pass | Same frontmatter keys, overview + goals + checkbox sections + Definition of Done; Stage 3 file has extra “Related” block — skill template includes Related placeholder. |
+| `status-and-next-steps.md` vs asset | Pass | Progress table + Next Steps + Notes pattern matches; Stage 3 uses emoji status columns consistent with template. |
+| Group file scaffold vs `task-group-skeleton.md` | Pass | `tasks/03-plan-review-skill.md` still on scaffolding banner (not yet expanded) — matches pre-expand skeleton intent; expanded groups match post-expand expectation. |
+| `references/structure.yaml` | Pass | Declares `tasks/`, singletons, `planning-stageN/` note, input_modes including `from_design`. |
+| SKILL self-containment (FR-8) | Pass | Core workflows readable without reading `.cursor/commands/transition-plan.md`; command referenced only as “archived” pointer. |
+
+**Verdict:** **GO**
+
+**Rationale:** Assets and YAML describe the Stage 3 tree; minor optional sections (extra Related links) are placeholders in assets and acceptable variance. Live regeneration would need source content (ADRs/design); static structural parity holds.
 
 ---
 
 ## 🔗 Dependencies
 
 - No hard dependency on Group 1 (decision), but shared audit patterns apply
-- Decomposition decision (Task 5) gates Task 6
-- **Group 1 follow-up:** decision skill needs template extraction into `assets/` (can happen during this group or cutover)
+- **Group 1 follow-up:** decision skill template extraction into `assets/` (Group 2 convention establishes pattern; decision work deferred per Group 1 task file)
 
 ---
 
