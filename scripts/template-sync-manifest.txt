@@ -5,7 +5,7 @@
 # Note: experimental-project was merged into standard-project (ADR-001: Commands as Guides)
 # All templates now receive all commands - no stable/experimental distinction
 
-# All commands (26 total — includes 2 deprecation stubs)
+# All commands (26 total — includes 5 archived stubs)
 .cursor/commands/commit.md
 .cursor/commands/cursor-rules.md
 .cursor/commands/decision.md
@@ -21,17 +21,22 @@
 .cursor/commands/pre-phase-review.md
 .cursor/commands/pr-validation.md
 .cursor/commands/pr.md
-.cursor/commands/reflect.md
+.cursor/commands/archived/reflect.md
 .cursor/commands/reflection-artifacts.md
-.cursor/commands/research.md
+.cursor/commands/archived/research.md
 .cursor/commands/review.md
-.cursor/commands/spike.md
+.cursor/commands/archived/spike.md
 .cursor/commands/status.md
 .cursor/commands/task.md
 .cursor/commands/task-improvement.md
 .cursor/commands/task-phase.md
 .cursor/commands/task-release.md
 .cursor/commands/transition-plan.md
+
+# Skills — intentionally NOT in this manifest.
+# Skills live only in standard-project (.claude/skills/) for now.
+# learning-project does not have a .claude/ directory yet.
+# When learning-project gains skills, add the shared entries here.
 
 # Configuration files
 .sourcery.yaml
