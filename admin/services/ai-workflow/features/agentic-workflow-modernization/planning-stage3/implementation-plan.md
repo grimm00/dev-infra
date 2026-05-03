@@ -29,7 +29,8 @@ tasks_files:
 **Created:** 2026-05-02
 **Last Updated:** 2026-05-02
 **Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 3 of 4-stage v1  
-**Group 1 merged:** PR #92 (2026-05-03)
+**Group 1 merged:** PR #92 (2026-05-03)  
+**Group 2 merged:** PR #93 (2026-05-03)
 
 ---
 
