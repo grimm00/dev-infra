@@ -14,7 +14,7 @@ Organize unstructured thoughts into themed explorations with prioritized
 research questions. This is the entry point of the thinking pipeline:
 
 ```
-explore-start → (human review) → research → decision → transition-plan → task
+explore-start → (human review) → research → decision → write-plan-setup → task
                       ↑
           explore-amend (feedback loop from downstream)
 ```

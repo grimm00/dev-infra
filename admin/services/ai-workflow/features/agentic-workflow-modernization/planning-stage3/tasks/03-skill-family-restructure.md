@@ -18,7 +18,7 @@ explore/research family pattern regardless of interim single-skill decision text
 
 ---
 
-- [ ] Task 8: Restructure write-plan into family (parent + setup + expand)
+- [x] Task 8: Restructure write-plan into family (parent + setup + expand)
   - **Purpose:** Reduce per-invocation context by mirroring `explore/` + `research/` thin-parent ergonomics without losing shared YAML + asset contracts.
   - **Steps:**
     1. Relocate substantive Setup prose into `templates/standard-project/.claude/skills/write-plan/write-plan-setup/SKILL.md` with **`read ../SKILL.md`** gate (family conventions identical pattern to research children).
@@ -68,8 +68,8 @@ explore/research family pattern regardless of interim single-skill decision text
 
 ## ✅ Completion Criteria
 
-- [ ] write-plan is a family: parent + write-plan-setup + write-plan-expand
-- [ ] write-plan parent is a thin orientation hub (like explore, research parents)
+- [x] write-plan is a family: parent + write-plan-setup + write-plan-expand
+- [x] write-plan parent is a thin orientation hub (like explore, research parents)
 - [ ] decision has `assets/` with extracted templates + `references/structure.yaml`
 - [ ] All modified SKILL.md files pass five-property rubric
 - [ ] `references/structure.yaml` files are accurate for both skills

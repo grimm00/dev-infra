@@ -14,7 +14,7 @@ Structured research from exploration or reflection through requirements ready
 for decisions. This family replaces the multi-mode `/research` command:
 
 ```
-research-setup → (human review) → research-conduct → (human review) → research-consolidate → /decision → /transition-plan
+research-setup → (human review) → research-conduct → (human review) → research-consolidate → /decision → write-plan-setup
          ↑
     explore output & explore-amend (new topics in research-topics.md)
 ```
@@ -100,5 +100,5 @@ research directory until a future naming cleanup.
 ## Related
 
 - **Upstream:** explore → `research-topics.md`
-- **Downstream:** `/decision --from-research`, `/transition-plan --from-adr`
+- **Downstream:** `/decision --from-research`, **write-plan-setup** (`--from-adr` semantics)
 - **Lateral:** **explore** family for exploration paths and amend loop

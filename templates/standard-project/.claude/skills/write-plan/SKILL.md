@@ -1,41 +1,40 @@
 ---
 name: write-plan
 description: >-
-  Create or expand implementation planning documents (implementation-plan.md,
-  status-and-next-steps.md, tasks/) from ADRs, artifacts, reflection output, or
-  design docs. Setup mode scaffolds the tree; Expand mode deepens one task group.
-  Use when the user wants /transition-plan, planning scaffolding, or to expand a
-  planning group. Read references/structure.yaml for output shape; copy templates
-  from assets/ rather than inventing filenames.
+  Write-plan skill family parent. Orientation and shared conventions for scaffolding
+  and expanding implementation plans. Do NOT invoke directly — use write-plan-setup
+  (scaffold planning tree) or write-plan-expand (deepen one group file). Children
+  should read this file first for path rules and contracts.
 disable-model-invocation: true
 ---
 
-# Write-Plan
+# Write-Plan — Skill Family
 
-Replace the `/transition-plan` command with a **two-phase skill**: **Setup**
-(scaffold planning tree) and **Expand** (add detail to one group file). Both
-phases share path detection, YAML frontmatter rules, and output layout — see
-`references/structure.yaml`.
+Create or evolve **uniform planning trees** (`implementation-plan.md`,
+`status-and-next-steps.md`, `tasks/`) sourced from ADRs, artifacts, reflections,
+or design docs. Mirrors the retired `/transition-plan` command as two focused
+skills so each invocation carries less procedural surface area.
 
----
+```
+write-plan-setup → (human review of scaffolding) → write-plan-expand → (repeat expand) → execution workflow
+```
 
-## When to use
+## Available Skills
 
-- After decisions or design work and the user wants an actionable task plan.
-- User says `/transition-plan`, “scaffold implementation plan”, “expand group N”.
-- Staged work needs `planning/…` or `planning-stageN/…` under a feature.
+| Skill | When to use |
+|-------|-------------|
+| **write-plan-setup** | **Setup mode:** scaffold `implementation-plan.md`, `status-and-next-steps.md`, and skeletized `tasks/NN-group.md` files |
+| **write-plan-expand** | **Expand mode:** turn one scaffolding group file into detailed steps / acceptance criteria |
 
-## When not to use
+## Family Conventions
 
-- No source material (ADR, artifact, reflection, or design) agreed — gather
-  inputs first.
-- Only code changes, no planning tree — use implementation tasks, not this skill.
+Child skills live in `write-plan-setup/` and `write-plan-expand/`. Before running a
+workflow, **`read ../SKILL.md`** in that child loads this orientation (path detection,
+templates location, parity rules).
 
----
+### Path Detection
 
-## Path detection
-
-Pick **one** planning root and use it for the whole invocation:
+Pick **one** planning root and use it for the whole subtree:
 
 | Layout | Planning root |
 |--------|----------------|
@@ -44,96 +43,39 @@ Pick **one** planning root and use it for the whole invocation:
 
 **Staged planning:** If the feature already uses `planning-stage2/`, `planning-stage3/`, etc., create **sibling** directories — do not silently merge into an old stage without user confirmation.
 
-**Detection:** If `admin/services/` applies, prefer feature-local paths. Otherwise use maintainer docs layout. Document the chosen subdirectory in `status-and-next-steps.md` Notes.
+**Detection:** If `admin/services/` applies in the repo, prefer the dev-infra layout row. Otherwise use the maintainer-docs row. Record the chosen subdirectory in `status-and-next-steps.md` Notes.
 
----
+Details and `{N}` semantics: `references/structure.yaml` (`planning_roots`).
 
-## Preconditions (stop if unmet)
+### Shared Preconditions
 
-1. **Topic / feature name** is known or inferable from context.
-2. **Input mode** identified: `from_adr` | `from_artifacts` | `from_reflection` | `from_design`.
-3. Source paths exist and are readable.
+1. **Topic / feature name** is known or inferable.
+2. **Input mode** is identified (`from_adr` | `from_artifacts` | `from_reflection` | `from_design`) — see child skills.
+3. Source paths exist and are readable — or the workflow stops with options.
 
----
+### Templates and Contract
 
-## Input modes
+- **Copy, do not reinvent filenames:** templates live in `assets/` beside this file.
+- **Declarative I/O:** `references/structure.yaml` is the authoritative map of Setup vs Expand outputs (`setup_output`, `expand_output`).
+- **Frontmatter parity:** `task_count`, `groups[]`, `tasks_files[]`, and body checkboxes must stay consistent across Setup and Expand (Expand never drops the plan root).
 
-| Mode | Read |
-|------|------|
-| **from_adr** | ADR files under `decisions/…`; optional `research/…/requirements.md` |
-| **from_artifacts** | Given artifact (checklist, handoff doc, transition brief) |
-| **from_reflection** | Reflection doc; if project expects generated artifacts first, surface that dependency |
-| **from_design** | `design.md` or Section excerpts: goals, stages, open questions → task groups |
+### Commit Discipline
 
-Extract: decisions, requirements, success criteria, constraints, and suggested group boundaries.
+Planning artifacts are documentation. Prefer `docs([feature]):` or the host repo’s planner scope; avoid merging unless policy requires it.
 
----
+## When NOT to Use This Family
 
-## Setup workflow
-
-**Goal:** Create `implementation-plan.md`, `status-and-next-steps.md`, and
-`tasks/NN-group-slug.md` skeletons.
-
-1. **Load sources** per Input modes above.
-2. **Choose transition type:** feature (default), release (source path or content mentions release/version), or ci-cd if pipeline-only scope.
-3. **Organize task groups:** 2–8 tasks per group; **global** task numbering 1…N across all groups; kebab-case group filenames.
-4. **Author `implementation-plan.md`:**
-   - YAML frontmatter: `task_count`, `groups` (name, file, task ids), `tasks_files`.
-   - Body: checkbox list matching `task_count` exactly. See `assets/implementation-plan.md`.
-5. **Author `status-and-next-steps.md`:** progress table + next steps. See `assets/status-and-next-steps.md`.
-6. **Author each `tasks/NN-….md`:** copy `assets/task-group-skeleton.md`; fill titles and one-line hints only (**no** long TDD blocks yet). Header `**Status:** 🔴 Scaffolding (needs expansion)`.
-7. **Commit guidance:** suggest `docs([feature]): …` or project convention; do not require dev-infra-specific branch polish unless the repo uses it.
-
----
-
-## Expand workflow
-
-**Goal:** One group file gains detailed steps, acceptance criteria, and files.
-
-**Trigger:** User specifies group index (1-based) or group name; optional `--all` for small plans only.
-
-1. **Locate group file** from frontmatter `groups[].file`.
-2. **Verify status** is scaffolding. If already `✅ Expanded`, skip or re-expand only on explicit request.
-3. **Classify group type** for order of detail:
-   | Type | Order |
-   |------|-------|
-   | Code + tests | RED → GREEN → REFACTOR in task text |
-   | Scripts | tests → script → integration |
-   | Docs / planning only | outline → link → verify |
-4. **Rewrite each task** with Purpose, Steps/TDD, Files, Acceptance.
-5. **Update header:** `**Status:** ✅ Expanded`; remove scaffolding banner.
-6. **Commit** with a scoped message describing the expanded group.
-
----
-
-## Behavioral contract
-
-- **Observable:** Every task checkbox in `implementation-plan.md` maps to exactly one row in a group file; filenames match `tasks_files`.
-- **Bounded:** If multiple features match, **stop** and ask which `feature/` directory; do not guess across unrelated features.
-- **Outcome-framed:** Deliver files under the chosen planning root; use templates in `assets/`.
-- **Delta-only:** Do not paste full multi-hundred-line templates into chat — **copy from `assets/`** on disk.
-- **Failure-aware:** Missing requirements, missing source, or existing `implementation-plan.md` → surface options (abort, new stage dir, `--force` if project allows).
-
----
-
-## Gotchas
-
-1. **Frontmatter must match body:** `task_count` equals checkbox count; `groups[].tasks` partition 1…N.
-2. **Expand is not Setup:** never delete `implementation-plan.md` when expanding a group.
-3. **`from_reflection` chaining** may depend on another workflow producing artifacts — call that out instead of inventing content.
-4. **Release transitions** reuse the **same file shapes**; only grouping semantics change.
-5. **`--all` expand** is context-heavy — prefer one group at a time for N > 3 groups.
-6. **Staged dirs:** dev-infra Stage 3 uses `planning-stage3/` not `planning/`; mirror sibling pattern the feature already uses.
-
----
+| Situation | Use instead |
+|-----------|-------------|
+| No agreed source material | Gather ADRs / design first (**decision**, upstream research) |
+| Only code churn, no plan files | Implementation task workflows |
+| Plan already fully expanded | Execute tasks — do not rescaffold |
 
 ## Related
 
 - **decision** — upstream ADRs.
-- **plan-review** — validate plan before execution.
-- Source command archived in dev-infra: `.cursor/commands/transition-plan.md`.
+- **plan-review** — validate plan consistency before execution.
+- **research / explore** — earlier pipeline stages feeding planning inputs.
 
----
-
-**Canonical shape:** `references/structure.yaml`  
-**Copyable templates:** `assets/implementation-plan.md`, `assets/status-and-next-steps.md`, `assets/task-group-skeleton.md`
+**Canonical shapes:** `references/structure.yaml`  
+**Templates:** `assets/implementation-plan.md`, `assets/status-and-next-steps.md`, `assets/task-group-skeleton.md`
