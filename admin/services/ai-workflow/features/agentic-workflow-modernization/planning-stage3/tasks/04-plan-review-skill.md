@@ -9,16 +9,16 @@
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 3` to add detailed implementation notes.
+> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 4` to add detailed implementation notes.
 
-- [ ] Task 8: Audit plan-review command and classify behavioral instructions
+- [ ] Task 11: Audit plan-review command and classify behavioral instructions
   - Read `.cursor/commands/plan-review.md` (416 lines)
   - Classify instructions against precision tiers
   - Produce audit artifact at `planning-stage3/artifacts/plan-review-command-audit.md`
   - Key gap to address: path detection doesn't support `planning-stageN/` directories
   - **Identify checklist/reference content** that belongs in `assets/` or `references/`
 
-- [ ] Task 9: Convert plan-review to SKILL.md
+- [ ] Task 12: Convert plan-review to SKILL.md
   - **Skill directory structure:**
     ```
     skills/plan-review/
@@ -41,7 +41,7 @@
 1. Complete the Planner role group with a review skill that catches cross-stage gaps
 2. Fix the path detection limitation (staged planning directories)
 3. Ensure plan-review enforces prior-learnings carry-forward at stage boundaries
-4. **Adopt the `assets/` + `references/` convention** established by write-plan (Group 2)
+4. **Adopt the `assets/` + `references/` convention** established by write-plan (Group 2) and validated by Group 3
 
 ---
 
@@ -57,8 +57,8 @@
 
 ## 🔗 Dependencies
 
-- Benefits from patterns established in decision and write-plan conversions (Groups 1-2)
-- **Depends on Group 2:** adopts the `assets/` + `references/` convention that write-plan establishes
+- Benefits from patterns established in Groups 1-3
+- **Depends on Group 3:** family pattern and assets/references convention finalized for write-plan and decision
 - No hard dependency on Group 1
 
 ---

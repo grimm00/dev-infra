@@ -56,7 +56,7 @@
 - [x] Five-property rubric passes, gotchas populated
 - [x] Validation log with go/no-go verdict
 
-> **Follow-up (Group 2 or cutover):** Extract inline templates (ADR template, hub README, decision-interview scaffold) into `assets/` and add `references/structure.yaml` per the convention established in Group 2. The decision skill was converted before this convention was defined.
+> **Follow-up (Group 3 — Skill Family Restructure):** Extract inline templates (ADR template, hub README, decision-interview scaffold) into `assets/` and add `references/structure.yaml`. Tracked as Task 9 in `03-skill-family-restructure.md`.
 
 ---
 

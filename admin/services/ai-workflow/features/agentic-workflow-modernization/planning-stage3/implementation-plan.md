@@ -1,5 +1,5 @@
 ---
-task_count: 12
+task_count: 15
 groups:
   - name: "Decision Skill"
     file: "tasks/01-decision-skill.md"
@@ -7,17 +7,21 @@ groups:
   - name: "Write-Plan Skill"
     file: "tasks/02-write-plan-skill.md"
     tasks: [4, 5, 6, 7]
+  - name: "Skill Family Restructure"
+    file: "tasks/03-skill-family-restructure.md"
+    tasks: [8, 9, 10]
   - name: "Plan-Review Skill"
-    file: "tasks/03-plan-review-skill.md"
-    tasks: [8, 9]
+    file: "tasks/04-plan-review-skill.md"
+    tasks: [11, 12]
   - name: "Cutover and Quality Gate"
-    file: "tasks/04-cutover-and-quality-gate.md"
-    tasks: [10, 11, 12]
+    file: "tasks/05-cutover-and-quality-gate.md"
+    tasks: [13, 14, 15]
 tasks_files:
   - "tasks/01-decision-skill.md"
   - "tasks/02-write-plan-skill.md"
-  - "tasks/03-plan-review-skill.md"
-  - "tasks/04-cutover-and-quality-gate.md"
+  - "tasks/03-skill-family-restructure.md"
+  - "tasks/04-plan-review-skill.md"
+  - "tasks/05-cutover-and-quality-gate.md"
 ---
 # Implementation Plan — Stage 3: Planner (Agentic Workflow Modernization)
 
@@ -31,28 +35,29 @@ tasks_files:
 
 ## 📋 Overview
 
-Convert the **Planner** role group of dev-infra commands to skills. This stage converts decision (632 lines, hybrid with interview pattern), transition-plan (820 lines, **single write-plan skill** with Setup + Expand), and plan-review (416 lines, procedural).
+Convert the **Planner** role group of dev-infra commands to skills. This stage converts decision (632 lines, hybrid with interview pattern), transition-plan (820 lines, two-mode procedural), and plan-review (416 lines, procedural). Write-plan is decomposed into a family (parent + setup + expand) consistent with the explore and research family patterns.
 
-**Skills converted in this stage:** decision, write-plan (single skill; Setup + Expand workflows), plan-review
+**Skills converted in this stage:** decision, write-plan (family: parent + write-plan-setup + write-plan-expand), plan-review
 **Entry criteria:** Stage 2 go decision (logged ✅ 2026-05-02)
 
-**New convention introduced:** Skills adopt an `assets/` + `references/` directory structure. Template-heavy content (scaffolding files, checklists) lives in `assets/` as copyable files. A `references/structure.yaml` declares the skill's expected I/O shape — input modes, output directories, singleton vs. collection files. This convention is established during write-plan (Group 2) and adopted by all Stage 3 skills.
+**New convention introduced:** Skills adopt an `assets/` + `references/` directory structure. Template-heavy content (scaffolding files, checklists) lives in `assets/` as copyable files. A `references/structure.yaml` declares the skill's expected I/O shape — input modes, output directories, singleton vs. collection files.
 
 **Key Changes:**
 
-- decision: hybrid skill — procedural interview workflow + behavioral contract for ADR quality. Bakes in the interview pattern from this feature's own research. Follow-up: extract inline templates into `assets/`.
-- transition-plan → write-plan: largest command (820 lines); **single skill** with Setup + Expand (Group 2 decision). **First skill to adopt `assets/` + `references/` convention** (most template-heavy).
-- plan-review: procedural review skill — ensures stage plans account for prior learnings and cross-checks consistency. Adopts the new convention.
+- decision: hybrid skill — procedural interview workflow + behavioral contract for ADR quality. Bakes in the interview pattern from this feature's own research. Follow-up: extract inline templates into `assets/` + add `references/structure.yaml` (Group 3).
+- transition-plan → write-plan: family pattern (parent hub + write-plan-setup + write-plan-expand). Initial single-skill conversion (Group 2) restructured into family (Group 3). **First skill to adopt `assets/` + `references/` convention** (most template-heavy).
+- plan-review: procedural review skill — ensures stage plans account for prior learnings and cross-checks consistency. Adopts the `assets/` + `references/` convention.
 - 3 commands archived after conversion (decision, transition-plan, plan-review).
 
 ---
 
 ## 🎯 Goals
 
-1. **Convert the interview-pattern skill** — decision is the first skill with a structured human-interview workflow baked in. Validates hybrid encoding at a new level of interactivity.
-2. **Resolve the write-plan decomposition question** — design.md Section 6 deferred to implementation time. **Resolved in Group 2:** single `write-plan` skill (Setup + Expand workflows); see `tasks/02-write-plan-skill.md`.
-3. **Complete the Planner role group** — plan-review rounds out the stage; full thinking pipeline becomes skill-based after merge.
-4. **Apply proven patterns** — Stage 1 and 2 established: five-property rubric, templates-as-assets, family pattern, clean cutover, regression test. Reuse, don't reinvent.
+1. **Convert the interview-pattern skill** — decision is the first skill with a structured human-interview workflow baked in.
+2. **Decompose write-plan into a family** — consistent with explore and research families; parent hub + setup + expand children.
+3. **Establish `assets/` + `references/` convention** — all Stage 3 skills get template assets and declarative structure.yaml.
+4. **Complete the Planner role group** — plan-review rounds out the stage; full thinking pipeline becomes skill-based after merge.
+5. **Apply proven patterns** — Stage 1 and 2 established: five-property rubric, templates-as-assets, family pattern, clean cutover.
 
 ---
 
@@ -69,25 +74,31 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] Task 6: Convert transition-plan to write-plan SKILL.md(s) per decomposition decision
 - [x] Task 7: Validate write-plan skill against Stage 3's own scaffolding (meta-test)
 
+### Skill Family Restructure
+- [ ] Task 8: Restructure write-plan into family (parent + write-plan-setup + write-plan-expand)
+- [ ] Task 9: Restructure decision skill with assets/ + references/
+- [ ] Task 10: Validate restructured skills (rubric + structure.yaml accuracy)
+
 ### Plan-Review Skill
-- [ ] Task 8: Audit plan-review command and classify behavioral instructions
-- [ ] Task 9: Convert plan-review to SKILL.md
+- [ ] Task 11: Audit plan-review command and classify behavioral instructions
+- [ ] Task 12: Convert plan-review to SKILL.md
 
 ### Cutover and Quality Gate
-- [ ] Task 10: Install skills + archive commands (decision, write-plan, plan-review)
-- [ ] Task 11: Verify all Stage 3 skills pass five-property rubric
-- [ ] Task 12: Final quality gate sweep + Stage 3 exit criteria
+- [ ] Task 13: Install skills + archive commands (decision, write-plan, plan-review)
+- [ ] Task 14: Verify all Stage 3 skills pass five-property rubric
+- [ ] Task 15: Final quality gate sweep + Stage 3 exit criteria
 
 ---
 
 ## ✅ Definition of Done
 
 - [x] decision skill exists with interview workflow and ADR behavioral contract
-- [x] write-plan decomposition decided and implemented (single or family)
+- [ ] write-plan is a family: parent + write-plan-setup + write-plan-expand
+- [ ] decision has `assets/` + `references/structure.yaml`
 - [ ] plan-review skill exists with staged-planning path support
 - [ ] All skills pass five-property rubric with populated gotchas
 - [ ] Self-containment (FR-8) verified for each skill
-- [ ] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml` *(write-plan done; decision/plan-review pending)*
+- [ ] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml`
 - [ ] 3 commands archived: decision.md, transition-plan.md, plan-review.md
 - [ ] CI passes after cutover
 - [ ] Stage 3 exit criteria from design.md Section 5 verified
@@ -101,7 +112,6 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - **Stage 2 learnings:** [../planning-stage2/status-and-next-steps.md](../planning-stage2/status-and-next-steps.md)
 - **Source ADRs:** [ADR-001 through ADR-005](../decisions/)
 - **Source design:** [design.md Section 5 — Stage 3: Planner](../designs/design.md)
-- **Open question:** [design.md Section 6 — Transition-plan mode decomposition](../designs/design.md)
 - **Conversion patterns:** Stage 1-2 established: five-property rubric, templates-as-assets, family pattern, clean cutover
 
 ---
