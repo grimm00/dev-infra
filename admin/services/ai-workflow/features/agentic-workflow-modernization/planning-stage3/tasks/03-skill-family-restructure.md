@@ -45,7 +45,7 @@ explore/research family pattern regardless of interim single-skill decision text
 
 ---
 
-- [ ] Task 10: Validate restructured skills
+- [x] Task 10: Validate restructured skills
   - **Purpose:** Guard cutover regressions ahead of Plan-Review (Group 4) + eventual command archival.
   - **Steps:**
     1. **Routing sanity:** Confirm parent forbids mistaken direct invocation wording consistent with explore/research parents (`disable-model-invocation`, explicit child routing).
@@ -71,8 +71,8 @@ explore/research family pattern regardless of interim single-skill decision text
 - [x] write-plan is a family: parent + write-plan-setup + write-plan-expand
 - [x] write-plan parent is a thin orientation hub (like explore, research parents)
 - [x] decision has `assets/` with extracted templates + `references/structure.yaml`
-- [ ] All modified SKILL.md files pass five-property rubric
-- [ ] `references/structure.yaml` files are accurate for both skills
+- [x] All modified SKILL.md files pass five-property rubric
+- [x] `references/structure.yaml` files are accurate for both skills
 
 ---
 
@@ -86,15 +86,17 @@ explore/research family pattern regardless of interim single-skill decision text
 
 ## 📋 Validation notes (Task 10)
 
-_Add GO/NO-GO narrative after onsite verification._
+Executed 2026-05-02 in-repo review (templates/standard-project write-plan family + decision).
 
 | Artifact | Spot-check | Verdict |
 |----------|-------------|---------|
-| `write-plan/SKILL.md` | Parent routing + duplication vs explore parent | Pending |
-| `write-plan-setup`, `write-plan-expand` | `read ../SKILL.md`; contracts + gotchas breadth | Pending |
-| `write-plan/references/structure.yaml` | `setup_output` vs `expand_output` coherence | Pending |
-| `decision/SKILL.md` | Asset pointers replace inline scaffolds | Pending |
-| `decision/references/structure.yaml` | Mirrors interview→hub→ADR→summary flow | Pending |
-| `explore` / `research` parents | Mention **write-plan-setup** not `/transition-plan` | Pending |
+| `write-plan/SKILL.md` | Parent-only orientation; explicit child routing; path table aligns with YAML | ✅ GO |
+| `write-plan-setup`, `write-plan-expand` | Each gates on `read ../SKILL.md`; setup vs expand I/O spelled; STOP/failure cues present | ✅ GO |
+| `write-plan/references/structure.yaml` | `setup_output` vs `expand_output` match filesystem behavior | ✅ GO |
+| `decision/SKILL.md` | Scaffolds live in assets; workflow + behavioral sections retained | ✅ GO |
+| `decision/references/structure.yaml` | Interview singleton → hub → ADR collection → summary | ✅ GO |
+| `explore` / `research` parents | References **write-plan-setup** successor label | ✅ GO |
 
-**Rubric rollup:** Pending explicit tick-box commentary after reviewer pass.
+**Rubric rollup (FR-19) on touched SKILL bodies:** Observability anchored on explicit deliverables/table rows (**Behavioral contract** headings). Bounded scope via Preconditions + explicit cease conditions. Outcome-framed section titles (**Goal:** / workflow objectives). Delta-only reliance on **`assets/`** + YAML instead of pasted templates inline. Failure-aware STOP/escalate language retained on every skill surface post-split.
+
+Overall: **GO** for Group 3 template deliverables pending CI on PR branch.

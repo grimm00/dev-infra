@@ -78,7 +78,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 ### Skill Family Restructure
 - [x] Task 8: Restructure write-plan into family (parent + write-plan-setup + write-plan-expand)
 - [x] Task 9: Restructure decision skill with assets/ + references/
-- [ ] Task 10: Validate restructured skills (rubric + structure.yaml accuracy)
+- [x] Task 10: Validate restructured skills (rubric + structure.yaml accuracy)
 
 ### Plan-Review Skill
 - [ ] Task 11: Audit plan-review command and classify behavioral instructions
