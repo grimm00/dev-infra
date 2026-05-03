@@ -40,4 +40,4 @@
 - **Group 2 — Write-Plan skill** — merged via [PR #93](https://github.com/grimm00/dev-infra/pull/93) (2026-05-03)
 - **Group 3 — Skill family restructure** — merged via [PR #94](https://github.com/grimm00/dev-infra/pull/94) (2026-05-03)
 - **Group 4 — Plan-review skill** — merged via [PR #95](https://github.com/grimm00/dev-infra/pull/95) (2026-05-03)
-- **Group 5 — Cutover and quality gate** — this PR closes Stage 3 (awaiting merge to `develop`)
+- **Group 5 — Cutover and quality gate** — [PR #96](https://github.com/grimm00/dev-infra/pull/96) (merged pending)

@@ -33,7 +33,7 @@ tasks_files:
 **Group 2 merged:** PR #93 (2026-05-03)  
 **Group 3 merged:** PR #94 (2026-05-03)  
 **Group 4 merged:** PR #95 (2026-05-03)  
-**Group 5 cutover:** this PR completes Stage 3 (awaiting merge)
+**Group 5 cutover:** PR [#96](https://github.com/grimm00/dev-infra/pull/96) completes Stage 3 (awaiting merge to `develop`)
 
 ---
 
