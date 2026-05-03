@@ -24,7 +24,7 @@
   - **Files:** `.claude/skills/research/`, `.claude/skills/spike/`, `.claude/skills/reflect/`, `.cursor/commands/archived/`, template archived dirs, `scripts/template-sync-manifest.txt`
   - **Acceptance:** root `.claude/skills/` has all 6 new skill dirs; 3 commands archived at root + 2 template dirs; manifest updated
 
-- [ ] Task 13: Regression test research-conduct against recent topic research
+- [x] Task 13: Regression test research-conduct against recent topic research
   - **Purpose:** Go/no-go gate — same quality bar as discuss (Stage 1 C5-3)
   - **Steps:**
     1. Identify a recent research artifact produced under the command era (before Group 1)
@@ -63,7 +63,29 @@
 
 ## 📋 Validation Log
 
-*(populated during task execution)*
+### Task 13: research-conduct Regression Test (2026-05-02)
+
+**Reference artifact:** `research/topic-8-behavioral-contracts.md` (Status: ✅ Complete, Completed: 2026-04-10) — produced under command era, 10 research goals all `[x]`, 14+ sources consulted, web searches documented with `[x]` in methodology, findings with Source + Relevance.
+
+**Comparison method:** Static — command `Conduct Mode Workflow §1–7` vs skill `research-conduct/SKILL.md §Workflow 1–7`. Behavioral instruction mappings cross-referenced against audit (C1–C5, T1–T4) in `artifacts/research-command-audit.md`.
+
+| Behavior | Command | Skill | Delta |
+|----------|---------|-------|-------|
+| Web search mandatory | "Web search is **required**" | "mandatory… do not mark complete without ≥1 successful call per topic" + failure-aware exception | **Improvement** — failure path documented |
+| Query derivation | "Formulate from question, sub-questions, sources" (Tier 2) | Bounded: ≥1 query from each of main question, each sub-question bullet, each unchecked methodology line; queries **recorded in topic doc** | **Improvement** — auditable, bounded |
+| Finding quality | "Record with source, note relevance" | heading + **Source:** credible link + **Relevance:** 1–2 sentences — all mandatory | **Improvement** — explicit minimum |
+| Topic ordering (all) | "Research high-priority topics first" (Tier 2) | Stable-sort by emoji priority (🔴→Medium→Low→unset); within band, preserve table order | **Improvement** — deterministic algorithm |
+| Completion condition | "Update Status: ✅ Complete" (no explicit gate) | 4-part gate: ≥1 finding w/ Source+Relevance; Analysis+Recommendations non-empty or N/A; Goals all `[x]` or deferred with user-approved note; Sources checklist reflects consulted | **Improvement** — explicit preconditions |
+| Requirements update | "Add any new requirements" | delta-only: append net-new only; edit in place for extensions; no renumbering in conduct | **Improvement** — delta-only property |
+| Commit format | Shows `git push origin develop` | "Default: do not git push; follow project norms. Commit locally unless user asks." | **Improvement** — push policy gotcha added |
+| Scope boundary | Implicit | Explicit: no scaffolding, no consolidation merges in this skill | **Improvement** — FR-8 self-containment |
+| Preconditions | Implicit (assumed setup ran) | Explicit STOP + redirect to research-setup if files missing | **Improvement** |
+
+**Real-artifact check:** topic-8 has all elements the skill specifies: queries documented in Methodology, findings with Source + Relevance, Goals all `[x]`, Status + Completed date, Requirements Discovered section, summary updated, hub updated.
+
+**Gaps or regressions:** None identified.
+
+**Verdict: GO** — research-conduct skill demonstrates no quality regression vs command. 9 of 9 conduct behaviors preserved; 8 behavioral improvements with tighter bounding or better failure-awareness. Stage 2 go/no-go signal is **positive**.
 
 ---
 
