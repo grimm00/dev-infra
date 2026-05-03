@@ -1,7 +1,7 @@
 # Status & Next Steps — Stage 3: Planner
 
 **Status:** 🟠 In Progress
-**Last Updated:** 2026-05-02
+**Last Updated:** 2026-05-03
 
 ---
 
@@ -13,7 +13,7 @@
 |-------|--------|----------|-------|
 | Decision Skill | ✅ Active/Complete | 3/3 tasks | Merged PR #92; audit, `decision/SKILL.md`, validation GO |
 | Write-Plan Skill | ✅ Active/Complete | 4/4 tasks | Merged [PR #93](https://github.com/grimm00/dev-infra/pull/93): audit, single-skill `write-plan/` + assets + structure.yaml, meta-test GO |
-| Skill Family Restructure | ✅ Active/Complete | 3/3 tasks | Parent + setup/expand; decision `assets/` + `references/`; validated in-task |
+| Skill Family Restructure | ✅ Active/Complete | 3/3 tasks | Merged [PR #94](https://github.com/grimm00/dev-infra/pull/94): write-plan family + decision assets/`references/` |
 | Plan-Review Skill | 🔴 Not Started | 0/2 tasks | Audit, convert (staged-planning path support) |
 | Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Install, rubric sweep, exit criteria |
 
@@ -40,4 +40,4 @@
 
 - **Group 1 — Decision skill** — merged via [PR #92](https://github.com/grimm00/dev-infra/pull/92) (2026-05-03)
 - **Group 2 — Write-Plan skill** — merged via [PR #93](https://github.com/grimm00/dev-infra/pull/93) (2026-05-03)
-- **Group 3 — Skill family restructure** — [PR #94](https://github.com/grimm00/dev-infra/pull/94)
+- **Group 3 — Skill family restructure** — merged via [PR #94](https://github.com/grimm00/dev-infra/pull/94) (2026-05-03)
