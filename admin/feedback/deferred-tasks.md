@@ -592,3 +592,13 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 - ~~**PR88-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** `--actionable-only` missing from reflect Options table~~ — ✅ Fixed inline
 - **PR88-Overall-#2 (🟡 MEDIUM):** Generalize reflect workflow “recent merged PRs” step: phrase as provider-agnostic list with `gh pr list` as example (portability).
+
+---
+
+## PR #90 Additions
+
+**Date:** 2026-05-02  
+**Status:** Sourcery overall comments triaged (effort-aware; no CRITICAL/HIGH; no LOW-effort inline wins)
+
+- **PR90-Overall-#1 (🟡 MEDIUM, 🟠 HIGH effort):** Research family conventions are duplicated in `templates/standard-project/.claude/skills/research/SKILL.md` and root `.claude/skills/research/SKILL.md` — designate a single source of truth (or explicit pointer) to prevent silent drift.
+- **PR90-Overall-#2 (🟡 MEDIUM, 🟡 MEDIUM effort):** Cross-skill relative references (`../explore/SKILL.md`, `../SKILL.md`, etc.) — add a short invariants note or validation so required paths stay present as the skill tree evolves.
