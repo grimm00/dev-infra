@@ -1,15 +1,15 @@
 ---
-name: review
+name: pre-commit-review
 description: >-
   Stage changes, capture a diff for review, and draft a commit message without
   committing. Hybrid skill: procedural staging plus behavioral diff-review
   guidance. Preserves the review-then-commit pause — STOP after presenting;
-  never auto-commit. Use when the user invokes review or needs the agentic
-  pre-commit review workflow.
+  never auto-commit. Use when the user invokes pre-commit-review, review, or
+  needs the agentic pre-commit review workflow.
 disable-model-invocation: true
 ---
 
-# Review
+# Pre-Commit Review
 
 Stage changes, capture review artifacts, present a review bundle, **then STOP**.
 This workflow exists because agentic edits are easy to commit before a human

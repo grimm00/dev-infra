@@ -2,7 +2,7 @@
 # Read alongside SKILL.md; YAML wins if any prose drifts.
 
 schema_version: 1
-skill: review
+skill: pre-commit-review
 
 invocation_aliases:
   - id: legacy_command

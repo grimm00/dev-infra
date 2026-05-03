@@ -29,17 +29,17 @@
   **Purpose:** Deliver a first-class **review** skill that preserves the review-then-commit pause and path detection while moving long template bodies out of the SKILL into `assets/` and declaring outputs in `references/structure.yaml`.
 
   **Steps:**
-  1. Create `templates/standard-project/.claude/skills/review/SKILL.md` with frontmatter (`name`, `description`, `disable-model-invocation`) aligned to sibling skills.
+  1. Create `templates/standard-project/.claude/skills/pre-commit-review/SKILL.md` with frontmatter (`name`, `description`, `disable-model-invocation`) aligned to sibling skills.
   2. Encode **Configuration** (three path layouts + auto-detection + `.gitignore` warning) and **Process** steps 1–5 from the command, using imperative checklists.
   3. Move the **summary.md** scaffold into `assets/summary-template.md`; SKILL references the file path instead of pasting the full template (delta-only).
   4. Add **Behavioral Contract** subsections: presentation bundle (summary, draft message, stats, folder path); **explicit STOP — do not commit**; integration with `/commit`.
-  5. Author `references/structure.yaml`: schema_version, `skill: review`, path detection roots, artifact folder pattern, required files (`summary.md`, `diff.patch`) with roles.
+  5. Author `references/structure.yaml`: schema_version, `skill: pre-commit-review`, path detection roots, artifact folder pattern, required files (`summary.md`, `diff.patch`) with roles.
   6. Add **Gotchas** mirroring command “Tips / Important” (unintended files, `--scope`, secret exclusion).
 
   **Files:**  
-  - `templates/standard-project/.claude/skills/review/SKILL.md`  
-  - `templates/standard-project/.claude/skills/review/assets/summary-template.md`  
-  - `templates/standard-project/.claude/skills/review/references/structure.yaml`
+  - `templates/standard-project/.claude/skills/pre-commit-review/SKILL.md`  
+  - `templates/standard-project/.claude/skills/pre-commit-review/assets/summary-template.md`  
+  - `templates/standard-project/.claude/skills/pre-commit-review/references/structure.yaml`
 
   **Acceptance:** Files exist on disk; STOP / never auto-commit appears verbatim in SKILL; path rules match audit; YAML declares outputs usable by downstream **commit** skill.
 
