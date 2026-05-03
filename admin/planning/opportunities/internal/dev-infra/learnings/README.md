@@ -28,7 +28,8 @@
 
 ### Learning Documents
 
-- **[Decision Interview Exercise](decision-interview-exercise-learnings.md)** - First real use of the decision interview pattern: what worked, what to improve, unexpected discoveries ⭐ **NEW**
+- **[Agentic Workflow Stage 3 — Pipeline Synthesis Gap](agentic-workflow-stage3-pipeline-synthesis-gap.md)** - Missing synthesis step in group-cycle pipeline; narrative/int-opp/reflection triggers; plan-review input reliability ⭐ **NEW**
+- **[Decision Interview Exercise](decision-interview-exercise-learnings.md)** - First real use of the decision interview pattern: what worked, what to improve, unexpected discoveries
 - **[Requirements and Design Prior Art](requirements-and-design-prior-art.md)** - Team engineering proposal that informed the design step discovery in agentic-workflow-modernization
 - **[Fix Management Workflow Learnings](fix-management-workflow-learnings.md)** - Learnings from completing all 8 cross-PR fix batches (28 issues)
 - **[Command Adaptation Template Learnings](command-adaptation-template-learnings.md)** - Learnings from creating the Command Adaptation Template feature
@@ -53,17 +54,18 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 25  
+**Total Learning Documents:** 26  
 **Feature-Specific Learnings:** 9 features (22 phases + 5 fix batches + 1 release total)  
 **CI/CD Improvement Learnings:** 2 improvements  
 **Status:** ✅ Active
 
 **Recent Additions:**
-- **Decision Interview Exercise (2026-04-14)** - First use of the interview pattern for agentic-workflow-modernization ⭐ **NEW**
+- **Pipeline Synthesis Gap (2026-05-02)** - Missing synthesis step in group-cycle; learnings feed-forward for plan-review ⭐ **NEW**
+- **Decision Interview Exercise (2026-04-14)** - First use of the interview pattern for agentic-workflow-modernization
 - Requirements and Design Prior Art (2026-04-02) - Team proposal that informed design step discovery
 - Template Doc Infrastructure Learnings (2026-01-16) - Phase 1 Template Creation: ADR-driven structure, placeholder conventions
 - Explore Two-Mode Learnings (2026-01-13) - Phase 1 Command Structure: task-based docs, timing guidance
 
 ---
 
-**Last Updated:** 2026-04-14
+**Last Updated:** 2026-05-02
