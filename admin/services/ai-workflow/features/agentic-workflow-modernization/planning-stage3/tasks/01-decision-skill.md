@@ -43,6 +43,8 @@
 - [ ] Five-property rubric passes, gotchas populated
 - [ ] Validation log with go/no-go verdict
 
+> **Follow-up (Group 2 or cutover):** Extract inline templates (ADR template, hub README, decision-interview scaffold) into `assets/` and add `references/structure.yaml` per the convention established in Group 2. The decision skill was converted before this convention was defined.
+
 ---
 
 ## 🔗 Dependencies

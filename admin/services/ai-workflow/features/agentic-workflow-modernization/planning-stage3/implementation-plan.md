@@ -35,11 +35,13 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 **Skills converted in this stage:** decision, write-plan (possibly write-plan-setup + write-plan-expand), plan-review
 **Entry criteria:** Stage 2 go decision (logged ✅ 2026-05-02)
 
+**New convention introduced:** Skills adopt an `assets/` + `references/` directory structure. Template-heavy content (scaffolding files, checklists) lives in `assets/` as copyable files. A `references/structure.yaml` declares the skill's expected I/O shape — input modes, output directories, singleton vs. collection files. This convention is established during write-plan (Group 2) and adopted by all Stage 3 skills.
+
 **Key Changes:**
 
-- decision: hybrid skill — procedural interview workflow + behavioral contract for ADR quality. Bakes in the interview pattern from this feature's own research.
-- transition-plan → write-plan: largest command (820 lines). Two modes (setup/expand) — assess decomposition vs single skill during audit.
-- plan-review: procedural review skill — ensures stage plans account for prior learnings and cross-checks consistency.
+- decision: hybrid skill — procedural interview workflow + behavioral contract for ADR quality. Bakes in the interview pattern from this feature's own research. Follow-up: extract inline templates into `assets/`.
+- transition-plan → write-plan: largest command (820 lines). Two modes (setup/expand) — assess decomposition vs single skill during audit. **First skill to adopt `assets/` + `references/` convention** (most template-heavy).
+- plan-review: procedural review skill — ensures stage plans account for prior learnings and cross-checks consistency. Adopts the new convention.
 - 3 commands archived after conversion (decision, transition-plan, plan-review).
 
 ---
@@ -84,6 +86,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [ ] plan-review skill exists with staged-planning path support
 - [ ] All skills pass five-property rubric with populated gotchas
 - [ ] Self-containment (FR-8) verified for each skill
+- [ ] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml`
 - [ ] 3 commands archived: decision.md, transition-plan.md, plan-review.md
 - [ ] CI passes after cutover
 - [ ] Stage 3 exit criteria from design.md Section 5 verified
