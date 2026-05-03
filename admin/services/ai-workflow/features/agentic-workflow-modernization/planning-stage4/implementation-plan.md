@@ -17,7 +17,7 @@ tasks_files:
 ---
 # Implementation Plan — Stage 4: Reviewer (Agentic Workflow Modernization)
 
-**Status:** 🟠 In Progress — Group 1 complete (Tasks 1–3)
+**Status:** 🔴 Not Started
 **Created:** 2026-05-03
 **Last Updated:** 2026-05-03
 **Source:** [design.md Section 5 — Stage 4: Reviewer](../designs/design.md) + Stage 3 learnings
@@ -28,14 +28,14 @@ tasks_files:
 
 Convert the **Reviewer** role group of dev-infra commands to skills, completing v1 of the agentic workflow modernization. This stage converts review (334 lines, hybrid with diff analysis behavioral contract), commit (312 lines, procedural, tightly coupled to review), and handoff (190 lines, procedural). All three are flat skills — no family decomposition needed.
 
-**Skills converted in this stage:** pre-commit-review, commit, handoff
+**Skills converted in this stage:** review, commit, handoff
 **Entry criteria:** Stage 3 go decision (logged ✅ 2026-05-03)
 
 **Conventions carried forward from Stage 3:** All Stage 4 skills adopt the `assets/` + `references/structure.yaml` convention from day one. Review has a summary template (`assets/`); handoff has a handoff template (`assets/`). Commit reads review's artifacts at runtime but doesn't have its own templates — `structure.yaml` declares its coupling to review's output shape.
 
 **Key characteristics:**
 
-- pre-commit-review: hybrid skill — procedural staging workflow (identify files, stage, capture diff, present) + behavioral contract (what to look for in diff, when to stop, never auto-commit). The review-then-commit pause is the core value proposition.
+- review: hybrid skill — procedural staging workflow (identify files, stage, capture diff, present) + behavioral contract (what to look for in diff, when to stop, never auto-commit). The review-then-commit pause is the core value proposition.
 - commit: procedural skill — reads review context (same-session or cross-session), verifies staged files, commits with draft message, cleans up. Tightly coupled to review's artifact shape.
 - handoff: procedural skill — gathers git context, creates handoff document from template, presents to user. Has `--resume` mode for reading back. Independent of review/commit.
 - After this stage: all ~16 thinking pipeline skills are skill-based. Implementation commands (`/task`, `/pr`, `/fix-plan`) remain as commands. This is the v1 completion boundary.
@@ -55,9 +55,9 @@ Convert the **Reviewer** role group of dev-infra commands to skills, completing 
 ## 📝 Implementation Plan
 
 ### Review Skill
-- [x] Task 1: Audit review command and classify behavioral instructions
-- [x] Task 2: Convert review to SKILL.md (hybrid: procedural staging + behavioral diff analysis)
-- [x] Task 3: Validate review skill against review artifact patterns
+- [ ] Task 1: Audit review command and classify behavioral instructions
+- [ ] Task 2: Convert review to SKILL.md (hybrid: procedural staging + behavioral diff analysis)
+- [ ] Task 3: Validate review skill against review artifact patterns
 
 ### Commit and Handoff Skills
 - [ ] Task 4: Audit commit command and classify instructions

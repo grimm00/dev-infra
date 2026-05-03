@@ -1,17 +1,17 @@
 # Status & Next Steps — Stage 4: Reviewer
 
-**Status:** 🟠 In Progress
+**Status:** 🔴 Not Started
 **Last Updated:** 2026-05-03
 
 ---
 
 ## 📊 Progress Summary
 
-**Overall:** 3/11 tasks complete
+**Overall:** 0/11 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Review Skill | ✅ Complete | 3/3 tasks | review skill + audit delivered in Group 1 cycle |
+| Review Skill | 🔴 Not Started | 0/3 tasks | |
 | Commit and Handoff Skills | 🔴 Not Started | 0/5 tasks | |
 | Cutover and v1 Final Quality Gate | 🔴 Not Started | 0/3 tasks | |
 
@@ -19,9 +19,9 @@
 
 ## 🚀 Next Steps
 
-1. Run **Group Cycle** for `02-commit-and-handoff-skills` (Tasks 4–8).
-2. Keep `implementation-plan.md` Definition of Done unchecked until cutover + quality gate close Stage 4.
-3. After Group 2 merges, proceed to cutover group (archive commands, final rubric sweep).
+1. Review scaffolding — verify group/task breakdown.
+2. Expand groups — run write-plan **Expand** for Group 1.
+3. Start implementation — `/agent-dispatch` for Group 1.
 
 ---
 
