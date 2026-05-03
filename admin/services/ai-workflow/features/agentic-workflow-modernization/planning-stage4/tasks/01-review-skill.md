@@ -43,7 +43,7 @@
 
   **Acceptance:** Files exist on disk; STOP / never auto-commit appears verbatim in SKILL; path rules match audit; YAML declares outputs usable by downstream **commit** skill.
 
-- [ ] **Task 3: Validate review skill against review artifact patterns**
+- [x] **Task 3: Validate review skill against review artifact patterns**
 
   **Purpose:** Close the loop between audit expectations and delivered SKILL/`structure.yaml` so Group 2 (commit coupling) starts from an accurate contract.
 
@@ -70,7 +70,7 @@
 ## ✅ Completion Criteria
 
 - [x] Audit artifact produced
-- [ ] review SKILL.md passes five-property rubric
+- [x] review SKILL.md passes five-property rubric
 - [x] `assets/` and `references/structure.yaml` present and accurate
 - [x] "Never auto-commit" behavioral contract preserved
 

@@ -99,4 +99,36 @@
 
 ## Validation (Task 3)
 
-_Added during Task execution — populated after SKILL + YAML land._
+Validated against delivered files:
+`templates/standard-project/.claude/skills/review/SKILL.md`,
+`references/structure.yaml`,
+`assets/summary-template.md` (against command template).
+
+### Five-property checklist (skill + YAML)
+
+| Property | Status | Evidence |
+|----------|--------|----------|
+| **Observable** | Pass | SKILL **Workflow** + **Configuration** list artifacts; YAML `required_artifacts`, `artifact_folder`, `review_roots`. |
+| **Bounded** | Pass | SKILL tables for `--scope`, `--all`, default confirmation; **Bounded stop** on empty selection. YAML `invocation_aliases` documents flags. |
+| **Outcome-framed** | Pass | Explicit outcomes: folder with `summary.md` + `diff.patch`, presentation bundle, then STOP. |
+| **Delta-only** | Pass | Summary scaffold moved to `assets/summary-template.md`; SKILL cites path; **Gotchas** forbid template sprawl in SKILL. |
+| **Failure-aware** | Pass | `.gitignore` gate in SKILL + YAML `gitignore_required`; exclusions for secrets/scratch; **Gotchas** for layout precedence. |
+
+### `structure.yaml` ↔ SKILL alignment
+
+| YAML key / concept | SKILL location |
+|--------------------|----------------|
+| `review_roots.*.artifact_base_dir` | **Configuration** (three bullets) matches `admin/tmp/reviews`, `tmp/reviews`, `tests/tmp/reviews`. |
+| Detection order | YAML lists dev-infra → template → lightweight; SKILL states “first match wins” consistent with historical command precedence when `admin/` exists. |
+| `artifact_folder.dirname_pattern` | SKILL **Configuration** folder shape `review-[description]-YYYY-MM-DD`. |
+| `required_artifacts[]` | **Workflow §3** and **Configuration** filenames. |
+| `integration.commit_skill` | **Integration** + SKILL STOP handoff to commit. |
+
+### STOP / no-commit contract
+
+| Requirement | Location |
+|-------------|----------|
+| “Do NOT `git commit`” / STOP | **Workflow §5** (bold), **Gotchas** first bullet. |
+| Presentation before wait | **Workflow §4** |
+
+**Residual risk (documented for Group 2):** Commit skill must treat `references/structure.yaml` as stable API — renames here require simultaneous commit SKILL updates.
