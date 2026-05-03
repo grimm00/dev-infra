@@ -16,7 +16,7 @@ questions the agent surfaced during execution.
 | `service` | yes | Service path (e.g., `ai-workflow`) |
 | `base_branch` | no | Branch to base work on (default: `develop`) |
 | `first_group` | no | Set to `true` if this is the first group in a stage (default: `false`) |
-| `prior_pr` | no | PR number of the previous group's merged PR (required if not first_group) |
+| `prior_pr` | no | Merged PR number for Step 0 post-pr closeout. **Omit when** merges are already absorbed on `base_branch` and no sweep is wanted — Step 0 is skipped (**same posture as first dispatch**). Optional `first_group=true` also skips Step 0. If `prior_pr` is omitted, Step 0 is skipped; say why in Step 6. |
 
 ## Skills & Commands
 
@@ -50,9 +50,16 @@ for the human to inspect. The human removes it after merge.
 
 ## Pipeline
 
-### Step 0: Prior Group Closeout (skip if `first_group` is true)
+### Step 0: Prior Group Closeout (skip if no `prior_pr` or `first_group` is true)
 
-Before starting new work, close out the previous group cycle:
+**Skip entirely** when **either** condition holds:
+
+- `first_group` is `true`, **or**
+- `prior_pr` is omitted / empty (human treats merges as already reflected on `base_branch`; behaves like **first dispatch** for closeout purposes).
+
+Do **not** block, warn, or loop on “missing prior PR” — just skip Step 0 and proceed to Step 1.
+
+When **not skipped**, close out before new work begins:
 
 1. **Post-PR:** Read `.cursor/commands/post-pr.md` and follow it for the prior
    group's merged PR (`prior_pr`). Key outputs: status document updates,
@@ -219,7 +226,13 @@ fabricate questions to fill the template.
 
 ### Step 6: Report
 
-Present a summary to the human:
+Compose the summary from execution facts. Include:
+
+**Step 0:** State whether Step 0 ran (for `#prior_pr`) or was skipped (first group or no `prior_pr`).
+
+**Stage boundary:** If `implementation-plan.md` marks **every task `[x]`** for the current stage and **no successor planning directory** exists for this feature (e.g. no `planning-stageN+1/`), that is **not** a defect — cycle is complete for this scope. Add **one optional** Needs Human Attention bullet — *when ready,* create successor planning (`transition-plan` / new tasks) before next `/agent-dispatch`. Never fail the pipeline for missing successor plans.
+
+Present the summary to the human using this shape:
 
 ```
 ## Group Cycle Complete: [Group Name]
