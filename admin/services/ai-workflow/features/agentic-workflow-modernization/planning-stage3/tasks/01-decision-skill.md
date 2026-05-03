@@ -30,7 +30,7 @@
   - **Files:** `templates/standard-project/.claude/skills/decision/SKILL.md` (create)
   - **Acceptance:** Skill is self-contained (FR-8): core flow readable without external commands; interview + ADR contract present; rubric-aligned prose.
 
-- [ ] Task 3: Validate decision skill against a recent ADR produced under the command
+- [x] Task 3: Validate decision skill against a recent ADR produced under the command
   - **Purpose:** Static regression vs command-era ADR shape.
   - **Steps:**
     1. Read `admin/services/ai-workflow/features/agentic-workflow-modernization/decisions/adr-001-v1-skill-selection.md`.
@@ -54,7 +54,7 @@
 - [x] Audit artifact produced with tier classification
 - [x] decision SKILL.md in templates with interview workflow + ADR contract
 - [x] Five-property rubric passes, gotchas populated
-- [ ] Validation log with go/no-go verdict
+- [x] Validation log with go/no-go verdict
 
 > **Follow-up (Group 2 or cutover):** Extract inline templates (ADR template, hub README, decision-interview scaffold) into `assets/` and add `references/structure.yaml` per the convention established in Group 2. The decision skill was converted before this convention was defined.
 
@@ -62,18 +62,24 @@
 
 ## 📋 Validation Log
 
-**Date:** _(Task 3)_  
+**Date:** 2026-05-02  
 **Reference ADR:** `decisions/adr-001-v1-skill-selection.md`
 
 | ADR section | Required by skill? | Present in ADR-001? | Notes |
 |-------------|-------------------|---------------------|-------|
-| _(pending)_ | | | |
+| Context | yes | yes | Skill §4 requires Context + research links; ADR-001 matches. |
+| Decision | yes | yes | |
+| Consequences | yes | yes | ADR uses Positive/Negative lists; skill expects same shape. |
+| Alternatives Considered | yes | yes | Two labeled alternatives (A/B) with why-not-chosen. |
+| Decision Rationale | yes | partial | No `## Decision Rationale` heading; rationale is embedded in **Decision** and **Context** — acceptable if substance is present; skill still recommends dedicated heading. |
+| Requirements Impact | yes | yes | |
+| References | yes | yes | |
 
-**Interview coverage:** _(pending)_
+**Interview coverage:** Skill Workflow §0 maps to `decision-interview.md` (priorities → rationale / ordering). ADR-001 text reflects interview-derived scope (e.g. C1-1, staged roles); static check only.
 
-**Verdict:** _(pending)_
+**Verdict:** GO
 
-**Rationale:** _(pending)_
+**Rationale:** ADR-001 satisfies the skill’s required ADR headings except a dedicated Decision Rationale section (substance present elsewhere). Interview-first step closes the legacy command gap. Live topic run still recommended; no NO-GO blockers for this group deliverable.
 
 ---
 
