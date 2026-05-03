@@ -48,7 +48,7 @@
   - **Files:** all 6 skill files, this task file
   - **Acceptance:** Each skill explicitly assessed; any failures documented with remediation needed
 
-- [ ] Task 15: Final quality gate sweep + Stage 2 exit criteria
+- [x] Task 15: Final quality gate sweep + Stage 2 exit criteria
   - **Purpose:** Verify Stage 2 is done and make Stage 2 → Stage 3 decision
   - **Steps:**
     1. Verify all Stage 2 exit criteria from design.md Section 5
@@ -110,6 +110,22 @@
 
 **Overall: All 6 skills PASS. No rubric failures.**
 
+### Task 15: Final Quality Gate + Stage 2 Exit Criteria (2026-05-02)
+
+**Stage 2 exit criteria (design.md Section 5, Stage 2):**
+
+| Criterion | Evidence | Status |
+|-----------|----------|--------|
+| Research family pattern validated (3 children + parent) | research/SKILL.md + research-setup + research-conduct + research-consolidate installed at root .claude/skills/ | ✅ |
+| All skills pass quality gate | Task 14 rubric sweep: 6/6 PASS | ✅ |
+| research-conduct regression test passes against recent topic research | Task 13: GO verdict, topic-8 artifact confirms full behavioral coverage | ✅ |
+
+**CI (local — `bats tests/unit/`):** 173 tests pass, 2 intentional skips, 0 failures.
+
+**Template sync validation:** `scripts/validate-template-sync.sh` PASS — all shared archived command entries verified identical between standard-project and learning-project.
+
+**Stage 2 → Stage 3 decision:** **GO.** All three exit criteria satisfied with explicit evidence. research-conduct (the most complex command in v1) demonstrates no quality regression — the family pattern scales to 3 children + parent. Stage 3 (Planner: decision, transition-plan, plan-review) may proceed.
+
 ---
 
 ## 🎯 Goals
@@ -122,13 +138,13 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Skills installed at root `.claude/skills/`
-- [ ] 3 commands archived
-- [ ] Template commands archived
-- [ ] CI passes after cutover
-- [ ] research-conduct regression test documented
-- [ ] Stage 2 exit criteria verified
-- [ ] Stage 2 → Stage 3 decision logged
+- [x] Skills installed at root `.claude/skills/`
+- [x] 3 commands archived
+- [x] Template commands archived
+- [x] CI passes after cutover (173 tests pass, template-sync validates)
+- [x] research-conduct regression test documented (GO verdict)
+- [x] Stage 2 exit criteria verified
+- [x] Stage 2 → Stage 3 decision logged
 
 ---
 
