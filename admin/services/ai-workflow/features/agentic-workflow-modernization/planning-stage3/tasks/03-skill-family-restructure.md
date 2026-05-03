@@ -2,66 +2,67 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 3: Planner)
 **Group:** Skill Family Restructure
-**Status:** 🔴 Scaffolding (needs expansion)
+**Status:** ✅ Expanded
 **Last Updated:** 2026-05-02
 
 ---
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 3` to add detailed implementation notes.
+### Pre-phase review pulse (prior group)
+
+`/pre-phase-review` is superseded by `/plan-review`; for this iteration the operator
+validated **Group 2** via merged PR **#93** narrative + Stage 3 doc notes (**Write-plan decomposition
+override** documented in status file). Carry-forward implication: decomposition **now** adopts the explicit
+explore/research family pattern regardless of interim single-skill decision text in Task 5 historical log.
+
+---
 
 - [ ] Task 8: Restructure write-plan into family (parent + setup + expand)
-  - Split the single `write-plan/SKILL.md` into:
-    ```
-    skills/write-plan/
-    ├── SKILL.md                      # thin parent: orientation hub, when-to-use routing, shared conventions
-    ├── write-plan-setup/
-    │   └── SKILL.md                  # setup workflow only (scaffold planning tree)
-    ├── write-plan-expand/
-    │   └── SKILL.md                  # expand workflow only (deepen one group file)
-    ├── assets/
-    │   ├── implementation-plan.md    # copyable template (shared by both children)
-    │   ├── status-and-next-steps.md  # copyable template
-    │   └── task-group-skeleton.md    # copyable template
-    └── references/
-        └── structure.yaml           # updated: declares per-child output shapes
-    ```
-  - Parent SKILL.md: orientation + routing (like `explore/SKILL.md`, `research/SKILL.md`)
-  - `write-plan-setup/SKILL.md`: path detection, input modes, scaffolding workflow, behavioral contract for setup
-  - `write-plan-expand/SKILL.md`: group location, classify-and-rewrite workflow, behavioral contract for expand
-  - `assets/` stays in parent dir, shared by both children
-  - `references/structure.yaml` updated: separate `setup_output` and `expand_output` sections
+  - **Purpose:** Reduce per-invocation context by mirroring `explore/` + `research/` thin-parent ergonomics without losing shared YAML + asset contracts.
+  - **Steps:**
+    1. Relocate substantive Setup prose into `templates/standard-project/.claude/skills/write-plan/write-plan-setup/SKILL.md` with **`read ../SKILL.md`** gate (family conventions identical pattern to research children).
+    2. Move Expand procedural detail into sibling `write-plan-expand/SKILL.md` with analogous gate + classify matrix.
+    3. Replace legacy monolith `write-plan/SKILL.md` with **orientation-only** hub: diagrams, routing table to children, condensed path table, pointers to **`assets/`** + **`references/structure.yaml`**.
+    4. Enhance `references/structure.yaml`: add **`setup_output`** vs **`expand_output`** blocks describing mutability surfaces (singletons vs lone group markdown).
+    5. Sanity scan template consumers (e.g., **explore**/ **research**/ diagrams) referencing `/transition-plan` → modern **write-plan-*** naming.
+    6. Ensure FR-8: **no uncompensated reliance** on `.cursor/commands/*.md`; templates stay self-explaining (`write-plan-setup` Step 1 now references heuristic extraction only — no dangling command cites).
+  - **Files:** `templates/standard-project/.claude/skills/write-plan/**`; optional dependent skill parents (`explore/SKILL.md`, `research/SKILL.md`) for pipeline breadcrumb renaming only.
+  - **Acceptance:** Directory tree matches task diagram; YAML validates logically; parental hub matches explore/research tone; children independently deployable prose blocks.
+
+---
 
 - [ ] Task 9: Restructure decision skill with assets/ + references/
-  - Extract inline templates from `decision/SKILL.md` into `assets/`:
-    ```
-    skills/decision/
-    ├── SKILL.md                      # behavioral contract + workflow (reduced — no inline templates)
-    ├── assets/
-    │   ├── adr-template.md           # ADR section structure
-    │   ├── hub-readme-template.md    # decisions hub README scaffold
-    │   └── decision-interview.md     # interview scaffold template
-    └── references/
-        └── structure.yaml           # declares decision output shape (hub, ADRs, summary)
-    ```
-  - SKILL.md references `assets/` for file creation instead of embedding templates inline
-  - `references/structure.yaml` declares: singleton files (hub README, summary), collection files (ADRs), interview artifact
-  - Decision stays a single skill (no family split — one workflow mode), but gains the `assets/` + `references/` convention
+  - **Purpose:** Finish deferred template extraction from Group 1 — align decision with **`assets/` + `references/`** convention already proven on write-plan.
+  - **Steps:**
+    1. Create **`decision/assets/adr-template.md`**, **`hub-readme-template.md`**, **`decision-interview.md`** mirroring headings previously enumerated inline inside `SKILL.md`.
+    2. Slim `decision/SKILL.md`: retain workflow sequencing + behavioral contract/gotchas — replace embedded template literals with anchored references (`assets/…`, **`references/structure.yaml`** summaries).
+    3. Author **`decision/references/structure.yaml`** enumerating singletons (interview artifact, README hub, rollup summary), collections (`adr-NNN-*`), optional parent aggregator touch policy.
+    4. Confirm relative asset paths ergonomic from skill root (`assets/foo.md` wording).
+    5. Maintain five-property readability (Observables + failure branches still explicit despite slimmer SKILL).
+  - **Files:** `templates/standard-project/.claude/skills/decision/**`
+  - **Acceptance:** SKILL does not duplicate full scaffold fences; newcomers can generate artifacts solely by reading SKILL + copying assets/YAML cues.
+
+---
 
 - [ ] Task 10: Validate restructured skills
-  - Verify write-plan family: parent routes correctly, setup produces expected scaffolding, expand deepens correctly
-  - Verify decision: SKILL.md references assets instead of inline templates, structure.yaml is accurate
-  - Cross-check: `references/structure.yaml` for each skill accurately describes what the skill produces
-  - Run five-property rubric on all new/modified SKILL.md files
+  - **Purpose:** Guard cutover regressions ahead of Plan-Review (Group 4) + eventual command archival.
+  - **Steps:**
+    1. **Routing sanity:** Confirm parent forbids mistaken direct invocation wording consistent with explore/research parents (`disable-model-invocation`, explicit child routing).
+    2. **`structure.yaml` accuracy:** Tables in write-plan YAML must reflect filesystem behavior post-split; decision YAML mirrors actual workflow stages (interview-before-clustering invariant).
+    3. **Cross-pattern audit:** Explore/research parent diagrams reference **write-plan-setup** successor labels (not retired command names).
+    4. **Five-property rubric (FR-19) pass:** For each touched SKILL (`write-plan` parent + two children + `decision`), verify headings still encode *observable, bounded, outcome-framed, delta-only, failure-aware* obligations either in Behavioral Contract bullets or fused Gotchas (note gaps inline below if discovered).
+    5. Capture outcomes in **Validation notes** appended under this Task.
+  - **Files:** This task markdown (logging), enumerated skill + YAML artifacts above (read-only verification).
+  - **Acceptance:** Validation notes show GO with concrete references OR NO-GO with blocking defects listed (none expected if merge proceeds).
 
 ---
 
 ## 🎯 Goals
 
-1. **Align write-plan with the family pattern** — consistent with explore and research families; cleaner per-invocation context
-2. **Complete the `assets/` + `references/` convention** for decision (deferred from Group 1)
-3. **Validate that `structure.yaml` is accurate** for both restructured skills before plan-review conversion
+1. **Align write-plan with the family pattern** — parity with explore & research ergonomics while preserving deterministic planning artifacts.
+2. **Finish template externalization on decision** — eliminate monolithic scaffold duplication.
+3. **Prove YAML truth tables** precede downstream plan-review conversions.
 
 ---
 
@@ -77,10 +78,23 @@
 
 ## 🔗 Dependencies
 
-- **Depends on Group 2:** write-plan single skill must exist before restructuring into family
-- **Depends on Group 1:** decision skill must exist before adding assets/references
-- Restructuring here informs plan-review (Group 4) — plan-review can reference the family pattern and structure.yaml convention as established
+- **Depends on Group 2:** canonical single-pass write-plan SKILL existed before family split (**PR #93** landed baseline assets + YAML).
+- **Depends on Group 1:** authoritative behavioral decision workflow precedes templating refactor (**PR #92**).
+- Informs Group 4 (plan-review modernization) referencing updated family choreography.
 
 ---
 
-**Last Updated:** 2026-05-02
+## 📋 Validation notes (Task 10)
+
+_Add GO/NO-GO narrative after onsite verification._
+
+| Artifact | Spot-check | Verdict |
+|----------|-------------|---------|
+| `write-plan/SKILL.md` | Parent routing + duplication vs explore parent | Pending |
+| `write-plan-setup`, `write-plan-expand` | `read ../SKILL.md`; contracts + gotchas breadth | Pending |
+| `write-plan/references/structure.yaml` | `setup_output` vs `expand_output` coherence | Pending |
+| `decision/SKILL.md` | Asset pointers replace inline scaffolds | Pending |
+| `decision/references/structure.yaml` | Mirrors interview→hub→ADR→summary flow | Pending |
+| `explore` / `research` parents | Mention **write-plan-setup** not `/transition-plan` | Pending |
+
+**Rubric rollup:** Pending explicit tick-box commentary after reviewer pass.
