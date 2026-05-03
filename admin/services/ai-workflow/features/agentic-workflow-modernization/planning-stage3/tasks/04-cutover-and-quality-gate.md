@@ -9,9 +9,9 @@
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/transition-plan agentic-workflow-modernization --expand --group 4` to add detailed implementation notes.
+> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 4` to add detailed implementation notes.
 
-- [ ] Task 10: Install skills + archive commands (decision, transition-plan, plan-review)
+- [ ] Task 10: Install skills + archive commands (decision, write-plan, plan-review)
   - Same pattern as Stage 1-2 cutover: copy from templates to root `.claude/skills/`, archive commands to `.cursor/commands/archived/`
   - Archive in both template directories (standard-project, learning-project)
   - Update `scripts/template-sync-manifest.txt`

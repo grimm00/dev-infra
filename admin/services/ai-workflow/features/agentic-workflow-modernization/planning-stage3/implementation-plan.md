@@ -5,7 +5,7 @@ groups:
     file: "tasks/01-decision-skill.md"
     tasks: [1, 2, 3]
   - name: "Transition-Plan Skill"
-    file: "tasks/02-transition-plan-skill.md"
+    file: "tasks/02-write-plan-skill.md"
     tasks: [4, 5, 6, 7]
   - name: "Plan-Review Skill"
     file: "tasks/03-plan-review-skill.md"
@@ -15,7 +15,7 @@ groups:
     tasks: [10, 11, 12]
 tasks_files:
   - "tasks/01-decision-skill.md"
-  - "tasks/02-transition-plan-skill.md"
+  - "tasks/02-write-plan-skill.md"
   - "tasks/03-plan-review-skill.md"
   - "tasks/04-cutover-and-quality-gate.md"
 ---
@@ -32,7 +32,7 @@ tasks_files:
 
 Convert the **Planner** role group of dev-infra commands to skills. This stage converts decision (632 lines, hybrid with interview pattern), transition-plan (820 lines, two-mode procedural), and plan-review (416 lines, procedural). The open question from design.md — whether transition-plan decomposes into two skills or stays single — is resolved during implementation.
 
-**Skills converted in this stage:** decision, transition-plan (possibly transition-plan-setup + transition-plan-expand), plan-review
+**Skills converted in this stage:** decision, write-plan (possibly write-plan-setup + write-plan-expand), plan-review
 **Entry criteria:** Stage 2 go decision (logged ✅ 2026-05-02)
 
 **Key Changes:**
@@ -47,7 +47,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 ## 🎯 Goals
 
 1. **Convert the interview-pattern skill** — decision is the first skill with a structured human-interview workflow baked in. Validates hybrid encoding at a new level of interactivity.
-2. **Resolve the transition-plan decomposition question** — design.md Section 6 defers this to implementation time. The audit decides: single skill (if modes are thin enough) or family (setup + expand).
+2. **Resolve the write-plan decomposition question** — design.md Section 6 defers this to implementation time. The audit decides: single skill (if modes are thin enough) or family (setup + expand).
 3. **Complete the Planner role group** — plan-review rounds out the stage; full thinking pipeline becomes skill-based after merge.
 4. **Apply proven patterns** — Stage 1 and 2 established: five-property rubric, templates-as-assets, family pattern, clean cutover, regression test. Reuse, don't reinvent.
 
@@ -60,18 +60,18 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [ ] Task 2: Design decision SKILL.md (interview workflow + ADR behavioral contract)
 - [ ] Task 3: Validate decision skill against a recent ADR produced under the command
 
-### Transition-Plan Skill
+### Write-Plan Skill
 - [ ] Task 4: Audit transition-plan command modes and classify behavioral instructions
-- [ ] Task 5: Resolve decomposition — single skill vs family (transition-plan-setup + transition-plan-expand)
-- [ ] Task 6: Convert transition-plan to SKILL.md(s) per decomposition decision
-- [ ] Task 7: Validate transition-plan skill against Stage 3's own scaffolding (meta-test)
+- [ ] Task 5: Resolve decomposition — single skill vs family (write-plan-setup + write-plan-expand)
+- [ ] Task 6: Convert transition-plan to write-plan SKILL.md(s) per decomposition decision
+- [ ] Task 7: Validate write-plan skill against Stage 3's own scaffolding (meta-test)
 
 ### Plan-Review Skill
 - [ ] Task 8: Audit plan-review command and classify behavioral instructions
 - [ ] Task 9: Convert plan-review to SKILL.md
 
 ### Cutover and Quality Gate
-- [ ] Task 10: Install skills + archive commands (decision, transition-plan, plan-review)
+- [ ] Task 10: Install skills + archive commands (decision, write-plan, plan-review)
 - [ ] Task 11: Verify all Stage 3 skills pass five-property rubric
 - [ ] Task 12: Final quality gate sweep + Stage 3 exit criteria
 
@@ -80,7 +80,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 ## ✅ Definition of Done
 
 - [ ] decision skill exists with interview workflow and ADR behavioral contract
-- [ ] transition-plan decomposition decided and implemented (single or family)
+- [ ] write-plan decomposition decided and implemented (single or family)
 - [ ] plan-review skill exists
 - [ ] All skills pass five-property rubric with populated gotchas
 - [ ] Self-containment (FR-8) verified for each skill

@@ -9,7 +9,7 @@
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/transition-plan agentic-workflow-modernization --expand --group 1` to add detailed implementation notes.
+> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 1` to add detailed implementation notes.
 
 - [ ] Task 1: Audit decision command and classify behavioral instructions
   - Read `.cursor/commands/decision.md` (632 lines) and classify every instruction against the three precision tiers (Tier 1/2/3)

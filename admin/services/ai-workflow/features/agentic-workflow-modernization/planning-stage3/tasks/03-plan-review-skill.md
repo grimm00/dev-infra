@@ -9,7 +9,7 @@
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/transition-plan agentic-workflow-modernization --expand --group 3` to add detailed implementation notes.
+> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 3` to add detailed implementation notes.
 
 - [ ] Task 8: Audit plan-review command and classify behavioral instructions
   - Read `.cursor/commands/plan-review.md` (416 lines)
@@ -41,7 +41,7 @@
 ## 🔗 Dependencies
 
 - No hard dependency on Groups 1-2
-- Benefits from patterns established in decision and transition-plan conversions
+- Benefits from patterns established in decision and write-plan conversions
 
 ---
 
