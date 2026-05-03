@@ -12,8 +12,9 @@
 > ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 5` to add detailed implementation notes.
 
 - [ ] Task 13: Install skills + archive commands (decision, write-plan, plan-review)
-  - Same pattern as Stage 1-2 cutover: copy from templates to root `.claude/skills/`, archive commands to `.cursor/commands/archived/`
-  - Archive in both template directories (standard-project, learning-project)
+  - Install skills: copy from `templates/standard-project/.claude/skills/` to root `.claude/skills/`
+  - **Archive commands to `admin/archived/commands/`** (NOT `.cursor/commands/archived/` — that path was consolidated; see `chore: consolidate archived docs` commit on develop)
+  - Archive in both template directories (standard-project, learning-project) — move `.cursor/commands/{decision,transition-plan,plan-review}.md` to `admin/archived/commands/`
   - Update `scripts/template-sync-manifest.txt`
   - **Verify each skill has the full directory structure:** SKILL.md + `assets/` (where applicable) + `references/structure.yaml`
   - write-plan family: parent + write-plan-setup + write-plan-expand all installed
@@ -47,7 +48,7 @@
 ## ✅ Completion Criteria
 
 - [ ] Skills installed at root `.claude/skills/`
-- [ ] 3 commands archived (decision, transition-plan, plan-review)
+- [ ] 3 commands archived to `admin/archived/commands/` (decision, transition-plan, plan-review)
 - [ ] Template commands archived
 - [ ] CI passes after cutover
 - [ ] All skills pass rubric sweep
