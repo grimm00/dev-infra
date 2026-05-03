@@ -1,17 +1,17 @@
 # Status & Next Steps — Stage 3: Planner
 
-**Status:** 🔴 Not Started
+**Status:** 🟠 In Progress
 **Last Updated:** 2026-05-02
 
 ---
 
 ## 📊 Progress Summary
 
-**Overall:** 0/12 tasks complete
+**Overall:** 3/12 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Decision Skill | 🔴 Not Started | 0/3 tasks | Audit, convert (interview + ADR contract), validate |
+| Decision Skill | ✅ Active/Complete | 3/3 tasks | Audit artifact, `decision/SKILL.md`, validation GO |
 | Write-Plan Skill | 🔴 Not Started | 0/4 tasks | Audit, decomposition decision, convert, validate |
 | Plan-Review Skill | 🔴 Not Started | 0/2 tasks | Audit, convert (staged-planning path support) |
 | Cutover and Quality Gate | 🔴 Not Started | 0/3 tasks | Install, rubric sweep, exit criteria |
@@ -20,7 +20,7 @@
 
 ## 🚀 Next Steps
 
-1. **Group 1** — decision skill: audit command (632 lines), design interview workflow, validate against recent ADR
+1. **Group 2** — write-plan skill: audit `transition-plan`, decomposition, convert, validate against Stage 3 scaffolding
 
 ---
 

@@ -21,7 +21,7 @@ tasks_files:
 ---
 # Implementation Plan — Stage 3: Planner (Agentic Workflow Modernization)
 
-**Status:** 🔴 Not Started
+**Status:** 🟠 In Progress
 **Created:** 2026-05-02
 **Last Updated:** 2026-05-02
 **Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 3 of 4-stage v1
@@ -58,9 +58,9 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 ## 📝 Implementation Plan
 
 ### Decision Skill
-- [ ] Task 1: Audit decision command and classify behavioral instructions
-- [ ] Task 2: Design decision SKILL.md (interview workflow + ADR behavioral contract)
-- [ ] Task 3: Validate decision skill against a recent ADR produced under the command
+- [x] Task 1: Audit decision command and classify behavioral instructions
+- [x] Task 2: Design decision SKILL.md (interview workflow + ADR behavioral contract)
+- [x] Task 3: Validate decision skill against a recent ADR produced under the command
 
 ### Write-Plan Skill
 - [ ] Task 4: Audit transition-plan command modes and classify behavioral instructions
@@ -81,7 +81,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 
 ## ✅ Definition of Done
 
-- [ ] decision skill exists with interview workflow and ADR behavioral contract
+- [x] decision skill exists with interview workflow and ADR behavioral contract
 - [ ] write-plan decomposition decided and implemented (single or family)
 - [ ] plan-review skill exists with staged-planning path support
 - [ ] All skills pass five-property rubric with populated gotchas
