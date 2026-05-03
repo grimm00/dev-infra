@@ -40,4 +40,4 @@
 
 - **Group 1 — Decision skill** — merged via [PR #92](https://github.com/grimm00/dev-infra/pull/92) (2026-05-03)
 - **Group 2 — Write-Plan skill** — merged via [PR #93](https://github.com/grimm00/dev-infra/pull/93) (2026-05-03)
-- **Group 3 — Skill family restructure** — delivered on branch `feat/agentic-workflow-stage3-g3` (PR link TBD upon open)
+- **Group 3 — Skill family restructure** — [PR #94](https://github.com/grimm00/dev-infra/pull/94)
