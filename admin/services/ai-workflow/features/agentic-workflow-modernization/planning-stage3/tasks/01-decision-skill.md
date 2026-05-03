@@ -19,7 +19,7 @@
   - **Files:** `planning-stage3/artifacts/decision-command-audit.md` (create)
   - **Acceptance:** Artifact exists; every command section ≥ summary row; explicit note on interview gap and canonical dev-infra decisions path.
 
-- [ ] Task 2: Design decision SKILL.md (interview workflow + ADR behavioral contract)
+- [x] Task 2: Design decision SKILL.md (interview workflow + ADR behavioral contract)
   - **Purpose:** Ship hybrid skill: human interview preflight + procedural ADR scaffolding + behavioral ADR quality bar.
   - **Steps:**
     1. Add `templates/standard-project/.claude/skills/decision/SKILL.md` with YAML frontmatter (`name`, `description`, `disable-model-invocation: true`).
@@ -52,8 +52,8 @@
 ## ✅ Completion Criteria
 
 - [x] Audit artifact produced with tier classification
-- [ ] decision SKILL.md in templates with interview workflow + ADR contract
-- [ ] Five-property rubric passes, gotchas populated
+- [x] decision SKILL.md in templates with interview workflow + ADR contract
+- [x] Five-property rubric passes, gotchas populated
 - [ ] Validation log with go/no-go verdict
 
 > **Follow-up (Group 2 or cutover):** Extract inline templates (ADR template, hub README, decision-interview scaffold) into `assets/` and add `references/structure.yaml` per the convention established in Group 2. The decision skill was converted before this convention was defined.
