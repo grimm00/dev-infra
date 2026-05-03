@@ -26,6 +26,8 @@ planning_roots:
     description: Feature work under admin/services
     base_glob: "admin/services/{service}/features/{feature}/"
     default_subdir: planning
+    # N is a 1-based positive integer (1, 2, 3, …). Directory name is literal prefix
+    # "planning-stage" + decimal digits (no zero-padding required): planning-stage3, planning-stage12, etc.
     staged_planning_subdir_pattern: "planning-stage{N}/"
     notes: Stage 3 of this feature uses planning-stage3/ instead of planning/
   template_project:
@@ -57,6 +59,9 @@ implementation_plan_frontmatter:
     - task_count
     - groups
     - tasks_files
+  # Consistency: tasks_files must be the ordered list of `groups[].file` values in the same
+  # order as `groups` (each path appears exactly once). groups[].tasks lists global task IDs
+  # 1..task_count covered by that group’s checkboxes in the body.
   group_entry_shape:
     name: string
     file: string

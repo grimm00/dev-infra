@@ -92,7 +92,7 @@
 | Tier | Approx. blocks | Notes |
 |------|----------------|-------|
 | Tier 1 | 28 | Paths, YAML, step checklists, error messages |
-| Tier 2 | 12 | Multi-feature detection, reflection chaining, ADR extraction Judgment |
+| Tier 2 | 12 | Multi-feature detection, reflection chaining, ADR extraction judgment |
 | Tier 3 | 2 | Optional: prescriptive “commits with this message” — soften for FR-8 portability |
 
 ---
