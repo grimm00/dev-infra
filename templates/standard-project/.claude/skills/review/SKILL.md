@@ -79,7 +79,7 @@ git status --short
 ```
 
 Show staged, unstaged, and untracked files. **Exclude** items the user did not
-intent to ship, scratch/temp files, and anything that may contain secrets.
+intend to ship, scratch/temp files, and anything that may contain secrets.
 
 | Mode | Selection rule |
 |------|----------------|
