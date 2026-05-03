@@ -36,16 +36,14 @@ review artifact named in **`references/structure.yaml`** (`report_output`).
 
 ## Path resolution
 
-Pick **exactly one** planning root for the invocation — identical semantics to **`write-plan`** parent:
+Mirror **`write-plan`** parent semantics: choose **one** subtree where `implementation-plan.md` + `tasks/` live (dev-infra row **or** maintainer-docs row).
 
-| Layout | Planning root |
-|--------|----------------|
-| Dev-infra feature | `admin/services/[service]/features/[feature]/` + **`planning/`** OR **`planning-stage{N}/`** |
+| Layout | Planning root (summary) |
+|--------|-------------------------|
+| Dev-infra feature | `admin/services/[service]/features/[feature]/` + `planning/` **or** `planning-stage{N}/` |
 | Template maintainer | `docs/maintainers/planning/features/[feature]/` |
 
-**Staged planning:** Prefer the newest intentional stage directory actually holding the active `implementation-plan.md`. When multiple staged dirs exist, **STOP** if ambiguity remains after `--feature` disambiguation — list candidates and ask for explicit subdirectory choice.
-
-Canonical glob notes: **`references/structure.yaml`** (`planning_roots`).
+If several `planning-stage*` dirs exist, **STOP** after listing candidates unless the operator names the exact subdirectory. **Authoritative** glob text + notes: **`references/structure.yaml`** → `planning_roots`.
 
 ---
 

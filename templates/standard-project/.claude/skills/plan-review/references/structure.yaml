@@ -51,11 +51,14 @@ prior_stage_carry_forward:
     When active planning root uses planning-stage{N}/ with N>1, explicitly verify the NEW stage plan
     incorporates documented learnings from planning-stage{N-1}/ (and linked spikes/PR narratives).
   suggested_reads:
-    - path_glob: "planning-stage{prev}/status-and-next-steps.md"
+    - glob: "planning-stage{prev}/status-and-next-steps.md"
+      optional: false
       role: Completed milestones + Notes often contain constraints for next stage
-    - path_glob: "planning-stage{prev}/implementation-plan.md"
+    - glob: "planning-stage{prev}/implementation-plan.md"
+      optional: false
       role: Residual unchecked items / deferred scope markers
-    - path_optional_glob: "**/artifacts/*.md"
+    - glob: "**/artifacts/*.md"
+      optional: true
       role: Spike or audit narratives linked from prior status sections
 
 review_dimensions:
