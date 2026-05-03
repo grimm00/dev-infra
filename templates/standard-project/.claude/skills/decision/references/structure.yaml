@@ -34,5 +34,7 @@ outputs:
     - filename: decisions/decisions-summary.md
       role: One-screen rollup of ADR intents + requirements fallout
   optional_parent_index_updates:
-    - filename: docs/maintainers/decisions/README.md OR admin/decisions/README.md
-      role: Mention topic iff file already establishes cross-topic navigation
+    - filename: docs/maintainers/decisions/README.md
+      role: Mention topic only if file already lists cross-topic navigation
+    - filename: admin/decisions/README.md
+      role: Mention topic only if file already lists cross-topic navigation

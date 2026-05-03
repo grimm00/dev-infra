@@ -2,8 +2,9 @@
 name: write-plan-expand
 description: >-
   Expand one scaffolding task-group file with detailed Purpose, Steps/TDD, Files,
-  and Acceptance criteria. Mirrors Expand mode of retired /transition-plan.
-  Read ../SKILL.md first. Does not recreate implementation-plan roots.
+  and Acceptance criteria. Primary skill: **write-plan-expand**; legacy alias
+  `/transition-plan … --expand` maps here. Read ../SKILL.md first. Does not
+  recreate implementation-plan roots.
 disable-model-invocation: true
 ---
 
@@ -41,7 +42,7 @@ Before proceeding, **`read ../SKILL.md`** for path rules and frontmatter parity.
 
 **Goal:** One group file earns full operational detail — still markdown only.
 
-**Trigger cues:** `/transition-plan [feature] --expand --group N`, natural language equivalents.
+**Trigger cues:** **write-plan-expand** with `--group N`; legacy `/transition-plan [feature] --expand --group N`; or natural-language equivalents.
 
 1. **Resolve target** by numeric index mapping into `groups[]` OR fuzzy title match
    confirmed with operator.
@@ -51,10 +52,10 @@ Before proceeding, **`read ../SKILL.md`** for path rules and frontmatter parity.
    | Type | Order inside each task row |
    |------|----------------------------|
    | Code + automated tests | RED → GREEN → REFACTOR phrasing inside Steps |
-   | Scripts / tooling | bats → script → integration |
+   | Scripts / tooling | Bats (Bash Automated Testing System) tests → script → integration |
    | Docs / coordination | outline → link → verify reads |
 5. **Rewrite each `- [ ] Task …` block** adding **Purpose**, **Steps or TDD Flow**,
-   **Files**, **Acceptance** per transition-plan Expand guidance.
+   **Files**, **Acceptance** per this skill’s Expand quality bar (aligns with **write-plan**/transition-plan-era guidance).
 6. **Header flip:** replace `🔴 Scaffolding` with **`✅ Expanded`; remove scaffolding callout**.
 7. **Commit:** scoped message documenting which group absorbed detail.
 

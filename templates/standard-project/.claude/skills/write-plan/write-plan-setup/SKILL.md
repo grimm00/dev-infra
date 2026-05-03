@@ -19,8 +19,7 @@ and staged-directory guidance.
 ## When to use
 
 - After upstream decisions/design and the user wants a plan skeleton.
-- User says `/transition-plan` without expand, “scaffold implementation plan”,
-  or “setup planning tree”.
+- User invokes **`write-plan-setup`**, **`/transition-plan`** (legacy alias) without expand, says “scaffold implementation plan”, or “setup planning tree”.
 - Needs `planning/…` or `planning-stageN/…` under a feature (see structure.yaml).
 
 ## When not to use
@@ -61,13 +60,12 @@ scaffolding-only `tasks/NN-group-slug.md` files under the resolved planning root
 
 1. **Load sources** using the declared input mode — extract grouping signals the way a human planner would summarize them (decisions, requirements, constraints, phased scope).
 2. **Choose transition type:** feature (default), release when path/content signals
-   a release rollout, ci-cd if pipeline-only.
+   a release rollout, **CI/CD** if pipeline-only.
 3. **Organize groups:** target 2–8 tasks per group; **global** numbering 1…N;
    filenames `tasks/{NN}-{kebab-case}.md`.
 4. **Author `implementation-plan.md`** using **`../assets/implementation-plan.md`** as
    boilerplate shape:
-   - YAML frontmatter: `task_count`, `groups[]` (`name`, `file`, integer `tasks`),
-     `tasks_files[]` aligned with groups order (`references/structure.yaml`).
+   - YAML frontmatter: `task_count`, `groups[]` (each `{ name, file, tasks }` where **`tasks`** is a **YAML list of integers** partitioning global checkbox IDs assigned to that group), `tasks_files[]` aligned with groups order (**`../references/structure.yaml`**).
    - Body: checklist rows matching task_count exactly.
 5. **Author `status-and-next-steps.md`** from **`../assets/status-and-next-steps.md`** —
    empty progress counts, next steps referencing expand.

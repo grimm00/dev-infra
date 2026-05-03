@@ -61,8 +61,8 @@ expand_output:
       role: Exactly one group's markdown deepened per run (Purpose/Steps/Acceptance)
       promoted_status_when_complete: "✅ Expanded"
   singletons_touch_policy: >
-    Rare advisory edits only (never delete implementation-plan.yaml block); root files
-    should already exist before expand executes.
+    Rare advisory edits only (never strip the YAML frontmatter block inside
+    implementation-plan.md); root files should already exist before expand executes.
 
 # Shared layout reference (historic outputs block — identical coverage to setup + expand slices).
 outputs:
