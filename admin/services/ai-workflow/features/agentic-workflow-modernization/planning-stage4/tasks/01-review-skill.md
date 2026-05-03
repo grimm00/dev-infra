@@ -24,7 +24,7 @@
 
   **Acceptance:** Audit artifact exists; procedural vs behavioral split is explicit; five-property gaps have remediation notes for Task 2–3.
 
-- [ ] **Task 2: Convert review to SKILL.md (hybrid: procedural staging + behavioral diff analysis)**
+- [x] **Task 2: Convert review to SKILL.md (hybrid: procedural staging + behavioral diff analysis)**
 
   **Purpose:** Deliver a first-class **review** skill that preserves the review-then-commit pause and path detection while moving long template bodies out of the SKILL into `assets/` and declaring outputs in `references/structure.yaml`.
 
@@ -71,8 +71,8 @@
 
 - [x] Audit artifact produced
 - [ ] review SKILL.md passes five-property rubric
-- [ ] `assets/` and `references/structure.yaml` present and accurate
-- [ ] "Never auto-commit" behavioral contract preserved
+- [x] `assets/` and `references/structure.yaml` present and accurate
+- [x] "Never auto-commit" behavioral contract preserved
 
 ---
 
