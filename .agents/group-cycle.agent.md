@@ -110,7 +110,10 @@ Once all tasks in the group are complete:
 
 ### Step 4: PR Validation
 
-Wait 60 seconds for CI to start, then validate the PR.
+Poll for the Sourcery review comment before proceeding. Check every 15 seconds
+(up to 4 attempts / 60s total) using `gh api repos/{owner}/{repo}/pulls/{pr}/comments`
+or `gh pr checks`. Once Sourcery's comment appears, continue immediately — don't
+wait for CI to finish.
 
 #### 4a. CI Status
 
