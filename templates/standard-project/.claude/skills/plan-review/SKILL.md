@@ -36,6 +36,8 @@ review artifact named in **`references/structure.yaml`** (`report_output`).
 
 ## Path resolution
 
+**Authoritative globs, flags, and parity fields** live only in **`references/structure.yaml`**; the table below is a quick human summary (if it ever disagrees with YAML, YAML wins).
+
 Mirror **`write-plan`** parent semantics: choose **one** subtree where `implementation-plan.md` + `tasks/` live (dev-infra row **or** maintainer-docs row).
 
 | Layout | Planning root (summary) |
@@ -43,7 +45,7 @@ Mirror **`write-plan`** parent semantics: choose **one** subtree where `implemen
 | Dev-infra feature | `admin/services/[service]/features/[feature]/` + `planning/` **or** `planning-stage{N}/` |
 | Template maintainer | `docs/maintainers/planning/features/[feature]/` |
 
-If several `planning-stage*` dirs exist, **STOP** after listing candidates unless the operator names the exact subdirectory. **Authoritative** glob text + notes: **`references/structure.yaml`** → `planning_roots`.
+If several `planning-stage*` dirs exist, **STOP** after listing candidates unless the operator names the exact subdirectory (`planning_roots` in YAML).
 
 ---
 
@@ -139,10 +141,10 @@ Classify findings:
 
 - **`write-plan`** family — upstream scaffolding producer (`write-plan-setup`, `write-plan-expand`).
 - **`decision`** — precedes planning when ADRs justify transition planning.
-- Legacy commands remain readable until archival PR completes Stage 3 cutover group.
+- Retired `/plan-review` command text (read-only history): `admin/archived/commands/stage3-planner/` — **not** an execution prerequisite.
 
 ---
 
 ## FR-8 (self-containment)
 
-Core workflow above is executable **without** loading `.cursor/commands/plan-review.md`. Companion **`assets/`** + **`references/`** files provide templates and declarative parity checks — optional depth, not hidden prerequisites.
+Core workflow above is executable **without** loading archived Cursor command stubs. Companion **`assets/`** + **`references/`** files provide templates and declarative parity checks — optional depth, not hidden prerequisites.

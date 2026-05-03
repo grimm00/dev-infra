@@ -104,7 +104,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] Self-containment (FR-8) verified for each skill (cutover; no archived command dependency at runtime)
 - [x] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml`
 - [x] 3 commands archived: decision.md, transition-plan.md, plan-review.md
-- [ ] CI passes after cutover (merge gate)
+- [x] CI passes after cutover (PR [#96](https://github.com/grimm00/dev-infra/pull/96) checks green prior to merge)
 - [x] Stage 3 exit criteria from design.md Section 5 verified
 - [x] Full thinking pipeline is skill-based (user experience at boundary)
 

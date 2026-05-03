@@ -49,7 +49,7 @@
 - [x] 3 commands archived to `admin/archived/commands/stage3-planner/` (repo root + both templates)
 - [x] Template commands removed after archive copy (`standard-project`, `learning-project`)
 - [x] `scripts/template-sync-manifest.txt` excludes archived planner command paths (commented)
-- [ ] CI passes after cutover (GitHub Actions on PR)
+- [x] CI passes after cutover (GitHub Actions on PR [#96](https://github.com/grimm00/dev-infra/pull/96): quick-checks, ubuntu/macos suites, build-image PASS)
 - [x] Stage 3 skills satisfy five-property rubric with populated Gotchas (validated on cutover branch; consistent with Tasks 10–12 / Group 3–4 audits)
 - [x] Each Stage 3 skill has `references/structure.yaml`; outputs match SKILL contracts (`decision`, `write-plan` family, `plan-review`)
 - [x] write-plan family mirrors explore/research: parent `SKILL.md` + subdirectory children with parent-read preamble
