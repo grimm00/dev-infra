@@ -36,7 +36,7 @@
   - **Files:** `planning-stage2/artifacts/research-command-audit.md` (reference), skill files, this task file
   - **Acceptance:** Validation log populated with explicit go/no-go verdict backed by behavioral diff
 
-- [ ] Task 14: Verify all Stage 2 skills pass five-property rubric
+- [x] Task 14: Verify all Stage 2 skills pass five-property rubric
   - **Purpose:** Quality gate before Stage 2 exit
   - **Rubric properties:** observable, bounded, outcome-framed, delta-only, failure-aware
   - **Steps:**
@@ -86,6 +86,29 @@
 **Gaps or regressions:** None identified.
 
 **Verdict: GO** — research-conduct skill demonstrates no quality regression vs command. 9 of 9 conduct behaviors preserved; 8 behavioral improvements with tighter bounding or better failure-awareness. Stage 2 go/no-go signal is **positive**.
+
+### Task 14: Five-Property Rubric Sweep (2026-05-02)
+
+**Rubric properties:** observable (O), bounded (B), outcome-framed (F), delta-only (D), failure-aware (A)
+
+| Skill | O | B | F | D | A | Gotchas | FR-8 | Verdict |
+|-------|---|---|---|---|---|---------|------|---------|
+| research (parent) | ✅ | ✅ | ✅ | N/A | N/A | N/A (orientation) | ✅ | **PASS** |
+| research-setup | ✅ | ✅ | ✅ | ✅ | ✅ | 5 items | ✅ | **PASS** |
+| research-conduct | ✅ | ✅ | ✅ | ✅ | ✅ | 6 items | ✅ | **PASS** |
+| research-consolidate | ✅ | ✅ | ✅ | ✅ | ✅ | 5 items | ✅ | **PASS** |
+| spike | ✅ | ✅ | ✅ | ✅ | ✅ | 6 items | ✅ | **PASS** |
+| reflect | ✅ | ✅ | ✅ | ✅ | ✅ | 6 items | ✅ | **PASS** |
+
+**Notes:**
+- `research` parent: orientation-only; no executable behavioral instructions → delta-only and failure-aware are not applicable. Path detection table is observable. Self-containment: ✅ (serves as family conventions reference for children).
+- `research-setup`: Observable completion: "every listed topic has a file; hub lists each file; requirements.md and research-summary.md exist; commit succeeded" — explicit. Failure-aware: layout detection → STOP; no silent overwrites.
+- `research-conduct`: Bounded query derivation (≥1 per question/sub-question/methodology line) is the strongest bounded improvement vs command.
+- `research-consolidate`: Two-human-gate STOP pattern (reconciliation → proposal) resolves original G4 Tier-3 "mental model" via explicit lineage tables and coverage tables.
+- `spike`: Hard stop at time-box + partial-results-valid pattern cleanly satisfies bounded + failure-aware.
+- `reflect`: Provider-agnostic PR listing ("gh pr list when available; if unavailable, note failure once") — addresses PR88-Overall-#2 in spirit; deferred item is about wording, not missing failure-aware behavior.
+
+**Overall: All 6 skills PASS. No rubric failures.**
 
 ---
 
