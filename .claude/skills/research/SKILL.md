@@ -33,9 +33,9 @@ start vs amend).
 
 ## Family Conventions
 
-Children that reference this parent (`read ../SKILL.md`) inherit these
-conventions. A child MAY operate without reading the parent — opt-in, not
-platform-enforced.
+Each child skill's `SKILL.md` opens with `read ../SKILL.md` — follow that
+instruction before running child workflows. Path detection, topic naming, and
+commit discipline are only specified here and are relied upon by every child.
 
 ### Path Detection
 
