@@ -592,3 +592,13 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 - ~~**PR88-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** `--actionable-only` missing from reflect Options table~~ — ✅ Fixed inline
 - **PR88-Overall-#2 (🟡 MEDIUM):** Generalize reflect workflow “recent merged PRs” step: phrase as provider-agnostic list with `gh pr list` as example (portability).
+
+---
+
+## PR #89 Additions
+
+**Date:** 2026-05-02  
+**Status:** Sourcery overall comments triaged
+
+- ~~**PR89-Overall-#2 (🟡 MEDIUM, 🟢 LOW effort):** Inconsistent "may vs must" parent-read language in research/SKILL.md~~ — ✅ Fixed inline
+- **PR89-Overall-#1 (🟡 MEDIUM, 🟠 HIGH effort):** Path detection rules for dev-infra vs template layouts appear in multiple skill files — consider further centralization beyond the parent SKILL.md. (Note: parent already IS the centralization point; this concerns any remaining duplication in child preamble sections.)

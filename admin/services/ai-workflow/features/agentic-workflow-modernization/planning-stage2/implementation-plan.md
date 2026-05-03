@@ -21,7 +21,7 @@ tasks_files:
 ---
 # Implementation Plan — Stage 2: Researcher (Agentic Workflow Modernization)
 
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Created:** 2026-05-02
 **Last Updated:** 2026-05-02
 **Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 2 of 4-stage v1
@@ -73,10 +73,10 @@ Convert the **Researcher** role group of dev-infra commands to skills. This stag
 - [x] Task 11: Convert reflect to SKILL.md (personal growth behavioral contract)
 
 ### Cutover and Quality Gate
-- [ ] Task 12: Install skills + archive commands (research, spike, reflect)
-- [ ] Task 13: Regression test research-conduct against recent topic research
-- [ ] Task 14: Verify all Stage 2 skills pass five-property rubric
-- [ ] Task 15: Final quality gate sweep + Stage 2 exit criteria
+- [x] Task 12: Install skills + archive commands (research, spike, reflect)
+- [x] Task 13: Regression test research-conduct against recent topic research
+- [x] Task 14: Verify all Stage 2 skills pass five-property rubric
+- [x] Task 15: Final quality gate sweep + Stage 2 exit criteria
 
 ---
 
