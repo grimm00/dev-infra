@@ -25,13 +25,15 @@ tasks_files:
 ---
 # Implementation Plan — Stage 3: Planner (Agentic Workflow Modernization)
 
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Created:** 2026-05-02
 **Last Updated:** 2026-05-03
 **Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 3 of 4-stage v1  
 **Group 1 merged:** PR #92 (2026-05-03)  
 **Group 2 merged:** PR #93 (2026-05-03)  
-**Group 3 merged:** PR #94 (2026-05-03)
+**Group 3 merged:** PR #94 (2026-05-03)  
+**Group 4 merged:** PR #95 (2026-05-03)  
+**Group 5 cutover:** this PR completes Stage 3 (awaiting merge)
 
 ---
 
@@ -86,9 +88,9 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] Task 12: Convert plan-review to SKILL.md
 
 ### Cutover and Quality Gate
-- [ ] Task 13: Install skills + archive commands (decision, write-plan, plan-review)
-- [ ] Task 14: Verify all Stage 3 skills pass five-property rubric
-- [ ] Task 15: Final quality gate sweep + Stage 3 exit criteria
+- [x] Task 13: Install skills + archive commands (decision, write-plan, plan-review)
+- [x] Task 14: Verify all Stage 3 skills pass five-property rubric
+- [x] Task 15: Final quality gate sweep + Stage 3 exit criteria
 
 ---
 
@@ -98,13 +100,13 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] write-plan is a family: parent + write-plan-setup + write-plan-expand
 - [x] decision has `assets/` + `references/structure.yaml`
 - [x] plan-review skill exists with staged-planning path support
-- [ ] All skills pass five-property rubric with populated gotchas
-- [ ] Self-containment (FR-8) verified for each skill
-- [ ] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml`
-- [ ] 3 commands archived: decision.md, transition-plan.md, plan-review.md
-- [ ] CI passes after cutover
-- [ ] Stage 3 exit criteria from design.md Section 5 verified
-- [ ] Full thinking pipeline is skill-based (user experience at boundary)
+- [x] All skills pass five-property rubric with populated gotchas
+- [x] Self-containment (FR-8) verified for each skill (cutover; no archived command dependency at runtime)
+- [x] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml`
+- [x] 3 commands archived: decision.md, transition-plan.md, plan-review.md
+- [ ] CI passes after cutover (merge gate)
+- [x] Stage 3 exit criteria from design.md Section 5 verified
+- [x] Full thinking pipeline is skill-based (user experience at boundary)
 
 ---
 
