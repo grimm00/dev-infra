@@ -41,3 +41,4 @@
 - **Group 1 — Decision skill** — merged via [PR #92](https://github.com/grimm00/dev-infra/pull/92) (2026-05-03)
 - **Group 2 — Write-Plan skill** — merged via [PR #93](https://github.com/grimm00/dev-infra/pull/93) (2026-05-03)
 - **Group 3 — Skill family restructure** — merged via [PR #94](https://github.com/grimm00/dev-infra/pull/94) (2026-05-03)
+- **Group 4 — Plan-review skill** — opened [PR #95](https://github.com/grimm00/dev-infra/pull/95)
