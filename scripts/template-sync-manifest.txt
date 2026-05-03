@@ -8,7 +8,7 @@
 # All commands (26 total — includes 5 archived stubs)
 .cursor/commands/commit.md
 .cursor/commands/cursor-rules.md
-.cursor/commands/decision.md
+# decision.md archived to admin/archived/commands/stage3-planner/
 .cursor/commands/archived/discuss.md
 .cursor/commands/archived/explore.md
 .cursor/commands/handoff.md
@@ -16,7 +16,7 @@
 .cursor/commands/fix-plan.md
 .cursor/commands/fix-review.md
 .cursor/commands/archived/int-opp.md
-.cursor/commands/plan-review.md
+# plan-review.md archived — stage3-planner
 .cursor/commands/post-pr.md
 .cursor/commands/pre-phase-review.md
 .cursor/commands/pr-validation.md
@@ -31,7 +31,7 @@
 .cursor/commands/task-improvement.md
 .cursor/commands/task-phase.md
 .cursor/commands/task-release.md
-.cursor/commands/transition-plan.md
+# transition-plan.md archived — stage3-planner
 
 # Skills — intentionally NOT in this manifest.
 # Skills live only in standard-project (.claude/skills/) for now.
