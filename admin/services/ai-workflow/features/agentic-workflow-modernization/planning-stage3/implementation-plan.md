@@ -27,10 +27,11 @@ tasks_files:
 
 **Status:** 🟠 In Progress
 **Created:** 2026-05-02
-**Last Updated:** 2026-05-02
+**Last Updated:** 2026-05-03
 **Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 3 of 4-stage v1  
 **Group 1 merged:** PR #92 (2026-05-03)  
-**Group 2 merged:** PR #93 (2026-05-03)
+**Group 2 merged:** PR #93 (2026-05-03)  
+**Group 3 merged:** PR #94 (2026-05-03)
 
 ---
 
@@ -45,7 +46,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 
 **Key Changes:**
 
-- decision: hybrid skill — procedural interview workflow + behavioral contract for ADR quality. Bakes in the interview pattern from this feature's own research. Follow-up: extract inline templates into `assets/` + add `references/structure.yaml` (Group 3).
+- decision: hybrid skill — procedural interview workflow + behavioral contract for ADR quality. **Group 3** extracted templates into `assets/` + `references/structure.yaml`.
 - transition-plan → write-plan: family pattern (parent hub + write-plan-setup + write-plan-expand). Initial single-skill conversion (Group 2) restructured into family (Group 3). **First skill to adopt `assets/` + `references/` convention** (most template-heavy).
 - plan-review: procedural review skill — ensures stage plans account for prior learnings and cross-checks consistency. Adopts the `assets/` + `references/` convention.
 - 3 commands archived after conversion (decision, transition-plan, plan-review).
@@ -81,8 +82,8 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] Task 10: Validate restructured skills (rubric + structure.yaml accuracy)
 
 ### Plan-Review Skill
-- [ ] Task 11: Audit plan-review command and classify behavioral instructions
-- [ ] Task 12: Convert plan-review to SKILL.md
+- [x] Task 11: Audit plan-review command and classify behavioral instructions
+- [x] Task 12: Convert plan-review to SKILL.md
 
 ### Cutover and Quality Gate
 - [ ] Task 13: Install skills + archive commands (decision, write-plan, plan-review)
@@ -96,7 +97,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] decision skill exists with interview workflow and ADR behavioral contract
 - [x] write-plan is a family: parent + write-plan-setup + write-plan-expand
 - [x] decision has `assets/` + `references/structure.yaml`
-- [ ] plan-review skill exists with staged-planning path support
+- [x] plan-review skill exists with staged-planning path support
 - [ ] All skills pass five-property rubric with populated gotchas
 - [ ] Self-containment (FR-8) verified for each skill
 - [ ] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml`
@@ -117,4 +118,4 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 
 ---
 
-**Last Updated:** 2026-05-02
+**Last Updated:** 2026-05-03

@@ -2,23 +2,21 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 3: Planner)
 **Group:** Plan-Review Skill
-**Status:** 🔴 Scaffolding (needs expansion)
-**Last Updated:** 2026-05-02
+**Status:** ✅ Active/Complete
+**Last Updated:** 2026-05-03
 
 ---
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 4` to add detailed implementation notes.
-
-- [ ] Task 11: Audit plan-review command and classify behavioral instructions
+- [x] Task 11: Audit plan-review command and classify behavioral instructions
   - Read `.cursor/commands/plan-review.md` (416 lines)
   - Classify instructions against precision tiers
   - Produce audit artifact at `planning-stage3/artifacts/plan-review-command-audit.md`
   - Key gap to address: path detection doesn't support `planning-stageN/` directories
   - **Identify checklist/reference content** that belongs in `assets/` or `references/`
 
-- [ ] Task 12: Convert plan-review to SKILL.md
+- [x] Task 12: Convert plan-review to SKILL.md
   - **Skill directory structure:**
     ```
     skills/plan-review/
@@ -47,11 +45,11 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Audit artifact with tier classification
-- [ ] plan-review SKILL.md in templates with rubric pass and gotchas
-- [ ] Staged planning path support (`planning-stageN/`)
-- [ ] `references/structure.yaml` with input/output schema
-- [ ] Self-containment (FR-8) verified
+- [x] Audit artifact with tier classification
+- [x] plan-review SKILL.md in templates with rubric pass and gotchas
+- [x] Staged planning path support (`planning-stageN/`)
+- [x] `references/structure.yaml` with input/output schema
+- [x] Self-containment (FR-8) verified
 
 ---
 
@@ -63,4 +61,4 @@
 
 ---
 
-**Last Updated:** 2026-05-02
+**Last Updated:** 2026-05-03
