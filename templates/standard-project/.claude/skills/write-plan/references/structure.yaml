@@ -1,0 +1,63 @@
+# Declarative contract for write-plan skill outputs and inputs.
+# Human and agent readers: use this alongside SKILL.md for path and shape truth.
+
+schema_version: 1
+skill: write-plan
+
+# Logical input channels (mirror command flags; design.md may be used like artifacts).
+input_modes:
+  - id: from_adr
+    description: ADR directory or files under decisions/
+    typical_flags: ["--from-adr"]
+  - id: from_artifacts
+    description: Single artifact file (e.g. checklist, transition brief)
+    typical_flags: ["--from-artifacts"]
+  - id: from_reflection
+    description: Reflection doc; may imply artifact generation first
+    typical_flags: ["--from-reflection"]
+  - id: from_design
+    description: Feature design document (sections with goals, scope, staging)
+    typical_flags: ["--from-design"]
+    notes: Natural extension for Stage 3-style planning sourced from design.md
+
+# Where the planning tree is rooted on disk (one of these conventions per repo).
+planning_roots:
+  dev_infra_feature:
+    description: Feature work under admin/services
+    base_glob: "admin/services/{service}/features/{feature}/"
+    default_subdir: planning
+    staged_planning_subdir_pattern: "planning-stage{N}/"
+    notes: Stage 3 of this feature uses planning-stage3/ instead of planning/
+  template_project:
+    description: Maintainer docs layout in generated projects
+    base_glob: "docs/maintainers/planning/features/{feature}/"
+
+# Files the skill creates or updates (Setup and Expand).
+outputs:
+  directories:
+    - path: tasks
+      role: One markdown file per task group
+      naming: "{nn}-{group-slug}.md"
+  singletons:
+    - filename: implementation-plan.md
+      role: YAML frontmatter + task index with GFM checkboxes
+      created_in: setup
+    - filename: status-and-next-steps.md
+      role: Progress table and next steps
+      created_in: setup
+  collections:
+    - pattern: "tasks/*.md"
+      role: Group files; Setup creates scaffolding; Expand deepens one group
+      setup_status: "🔴 Scaffolding (needs expansion)"
+      expanded_status: "✅ Expanded"
+
+# Frontmatter contract (must match implementation-plan body checkboxes).
+implementation_plan_frontmatter:
+  required_keys:
+    - task_count
+    - groups
+    - tasks_files
+  group_entry_shape:
+    name: string
+    file: string
+    tasks: list_of_integers
