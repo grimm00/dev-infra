@@ -33,7 +33,7 @@ tasks_files:
 **Group 2 merged:** PR #93 (2026-05-03)  
 **Group 3 merged:** PR #94 (2026-05-03)  
 **Group 4 merged:** PR #95 (2026-05-03)  
-**Group 5 cutover:** PR [#96](https://github.com/grimm00/dev-infra/pull/96) completes Stage 3 (awaiting merge to `develop`)
+**Group 5 merged:** PR #96 (2026-05-03) — Stage 3 cutover on `develop`
 
 ---
 
@@ -103,8 +103,8 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] All skills pass five-property rubric with populated gotchas
 - [x] Self-containment (FR-8) verified for each skill (cutover; no archived command dependency at runtime)
 - [x] All Stage 3 skills have `assets/` (where applicable) + `references/structure.yaml`
-- [x] 3 commands archived: decision.md, transition-plan.md, plan-review.md
-- [x] CI passes after cutover (PR [#96](https://github.com/grimm00/dev-infra/pull/96) checks green prior to merge)
+- [x] 3 commands archived to `admin/archived/commands/stage3-planner/`: decision.md, transition-plan.md, plan-review.md (repo root + templates)
+- [x] CI passes after cutover (PR [#96](https://github.com/grimm00/dev-infra/pull/96): checks green before merge + on `develop` after merge)
 - [x] Stage 3 exit criteria from design.md Section 5 verified
 - [x] Full thinking pipeline is skill-based (user experience at boundary)
 

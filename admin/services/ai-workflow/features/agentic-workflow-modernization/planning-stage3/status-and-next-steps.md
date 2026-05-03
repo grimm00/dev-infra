@@ -30,7 +30,7 @@
 - Stage 3 entry criteria met: Stage 2 go decision logged 2026-05-02
 - **Stage 3 → Stage 4 decision: GO** (2026-05-03) — exit criteria satisfied (design §5 Stage 3); `decision` retains interview workflow; `references/structure.yaml` aligned with SKILL outputs; bats full suite PASS on cutover branch; UX boundary matches design (thinking pipeline skill-based).
 - **Write-plan decomposition override:** Group 2 delivered as single skill; overridden — Group 3 restructures into family (parent + setup + expand) consistent with explore/research patterns
-- Stage 1-2 patterns apply: five-property rubric, templates-as-assets, family pattern, clean cutover
+- Post-merge (PR [#96](https://github.com/grimm00/dev-infra/pull/96)): Sourcery review — no deferred MEDIUM/LOW items (`admin/feedback/sourcery/pr96.md`; overall notes fixed inline prior to merge).
 
 ---
 
@@ -40,4 +40,4 @@
 - **Group 2 — Write-Plan skill** — merged via [PR #93](https://github.com/grimm00/dev-infra/pull/93) (2026-05-03)
 - **Group 3 — Skill family restructure** — merged via [PR #94](https://github.com/grimm00/dev-infra/pull/94) (2026-05-03)
 - **Group 4 — Plan-review skill** — merged via [PR #95](https://github.com/grimm00/dev-infra/pull/95) (2026-05-03)
-- **Group 5 — Cutover and quality gate** — [PR #96](https://github.com/grimm00/dev-infra/pull/96) (merged pending)
+- **Group 5 — Cutover and quality gate** — merged via [PR #96](https://github.com/grimm00/dev-infra/pull/96) (2026-05-03)
