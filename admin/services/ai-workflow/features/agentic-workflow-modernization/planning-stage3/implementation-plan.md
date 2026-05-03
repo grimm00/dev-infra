@@ -77,7 +77,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 
 ### Skill Family Restructure
 - [x] Task 8: Restructure write-plan into family (parent + write-plan-setup + write-plan-expand)
-- [ ] Task 9: Restructure decision skill with assets/ + references/
+- [x] Task 9: Restructure decision skill with assets/ + references/
 - [ ] Task 10: Validate restructured skills (rubric + structure.yaml accuracy)
 
 ### Plan-Review Skill
@@ -95,7 +95,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 
 - [x] decision skill exists with interview workflow and ADR behavioral contract
 - [x] write-plan is a family: parent + write-plan-setup + write-plan-expand
-- [ ] decision has `assets/` + `references/structure.yaml`
+- [x] decision has `assets/` + `references/structure.yaml`
 - [ ] plan-review skill exists with staged-planning path support
 - [ ] All skills pass five-property rubric with populated gotchas
 - [ ] Self-containment (FR-8) verified for each skill

@@ -3,205 +3,146 @@ name: decision
 description: >-
   Create Architecture Decision Records from research: human decision-interview
   first, then one ADR per decision point with alternatives and rationale.
-  Use after research is complete and the user wants /decision or to record
-  topic decisions. Do NOT run planning/task implementation in this skill —
-  hand off to the project's planning workflow after ADRs exist.
+  Use after research is complete and the user wants /decision or ADR authoring.
+  Do NOT run implementation planning inside this skill — hand off afterwards.
 disable-model-invocation: true
 ---
 
 # Decision
 
-Make **documented architecture decisions** from research artifacts. **Hybrid
-skill:** procedural file scaffolding + behavioral judgment (decision framing,
-alternative quality, human pacing).
+Make **documented architecture decisions** from research artifacts using a staged
+workflow: constrained interview (**`assets/decision-interview.md`**) → hub index
+(**`assets/hub-readme-template.md`**) → ADR files seeded from **`assets/adr-template.md`**.
 
-**North star:** The user stays in control and enriched by slowing down — not
-rushed to a single “right answer” before priorities are explicit (see
-decision-interview pattern).
+Treat those files under `assets/` as **copy-on-write templates** beside the eventual
+disk paths declared in **`references/structure.yaml`**.
+
+Hybrid skill: scaffolding rules + deliberate behavioral judgment framing **options,
+not pre-baked mandates**.
+
+North star — users stay paced through explicit priority capture before narrowing to a
+recommended alternative set (see behavioral contract).
 
 ---
 
 ## When to use
 
-- Research outputs exist (summary + topic docs or equivalent) and the user
-  wants ADRs for a topic.
-- User says `/decision`, “decision command”, or “turn this research into ADRs”.
+- Research summaries + topic dossiers justify ADR-ready questions.
+- User says `/decision`, `/decisions`, or analogous natural language.
 
 ## When not to use
 
-- Research scaffolding is missing → point to **research-setup** first.
-- User only wants brainstorming without records → **discuss**.
-- User wants implementation tasks → **task** / planning pipeline, not this skill.
+- Research scaffolding missing substantive findings → **`research-setup`** instead.
+- Ideation wanting zero records → **`discuss`** until intent firms.
+- Need implementation task breakdown afterwards → **`write-plan-setup`** / execution flows.
 
 ---
 
 ## Path resolution
 
-Pick **one** row and use it consistently for `topic` (kebab-case slug):
+Pick **exactly one layout row**, stay scoped to that subtree for remainder:
 
-| Structure | Topic root | Decisions directory | Research summary (typical) | Requirements (typical) |
-|-----------|------------|--------------------|----------------------------|-------------------------|
-| Dev-Infra feature | `admin/services/[service]/features/[topic]/` | `[topic-root]/decisions/` | `research/research-summary.md` or under `research/` | `[topic-root]/requirements.md` or `research/requirements.md` |
-| Template maintainer | `docs/maintainers/` | `docs/maintainers/decisions/[topic]/` | `docs/maintainers/research/[topic]/research-summary.md` | `docs/maintainers/research/[topic]/requirements.md` |
-| Project-wide | `docs/maintainers/` | `docs/maintainers/decisions/[topic]/` | same as template row | same as template row |
+| Structure | Topic root | Decisions dir | Typical research pointers |
+|-----------|------------|---------------|---------------------------|
+| Dev-infra feature | `admin/services/[service]/features/[topic]/` | `[topic-root]/decisions/` | `research/research-summary.md`, `research/requirements.md` mirrors |
+| Template maintainer | `docs/maintainers/` | `docs/maintainers/decisions/[topic]/` | Matching `research/[topic]/` summaries |
+| Project-wide | `docs/maintainers/` | `docs/maintainers/decisions/[topic]/` | same as maintainer |
 
-**Do not** use `admin/decisions/[topic]/` for dev-infra feature work — that path
-conflicts with feature-local hubs; feature **`[topic]/decisions/`** is canonical.
+Do **not** route dev-infra feature work through `admin/decisions/[topic]/` hubs — feature-local
+`/decisions/` keeps traceability symmetrical with research siblings.
+
+Detailed glob expectations: **`references/structure.yaml`**.
 
 ---
 
-## Preconditions (stop if unmet)
+## Preconditions
 
-1. User supplies or confirms `topic` and at least one research path to read
-   (`--from-research` equivalent).
-2. After reading: if there are **no** findings and **no** stated decision
-   questions, **stop** — research is not ready.
+1. Human or agent declares `topic` + readable research corpus.
+2. After inspection: if summaries contain **zero** articulated decision questions &
+   unresolved constraints, STOP — escalate back to **`research-conduct`**.
 
 ---
 
 ## Workflow
 
-### 0. Decision interview (human priorities)
+### 0. Interview priorities
 
-**Goal:** Surface priorities, friction, and constraints **before** clustering
-decision points (phase start signal from agentic-workflow research).
+Goal: constrain sequencing before authoring ADRs.
 
-1. Compute `decisions/` directory for the topic from the table above.
-2. Interview artifact path: **`[decisions-dir]/decision-interview.md`**.
-3. If the file **does not exist**: offer to create a stub with sections modeled
-   on typical interview flow:
-   - **How to use** (short answers; skip ok)
-   - **User experience priorities** (which workflows matter; friction)
-   - **Constraints / instincts** (scope, risk, “v1 means…”)
-   - Optional: **architecture / validation** prompts  
-   Then **stop** until the user fills enough to guide clustering **or** types an
-   explicit in-chat waiver: e.g. `waive decision interview`.
-4. If the file **exists**: read it first; use it to order which decision clusters
-   to tackle and what tradeoffs are acceptable. If it is still marked awaiting
-   input and empty where it matters, **stop** and ask the user to complete or
-   waive.
+1. Resolve decisions directory (`…/decisions/` under topic root).
+2. Target path **`[decisions-dir]/decision-interview.md`**.
+3. If missing → copy tailoring instructions from **`assets/decision-interview.md`**, create file,
+   then STOP until human fills materially **or** types explicit textual waiver mirrored in-chat.
+4. If present but empty anchors remain → STOP with targeted prompts referencing missing sections.
 
-### 1. Load research and requirements
+### 1. Absorb research corpus
 
-1. Read `research-summary.md` (or equivalent) for the topic.
-2. Read per-topic research files linked from the hub or under `research/`.
-3. Read `requirements.md` when present (functional + non-functional).
-4. **Outputs:** mental model of constraints, findings, and candidate requirements
-   IDs to reference later.
+Sequential reads: hub README (if exists) → summary → dossiers → consolidated requirements.
 
-### 2. Identify decision points (cluster)
+Deliverable: prioritized unknown clusters + linkage map for rationales later.
 
-For each cluster of related unknowns:
+### 2. Identify decision clusters
 
-1. Name **one** decision question (one ADR per decision point later).
-2. List **2–3 alternatives** with **pros/cons** — **do not** present a single
-   recommended winner until the user chooses or defers (see Behavioral
-   Contract).
-3. Note decision criteria (e.g. portability, complexity, team size).
+For cluster:
 
-**Observable output:** Ordered list of decision points (titles only) shown to
-the user; User confirms order or edits before file writes.
+1. One crisp question headline (will map 1:1 to ADRs).
+2. At least **two** differentiated alternatives annotated with +/- trade space.
+3. Criteria tags (risk, portability, staffing, rollout windows).
 
-### 3. Create or update decisions hub README
+Expose ordered backlog to operator for ACK before writes.
 
-In `[decisions-dir]/README.md`:
+### 3. Maintain decisions hub README
 
-- Purpose: decisions hub for topic; links to research + requirements.
-- Table listing each ADR with status (Proposed until user accepts).
-- `decisions-summary.md` link.
+Seed / refresh using **`assets/hub-readme-template.md`** — emphasize links table + statuses.
 
-Use the project's status emoji conventions if already present; otherwise 🔴 /
-🟡 / ✅ as in existing docs.
+### 4. Author ADRs (one file per outstanding decision)
 
-### 4. Write ADRs (one file per decision point)
+Filename pattern `adr-[NNN]-[kebab].md` synced with numbering policy in **`references/structure.yaml`**.
 
-**Filename:** `adr-[NNN]-[kebab-name].md` in `[decisions-dir]/`,
-zero-padded numbering matching hub order.
+Structural obligations mirror **`assets/adr-template.md`** (Context, Decision, Consequences ±,
+Alternatives, Rationale bridging interview, Requirements impact, References). Default lifecycle
+starts **🔴 Proposed** pending owner acceptance gates.
 
-**Required sections (non-negotiable):**
+### 5. Maintain `decisions-summary.md`
 
-1. **Context** — problem, forces, links to research + requirements.
-2. **Decision** — clear decision statement.
-3. **Consequences** — Positive and Negative subsections.
-4. **Alternatives Considered** — at least two, each with pros/cons and **why not
-   chosen** (or “deferred” with reason).
-5. **Decision Rationale** — ties back to interview priorities and research.
-6. **Requirements Impact** — affected/refined requirements.
-7. **References** — research paths, interview file if used.
+One-screen synopsis cross-linking statuses + fallout for PM stakeholders.
 
-**Status:** start as **Proposed** unless the user directs otherwise.
+### 6. Touch parent README only if precedent exists
 
-### 5. Create `decisions-summary.md`
+Prefer append-only hyperlink entries when repos already maintain aggregator docs (see YAML map).
 
-Summarize each ADR in one screen: decision one-liner, status, link. Requirements
-impact at high level, pointer to full `requirements.md`.
+### 7. Commit guidance — bounded autonomy
 
-### 6. Update parent decisions index (if present)
-
-| Structure | Parent index |
-|-----------|----------------|
-| Template / project-wide | `docs/maintainers/decisions/README.md` |
-| Dev-Infra | `admin/decisions/README.md` **or** service hub if that is where the repo lists decision topics — use whichever file already lists other topics. If none exists, skip (do not invent org-wide policy). |
-
-Add the topic link only if that file exists and is the established pattern.
-
-### 7. Commit guidance (bounded)
-
-1. Propose a single commit or small series with message shape:
-   `docs(decisions): add [topic] ADRs` (or per-ADR if user prefers).
-2. List `git add` paths concretely.
-3. **Stop.** Do not merge to a branch unless the user's repository policy asks —
-   the old command's merge-to-develop flow is not universal.
+Recommend `git add …` coverage + concise `docs(decisions):` style commit message bodies; STOP before
+automatic merges lacking policy certainty.
 
 ---
 
-## Behavioral Contract
+## Behavioral contract
 
-**Options, not answers.** Until the user selects or explicitly defers, present
-**2–3** credible alternatives with tradeoffs for each decision point. A
-recommended default is allowed **only** if the user asks for a recommendation
-after seeing alternatives.
+- **Options dominance:** forbid single-path ADRs posing as exhaustive unless research logged why.
+- **One decision per ADR.** Bundle only tightly coupled deltas with explicit bridging narrative.
+- **Traceability enforced:** citations must be openable Markdown-relative paths audiences already trust.
+- **Interview gravity:** waived flows must visibly echo waiver text inside ADRs (no invisible skips).
+- **Bounded analysis:** once mandatory sections materially satisfied → yield to human approval loops.
+- **Failure-aware:** conflicting numbering / hub divergence → escalate with corrective menu (append /
+  resequence / reconcile) before overwriting.
 
-**One ADR per decision point.** Do not combine unrelated decisions in one ADR.
-
-**Traceability.** Each ADR's Context and References must include paths the reader
-can open — no orphan decisions.
-
-**Interview informs rationale.** The `decision-interview.md` content (or waiver)
-must visibly influence **Decision Rationale** and ordering — if not, you skipped
-the point of step 0.
-
-**Bounded analysis.** Enough analysis to distinguish alternatives; stop when
-sections are complete and consistent. Do not continue into implementation
-planning.
-
-**Failure-aware.** If paths conflict or hub already exists with different
-numbering, **pause** and ask whether to append, renumber, or align with existing
-ADRs.
+Observable / bounded / outcome-framed / delta-only interpretations align with Stage 3 five-property gate.
 
 ---
 
 ## Gotchas
 
-**Wrong dev-infra root.** Using a global `admin/decisions/[topic]/` path for
-feature work breaks links; use `admin/services/.../features/[topic]/decisions/`.
+- Mis-targeting **`admin/decisions/`** hubs for bounded feature scopes — breaks onboarding paths.
+- Silent interview skips — yields mis-prioritized ADR waterfalls.
+- **Placeholder ADRs** masquerading as finished — placeholders belong in drafts branches only.
+- Merged winner hallucination — rewind to enumerated trade space if critique absent.
+- **Planning bleed:** never mint `implementation-plan.md` herein — escalate to **`write-plan-setup`**.
 
-**Skipping interview silently.** Without priorities, decision order defaults to
-technical completeness — that violates the interview-first pattern; only proceed
-with an explicit waiver.
-
-**Single-option ADRs.** An ADR with one “alternative” is incomplete — fold more
-options in or document why others were eliminated in research.
-
-**Paste-only ADRs.** Filling the template with placeholders and lorem-style
-text — each section needs substantive ties to **this** topic's research.
-
-**Merged recommendations.** If you “hallucinate” a decision the user did not
-accept, rewind: alternatives first, then record their choice.
-
-**Planning bleed.** Do not create `implementation-plan.md` here — that belongs
-to the planning / write-plan step after ADRs stabilize.
+Asset pointers keep templates versioned beside skill instructions for FR-8 self-containment.
 
 ---
 
-**Last Updated:** 2026-05-02
+**Structured map:** `references/structure.yaml`  
+**Interview seed:** `assets/decision-interview.md` • **Hub seed:** `assets/hub-readme-template.md` • **ADR seed:** `assets/adr-template.md`

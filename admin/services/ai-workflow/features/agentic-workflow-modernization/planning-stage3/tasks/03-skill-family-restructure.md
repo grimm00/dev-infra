@@ -32,7 +32,7 @@ explore/research family pattern regardless of interim single-skill decision text
 
 ---
 
-- [ ] Task 9: Restructure decision skill with assets/ + references/
+- [x] Task 9: Restructure decision skill with assets/ + references/
   - **Purpose:** Finish deferred template extraction from Group 1 — align decision with **`assets/` + `references/`** convention already proven on write-plan.
   - **Steps:**
     1. Create **`decision/assets/adr-template.md`**, **`hub-readme-template.md`**, **`decision-interview.md`** mirroring headings previously enumerated inline inside `SKILL.md`.
@@ -70,7 +70,7 @@ explore/research family pattern regardless of interim single-skill decision text
 
 - [x] write-plan is a family: parent + write-plan-setup + write-plan-expand
 - [x] write-plan parent is a thin orientation hub (like explore, research parents)
-- [ ] decision has `assets/` with extracted templates + `references/structure.yaml`
+- [x] decision has `assets/` with extracted templates + `references/structure.yaml`
 - [ ] All modified SKILL.md files pass five-property rubric
 - [ ] `references/structure.yaml` files are accurate for both skills
 
