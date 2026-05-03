@@ -2,16 +2,14 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 3: Planner)
 **Group:** Plan-Review Skill
-**Status:** 🔴 Scaffolding (needs expansion)
-**Last Updated:** 2026-05-02
+**Status:** 🟠 In Progress
+**Last Updated:** 2026-05-03
 
 ---
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 4` to add detailed implementation notes.
-
-- [ ] Task 11: Audit plan-review command and classify behavioral instructions
+- [x] Task 11: Audit plan-review command and classify behavioral instructions
   - Read `.cursor/commands/plan-review.md` (416 lines)
   - Classify instructions against precision tiers
   - Produce audit artifact at `planning-stage3/artifacts/plan-review-command-audit.md`

@@ -82,7 +82,7 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] Task 10: Validate restructured skills (rubric + structure.yaml accuracy)
 
 ### Plan-Review Skill
-- [ ] Task 11: Audit plan-review command and classify behavioral instructions
+- [x] Task 11: Audit plan-review command and classify behavioral instructions
 - [ ] Task 12: Convert plan-review to SKILL.md
 
 ### Cutover and Quality Gate
