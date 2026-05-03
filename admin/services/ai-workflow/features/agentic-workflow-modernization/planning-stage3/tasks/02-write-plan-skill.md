@@ -3,6 +3,7 @@
 **Feature:** Agentic Workflow Modernization (Stage 3: Planner)
 **Group:** Write-Plan Skill
 **Status:** ✅ Expanded
+**Merged:** PR #93 (2026-05-03)
 **Last Updated:** 2026-05-02
 
 ---

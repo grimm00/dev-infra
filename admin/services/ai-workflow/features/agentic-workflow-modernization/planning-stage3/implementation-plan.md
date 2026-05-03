@@ -29,7 +29,8 @@ tasks_files:
 **Created:** 2026-05-02
 **Last Updated:** 2026-05-02
 **Source:** [ADRs 1-5 + design.md Section 5](../decisions/) → Stage 3 of 4-stage v1  
-**Group 1 merged:** PR #92 (2026-05-03)
+**Group 1 merged:** PR #92 (2026-05-03)  
+**Group 2 merged:** PR #93 (2026-05-03)
 
 ---
 
@@ -75,9 +76,9 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 - [x] Task 7: Validate write-plan skill against Stage 3's own scaffolding (meta-test)
 
 ### Skill Family Restructure
-- [ ] Task 8: Restructure write-plan into family (parent + write-plan-setup + write-plan-expand)
-- [ ] Task 9: Restructure decision skill with assets/ + references/
-- [ ] Task 10: Validate restructured skills (rubric + structure.yaml accuracy)
+- [x] Task 8: Restructure write-plan into family (parent + write-plan-setup + write-plan-expand)
+- [x] Task 9: Restructure decision skill with assets/ + references/
+- [x] Task 10: Validate restructured skills (rubric + structure.yaml accuracy)
 
 ### Plan-Review Skill
 - [ ] Task 11: Audit plan-review command and classify behavioral instructions
@@ -93,8 +94,8 @@ Convert the **Planner** role group of dev-infra commands to skills. This stage c
 ## ✅ Definition of Done
 
 - [x] decision skill exists with interview workflow and ADR behavioral contract
-- [ ] write-plan is a family: parent + write-plan-setup + write-plan-expand
-- [ ] decision has `assets/` + `references/structure.yaml`
+- [x] write-plan is a family: parent + write-plan-setup + write-plan-expand
+- [x] decision has `assets/` + `references/structure.yaml`
 - [ ] plan-review skill exists with staged-planning path support
 - [ ] All skills pass five-property rubric with populated gotchas
 - [ ] Self-containment (FR-8) verified for each skill
