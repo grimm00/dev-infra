@@ -2,30 +2,43 @@
 
 **Feature:** Agentic Workflow Modernization (Stage 3: Planner)
 **Group:** Decision Skill
-**Status:** 🔴 Scaffolding (needs expansion)
+**Status:** ✅ Expanded
 **Last Updated:** 2026-05-02
 
 ---
 
 ## 📝 Tasks
 
-> ⚠️ **Scaffolding:** Run `/write-plan agentic-workflow-modernization --expand --group 1` to add detailed implementation notes.
-
-- [ ] Task 1: Audit decision command and classify behavioral instructions
-  - Read `.cursor/commands/decision.md` (632 lines) and classify every instruction against the three precision tiers (Tier 1/2/3)
-  - Identify the interview workflow structure: question sequence, ADR template filling, decision-interview.md pattern
-  - Produce audit artifact at `planning-stage3/artifacts/decision-command-audit.md`
+- [x] Task 1: Audit decision command and classify behavioral instructions
+  - **Purpose:** Map `.cursor/commands/decision.md` to ADR-004 tiers before conversion so nothing vague ships in the skill.
+  - **Steps:**
+    1. Read `decision.md` end-to-end; note path-detection contradictions (Configuration vs Step 3 vs Reference).
+    2. Classify each major section and standout instruction as Tier 1 (precise), Tier 2 (mixed), or Tier 3 (vague/problematic) per Topic 8 / ADR-004.
+    3. Record interview workflow separately: current command does **not** encode interview-first prose — pull structure from `decisions/decision-interview.md` and design staging notes (Stage 3 Planner).
+    4. Write `planning-stage3/artifacts/decision-command-audit.md` with summary table, tier tallies, and “skill actions” (keep / rewrite / omit).
+  - **Files:** `planning-stage3/artifacts/decision-command-audit.md` (create)
+  - **Acceptance:** Artifact exists; every command section ≥ summary row; explicit note on interview gap and canonical dev-infra decisions path.
 
 - [ ] Task 2: Design decision SKILL.md (interview workflow + ADR behavioral contract)
-  - Hybrid skill: procedural interview flow + behavioral contract for ADR quality
-  - Bake in the interview pattern from this feature's own research (design.md Section 5 calls this out)
-  - Apply five-property rubric to all behavioral instructions; populate gotchas
-  - Install in `templates/standard-project/.claude/skills/decision/SKILL.md`
+  - **Purpose:** Ship hybrid skill: human interview preflight + procedural ADR scaffolding + behavioral ADR quality bar.
+  - **Steps:**
+    1. Add `templates/standard-project/.claude/skills/decision/SKILL.md` with YAML frontmatter (`name`, `description`, `disable-model-invocation: true`).
+    2. **Workflow:** (0) Decision interview — locate or scaffold `decision-interview.md` under the topic decisions tree; **stop** until human fills priority sections or explicitly waives in chat; (1) research/requirements reads per path table; (2) decision points with **options-not-answers** (2–3 alternatives, tradeoffs, no premature recommendation); (3) hub README; (4) one ADR per decision point using template sections; (5) decisions-summary; (6) update parent decisions README quick links when present; (7) commit guidance **bounded** to project norms (do not require merge-to-develop like the command).
+    3. **Behavioral contract:** Observable outputs (filenames, sections), bounded stop conditions, outcome-framed ADR structure, delta-only path rules (fix dev-infra `admin/services/.../decisions/`), failure-aware (missing research, missing interview waiver, ambiguous topic).
+    4. **Gotchas:** ≥5 bullets from audit Tier 3/mixed items and path confusion.
+    5. Keep `SKILL.md` under 500 lines (ADR-004).
+  - **Files:** `templates/standard-project/.claude/skills/decision/SKILL.md` (create)
+  - **Acceptance:** Skill is self-contained (FR-8): core flow readable without external commands; interview + ADR contract present; rubric-aligned prose.
 
 - [ ] Task 3: Validate decision skill against a recent ADR produced under the command
-  - Static comparison: behavioral coverage, interview flow, ADR quality output
-  - Reference artifact: one of ADR-001 through ADR-005 (produced under command era)
-  - Document go/no-go verdict in task file's Validation Log
+  - **Purpose:** Static regression vs command-era ADR shape.
+  - **Steps:**
+    1. Read `admin/services/ai-workflow/features/agentic-workflow-modernization/decisions/adr-001-v1-skill-selection.md`.
+    2. Checklist map: Context, Decision, Consequences (+ pos/neg), Alternatives Considered (≥2), Decision Rationale, Requirements Impact, References — skill workflow requires each in ADR output.
+    3. Compare interview intent: skill step 0 must reference the same priority surfaces as `decision-interview.md` (Sections 1–3 style), not necessarily verbatim text.
+    4. Record **Validation Log** below with **Verdict:** `GO` or `NO-GO` + rationale.
+  - **Files:** This task file (Validation Log section)
+  - **Acceptance:** Log contains checklist results and a clear GO/NO-GO.
 
 ---
 
@@ -38,12 +51,29 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Audit artifact produced with tier classification
+- [x] Audit artifact produced with tier classification
 - [ ] decision SKILL.md in templates with interview workflow + ADR contract
 - [ ] Five-property rubric passes, gotchas populated
 - [ ] Validation log with go/no-go verdict
 
 > **Follow-up (Group 2 or cutover):** Extract inline templates (ADR template, hub README, decision-interview scaffold) into `assets/` and add `references/structure.yaml` per the convention established in Group 2. The decision skill was converted before this convention was defined.
+
+---
+
+## 📋 Validation Log
+
+**Date:** _(Task 3)_  
+**Reference ADR:** `decisions/adr-001-v1-skill-selection.md`
+
+| ADR section | Required by skill? | Present in ADR-001? | Notes |
+|-------------|-------------------|---------------------|-------|
+| _(pending)_ | | | |
+
+**Interview coverage:** _(pending)_
+
+**Verdict:** _(pending)_
+
+**Rationale:** _(pending)_
 
 ---
 
