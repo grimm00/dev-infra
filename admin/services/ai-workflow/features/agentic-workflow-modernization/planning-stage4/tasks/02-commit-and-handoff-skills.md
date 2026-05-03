@@ -11,12 +11,12 @@
 
 - [ ] Task 4: Audit commit command and classify instructions
   - Classify commit.md (312 lines) against the five-property rubric
-  - Document coupling to review: same-session context, cross-session artifact reading, auto-detect
+  - Document coupling to pre-commit-review: same-session context, cross-session artifact reading, auto-detect
   - Produce audit artifact at `planning-stage4/artifacts/commit-command-audit.md`
 
 - [ ] Task 5: Convert commit to SKILL.md (procedural, review-coupled)
   - Create `templates/standard-project/.claude/skills/commit/SKILL.md`
-  - Create `references/structure.yaml` — declare dependency on review's artifact shape (cross-reference review's `structure.yaml`)
+  - Create `references/structure.yaml` — declare dependency on pre-commit-review's artifact shape (cross-reference pre-commit-review's `structure.yaml`)
   - No `assets/` needed (commit produces commits, not templates)
   - Preserve three discovery modes: same-session context, explicit folder, auto-detect
 
@@ -34,7 +34,7 @@
 - [ ] Task 8: Validate commit↔review integration and handoff skill
   - Verify commit's `structure.yaml` correctly references review's output shape
   - Verify handoff skill passes five-property rubric independently
-  - Confirm all three skills (review, commit, handoff) are self-contained per FR-8
+  - Confirm all three skills (pre-commit-review, commit, handoff) are self-contained per FR-8
 
 ---
 
@@ -59,7 +59,7 @@
 
 ## 🔗 Dependencies
 
-- Group 1 (Review Skill) must be complete — commit references review's `structure.yaml` output shape
+- Group 1 (Review Skill) must be complete — commit references pre-commit-review's `structure.yaml` output shape
 - Handoff tasks (6-7) are independent of review/commit and could theoretically parallelize
 
 ---
