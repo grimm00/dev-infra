@@ -55,7 +55,7 @@ Convert the **Reviewer** role group of dev-infra commands to skills, completing 
 ## 📝 Implementation Plan
 
 ### Review Skill
-- [ ] Task 1: Audit review command and classify behavioral instructions
+- [x] Task 1: Audit review command and classify behavioral instructions
 - [ ] Task 2: Convert review to SKILL.md (hybrid: procedural staging + behavioral diff analysis)
 - [ ] Task 3: Validate review skill against review artifact patterns
 
