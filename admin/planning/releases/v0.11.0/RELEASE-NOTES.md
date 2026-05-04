@@ -1,8 +1,8 @@
 # Release Notes - v0.11.0
 
 **Version:** v0.11.0
-**Release Date:** 2026-05-XX
-**Status:** 🔴 Draft - Needs Review
+**Release Date:** 2026-05-04
+**Status:** ✅ Final
 
 ---
 

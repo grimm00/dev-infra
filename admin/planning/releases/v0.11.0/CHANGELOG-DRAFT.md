@@ -1,11 +1,11 @@
 # CHANGELOG Draft - v0.11.0
 
 **Draft Created:** 2026-05-04
-**Status:** 🔴 Draft - Needs Review
+**Status:** ✅ Merged into CHANGELOG.md
 
 ---
 
-## [0.11.0] - 2026-05-XX
+## [0.11.0] - 2026-05-04
 
 ### Added
 
