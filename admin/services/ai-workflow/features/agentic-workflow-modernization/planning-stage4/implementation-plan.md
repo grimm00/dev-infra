@@ -20,7 +20,7 @@ tasks_files:
 **Status:** ✅ Complete
 **Created:** 2026-05-03
 **Last Updated:** 2026-05-03
-**Cutover PR:** _(link added when PR is opened)_
+**Cutover PR:** https://github.com/grimm00/dev-infra/pull/99
 **Source:** [design.md Section 5 — Stage 4: Reviewer](../designs/design.md) + Stage 3 learnings
 
 ---

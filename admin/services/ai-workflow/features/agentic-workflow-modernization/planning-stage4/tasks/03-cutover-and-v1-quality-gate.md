@@ -44,7 +44,7 @@
 - [x] Bats test suite passes (full recursive run)
 - [x] Stage 4 exit criteria verified against design.md
 - [x] v1 completion logged
-- [ ] CI green on cutover PR _(record snapshot at PR validation; agent does not block on pending CI)_
+- [x] CI green on cutover PR _(see PR #99 checks snapshot in group-cycle report; local Bats + template-sync PASS)_
 
 ---
 

@@ -29,7 +29,7 @@
 - Stage 4 entry criteria met: Stage 3 go decision logged 2026-05-03
 - **PR #97** merged 2026-05-03 — Group 1 (pre-commit-review)
 - **PR #98** merged 2026-05-04 — Group 2 (commit + handoff)
-- **Between-group plan-review:** `plan-review-2026-05-04.md` (Group 3 checkpoint)
+- **Cutover PR:** [#99](https://github.com/grimm00/dev-infra/pull/99)
 - **Stage 4 → Post-v1:** **GO** — see `implementation-plan.md` exit table and Group 3 task log
 
 ---
