@@ -17,9 +17,10 @@ tasks_files:
 ---
 # Implementation Plan — Stage 4: Reviewer (Agentic Workflow Modernization)
 
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Created:** 2026-05-03
 **Last Updated:** 2026-05-03
+**Cutover PR:** https://github.com/grimm00/dev-infra/pull/99
 **Source:** [design.md Section 5 — Stage 4: Reviewer](../designs/design.md) + Stage 3 learnings
 
 ---
@@ -67,9 +68,9 @@ Convert the **Reviewer** role group of dev-infra commands to skills, completing 
 - [x] Task 8: Validate commit↔review integration and handoff skill
 
 ### Cutover and v1 Final Quality Gate
-- [ ] Task 9: Install skills + archive commands (review, commit, handoff)
-- [ ] Task 10: Final quality sweep across ALL v1 skills (~16 skills)
-- [ ] Task 11: v1 exit criteria verification + completion
+- [x] Task 9: Install skills + archive commands (review, commit, handoff)
+- [x] Task 10: Final quality sweep across ALL v1 skills (~16 skills)
+- [x] Task 11: v1 exit criteria verification + completion
 
 ---
 
@@ -79,14 +80,18 @@ Convert the **Reviewer** role group of dev-infra commands to skills, completing 
 - [x] commit skill exists with review-artifact coupling (same-session + cross-session)
 - [x] handoff skill exists with create + resume modes
 - [x] All Stage 4 skills have `assets/` (where applicable) + `references/structure.yaml`
-- [ ] All Stage 4 skills pass five-property rubric with populated gotchas *(Group 3 final sweep remainder)*
-- [ ] Self-containment (FR-8) verified for each skill *(trio validated Group 2; full corpus pending Task 11)*
-- [ ] 3 commands archived to `admin/archived/commands/stage4-reviewer/`
-- [ ] CI passes after cutover
-- [ ] Final quality sweep: all ~16 v1 skills pass five-property rubric
-- [ ] All thinking pipeline commands removed — skills only
-- [ ] Stage 4 exit criteria from design.md Section 5 verified
-- [ ] v1 completion: full thinking pipeline is skill-based; implementation commands remain as commands
+- [x] All Stage 4 skills pass five-property rubric with populated gotchas *(Group 3 sweep)*
+- [x] Self-containment (FR-8) verified for each skill *(full corpus: see task file waivers for legacy YAML)*
+- [x] 3 commands archived to `admin/archived/commands/stage4-reviewer/` (repo + both templates)
+- [x] CI / local quality gate: `validate-template-sync.sh` PASS; full Bats **`find tests -name '*.bats'`** PASS (248 ok, 3 skip)
+- [x] Final quality sweep: v1 skill corpus verified (19 `SKILL.md` files; see `tasks/03-cutover-and-v1-quality-gate.md`)
+- [x] All thinking pipeline commands removed — skills only *(reviewer trio cut over; remaining `.cursor/commands/` are implementation / release / redirect shims)*
+- [x] Stage 4 exit criteria from design.md Section 5 verified
+- [x] v1 completion: full thinking pipeline is skill-based; implementation commands remain as commands
+
+### Stage 4 → Post-v1 decision
+
+**GO.** Section 5 Stage 4 exit criteria satisfied: thinking commands removed for the reviewer trio, skills vendored at repo root, quality gate passed locally, post-v1 backlog unchanged (template sync FR-9, learning-project skills, implementation-command v2 evaluation).
 
 ---
 
