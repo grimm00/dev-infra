@@ -14,6 +14,15 @@ Ensure **uniform planning trees** are internally consistent before `/task` style
 execution. Replaces `.cursor/commands/plan-review.md` with the same behavioral
 contract plus **`planning-stage{N}/`** parity with **`write-plan`**.
 
+**Formal absorption of `/pre-phase-review`:** Operator + agent pipelines now standardize
+on **plan-review** for the “checkpoint before the next tranche of work” role. Use this
+skill **between** dispatched task groups (after the prior group’s work has landed, before
+plan expansion / execution of the next group) so blockers surface early. The dated
+**`plan-review-YYYY-MM-DD.md`** artifact is identical whether run standalone or as a
+pipeline gate — see **`references/structure.yaml`** (`pipeline_integration`). Legacy
+**`/pre-phase-review`** stubs remain only as thin redirects to **`/plan-review`** /
+this skill.
+
 Heavy checklist prose lives in **`assets/review-checklist.md`** — copy into the dated
 review artifact named in **`references/structure.yaml`** (`report_output`).
 
@@ -22,6 +31,10 @@ review artifact named in **`references/structure.yaml`** (`report_output`).
 ## When to use
 
 - Immediately **before** starting work on a new task group when scaffolding exists.
+- **Between task-group dispatches** in long-running agent pipelines (after the prior
+  group merges or fully lands, before you expand/execute the next group) — same dated
+  artifact output as any other invocation; scope with `--group N` when you only need
+  the upcoming group’s footprint reviewed.
 - After **`write-plan-setup`** / **`write-plan-expand`** produced or mutated files.
 - User invokes `/plan-review`, names this skill, or supplies `--check-deps` /
   `--check-tests` emphasis flags.
@@ -141,6 +154,7 @@ Classify findings:
 
 - **`write-plan`** family — upstream scaffolding producer (`write-plan-setup`, `write-plan-expand`).
 - **`decision`** — precedes planning when ADRs justify transition planning.
+- `.cursor/commands/pre-phase-review.md` — deprecated redirect shim → use this skill instead.
 - Retired `/plan-review` command text (read-only history): `admin/archived/commands/stage3-planner/` — **not** an execution prerequisite.
 
 ---

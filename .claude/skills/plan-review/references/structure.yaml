@@ -4,6 +4,14 @@
 schema_version: 2
 skill: plan-review
 
+pipeline_integration:
+  between_group_cycles: >
+    Agentic multi-group pipelines (e.g. group-cycle / agent dispatch) MUST invoke this
+    skill after a merged prior-group PR and before expanding or executing the next
+    task group. Mirrors legacy pre-phase checkpoints while emitting the single
+    `plan-review-{yyyy}-{mm}-{dd}.md` artifact contract (standalone equivalent to ad-hoc runs).
+    Deprecated `/pre-phase-review` command stubs redirect to `/plan-review` / this skill.
+
 invocation_flags:
   - id: feature
     description: Explicit planning feature/topic name when multiple trees exist

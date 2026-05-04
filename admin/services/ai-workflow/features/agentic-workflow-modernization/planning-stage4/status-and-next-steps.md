@@ -1,36 +1,35 @@
 # Status & Next Steps — Stage 4: Reviewer
 
-**Status:** 🔴 Not Started
+**Status:** 🟠 In Progress
 **Last Updated:** 2026-05-03
 
 ---
 
 ## 📊 Progress Summary
 
-**Overall:** 0/11 tasks complete
+**Overall:** 8/11 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Review Skill | 🔴 Not Started | 0/3 tasks | |
-| Commit and Handoff Skills | 🔴 Not Started | 0/5 tasks | |
-| Cutover and v1 Final Quality Gate | 🔴 Not Started | 0/3 tasks | |
+| Review Skill | ✅ Complete | 3/3 tasks | Landed via PR #97 |
+| Commit and Handoff Skills | ✅ Complete | 5/5 tasks | Audits + skills + integration validation |
+| Cutover and v1 Final Quality Gate | 🔴 Not Started | 0/3 tasks | Next dispatch |
 
 ---
 
 ## 🚀 Next Steps
 
-1. Review scaffolding — verify group/task breakdown.
-2. Expand groups — run write-plan **Expand** for Group 1.
-3. Start implementation — `/agent-dispatch` for Group 1.
+1. Run **plan-review** before Group 3 when ready (after this PR merges) — confirm cutover task specs.
+2. Dispatch **Group 3** — install skills, archive reviewer commands, v1 quality sweep, exit criteria.
 
 ---
 
 ## 📝 Notes
 
 - Stage 4 entry criteria met: Stage 3 go decision logged 2026-05-03
-- Plan generated from design.md Section 5 (Stage 4: Reviewer) on 2026-05-03
-- Conventions carried forward: `assets/` + `references/structure.yaml` from day one (Stage 3 lesson)
-- Archival path follows Stage 3 convention: `admin/archived/commands/stage4-reviewer/`
+- **PR #97** merged 2026-05-03 — Group 1 (pre-commit-review) complete
+- Conventions: `assets/` + `references/structure.yaml`; commit declares coupling via **pre-commit-review** YAML pointer
+- **Group-cycle Step 0** now uses **`plan-review`** skill between groups (`plan-review-YYYY-MM-DD.md`), not legacy `/pre-phase-review` stubs
 
 ---
 

@@ -49,4 +49,7 @@ git_expectations:
 integration:
   commit_skill:
     description: Second half of review-then-commit; consumes same review folder context
-    notes: Declare filenames here so commit SKILL can depend on stable names/paths.
+    sibling_structure_yaml_relative: ../commit/references/structure.yaml
+    notes: >
+      Declare filenames here so commit SKILL can depend on stable names/paths.
+      Companion commit YAML points back via upstream_review_contract for paired edits.
