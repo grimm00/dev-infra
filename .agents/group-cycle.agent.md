@@ -152,12 +152,13 @@ dt-review [pr-number] admin/feedback/sourcery/pr[number].md
 If `dt-review` is not available (`which dt-review` returns nothing), skip this
 sub-step and note it in the report. Do not block on a missing tool.
 
-**Polling:** Run `dt-review` every 15 seconds, up to 4 attempts (60s total).
-After each run, check whether the output file contains substantive content
-(individual comments or overall comments — not just headers/empty template).
-If content appears, Sourcery has landed — proceed immediately. If all 4 polls
-produce empty output, proceed anyway and note that Sourcery did not land within
-the polling window.
+**Polling:** Wait 15 seconds before the first attempt, then run `dt-review`.
+If the output has no substantive content, wait another 15 seconds and retry —
+up to 4 attempts total (60s of waiting). After each run, check whether the
+output file contains substantive content (individual comments or overall
+comments — not just headers/empty template). If content appears, Sourcery has
+landed — proceed immediately. If all 4 polls produce empty output, proceed
+anyway and note that Sourcery did not land within the polling window.
 
 #### 4c. Priority Matrix
 
