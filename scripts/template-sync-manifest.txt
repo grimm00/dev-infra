@@ -5,33 +5,36 @@
 # Note: experimental-project was merged into standard-project (ADR-001: Commands as Guides)
 # All templates now receive all commands - no stable/experimental distinction
 
-# All commands (26 total — includes 2 deprecation stubs)
-.cursor/commands/commit.md
+# All commands (23 remaining — reviewer trio archived stage4-reviewer)
+# review.md, commit.md, handoff.md → admin/archived/commands/stage4-reviewer/{repo-root,templates-*}
 .cursor/commands/cursor-rules.md
-.cursor/commands/decision.md
-.cursor/commands/discuss.md
-.cursor/commands/explore.md
-.cursor/commands/handoff.md
+# decision.md archived to admin/archived/commands/stage3-planner/
+.cursor/commands/archived/discuss.md
+.cursor/commands/archived/explore.md
 .cursor/commands/fix-implement.md
 .cursor/commands/fix-plan.md
 .cursor/commands/fix-review.md
-.cursor/commands/int-opp.md
-.cursor/commands/plan-review.md
+.cursor/commands/archived/int-opp.md
+# plan-review.md archived — stage3-planner
 .cursor/commands/post-pr.md
 .cursor/commands/pre-phase-review.md
 .cursor/commands/pr-validation.md
 .cursor/commands/pr.md
-.cursor/commands/reflect.md
+.cursor/commands/archived/reflect.md
 .cursor/commands/reflection-artifacts.md
-.cursor/commands/research.md
-.cursor/commands/review.md
-.cursor/commands/spike.md
+.cursor/commands/archived/research.md
+.cursor/commands/archived/spike.md
 .cursor/commands/status.md
 .cursor/commands/task.md
 .cursor/commands/task-improvement.md
 .cursor/commands/task-phase.md
 .cursor/commands/task-release.md
-.cursor/commands/transition-plan.md
+# transition-plan.md archived — stage3-planner
+
+# Claude skills (standard-project only until learning mirrors .claude/skills/).
+# Repo root `.claude/skills/` is vendored from standard-project; tracked in CI via
+# other checks — not synced via this manifest because learning lacks `.claude/`.
+# Stage 4 reviewer cutover installs: pre-commit-review, commit, handoff (+ prior skills).
 
 # Configuration files
 .sourcery.yaml

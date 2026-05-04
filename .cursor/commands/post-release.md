@@ -103,17 +103,19 @@ git tag -l "v0.4.0"
 git branch -a --contains v0.4.0 | grep main
 ```
 
-**Check GitHub release (if applicable):**
+**Check GitHub release (auto-created by CI):**
 
 ```bash
 gh release view v0.4.0
 ```
 
+**Note:** As of v0.10.0, GitHub Releases are created automatically by the `create-release-tag.yml` workflow when the release PR merges to main. The workflow uses curated `RELEASE-NOTES.md` when available. If the release doesn't exist, it may indicate a CI issue.
+
 **Checklist:**
 
 - [ ] Tag v0.4.0 exists
 - [ ] Tag is on main branch
-- [ ] GitHub release exists (if applicable)
+- [ ] GitHub release exists (auto-created by CI)
 - [ ] Release distribution workflow completed
 
 ---

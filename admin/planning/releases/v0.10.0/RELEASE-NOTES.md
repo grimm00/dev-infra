@@ -2,7 +2,7 @@
 
 **Version:** v0.10.0  
 **Release Date:** 2026-02-28  
-**Status:** ✅ Final
+**Status:** ✅ Published (GitHub Release)
 
 ---
 

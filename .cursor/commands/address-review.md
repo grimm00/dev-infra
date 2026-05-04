@@ -53,7 +53,7 @@ This command supports multiple project organization patterns:
 **Examples:**
 
 - `/address-review phase-5-review.md` - Address gaps from Phase 5 review
-- `/address-review admin/planning/features/release-readiness/phase-5-review.md` - Full path
+- `/address-review admin/services/[service]/features/release-readiness/phase-5-review.md` - Full path
 - `/address-review --phase 5 --feature release-readiness` - Auto-detect review path
 - `/address-review phase-5-review.md --dry-run` - Show changes without applying
 

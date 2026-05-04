@@ -12,7 +12,7 @@
 
 This document specifies the validation rules that `dt-doc-validate` must implement to ensure documentation complies with template standards. Rules are organized into **common rules** (applicable to all doc types) and **type-specific rules** (per document category).
 
-**Architecture Reference:** [ADR-004: Validation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-004-validation-architecture.md)
+**Architecture Reference:** [ADR-004: Validation Architecture](../../../admin/services/template-generation/features/template-doc-infrastructure/decisions/adr-004-validation-architecture.md)
 
 ---
 
@@ -205,7 +205,7 @@ When validating a directory:
 ## 📑 Type-Specific Rules
 
 Each document type has additional required sections beyond the common rules. Document type is detected from:
-1. **Path-based detection:** Directory structure (e.g., `admin/explorations/` → Exploration)
+1. **Path-based detection:** Directory structure (e.g., `admin/services/[service]/explorations/` → Exploration)
 2. **Content-based detection:** Title patterns (e.g., `# ADR-NNN:` → ADR)
 3. **Override flag:** `--type` CLI option
 
@@ -213,7 +213,7 @@ Each document type has additional required sections beyond the common rules. Doc
 
 ### Exploration Documents
 
-**Path Pattern:** `admin/explorations/[topic]/exploration.md`
+**Path Pattern:** `admin/services/[service]/explorations/[topic]/exploration.md`
 
 **Document Subtypes:**
 
@@ -259,7 +259,7 @@ Each document type has additional required sections beyond the common rules. Doc
 
 ### Research Documents
 
-**Path Pattern:** `admin/research/[topic]/`
+**Path Pattern:** `admin/services/[service]/features/[topic]/research/`
 
 **Document Subtypes:**
 
@@ -334,7 +334,7 @@ Each document type has additional required sections beyond the common rules. Doc
 
 ### Decision Documents (ADRs)
 
-**Path Pattern:** `admin/decisions/[topic]/`
+**Path Pattern:** `admin/services/[service]/features/[topic]/decisions/`
 
 **Document Subtypes:**
 
@@ -1024,7 +1024,7 @@ dt-doc-validate --json admin/ > validation-report.json
 
 ## 🔗 References
 
-- [ADR-004: Validation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-004-validation-architecture.md)
+- [ADR-004: Validation Architecture](../../../admin/services/template-generation/features/template-doc-infrastructure/decisions/adr-004-validation-architecture.md)
 - [validation-rules/](validation-rules/) - Machine-readable YAML validation rules
 - [FORMAT.md](FORMAT.md) - Template format specification
 - [VARIABLES.md](VARIABLES.md) - Variable reference

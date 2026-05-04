@@ -365,15 +365,15 @@ git worktree remove worktrees/feat-user-auth
 
 ### Architecture Decisions
 
-- [ADR-001: Worktree Location and Naming](../admin/decisions/worktree-feature-workflow/adr-001-worktree-location-and-naming.md)
-- [ADR-002: Self-Contained Feature Branches](../admin/decisions/worktree-feature-workflow/adr-002-self-contained-feature-branches.md)
-- [ADR-003: Draft PR Review Workflow](../admin/decisions/worktree-feature-workflow/adr-003-draft-pr-review-workflow.md)
-- [ADR-004: Sourcery Configuration](../admin/decisions/worktree-feature-workflow/adr-004-sourcery-configuration.md)
+- [ADR-001: Worktree Location and Naming](../admin/services/meta/features/worktree-feature-workflow/decisions/adr-001-worktree-location-and-naming.md)
+- [ADR-002: Self-Contained Feature Branches](../admin/services/meta/features/worktree-feature-workflow/decisions/adr-002-self-contained-feature-branches.md)
+- [ADR-003: Draft PR Review Workflow](../admin/services/meta/features/worktree-feature-workflow/decisions/adr-003-draft-pr-review-workflow.md)
+- [ADR-004: Sourcery Configuration](../admin/services/meta/features/worktree-feature-workflow/decisions/adr-004-sourcery-configuration.md)
 
 ### Research
 
-- [Incremental Review Strategies](../admin/research/worktree-feature-workflow/research-incremental-review-strategies.md)
-- [Phase-Based Review](../admin/research/worktree-feature-workflow/research-phase-based-review.md)
+- [Incremental Review Strategies](../admin/services/meta/features/worktree-feature-workflow/research/research-incremental-review-strategies.md)
+- [Phase-Based Review](../admin/services/meta/features/worktree-feature-workflow/research/research-phase-based-review.md)
 
 ### Other Guides
 

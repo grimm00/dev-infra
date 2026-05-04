@@ -675,8 +675,8 @@ Templates are reviewed for:
 
 **Architecture Decisions:**
 
-- [ADR-002: Template Structure Standard](../../../admin/decisions/template-doc-infrastructure/adr-002-template-structure-standard.md)
-- [ADR-003: Generation Architecture](../../../admin/decisions/template-doc-infrastructure/adr-003-generation-architecture.md)
+- [ADR-002: Template Structure Standard](../../../admin/services/template-generation/features/template-doc-infrastructure/decisions/adr-002-template-structure-standard.md)
+- [ADR-003: Generation Architecture](../../../admin/services/template-generation/features/template-doc-infrastructure/decisions/adr-003-generation-architecture.md)
 
 **Template Examples by Category:**
 
