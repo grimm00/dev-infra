@@ -125,11 +125,6 @@ Once all tasks in the group are complete:
 
 ### Step 4: PR Validation
 
-Poll for the Sourcery review comment before proceeding. Check every 15 seconds
-(up to 4 attempts / 60s total) using `gh api repos/{owner}/{repo}/pulls/{pr}/comments`
-or `gh pr checks`. Once Sourcery's comment appears, continue immediately — don't
-wait for CI to finish.
-
 #### 4a. CI Status
 
 ```bash
@@ -146,7 +141,8 @@ don't block; new failures get 3 retry attempts before stopping.
 
 #### 4b. Sourcery Review (dt-review)
 
-Run the review tool and save output:
+Poll for Sourcery's review using `dt-review` directly — it knows how to find
+and extract Sourcery review content (inline comments + overall summary).
 
 ```bash
 mkdir -p admin/feedback/sourcery
@@ -155,6 +151,13 @@ dt-review [pr-number] admin/feedback/sourcery/pr[number].md
 
 If `dt-review` is not available (`which dt-review` returns nothing), skip this
 sub-step and note it in the report. Do not block on a missing tool.
+
+**Polling:** Run `dt-review` every 15 seconds, up to 4 attempts (60s total).
+After each run, check whether the output file contains substantive content
+(individual comments or overall comments — not just headers/empty template).
+If content appears, Sourcery has landed — proceed immediately. If all 4 polls
+produce empty output, proceed anyway and note that Sourcery did not land within
+the polling window.
 
 #### 4c. Priority Matrix
 
