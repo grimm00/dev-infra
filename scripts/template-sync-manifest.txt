@@ -5,13 +5,12 @@
 # Note: experimental-project was merged into standard-project (ADR-001: Commands as Guides)
 # All templates now receive all commands - no stable/experimental distinction
 
-# All commands (26 total — includes 5 archived stubs)
-.cursor/commands/commit.md
+# All commands (23 remaining — reviewer trio archived stage4-reviewer)
+# review.md, commit.md, handoff.md → admin/archived/commands/stage4-reviewer/{repo-root,templates-*}
 .cursor/commands/cursor-rules.md
 # decision.md archived to admin/archived/commands/stage3-planner/
 .cursor/commands/archived/discuss.md
 .cursor/commands/archived/explore.md
-.cursor/commands/handoff.md
 .cursor/commands/fix-implement.md
 .cursor/commands/fix-plan.md
 .cursor/commands/fix-review.md
@@ -24,7 +23,6 @@
 .cursor/commands/archived/reflect.md
 .cursor/commands/reflection-artifacts.md
 .cursor/commands/archived/research.md
-.cursor/commands/review.md
 .cursor/commands/archived/spike.md
 .cursor/commands/status.md
 .cursor/commands/task.md
@@ -33,10 +31,10 @@
 .cursor/commands/task-release.md
 # transition-plan.md archived — stage3-planner
 
-# Skills — intentionally NOT in this manifest.
-# Skills live only in standard-project (.claude/skills/) for now.
-# learning-project does not have a .claude/ directory yet.
-# When learning-project gains skills, add the shared entries here.
+# Claude skills (standard-project only until learning mirrors .claude/skills/).
+# Repo root `.claude/skills/` is vendored from standard-project; tracked in CI via
+# other checks — not synced via this manifest because learning lacks `.claude/`.
+# Stage 4 reviewer cutover installs: pre-commit-review, commit, handoff (+ prior skills).
 
 # Configuration files
 .sourcery.yaml
