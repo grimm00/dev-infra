@@ -24,7 +24,7 @@
 - [x] Task 11: v1 exit criteria verification + completion
   - Verified design.md §5 Stage 4 exit criteria — table in `status-and-next-steps.md`.
   - Logged **Stage 4 → Post-v1 GO** in `implementation-plan.md`.
-  - Marked planning docs ✅; PR link recorded in **`implementation-plan.md`** once PR is opened.
+  - Marked planning docs ✅; **PR #99** linked from `implementation-plan.md` and `status-and-next-steps.md`.
 
 ---
 
