@@ -1,5 +1,5 @@
 # Declarative contract for handoff skill — transient markdown artifacts only.
-schema_version: 1
+schema_version: 2
 skill: handoff
 
 handoff_roots:

@@ -10,7 +10,7 @@
 
 | Check | Result |
 |-------|--------|
-| `commit/references/structure.yaml` includes `upstream_review_contract.skill_id = pre-commit-review` | ✅ |
+| `commit/references/structure.yaml` includes `upstream_review_contract.skill_id = pre-commit-review` | ✅ (`schema_version: 2`) |
 | Relative pointer `../pre-commit-review/references/structure.yaml` resolves within `templates/standard-project/.claude/skills/` | ✅ |
 | `consumes_review_artifacts.required_files` lists `summary.md` consistent with **`pre-commit-review/references/structure.yaml`** `required_artifacts` | ✅ |
 | `artifact_bases_must_match_upstream: true` encodes positional parity with reviewer roots | ✅ |

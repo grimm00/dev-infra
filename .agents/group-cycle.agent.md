@@ -65,7 +65,10 @@ Otherwise close out the previous group cycle:
 2. **Plan review (between group cycles):** Read the **`plan-review`** Claude skill:
    **`templates/standard-project/.claude/skills/plan-review/SKILL.md`** (preferred
    source of truth), **or** **`.claude/skills/plan-review/SKILL.md`** when skills are
-   installed at repo root. Follow that skill exactly — instantiate the checklist from
+   installed at repo root. If **neither** path is present in the checked-out tree, read
+   **from the template directory anyway** (or copy `templates/standard-project/.claude/skills/plan-review/`
+   to repo-root **`.claude/skills/plan-review/`**) — do **not** treat missing repo-root
+   install as a signal to use deprecated slash-command stubs. Follow that skill exactly — instantiate the checklist from
    **`assets/review-checklist.md`** and write **`plan-review-YYYY-MM-DD.md`** beside
    `implementation-plan.md` for the chosen planning subtree (same dated artifact semantics
    as standalone runs). Narrow scope with `--group N` when validating only the next

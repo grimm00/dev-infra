@@ -83,7 +83,7 @@ pre-commit-review  →  STOP + human pause  →  commit (this skill)
 2. **Explicit token:** Match user-supplied substring against basename under each artifact root.
 3. **Auto-latest:** Shell-equivalent aggregation `ls -dt <root>/review-*/ … | head -1` respecting detection order above.
 
-If multiple ambiguous candidates remains without session hints → prompt user — **do not guess**.
+If multiple ambiguous candidates remain without session hints → prompt user — **do not guess**.
 
 Stop + warn when **no candidate** directories exist → suggest rerun **pre-commit-review**.
 
