@@ -136,9 +136,13 @@ wait for CI to finish.
 gh pr checks [pr-number]
 ```
 
-Document passing/failing checks. If a check fails, check the known issues
-registry at `admin/planning/ci/multi-environment-testing/known-issues.md`. Known
-issues don't block; new failures get 3 retry attempts before stopping.
+Record **current** CI status (passing, failing, or pending). Do not wait for
+pending checks to resolve — Sourcery landing is the only gate for Step 4.
+If checks are still running, note them as pending and continue.
+
+If a check has already **failed**, check the known issues registry at
+`admin/planning/ci/multi-environment-testing/known-issues.md`. Known issues
+don't block; new failures get 3 retry attempts before stopping.
 
 #### 4b. Sourcery Review (dt-review)
 
