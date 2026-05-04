@@ -25,7 +25,7 @@ Read these files **before** the step that needs them. Follow each one exactly.
 | Step | Skill / Command | Path |
 |------|----------------|------|
 | Step 0 — post-PR | post-pr | `.cursor/commands/post-pr.md` |
-| Step 0 — pre-phase review | pre-phase-review | `.cursor/commands/pre-phase-review.md` |
+| Step 0 — plan-review (between groups) | plan-review | **Canonical:** `templates/standard-project/.claude/skills/plan-review/SKILL.md` (authoritative semantics + `references/structure.yaml`). **Repo install:** `.claude/skills/plan-review/SKILL.md` when the skill is vendored at repo root — read whichever copy exists in-repo; YAML + assets always align with `templates/standard-project/`. |
 | Step 1 — plan expansion | transition-plan | `.cursor/commands/transition-plan.md` |
 | Step 3 — PR body | update-pr-description | `~/.cursor/skills/update-pr-description/SKILL.md` |
 | Step 4 — PR validation | pr-validation | `.cursor/commands/pr-validation.md` (reference only — Step 4 sub-steps are self-contained) |
@@ -62,9 +62,17 @@ Otherwise close out the previous group cycle:
    group's merged PR (`prior_pr`). Key outputs: status document updates,
    implementation plan checkboxes, deferred Sourcery issue check.
 
-2. **Pre-phase review:** Read `.cursor/commands/pre-phase-review.md` and follow
-   it. Review the prior group's task file and any open questions from its PR.
-   Note adjustments that affect the current group's scope.
+2. **Plan review (between group cycles):** Read the **`plan-review`** Claude skill:
+   **`templates/standard-project/.claude/skills/plan-review/SKILL.md`** (preferred
+   source of truth), **or** **`.claude/skills/plan-review/SKILL.md`** when skills are
+   installed at repo root. Follow that skill exactly — instantiate the checklist from
+   **`assets/review-checklist.md`** and write **`plan-review-YYYY-MM-DD.md`** beside
+   `implementation-plan.md` for the chosen planning subtree (same dated artifact semantics
+   as standalone runs). Narrow scope with `--group N` when validating only the next
+   dispatch footprint. Deprecated slash-command stubs under **`.cursor/commands/pre-phase-review.md`**
+   are thin redirects; do **not** use them as the execution primitive. Produce or refresh
+   the review artifact **after** the prior group's merged PR is reflected in docs and **before**
+   **Step 1** expands or executes the next group's plan.
 
 Both of these happen on the worktree branch before plan expansion begins.
 

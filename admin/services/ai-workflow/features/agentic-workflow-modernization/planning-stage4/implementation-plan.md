@@ -17,7 +17,7 @@ tasks_files:
 ---
 # Implementation Plan — Stage 4: Reviewer (Agentic Workflow Modernization)
 
-**Status:** 🔴 Not Started
+**Status:** 🟠 In Progress
 **Created:** 2026-05-03
 **Last Updated:** 2026-05-03
 **Source:** [design.md Section 5 — Stage 4: Reviewer](../designs/design.md) + Stage 3 learnings
@@ -55,16 +55,16 @@ Convert the **Reviewer** role group of dev-infra commands to skills, completing 
 ## 📝 Implementation Plan
 
 ### Review Skill
-- [ ] Task 1: Audit review command and classify behavioral instructions
-- [ ] Task 2: Convert review to SKILL.md (hybrid: procedural staging + behavioral diff analysis)
-- [ ] Task 3: Validate review skill against review artifact patterns
+- [x] Task 1: Audit review command and classify behavioral instructions
+- [x] Task 2: Convert review to SKILL.md (hybrid: procedural staging + behavioral diff analysis)
+- [x] Task 3: Validate review skill against review artifact patterns
 
 ### Commit and Handoff Skills
-- [ ] Task 4: Audit commit command and classify instructions
-- [ ] Task 5: Convert commit to SKILL.md (procedural, review-coupled)
-- [ ] Task 6: Audit handoff command and classify instructions
-- [ ] Task 7: Convert handoff to SKILL.md (procedural)
-- [ ] Task 8: Validate commit↔review integration and handoff skill
+- [x] Task 4: Audit commit command and classify instructions
+- [x] Task 5: Convert commit to SKILL.md (procedural, review-coupled)
+- [x] Task 6: Audit handoff command and classify instructions
+- [x] Task 7: Convert handoff to SKILL.md (procedural)
+- [x] Task 8: Validate commit↔review integration and handoff skill
 
 ### Cutover and v1 Final Quality Gate
 - [ ] Task 9: Install skills + archive commands (review, commit, handoff)
@@ -75,12 +75,12 @@ Convert the **Reviewer** role group of dev-infra commands to skills, completing 
 
 ## ✅ Definition of Done
 
-- [ ] pre-commit-review skill exists with procedural staging workflow and behavioral diff analysis contract
-- [ ] commit skill exists with review-artifact coupling (same-session + cross-session)
-- [ ] handoff skill exists with create + resume modes
-- [ ] All Stage 4 skills have `assets/` (where applicable) + `references/structure.yaml`
-- [ ] All Stage 4 skills pass five-property rubric with populated gotchas
-- [ ] Self-containment (FR-8) verified for each skill
+- [x] pre-commit-review skill exists with procedural staging workflow and behavioral diff analysis contract
+- [x] commit skill exists with review-artifact coupling (same-session + cross-session)
+- [x] handoff skill exists with create + resume modes
+- [x] All Stage 4 skills have `assets/` (where applicable) + `references/structure.yaml`
+- [ ] All Stage 4 skills pass five-property rubric with populated gotchas *(Group 3 final sweep remainder)*
+- [ ] Self-containment (FR-8) verified for each skill *(trio validated Group 2; full corpus pending Task 11)*
 - [ ] 3 commands archived to `admin/archived/commands/stage4-reviewer/`
 - [ ] CI passes after cutover
 - [ ] Final quality sweep: all ~16 v1 skills pass five-property rubric

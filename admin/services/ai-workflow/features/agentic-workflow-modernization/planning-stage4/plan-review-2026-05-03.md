@@ -115,4 +115,27 @@ The plan is structurally sound: frontmatter is internally consistent, task IDs a
 
 ---
 
+## Follow-up — Scoped plan review before Group 2 (commit + handoff)
+
+**Invoked:** Between merged Group 1 PR #97 and expanding/executing Group 2 (`--group 2` posture).  
+**Purpose:** Re-validate the footprint for Tasks 4–8 after Group 1 artifacts (`pre-commit-review`) settled.
+
+### Plan structure (unchanged)
+
+- [x] Frontmatter still coherent; no new phantom task IDs introduced by Group 2 deliverables
+
+### Task Group 2 (Commit and Handoff Skills)
+
+- [x] Dependencies still reference Group 1 review completion (now satisfied)
+- [x] Tasks 4–8 remain executable without new external blockers
+- [x] Acceptance paths map to delivered files: audits under `planning-stage4/artifacts/`, skills under `templates/standard-project/.claude/skills/{commit,handoff}/`
+
+### Readiness
+
+**Label:** ✅ Ready to execute Group 2 / closeout complete
+
+No new blockers; coupling expectations (commit → **pre-commit-review** `structure.yaml`) explicit in plan prose.
+
+---
+
 **Last Updated:** 2026-05-03
