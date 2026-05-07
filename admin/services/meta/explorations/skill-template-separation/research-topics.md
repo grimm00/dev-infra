@@ -54,6 +54,12 @@
 **Priority:** Medium
 **Context:** The worktree workflow already states feature content stays on the branch, but the service directory structure assumes it all merges. Resolving this contradiction determines what `develop` looks like and whether the explorations/features duplication pattern persists.
 
+### Topic 9: Artifact Management Configuration Schema — Location and Retention Axes
+
+**Question:** What should the per-repo profile schema look like for artifact location (on-disk / worktree / in-repo), and how should the handoff/merge skill prompt for retention strategy (full / condensed / minimal) at feature completion?
+**Priority:** Medium
+**Context:** Location is a project-level decision (set once in the profile); retention is a per-feature decision (asked at completion). Separating these into the right configuration surfaces — profile for location, handoff skill for retention — keeps the schema clean and asks questions at the right time in the workflow.
+
 ---
 
 ## 🚀 Next Steps

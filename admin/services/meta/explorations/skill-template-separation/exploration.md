@@ -2,6 +2,7 @@
 
 **Created:** 2026-05-06
 **Amended:** 2026-05-06 — discuss session surfaced branch-as-workspace concept from Topic 1 Finding 7
+**Amended:** 2026-05-06 — discuss session identified configurable artifact strategy (location + retention as separate axes)
 
 ---
 
@@ -59,6 +60,15 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 - Open question: what's the mechanism for recovering process work after branch deletion? Squash merges compress history; deleted branches lose the pointer. The summary/ADR needs to be rich enough to stand alone, or branches need a preservation convention
 - Source: `/discuss` session reacting to Topic 1 Finding 7 ("Agent Landing Site") — extended to ask whether docs should live in the repo at all
 
+### Theme 7: Configurable Artifact Strategy — Location as Project Config, Retention as Per-Feature
+
+- The artifact storage question has two orthogonal axes: where process artifacts live during work (location) and what happens to them after the feature concludes (retention)
+- Location options: on-disk (outside repo entirely), worktree/branch (in working tree, doesn't merge), in-repo (current model, everything merges) — this is a project-level setting in the per-repo profile, chosen once at setup
+- Retention options: save everything as-is, condense into a summary/extract, or discard process and keep only decisions and deliverables — this is a per-feature choice made at completion time, not upfront
+- The separation matters because you can't commit to retention strategy before the work is done — you don't know how valuable the process artifacts are until the feature concludes; but you CAN commit to location upfront because that's just "where do skills put things while I'm working"
+- This means the profile schema (Topic 2) needs a `location` field for artifact storage, and the handoff/merge skill becomes the place that asks about retention — two different moments in the workflow, two different configuration surfaces
+- Source: `/discuss` session extending Theme 6 — instead of picking one right answer, make the axes explicit and ask the questions at the right time
+
 ### Theme 5: The `global-command-distribution` Feature — Absorb or Reference?
 
 - The December 2025 feature under `admin/services/meta/features/global-command-distribution/` has requirements and research (FR-1 through FR-5, NFR-1/2, constraints C-1/C-2) that are directly relevant
@@ -79,6 +89,7 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 6. What's the right naming for meta-level work units — "initiative"? — and does the directory structure change from `features/` to `initiatives/`?
 7. How does the `global-command-distribution` feature's research fold into this exploration? Absorb into research topics, or mark as superseded and reference?
 8. Should process artifacts (explorations, research, plans) remain branch-local and never merge, with only hard artifacts (ADRs, summaries) reaching develop? What's the branch preservation/recovery mechanism?
+9. What are the right configuration axes for artifact management — location (project-level: on-disk / worktree / in-repo) and retention (per-feature at completion: full / condensed / minimal) — and where does each get configured?
 
 ---
 
@@ -92,6 +103,7 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 | Initiative naming / roadmap | LOW | No | Naming is a decision, not a risk. Can be made directly after research. |
 | Absorbing global-command-distribution | LOW | No | Reading existing requirements and deciding what's still relevant. Pure desk work. |
 | Branch-as-workspace / process artifacts don't merge | MEDIUM | No | The worktree workflow already describes this model. The open question is branch preservation, which is a convention choice, not a hard-to-reverse technical decision. |
+| Configurable artifact strategy (location + retention) | MEDIUM | No | The axes are clear and the configuration surfaces are identified (profile for location, handoff skill for retention). Research into schema options is sufficient. |
 
 **Risk framework:** HIGH = spike first (hard to pivot), MEDIUM-HIGH = consider spike, MEDIUM/LOW = research only.
 
