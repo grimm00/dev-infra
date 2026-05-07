@@ -1,6 +1,7 @@
 # Exploration: Skill Package Controller
 
 **Created:** 2026-05-06
+**Amended:** 2026-05-06 — discussion surfaced stateless dispatch model and issue #102 connection
 
 ---
 
@@ -69,6 +70,25 @@ The ai-workflow skills, agents, and commands currently operate as independent un
 - **What's blocked on meta decisions:** the full registry schema (what sections exist depends on what templates stop providing), whether AGENTS.md generation is part of setup or separate, the naming/location of the package's config directory (depends on whether the package is "ai-workflow" or something else)
 - The handoff (`handoff-ai-skill-improvements.md`) explicitly advises "hold on the unified profile schema until meta research on Themes 1–2 lands" — this exploration's parallel-work items respect that boundary
 
+### Theme 7: Stateless Dispatch, Filesystem-Backed Statefulness
+
+- The controller/dispatch is stateless at invocation time — it reads filesystem state, resolves, and hands off. No daemon, no in-memory persistence, no session carryover required
+- The *system* is stateful (registry files accumulate over time) but any individual invocation is a pure read-resolve-handoff — same model as `git config`, `direnv`, `mise`
+- This means dispatch can't become a god object (issue #102's concern about unified dispatch complexity) — it doesn't accumulate runtime state, it just knows where to look
+- Registry writes don't need to happen during dispatch. They can be post-hooks ("update last-seen, record observations") or explicit setup commands. The dispatch path stays fast and predictable — never blocks on a write
+- A stateful server or daemon is a possible future layer but not a prerequisite — file-based config/state is sufficient and proven at this scale
+- This is the architectural answer to "how does the package remember things across sessions without becoming complex": it doesn't remember anything in-process; it reads files that persist
+
+### Theme 8: Connection to Issue #102 — Agent Architecture and Unified Dispatch
+
+- Issue #102 ("Agent architecture: directory-based agents with skill manifests and unified dispatch") works the same problem from the agent-orchestration angle
+- Thread 5 ("Agents Hired by Projects") is the bootstrapping/registry concept as metaphor: agents come with a toolbox (skills manifest) and a resume; a project "hires" them by dispatching. The controller mediates between project needs (AGENTS.md / registry) and package capabilities (manifest)
+- Thread 4 ("Unified Dispatch") is the controller by another name — and the concern about it becoming a god object is resolved by Theme 7's stateless-dispatch model
+- Thread 3 ("Skill Concerns vs Agent Concerns") gives the layer boundary: skills = atomic contracts, agents = orchestration, controller = neither. The controller is runtime substrate both consume
+- Thread 2 ("Agents as Skill Collections / Directory Pattern") connects to the package framing: if agents become directories with manifests, the manifest is what the controller reads to know "what does this agent need from the registry?"
+- The statefulness dimension (Theme 2, Theme 7) is what issue #102 doesn't yet have — it frames dispatch as stateless matching, but the registry adds cross-session memory. This is an extension, not a contradiction
+- Source: `/discuss` session reviewing issue #102 against the exploration
+
 ---
 
 ## ❓ Key Questions
@@ -80,6 +100,8 @@ The ai-workflow skills, agents, and commands currently operate as independent un
 5. Should the setup flow produce AGENTS.md by default (in-repo) or external-only by default (guest mode)? What heuristic determines the default offer?
 6. How does the registry handle repos with no git remote (local-only projects, monorepo subdirectories)?
 7. Can the controller's resolution chain be implemented as a standalone utility (shell script, yq helper) that skills call, or does it need to be a hook that runs *before* skills?
+8. If dispatch is stateless (read-resolve-handoff), where and when do registry writes happen — post-hook after skill execution, explicit setup command, or both?
+9. How does this controller concept unify with issue #102's "unified dispatch" — are they the same component, or is the controller a substrate that the dispatcher consumes?
 
 ---
 
@@ -93,6 +115,8 @@ The ai-workflow skills, agents, and commands currently operate as independent un
 | Three-tier authority resolution | LOW | No | The resolution chain is a well-understood pattern (flag → config → fallback). Implementation is straightforward once the registry location is decided. |
 | XDG vs Cursor-local storage | LOW | No | This is a decision about naming/location, not a technical risk. Can be made after a brief research pass on conventions. |
 | Platform convergence (multi-editor) | LOW | No | Only Cursor is supported now. The abstraction is worth having, but building for multiple editors is YAGNI until a second editor is actually used. Research the emerging standards; don't implement multi-editor support. |
+| Stateless dispatch model | LOW | No | Well-understood pattern (git config, direnv, mise). No hard-to-reverse decisions — it's a design constraint, not a technical risk. |
+| Issue #102 unification | MEDIUM | No | Conceptual alignment work — determining whether the controller IS the unified dispatch or feeds into it. Research and discussion are sufficient; no code risk. |
 
 **Risk framework:** HIGH = spike first (hard to pivot), MEDIUM-HIGH = consider spike, MEDIUM/LOW = research only.
 

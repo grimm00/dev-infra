@@ -55,6 +55,20 @@
 **Context:** Avoids reinventing known patterns. `direnv` does "detect `.envrc`, resolve hierarchically." `mise` does "detect `.tool-versions` or `mise.toml`, support global fallback." These are the same problem: per-project config with a global default. Their UX decisions (opt-in vs opt-out, file-in-repo vs external) are directly relevant.
 **Parallel-safe:** Yes — pure research, no dependencies.
 
+### Topic 8: Stateless Dispatch — Write Timing and Post-Hooks
+
+**Question:** If dispatch is a pure read-resolve-handoff, when and how do registry writes happen? Should writes be post-skill-execution hooks, explicit setup commands, or opportunistic (write-if-changed)?
+**Priority:** Medium
+**Context:** The stateless dispatch model means the fast path (read config, resolve, hand off) never blocks on writes. But the registry still needs to be updated — last-seen timestamps, newly observed repo structure, setup state changes. The write timing affects whether skills need to be aware of the registry at all or whether the controller handles all persistence transparently.
+**Parallel-safe:** Yes — write timing is a design decision independent of meta exploration outcomes.
+
+### Topic 9: Relationship Between Controller and Issue #102 Unified Dispatch
+
+**Question:** Is the controller the same component as issue #102's "unified dispatch," or is it a lower-level substrate that the dispatcher consumes? If they're the same, how does the controller avoid becoming the "god object" #102 warns about?
+**Priority:** Medium
+**Context:** Issue #102 proposes unified dispatch (routing to agents by category/name/intent) and warns about god-object risk. The controller explored here resolves context and passes it downstream. These might be the same thing (dispatch = resolve context + route to agent) or two layers (controller = resolve context; dispatcher = route to agent using that context). Clarifying the boundary determines whether this exploration subsumes #102's dispatch thread or feeds into it.
+**Parallel-safe:** Yes — conceptual alignment work, no implementation dependencies.
+
 ---
 
 ## 🚀 Next Steps
