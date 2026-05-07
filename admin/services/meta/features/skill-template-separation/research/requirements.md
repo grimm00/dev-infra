@@ -2,13 +2,13 @@
 
 **Status:** Draft
 **Created:** 2026-05-06
-**Last Updated:** 2026-05-06
+**Last Updated:** 2026-05-07
 
 ---
 
 ## Overview
 
-Requirements extracted from research findings across 7 topics. This document starts as a skeleton and is populated during research-conduct, then consolidated and finalized during research-consolidate.
+Requirements extracted from research findings across 9 topics. This document starts as a skeleton and is populated during research-conduct, then consolidated and finalized during research-consolidate.
 
 ---
 
@@ -38,6 +38,30 @@ The minimal template SHOULD NOT include directory structure that skills create o
 The minimal template MUST NOT bundle skills, commands, or agents (these are global installs with independent lifecycle).
 **Source:** Topic 1 — Finding 5 (migration already done)
 
+### FR-PROF-1: Profile Location
+The per-repo profile MUST live at `~/.cursor/repos/<slug>.yaml` where slug is derived from `basename $(git remote get-url origin) .git`.
+**Source:** Topic 2 — Finding 3 (pragmatic location), Finding 4 (slug derivation)
+
+### FR-PROF-2: Schema Versioning
+The profile MUST include a `schema_version` field (integer, starting at 1) for forward compatibility.
+**Source:** Topic 2 — Finding 6 (schema versioning)
+
+### FR-PROF-3: Minimum Schema Sections
+The profile schema MUST support at minimum: `ticket:`, `paths:`, and `artifacts:` sections.
+**Source:** Topic 2 — Finding 7 (ticket-intake seed), Analysis (schema shape)
+
+### FR-PROF-4: Lookup Precedence Chain
+Skills MUST resolve configuration via: invocation flag → AGENTS.md → external profile → skill defaults. Skills MUST NOT hardcode paths without consulting this chain.
+**Source:** Topic 2 — Analysis (lookup convention), `skills-path-roots-configurable.md`
+
+### FR-PROF-5: Slug Override
+The profile MUST support an optional `slug:` override field for basename collision cases.
+**Source:** Topic 2 — Finding 4 (slug derivation)
+
+### FR-PROF-6: Backwards-Compatible Migration
+The `ticket-intake/repos/<slug>.yaml` migration MUST be backwards-compatible — read unified profile first, fall back to legacy location.
+**Source:** Topic 2 — Finding 7 (ticket-intake precedent), `per-repo-skill-profile-unified.md`
+
 ---
 
 ## Non-Functional Requirements
@@ -50,6 +74,18 @@ The minimal template SHOULD be generatable in < 5 seconds with no network calls.
 The minimal template SHOULD produce a working project (passes CI, agents can operate) immediately after generation without additional setup steps.
 **Source:** Topic 1 — Finding 6 (day-one productivity)
 
+### NFR-PROF-1: Lookup Performance
+Profile lookup MUST complete in < 100ms (single file read + YAML parse) to avoid perceptible latency on every skill invocation.
+**Source:** Topic 2 — Analysis (lookup convention must be fast)
+
+### NFR-PROF-2: Additive Schema
+The schema MUST be additive — new optional sections can be added without requiring a schema_version bump or breaking existing profiles.
+**Source:** Topic 2 — Finding 6 (schema versioning best practices)
+
+### NFR-PROF-3: Human-Editable
+The profile file MUST be human-editable with clear inline comments explaining each section's purpose.
+**Source:** Topic 2 — Analysis (user-editable config)
+
 ---
 
 ## Constraints
@@ -61,6 +97,14 @@ AGENTS.md content depends on project type (tech stack, framework, conventions). 
 ### C-MVPC-2: No Breaking Existing Projects
 Existing projects generated from comprehensive templates are not affected — they keep their structure. Migration is a separate concern (Topic 5).
 **Source:** Topic 1 — Analysis
+
+### C-PROF-1: Cursor-Specific Location
+The `~/.cursor/repos/` location is Cursor-specific. If multi-editor support becomes a requirement, migration to `~/.config/ai-workflow/repos/` is the documented path. v1 does not need to support this.
+**Source:** Topic 2 — Finding 2 (XDG), Finding 3 (pragmatic tradeoff)
+
+### C-PROF-2: State Separation
+Controller state (setup status, last-seen, detection cache) MUST NOT be mixed with user-editable config in the same YAML sections.
+**Source:** Topic 2 — Finding 2 (XDG config vs state), skill-package-controller Theme 2
 
 ---
 

@@ -12,7 +12,7 @@
 
 | Priority | Topics | Status |
 |----------|--------|--------|
-| High | 2 (Topics 1, 2) | Topic 1 ✅ Complete |
+| High | 2 (Topics 1, 2) | ✅ Both Complete |
 | Medium | 5 (Topics 3, 4, 6, 8, 9) | 🔴 Not Started |
 | Low | 2 (Topics 5, 7) | 🔴 Not Started |
 
@@ -28,7 +28,7 @@ The current 89-file standard template is 91% removable: 47% is skills/commands (
 
 ### Topic 2: Per-Repo Profile Location and Schema
 
-*(Not yet researched)*
+The unified per-repo profile lives at `~/.cursor/repos/<slug>.yaml` (slug = repo basename from git remote). Schema starts at v1 with three sections: `ticket:` (existing ticket-intake conventions), `paths:` (artifact/plan/scratch roots), and `artifacts:` (location strategy from Topic 9). Lookup convention: invocation flag → AGENTS.md → external profile → skill defaults. AGENTS.md and the profile are complementary (repo's shared opinion vs. user's personal preferences). XDG-compliant path (`~/.config/ai-workflow/repos/`) documented as migration target if multi-editor support becomes needed. Controller state (setup status, last-seen) separated from user-editable config.
 
 ### Topic 3: Skill Corpus Ownership Model
 
