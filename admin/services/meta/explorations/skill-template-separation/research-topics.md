@@ -60,6 +60,12 @@
 **Priority:** Medium
 **Context:** Location is a project-level decision (set once in the profile); retention is a per-feature decision (asked at completion). Separating these into the right configuration surfaces — profile for location, handoff skill for retention — keeps the schema clean and asks questions at the right time in the workflow.
 
+### Topic 10: Symlink-Based Installation — Feasibility and Editor Compatibility
+
+**Question:** Can a symlink-based installer (GNU Stow pattern) bridge the canonical XDG package location and editor-specific expected paths, and do Cursor's known symlink handling bugs affect skill/config file loading specifically?
+**Priority:** Medium
+**Context:** GNU Stow proves the pattern works for dotfiles/packages, but Cursor has documented bugs with symlinked plugin directories (cursor/plugins#35). Skills are markdown files read by the AI engine, not plugins loaded by the editor runtime — they may use a different code path. A quick spike would confirm.
+
 ---
 
 ## 🚀 Next Steps

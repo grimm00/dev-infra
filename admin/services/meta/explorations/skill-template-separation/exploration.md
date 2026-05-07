@@ -3,6 +3,7 @@
 **Created:** 2026-05-06
 **Amended:** 2026-05-06 — discuss session surfaced branch-as-workspace concept from Topic 1 Finding 7
 **Amended:** 2026-05-06 — discuss session identified configurable artifact strategy (location + retention as separate axes)
+**Amended:** 2026-05-07 — discuss session surfaced symlink-based installer concept with GNU Stow prior art and Cursor symlink caveats
 
 ---
 
@@ -69,6 +70,16 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 - This means the profile schema (Topic 2) needs a `location` field for artifact storage, and the handoff/merge skill becomes the place that asks about retention — two different moments in the workflow, two different configuration surfaces
 - Source: `/discuss` session extending Theme 6 — instead of picking one right answer, make the axes explicit and ask the questions at the right time
 
+### Theme 8: Symlink-Based Installation — Canonical Package with Editor Adapters
+
+- The package (skills, commands, agents, repos config) lives in ONE canonical location (XDG-compliant: `~/.config/ai-workflow/` or similar) and symlinks make it appear wherever each editor expects to find things (`~/.cursor/skills/`, `~/.cursor/repos/`, etc.)
+- The installer is a thin adapter layer whose only knowledge is a mapping table: "Cursor expects skills at `~/.cursor/skills/` → symlink to canonical `~/.config/ai-workflow/skills/`." Adding Claude Code support later = adding another mapping block, not moving data
+- Prior art: GNU Stow (25+ years, proven symlink farm manager). Stow takes packages in separate directories and makes them appear installed in a target tree via symlinks. It's stateless, reversible (`stow -D`), supports tree folding, and never modifies source files
+- This resolves the Topic 2 location tension (Finding 3): data lives at the XDG-correct location from day one; C-PROF-1's "migration to XDG" becomes a non-event because the data was always there. The `~/.cursor/` paths are just symlinks
+- The installer is the only component that's editor-opinionated — skills, the profile, the controller all operate on paths they're given without caring whether those paths are symlinks or real directories
+- **Caveat from research:** Cursor (and some other editors) have known bugs with symlinked plugin directories — `Dirent.isDirectory()` returns `false` for symlinks, extension discovery skips them silently (GitHub: cursor/plugins#35, openai/codex#18863). This may require file-level symlinks (individual files) rather than directory-level symlinks, or testing to confirm skills specifically work. Skills are markdown files read by the AI, not loaded as plugins by the editor runtime — they may not hit the same code path
+- Source: `/discuss` session extending Topic 2 findings — the symlink pattern bridges the pragmatic (`~/.cursor/`) and standards-compliant (XDG) locations without forcing a choice
+
 ### Theme 5: The `global-command-distribution` Feature — Absorb or Reference?
 
 - The December 2025 feature under `admin/services/meta/features/global-command-distribution/` has requirements and research (FR-1 through FR-5, NFR-1/2, constraints C-1/C-2) that are directly relevant
@@ -90,6 +101,7 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 7. How does the `global-command-distribution` feature's research fold into this exploration? Absorb into research topics, or mark as superseded and reference?
 8. Should process artifacts (explorations, research, plans) remain branch-local and never merge, with only hard artifacts (ADRs, summaries) reaching develop? What's the branch preservation/recovery mechanism?
 9. What are the right configuration axes for artifact management — location (project-level: on-disk / worktree / in-repo) and retention (per-feature at completion: full / condensed / minimal) — and where does each get configured?
+10. Can a symlink-based installer bridge the canonical XDG package location and editor-specific expected paths, and do Cursor's symlink handling bugs affect skill/config file loading (vs. plugin loading)?
 
 ---
 
@@ -104,6 +116,7 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 | Absorbing global-command-distribution | LOW | No | Reading existing requirements and deciding what's still relevant. Pure desk work. |
 | Branch-as-workspace / process artifacts don't merge | MEDIUM | No | The worktree workflow already describes this model. The open question is branch preservation, which is a convention choice, not a hard-to-reverse technical decision. |
 | Configurable artifact strategy (location + retention) | MEDIUM | No | The axes are clear and the configuration surfaces are identified (profile for location, handoff skill for retention). Research into schema options is sufficient. |
+| Symlink-based installation (canonical + editor adapters) | MEDIUM | Consider | GNU Stow proves the pattern works generically, but Cursor has known symlink bugs for plugins. A quick spike testing whether skill files (read as markdown by AI) vs. plugin directories (loaded by editor runtime) hit the same bug would de-risk this. |
 
 **Risk framework:** HIGH = spike first (hard to pivot), MEDIUM-HIGH = consider spike, MEDIUM/LOW = research only.
 
