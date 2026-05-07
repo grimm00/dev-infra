@@ -48,6 +48,12 @@
 **Priority:** Low
 **Context:** "Feature" implies product delivery; meta work is structural. Naming matters for how work feels and gets communicated, but it's a decision to make, not a research problem. Quick resolution once other topics are clearer.
 
+### Topic 8: Process Artifact Storage — Branch-Local vs. Merged
+
+**Question:** Should process artifacts (explorations, research, planning docs) remain branch-local and never merge to develop, with only hard artifacts (ADRs, summaries) reaching the main line? What branch preservation or recovery mechanism is needed?
+**Priority:** Medium
+**Context:** The worktree workflow already states feature content stays on the branch, but the service directory structure assumes it all merges. Resolving this contradiction determines what `develop` looks like and whether the explorations/features duplication pattern persists.
+
 ---
 
 ## 🚀 Next Steps
