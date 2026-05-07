@@ -1,9 +1,9 @@
 # Research — Skill-Template Separation
 
-**Purpose:** Investigate 7 topics to determine how skills/commands/agents separate from templates, what templates become after separation, and what substrate enables both
+**Purpose:** Investigate 9 topics to determine how skills/commands/agents separate from templates, what templates become after separation, and what substrate enables both
 **Status:** 🔴 Research
 **Created:** 2026-05-06
-**Last Updated:** 2026-05-06
+**Last Updated:** 2026-05-07
 
 ---
 
@@ -26,16 +26,19 @@
 | 5 | Migration Path for Existing Projects | [research-migration-path-for-existing-projects.md](research-migration-path-for-existing-projects.md) | Low | 🔴 Not Started |
 | 6 | `global-command-distribution` Requirements Audit | [research-global-command-distribution-requirements-audit.md](research-global-command-distribution-requirements-audit.md) | Medium | 🔴 Not Started |
 | 7 | Meta Work-Unit Naming | [research-meta-work-unit-naming.md](research-meta-work-unit-naming.md) | Low | 🔴 Not Started |
+| 8 | Process Artifact Storage — Branch-Local vs. Merged | [topic-8-process-artifact-storage.md](topic-8-process-artifact-storage.md) | Medium | 🔴 Not Started |
+| 9 | Artifact Management Configuration Schema | [topic-9-artifact-management-configuration-schema.md](topic-9-artifact-management-configuration-schema.md) | Medium | 🔴 Not Started |
 
 ---
 
 ## Research Overview
 
-This research spans three interconnected concerns:
+This research spans four interconnected concerns:
 
 1. **What do templates become?** (Topics 1, 4, 5) — Define the minimal template, decide bundling strategy, plan migration
 2. **What enables skills to work anywhere?** (Topic 2) — Per-repo profile location and schema (ai-workflow substrate, consumed by meta decisions)
 3. **What's the organizational model?** (Topics 3, 6, 7) — Skill ownership, requirements reuse, naming conventions
+4. **How are artifacts managed?** (Topics 8, 9) — Where process artifacts live, what survives feature completion, configurable location and retention
 
 **Recommended conduct order:** Topics 1 and 2 first (they constrain the others), then Topic 6 (reuse existing research), then Topics 3–4 (depend on 1+2 findings), then Topics 5 and 7 (lowest priority, least dependent).
 

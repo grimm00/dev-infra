@@ -8,12 +8,12 @@
 
 ## Overview
 
-7 research topics investigating how to separate skills/commands/agents from templates, what templates become after separation, and what substrate enables the transition.
+9 research topics investigating how to separate skills/commands/agents from templates, what templates become after separation, what substrate enables the transition, and how artifacts are managed across the workflow.
 
 | Priority | Topics | Status |
 |----------|--------|--------|
-| High | 2 (Topics 1, 2) | 🔴 Not Started |
-| Medium | 3 (Topics 3, 4, 6) | 🔴 Not Started |
+| High | 2 (Topics 1, 2) | Topic 1 ✅ Complete |
+| Medium | 5 (Topics 3, 4, 6, 8, 9) | 🔴 Not Started |
 | Low | 2 (Topics 5, 7) | 🔴 Not Started |
 
 ---
@@ -47,6 +47,14 @@ The current 89-file standard template is 91% removable: 47% is skills/commands (
 *(Not yet researched)*
 
 ### Topic 7: Meta Work-Unit Naming
+
+*(Not yet researched)*
+
+### Topic 8: Process Artifact Storage — Branch-Local vs. Merged
+
+*(Not yet researched)*
+
+### Topic 9: Artifact Management Configuration Schema
 
 *(Not yet researched)*
 
