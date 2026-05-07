@@ -62,6 +62,22 @@ The profile MUST support an optional `slug:` override field for basename collisi
 The `ticket-intake/repos/<slug>.yaml` migration MUST be backwards-compatible — read unified profile first, fall back to legacy location.
 **Source:** Topic 2 — Finding 7 (ticket-intake precedent), `per-repo-skill-profile-unified.md`
 
+### FR-INST-1: Symlink-Based Installation
+The installer MUST create symlinks from editor-specific expected paths to the canonical package location, not copy files.
+**Source:** Topic 10 — Finding 1 (GNU Stow pattern), Finding 4 (installer boundary)
+
+### FR-INST-2: Editor Mapping Configuration
+The installer MUST support a mapping configuration that defines per-editor path expectations (adding a new editor = adding config, not code).
+**Source:** Topic 10 — Finding 4 (narrow responsibility boundary)
+
+### FR-INST-3: Clean Uninstallation
+The installer MUST support uninstallation (removing all symlinks) without affecting the canonical package.
+**Source:** Topic 10 — Finding 1 (GNU Stow reversibility)
+
+### FR-INST-4: XDG Canonical Location
+The canonical package location SHOULD follow XDG conventions (`~/.config/ai-workflow/`).
+**Source:** Topic 10 — Analysis; Topic 2 — Finding 2 (XDG separation)
+
 ---
 
 ## Non-Functional Requirements
@@ -86,6 +102,14 @@ The schema MUST be additive — new optional sections can be added without requi
 The profile file MUST be human-editable with clear inline comments explaining each section's purpose.
 **Source:** Topic 2 — Analysis (user-editable config)
 
+### NFR-INST-1: Idempotent Operations
+Installation/uninstallation MUST be idempotent — running twice produces the same result as running once.
+**Source:** Topic 10 — GNU Stow behavior model
+
+### NFR-INST-2: No Internal Knowledge Required
+The installer MUST NOT require knowledge of skill schemas, profile shapes, or package internals — it operates purely on filesystem paths.
+**Source:** Topic 10 — Finding 4 (responsibility boundary)
+
 ---
 
 ## Constraints
@@ -105,6 +129,10 @@ The `~/.cursor/repos/` location is Cursor-specific. If multi-editor support beco
 ### C-PROF-2: State Separation
 Controller state (setup status, last-seen, detection cache) MUST NOT be mixed with user-editable config in the same YAML sections.
 **Source:** Topic 2 — Finding 2 (XDG config vs state), skill-package-controller Theme 2
+
+### C-INST-1: Cursor Symlink Compatibility
+If Cursor's skill discovery has the same `isDirectory()` bug as plugin discovery, file-level or subtree-level symlinks MUST be used instead of directory-level.
+**Source:** Topic 10 — Finding 2 (Cursor plugin bug), Finding 5 (fallback strategy)
 
 ---
 

@@ -8,7 +8,7 @@
 
 ## Overview
 
-9 research topics investigating how to separate skills/commands/agents from templates, what templates become after separation, what substrate enables the transition, and how artifacts are managed across the workflow.
+10 research topics investigating how to separate skills/commands/agents from templates, what templates become after separation, what substrate enables the transition, how artifacts are managed, and the installation/distribution mechanism.
 
 | Priority | Topics | Status |
 |----------|--------|--------|
@@ -57,6 +57,10 @@ The unified per-repo profile lives at `~/.cursor/repos/<slug>.yaml` (slug = repo
 ### Topic 9: Artifact Management Configuration Schema
 
 *(Not yet researched)*
+
+### Topic 10: Symlink-Based Installation
+
+GNU Stow pattern (25+ years proven) works for bridging canonical XDG package location to editor-specific paths. The installer is a thin adapter with a mapping table (editor → paths). Cursor has known symlink bugs for plugins (`Dirent.isDirectory()` returns false), but skills are markdown files read via standard `fs.readFile()` which follows symlinks transparently — different code path. Recommendation: start with directory-level symlinks, fall back to hybrid (real dirs, symlinked children) if needed. A 5-minute spike (symlink one skill dir, invoke it) would fully de-risk.
 
 ---
 
