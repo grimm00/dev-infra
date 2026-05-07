@@ -19,7 +19,7 @@
 
 | # | Topic | File | Priority | Status |
 |---|-------|------|----------|--------|
-| 1 | Minimum Viable Project Contract | [research-minimum-viable-project-contract.md](research-minimum-viable-project-contract.md) | High | 🔴 Not Started |
+| 1 | Minimum Viable Project Contract | [research-minimum-viable-project-contract.md](research-minimum-viable-project-contract.md) | High | ✅ Complete |
 | 2 | Per-Repo Profile Location and Schema | [research-per-repo-profile-location-and-schema.md](research-per-repo-profile-location-and-schema.md) | High | 🔴 Not Started |
 | 3 | Skill Corpus Ownership Model | [research-skill-corpus-ownership-model.md](research-skill-corpus-ownership-model.md) | Medium | 🔴 Not Started |
 | 4 | Template Skill Bundling Strategy | [research-template-skill-bundling-strategy.md](research-template-skill-bundling-strategy.md) | Medium | 🔴 Not Started |

@@ -24,7 +24,7 @@
 
 ### Topic 1: Minimum Viable Project Contract
 
-*(Not yet researched)*
+The current 89-file standard template is 91% removable: 47% is skills/commands (migrated to global installs), 27% is docs infrastructure (created on demand by skills), 8% is structural empties. The minimal template converges on **7-9 files**: AGENTS.md (AI agent contract), `.dev-infra.yml` (proj-cli state), `.gitignore` (scratch hygiene), README.md (human identity), and optionally CI config + entry point. Key insight: skills create their own structure on demand — pre-building it is wasted scaffolding that becomes stale. AGENTS.md is the highest-leverage file (Linux Foundation standard, 28.6% agent runtime reduction per Princeton research).
 
 ### Topic 2: Per-Repo Profile Location and Schema
 
