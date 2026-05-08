@@ -1,6 +1,6 @@
 # Research — Skill-Template Separation
 
-**Purpose:** Investigate 10 topics to determine how skills/commands/agents separate from templates, what templates become after separation, and what substrate enables both
+**Purpose:** Investigate 11 topics to determine how skills/commands/agents separate from templates, what templates become after separation, and what substrate enables both
 **Status:** 🔴 Research
 **Created:** 2026-05-06
 **Last Updated:** 2026-05-07
@@ -29,6 +29,7 @@
 | 8 | Process Artifact Storage — Branch-Local vs. Merged | [topic-8-process-artifact-storage.md](topic-8-process-artifact-storage.md) | Medium | 🔴 Not Started |
 | 9 | Artifact Management Configuration Schema | [topic-9-artifact-management-configuration-schema.md](topic-9-artifact-management-configuration-schema.md) | Medium | 🔴 Not Started |
 | 10 | Symlink-Based Installation | [topic-10-symlink-based-installation.md](topic-10-symlink-based-installation.md) | Medium | ✅ Complete |
+| 11 | Dev Mode vs. Distribution Mode | [topic-11-dev-mode-vs-distribution-mode.md](topic-11-dev-mode-vs-distribution-mode.md) | Low | ✅ Complete |
 
 ---
 

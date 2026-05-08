@@ -8,7 +8,7 @@
 
 ## Overview
 
-10 research topics investigating how to separate skills/commands/agents from templates, what templates become after separation, what substrate enables the transition, how artifacts are managed, and the installation/distribution mechanism.
+11 research topics investigating how to separate skills/commands/agents from templates, what templates become after separation, what substrate enables the transition, how artifacts are managed, and the installation/distribution mechanism.
 
 | Priority | Topics | Status |
 |----------|--------|--------|
@@ -61,6 +61,10 @@ The unified per-repo profile lives at `~/.cursor/repos/<slug>.yaml` (slug = repo
 ### Topic 10: Symlink-Based Installation
 
 GNU Stow pattern (25+ years proven) works for bridging canonical XDG package location to editor-specific paths. The installer is a thin adapter with a mapping table (editor → paths). Cursor has known symlink bugs for plugins (`Dirent.isDirectory()` returns false), but skills are markdown files read via standard `fs.readFile()` which follows symlinks transparently — different code path. Recommendation: start with directory-level symlinks, fall back to hybrid (real dirs, symlinked children) if needed. A 5-minute spike (symlink one skill dir, invoke it) would fully de-risk.
+
+### Topic 11: Dev Mode vs. Distribution Mode
+
+Two permanent coexisting modes: dev (symlinks, zero-friction edit-test cycle for the author) and distribution (plugin publish for external consumers). Not a maturity progression — both serve different audiences permanently. AI skill testing is impractical at this scale: prompt testing appears in only ~1% of agent framework tests, proper frameworks (AgentAssay) require 5-10 multi-trial runs per test. Usage-as-testing is the correct methodology, not laziness. Cursor's plugin system (`~/.cursor/plugins/local/`) is the ready-made distribution mechanism — add a manifest when there's a second consumer, not before. The npm link analogy holds but is *simpler* for skills (no dependency resolution, no version conflicts).
 
 ---
 

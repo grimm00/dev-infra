@@ -78,6 +78,22 @@ The installer MUST support uninstallation (removing all symlinks) without affect
 The canonical package location SHOULD follow XDG conventions (`~/.config/ai-workflow/`).
 **Source:** Topic 10 — Analysis; Topic 2 — Finding 2 (XDG separation)
 
+### FR-DEV-1: Zero-Friction Edit-Test Cycle
+The dev-mode workflow MUST support zero-friction edit-test cycles: editing a skill file at the canonical source MUST make the change visible to the next AI invocation without any manual build, copy, or publish step.
+**Source:** Topic 11 — Finding 2 (testing is impractical), Analysis (usage-as-testing)
+
+### FR-DEV-2: Symlink-Based Dev Mode
+The dev-mode mechanism SHOULD be symlinks from editor-expected paths to the canonical source. If symlinks are infeasible (C-INST-1), a file-watcher-based copy mechanism is the fallback.
+**Source:** Topic 11 — Finding 1 (npm link analogy), Finding 4 (symlink bug scope)
+
+### FR-DIST-1: Additive Distribution
+Distribution mode MUST be additive — adding distribution to an existing dev-mode setup requires only a manifest file and a publish step, not restructuring the canonical source.
+**Source:** Topic 11 — Finding 3 (Cursor plugin system), Analysis
+
+### FR-DIST-2: Native Plugin System
+Distribution SHOULD use the target editor's native plugin system (Cursor plugins, Claude plugins) rather than a custom mechanism.
+**Source:** Topic 11 — Finding 3 (existing plugin-delivered skills: hex, superpowers)
+
 ---
 
 ## Non-Functional Requirements
@@ -110,6 +126,10 @@ Installation/uninstallation MUST be idempotent — running twice produces the sa
 The installer MUST NOT require knowledge of skill schemas, profile shapes, or package internals — it operates purely on filesystem paths.
 **Source:** Topic 10 — Finding 4 (responsibility boundary)
 
+### NFR-DEV-1: Zero-Step Iteration
+The dev-mode feedback loop (edit → use → evaluate) MUST NOT require running any command between editing a skill file and using it.
+**Source:** Topic 11 — Analysis (usage-as-testing workflow)
+
 ---
 
 ## Constraints
@@ -133,6 +153,10 @@ Controller state (setup status, last-seen, detection cache) MUST NOT be mixed wi
 ### C-INST-1: Cursor Symlink Compatibility
 If Cursor's skill discovery has the same `isDirectory()` bug as plugin discovery, file-level or subtree-level symlinks MUST be used instead of directory-level.
 **Source:** Topic 10 — Finding 2 (Cursor plugin bug), Finding 5 (fallback strategy)
+
+### C-DEV-1: Usage-as-Testing Accepted
+Conventional AI skill testing (statistical, multi-trial) is not economically viable for a sole author. Usage-as-testing is the accepted methodology until scale justifies investment in evaluation infrastructure.
+**Source:** Topic 11 — Finding 2 (AgentAssay cost, 1% prompt testing coverage in industry)
 
 ---
 
