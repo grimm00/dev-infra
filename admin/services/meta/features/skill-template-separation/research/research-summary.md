@@ -32,7 +32,7 @@ The unified per-repo profile lives at `~/.cursor/repos/<slug>.yaml` (slug = repo
 
 ### Topic 3: Skill Corpus Ownership Model
 
-*(Not yet researched)*
+The corpus should be its own repo (Model B: separate). 76% of the corpus already exists only globally — dev-infra's template copies are a stale 24% subset. The corpus and templates are different products with different lifecycles. The canonical XDG location (`~/.config/ai-workflow/`) becomes the repo root. Zero coordination cost because symlink dev-mode means editing never involves dev-infra's git flow. Dev-infra retains only a manifest of expected skills, not copies. The hybrid model (some skills in dev-infra, some outside) is explicitly rejected — it creates ambiguity.
 
 ### Topic 4: Template Skill Bundling Strategy
 

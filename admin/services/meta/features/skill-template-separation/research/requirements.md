@@ -94,6 +94,18 @@ Distribution mode MUST be additive — adding distribution to an existing dev-mo
 Distribution SHOULD use the target editor's native plugin system (Cursor plugins, Claude plugins) rather than a custom mechanism.
 **Source:** Topic 11 — Finding 3 (existing plugin-delivered skills: hex, superpowers)
 
+### FR-OWN-1: Separate Product
+The skill corpus (skills, commands, agents) MUST be a separate product from dev-infra templates, with its own repository and independent versioning.
+**Source:** Topic 3 — Finding 1 (76% global-only), Finding 2 (different products)
+
+### FR-OWN-2: No Authoritative Copies in Dev-Infra
+Dev-infra MUST NOT contain authoritative copies of skills. It MAY contain a manifest listing expected skills for template validation.
+**Source:** Topic 3 — Finding 1 (stale subset), Analysis (Model B)
+
+### FR-OWN-3: Corpus at Canonical Location
+The corpus repo MUST be rooted at or symlinked from the canonical XDG location (`~/.config/ai-workflow/`).
+**Source:** Topic 3 — Finding 2 (XDG canonical), Topics 10-11 (installation model)
+
 ---
 
 ## Non-Functional Requirements
@@ -130,6 +142,14 @@ The installer MUST NOT require knowledge of skill schemas, profile shapes, or pa
 The dev-mode feedback loop (edit → use → evaluate) MUST NOT require running any command between editing a skill file and using it.
 **Source:** Topic 11 — Analysis (usage-as-testing workflow)
 
+### NFR-OWN-1: No Coordination Overhead
+The separation MUST NOT introduce coordination overhead for daily skill development.
+**Source:** Topic 3 — Finding 5 (symlinks eliminate cross-repo cost)
+
+### NFR-OWN-2: Single Browsable Unit
+The corpus repo SHOULD be browsable and searchable as a single unit (all skills, commands, agents in one tree).
+**Source:** Topic 3 — Analysis (discoverability)
+
 ---
 
 ## Constraints
@@ -157,6 +177,10 @@ If Cursor's skill discovery has the same `isDirectory()` bug as plugin discovery
 ### C-DEV-1: Usage-as-Testing Accepted
 Conventional AI skill testing (statistical, multi-trial) is not economically viable for a sole author. Usage-as-testing is the accepted methodology until scale justifies investment in evaluation infrastructure.
 **Source:** Topic 11 — Finding 2 (AgentAssay cost, 1% prompt testing coverage in industry)
+
+### C-OWN-1: No Migration Deadline
+No migration deadline for formalizing the corpus repo. Current global installs work. Formalization happens when convenient.
+**Source:** Topic 3 — Analysis (de facto already separated)
 
 ---
 
