@@ -66,6 +66,12 @@
 **Priority:** Medium
 **Context:** GNU Stow proves the pattern works for dotfiles/packages, but Cursor has documented bugs with symlinked plugin directories (cursor/plugins#35). Skills are markdown files read by the AI engine, not plugins loaded by the editor runtime — they may use a different code path. A quick spike would confirm.
 
+### Topic 11: Dev Mode vs. Distribution Mode — Lifecycle and Triggers
+
+**Question:** What does the dev-mode (symlinks for authoring/testing) vs. distribution-mode (plugin publish for consumers) split look like concretely, and what triggers the transition from one to the other?
+**Priority:** Low
+**Context:** AI skills can't be conventionally tested — usage IS testing. This makes symlinks the correct dev-time mechanism (zero friction between edit and use). Plugin distribution is additive for when there are external consumers. The question is when/how the transition happens and whether both modes coexist permanently.
+
 ---
 
 ## 🚀 Next Steps

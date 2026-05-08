@@ -4,6 +4,7 @@
 **Amended:** 2026-05-06 — discuss session surfaced branch-as-workspace concept from Topic 1 Finding 7
 **Amended:** 2026-05-06 — discuss session identified configurable artifact strategy (location + retention as separate axes)
 **Amended:** 2026-05-07 — discuss session surfaced symlink-based installer concept with GNU Stow prior art and Cursor symlink caveats
+**Amended:** 2026-05-08 — discuss session identified dev-mode vs. distribution-mode split; usage as testing for AI skills
 
 ---
 
@@ -80,6 +81,17 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 - **Caveat from research:** Cursor (and some other editors) have known bugs with symlinked plugin directories — `Dirent.isDirectory()` returns `false` for symlinks, extension discovery skips them silently (GitHub: cursor/plugins#35, openai/codex#18863). This may require file-level symlinks (individual files) rather than directory-level symlinks, or testing to confirm skills specifically work. Skills are markdown files read by the AI, not loaded as plugins by the editor runtime — they may not hit the same code path
 - Source: `/discuss` session extending Topic 2 findings — the symlink pattern bridges the pragmatic (`~/.cursor/`) and standards-compliant (XDG) locations without forcing a choice
 
+### Theme 9: Dev Mode vs. Distribution Mode — Usage as Testing
+
+- Skills can't be tested in the conventional sense — the "output" is AI behavior which is non-deterministic, context-dependent, and evaluated qualitatively. The only meaningful test is: invoke the skill in a real scenario, evaluate, iterate
+- This makes the edit-test cycle: change markdown → use the skill → evaluate the result → change again. Any build/publish/install step between "edit" and "use" is pure friction on an already slow feedback loop
+- Symlinks are the correct *development-time* mechanism because they eliminate that friction — save the file, next invocation uses the updated version. This isn't a compromise; it's the right tool for a product whose testing model is usage
+- Plugin distribution is a separate concern for *distribution-time* — when there's a second consumer who doesn't need instant iteration, just a stable versioned snapshot. The `npm link` vs. `npm install` analogy applies directly
+- The two modes coexist: canonical source → symlinks for dev (author iterates), canonical source → published plugin for distribution (consumers get versioned snapshots)
+- As the sole consumer AND author, the dev-mode workflow is the only one needed today. Plugin distribution becomes relevant when/if others consume the skills — the architecture supports it additively without imposing its overhead now
+- This reframes Topic 10: symlinks aren't a "pragmatic compromise" waiting for "real" distribution — they're the correct mechanism for the current stage. Plugin publishing is an additive layer, not a replacement
+- Source: `/discuss` session reflecting on why conventional testing doesn't apply to AI skills and what that means for the development workflow
+
 ### Theme 5: The `global-command-distribution` Feature — Absorb or Reference?
 
 - The December 2025 feature under `admin/services/meta/features/global-command-distribution/` has requirements and research (FR-1 through FR-5, NFR-1/2, constraints C-1/C-2) that are directly relevant
@@ -102,6 +114,7 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 8. Should process artifacts (explorations, research, plans) remain branch-local and never merge, with only hard artifacts (ADRs, summaries) reaching develop? What's the branch preservation/recovery mechanism?
 9. What are the right configuration axes for artifact management — location (project-level: on-disk / worktree / in-repo) and retention (per-feature at completion: full / condensed / minimal) — and where does each get configured?
 10. Can a symlink-based installer bridge the canonical XDG package location and editor-specific expected paths, and do Cursor's symlink handling bugs affect skill/config file loading (vs. plugin loading)?
+11. What does the dev-mode vs. distribution-mode split look like concretely — symlinks for authoring/testing, plugin publish for consumers — and what triggers the transition from one to the other?
 
 ---
 
@@ -117,6 +130,7 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 | Branch-as-workspace / process artifacts don't merge | MEDIUM | No | The worktree workflow already describes this model. The open question is branch preservation, which is a convention choice, not a hard-to-reverse technical decision. |
 | Configurable artifact strategy (location + retention) | MEDIUM | No | The axes are clear and the configuration surfaces are identified (profile for location, handoff skill for retention). Research into schema options is sufficient. |
 | Symlink-based installation (canonical + editor adapters) | MEDIUM | Consider | GNU Stow proves the pattern works generically, but Cursor has known symlink bugs for plugins. A quick spike testing whether skill files (read as markdown by AI) vs. plugin directories (loaded by editor runtime) hit the same bug would de-risk this. |
+| Dev mode vs. distribution mode (usage as testing) | LOW | No | The dev-mode workflow (symlinks) is already proven conceptually and matches npm link/install pattern. No hard-to-reverse decisions — plugin distribution is additive when needed. |
 
 **Risk framework:** HIGH = spike first (hard to pivot), MEDIUM-HIGH = consider spike, MEDIUM/LOW = research only.
 
