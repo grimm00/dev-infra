@@ -44,7 +44,7 @@ Model B confirmed: templates carry NO skill/command/agent copies. They include o
 
 ### Topic 6: `global-command-distribution` Requirements Audit
 
-*(Not yet researched)*
+The December 2025 feature is **superseded**. FR-1 (install globally) is already done. FR-2 (project installs) and FR-5 (check updates) are superseded by the no-bundling model. FR-3 (version tracking) evolves into corpus versioning (deferred until distribution mode needed). FR-4 (update) is replaced by symlinks (always current). Two platform constraints survive: C-1 (rules NOT global — only skills/commands/agents work globally) and C-2 (project commands override global). The old feature's core assumption (dev-infra as authority) is explicitly rejected.
 
 ### Topic 7: Meta Work-Unit Naming
 

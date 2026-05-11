@@ -24,7 +24,7 @@
 | 3 | Skill Corpus Ownership Model | [research-skill-corpus-ownership-model.md](research-skill-corpus-ownership-model.md) | Medium | ✅ Complete |
 | 4 | Template Skill Bundling Strategy | [research-template-skill-bundling-strategy.md](research-template-skill-bundling-strategy.md) | Medium | ✅ Complete |
 | 5 | Migration Path for Existing Projects | [research-migration-path-for-existing-projects.md](research-migration-path-for-existing-projects.md) | Low | 🔴 Not Started |
-| 6 | `global-command-distribution` Requirements Audit | [research-global-command-distribution-requirements-audit.md](research-global-command-distribution-requirements-audit.md) | Medium | 🔴 Not Started |
+| 6 | `global-command-distribution` Requirements Audit | [research-global-command-distribution-requirements-audit.md](research-global-command-distribution-requirements-audit.md) | Medium | ✅ Complete |
 | 7 | Meta Work-Unit Naming | [research-meta-work-unit-naming.md](research-meta-work-unit-naming.md) | Low | 🔴 Not Started |
 | 8 | Process Artifact Storage — Branch-Local vs. Merged | [topic-8-process-artifact-storage.md](topic-8-process-artifact-storage.md) | Medium | 🔴 Not Started |
 | 9 | Artifact Management Configuration Schema | [topic-9-artifact-management-configuration-schema.md](topic-9-artifact-management-configuration-schema.md) | Medium | 🔴 Not Started |

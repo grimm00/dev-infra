@@ -203,6 +203,14 @@ Conventional AI skill testing (statistical, multi-trial) is not economically via
 No migration deadline for formalizing the corpus repo. Current global installs work. Formalization happens when convenient.
 **Source:** Topic 3 — Analysis (de facto already separated)
 
+### C-PLAT-1: Rules Not Global
+Cursor global rules (`~/.cursor/rules/`) are NOT loaded by the editor. Only skills, commands, and agents work globally. Rules require project-level `.cursor/rules/` files.
+**Source:** Topic 6 — C-1 validation (December 2025, confirmed still holds)
+
+### C-PLAT-2: Project Commands Override Global
+Project-level commands (`<repo>/.cursor/commands/`) ALWAYS override global commands of the same name.
+**Source:** Topic 6 — C-2 validation (December 2025, confirmed still holds)
+
 ---
 
 ## Assumptions
