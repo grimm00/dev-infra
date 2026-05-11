@@ -106,6 +106,23 @@ Dev-infra MUST NOT contain authoritative copies of skills. It MAY contain a mani
 The corpus repo MUST be rooted at or symlinked from the canonical XDG location (`~/.config/ai-workflow/`).
 **Source:** Topic 3 — Finding 2 (XDG canonical), Topics 10-11 (installation model)
 
+### FR-BNDL-1: No Bundling
+Templates MUST NOT bundle skills, commands, or agents. They MAY include a manifest declaring expected skills.
+**Source:** Topic 4 — Finding 1 (prior findings converge), Finding 2 (drift confirmed)
+**Updated after:** Reinforces FR-MVPC-6 from Topic 1 with explicit model selection.
+
+### FR-BNDL-2: Expected-Skills Manifest
+The expected-skills manifest SHOULD live in `.dev-infra.yml` as an `expected_skills` list (machine-readable for proj-cli validation).
+**Source:** Topic 4 — Finding 5 (manifest shape)
+
+### FR-BNDL-3: Validation with Warning
+`proj-cli` setup SHOULD validate that expected skills are installed and warn (not error) if missing, providing install guidance.
+**Source:** Topic 4 — Analysis (self-containment tradeoff)
+
+### FR-BNDL-4: Retire Template-Sync-Manifest
+`template-sync-manifest.txt` SHOULD be retired once templates stop bundling commands.
+**Source:** Topic 4 — Finding 4 (manifest already obsolete)
+
 ---
 
 ## Non-Functional Requirements
@@ -149,6 +166,10 @@ The separation MUST NOT introduce coordination overhead for daily skill developm
 ### NFR-OWN-2: Single Browsable Unit
 The corpus repo SHOULD be browsable and searchable as a single unit (all skills, commands, agents in one tree).
 **Source:** Topic 3 — Analysis (discoverability)
+
+### NFR-BNDL-1: Graceful Degradation
+A generated project MUST function (CI passes, agents can orient via AGENTS.md) even without the expected skills installed.
+**Source:** Topic 4 — Analysis (self-containment tradeoff)
 
 ---
 

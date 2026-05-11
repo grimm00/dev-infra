@@ -22,7 +22,7 @@
 | 1 | Minimum Viable Project Contract | [research-minimum-viable-project-contract.md](research-minimum-viable-project-contract.md) | High | ✅ Complete |
 | 2 | Per-Repo Profile Location and Schema | [research-per-repo-profile-location-and-schema.md](research-per-repo-profile-location-and-schema.md) | High | ✅ Complete |
 | 3 | Skill Corpus Ownership Model | [research-skill-corpus-ownership-model.md](research-skill-corpus-ownership-model.md) | Medium | ✅ Complete |
-| 4 | Template Skill Bundling Strategy | [research-template-skill-bundling-strategy.md](research-template-skill-bundling-strategy.md) | Medium | 🔴 Not Started |
+| 4 | Template Skill Bundling Strategy | [research-template-skill-bundling-strategy.md](research-template-skill-bundling-strategy.md) | Medium | ✅ Complete |
 | 5 | Migration Path for Existing Projects | [research-migration-path-for-existing-projects.md](research-migration-path-for-existing-projects.md) | Low | 🔴 Not Started |
 | 6 | `global-command-distribution` Requirements Audit | [research-global-command-distribution-requirements-audit.md](research-global-command-distribution-requirements-audit.md) | Medium | 🔴 Not Started |
 | 7 | Meta Work-Unit Naming | [research-meta-work-unit-naming.md](research-meta-work-unit-naming.md) | Low | 🔴 Not Started |

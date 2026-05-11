@@ -36,7 +36,7 @@ The corpus should be its own repo (Model B: separate). 76% of the corpus already
 
 ### Topic 4: Template Skill Bundling Strategy
 
-*(Not yet researched)*
+Model B confirmed: templates carry NO skill/command/agent copies. They include only an `expected_skills` manifest in `.dev-infra.yml` (machine-readable for proj-cli validation) and a note in AGENTS.md. No "package manager" is needed — the symlink installer (Topic 10) IS the install mechanism. `template-sync-manifest.txt` should be retired. Generated projects function without skills installed (degraded but functional via AGENTS.md). The `workflow-decoupling` exploration's "package manager question" is answered: manifest + existing install mechanism, not a new tool.
 
 ### Topic 5: Migration Path for Existing Projects
 
