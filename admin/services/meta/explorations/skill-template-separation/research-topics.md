@@ -72,6 +72,18 @@
 **Priority:** Low
 **Context:** AI skills can't be conventionally tested — usage IS testing. This makes symlinks the correct dev-time mechanism (zero friction between edit and use). Plugin distribution is additive for when there are external consumers. The question is when/how the transition happens and whether both modes coexist permanently.
 
+### Topic 12: XDG Semantics Correction — Config vs. Corpus Location
+
+**Question:** How should XDG semantics apply correctly — config (profiles, installer mapping) in `~/.config/ai-workflow/`, corpus repo at a normal project path, symlinks bridging — and what does the installer config look like?
+**Priority:** Low
+**Context:** Prior research conflated the corpus (the product) with `~/.config/` (user settings). Config IS config (profiles, mappings); the corpus is a git repo at a normal project directory. The installer reads config to know where the corpus is and where to symlink. Multi-machine bootstrap = clone repo + run installer.
+
+### Topic 13: Three-Tier Distribution Model — Install Script and Tiers
+
+**Question:** What does the corpus repo's self-contained install script look like, and how does the three-tier model (author → source install → plugin publish) work in practice?
+**Priority:** Low
+**Context:** Tier 1→2 is free (clone + run installer). Tier 2→3 requires a plugin manifest + publish step. The repo being its own installer means source-install distribution requires no new infrastructure — just a README and a script.
+
 ---
 
 ## 🚀 Next Steps

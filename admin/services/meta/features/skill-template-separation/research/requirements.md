@@ -74,9 +74,9 @@ The installer MUST support a mapping configuration that defines per-editor path 
 The installer MUST support uninstallation (removing all symlinks) without affecting the canonical package.
 **Source:** Topic 10 — Finding 1 (GNU Stow reversibility)
 
-### FR-INST-4: XDG Canonical Location
-The canonical package location SHOULD follow XDG conventions (`~/.config/ai-workflow/`).
-**Source:** Topic 10 — Analysis; Topic 2 — Finding 2 (XDG separation)
+### FR-INST-4: Config at XDG, Corpus at Project Path
+Package configuration (per-repo profiles, installer mapping) SHOULD live at `~/.config/ai-workflow/`. The corpus itself (skills, commands, agents) lives at a normal project path and is exposed via symlinks.
+**Source:** Topic 10 — Analysis; Topic 2 — Finding 2 (XDG separation); amended by Theme 10 (XDG correction)
 
 ### FR-DEV-1: Zero-Friction Edit-Test Cycle
 The dev-mode workflow MUST support zero-friction edit-test cycles: editing a skill file at the canonical source MUST make the change visible to the next AI invocation without any manual build, copy, or publish step.
@@ -102,9 +102,9 @@ The skill corpus (skills, commands, agents) MUST be a separate product from dev-
 Dev-infra MUST NOT contain authoritative copies of skills. It MAY contain a manifest listing expected skills for template validation.
 **Source:** Topic 3 — Finding 1 (stale subset), Analysis (Model B)
 
-### FR-OWN-3: Corpus at Canonical Location
-The corpus repo MUST be rooted at or symlinked from the canonical XDG location (`~/.config/ai-workflow/`).
-**Source:** Topic 3 — Finding 2 (XDG canonical), Topics 10-11 (installation model)
+### FR-OWN-3: Corpus at Normal Project Path
+The corpus repo MUST live at a normal project directory (e.g., `~/Projects/ai-workflow/`), NOT inside `~/.config/`. The installer symlinks from editor paths to wherever the repo is cloned.
+**Source:** Topic 3 — Finding 2 (separate product), amended by Theme 10 discuss session (XDG correction: config ≠ corpus)
 
 ### FR-BNDL-1: No Bundling
 Templates MUST NOT bundle skills, commands, or agents. They MAY include a manifest declaring expected skills.

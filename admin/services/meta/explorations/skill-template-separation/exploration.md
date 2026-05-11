@@ -5,6 +5,7 @@
 **Amended:** 2026-05-06 — discuss session identified configurable artifact strategy (location + retention as separate axes)
 **Amended:** 2026-05-07 — discuss session surfaced symlink-based installer concept with GNU Stow prior art and Cursor symlink caveats
 **Amended:** 2026-05-08 — discuss session identified dev-mode vs. distribution-mode split; usage as testing for AI skills
+**Amended:** 2026-05-11 — discuss session corrected XDG semantics (config ≠ corpus) and identified three-tier distribution model
 
 ---
 
@@ -92,6 +93,26 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 - This reframes Topic 10: symlinks aren't a "pragmatic compromise" waiting for "real" distribution — they're the correct mechanism for the current stage. Plugin publishing is an additive layer, not a replacement
 - Source: `/discuss` session reflecting on why conventional testing doesn't apply to AI skills and what that means for the development workflow
 
+### Theme 10: XDG Correction — Config Is Config, Corpus Is a Project
+
+- Prior research (Topics 2, 3, 10) conflated the corpus location with `~/.config/ai-workflow/` — but XDG `~/.config/` is for user-editable configuration, not for application data or source code
+- The per-repo profiles (`repos/<slug>.yaml`), installer mappings, and preferences ARE config → they belong in `~/.config/ai-workflow/`
+- The corpus itself (skills, commands, agents) is the PRODUCT — it's a git repo you actively author. It belongs at a normal project path (e.g., `~/Projects/ai-workflow/`), not inside a config directory
+- The installer symlinks from editor paths (`~/.cursor/skills/`) to wherever the corpus repo is cloned — it doesn't need to be at a special XDG path
+- On a new machine: clone the corpus repo (to any project directory), run the installer (reads config from `~/.config/ai-workflow/installer.yaml` for the mapping table, creates symlinks). Standard dotfiles bootstrap pattern
+- This resolves the multi-machine question: the repo lives wherever repos live on that machine; config tells the installer where to find it and what to link
+- Source: `/discuss` session questioning why everything was being collapsed into `~/.config/`
+
+### Theme 11: Three-Tier Distribution — Author, Source Install, Plugin Publish
+
+- The dev-mode vs. distribution-mode split (Theme 9) was binary, but there's a natural middle tier: source install
+- Tier 1 (Author mode): repo on your machine, symlinks, zero-friction iteration — current state
+- Tier 2 (Source install): a second dev clones the repo and runs the installer script. One or two commands, no marketplace. The repo IS its own installer — it carries the script
+- Tier 3 (Plugin publish): Cursor marketplace, Claude plugin registry, versioned snapshots for a broader audience
+- Tier 1 → Tier 2 requires no new infrastructure (just a README and an install script in the repo). Tier 2 → Tier 3 requires a manifest file and a publish step
+- This means "pre-release" distribution is free: anyone with repo access can install via source. Plugin publishing is deferred until there's an audience that doesn't want to clone repos
+- Source: `/discuss` session on multi-machine development and distribution tiers
+
 ### Theme 5: The `global-command-distribution` Feature — Absorb or Reference?
 
 - The December 2025 feature under `admin/services/meta/features/global-command-distribution/` has requirements and research (FR-1 through FR-5, NFR-1/2, constraints C-1/C-2) that are directly relevant
@@ -115,6 +136,8 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 9. What are the right configuration axes for artifact management — location (project-level: on-disk / worktree / in-repo) and retention (per-feature at completion: full / condensed / minimal) — and where does each get configured?
 10. Can a symlink-based installer bridge the canonical XDG package location and editor-specific expected paths, and do Cursor's symlink handling bugs affect skill/config file loading (vs. plugin loading)?
 11. What does the dev-mode vs. distribution-mode split look like concretely — symlinks for authoring/testing, plugin publish for consumers — and what triggers the transition from one to the other?
+12. How does XDG semantics apply correctly — config (profiles, installer mapping) in `~/.config/ai-workflow/`, corpus repo at a normal project path, symlinks bridging the two?
+13. What does the three-tier distribution model (author → source install → plugin publish) look like in practice, and what's in the repo's install script?
 
 ---
 
@@ -131,6 +154,8 @@ Dev-infra's skills, commands, and agents have been installed globally (`~/.curso
 | Configurable artifact strategy (location + retention) | MEDIUM | No | The axes are clear and the configuration surfaces are identified (profile for location, handoff skill for retention). Research into schema options is sufficient. |
 | Symlink-based installation (canonical + editor adapters) | MEDIUM | Consider | GNU Stow proves the pattern works generically, but Cursor has known symlink bugs for plugins. A quick spike testing whether skill files (read as markdown by AI) vs. plugin directories (loaded by editor runtime) hit the same bug would de-risk this. |
 | Dev mode vs. distribution mode (usage as testing) | LOW | No | The dev-mode workflow (symlinks) is already proven conceptually and matches npm link/install pattern. No hard-to-reverse decisions — plugin distribution is additive when needed. |
+| XDG correction (config vs. corpus separation) | LOW | No | Pure architectural clarification — config in `~/.config/`, corpus at project path, symlinks bridge. No risk, just correct semantics. |
+| Three-tier distribution (author → source install → plugin) | LOW | No | Tier 1→2 requires only an install script in the repo. Tier 2→3 deferred until needed. No hard-to-reverse decisions. |
 
 **Risk framework:** HIGH = spike first (hard to pivot), MEDIUM-HIGH = consider spike, MEDIUM/LOW = research only.
 
