@@ -2,7 +2,8 @@
 
 **Feature:** README Narrative
 **Group:** README Restructure
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
+**Completed:** 2026-05-14
 **Last Updated:** 2026-05-14
 
 > ⚠️ **Scaffolding only.** Run write-plan **Expand** on this group to generate detailed steps and acceptance criteria.
@@ -23,7 +24,7 @@
   - Version references (v0.6.0 in curl commands, v0.7.0-dev in header), last-updated date (2025-12-18), placeholder links ([issues-url], [discussions-url]), template statistics counts
   - Deliverable: All references reflect current project state
 
-- [ ] Task 7: Make technical details secondary — collapsible or lower-priority positioning
+- [x] Task 7: Make technical details secondary — collapsible or lower-priority positioning
   - Template structures, technology stack, statistics, and use cases sections currently dominate; consider collapsible details or moving below fold
   - Deliverable: Technical reference material accessible but not primary
 

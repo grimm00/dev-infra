@@ -87,6 +87,9 @@ Choose your project type:
 
 For applications, tools, services, and APIs. Includes hub-and-spoke documentation, feature-based planning, backend/frontend separation, centralized testing, and CI/CD workflows.
 
+<details>
+<summary>Template structure</summary>
+
 ```
 project/
 ├── docs/
@@ -98,9 +101,14 @@ project/
 └── .github/          # CI/CD workflows
 ```
 
+</details>
+
 ### Learning Project
 
 For tutorials, courses, and exercises. Uses stage-based progression from fundamentals through implementation, with reference materials and practice applications.
+
+<details>
+<summary>Template structure</summary>
 
 ```
 project/
@@ -112,6 +120,8 @@ project/
 └── docs/
     └── maintainers/      # Learning management
 ```
+
+</details>
 
 ---
 
@@ -167,6 +177,9 @@ See [Integration Guide](docs/INTEGRATION.md) for complete examples.
 
 ## Project Structure
 
+<details>
+<summary>Repository layout</summary>
+
 ```
 dev-infra/
 ├── templates/              # Project templates
@@ -178,6 +191,8 @@ dev-infra/
 │   └── services/           # Service-first organization
 └── .cursor/                # IDE configuration
 ```
+
+</details>
 
 ---
 
