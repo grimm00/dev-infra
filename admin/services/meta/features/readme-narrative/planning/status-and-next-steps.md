@@ -7,11 +7,11 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 1/9 tasks complete
+**Overall:** 2/9 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Origin Narrative Content | 🟠 In Progress | 1/3 tasks | |
+| Origin Narrative Content | 🟠 In Progress | 2/3 tasks | |
 | README Restructure | 🔴 Not Started | 0/4 tasks | |
 | Start.txt Reconciliation | 🔴 Not Started | 0/2 tasks | |
 

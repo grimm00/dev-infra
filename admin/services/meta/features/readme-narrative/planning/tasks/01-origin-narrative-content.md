@@ -15,7 +15,7 @@
   - Write the "why this exists" narrative: the pain of recreating project structures, the pattern recognition across pokehub/dev-toolkit/containers
   - Deliverable: Origin paragraph(s) ready for README insertion
 
-- [ ] Task 2: Write identity pivot narrative — lab/factory/reference tension and ADR-001 resolution
+- [x] Task 2: Write identity pivot narrative — lab/factory/reference tension and ADR-001 resolution
   - Distill ADR-001's core tension (organic growth into three roles) and resolution (template factory focus) into reader-facing prose
   - Deliverable: Identity section that communicates project maturity without requiring readers to find the ADR
 

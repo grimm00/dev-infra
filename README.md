@@ -20,6 +20,14 @@ But the project quickly became more than templates. Alongside the need to manage
 
 The visible output is a couple of opinionated project templates. The actual product is the system that produces them — a living project with 1,100+ commits, 14 architectural decisions, and patterns running in production across multiple real projects.
 
+### How the Project Found Its Focus
+
+That dual nature — templates and workflows — created a real tension as the project grew. Dev-infra had organically become three things at once: a **laboratory** for experimenting with workflow automation, a **factory** for producing project templates, and a **reference implementation** that used its own tools to build itself. Every improvement became a question: is this a template feature that downstream projects need, or is this internal tooling that only dev-infra uses?
+
+The answer came through a formal decision process (the same explore → research → decide pipeline that dev-infra encodes for other projects). The conclusion: dev-infra's primary identity is **template factory**. Templates are products, not reflections of the internal process. Internal tooling — release automation, validation scripts, the workflow experiments — stays internal. Features have to prove themselves in real use before they graduate into templates.
+
+That decision clarified everything. It meant fewer, more stable template features instead of shipping every experiment. It meant a two-tier system where dev-infra is deliberately more capable than the templates it produces — and that's by design, not by accident. It also meant the project could iterate on its own workflows without every change rippling into downstream projects.
+
 ---
 
 ## 🚀 Quick Start
