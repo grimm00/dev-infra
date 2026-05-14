@@ -10,6 +10,38 @@
 
 ---
 
+## Why dev-infra Exists
+
+Dev-infra grew out of an apprenticeship where the job was to explore broadly — instructors assigned topics across different domains, from DNS infrastructure to CLI tooling to file servers, with access to company infrastructure and the encouragement to leverage open-source tools and just figure things out. That freedom was valuable, but it created a real problem: projects multiplied faster than they could be tracked. Each new investigation meant a new repo, a new structure, a new set of conventions to remember. Some were active, some were experiments, some should have been archived months ago. Without a consistent approach, the breadth became sprawl.
+
+The initial trigger was noticing that the same patterns kept emerging across unrelated projects. A full-stack app (Pokehub), a command-line tool (dev-toolkit), and a learning project (Containers) all converged on similar organizational structures, similar documentation approaches, similar planning workflows. The thought was: it would be useful to start new projects, revisit old ones, and read others' projects with a systematic way of understanding them — a consistent landing surface regardless of tech stack, domain, or level of activity.
+
+But the project quickly became more than templates. Alongside the need to manage project lifecycles, there was a parallel need to develop workflows for refining thinking itself — structured approaches to exploring problems, conducting research, making architectural decisions, and planning implementation before writing code. These two needs started as one ("I need structure") and dev-infra is where they converge: the templates provide consistent project organization, while the workflow system (skills like explore, research, decide, plan) encodes engineering rigor into repeatable patterns.
+
+The visible output is a couple of opinionated project templates. The actual product is the system that produces them — a living project with 1,100+ commits, 14 architectural decisions, and patterns running in production across multiple real projects.
+
+### How the Project Found Its Focus
+
+That dual nature — templates and workflows — created a real tension as the project grew. Dev-infra had organically become three things at once: a **laboratory** for experimenting with workflow automation, a **factory** for producing project templates, and a **reference implementation** that used its own tools to build itself. Every improvement became a question: is this a template feature that downstream projects need, or is this internal tooling that only dev-infra uses?
+
+The answer came through a formal decision process (the same explore → research → decide pipeline that dev-infra encodes for other projects). The conclusion: dev-infra's primary identity is **template factory**. Templates are products, not reflections of the internal process. Internal tooling — release automation, validation scripts, the workflow experiments — stays internal. Features have to prove themselves in real use before they graduate into templates.
+
+That decision clarified everything. It meant fewer, more stable template features instead of shipping every experiment. It meant a two-tier system where dev-infra is deliberately more capable than the templates it produces — and that's by design, not by accident. It also meant the project could iterate on its own workflows without every change rippling into downstream projects.
+
+### What dev-infra Has Produced
+
+The proof that the patterns work isn't in the templates themselves — it's in the projects running on them. Dev-infra's templates and workflows are the foundation for a growing ecosystem of real projects across different domains and tech stacks:
+
+- **proj-cli** — A command-line tool for project management, built on the standard project template
+- **pihole-dns** — DNS infrastructure using Pi-hole, structured with dev-infra's hub-and-spoke documentation and planning workflows
+- **ourfileserver** — A file server project using dev-infra's feature-based planning and consistent project organization
+- **work-prod** — Work/production integration, using dev-infra workflows to bridge personal and professional tooling
+- **support-shark** — A support tool leveraging dev-infra's standard project structure and AI-friendly organization
+
+Each of these projects started from a dev-infra template and inherited the same documentation patterns, planning workflows, and organizational conventions. That consistency is what makes it possible to context-switch between a DNS project and a CLI tool without re-learning how the project is organized — the original problem that dev-infra was built to solve.
+
+---
+
 ## 🚀 Quick Start
 
 ### 1. Get Dev-Infra
