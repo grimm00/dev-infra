@@ -21,7 +21,7 @@
   - Deliverable: Identity section that communicates project maturity without requiring readers to find the ADR
 
 - [x] Task 3: Write downstream lineage section — projects produced by dev-infra patterns
-  - Name real downstream projects (pi-hole DNS, proj-cli, OurFileServer, etc.) and describe what dev-infra patterns they use
+  - Name real downstream projects (pihole-dns, proj-cli, ourfileserver, etc.) and describe what dev-infra patterns they use
   - Deliverable: Lineage section establishing dev-infra as a living system that produces production infrastructure
 
 ---

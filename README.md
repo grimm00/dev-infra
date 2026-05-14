@@ -10,7 +10,7 @@
 
 ---
 
-## Why Dev-Infra Exists
+## Why dev-infra Exists
 
 Dev-infra grew out of an apprenticeship where the job was to explore broadly — instructors assigned topics across different domains, from DNS infrastructure to CLI tooling to file servers, with access to company infrastructure and the encouragement to leverage open-source tools and just figure things out. That freedom was valuable, but it created a real problem: projects multiplied faster than they could be tracked. Each new investigation meant a new repo, a new structure, a new set of conventions to remember. Some were active, some were experiments, some should have been archived months ago. Without a consistent approach, the breadth became sprawl.
 
@@ -28,13 +28,13 @@ The answer came through a formal decision process (the same explore → research
 
 That decision clarified everything. It meant fewer, more stable template features instead of shipping every experiment. It meant a two-tier system where dev-infra is deliberately more capable than the templates it produces — and that's by design, not by accident. It also meant the project could iterate on its own workflows without every change rippling into downstream projects.
 
-### What Dev-Infra Has Produced
+### What dev-infra Has Produced
 
 The proof that the patterns work isn't in the templates themselves — it's in the projects running on them. Dev-infra's templates and workflows are the foundation for a growing ecosystem of real projects across different domains and tech stacks:
 
 - **proj-cli** — A command-line tool for project management, built on the standard project template
-- **piHole-DNS** — DNS infrastructure using Pi-hole, structured with dev-infra's hub-and-spoke documentation and planning workflows
-- **OurFileServer** — A file server project using dev-infra's feature-based planning and consistent project organization
+- **pihole-dns** — DNS infrastructure using Pi-hole, structured with dev-infra's hub-and-spoke documentation and planning workflows
+- **ourfileserver** — A file server project using dev-infra's feature-based planning and consistent project organization
 - **work-prod** — Work/production integration, using dev-infra workflows to bridge personal and professional tooling
 - **support-shark** — A support tool leveraging dev-infra's standard project structure and AI-friendly organization
 

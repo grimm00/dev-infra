@@ -1,6 +1,6 @@
 # Status & Next Steps — README Narrative
 
-**Status:** 🔴 Not Started
+**Status:** 🟠 In Progress
 **Last Updated:** 2026-05-14
 
 ---
@@ -19,9 +19,9 @@
 
 ## 🚀 Next Steps
 
-1. Review scaffolding — verify group/task breakdown matches discussion intent.
-2. Expand groups — run write-plan **Expand** for group 1 (Origin Narrative Content).
-3. Start implementation — begin with origin section drafting.
+1. Expand and implement Group 2 — README Restructure (Tasks 4–7).
+2. Expand and implement Group 3 — Start.txt Reconciliation (Tasks 8–9).
+3. Merge to develop when all groups complete.
 
 ---
 

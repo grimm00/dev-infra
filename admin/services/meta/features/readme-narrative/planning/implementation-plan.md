@@ -26,7 +26,7 @@ tasks_files:
 
 ## 📋 Overview
 
-Dev-infra's README currently reads as a product spec sheet — it describes what the project does and how to use it, but provides no context for why it exists, how it evolved, or what it has produced. Research on 2026 narrative-driven README conventions (Finding 1) and self-assessment identified that the README lacks an origin section (Finding 2), underselling a 7-month, 1,100+ commit project with 14 ADRs and multiple downstream production projects (pi-hole DNS, proj-cli, OurFileServer). This plan adds narrative context, restructures the README to lead with purpose over mechanics, and reconciles the untouched start.txt.
+Dev-infra's README currently reads as a product spec sheet — it describes what the project does and how to use it, but provides no context for why it exists, how it evolved, or what it has produced. Research on 2026 narrative-driven README conventions (Finding 1) and self-assessment identified that the README lacks an origin section (Finding 2), underselling a 7-month, 1,100+ commit project with 14 ADRs and multiple downstream production projects (pihole-dns, proj-cli, ourfileserver). This plan adds narrative context, restructures the README to lead with purpose over mechanics, and reconciles the untouched start.txt.
 
 **Key Changes:**
 - Add origin/narrative section communicating why dev-infra exists, the identity pivot, and downstream lineage
