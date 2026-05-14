@@ -28,6 +28,18 @@ The answer came through a formal decision process (the same explore → research
 
 That decision clarified everything. It meant fewer, more stable template features instead of shipping every experiment. It meant a two-tier system where dev-infra is deliberately more capable than the templates it produces — and that's by design, not by accident. It also meant the project could iterate on its own workflows without every change rippling into downstream projects.
 
+### What Dev-Infra Has Produced
+
+The proof that the patterns work isn't in the templates themselves — it's in the projects running on them. Dev-infra's templates and workflows are the foundation for a growing ecosystem of real projects across different domains and tech stacks:
+
+- **proj-cli** — A command-line tool for project management, built on the standard project template
+- **piHole-DNS** — DNS infrastructure using Pi-hole, structured with dev-infra's hub-and-spoke documentation and planning workflows
+- **OurFileServer** — A file server project using dev-infra's feature-based planning and consistent project organization
+- **work-prod** — Work/production integration, using dev-infra workflows to bridge personal and professional tooling
+- **support-shark** — A support tool leveraging dev-infra's standard project structure and AI-friendly organization
+
+Each of these projects started from a dev-infra template and inherited the same documentation patterns, planning workflows, and organizational conventions. That consistency is what makes it possible to context-switch between a DNS project and a CLI tool without re-learning how the project is organized — the original problem that dev-infra was built to solve.
+
 ---
 
 ## 🚀 Quick Start

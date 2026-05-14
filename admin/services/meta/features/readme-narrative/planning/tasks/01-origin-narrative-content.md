@@ -2,7 +2,8 @@
 
 **Feature:** README Narrative
 **Group:** Origin Narrative Content
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
+**Completed:** 2026-05-14
 **Last Updated:** 2026-05-14
 
 > ⚠️ **Scaffolding only.** Run write-plan **Expand** on this group to generate detailed steps and acceptance criteria.
@@ -19,7 +20,7 @@
   - Distill ADR-001's core tension (organic growth into three roles) and resolution (template factory focus) into reader-facing prose
   - Deliverable: Identity section that communicates project maturity without requiring readers to find the ADR
 
-- [ ] Task 3: Write downstream lineage section — projects produced by dev-infra patterns
+- [x] Task 3: Write downstream lineage section — projects produced by dev-infra patterns
   - Name real downstream projects (pi-hole DNS, proj-cli, OurFileServer, etc.) and describe what dev-infra patterns they use
   - Deliverable: Lineage section establishing dev-infra as a living system that produces production infrastructure
 

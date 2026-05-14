@@ -51,7 +51,7 @@ Dev-infra's README currently reads as a product spec sheet — it describes what
 ### Origin Narrative Content
 - [x] Task 1: Draft origin section — the problem that motivated dev-infra
 - [x] Task 2: Write identity pivot narrative — lab/factory/reference tension and ADR-001 resolution
-- [ ] Task 3: Write downstream lineage section — projects produced by dev-infra patterns
+- [x] Task 3: Write downstream lineage section — projects produced by dev-infra patterns
 
 ### README Restructure
 - [ ] Task 4: Reorder README sections — origin/narrative before Quick Start
