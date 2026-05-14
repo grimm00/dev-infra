@@ -19,7 +19,7 @@
   - Current README has duplicate "Getting Started" (lines 53 and 213), redundant "Development" section that restates project structure, and heavy emoji usage that reads as filler
   - Deliverable: Leaner README with no duplicated content
 
-- [ ] Task 6: Update stale references — version numbers, dates, placeholder links
+- [x] Task 6: Update stale references — version numbers, dates, placeholder links
   - Version references (v0.6.0 in curl commands, v0.7.0-dev in header), last-updated date (2025-12-18), placeholder links ([issues-url], [discussions-url]), template statistics counts
   - Deliverable: All references reflect current project state
 

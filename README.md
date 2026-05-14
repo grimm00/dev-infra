@@ -4,8 +4,8 @@
 [![License](https://img.shields.io/github/license/grimm00/dev-infra)](LICENSE)
 
 **Purpose:** Standardized development infrastructure templates and best practices  
-**Version:** v0.7.0-dev  
-**Last Updated:** 2025-12-18  
+**Version:** v0.11.0  
+**Last Updated:** 2026-05-14  
 **Status:** ✅ Active
 
 ---
@@ -48,8 +48,8 @@ Each of these projects started from a dev-infra template and inherited the same 
 
 **Option A: Download Distribution (Recommended)**
 ```bash
-curl -L https://github.com/grimm00/dev-infra/releases/download/v0.6.0/dev-infra-0.6.0.tar.gz | tar -xz
-cd dev-infra-0.6.0
+curl -L https://github.com/grimm00/dev-infra/releases/download/v0.7.0/dev-infra-0.7.0.tar.gz | tar -xz
+cd dev-infra-0.7.0
 ```
 
 **Option B: Clone Repository**
@@ -136,7 +136,7 @@ Not all directories are required for every project. Templates are designed to be
 Dev-infra integrates with dev-toolkit for version-pinned template management:
 
 ```bash
-DEVINFRA_VERSION="0.6.0"
+DEVINFRA_VERSION="0.7.0"
 curl -L "https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz" | tar -xz
 ```
 
@@ -181,12 +181,6 @@ dev-infra/
 
 ---
 
-## License
-
-[License information]
-
----
-
-**Last Updated:** 2025-12-18  
+**Last Updated:** 2026-05-14  
 **Status:** ✅ Active  
 **Next:** [Template Usage Guide](docs/TEMPLATE-USAGE.md)
