@@ -2,7 +2,7 @@
 
 **Feature:** README Narrative
 **Group:** README Restructure
-**Status:** 🔴 Scaffolding (needs expansion)
+**Status:** 🟠 In Progress
 **Last Updated:** 2026-05-14
 
 > ⚠️ **Scaffolding only.** Run write-plan **Expand** on this group to generate detailed steps and acceptance criteria.
@@ -11,7 +11,7 @@
 
 ## 📝 Tasks
 
-- [ ] Task 4: Reorder README sections — origin/narrative before Quick Start
+- [x] Task 4: Reorder README sections — origin/narrative before Quick Start
   - Move or insert origin content above the Quick Start section; current structure jumps from badges to installation
   - Deliverable: README leads with purpose and context before mechanics
 

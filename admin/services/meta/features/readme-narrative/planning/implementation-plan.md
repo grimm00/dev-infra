@@ -54,7 +54,7 @@ Dev-infra's README currently reads as a product spec sheet — it describes what
 - [x] Task 3: Write downstream lineage section — projects produced by dev-infra patterns
 
 ### README Restructure
-- [ ] Task 4: Reorder README sections — origin/narrative before Quick Start
+- [x] Task 4: Reorder README sections — origin/narrative before Quick Start
 - [ ] Task 5: Consolidate redundant sections and reduce emoji-header noise
 - [ ] Task 6: Update stale references — version numbers, dates, placeholder links
 - [ ] Task 7: Make technical details secondary — collapsible or lower-priority positioning
