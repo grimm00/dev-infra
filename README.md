@@ -10,6 +10,18 @@
 
 ---
 
+## Why Dev-Infra Exists
+
+Dev-infra grew out of an apprenticeship where the job was to explore broadly — instructors assigned topics across different domains, from DNS infrastructure to CLI tooling to file servers, with access to company infrastructure and the encouragement to leverage open-source tools and just figure things out. That freedom was valuable, but it created a real problem: projects multiplied faster than they could be tracked. Each new investigation meant a new repo, a new structure, a new set of conventions to remember. Some were active, some were experiments, some should have been archived months ago. Without a consistent approach, the breadth became sprawl.
+
+The initial trigger was noticing that the same patterns kept emerging across unrelated projects. A full-stack app (Pokehub), a command-line tool (dev-toolkit), and a learning project (Containers) all converged on similar organizational structures, similar documentation approaches, similar planning workflows. The thought was: it would be useful to start new projects, revisit old ones, and read others' projects with a systematic way of understanding them — a consistent landing surface regardless of tech stack, domain, or level of activity.
+
+But the project quickly became more than templates. Alongside the need to manage project lifecycles, there was a parallel need to develop workflows for refining thinking itself — structured approaches to exploring problems, conducting research, making architectural decisions, and planning implementation before writing code. These two needs started as one ("I need structure") and dev-infra is where they converge: the templates provide consistent project organization, while the workflow system (skills like explore, research, decide, plan) encodes engineering rigor into repeatable patterns.
+
+The visible output is a couple of opinionated project templates. The actual product is the system that produces them — a living project with 1,100+ commits, 14 architectural decisions, and patterns running in production across multiple real projects.
+
+---
+
 ## 🚀 Quick Start
 
 ### 1. Get Dev-Infra

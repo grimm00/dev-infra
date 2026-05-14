@@ -49,7 +49,7 @@ Dev-infra's README currently reads as a product spec sheet — it describes what
 ## 📝 Implementation Plan
 
 ### Origin Narrative Content
-- [ ] Task 1: Draft origin section — the problem that motivated dev-infra
+- [x] Task 1: Draft origin section — the problem that motivated dev-infra
 - [ ] Task 2: Write identity pivot narrative — lab/factory/reference tension and ADR-001 resolution
 - [ ] Task 3: Write downstream lineage section — projects produced by dev-infra patterns
 

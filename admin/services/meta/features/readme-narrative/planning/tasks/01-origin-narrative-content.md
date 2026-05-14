@@ -11,7 +11,7 @@
 
 ## 📝 Tasks
 
-- [ ] Task 1: Draft origin section — the problem that motivated dev-infra
+- [x] Task 1: Draft origin section — the problem that motivated dev-infra
   - Write the "why this exists" narrative: the pain of recreating project structures, the pattern recognition across pokehub/dev-toolkit/containers
   - Deliverable: Origin paragraph(s) ready for README insertion
 
