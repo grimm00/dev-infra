@@ -109,6 +109,12 @@ from the structural scaffold so that both can evolve independently.
 
 ---
 
+## 🔗 Sibling Explorations
+
+- **[Skill-Template Separation](../../../meta/explorations/skill-template-separation/)** (meta service) — Asks "what *is* the separation and what does a template become after?" while this exploration asks "how do we distribute what's been separated?" The two are complementary halves of the same initiative. Research and decisions should proceed in coordination.
+
+---
+
 ## 🚀 Next Steps
 
 Review this exploration, then:
