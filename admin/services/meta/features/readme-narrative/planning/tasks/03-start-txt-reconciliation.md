@@ -2,8 +2,9 @@
 
 **Feature:** README Narrative
 **Group:** Start.txt Reconciliation
-**Status:** 🔴 Scaffolding (needs expansion)
-**Last Updated:** 2026-05-14
+**Status:** ❌ Cancelled
+**Cancelled:** 2026-05-15
+**Last Updated:** 2026-05-15
 
 > ⚠️ **Scaffolding only.** Run write-plan **Expand** on this group to generate detailed steps and acceptance criteria.
 
@@ -11,13 +12,10 @@
 
 ## 📝 Tasks
 
-- [ ] Task 8: Fill in start.txt with actual dev-infra project context
-  - The file has been untouched since the initial commit (2025-10-22) with template placeholders; fill in Problem Statement, Scope, and preferences that reflect dev-infra's actual configuration
-  - Deliverable: start.txt contains real project initialization context
+- ~~Task 8: Fill in start.txt with actual dev-infra project context~~ — **Cancelled**
+- ~~Task 9: Review start.txt against README origin section for consistency~~ — **Cancelled**
 
-- [ ] Task 9: Review start.txt against README origin section for consistency
-  - Ensure start.txt's problem statement aligns with the origin narrative written in Group 1; these are two views of the same story (start.txt for project context, README for external audience)
-  - Deliverable: Both documents tell a consistent story with audience-appropriate framing
+**Cancellation rationale:** Dev-infra didn't go through its own `new-project.sh` template pipeline — it *is* the factory, not a product of the factory. The blank start.txt is consistent with ADR-001's identity distinction. Retrofitting project initialization context into a file designed for new projects would be artificial. The origin story now lives in the README where it serves its actual audience.
 
 ---
 

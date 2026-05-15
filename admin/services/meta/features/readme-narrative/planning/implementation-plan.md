@@ -17,7 +17,7 @@ tasks_files:
 ---
 # Implementation Plan — README Narrative
 
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Created:** 2026-05-14
 **Last Updated:** 2026-05-14
 **Source:** Discussion artifacts + research on narrative-driven READMEs + ADR-001 (project identity) + existing README.md + start.txt
@@ -60,8 +60,8 @@ Dev-infra's README currently reads as a product spec sheet — it describes what
 - [x] Task 7: Make technical details secondary — collapsible or lower-priority positioning
 
 ### Start.txt Reconciliation
-- [ ] Task 8: Fill in start.txt with actual dev-infra project context
-- [ ] Task 9: Review start.txt against README origin section for consistency
+- ~~Task 8: Fill in start.txt with actual dev-infra project context~~ — **Cancelled:** start.txt was never filled because dev-infra didn't go through its own template pipeline; retrofitting it would be artificial
+- ~~Task 9: Review start.txt against README origin section for consistency~~ — **Cancelled:** dependent on Task 8; origin story lives in README where it belongs
 
 ---
 
