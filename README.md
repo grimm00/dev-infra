@@ -4,8 +4,8 @@
 [![License](https://img.shields.io/github/license/grimm00/dev-infra)](LICENSE)
 
 **Purpose:** Standardized development infrastructure templates and best practices  
-**Version:** v0.11.0  
-**Last Updated:** 2026-05-14  
+**Version:** v0.11.0 ([v0.7.0 latest with distribution assets](https://github.com/grimm00/dev-infra/releases/tag/v0.7.0))  
+**Last Updated:** 2026-05-15  
 **Status:** ✅ Active
 
 ---
@@ -196,6 +196,6 @@ dev-infra/
 
 ---
 
-**Last Updated:** 2026-05-14  
+**Last Updated:** 2026-05-15  
 **Status:** ✅ Active  
 **Next:** [Template Usage Guide](docs/TEMPLATE-USAGE.md)
