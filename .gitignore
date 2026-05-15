@@ -12,11 +12,18 @@ Thumbs.db
 # Editor files
 .vscode/
 .idea/
-# Allow tracking cursor rules (they're useful for templates)
-# .cursor/rules/
 *.swp
 *.swo
 *~
+
+# AI workflow tools — installed globally, not per-repo
+# Authoritative copies live in templates/standard-project/.claude/skills/
+# and templates/standard-project/.cursor/commands/
+# Future: cursor-specific install option (see skill-template-separation feature)
+.claude/skills/
+.cursor/commands/
+.cursor/worktrees.json
+.agents/
 
 # Temporary files (handoff docs, scratch)
 # Per FR-19: tmp/handoff.md for session continuity
