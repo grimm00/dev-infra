@@ -4,8 +4,8 @@
 [![License](https://img.shields.io/github/license/grimm00/dev-infra)](LICENSE)
 
 **Purpose:** Standardized development infrastructure templates and best practices  
-**Version:** v0.7.0-dev  
-**Last Updated:** 2025-12-18  
+**Version:** v0.11.0  
+**Last Updated:** 2026-05-14  
 **Status:** ✅ Active
 
 ---
@@ -42,18 +42,14 @@ Each of these projects started from a dev-infra template and inherited the same 
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-### 1. Get Dev-Infra
+### 1. Get dev-infra
 
 **Option A: Download Distribution (Recommended)**
 ```bash
-# Download clean package (Linux/Mac)
-curl -L https://github.com/grimm00/dev-infra/releases/download/v0.6.0/dev-infra-0.6.0.tar.gz | tar -xz
-cd dev-infra-0.6.0
-
-# Or download for Windows
-curl -L https://github.com/grimm00/dev-infra/releases/download/v0.6.0/dev-infra-0.6.0.zip -o dev-infra.zip
+curl -L https://github.com/grimm00/dev-infra/releases/download/v0.7.0/dev-infra-0.7.0.tar.gz | tar -xz
+cd dev-infra-0.7.0
 ```
 
 **Option B: Clone Repository**
@@ -68,367 +64,138 @@ See [Integration Guide](docs/INTEGRATION.md) for version-pinned download approac
 ### 2. Create Your Project
 
 ```bash
-# Generate new project
 ./scripts/new-project.sh
-
-# Validate templates
-./scripts/validate-templates.sh
 ```
 
-**Choose your project type:**
+Choose your project type:
 
-- **Standard Project** - Applications, tools, services
-- **Learning Project** - Tutorials, courses, exercises
+- **Standard Project** — Applications, tools, services, APIs
+- **Learning Project** — Tutorials, courses, exercises
 
----
+### 3. Customize
 
-## 🚀 What is Dev-Infra?
-
-Dev-infra provides standardized project templates that incorporate proven patterns from real-world projects. It eliminates the need to recreate project structure and workflows from scratch, ensuring consistency and quality across all your projects.
-
-### Key Benefits
-
-- **🏗️ Consistent Structure** - Every project starts with proven organization
-- **⚡ Quick Setup** - Interactive generator creates projects in minutes
-- **📚 Best Practices** - Built-in patterns from successful projects
-- **🤖 AI-Friendly** - Structure optimized for AI assistance
-- **🔧 Flexible** - Adapt templates to your specific needs
-- **📖 Well-Documented** - Comprehensive guides and examples
+- Update `start.txt` with project details and goals
+- Customize `README.md` with your technology stack
+- Configure CI/CD workflows
+- Remove unused directories, add project-specific ones
 
 ---
 
-## 📁 Project Templates
+## Project Templates
 
-### Standard Project Template
+### Standard Project
 
-**For:** Applications, tools, services, APIs
+For applications, tools, services, and APIs. Includes hub-and-spoke documentation, feature-based planning, backend/frontend separation, centralized testing, and CI/CD workflows.
 
-**Features:**
-
-- Hub-and-spoke documentation pattern
-- Feature-based planning and tracking
-- Backend/frontend separation
-- Centralized testing structure
-- CI/CD workflows
-- Maintainers directory for project management
-
-**Structure:**
+<details>
+<summary>Template structure</summary>
 
 ```
 project/
 ├── docs/
 │   └── maintainers/  # Project management hub
-├── backend/          # Backend application (includes instance/)
+├── backend/          # Backend application
 ├── frontend/         # Frontend application
 ├── tests/            # Centralized testing
 ├── scripts/          # Automation
-├── docs/             # User documentation
 └── .github/          # CI/CD workflows
 ```
 
-### Learning Project Template
+</details>
 
-**For:** Tutorials, courses, exercises, reference materials
+### Learning Project
 
-**Features:**
+For tutorials, courses, and exercises. Uses stage-based progression from fundamentals through implementation, with reference materials and practice applications.
 
-- Stage-based learning progression
-- Fundamentals before implementation
-- Hands-on exercises
-- Reference materials
-- Practice applications
-- Educational content structure
-
-**Structure:**
+<details>
+<summary>Template structure</summary>
 
 ```
 project/
 ├── stage0-fundamentals/  # Core concepts
-├── stage1-[topic]/      # First learning stage
-├── stage2-[topic]/      # Second learning stage
-├── stage3-[topic]/      # Third learning stage
-├── reference/           # Quick reference
-├── practice-apps/       # Hands-on practice
+├── stage1-[topic]/       # Learning stages
+├── stage2-[topic]/
+├── reference/            # Quick reference
+├── practice-apps/        # Hands-on practice
 └── docs/
-    └── maintainers/     # Learning management
+    └── maintainers/      # Learning management
 ```
+
+</details>
 
 ---
 
-## 🎨 Design Philosophy
+## Design Philosophy
 
 ### Hub-and-Spoke Documentation
 
-Every template uses a hub-and-spoke documentation pattern:
+Every template uses a hub-and-spoke documentation pattern: hub files (README.md) serve as entry points with quick links, spoke directories contain focused single-topic content, and progressive disclosure guides readers from overview to detail.
 
-- **Hub Files** (README.md) serve as entry points with quick links
-- **Spoke Directories** contain focused, single-topic content
-- **Progressive Disclosure** from overview to detailed implementation
-- **Consistent Navigation** across all project types
+### Patterns from Real Projects
 
-### Best Practices Integration
+Templates incorporate patterns learned from real projects — Pokehub (full-stack structure), dev-toolkit (CLI organization), and Containers (learning progression). These aren't theoretical best practices; they're patterns that survived contact with real codebases.
 
-Templates incorporate patterns learned from real projects:
+### Flexibility
 
-- **Pokehub** - Full-stack application structure
-- **Dev-toolkit** - Command-line tool organization
-- **Containers** - Learning project progression
-
-### Flexibility and Adaptation
-
-- Not all directories required for every project
-- Easy to remove unused sections
-- Simple to add project-specific directories
-- Maintains core structural principles
+Not all directories are required for every project. Templates are designed to be trimmed (remove what you don't need) or extended (add project-specific directories) while maintaining core structural principles.
 
 ---
 
-## 🔗 Dev-Toolkit Integration
+## Dev-Toolkit Integration
 
-Dev-infra is designed for seamless integration with dev-toolkit projects:
+Dev-infra integrates with dev-toolkit for version-pinned template management:
 
-### Version-Pinned Downloads (Recommended)
 ```bash
-# In dev-toolkit configuration
-DEVINFRA_VERSION="0.6.0"
+DEVINFRA_VERSION="0.7.0"
 curl -L "https://github.com/grimm00/dev-infra/archive/v${DEVINFRA_VERSION}.tar.gz" | tar -xz
 ```
 
-### Integration Commands
-```bash
-# Dev-toolkit new commands
-dev-toolkit install-templates [version]
-dev-toolkit new-project --template regular
-dev-toolkit new-project --template learning
-dev-toolkit update-templates
-```
-
-### Benefits
-- **No Git Dependencies** - Download and extract approach
-- **Version Control** - Pin to specific stable versions
-- **Fast Integration** - Quick download and setup
-- **Easy Updates** - Change version number to update
-
-See [Integration Guide](docs/INTEGRATION.md) for complete implementation examples.
+See [Integration Guide](docs/INTEGRATION.md) for complete examples.
 
 ---
 
-## 🛠️ Technology Stack
+## Documentation
 
-### Core Technologies
-
-- **Documentation** - Markdown with hub-and-spoke pattern
-- **Version Control** - Git with Git Flow branching
-- **CI/CD** - GitHub Actions with branch-based workflows
-- **AI Integration** - Cursor IDE with custom rules
-- **Automation** - Bash scripts for project generation
-
-### External Integrations
-
-- **Sourcery AI** - Code review and quality analysis
-- **Bugbot** - Bug detection and prevention
-- **GitHub CLI** - Repository management
-- **Dev-toolkit** - Workflow automation
+- **[Template Usage Guide](docs/TEMPLATE-USAGE.md)** — How to use templates
+- **[Project Types Guide](docs/PROJECT-TYPES.md)** — Standard vs Learning comparison
+- **[Best Practices Guide](docs/BEST-PRACTICES.md)** — Template best practices
+- **[Customization Guide](docs/CUSTOMIZATION.md)** — Advanced customization
+- **[Standard Project Template](templates/standard-project/)** — Application template source
+- **[Learning Project Template](templates/learning-project/)** — Educational template source
 
 ---
 
-## 📊 Template Statistics
+## Contributing
 
-- **Templates Available** - 2 (Regular, Learning)
-- **Example Projects Analyzed** - 3 (Pokehub, dev-toolkit, containers)
-- **Documentation Patterns** - Hub-and-spoke, progressive disclosure
-- **Automation Scripts** - 1 (Interactive project generator)
-- **CI/CD Workflows** - 1 (Branch-based automation)
-
----
-
-## 🚀 Getting Started
-
-### 1. Generate New Project
-
-```bash
-# Interactive project creation
-./scripts/new-project.sh
-
-# Follow prompts:
-# - Enter project name and description
-# - Choose project type (Regular/Learning)
-# - Customize settings
-# - Initialize git repository
-```
-
-### 2. Customize Template
-
-**Required:**
-
-- Update `start.txt` with project details
-- Customize `README.md` with technology stack
-- Configure CI/CD workflows
-
-**Optional:**
-
-- Remove unused directories
-- Add project-specific directories
-- Customize admin structure
-
-### 3. Start Development
-
-**Standard Projects:**
-
-- Create first feature in `docs/maintainers/planning/features/`
-- Set up development environment
-- Begin feature development
-
-**Learning Projects:**
-
-- Start with `stage0-fundamentals/`
-- Follow learning progression
-- Complete exercises as you go
+1. Fork the repository
+2. Create a feature branch (`feat/improve-templates`)
+3. Make changes following hub-and-spoke patterns
+4. Test templates using `./scripts/new-project.sh` and `./scripts/validate-templates.sh`
+5. Submit a pull request
 
 ---
 
-## 📚 Documentation
+## Project Structure
 
-### User Guides
-
-- **[Template Usage Guide](docs/TEMPLATE-USAGE.md)** - How to use templates
-- **[Project Types Guide](docs/PROJECT-TYPES.md)** - Regular vs Learning comparison
-- **[Best Practices Guide](docs/BEST-PRACTICES.md)** - Template best practices
-- **[Customization Guide](docs/CUSTOMIZATION.md)** - Advanced customization
-
-### Template Examples
-
-- **[Standard Project Template](templates/standard-project/)** - Application template
-- **[Learning Project Template](templates/learning-project/)** - Educational template
-
-### Real Project Examples
-
-- **[Hub-and-Spoke Patterns](admin/notes/examples/hub-and-spoke-documentation-best-practices.md)** - Documentation patterns
-- **[Project Structures](admin/notes/examples/)** - Structure examples from real projects
-- **[CI/CD Workflows](admin/notes/examples/ci.yml.example)** - Workflow patterns
-- **[AI Rules](admin/notes/examples/main.mdc.example)** - Cursor IDE rules
-
----
-
-## 🔧 Development
-
-### Project Structure
+<details>
+<summary>Repository layout</summary>
 
 ```
 dev-infra/
 ├── templates/              # Project templates
 │   ├── standard-project/   # Application template
-│   └── learning-project/  # Educational template
-├── scripts/               # Automation scripts
-│   └── new-project.sh     # Project generator
-├── docs/                  # User documentation
-├── admin/                 # Dev-infra management
-│   ├── planning/          # Template roadmap
-│   ├── research/          # Design decisions
-│   └── notes/examples/    # Real project examples
-└── .cursor/               # AI assistant rules
-    └── rules/main.mdc     # Cursor IDE configuration
+│   └── learning-project/   # Educational template
+├── scripts/                # Automation scripts
+├── docs/                   # User documentation
+├── admin/                  # Dev-infra project management
+│   └── services/           # Service-first organization
+└── .cursor/                # IDE configuration
 ```
 
-### Contributing
-
-1. **Fork the repository**
-2. **Create feature branch** (`feat/improve-templates`)
-3. **Make changes** following hub-and-spoke pattern
-4. **Test templates** using generator script
-5. **Submit pull request** with clear description
-
-### Template Evolution
-
-Templates evolve based on:
-
-- Real project experience
-- User feedback
-- Best practice discoveries
-- Tool integration improvements
+</details>
 
 ---
 
-## 🎯 Use Cases
-
-### Individual Developers
-
-- Consistent project structure
-- Quick project setup
-- Built-in best practices
-- AI-optimized workflows
-
-### Teams
-
-- Standardized workflows
-- Shared documentation patterns
-- Consistent CI/CD processes
-- Reduced onboarding time
-
-### Educational
-
-- Structured learning progression
-- Hands-on exercise framework
-- Reference material organization
-- Practice application templates
-
----
-
-## 📈 Success Metrics
-
-### Template Adoption
-
-- Projects created using templates
-- Time saved in project setup
-- Consistency across projects
-- User satisfaction ratings
-
-### Project Quality
-
-- Documentation completeness
-- Navigation effectiveness
-- Maintenance ease
-- Development velocity
-
----
-
-## 🎊 Key Achievements
-
-1. **Comprehensive Templates** - Complete project structures for both types
-2. **Best Practices Integration** - Learned from real project examples
-3. **Automation** - Interactive project generator with customization
-4. **Documentation Patterns** - Hub-and-spoke structure for navigation
-5. **Flexibility** - Templates adapt to different project needs
-6. **AI Optimization** - Structure designed for AI assistance
-
----
-
-## 📞 Support
-
-### Documentation
-
-- [Template Usage Guide](docs/TEMPLATE-USAGE.md)
-- [Project Types Guide](docs/PROJECT-TYPES.md)
-- [Best Practices Guide](docs/BEST-PRACTICES.md)
-
-### Examples
-
-- [Real Project Examples](admin/notes/examples/)
-- [Template Examples](templates/)
-
-### Issues
-
-- [GitHub Issues]([issues-url])
-- [Discussions]([discussions-url])
-
----
-
-## 📄 License
-
-[License information]
-
----
-
-**Last Updated:** 2025-12-18  
+**Last Updated:** 2026-05-14  
 **Status:** ✅ Active  
 **Next:** [Template Usage Guide](docs/TEMPLATE-USAGE.md)
