@@ -19,10 +19,10 @@ Thumbs.db
 # AI workflow tools — installed globally, not per-repo
 # Authoritative copies live in templates/standard-project/.claude/skills/
 # and templates/standard-project/.cursor/commands/
+# Project conventions live in AGENTS.md (repo root)
 # Future: cursor-specific install option (see skill-template-separation feature)
 .claude/skills/
-.cursor/commands/
-.cursor/worktrees.json
+.cursor/
 .agents/
 
 # Temporary files (handoff docs, scratch)

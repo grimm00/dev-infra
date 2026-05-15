@@ -22,10 +22,9 @@ dev-infra/
 │       ├── template-generation/   # Template creation/maintenance
 │       ├── release-management/    # Versioning and releases
 │       └── meta/                  # Dev-infra about itself
-└── .cursor/                       # IDE configuration
-    ├── commands/                   # Workflow commands (migrating to skills)
-    └── rules/                     # AI assistant rules
 ```
+
+AI workflow tools (skills, commands, agents) are installed globally at `~/.cursor/` — not tracked in this repo. Authoritative template copies live in `templates/standard-project/`.
 
 Each service contains: `explorations/` (pre-formal thinking), `features/` (formal work with planning pipeline), and `maintenance/` (operational upkeep). Features follow the structure: `[feature]/planning/implementation-plan.md` + `tasks/` + `status-and-next-steps.md`.
 
