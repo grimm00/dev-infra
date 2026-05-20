@@ -1,14 +1,14 @@
 # Requirements — Skill-Template Separation
 
-**Status:** Draft
+**Status:** Final
 **Created:** 2026-05-06
-**Last Updated:** 2026-05-07
+**Last Updated:** 2026-05-19
 
 ---
 
 ## Overview
 
-Requirements extracted from research findings across 9 topics. This document starts as a skeleton and is populated during research-conduct, then consolidated and finalized during research-consolidate.
+Requirements extracted from research findings across 11 topics (7 complete, 4 deferred). Consolidated 2026-05-19: merged redundancies, corrected XDG semantics, added gaps for installer self-containment.
 
 ---
 
@@ -34,13 +34,9 @@ The minimal template SHOULD include a README.md with project identity and gettin
 The minimal template SHOULD NOT include directory structure that skills create on demand (explorations, research, decisions, planning).
 **Source:** Topic 1 — Finding 4 (skills create on demand), Finding 5 (80% analysis)
 
-### FR-MVPC-6: No Bundled Skills/Commands/Agents
-The minimal template MUST NOT bundle skills, commands, or agents (these are global installs with independent lifecycle).
-**Source:** Topic 1 — Finding 5 (migration already done)
-
 ### FR-PROF-1: Profile Location
-The per-repo profile MUST live at `~/.cursor/repos/<slug>.yaml` where slug is derived from `basename $(git remote get-url origin) .git`.
-**Source:** Topic 2 — Finding 3 (pragmatic location), Finding 4 (slug derivation)
+The per-repo profile MUST live at `~/.config/ai-workflow/repos/<slug>.yaml` and MAY be symlinked to `~/.cursor/repos/<slug>.yaml` for editor compatibility. Slug derived from `basename $(git remote get-url origin) .git`.
+**Source:** Topic 2 — Finding 3 (pragmatic location), Finding 4 (slug derivation); amended by Theme 10 (XDG correction: profiles are config)
 
 ### FR-PROF-2: Schema Versioning
 The profile MUST include a `schema_version` field (integer, starting at 1) for forward compatibility.
@@ -63,8 +59,8 @@ The `ticket-intake/repos/<slug>.yaml` migration MUST be backwards-compatible —
 **Source:** Topic 2 — Finding 7 (ticket-intake precedent), `per-repo-skill-profile-unified.md`
 
 ### FR-INST-1: Symlink-Based Installation
-The installer MUST create symlinks from editor-specific expected paths to the canonical package location, not copy files.
-**Source:** Topic 10 — Finding 1 (GNU Stow pattern), Finding 4 (installer boundary)
+The installer MUST create symlinks from editor-specific expected paths to the corpus project directory, not copy files. If Cursor's skill discovery has symlink compatibility issues (C-INST-1), a file-watcher-based copy mechanism is the fallback.
+**Source:** Topic 10 — Finding 1 (GNU Stow pattern), Finding 4 (installer boundary); absorbs FR-DEV-2 (symlink dev mode + fallback)
 
 ### FR-INST-2: Editor Mapping Configuration
 The installer MUST support a mapping configuration that defines per-editor path expectations (adding a new editor = adding config, not code).
@@ -75,16 +71,12 @@ The installer MUST support uninstallation (removing all symlinks) without affect
 **Source:** Topic 10 — Finding 1 (GNU Stow reversibility)
 
 ### FR-INST-4: Config at XDG, Corpus at Project Path
-Package configuration (per-repo profiles, installer mapping) SHOULD live at `~/.config/ai-workflow/`. The corpus itself (skills, commands, agents) lives at a normal project path and is exposed via symlinks.
-**Source:** Topic 10 — Analysis; Topic 2 — Finding 2 (XDG separation); amended by Theme 10 (XDG correction)
+Package configuration (per-repo profiles, installer mapping) MUST live at `~/.config/ai-workflow/`. The corpus itself (skills, commands, agents) MUST live at a normal project directory (e.g., `~/Projects/ai-workflow/`), NOT inside `~/.config/`. The installer symlinks from editor paths to the corpus project directory.
+**Source:** Topic 10 — Analysis; Topic 2 — Finding 2 (XDG separation); Theme 10 (XDG correction); absorbs FR-OWN-3
 
 ### FR-DEV-1: Zero-Friction Edit-Test Cycle
-The dev-mode workflow MUST support zero-friction edit-test cycles: editing a skill file at the canonical source MUST make the change visible to the next AI invocation without any manual build, copy, or publish step.
-**Source:** Topic 11 — Finding 2 (testing is impractical), Analysis (usage-as-testing)
-
-### FR-DEV-2: Symlink-Based Dev Mode
-The dev-mode mechanism SHOULD be symlinks from editor-expected paths to the canonical source. If symlinks are infeasible (C-INST-1), a file-watcher-based copy mechanism is the fallback.
-**Source:** Topic 11 — Finding 1 (npm link analogy), Finding 4 (symlink bug scope)
+The dev-mode workflow MUST support zero-friction edit-test cycles: editing a skill file at the canonical source MUST make the change visible to the next AI invocation without any manual build, copy, publish, or run step between edit and use.
+**Source:** Topic 11 — Finding 2 (testing is impractical), Analysis (usage-as-testing); absorbs NFR-DEV-1 (zero-step iteration)
 
 ### FR-DIST-1: Additive Distribution
 Distribution mode MUST be additive — adding distribution to an existing dev-mode setup requires only a manifest file and a publish step, not restructuring the canonical source.
@@ -94,6 +86,14 @@ Distribution mode MUST be additive — adding distribution to an existing dev-mo
 Distribution SHOULD use the target editor's native plugin system (Cursor plugins, Claude plugins) rather than a custom mechanism.
 **Source:** Topic 11 — Finding 3 (existing plugin-delivered skills: hex, superpowers)
 
+### FR-INST-5: Self-Contained Install Script
+The corpus repo MUST contain its own install script enabling tier-2 source installs: `git clone` + one command produces a working installation with all symlinks created.
+**Source:** Theme 11 (three-tier distribution), Topic 10 Finding 1 (GNU Stow)
+
+### FR-INST-6: Installer Config at XDG
+The installer MUST read its editor-path mapping from `~/.config/ai-workflow/installer.yaml` (or equivalent XDG-compliant config file), not from hardcoded paths in the script.
+**Source:** Theme 10 (XDG correction), Topic 10 Finding 4 (narrow responsibility boundary)
+
 ### FR-OWN-1: Separate Product
 The skill corpus (skills, commands, agents) MUST be a separate product from dev-infra templates, with its own repository and independent versioning.
 **Source:** Topic 3 — Finding 1 (76% global-only), Finding 2 (different products)
@@ -102,14 +102,9 @@ The skill corpus (skills, commands, agents) MUST be a separate product from dev-
 Dev-infra MUST NOT contain authoritative copies of skills. It MAY contain a manifest listing expected skills for template validation.
 **Source:** Topic 3 — Finding 1 (stale subset), Analysis (Model B)
 
-### FR-OWN-3: Corpus at Normal Project Path
-The corpus repo MUST live at a normal project directory (e.g., `~/Projects/ai-workflow/`), NOT inside `~/.config/`. The installer symlinks from editor paths to wherever the repo is cloned.
-**Source:** Topic 3 — Finding 2 (separate product), amended by Theme 10 discuss session (XDG correction: config ≠ corpus)
-
 ### FR-BNDL-1: No Bundling
-Templates MUST NOT bundle skills, commands, or agents. They MAY include a manifest declaring expected skills.
-**Source:** Topic 4 — Finding 1 (prior findings converge), Finding 2 (drift confirmed)
-**Updated after:** Reinforces FR-MVPC-6 from Topic 1 with explicit model selection.
+Templates MUST NOT bundle skills, commands, or agents (these are global installs with independent lifecycle). They MAY include a manifest declaring expected skills.
+**Source:** Topic 4 — Finding 1 (prior findings converge), Finding 2 (drift confirmed); absorbs FR-MVPC-6 from Topic 1.
 
 ### FR-BNDL-2: Expected-Skills Manifest
 The expected-skills manifest SHOULD live in `.dev-infra.yml` as an `expected_skills` list (machine-readable for proj-cli validation).
@@ -155,10 +150,6 @@ Installation/uninstallation MUST be idempotent — running twice produces the sa
 The installer MUST NOT require knowledge of skill schemas, profile shapes, or package internals — it operates purely on filesystem paths.
 **Source:** Topic 10 — Finding 4 (responsibility boundary)
 
-### NFR-DEV-1: Zero-Step Iteration
-The dev-mode feedback loop (edit → use → evaluate) MUST NOT require running any command between editing a skill file and using it.
-**Source:** Topic 11 — Analysis (usage-as-testing workflow)
-
 ### NFR-OWN-1: No Coordination Overhead
 The separation MUST NOT introduce coordination overhead for daily skill development.
 **Source:** Topic 3 — Finding 5 (symlinks eliminate cross-repo cost)
@@ -183,9 +174,9 @@ AGENTS.md content depends on project type (tech stack, framework, conventions). 
 Existing projects generated from comprehensive templates are not affected — they keep their structure. Migration is a separate concern (Topic 5).
 **Source:** Topic 1 — Analysis
 
-### C-PROF-1: Cursor-Specific Location
-The `~/.cursor/repos/` location is Cursor-specific. If multi-editor support becomes a requirement, migration to `~/.config/ai-workflow/repos/` is the documented path. v1 does not need to support this.
-**Source:** Topic 2 — Finding 2 (XDG), Finding 3 (pragmatic tradeoff)
+### C-PROF-1: XDG Is Primary, Editor Paths Are Symlinks
+The `~/.config/ai-workflow/repos/` location is the canonical config path. The installer symlinks to `~/.cursor/repos/` for Cursor compatibility. Multi-editor support = adding symlink targets, not migrating data.
+**Source:** Topic 2 — Finding 2 (XDG); Theme 10 (XDG correction flips the framing)
 
 ### C-PROF-2: State Separation
 Controller state (setup status, last-seen, detection cache) MUST NOT be mixed with user-editable config in the same YAML sections.
@@ -223,10 +214,22 @@ Project-level commands (`<repo>/.cursor/commands/`) ALWAYS override global comma
 
 | Requirement | Source Topic | Evidence |
 |-------------|-------------|----------|
-| *(populated during consolidate)* | | |
+| FR-MVPC-1 through FR-MVPC-5 | Topic 1 | Findings 2-7 (minimal template analysis) |
+| FR-PROF-1 through FR-PROF-6 | Topic 2 | Findings 1-7 (profile schema research) |
+| FR-INST-1 through FR-INST-6 | Topics 10, 11, Themes 10-11 | GNU Stow, XDG correction, three-tier model |
+| FR-DEV-1 | Topic 11 | Finding 2 (testing impractical), Analysis |
+| FR-DIST-1, FR-DIST-2 | Topic 11 | Finding 3 (Cursor plugin system) |
+| FR-OWN-1, FR-OWN-2 | Topic 3 | Finding 1 (76% global-only) |
+| FR-BNDL-1 through FR-BNDL-4 | Topic 4 | Findings 1-5 (bundling analysis) |
+| C-PLAT-1, C-PLAT-2 | Topic 6 | December 2025 validation (confirmed still holds) |
 
 ---
 
 ## Next Steps
 
-Requirements are extracted as research proceeds. After all topics are complete, use research-consolidate to deduplicate, prioritize, and move from Draft to Final status.
+Consolidated requirements are ready for `/decision` phase. Recommended decisions:
+1. **ADR: Separation model** — corpus as separate repo, templates as minimal (FR-OWN-1, FR-BNDL-1)
+2. **ADR: Installation architecture** — symlinks, XDG config, project-path corpus (FR-INST-1 through FR-INST-6)
+3. **ADR: Profile schema v1** — location, fields, lookup chain (FR-PROF-1 through FR-PROF-6)
+
+Deferred topics (5, 7, 8, 9) may add requirements later but do not block architectural decisions.

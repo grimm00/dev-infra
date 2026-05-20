@@ -1,8 +1,8 @@
 # Research Summary — Skill-Template Separation
 
-**Status:** 🔴 Not Started
+**Status:** ✅ Consolidated
 **Created:** 2026-05-06
-**Last Updated:** 2026-05-06
+**Last Updated:** 2026-05-19
 
 ---
 
@@ -13,8 +13,8 @@
 | Priority | Topics | Status |
 |----------|--------|--------|
 | High | 2 (Topics 1, 2) | ✅ Both Complete |
-| Medium | 5 (Topics 3, 4, 6, 8, 9) | 🔴 Not Started |
-| Low | 2 (Topics 5, 7) | 🔴 Not Started |
+| Medium | 5 (Topics 3, 4, 6, 8, 9) | 3 Complete, 2 Deferred |
+| Low | 4 (Topics 5, 7, 11) + Topic 10 (Medium) | 2 Complete (10, 11), 2 Deferred (5, 7) |
 
 ---
 
@@ -78,12 +78,15 @@ Two permanent coexisting modes: dev (symlinks, zero-friction edit-test cycle for
 
 See [requirements.md](requirements.md) for the full requirements document.
 
-*(Requirements extracted from each topic's findings during research-conduct, consolidated and deduped during research-consolidate)*
+**Status:** Final (consolidated 2026-05-19)
+**Counts:** 25 FR, 10 NFR, 9 Constraints, 0 Assumptions = 44 total requirements
+
+**Consolidation actions:** Merged 4 redundancies (FR-MVPC-6→BNDL-1, FR-DEV-2→INST-1, FR-OWN-3→INST-4, NFR-DEV-1→FR-DEV-1), added 2 gap fills (FR-INST-5 self-contained installer, FR-INST-6 config-driven mapping), modified 2 stale requirements (FR-PROF-1 and C-PROF-1 to reflect XDG-primary framing).
 
 ---
 
 ## Next Steps
 
-1. Begin research-conduct on Topics 1 and 2 (highest priority, unblock others)
-2. Topic 6 can proceed in parallel (pure audit of existing docs)
-3. After all topics complete → research-consolidate → decision phase
+1. Proceed to `/decision` phase — recommended ADRs: separation model, installation architecture, profile schema v1
+2. Deferred topics (5, 7, 8, 9) can be researched later and may append requirements, but do not block decisions
+3. Template minimalism spike (MEDIUM-HIGH) recommended before implementation to validate the 7-9 file template on a real project
