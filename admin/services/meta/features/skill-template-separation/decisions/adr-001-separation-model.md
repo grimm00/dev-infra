@@ -80,6 +80,10 @@ Interview waived — proceeding from research findings. The decision is backed b
 
 ## References
 
+> Research artifacts (per-topic findings, requirements, sibling ADRs, exploration)
+> live on the `docs/skill-template-separation-research` branch. In-repo links below
+> may not resolve on develop until the corpus separation is fully landed.
+
 - [Research: Skill Corpus Ownership Model](../research/research-skill-corpus-ownership-model.md)
 - [Research: Template Skill Bundling Strategy](../research/research-template-skill-bundling-strategy.md)
 - [Research: Minimum Viable Project Contract](../research/research-minimum-viable-project-contract.md)

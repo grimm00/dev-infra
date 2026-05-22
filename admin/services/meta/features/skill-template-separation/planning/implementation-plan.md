@@ -118,6 +118,10 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 
 ## 🔗 Related
 
+> Sibling artifacts (ADR-002, ADR-003, exploration, full research) live on the
+> `docs/skill-template-separation-research` branch. Links below may not resolve
+> on develop.
+
 - **Source ADR:** [decisions/adr-001-separation-model.md](../decisions/adr-001-separation-model.md)
 - **Sibling ADRs (separate plans):** [adr-002-installation-architecture.md](../decisions/adr-002-installation-architecture.md), [adr-003-per-repo-profile-schema.md](../decisions/adr-003-per-repo-profile-schema.md)
 - **Theme 6 (branch-as-workspace):** [../../../explorations/skill-template-separation/exploration.md](../../../explorations/skill-template-separation/exploration.md) — Why only ADR-001 + planning merge to develop
