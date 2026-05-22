@@ -66,11 +66,11 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 ## 📝 Implementation Plan
 
 ### Branch Setup & Doc Curation
-- [ ] Task 1: Create new feature branch from develop
-- [ ] Task 2: Selectively transfer ADR-001 to the new branch
-- [ ] Task 3: Selectively transfer planning tree to the new branch
-- [ ] Task 4: Decide how ADR-001's research references are handled on develop
-- [ ] Task 5: Verify the new branch contains only curated hard artifacts
+- [x] Task 1: Create new feature branch from develop
+- [x] Task 2: Selectively transfer ADR-001 to the new branch
+- [x] Task 3: Selectively transfer planning tree to the new branch
+- [x] Task 4: Decide how ADR-001's research references are handled on develop
+- [x] Task 5: Verify the new branch contains only curated hard artifacts
 
 ### Template Cleanup
 - [ ] Task 6: Audit current template tree for skill/command/agent residue

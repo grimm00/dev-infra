@@ -1,17 +1,17 @@
 # Status & Next Steps — Skill-Template Separation (ADR-001)
 
-**Status:** 🔴 Not Started
+**Status:** 🟠 In Progress
 **Last Updated:** 2026-05-22
 
 ---
 
 ## 📊 Progress Summary
 
-**Overall:** 0/25 tasks complete
+**Overall:** 5/25 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Branch Setup & Doc Curation | 🔴 Not Started | 0/5 tasks | Theme 6 in practice — curate what merges to develop |
+| Branch Setup & Doc Curation | ✅ Complete | 5/5 tasks | Plan B executed; stale research scaffolds replaced with ADR-001 + planning |
 | Template Cleanup | 🔴 Not Started | 0/5 tasks | Mostly already deleted in working tree; this formalizes it |
 | Template-Sync-Manifest Retirement | 🔴 Not Started | 0/4 tasks | Includes CI workflow updates |
 | expected_skills Manifest in Templates | 🔴 Not Started | 0/4 tasks | New `.dev-infra.yml` field |
@@ -22,9 +22,9 @@
 
 ## 🚀 Next Steps
 
-1. Review scaffolding — verify group/task breakdown aligns with ADR-001 scope.
-2. Expand groups — run `write-plan-expand` starting with Group 1 (Branch Setup) since it gates everything else.
-3. Begin implementation on the new feature branch once Group 1 is expanded.
+1. Push the `feat/skill-template-separation` branch and open a PR to `develop` for Group 1 (review of the curated artifacts).
+2. After Group 1 PR merges: expand Group 2 (Template Cleanup) and proceed.
+3. Continue group-by-group on this branch (single PR per group, all targeting `develop`).
 
 ---
 
@@ -34,6 +34,11 @@
 - Planning subdir: `admin/services/meta/features/skill-template-separation/planning/` (default, not staged).
 - **Doc surface intent:** This planning tree + ADR-001 are the only artifacts that merge to develop. Research and exploration stay on the `docs/skill-template-separation-research` branch.
 - ADR-002 (installation architecture) and ADR-003 (per-repo profile schema) are explicitly out of scope for this plan — each will get its own.
+
+## 🧭 Decisions Made
+
+- **Reference handling (Group 1 Task 4):** Strategy (c) — kept the `../research/...` and `../decisions/adr-002...` style links in ADR-001 and `implementation-plan.md`, added a one-line blockquote note at the top of each affected section explaining the artifacts live on the research branch. Lightest touch; uniform breakage made one explanation sufficient.
+- **Discovery during Group 1 Task 1:** develop already had stale research scaffolds (from PR #103) under this feature dir. Chose Option C — delete them as part of replacing-with-ADR-001 — so develop's state reflects the curation intent rather than zombie "🔴 Not Started" placeholders for research that's actually complete.
 
 ---
 

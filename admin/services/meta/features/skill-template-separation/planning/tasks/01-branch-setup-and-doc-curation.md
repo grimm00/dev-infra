@@ -251,11 +251,11 @@ admin/services/meta/features/skill-template-separation/planning"
 
 ## ✅ Completion Criteria
 
-- [ ] `feat/skill-template-separation` branch exists at `origin/develop` head with no extra commits at branch creation (Task 1)
-- [ ] ADR-001 is the only file under `decisions/` on the new branch (Task 2)
-- [ ] All 8 planning files transferred and frontmatter intact (Task 3)
-- [ ] Reference-handling strategy chosen, applied, and documented (Task 4)
-- [ ] All four guard checks in Task 5 pass; total diff is ~9 files
+- [x] `feat/skill-template-separation` branch exists at `origin/develop` head with no extra commits at branch creation (Task 1)
+- [x] ADR-001 is the only file under `decisions/` on the new branch (Task 2 — Option C: also removed 11 stale research scaffolds inherited from PR #103)
+- [x] All 8 planning files transferred and frontmatter intact (Task 3)
+- [x] Reference-handling strategy chosen, applied, and documented (Task 4 — strategy (c): blockquote notes added to ADR-001 and implementation-plan.md)
+- [x] All four guard checks in Task 5 pass; total diff is 20 files (9 add + 11 delete, all under the feature dir)
 
 ---
 
