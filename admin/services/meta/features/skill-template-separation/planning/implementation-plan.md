@@ -29,9 +29,9 @@ tasks_files:
 ---
 # Implementation Plan — Skill-Template Separation (ADR-001)
 
-**Status:** 🔴 Not Started
+**Status:** 🟠 In Progress
 **Created:** 2026-05-22
-**Last Updated:** 2026-05-22
+**Last Updated:** 2026-06-03
 **Source:** [decisions/adr-001-separation-model.md](../decisions/adr-001-separation-model.md)
 
 ---
@@ -73,11 +73,11 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 - [x] Task 5: Verify the new branch contains only curated hard artifacts
 
 ### Template Cleanup
-- [ ] Task 6: Audit current template tree for skill/command/agent residue
-- [ ] Task 7: Remove `templates/standard-project/.claude/skills/` if present
-- [ ] Task 8: Remove `templates/standard-project/.cursor/commands/` if present
-- [ ] Task 9: Remove any agent files from `templates/`
-- [ ] Task 10: Update template validation tests to confirm absence
+- [x] Task 6: Audit current template tree for skill/command/agent residue
+- [x] Task 7: Remove `templates/standard-project/.claude/skills/` if present
+- [x] Task 8: Remove `templates/standard-project/.cursor/commands/` if present
+- [x] Task 9: Remove any agent files from `templates/`
+- [x] Task 10: Update template validation tests to confirm absence
 
 ### Template-Sync-Manifest Retirement
 - [ ] Task 11: Audit `scripts/template-sync-manifest.txt` for remaining valid entries
