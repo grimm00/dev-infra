@@ -51,7 +51,7 @@ teardown() {
     # Script should accept standard-project without error
 }
 
-@test "new-project: standard-project includes all commands" {
+@test "new-project: standard-project does not bundle cursor commands" {
     export PROJECT_NAME="test-standard"
     export PROJECT_TYPE="standard-project"
     export TARGET_DIR="$TEST_TMPDIR"
@@ -60,13 +60,19 @@ teardown() {
     run "$SCRIPT" --non-interactive
     
     [ "$status" -eq 0 ]
-    # Check that commands directory exists
-    [ -d "$TEST_STANDARD_DIR/.cursor/commands" ]
-    # Check for status.md command (previously experimental, now in all templates)
-    [ -f "$TEST_STANDARD_DIR/.cursor/commands/status.md" ]
-    # Check for other key commands
-    [ -f "$TEST_STANDARD_DIR/.cursor/commands/pr.md" ]
-    [ -f "$TEST_STANDARD_DIR/.cursor/commands/task-phase.md" ]
+    [ ! -d "$TEST_STANDARD_DIR/.cursor/commands" ]
+}
+
+@test "new-project: standard-project does not bundle claude skills" {
+    export PROJECT_NAME="test-standard"
+    export PROJECT_TYPE="standard-project"
+    export TARGET_DIR="$TEST_TMPDIR"
+    export INIT_GIT="false"
+    
+    run "$SCRIPT" --non-interactive
+    
+    [ "$status" -eq 0 ]
+    [ ! -d "$TEST_STANDARD_DIR/.claude/skills" ]
 }
 
 @test "new-project: rejects invalid template type" {
@@ -90,8 +96,7 @@ teardown() {
     run "$SCRIPT" --non-interactive
     [ "$status" -eq 0 ]
     
-    # Core directories
-    [ -d "$TEST_STANDARD_DIR/.cursor" ]
+    # Core directories (no bundled .cursor/commands per ADR-001)
     [ -d "$TEST_STANDARD_DIR/docs" ]
     [ -d "$TEST_STANDARD_DIR/backend" ]
     [ -d "$TEST_STANDARD_DIR/frontend" ]
@@ -115,7 +120,7 @@ teardown() {
     [ -f "$TEST_LEARNING_DIR/start.txt" ]
 }
 
-@test "new-project: learning-project includes all commands" {
+@test "new-project: learning-project does not bundle cursor commands" {
     export PROJECT_NAME="test-learning"
     export PROJECT_TYPE="learning-project"
     export TARGET_DIR="$TEST_TMPDIR"
@@ -124,10 +129,7 @@ teardown() {
     run "$SCRIPT" --non-interactive
     
     [ "$status" -eq 0 ]
-    # Check that commands directory exists
-    [ -d "$TEST_LEARNING_DIR/.cursor/commands" ]
-    # Check for status.md command (now in all templates)
-    [ -f "$TEST_LEARNING_DIR/.cursor/commands/status.md" ]
+    [ ! -d "$TEST_LEARNING_DIR/.cursor/commands" ]
 }
 
 @test "new-project: learning-project has stage directories" {
