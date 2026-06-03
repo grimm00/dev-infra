@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2025-12-31
+**Last Updated:** 2026-06-03
 
 ---
 
@@ -10,11 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 57
+**Total Tasks:** 59
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
-- 🟡 **MEDIUM**: 28 tasks
-- 🟢 **LOW**: 21 tasks (1 fixed)
+- 🟡 **MEDIUM**: 29 tasks
+- 🟢 **LOW**: 22 tasks (1 fixed)
 - 📋 **Workflow**: 1 task
 
 ---
@@ -602,3 +602,13 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 - ~~**PR89-Overall-#2 (🟡 MEDIUM, 🟢 LOW effort):** Inconsistent "may vs must" parent-read language in research/SKILL.md~~ — ✅ Fixed inline
 - **PR89-Overall-#1 (🟡 MEDIUM, 🟠 HIGH effort):** Path detection rules for dev-infra vs template layouts appear in multiple skill files — consider further centralization beyond the parent SKILL.md. (Note: parent already IS the centralization point; this concerns any remaining duplication in child preamble sections.)
+
+---
+
+## PR #106 Additions
+
+**Date:** 2026-06-03
+**Status:** Sourcery overall comments triaged (no inline comments, no CRITICAL/HIGH)
+
+- **PR106-Overall-#1 (🟡 MEDIUM, 🟡 MEDIUM effort):** Hard-coded `/Users/cdwilson/...` absolute paths in completed task instructions (`admin/services/meta/features/skill-template-separation/planning/tasks/01-branch-setup-and-doc-curation.md` lines 80, 119). Same pattern exists in 4 other research/task docs under `admin/services/meta/features/` — fixing here in isolation would create inconsistency. Right intervention is a project-wide convention sweep about whether completed task/research docs should use generic paths or placeholder variables. Personal username in a public repo is the privacy/info-leak angle worth weighing.
+- **PR106-Overall-#2 (🟢 LOW, 🟡 MEDIUM effort):** Sourcery suggests converting `../research/...` relative links in ADR-001 and `planning/implementation-plan.md` to GitHub permalinks to the `docs/skill-template-separation-research` branch, now that the branch is on origin. This is a *re-decision suggestion* — Strategy (c) was the explicit Group 1 Task 4 choice (recorded in `status-and-next-steps.md` under "Decisions Made"). Revisit only if reviewers actually get tripped up by the blockquote-noted broken links; otherwise the deliberate decision stands.
