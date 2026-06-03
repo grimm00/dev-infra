@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2025-12-31
+**Last Updated:** 2026-06-03
 
 ---
 
@@ -10,11 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 57
+**Total Tasks:** 59
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
-- 🟡 **MEDIUM**: 28 tasks
-- 🟢 **LOW**: 21 tasks (1 fixed)
+- 🟡 **MEDIUM**: 29 tasks
+- 🟢 **LOW**: 22 tasks (1 fixed)
 - 📋 **Workflow**: 1 task
 
 ---
@@ -602,3 +602,25 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 - ~~**PR89-Overall-#2 (🟡 MEDIUM, 🟢 LOW effort):** Inconsistent "may vs must" parent-read language in research/SKILL.md~~ — ✅ Fixed inline
 - **PR89-Overall-#1 (🟡 MEDIUM, 🟠 HIGH effort):** Path detection rules for dev-infra vs template layouts appear in multiple skill files — consider further centralization beyond the parent SKILL.md. (Note: parent already IS the centralization point; this concerns any remaining duplication in child preamble sections.)
+
+---
+
+## PR #106 Additions
+
+**Date:** 2026-06-03
+**Status:** Sourcery overall comments triaged (no inline comments, no CRITICAL/HIGH)
+
+- ~~**PR106-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** Hard-coded `/Users/cdwilson/...` absolute paths in completed task instructions~~ — ✅ Fixed inline in PR #106. User override of initial defer; privacy/info-leak angle outweighed the consistency argument. Replaced with `../docs-skill-template-separation-research/...` relative paths. See follow-up below for the develop-side sweep.
+- **PR106-Overall-#1-followup (🟡 MEDIUM, 🟠 HIGH effort):** Repo-wide sweep of `/Users/cdwilson/...` absolute paths in the remaining **11 develop-side files** flagged when PR #106 was triaged. Contexts vary across files (debug logs, example outputs, executable commands, prose references) and may need different replacements per file. Affected files:
+  - `admin/services/template-generation/features/directory-selection/planning/fix/debugging.md`
+  - `admin/services/meta/features/worktree-feature-workflow/research/research-worktree-naming-conventions.md`
+  - `admin/services/meta/features/worktree-feature-workflow/research/research-context-switching-and-discovery.md`
+  - `admin/services/meta/features/work-prod-integration/research/research-local-registry-format.md`
+  - `admin/services/meta/features/terraform-style-project-management/research/research-registry-architecture.md`
+  - `admin/services/meta/explorations/project-model-definition/tier-1-core-registry.md`
+  - `admin/services/ai-workflow/features/command-distribution/planning/phase-1.md`
+  - `admin/services/ai-workflow/features/command-adaptation-template/planning/phase-document-enhancement-plan.md`
+  - `admin/planning/notes/reflections/reflection-workflow-simplification-research-2026-02-14.md`
+  - `admin/planning/ci/template-sync-drift-fix/phase-2.md`
+  - `admin/planning/notes/chat-log-2025-12-09-phase-3-pr-creation.md`
+- **PR106-Overall-#2 (🟢 LOW, 🟡 MEDIUM effort):** Sourcery suggests converting `../research/...` relative links in ADR-001 and `planning/implementation-plan.md` to GitHub permalinks to the `docs/skill-template-separation-research` branch, now that the branch is on origin. This is a *re-decision suggestion* — Strategy (c) was the explicit Group 1 Task 4 choice (recorded in `status-and-next-steps.md` under "Decisions Made"). Revisit only if reviewers actually get tripped up by the blockquote-noted broken links; otherwise the deliberate decision stands.
