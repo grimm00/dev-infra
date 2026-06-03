@@ -75,9 +75,9 @@ This group implements **Plan B** (curated-merge strategy):
    ```bash
    mkdir -p admin/services/meta/features/skill-template-separation/decisions
    ```
-2. Copy the ADR file from the research worktree (use absolute paths to avoid ambiguity):
+2. Copy the ADR file from the research worktree (paths relative to this worktree; assumes the sibling research worktree at `../docs-skill-template-separation-research/` per the worktree naming convention in `AGENTS.md`):
    ```bash
-   cp /Users/cdwilson/Projects/dev-infra/worktrees/docs-skill-template-separation-research/\
+   cp ../docs-skill-template-separation-research/\
 admin/services/meta/features/skill-template-separation/decisions/adr-001-separation-model.md \
       admin/services/meta/features/skill-template-separation/decisions/
    ```
@@ -114,9 +114,9 @@ admin/services/meta/features/skill-template-separation/decisions/adr-001-separat
    ```bash
    mkdir -p admin/services/meta/features/skill-template-separation/planning/tasks
    ```
-2. Copy the entire planning tree from the research worktree:
+2. Copy the entire planning tree from the research worktree (same sibling-worktree assumption as Task 2):
    ```bash
-   RESEARCH_PLANNING="/Users/cdwilson/Projects/dev-infra/worktrees/docs-skill-template-separation-research/\
+   RESEARCH_PLANNING="../docs-skill-template-separation-research/\
 admin/services/meta/features/skill-template-separation/planning"
    cp "$RESEARCH_PLANNING/implementation-plan.md"     admin/services/meta/features/skill-template-separation/planning/
    cp "$RESEARCH_PLANNING/status-and-next-steps.md"   admin/services/meta/features/skill-template-separation/planning/

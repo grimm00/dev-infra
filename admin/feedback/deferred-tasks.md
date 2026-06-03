@@ -610,5 +610,17 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 **Date:** 2026-06-03
 **Status:** Sourcery overall comments triaged (no inline comments, no CRITICAL/HIGH)
 
-- **PR106-Overall-#1 (🟡 MEDIUM, 🟡 MEDIUM effort):** Hard-coded `/Users/cdwilson/...` absolute paths in completed task instructions (`admin/services/meta/features/skill-template-separation/planning/tasks/01-branch-setup-and-doc-curation.md` lines 80, 119). Same pattern exists in 4 other research/task docs under `admin/services/meta/features/` — fixing here in isolation would create inconsistency. Right intervention is a project-wide convention sweep about whether completed task/research docs should use generic paths or placeholder variables. Personal username in a public repo is the privacy/info-leak angle worth weighing.
+- ~~**PR106-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** Hard-coded `/Users/cdwilson/...` absolute paths in completed task instructions~~ — ✅ Fixed inline in PR #106. User override of initial defer; privacy/info-leak angle outweighed the consistency argument. Replaced with `../docs-skill-template-separation-research/...` relative paths. See follow-up below for the develop-side sweep.
+- **PR106-Overall-#1-followup (🟡 MEDIUM, 🟠 HIGH effort):** Repo-wide sweep of `/Users/cdwilson/...` absolute paths in the remaining **11 develop-side files** flagged when PR #106 was triaged. Contexts vary across files (debug logs, example outputs, executable commands, prose references) and may need different replacements per file. Affected files:
+  - `admin/services/template-generation/features/directory-selection/planning/fix/debugging.md`
+  - `admin/services/meta/features/worktree-feature-workflow/research/research-worktree-naming-conventions.md`
+  - `admin/services/meta/features/worktree-feature-workflow/research/research-context-switching-and-discovery.md`
+  - `admin/services/meta/features/work-prod-integration/research/research-local-registry-format.md`
+  - `admin/services/meta/features/terraform-style-project-management/research/research-registry-architecture.md`
+  - `admin/services/meta/explorations/project-model-definition/tier-1-core-registry.md`
+  - `admin/services/ai-workflow/features/command-distribution/planning/phase-1.md`
+  - `admin/services/ai-workflow/features/command-adaptation-template/planning/phase-document-enhancement-plan.md`
+  - `admin/planning/notes/reflections/reflection-workflow-simplification-research-2026-02-14.md`
+  - `admin/planning/ci/template-sync-drift-fix/phase-2.md`
+  - `admin/planning/notes/chat-log-2025-12-09-phase-3-pr-creation.md`
 - **PR106-Overall-#2 (🟢 LOW, 🟡 MEDIUM effort):** Sourcery suggests converting `../research/...` relative links in ADR-001 and `planning/implementation-plan.md` to GitHub permalinks to the `docs/skill-template-separation-research` branch, now that the branch is on origin. This is a *re-decision suggestion* — Strategy (c) was the explicit Group 1 Task 4 choice (recorded in `status-and-next-steps.md` under "Decisions Made"). Revisit only if reviewers actually get tripped up by the blockquote-noted broken links; otherwise the deliberate decision stands.
