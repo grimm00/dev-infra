@@ -144,8 +144,8 @@ PR #107 removed bundled `.cursor/commands/` and `.claude/skills/` from both temp
 
 ## ✅ Completion Criteria
 
-- [x] Manifest file removed or minimized to its remaining purpose
-- [x] Validation script removed or updated; `scripts/README.md` reflects the change
+- [x] Manifest file fully removed (no residual; full retirement per ADR-001 FR-BNDL-4)
+- [x] Validation script removed; `scripts/README.md` reflects the change
 - [x] CI workflows green without the dead steps
 
 ---

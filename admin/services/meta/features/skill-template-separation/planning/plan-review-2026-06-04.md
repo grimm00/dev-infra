@@ -39,7 +39,7 @@
 
 ## 🔄 Consistency Check
 
-- [x] `template-sync-manifest.txt` still lists 20+ removed `.cursor/commands/*` paths — Task 11–12 addresses
+- [x] `template-sync-manifest.txt` still lists 20+ removed `.cursor/commands/*` paths — Tasks 11–12 address
 - [x] `.github/workflows/test.yml` still runs `validate-template-sync.sh` — Task 14 addresses
 - [x] `tests/unit/validate-template-sync.bats` coupled to retired script — Task 13 addresses
 
