@@ -3,7 +3,7 @@
 **Purpose:** Learnings from dev-infra implementation  
 **Target:** Inform dev-infra template evolution and other projects  
 **Status:** ✅ Active  
-**Last Updated:** 2026-06-03
+**Last Updated:** 2026-06-04
 
 ---
 
@@ -28,7 +28,8 @@
 
 ### Learning Documents
 
-- **[Research Artifact Lifecycle](research-artifact-lifecycle-learnings.md)** - Discovery: research topic files are write-only artifacts for the author; reframe under consideration (tarball + digestible summary); gating questions before any /research schema change ⭐ **NEW**
+- **[Orchestrating from Develop & Chat-as-Agent](orchestrating-from-develop-and-chat-as-agent-learnings.md)** - IDE position has two jobs (workspace vs observation point); "develop in develop" pattern for orchestrating subagent dispatches; chat sessions are bounded-context agents structurally identical to dispatched subagents; handoff and dispatch are the same materialization-of-context pattern across different boundaries ⭐ **NEW**
+- **[Research Artifact Lifecycle](research-artifact-lifecycle-learnings.md)** - Discovery: research topic files are write-only artifacts for the author; reframe under consideration (tarball + digestible summary); gating questions before any /research schema change
 - **[Agentic Workflow Stage 3 — Pipeline Synthesis Gap](agentic-workflow-stage3-pipeline-synthesis-gap.md)** - Missing synthesis step in group-cycle pipeline; narrative/int-opp/reflection triggers; plan-review input reliability
 - **[Decision Interview Exercise](decision-interview-exercise-learnings.md)** - First real use of the decision interview pattern: what worked, what to improve, unexpected discoveries
 - **[Requirements and Design Prior Art](requirements-and-design-prior-art.md)** - Team engineering proposal that informed the design step discovery in agentic-workflow-modernization
@@ -55,18 +56,18 @@ This directory contains learnings from dev-infra development that can inform:
 
 ## 📊 Summary
 
-**Total Learning Documents:** 27  
+**Total Learning Documents:** 28  
 **Feature-Specific Learnings:** 9 features (22 phases + 5 fix batches + 1 release total)  
 **CI/CD Improvement Learnings:** 2 improvements  
 **Status:** ✅ Active
 
 **Recent Additions:**
-- **Research Artifact Lifecycle (2026-06-03)** - Research topic files are write-only artifacts for the author; reframe under consideration; gating questions before any /research schema change ⭐ **NEW**
+- **Orchestrating from Develop & Chat-as-Agent (2026-06-04)** - IDE position has two jobs (workspace vs observation point); "develop in develop" pattern for orchestrating subagent dispatches; handoff and dispatch as same materialization-of-context pattern at different boundaries ⭐ **NEW**
+- **Research Artifact Lifecycle (2026-06-03)** - Research topic files are write-only artifacts for the author; reframe under consideration; gating questions before any /research schema change
 - **Pipeline Synthesis Gap (2026-05-02)** - Missing synthesis step in group-cycle; learnings feed-forward for plan-review
 - **Decision Interview Exercise (2026-04-14)** - First use of the interview pattern for agentic-workflow-modernization
 - Requirements and Design Prior Art (2026-04-02) - Team proposal that informed design step discovery
-- Template Doc Infrastructure Learnings (2026-01-16) - Phase 1 Template Creation: ADR-driven structure, placeholder conventions
 
 ---
 
-**Last Updated:** 2026-06-03
+**Last Updated:** 2026-06-04
