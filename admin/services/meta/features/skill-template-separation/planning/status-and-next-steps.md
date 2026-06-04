@@ -7,13 +7,13 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 10/25 tasks complete
+**Overall:** 14/25 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Branch Setup & Doc Curation | ✅ Complete | 5/5 tasks | Merged PR #106 (2026-06-03) |
 | Template Cleanup | ✅ Complete | 5/5 tasks | Merged PR #107 (2026-06-03); 82 bundled files removed |
-| Template-Sync-Manifest Retirement | 🟠 In Progress | 0/4 tasks | Restores `develop` CI (`validate-template-sync` red post-#107) |
+| Template-Sync-Manifest Retirement | ✅ Complete | 4/4 tasks | PR pending; restores `develop` CI after merge |
 | expected_skills Manifest in Templates | 🔴 Not Started | 0/4 tasks | New `.dev-infra.yml` field |
 | proj-cli Validation | 🔴 Not Started | 0/4 tasks | Warn-not-error behavior |
 | Documentation & Supersession | 🔴 Not Started | 0/3 tasks | global-command-distribution superseded; AGENTS.md updated |
@@ -22,8 +22,9 @@
 
 ## 🚀 Next Steps
 
-1. Complete Group 3 PR (manifest + validator + CI step retirement) → merge to `develop` → expect Run Tests green.
-2. Continue group-by-group (Groups 4–6).
+1. Merge Group 3 PR → confirm Run Tests green on `develop`.
+2. Group 4: `expected_skills` manifest in templates.
+3. Continue group-by-group (Groups 5–6).
 
 ---
 
