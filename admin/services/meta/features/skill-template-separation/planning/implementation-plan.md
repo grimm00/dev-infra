@@ -80,10 +80,10 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 - [x] Task 10: Update template validation tests to confirm absence
 
 ### Template-Sync-Manifest Retirement
-- [ ] Task 11: Audit `scripts/template-sync-manifest.txt` for remaining valid entries
-- [ ] Task 12: Remove or repurpose the manifest file
-- [ ] Task 13: Remove or update `scripts/validate-template-sync.sh`
-- [ ] Task 14: Remove related CI workflow steps that consume the manifest
+- [x] Task 11: Audit `scripts/template-sync-manifest.txt` for remaining valid entries
+- [x] Task 12: Remove or repurpose the manifest file
+- [x] Task 13: Remove or update `scripts/validate-template-sync.sh`
+- [x] Task 14: Remove related CI workflow steps that consume the manifest
 
 ### expected_skills Manifest in Templates
 - [ ] Task 15: Define `expected_skills` field schema in `.dev-infra.yml`

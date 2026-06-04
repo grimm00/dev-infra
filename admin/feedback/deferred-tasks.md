@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2026-06-03
+**Last Updated:** 2026-06-04
 
 ---
 
@@ -10,11 +10,11 @@
 
 This document tracks all medium (🟡) and low (🟢) priority tasks identified during PR code reviews that have been assessed but deferred to future work. These are non-blocking improvements that can be addressed when time permits or as part of ongoing code quality improvements.
 
-**Total Tasks:** 59
+**Total Tasks:** 60
 
 - 🟠 **HIGH**: 1 task (deferred - edge case)
 - 🟡 **MEDIUM**: 29 tasks
-- 🟢 **LOW**: 22 tasks (1 fixed)
+- 🟢 **LOW**: 23 tasks (1 fixed)
 - 📋 **Workflow**: 1 task
 
 ---
@@ -624,3 +624,14 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
   - `admin/planning/ci/template-sync-drift-fix/phase-2.md`
   - `admin/planning/notes/chat-log-2025-12-09-phase-3-pr-creation.md`
 - **PR106-Overall-#2 (🟢 LOW, 🟡 MEDIUM effort):** Sourcery suggests converting `../research/...` relative links in ADR-001 and `planning/implementation-plan.md` to GitHub permalinks to the `docs/skill-template-separation-research` branch, now that the branch is on origin. This is a *re-decision suggestion* — Strategy (c) was the explicit Group 1 Task 4 choice (recorded in `status-and-next-steps.md` under "Decisions Made"). Revisit only if reviewers actually get tripped up by the blockquote-noted broken links; otherwise the deliberate decision stands.
+
+---
+
+## PR #108 Additions
+
+**Date:** 2026-06-04
+**Status:** Sourcery triaged (1 inline + 2 overall; 2 fixed inline, 1 deferred)
+
+- ~~**PR108-Inline-#1 (🟢 LOW, 🟢 LOW effort):** Plural agreement typo "Task 11–12 addresses" → "Tasks 11–12 address" in `plan-review-2026-06-04.md`~~ — ✅ Fixed inline.
+- ~~**PR108-Overall-#1 (🟢 LOW, 🟢 LOW effort):** Completion criteria in `tasks/03-template-sync-manifest-retirement.md` said "removed or minimized" but ADR-001 FR-BNDL-4 requires full retirement; language tightened to remove the partial-retention hedge~~ — ✅ Fixed inline.
+- **PR108-Overall-#2 (🟢 LOW, 🟡 MEDIUM effort):** Duplicate `**Last Updated:**` lines (top metadata block + trailing line) in `tasks/03-template-sync-manifest-retirement.md`. This is a *project-wide convention pattern* — the same duplication exists across all 6 task docs in this feature (`01-…md` through `06-…md`) and likely the broader template scaffold. Fixing in isolation here would create inconsistency. Right intervention is a convention discussion: pick one source of truth (top metadata vs trailing line), sweep all task docs in a separate chore PR.
