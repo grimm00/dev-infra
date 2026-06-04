@@ -17,7 +17,7 @@ PR #107 removed bundled `.cursor/commands/` and `.claude/skills/` from both temp
 
 ## 📝 Tasks
 
-- [ ] Task 11: Audit `scripts/template-sync-manifest.txt` for remaining valid entries
+- [x] Task 11: Audit `scripts/template-sync-manifest.txt` for remaining valid entries
 - [ ] Task 12: Remove or repurpose the manifest file
 - [ ] Task 13: Remove or update `scripts/validate-template-sync.sh`
 - [ ] Task 14: Remove related CI workflow steps that consume the manifest
@@ -47,6 +47,8 @@ PR #107 removed bundled `.cursor/commands/` and `.claude/skills/` from both temp
 
 - Audit confirms zero manifest paths exist under `templates/`
 - Decision recorded: full retirement (delete manifest), not minimal residual manifest
+
+**Audit result (2026-06-04):** 20 `.cursor/commands/*` paths absent in both templates (removed PR #107). Only `.sourcery.yaml` exists and is identical — retired with whole mechanism per ADR-001.
 
 ---
 
