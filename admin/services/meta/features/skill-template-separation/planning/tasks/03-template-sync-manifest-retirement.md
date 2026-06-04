@@ -18,7 +18,7 @@ PR #107 removed bundled `.cursor/commands/` and `.claude/skills/` from both temp
 ## 📝 Tasks
 
 - [x] Task 11: Audit `scripts/template-sync-manifest.txt` for remaining valid entries
-- [ ] Task 12: Remove or repurpose the manifest file
+- [x] Task 12: Remove or repurpose the manifest file
 - [ ] Task 13: Remove or update `scripts/validate-template-sync.sh`
 - [ ] Task 14: Remove related CI workflow steps that consume the manifest
 
