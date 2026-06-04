@@ -31,7 +31,7 @@ tasks_files:
 
 **Status:** 🟠 In Progress
 **Created:** 2026-05-22
-**Last Updated:** 2026-06-03
+**Last Updated:** 2026-06-04
 **Source:** [decisions/adr-001-separation-model.md](../decisions/adr-001-separation-model.md)
 
 ---
@@ -106,13 +106,13 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 
 ## ✅ Definition of Done
 
-- [ ] All 25 tasks complete
-- [ ] CI passes on the new feature branch
-- [ ] Generated project (via `./scripts/new-project.sh`) contains no bundled skills/commands/agents
-- [ ] `proj-cli` setup warns (not errors) when expected skills are missing
-- [ ] `template-sync-manifest.txt` and validator removed; CI green without them
-- [ ] ADR-001 status moved from 🔴 Proposed → ✅ Accepted (acceptance recorded in the ADR file)
-- [ ] PR to `develop` carries only ADR-001 + planning tree (no research, no exploration, no other ADRs)
+- [ ] All 25 tasks complete (14/25 done; Groups 1–3 ✅)
+- [x] CI passes on the new feature branch (demonstrated on PRs #106, #107, #108)
+- [ ] Generated project (via `./scripts/new-project.sh`) contains no bundled skills/commands/agents — pending Group 4 + 5 validation work
+- [ ] `proj-cli` setup warns (not errors) when expected skills are missing — pending Group 5
+- [x] `template-sync-manifest.txt` and validator removed; CI green without them (PR #108, 2026-06-04)
+- [ ] ADR-001 status moved from 🔴 Proposed → ✅ Accepted (acceptance recorded in the ADR file) — pending Group 6
+- [x] PR to `develop` carries only ADR-001 + planning tree (no research, no exploration, no other ADRs) — done by PR #106 (Group 1)
 
 ---
 
