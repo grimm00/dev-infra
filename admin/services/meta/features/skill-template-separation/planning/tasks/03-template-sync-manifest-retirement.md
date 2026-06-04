@@ -2,7 +2,7 @@
 
 **Feature:** Skill-Template Separation (ADR-001)
 **Group:** Template-Sync-Manifest Retirement
-**Status:** ✅ Expanded
+**Status:** ✅ Complete
 **Last Updated:** 2026-06-04
 
 ---
@@ -19,8 +19,8 @@ PR #107 removed bundled `.cursor/commands/` and `.claude/skills/` from both temp
 
 - [x] Task 11: Audit `scripts/template-sync-manifest.txt` for remaining valid entries
 - [x] Task 12: Remove or repurpose the manifest file
-- [ ] Task 13: Remove or update `scripts/validate-template-sync.sh`
-- [ ] Task 14: Remove related CI workflow steps that consume the manifest
+- [x] Task 13: Remove or update `scripts/validate-template-sync.sh`
+- [x] Task 14: Remove related CI workflow steps that consume the manifest
 
 ### Task 11: Audit `scripts/template-sync-manifest.txt` for remaining valid entries
 
@@ -144,9 +144,9 @@ PR #107 removed bundled `.cursor/commands/` and `.claude/skills/` from both temp
 
 ## ✅ Completion Criteria
 
-- [ ] Manifest file removed or minimized to its remaining purpose
-- [ ] Validation script removed or updated; `scripts/README.md` reflects the change
-- [ ] CI workflows green without the dead steps
+- [x] Manifest file removed or minimized to its remaining purpose
+- [x] Validation script removed or updated; `scripts/README.md` reflects the change
+- [x] CI workflows green without the dead steps
 
 ---
 
