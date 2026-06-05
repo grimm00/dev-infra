@@ -17,6 +17,18 @@ By the end of this project, you will understand:
 
 ---
 
+## 📄 Project Metadata (`.dev-infra.yml`)
+
+This project includes a **`.dev-infra.yml`** file at the repository root. It records the dev-infra template type, generation version, and an **`expected_skills`** manifest — the workflow skills this template assumes you have installed globally.
+
+- **Not a bundle:** Templates no longer ship skill or command copies; the manifest declares expectations only.
+- **Validation:** `proj-cli` setup will **warn** (not error) when listed skills are missing and point you to the external skill corpus.
+- **Reference:** See the dev-infra [.dev-infra.yml schema](https://github.com/grimm00/dev-infra/blob/develop/docs/DEV-INFRA-YML.md) for field definitions and identifier conventions.
+
+Projects work without skills installed — documentation and hub READMEs orient you when skills are absent.
+
+---
+
 ## 🔍 Exploration/Research/Decision Workflows
 
 This project supports structured workflows for exploring ideas, conducting research, and making architectural decisions before transitioning to feature planning.

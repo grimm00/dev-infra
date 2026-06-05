@@ -2,7 +2,7 @@
 
 **Purpose:** Documentation of standard files included in project templates  
 **Status:** ✅ Complete  
-**Last Updated:** 2025-01-27
+**Last Updated:** 2026-06-05
 
 ---
 
@@ -15,6 +15,24 @@ This document describes the standard files included in each project template and
 ## 📁 Standard Project Template Files
 
 ### Configuration Files
+
+#### `.dev-infra.yml`
+
+**Purpose:** Dev-infra project metadata and skill expectation manifest (ADR-001)
+
+**Includes:**
+
+- `template` — which dev-infra template generated the project
+- `version` — dev-infra version at generation time
+- `created` — generation date (when populated)
+- `expected_skills` — bare skill identifiers the template workflow assumes (installed globally, not bundled)
+
+**Customization:**
+
+- Adjust `expected_skills` if your team uses a subset of the workflow skill corpus
+- Do not treat the list as a bundle — skills install from the external corpus product
+
+**Reference:** [.dev-infra.yml schema](DEV-INFRA-YML.md)
 
 #### `.gitignore`
 
@@ -103,6 +121,12 @@ This document describes the standard files included in each project template and
 ## 📚 Learning Project Template Files
 
 ### Configuration Files
+
+#### `.dev-infra.yml`
+
+**Purpose:** Same as standard-project — dev-infra metadata and `expected_skills` manifest (identical skill list; `template: learning-project`)
+
+**Reference:** [.dev-infra.yml schema](DEV-INFRA-YML.md)
 
 #### `.gitignore`
 
