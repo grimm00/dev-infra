@@ -1,4 +1,4 @@
-# Dev-infra project metadata — see docs/DEV-INFRA-YML.md in the dev-infra repo
+# Dev-infra project metadata — canonical inventory: docs/DEV-INFRA-YML.md (keep lists in sync)
 # Placeholders are filled at project generation time.
 
 template: standard-project

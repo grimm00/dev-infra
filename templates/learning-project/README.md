@@ -23,7 +23,7 @@ This project includes a **`.dev-infra.yml`** file at the repository root. It rec
 
 - **Not a bundle:** Templates no longer ship skill or command copies; the manifest declares expectations only.
 - **Validation:** `proj-cli` setup will **warn** (not error) when listed skills are missing and point you to the external skill corpus.
-- **Reference:** See the dev-infra [.dev-infra.yml schema](https://github.com/grimm00/dev-infra/blob/develop/docs/DEV-INFRA-YML.md) for field definitions and identifier conventions.
+- **Reference:** Schema and canonical skill inventory live in the dev-infra repo [`docs/DEV-INFRA-YML.md`](https://github.com/grimm00/dev-infra/blob/develop/docs/DEV-INFRA-YML.md) (generated projects link out; dev-infra maintainers edit the doc + template copies together).
 
 Projects work without skills installed — documentation and hub READMEs orient you when skills are absent.
 
