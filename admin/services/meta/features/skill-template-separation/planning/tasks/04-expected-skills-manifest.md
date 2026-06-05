@@ -2,7 +2,7 @@
 
 **Feature:** Skill-Template Separation (ADR-001)
 **Group:** expected_skills Manifest in Templates
-**Status:** ✅ Expanded
+**Status:** ✅ Complete
 **Last Updated:** 2026-06-05
 
 ---
@@ -19,10 +19,10 @@ ADR-001 FR-BNDL-2: `.dev-infra.yml` declares skill expectations; templates carry
 
 ## 📝 Tasks
 
-- [ ] Task 15: Define `expected_skills` field schema in `.dev-infra.yml`
-- [ ] Task 16: Populate `expected_skills` in `templates/standard-project/.dev-infra.yml`
-- [ ] Task 17: Populate `expected_skills` in `templates/learning-project/.dev-infra.yml`
-- [ ] Task 18: Document the field in template README and `.dev-infra.yml` reference docs
+- [x] Task 15: Define `expected_skills` field schema in `.dev-infra.yml`
+- [x] Task 16: Populate `expected_skills` in `templates/standard-project/.dev-infra.yml`
+- [x] Task 17: Populate `expected_skills` in `templates/learning-project/.dev-infra.yml`
+- [x] Task 18: Document the field in template README and `.dev-infra.yml` reference docs
 
 ### Task 15: Define `expected_skills` field schema in `.dev-infra.yml`
 
@@ -139,9 +139,9 @@ ADR-001 FR-BNDL-2: `.dev-infra.yml` declares skill expectations; templates carry
 
 ## ✅ Completion Criteria
 
-- [ ] Schema updated and documented
-- [ ] Both templates' `.dev-infra.yml` files contain the field with realistic entries
-- [ ] Reference docs updated; cross-linked from template READMEs
+- [x] Schema updated and documented
+- [x] Both templates' `.dev-infra.yml` files contain the field with realistic entries
+- [x] Reference docs updated; cross-linked from template READMEs
 
 ---
 
@@ -149,10 +149,10 @@ ADR-001 FR-BNDL-2: `.dev-infra.yml` declares skill expectations; templates carry
 
 | Task | Status | Notes |
 |------|--------|-------|
-| Task 15: Schema | 🔴 Not Started | |
-| Task 16: standard-project | 🔴 Not Started | |
-| Task 17: learning-project | 🔴 Not Started | |
-| Task 18: Documentation | 🔴 Not Started | |
+| Task 15: Schema | ✅ Complete | docs/DEV-INFRA-YML.md |
+| Task 16: standard-project | ✅ Complete | 13 bare identifiers |
+| Task 17: learning-project | ✅ Complete | mirrors standard list |
+| Task 18: Documentation | ✅ Complete | READMEs + TEMPLATE-FILES |
 
 ---
 

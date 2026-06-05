@@ -31,7 +31,7 @@ tasks_files:
 
 **Status:** 🟠 In Progress
 **Created:** 2026-05-22
-**Last Updated:** 2026-06-04
+**Last Updated:** 2026-06-05
 **Source:** [decisions/adr-001-separation-model.md](../decisions/adr-001-separation-model.md)
 
 ---
@@ -86,10 +86,10 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 - [x] Task 14: Remove related CI workflow steps that consume the manifest
 
 ### expected_skills Manifest in Templates
-- [ ] Task 15: Define `expected_skills` field schema in `.dev-infra.yml`
-- [ ] Task 16: Populate `expected_skills` in `templates/standard-project/.dev-infra.yml`
-- [ ] Task 17: Populate `expected_skills` in `templates/learning-project/.dev-infra.yml`
-- [ ] Task 18: Document the field in template README and `.dev-infra.yml` reference docs
+- [x] Task 15: Define `expected_skills` field schema in `.dev-infra.yml`
+- [x] Task 16: Populate `expected_skills` in `templates/standard-project/.dev-infra.yml`
+- [x] Task 17: Populate `expected_skills` in `templates/learning-project/.dev-infra.yml`
+- [x] Task 18: Document the field in template README and `.dev-infra.yml` reference docs
 
 ### proj-cli Validation
 - [ ] Task 19: Design `proj-cli` `expected_skills` validation step (warn-not-error)
@@ -106,7 +106,7 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 
 ## ✅ Definition of Done
 
-- [ ] All 25 tasks complete (14/25 done; Groups 1–3 ✅)
+- [ ] All 25 tasks complete (18/25 done; Groups 1–4 ✅)
 - [x] CI passes on the new feature branch (demonstrated on PRs #106, #107, #108)
 - [ ] Generated project (via `./scripts/new-project.sh`) contains no bundled skills/commands/agents — pending Group 4 + 5 validation work
 - [ ] `proj-cli` setup warns (not errors) when expected skills are missing — pending Group 5
