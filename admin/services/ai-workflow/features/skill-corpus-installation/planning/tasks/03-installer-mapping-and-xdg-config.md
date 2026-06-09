@@ -2,7 +2,8 @@
 
 **Feature:** Skill Corpus Installation (ADR-002)
 **Group:** Installer Mapping & XDG Config
-**Status:** 🟠 In Progress (Tasks 8–9 ✅; Task 10 — config-vs-corpus doc — remains)
+**Status:** ✅ Complete
+**Completed:** 2026-06-09
 **Last Updated:** 2026-06-09
 
 ---
@@ -130,7 +131,7 @@ config, corpus is a project; the installer bridges them.
 
 - [x] `installer.yaml` schema defined + documented (multi-source, per-item, collision=error, maps from `corpus/`) — `agentic-ocean/docs/installer-schema.md` + `installer.example.yaml` (`aec198d`)
 - [x] `~/.config/agentic-ocean/installer.yaml` established with both live sources (validated; roots resolve); `repos/` slot reserved; lookup order documented in the schema doc
-- [ ] Config-vs-corpus separation documented + cross-linked
+- [x] Config-vs-corpus separation documented + cross-linked — `agentic-ocean/docs/config-vs-corpus.md` (PR #1 → develop)
 
 ---
 
