@@ -7,12 +7,12 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 6/21 tasks complete
+**Overall:** 7/21 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Symlink Loading Spike | ✅ Complete | 3/3 tasks | C-INST-1 **GO** (Cursor 3.7.19: discovery + live-edit verified). `~/.claude/` deferred to int-opp. See `spike-c-inst-1-findings.md`. |
-| Corpus Repository Structure | 🟠 In Progress | 3/4 tasks | Tasks 4–6 ✅ (classify + bootstrap + trim/migrate-split; core 14/20/2, personal 5/1/1; committed local-only). **Next: Task 7** README/versioning/private |
+| Corpus Repository Structure | ✅ Complete | 4/4 tasks | Two repos live: [agentic-ocean](https://github.com/grimm00/agentic-ocean) (public) + [agentic-ocean-personal](https://github.com/grimm00/agentic-ocean-personal) (private). Classified, bootstrapped (nightly), trimmed, migrated-split, READMEs, pushed. |
 | Installer Mapping & XDG Config | 🔴 Not Started | 0/3 tasks | `installer.yaml` **multi-source** + `~/.config/agentic-ocean/` |
 | Installer Script | 🔴 Not Started | 0/5 tasks | `install.sh` — idempotent, reversible, Bats-tested; + core→personal lint |
 | Source Install & Multi-Machine (Tier 2) | 🔴 Not Started | 0/3 tasks | two-repo `clone → install` (private auth); retire proj-cli placeholder |
@@ -24,7 +24,10 @@
 
 1. ✅ Group 1 (Symlink Loading Spike) complete (2026-06-09) — C-INST-1 resolved GO; symlink mode is the primary installer mechanism.
 2. ✅ Plan re-partitioned (2026-06-09, 19→21 tasks) per `plan-review-2026-06-09.md` + ADR-001 — Groups 2–5 now reflect two repos, proj-cli-nightly bootstrap, multi-source mapping, the core→personal lint, and private-repo clone.
-3. ✅ Group 2 (Corpus Repository Structure) **expanded** (2026-06-09) — Tasks 4–7 carry Purpose/Steps/Files/Acceptance. **Execute next.** Note: Group 2 produces artifacts in the **external corpus repo(s)**, not dev-infra — execution drives both repos from this session; planning/record updates stay docs-direct here.
+3. ✅ Group 2 (Corpus Repository Structure) **complete** (2026-06-09) — both repos exist, populated, and pushed (core public / personal private).
+4. **Next: Group 3** (Installer Mapping & XDG Config) — expand, then build the multi-source `installer.yaml` + `~/.config/agentic-ocean/`. Group 3 onward authors files **in the corpus repo** (`agentic-ocean/install.sh`, etc.), not dev-infra.
+
+**Minor follow-up (Task 7 leftover):** the personal repo's `.dev-infra.yml` still lists the 13 *core* `expected_skills` (template default) and `[DEV_INFRA_VERSION]`/`[CREATED_DATE]` placeholders are unsubstituted in both — vestigial for a corpus repo; clean up opportunistically.
 4. The symlink-vs-copy decision is settled (symlink primary) — Groups 3–4 assume symlink mode, copy-mode is the documented contingency.
 
 **Deferred (not v1):** `~/.claude/` symlink verification → `admin/planning/opportunities/internal/dev-infra/improvements/claude-path-symlink-verification.md`.

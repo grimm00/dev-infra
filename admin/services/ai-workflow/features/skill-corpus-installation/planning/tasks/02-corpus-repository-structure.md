@@ -2,7 +2,8 @@
 
 **Feature:** Skill Corpus Installation (ADR-002)
 **Group:** Corpus Repository Structure
-**Status:** 🟠 In Progress (Tasks 4–6 ✅; Task 7 — README/versioning/private — remains)
+**Status:** ✅ Complete
+**Completed:** 2026-06-09
 **Last Updated:** 2026-06-09
 
 ---
@@ -140,7 +141,7 @@ per the Task 4 classification, making it tracked source.
 - [x] Classification table produced; `update-pr-description` in core; no core→personal deps — `corpus-classification.md`
 - [x] Both repos bootstrapped via proj-cli nightly; SHAs pinned/recorded — `corpus-bootstrap-record.md` (dev-infra `88fc037` + proj-cli `bec1d54`)
 - [x] Inventory migrated + split correctly; counts reconcile (core 14/20/2, personal 5/1/1; foobar excluded); `~/.cursor/` originals intact; core→personal invariant verified on disk. Initial commits: core `20bd7e0`, personal `3b436fe`
-- [ ] Per-repo README + versioning; personal repo private
+- [x] Per-repo README + versioning; personal repo private — remotes: [agentic-ocean](https://github.com/grimm00/agentic-ocean) (PUBLIC) + [agentic-ocean-personal](https://github.com/grimm00/agentic-ocean-personal) (PRIVATE), pushed
 
 ---
 

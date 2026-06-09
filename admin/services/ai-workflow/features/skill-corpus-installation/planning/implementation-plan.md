@@ -72,7 +72,7 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 - [x] Task 4: Define layout + names for **both** core (`agentic-ocean`) and personal (`agentic-ocean-personal`) repos; classify the inventory via the ADR-001 boundary test
 - [x] Task 5: Bootstrap both repos via `proj-cli` on **develop/nightly**; pin the dev-infra + proj-cli develop SHAs used
 - [x] Task 6: Migrate + **split** the global corpus (core = general/durable or depended-on-by-core incl. `update-pr-description`; personal = `apprentice-*`, `ticket-*`, `capture-discussion`)
-- [ ] Task 7: Per-repo README + versioning; mark the personal repo private
+- [x] Task 7: Per-repo README + versioning; mark the personal repo private
 
 ### Installer Mapping & XDG Config
 - [ ] Task 8: Define the `installer.yaml` **multi-source** mapping schema (two source repos → editor paths)
