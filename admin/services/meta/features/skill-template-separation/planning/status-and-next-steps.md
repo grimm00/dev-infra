@@ -15,15 +15,14 @@
 | Template Cleanup | ✅ Complete | 5/5 tasks | Merged PR #107 (2026-06-03); 82 bundled files removed |
 | Template-Sync-Manifest Retirement | ✅ Complete | 4/4 tasks | Merged PR #108 (2026-06-04); `develop` Run Tests confirmed green post-merge |
 | expected_skills Manifest in Templates | ✅ Complete | 4/4 tasks | Merged PR #109 (2026-06-09); `.dev-infra.yml` + `docs/DEV-INFRA-YML.md` |
-| proj-cli Validation | ✅ Complete | 4/4 tasks | proj-cli `skills.py` + dev-infra graceful-degradation Bats |
+| proj-cli Validation | ✅ Complete | 4/4 tasks | Merged PR #110 (2026-06-09); proj-cli `skills.py` + dev-infra graceful-degradation Bats |
 | Documentation & Supersession | 🔴 Not Started | 0/3 tasks | global-command-distribution superseded; AGENTS.md updated |
 
 ---
 
 ## 🚀 Next Steps
 
-1. **Group 6:** Documentation & supersession (mark `global-command-distribution` superseded, update AGENTS.md, cross-link from four-arm-architecture).
-2. **Companion:** Merge proj-cli branch `feat/skill-template-separation-expected-skills-validation` (Tasks 20–21 code).
+1. **Group 6:** Documentation & supersession (mark `global-command-distribution` superseded, update AGENTS.md, cross-link from four-arm-architecture, accept ADR-001).
 
 ---
 
@@ -43,6 +42,7 @@
 - **Group 3 merge:** PR #108 retired `template-sync-manifest.txt`, `validate-template-sync.sh`, dedicated Bats suite, and the CI workflow step that invoked them (2026-06-04). `develop` Run Tests confirmed green post-merge — Group 2's admin override is now resolved.
 - **Group 4 identifier convention (Task 15):** Bare skill directory names (not namespaced) for `expected_skills` v1.
 - **Group 4 merge:** PR #109 landed `expected_skills` manifest in both templates, `docs/DEV-INFRA-YML.md`, and template README / `TEMPLATE-FILES` cross-links (2026-06-09).
+- **Group 5 merge:** PR #110 landed proj-cli `expected_skills` validation design, graceful-degradation Bats, and `docs/DEV-INFRA-YML.md` behavioral phrasing fix (2026-06-09). Sourcery `PR110-Overall-#1` (Bats string coupling) deferred; `PR110-Overall-#2` fixed inline.
 
 ## 📋 Deferred
 

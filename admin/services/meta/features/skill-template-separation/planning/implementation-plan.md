@@ -95,7 +95,7 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 - [x] Task 19: Design `proj-cli` `expected_skills` validation step (warn-not-error)
 - [x] Task 20: Implement validation logic in `proj-cli` setup flow
 - [x] Task 21: Add install-guidance message text pointing to the corpus
-- [x] Task 22: Test graceful degradation (generated project works without skills installed)
+- [x] Task 22: Test graceful degradation (generated project works without skills installed) — PR #110 (2026-06-09)
 
 ### Documentation & Supersession
 - [ ] Task 23: Mark `global-command-distribution` feature README as superseded by ADR-001
