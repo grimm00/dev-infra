@@ -7,11 +7,11 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 0/19 tasks complete
+**Overall:** 1/19 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Symlink Loading Spike | 🔴 Not Started | 0/3 tasks | C-INST-1 — verify-before-build; go/no-go on symlinks |
+| Symlink Loading Spike | 🟠 In Progress | 1/3 tasks | Task 1 fixture built (`~/.cursor/skills/spike-probe`); Task 2 needs live observation |
 | Corpus Repository Structure | 🔴 Not Started | 0/3 tasks | Establish corpus repo; migrate global corpus |
 | Installer Mapping & XDG Config | 🔴 Not Started | 0/3 tasks | `installer.yaml` + `~/.config/ai-workflow/` |
 | Installer Script | 🔴 Not Started | 0/4 tasks | `install.sh` — idempotent, reversible, Bats-tested |
