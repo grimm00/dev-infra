@@ -655,3 +655,13 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 - ~~**PR110-Overall-#2 (🟢 LOW, 🟢 LOW effort):** `docs/DEV-INFRA-YML.md` hard-coded the implementation path `proj-cli src/proj/skills.py`~~ — ✅ Fixed inline. Replaced with behavioral phrasing ("proj-cli's setup flow") so the doc doesn't break when proj-cli internals move.
 - **PR110-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** The graceful-degradation Bats suite (`tests/unit/expected-skills-graceful-degradation.bats`) asserts on specific strings — `grep 'explore'` against the manifest and `grep -i 'without skills'` against the generated README — which couples the tests to specific manifest entries and README wording. Sourcery suggests asserting more stable invariants (`expected_skills` present with ≥1 entry; an orientation section exists). **Deferred:** loosening the assertions is a test-design tradeoff — the specific-string checks also intentionally verify a known skill and the graceful-degradation guidance actually ship. Worth a deliberate test-robustness pass rather than a mid-validation rewrite.
+
+---
+
+## PR #112 Additions
+
+**Date:** 2026-06-09
+**Status:** Retro-validated post-merge (docs-only; 2 overall, 1 fixed, 1 deferred)
+
+- ~~**PR112-Overall-#2 (🟢 LOW, 🟢 LOW effort):** int-opp didn't state the concrete rule change crisply~~ — ✅ Fixed. Added a one-line rule to `feature-work-bypassed-pr-via-docs-allowance.md`.
+- **PR112-Overall-#1 (🟢 LOW, 🟡 MEDIUM effort):** Duplicate `Last Updated` (top metadata + trailing line) in the int-opp doc. **Deferred — same project-wide convention issue as `PR108-Overall-#2`** (the top+trailing `Last Updated` pattern across many docs). Roll into that convention sweep; don't fix in isolation.

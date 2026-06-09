@@ -49,6 +49,9 @@ Related: the external corpus repos (`agentic-ocean`) also received commits strai
 
 ## Proposed Improvements
 
+> **The rule, in one line:** *direct-to-develop is for one-off doc fixes; a multi-group **feature** — even a docs-only one — runs on a branch and lands via PR.*
+
+
 1. **Clarify the docs-direct allowance.** State in AGENTS.md (and `/task`'s docs-only
    detection) that direct-to-develop is for **one-off doc fixes**, *not* for running a
    multi-group **feature's** planning tree. A feature is branch-and-PR even when its
