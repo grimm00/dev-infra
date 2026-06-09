@@ -31,7 +31,7 @@ tasks_files:
 
 **Status:** 🟠 In Progress
 **Created:** 2026-05-22
-**Last Updated:** 2026-06-05
+**Last Updated:** 2026-06-09
 **Source:** [decisions/adr-001-separation-model.md](../decisions/adr-001-separation-model.md)
 
 ---
@@ -108,7 +108,7 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 
 - [ ] All 25 tasks complete (18/25 done; Groups 1–4 ✅)
 - [x] CI passes on the new feature branch (demonstrated on PRs #106, #107, #108)
-- [ ] Generated project (via `./scripts/new-project.sh`) contains no bundled skills/commands/agents — pending Group 4 + 5 validation work
+- [x] Generated project (via `./scripts/new-project.sh`) contains no bundled skills/commands/agents — manifest in `.dev-infra.yml` (PR #109); Group 5 adds proj-cli warn-not-error validation
 - [ ] `proj-cli` setup warns (not errors) when expected skills are missing — pending Group 5
 - [x] `template-sync-manifest.txt` and validator removed; CI green without them (PR #108, 2026-06-04)
 - [ ] ADR-001 status moved from 🔴 Proposed → ✅ Accepted (acceptance recorded in the ADR file) — pending Group 6
@@ -129,4 +129,4 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 
 ---
 
-**Last Updated:** 2026-05-22
+**Last Updated:** 2026-06-09
