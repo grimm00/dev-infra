@@ -51,20 +51,23 @@ This boundary matters: the installer maps **only** the authored corpus into edit
 
 ## Proposed repo shape (from ADR-002)
 
-- **Name:** `ai-workflow` (ADR-002's working name)
-- **Location:** a normal project dir, e.g. `~/Projects/ai-workflow/` (ADR-002 §Decision)
+- **Name:** `agentic-ocean` (the **core** repo; renamed from ADR-002's `ai-workflow` working name, 2026-06-09)
+- **Location:** a normal project dir, e.g. `~/Projects/agentic-ocean/` (ADR-002 §Decision)
 - **Layout:**
   ```
-  ai-workflow/
-  ├── skills/        # the 19 authored skills
-  ├── commands/      # the 22 commands
-  ├── agents/        # the agent definitions
+  agentic-ocean/
+  ├── skills/        # the core skills (14)
+  ├── commands/      # the core commands (20)
+  ├── agents/        # the core agent definitions (2)
   ├── install.sh     # self-contained installer (Group 4)
   └── README.md      # corpus product doc + versioning
   ```
 - **Config (separate, XDG):** `~/.config/ai-workflow/` holds `installer.yaml` (the
   editor-path → corpus-subdir mapping) and later `repos/` profiles (ADR-003). Config is
-  config; corpus is a project (ADR-002 Theme 10).
+  config; corpus is a project (ADR-002 Theme 10). **Note:** the config namespace is still
+  `ai-workflow` — it's the shared **product/family** namespace for *both* repos, and
+  `agentic-ocean` was named as the **core repo only** (2026-06-09). Renaming the family
+  namespace is a separate, deferred decision (see open question 2).
 - **Versioning:** independent of dev-infra (ADR-001) — the corpus releases on its own
   cadence.
 - **Install mode:** symlink farm (C-INST-1 resolved GO); copy-mode is the documented
@@ -92,13 +95,15 @@ the code ships in the corpus repo.
 
 1. ~~**Personal vs shared skills:** all authored skills vs core/personal split?~~
    **RESOLVED** by [ADR-001: Corpus Repository Split Model](../decisions/adr-001-corpus-repo-split-model.md)
-   — **two repos**: core (`ai-workflow`, shareable) + personal (`ai-workflow-personal`,
+   — **two repos**: core (`agentic-ocean`, shareable) + personal (`agentic-ocean-personal`,
    private). A skill is core if general-purpose/durable **or** depended-on by a core
    artifact; otherwise personal. `update-pr-description` is **core** (dependency-forced
    via `group-cycle.agent`); `apprentice-*` / `ticket-*` / `capture-discussion` are
    personal. Invariant: no core→personal dependencies.
-2. **Repo name/location final call:** `ai-workflow` at `~/Projects/ai-workflow/` per
-   ADR-002, or something else?
+2. **Repo + family naming:** core repo name **RESOLVED** (2026-06-09) → `agentic-ocean`
+   (personal → `agentic-ocean-personal`). **Still open:** the shared **family / config
+   namespace** is currently `~/.config/ai-workflow/` — `agentic-ocean` was scoped to the
+   core repo only, so whether the family namespace also renames (and to what) is deferred.
 3. **`research-orchestrator/`** is a directory under `agents/` (not a single `.agent.md`)
    — confirm the agents layout handles both forms.
 4. **Migration mechanics:** move (git mv from nowhere — they're untracked) vs copy then

@@ -33,7 +33,7 @@ generating anything, so Tasks 5–6 are mechanical.
 
 **Steps:**
 
-1. Repo names: **core = `ai-workflow`**, **personal = `ai-workflow-personal`** (confirm or override).
+1. Repo names: **core = `agentic-ocean`**, **personal = `agentic-ocean-personal`** (confirm or override).
 2. Layout for each: `skills/`, `commands/`, `agents/` (+ `install.sh` lands in core at Group 4).
 3. Apply the ADR-001 boundary test to every inventory item; produce a **classification table** (each skill/command/agent → core | personal + reason). Anchor cases:
    - `update-pr-description` → **core** (depended on by `group-cycle.agent`).
@@ -55,14 +55,14 @@ generating anything, so Tasks 5–6 are mechanical.
 
 ### Task 5: Bootstrap both repos via proj-cli (develop/nightly)
 
-**Purpose:** Generate `ai-workflow` and `ai-workflow-personal` as proj-cli-generated
+**Purpose:** Generate `agentic-ocean` and `agentic-ocean-personal` as proj-cli-generated
 projects using the unreleased template + validation, reproducibly.
 
 **Steps:**
 
 1. Verify proj-cli is on **develop** (carries `expected_skills` validation, #31) and dev-infra templates are at develop. Record both **commit SHAs** (the "nightly pin").
-2. Generate the **core** repo: `proj create` (or the repo's documented invocation) for `ai-workflow` at its chosen location (e.g. `~/Projects/ai-workflow/`).
-3. Generate the **personal** repo: same for `ai-workflow-personal`.
+2. Generate the **core** repo: `proj create` (or the repo's documented invocation) for `agentic-ocean` at its chosen location (e.g. `~/Projects/agentic-ocean/`).
+3. Generate the **personal** repo: same for `agentic-ocean-personal`.
 4. Confirm each generated project's structure (`admin/`, `docs/maintainers/`, CI, `.dev-infra.yml`) and that generation succeeded with the expected_skills validation behaving as warn-not-error.
 5. Note: corpus repos may be over-scaffolded vs a flat skills collection — capture any structure to trim as a follow-up rather than fighting the generator now.
 
@@ -86,7 +86,7 @@ per the Task 4 classification, making it tracked source.
 
 **Steps:**
 
-1. Copy core-classified `skills/ commands/ agents/` from `~/.cursor/` into `ai-workflow/`; copy personal-classified items into `ai-workflow-personal/`.
+1. Copy core-classified `skills/ commands/ agents/` from `~/.cursor/` into `agentic-ocean/`; copy personal-classified items into `agentic-ocean-personal/`.
 2. Exclude the non-corpus dirs (`~/.cursor/skills-cursor/` built-ins, Claude plugins). The empty `~/.claude/skills/` is a no-op — drop it from any migration script.
 3. Verify counts reconcile against the Task 4 classification (no item dropped or duplicated).
 4. Re-run the dependency sweep on the *materialized* repos: confirm no core file references a personal-only path.

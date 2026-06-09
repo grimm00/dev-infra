@@ -12,7 +12,7 @@ decisions here concern how the corpus repo(s) are organized.
 
 | ADR | Title | Status | Summary |
 |-----|-------|--------|---------|
-| [001](adr-001-corpus-repo-split-model.md) | Corpus Repository Split Model (Core + Personal) | ✅ Accepted | Two repos — core (`ai-workflow`, shareable) + personal (`ai-workflow-personal`, private). Boundary test = general-purpose/durable **or** depended-on-by-core. Invariant: no core→personal deps. `update-pr-description` is core (dependency-forced). Graduation = `git mv` + reinstall. |
+| [001](adr-001-corpus-repo-split-model.md) | Corpus Repository Split Model (Core + Personal) | ✅ Accepted | Two repos — core (`agentic-ocean`, shareable) + personal (`agentic-ocean-personal`, private). Boundary test = general-purpose/durable **or** depended-on-by-core. Invariant: no core→personal deps. `update-pr-description` is core (dependency-forced). Graduation = `git mv` + reinstall. |
 
 ---
 

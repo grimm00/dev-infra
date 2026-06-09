@@ -17,7 +17,7 @@ With the corpus living in its own repo (ADR-001), skills need a mechanism to app
 
 Adopt a **symlink farm** (GNU Stow pattern) as the installation mechanism:
 
-1. **Corpus** lives at a normal project directory (e.g., `~/Projects/ai-workflow/`)
+1. **Corpus** lives at a normal project directory (e.g., `~/Projects/agentic-ocean/`)
 2. **Config** (installer mapping, per-repo profiles) lives at `~/.config/ai-workflow/`
 3. **Installer** reads mapping from config, creates symlinks from editor paths → corpus
 4. **Three-tier distribution:**

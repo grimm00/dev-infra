@@ -30,11 +30,13 @@ This ADR records that deliberation in lieu of a separate interview file.
 
 ## Decision
 
+> **Naming note (2026-06-09):** repo names updated post-acceptance — core `ai-workflow` → **`agentic-ocean`**, personal → **`agentic-ocean-personal`**. `agentic-ocean` names the **core repo only**; the shared config/family namespace (`~/.config/ai-workflow/`) is unchanged pending a separate family-name decision.
+
 Split the corpus into **two repositories**, both installed by the same ADR-002 installer:
 
-1. **Core corpus** (`ai-workflow`) — general-purpose, durable tooling. Shareable
+1. **Core corpus** (`agentic-ocean`) — general-purpose, durable tooling. Shareable
    (public-ish), the basis for any future second consumer.
-2. **Personal corpus** (`ai-workflow-personal`) — context-coupled, expirable, or
+2. **Personal corpus** (`agentic-ocean-personal`) — context-coupled, expirable, or
    author-private tooling (`apprentice-*`, `ticket-*`, `capture-discussion`, …). Private.
 
 The ADR-002 `installer.yaml` mapping is **repo-agnostic** — it already maps editor paths
@@ -83,7 +85,7 @@ symlink target moves, the editor path is unchanged, nothing else notices.
 
 ## Alternatives Considered
 
-### A: Single corpus repo (everything in `ai-workflow`)
+### A: Single corpus repo (everything in `agentic-ocean`)
 
 **Why not chosen:** Forces expirable/context-bound skills (`apprentice-*`) into a
 shareable core, which rots over time, and provides no way to keep personal tooling

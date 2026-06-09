@@ -52,7 +52,7 @@ The group predates ADR-001 (corpus split) and the proj-cli-nightly bootstrap int
 
 ## 🔴 Blockers
 
-1. **Group 2 assumes ONE corpus repo; ADR-001 (Accepted) mandates TWO.** Tasks 4–6 say "the corpus repo" (singular). [ADR-001](../decisions/adr-001-corpus-repo-split-model.md) requires a **core** repo (`ai-workflow`) and a **personal** repo (`ai-workflow-personal`), with the inventory split by the boundary test. Executing Group 2 as written would build the wrong structure and contradict an accepted decision. *(Faithful-execution blocker.)*
+1. **Group 2 assumes ONE corpus repo; ADR-001 (Accepted) mandates TWO.** Tasks 4–6 say "the corpus repo" (singular). [ADR-001](../decisions/adr-001-corpus-repo-split-model.md) requires a **core** repo (`agentic-ocean`) and a **personal** repo (`agentic-ocean-personal`), with the inventory split by the boundary test. Executing Group 2 as written would build the wrong structure and contradict an accepted decision. *(Faithful-execution blocker.)*
 2. **Migration target is wrong (Task 5).** Task 5 says migrate `~/.claude/skills/` — but the [corpus reference](corpus-repo-reference.md) inventory found `~/.claude/skills/` **empty** (corpus is Cursor-only for v1). Task 5 also doesn't split core vs personal or guarantee `update-pr-description` lands in **core** (dependency-forced per ADR-001).
 
 ---
