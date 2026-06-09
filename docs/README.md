@@ -12,6 +12,7 @@
 - **[Template Usage Guide](TEMPLATE-USAGE.md)** - How to use templates effectively
 - **[Project Types Guide](PROJECT-TYPES.md)** - Regular vs Learning project comparison
 - **[Template Files Guide](TEMPLATE-FILES.md)** - Standard files reference
+- **[.dev-infra.yml Reference](DEV-INFRA-YML.md)** - Project metadata schema and `expected_skills` manifest
 
 ### Advanced Usage
 - **[Best Practices Guide](BEST-PRACTICES.md)** - Comprehensive best practices

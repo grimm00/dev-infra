@@ -74,9 +74,21 @@ This project follows a **hub-and-spoke documentation pattern**:
 
 ---
 
+## 📄 Project Metadata (`.dev-infra.yml`)
+
+This project includes a **`.dev-infra.yml`** file at the repository root. It records the dev-infra template type, generation version, and an **`expected_skills`** manifest — the workflow skills this template assumes you have installed globally.
+
+- **Not a bundle:** Templates no longer ship skill or command copies; the manifest declares expectations only.
+- **Validation:** `proj-cli` setup will **warn** (not error) when listed skills are missing and point you to the external skill corpus.
+- **Reference:** Schema and canonical skill inventory live in the dev-infra repo [`docs/DEV-INFRA-YML.md`](https://github.com/grimm00/dev-infra/blob/develop/docs/DEV-INFRA-YML.md) (generated projects link out; dev-infra maintainers edit the doc + template copies together).
+
+Projects work without skills installed — AGENTS.md and documentation orient agents when skills are absent.
+
+---
+
 ## 🤖 Workflow Automation Commands
 
-This project includes workflow automation commands to streamline development, planning, and project management. All commands are located in `.cursor/commands/` and can be used directly in Cursor IDE.
+This project includes workflow automation commands to streamline development, planning, and project management. Commands and skills are installed globally (not bundled in the template) and can be used directly in Cursor IDE.
 
 ### Quick Reference
 

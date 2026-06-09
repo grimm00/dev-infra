@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2026-06-04
+**Last Updated:** 2026-06-08
 
 ---
 
@@ -635,3 +635,13 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 - ~~**PR108-Inline-#1 (🟢 LOW, 🟢 LOW effort):** Plural agreement typo "Task 11–12 addresses" → "Tasks 11–12 address" in `plan-review-2026-06-04.md`~~ — ✅ Fixed inline.
 - ~~**PR108-Overall-#1 (🟢 LOW, 🟢 LOW effort):** Completion criteria in `tasks/03-template-sync-manifest-retirement.md` said "removed or minimized" but ADR-001 FR-BNDL-4 requires full retirement; language tightened to remove the partial-retention hedge~~ — ✅ Fixed inline.
 - **PR108-Overall-#2 (🟢 LOW, 🟡 MEDIUM effort):** Duplicate `**Last Updated:**` lines (top metadata block + trailing line) in `tasks/03-template-sync-manifest-retirement.md`. This is a *project-wide convention pattern* — the same duplication exists across all 6 task docs in this feature (`01-…md` through `06-…md`) and likely the broader template scaffold. Fixing in isolation here would create inconsistency. Right intervention is a convention discussion: pick one source of truth (top metadata vs trailing line), sweep all task docs in a separate chore PR.
+
+---
+
+## PR #109 Additions
+
+**Date:** 2026-06-08
+**Status:** Sourcery triaged (0 inline + 2 overall; 1 fixed inline, 1 deferred)
+
+- ~~**PR109-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** The 13-skill `expected_skills` inventory is duplicated across `docs/DEV-INFRA-YML.md` and both template `.dev-infra.yml` files~~ — ✅ Fixed inline. Both template `.dev-infra.yml` headers now name `docs/DEV-INFRA-YML.md` as the canonical inventory with a sync reminder. Full single-source generation deferred until `new-project.sh` / proj-cli can inject the list (see Group 5).
+- **PR109-Overall-#2 (🟢 LOW, 🟡 MEDIUM effort):** Template README links to the `.dev-infra.yml` schema via an absolute GitHub URL pinned to `develop` rather than a relative/docs-hub link. **Deferred intentionally:** template READMEs ship into standalone generated projects that do *not* contain dev-infra's `docs/` tree, so a relative in-repo link would break post-generation. The external link is the correct default; the branch-pinned-URL tradeoff is flagged for the Group 6 documentation sweep, which may introduce a project-local docs-hub link pattern.
