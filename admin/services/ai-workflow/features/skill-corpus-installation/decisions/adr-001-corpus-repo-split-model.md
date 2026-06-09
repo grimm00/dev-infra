@@ -30,7 +30,7 @@ This ADR records that deliberation in lieu of a separate interview file.
 
 ## Decision
 
-> **Naming note (2026-06-09):** repo names updated post-acceptance — core `ai-workflow` → **`agentic-ocean`**, personal → **`agentic-ocean-personal`**. `agentic-ocean` names the **core repo only**; the shared config/family namespace (`~/.config/ai-workflow/`) is unchanged pending a separate family-name decision.
+> **Naming note (2026-06-09):** names updated post-acceptance — core `ai-workflow` → **`agentic-ocean`**, personal → **`agentic-ocean-personal`**, and the shared config/family namespace → **`~/.config/agentic-ocean/`** (renamed too, for consistency and to ease any future rename). `agentic-ocean` thus serves as both the core repo name and the family/config namespace.
 
 Split the corpus into **two repositories**, both installed by the same ADR-002 installer:
 

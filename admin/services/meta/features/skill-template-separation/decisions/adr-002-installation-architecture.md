@@ -18,7 +18,7 @@ With the corpus living in its own repo (ADR-001), skills need a mechanism to app
 Adopt a **symlink farm** (GNU Stow pattern) as the installation mechanism:
 
 1. **Corpus** lives at a normal project directory (e.g., `~/Projects/agentic-ocean/`)
-2. **Config** (installer mapping, per-repo profiles) lives at `~/.config/ai-workflow/`
+2. **Config** (installer mapping, per-repo profiles) lives at `~/.config/agentic-ocean/`
 3. **Installer** reads mapping from config, creates symlinks from editor paths → corpus
 4. **Three-tier distribution:**
    - Tier 1 (Author): symlinks from editor paths to local corpus repo — zero-friction iteration
@@ -62,7 +62,7 @@ Package the corpus as a Cursor plugin installed via `~/.cursor/plugins/local/`.
 
 ### C: XDG as canonical with no symlinks (direct reads from `~/.config/`)
 
-Skills live at `~/.config/ai-workflow/skills/` and editors read from there directly.
+Skills live at `~/.config/agentic-ocean/skills/` and editors read from there directly.
 
 **Why not chosen:** Editors expect specific paths (`~/.cursor/skills/`). XDG `~/.config/` is for config, not application source code (Theme 10 correction). And editors can't be told to look elsewhere without symlinks or plugins.
 
@@ -85,7 +85,7 @@ Interview waived — proceeding from research findings. The decision is backed b
 | Requirement | Impact |
 |-------------|--------|
 | FR-INST-1 | **Fulfilled** — symlink-based, with copy fallback if needed |
-| FR-INST-2 | **Fulfilled** — mapping in `~/.config/ai-workflow/installer.yaml` |
+| FR-INST-2 | **Fulfilled** — mapping in `~/.config/agentic-ocean/installer.yaml` |
 | FR-INST-3 | **Fulfilled** — uninstall = remove symlinks |
 | FR-INST-4 | **Fulfilled** — config at XDG, corpus at project path |
 | FR-INST-5 | **Fulfilled** — repo carries install script |

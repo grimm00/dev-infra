@@ -38,12 +38,12 @@ tasks_files:
 
 ## 📋 Overview
 
-Implements ADR-002 — gives the skill corpus (separated into its own product by ADR-001) a real installation mechanism so skills/commands/agents appear at editor paths (`~/.cursor/skills/`, `~/.claude/skills/`, etc.) without manual copying, and so a second machine can go from `git clone` → one command → working. Adopts a **symlink farm** (GNU Stow pattern): corpus lives at a project path, config lives at `~/.config/ai-workflow/`, an installer creates symlinks from editor paths into the corpus. This is the work that closes the gap ADR-001 left open — proj-cli currently warns about missing skills but ships only a placeholder install path (ADR-001 Task 21).
+Implements ADR-002 — gives the skill corpus (separated into its own product by ADR-001) a real installation mechanism so skills/commands/agents appear at editor paths (`~/.cursor/skills/`, `~/.claude/skills/`, etc.) without manual copying, and so a second machine can go from `git clone` → one command → working. Adopts a **symlink farm** (GNU Stow pattern): corpus lives at a project path, config lives at `~/.config/agentic-ocean/`, an installer creates symlinks from editor paths into the corpus. This is the work that closes the gap ADR-001 left open — proj-cli currently warns about missing skills but ships only a placeholder install path (ADR-001 Task 21).
 
 **Key Changes:**
 - A 5-minute spike confirms Cursor loads skills through symlinks before any build (C-INST-1) ✅ GO
 - **Two** corpus repos are established per ADR-001 (core + personal), bootstrapped via `proj-cli` on develop/nightly, and the global corpus is migrated + split into them
-- An `installer.yaml` **multi-source** mapping + `~/.config/ai-workflow/` config home are defined (XDG-correct)
+- An `installer.yaml` **multi-source** mapping + `~/.config/agentic-ocean/` config home are defined (XDG-correct)
 - A self-contained, idempotent, reversible `install.sh` ships in the core repo (Tier 2), enforcing the no-core→personal-dependency invariant
 - The proj-cli install-guidance placeholder is replaced with real corpus + installer instructions
 - Tier 3 (plugin marketplace publish) stays explicitly deferred until an external audience exists
@@ -76,7 +76,7 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 
 ### Installer Mapping & XDG Config
 - [ ] Task 8: Define the `installer.yaml` **multi-source** mapping schema (two source repos → editor paths)
-- [ ] Task 9: Establish `~/.config/ai-workflow/` config home + example mapping (core + personal blocks)
+- [ ] Task 9: Establish `~/.config/agentic-ocean/` config home + example mapping (core + personal blocks)
 - [ ] Task 10: Document XDG config vs corpus-project separation (Theme 10)
 
 ### Installer Script
@@ -120,7 +120,7 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 
 - **Source ADR:** [ADR-002: Installation & Distribution Architecture](../../../../meta/features/skill-template-separation/decisions/adr-002-installation-architecture.md)
 - **Predecessor:** [ADR-001: Skill-Template Separation Model](../../../../meta/features/skill-template-separation/decisions/adr-001-separation-model.md) — completed; this plan closes its deferred installation gap
-- **Downstream (separate plan):** [ADR-003: Per-Repo Profile Schema](../../../../meta/features/skill-template-separation/decisions/adr-003-per-repo-profile-schema.md) — its `~/.config/ai-workflow/repos/` symlink is installed by ADR-002's installer, but its schema/migration work gets its own implementation plan
+- **Downstream (separate plan):** [ADR-003: Per-Repo Profile Schema](../../../../meta/features/skill-template-separation/decisions/adr-003-per-repo-profile-schema.md) — its `~/.config/agentic-ocean/repos/` symlink is installed by ADR-002's installer, but its schema/migration work gets its own implementation plan
 - **Feature decision:** [ADR-001: Corpus Repository Split Model](../decisions/adr-001-corpus-repo-split-model.md) — core + personal two-repo split (shapes Group 2)
 - **Corpus repo reference:** [corpus-repo-reference.md](corpus-repo-reference.md) — what the corpus repo is/contains/excludes (anchors Group 2)
 - **Related exploration:** [skill-package-controller](../../../explorations/skill-package-controller/exploration.md) — the controller consumes the XDG config this installer establishes

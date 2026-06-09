@@ -62,12 +62,11 @@ This boundary matters: the installer maps **only** the authored corpus into edit
   ├── install.sh     # self-contained installer (Group 4)
   └── README.md      # corpus product doc + versioning
   ```
-- **Config (separate, XDG):** `~/.config/ai-workflow/` holds `installer.yaml` (the
+- **Config (separate, XDG):** `~/.config/agentic-ocean/` holds `installer.yaml` (the
   editor-path → corpus-subdir mapping) and later `repos/` profiles (ADR-003). Config is
-  config; corpus is a project (ADR-002 Theme 10). **Note:** the config namespace is still
-  `ai-workflow` — it's the shared **product/family** namespace for *both* repos, and
-  `agentic-ocean` was named as the **core repo only** (2026-06-09). Renaming the family
-  namespace is a separate, deferred decision (see open question 2).
+  config; corpus is a project (ADR-002 Theme 10). The config/family namespace was renamed
+  from `ai-workflow` → `agentic-ocean` (2026-06-09) so `agentic-ocean` serves as both the
+  core repo name and the shared family namespace for *both* repos.
 - **Versioning:** independent of dev-infra (ADR-001) — the corpus releases on its own
   cadence.
 - **Install mode:** symlink farm (C-INST-1 resolved GO); copy-mode is the documented
@@ -80,7 +79,7 @@ This boundary matters: the installer maps **only** the authored corpus into edit
 | Group | Produces |
 |-------|----------|
 | 2 — Corpus Repository Structure | Establishes the repo + migrates the inventory above into it |
-| 3 — Installer Mapping & XDG Config | `installer.yaml` schema + `~/.config/ai-workflow/` |
+| 3 — Installer Mapping & XDG Config | `installer.yaml` schema + `~/.config/agentic-ocean/` |
 | 4 — Installer Script | `install.sh` (lives in the corpus repo) |
 | 5 — Source Install & Multi-Machine | `clone → install` flow; retires proj-cli placeholder |
 | 6 — Documentation & ADR Acceptance | Guide, cross-links, ADR-002 → Accepted |
@@ -100,10 +99,11 @@ the code ships in the corpus repo.
    artifact; otherwise personal. `update-pr-description` is **core** (dependency-forced
    via `group-cycle.agent`); `apprentice-*` / `ticket-*` / `capture-discussion` are
    personal. Invariant: no core→personal dependencies.
-2. **Repo + family naming:** core repo name **RESOLVED** (2026-06-09) → `agentic-ocean`
-   (personal → `agentic-ocean-personal`). **Still open:** the shared **family / config
-   namespace** is currently `~/.config/ai-workflow/` — `agentic-ocean` was scoped to the
-   core repo only, so whether the family namespace also renames (and to what) is deferred.
+2. ~~**Repo + family naming**~~ **RESOLVED** (2026-06-09) → core repo `agentic-ocean`,
+   personal `agentic-ocean-personal`, and the shared family/config namespace
+   `~/.config/agentic-ocean/`. `agentic-ocean` is both the core repo name and the family
+   namespace. (Name is still "for now" — but everything is consistent now, so a future
+   rename is a single sweep.)
 3. **`research-orchestrator/`** is a directory under `agents/` (not a single `.agent.md`)
    — confirm the agents layout handles both forms.
 4. **Migration mechanics:** move (git mv from nowhere — they're untracked) vs copy then

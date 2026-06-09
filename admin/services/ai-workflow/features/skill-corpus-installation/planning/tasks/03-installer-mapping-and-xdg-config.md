@@ -14,7 +14,7 @@
 - [ ] Task 8: Define the `installer.yaml` **multi-source** mapping schema
   - Schema mapping editor paths (`~/.cursor/skills/` etc.) → subdirs across **two** source repos (core + personal) per ADR-001 (FR-INST-2, FR-INST-6). One mapping block per repo.
 
-- [ ] Task 9: Establish the `~/.config/ai-workflow/` config home + example mapping
+- [ ] Task 9: Establish the `~/.config/agentic-ocean/` config home + example mapping
   - XDG config location holding `installer.yaml` (core + personal blocks) and (later) `repos/` profiles; ship a documented example mapping.
 
 - [ ] Task 10: Document XDG config vs corpus-project separation
@@ -32,7 +32,7 @@
 ## ✅ Completion Criteria
 
 - [ ] `installer.yaml` schema defined and documented
-- [ ] `~/.config/ai-workflow/` home established with an example mapping
+- [ ] `~/.config/agentic-ocean/` home established with an example mapping
 - [ ] Config-vs-corpus separation documented
 
 ---

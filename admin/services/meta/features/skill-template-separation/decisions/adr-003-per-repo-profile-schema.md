@@ -15,7 +15,7 @@ Skills currently hardcode path-detection logic, breaking when they run in repos 
 
 ## Decision
 
-Adopt a **unified per-repo profile** at `~/.config/ai-workflow/repos/<slug>.yaml` with the following v1 schema:
+Adopt a **unified per-repo profile** at `~/.config/agentic-ocean/repos/<slug>.yaml` with the following v1 schema:
 
 ```yaml
 schema_version: 1
@@ -49,7 +49,7 @@ artifacts:
 
 **Slug derivation:** `basename $(git remote get-url origin) .git` with optional `slug:` override field.
 
-**Symlinked to editor:** `~/.config/ai-workflow/repos/` is symlinked to `~/.cursor/repos/` by the installer (ADR-002) for editor compatibility.
+**Symlinked to editor:** `~/.config/agentic-ocean/repos/` is symlinked to `~/.cursor/repos/` by the installer (ADR-002) for editor compatibility.
 
 ---
 
@@ -111,7 +111,7 @@ Interview waived — proceeding from research findings. The decision is backed b
 
 | Requirement | Impact |
 |-------------|--------|
-| FR-PROF-1 | **Fulfilled** — profile at `~/.config/ai-workflow/repos/<slug>.yaml`, symlinked to editor path |
+| FR-PROF-1 | **Fulfilled** — profile at `~/.config/agentic-ocean/repos/<slug>.yaml`, symlinked to editor path |
 | FR-PROF-2 | **Fulfilled** — `schema_version: 1` |
 | FR-PROF-3 | **Fulfilled** — ticket, paths, artifacts sections |
 | FR-PROF-4 | **Fulfilled** — lookup chain defined (flag → AGENTS.md → profile → defaults) |
