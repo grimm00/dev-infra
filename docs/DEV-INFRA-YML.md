@@ -43,7 +43,7 @@ Future fields (`last_sync`, `sync`, `customizations`) may be added when template
 
 ### Purpose
 
-Declares the skill corpus entries a generated project expects (FR-BNDL-2). Supports warn-not-error validation during `proj-cli` setup (FR-BNDL-3, implemented in Group 5 of the skill-template-separation plan).
+Declares the skill corpus entries a generated project expects (FR-BNDL-2). Supports warn-not-error validation during `proj-cli` setup (FR-BNDL-3, implemented in proj-cli's setup flow — Group 5 of the skill-template-separation plan).
 
 ### Format
 
@@ -73,7 +73,7 @@ Group 5 (`proj-cli` validation) resolves each entry by checking for an installed
 
 ### Validation behavior (proj-cli)
 
-When `proj-cli` setup runs (Group 5):
+When `proj create --template` runs (proj-cli Group 5):
 
 1. Read `expected_skills` from `.dev-infra.yml`.
 2. For each identifier, check whether the skill is installed globally.
