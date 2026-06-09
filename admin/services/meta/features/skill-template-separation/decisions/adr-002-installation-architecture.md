@@ -40,7 +40,7 @@ Adopt a **symlink farm** (GNU Stow pattern) as the installation mechanism:
 
 ### Negative
 
-- Cursor has a known symlink bug for plugins (C-INST-1) — skills likely use a different code path but needs a spike to confirm
+- Cursor has a known symlink bug for plugins (C-INST-1) — but skills use a different code path; the C-INST-1 spike confirmed Cursor 3.7.19 discovers and reads skills through symlinks (GO)
 - Adds a one-time setup step on new machines (clone + install) vs. the current "files just exist" state
 - Symlinks are invisible in file explorers — can confuse users who `ls` and see files but can't find the "real" source
 
@@ -93,7 +93,7 @@ Interview waived — proceeding from research findings. The decision is backed b
 | FR-DEV-1 | **Fulfilled** — symlinks = zero-step iteration |
 | FR-DIST-1 | **Deferred** — plugin publish additive when needed |
 | FR-DIST-2 | **Deferred** — Cursor/Claude plugin system used at tier 3 |
-| C-INST-1 | **Spike needed** — confirm skills load via symlinks (5 min test) |
+| C-INST-1 | **Resolved (GO)** — Cursor 3.7.19 loads skills via symlinks; symlink mode primary. See [spike findings](../../../../ai-workflow/features/skill-corpus-installation/planning/spike-c-inst-1-findings.md) |
 
 ---
 

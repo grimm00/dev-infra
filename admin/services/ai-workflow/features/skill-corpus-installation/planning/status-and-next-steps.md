@@ -7,11 +7,11 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 1/19 tasks complete
+**Overall:** 3/19 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Symlink Loading Spike | 🟠 In Progress | 1/3 tasks | Task 1 fixture built (`~/.cursor/skills/spike-probe`); Task 2 needs live observation |
+| Symlink Loading Spike | ✅ Complete | 3/3 tasks | C-INST-1 **GO** (Cursor 3.7.19: discovery + live-edit verified). `~/.claude/` deferred to int-opp. See `spike-c-inst-1-findings.md`. |
 | Corpus Repository Structure | 🔴 Not Started | 0/3 tasks | Establish corpus repo; migrate global corpus |
 | Installer Mapping & XDG Config | 🔴 Not Started | 0/3 tasks | `installer.yaml` + `~/.config/ai-workflow/` |
 | Installer Script | 🔴 Not Started | 0/4 tasks | `install.sh` — idempotent, reversible, Bats-tested |
@@ -22,9 +22,11 @@
 
 ## 🚀 Next Steps
 
-1. ✅ Group 1 (Symlink Loading Spike) expanded (2026-06-09) — tasks now carry Purpose/Steps/Files/Acceptance.
-2. Execute Group 1 — it's a spike (no PR-worthy code yet); run it interactively to get the C-INST-1 go/no-go, since it needs a live Cursor session + editor config the agent-dispatch flow can't drive headlessly.
-3. Expand remaining groups (2–6) via write-plan **Expand** once the spike outcome is known — the symlink-vs-copy decision shapes Groups 3–4.
+1. ✅ Group 1 (Symlink Loading Spike) complete (2026-06-09) — C-INST-1 resolved GO; symlink mode is the primary installer mechanism.
+2. Expand Group 2 (Corpus Repository Structure) via write-plan **Expand**, then execute. Note: most of Groups 2–5 produce artifacts in the **external corpus repo**, not dev-infra — so they won't follow the in-dev-infra `/task` + PR flow cleanly.
+3. The symlink-vs-copy decision is settled (symlink primary) — Groups 3–4 can assume symlink mode, with copy-mode retained only as the documented contingency.
+
+**Deferred (not v1):** `~/.claude/` symlink verification → `admin/planning/opportunities/internal/dev-infra/improvements/claude-path-symlink-verification.md`.
 
 ---
 

@@ -65,8 +65,8 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 
 ### Symlink Loading Spike
 - [x] Task 1: Build a minimal symlink test fixture (symlink one skill into an editor path)
-- [ ] Task 2: Verify Cursor loads the symlinked skill in a live session; record go/no-go
-- [ ] Task 3: Define the copy-mode fallback if symlink discovery fails
+- [x] Task 2: Verify Cursor loads the symlinked skill in a live session; record go/no-go
+- [x] Task 3: Define the copy-mode fallback if symlink discovery fails
 
 ### Corpus Repository Structure
 - [ ] Task 4: Define the corpus repo layout (`skills/`, `commands/`, `agents/`) and name

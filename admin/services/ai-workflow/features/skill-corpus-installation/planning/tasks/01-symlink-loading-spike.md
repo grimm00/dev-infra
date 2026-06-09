@@ -2,7 +2,8 @@
 
 **Feature:** Skill Corpus Installation (ADR-002)
 **Group:** Symlink Loading Spike
-**Status:** ✅ Expanded
+**Status:** ✅ Complete — C-INST-1 resolved GO (Cursor 3.7.19)
+**Completed:** 2026-06-09
 **Last Updated:** 2026-06-09
 
 ---
@@ -96,10 +97,10 @@ This group resolves **C-INST-1** before any installer is built: *does Cursor loa
 
 ## ✅ Completion Criteria
 
-- [ ] Symlink loading verified in a real Cursor session (or proven not to work), with the Cursor version recorded
-- [ ] Go/no-go recorded with evidence in a spike findings note
-- [ ] Installation-mode decision made: symlink primary, or copy-mode fallback defined
-- [ ] C-INST-1 resolution captured for ADR-002 acceptance (Group 6)
+- [x] Symlink loading verified in a real Cursor session (or proven not to work), with the Cursor version recorded — GO on Cursor 3.7.19
+- [x] Go/no-go recorded with evidence in a spike findings note — `planning/spike-c-inst-1-findings.md`
+- [x] Installation-mode decision made: symlink primary, or copy-mode fallback defined — symlink primary; copy-mode kept as contingency
+- [x] C-INST-1 resolution captured for ADR-002 acceptance (Group 6) — ADR-002 row + Negative note updated
 
 ---
 
