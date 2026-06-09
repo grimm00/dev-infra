@@ -7,12 +7,12 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 3/21 tasks complete
+**Overall:** 4/21 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Symlink Loading Spike | ✅ Complete | 3/3 tasks | C-INST-1 **GO** (Cursor 3.7.19: discovery + live-edit verified). `~/.claude/` deferred to int-opp. See `spike-c-inst-1-findings.md`. |
-| Corpus Repository Structure | 🔴 Not Started | 0/4 tasks | **Two** repos (core + personal, ADR-001); proj-cli nightly bootstrap; split migration |
+| Corpus Repository Structure | 🟠 In Progress | 1/4 tasks | Task 4 ✅ classification (`corpus-classification.md`: 36 core / 8 personal; invariant holds). Next: Task 5 proj-cli nightly bootstrap |
 | Installer Mapping & XDG Config | 🔴 Not Started | 0/3 tasks | `installer.yaml` **multi-source** + `~/.config/ai-workflow/` |
 | Installer Script | 🔴 Not Started | 0/5 tasks | `install.sh` — idempotent, reversible, Bats-tested; + core→personal lint |
 | Source Install & Multi-Machine (Tier 2) | 🔴 Not Started | 0/3 tasks | two-repo `clone → install` (private auth); retire proj-cli placeholder |
