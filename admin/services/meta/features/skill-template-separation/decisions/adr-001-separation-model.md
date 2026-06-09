@@ -2,7 +2,7 @@
 
 **Status:** ✅ Accepted
 **Accepted:** 2026-06-09
-**Implementation:** PRs #106–#110 (Groups 1–5); Group 6 documentation PR pending
+**Implementation:** PRs #106–#111 (Groups 1–6)
 **Decision topic:** `skill-template-separation`
 
 ---
