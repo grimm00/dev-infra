@@ -7,12 +7,12 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 4/21 tasks complete
+**Overall:** 5/21 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Symlink Loading Spike | ✅ Complete | 3/3 tasks | C-INST-1 **GO** (Cursor 3.7.19: discovery + live-edit verified). `~/.claude/` deferred to int-opp. See `spike-c-inst-1-findings.md`. |
-| Corpus Repository Structure | 🟠 In Progress | 1/4 tasks | Task 4 ✅ classification (`corpus-classification.md`: 36 core / 8 personal; invariant holds). Next: Task 5 proj-cli nightly bootstrap |
+| Corpus Repository Structure | 🟠 In Progress | 2/4 tasks | Tasks 4–5 ✅ (classification + proj-cli bootstrap; both repos generated local-only). **Next: Task 6 migrate+split** — decide standard-project over-scaffold trim first (`corpus-bootstrap-record.md`) |
 | Installer Mapping & XDG Config | 🔴 Not Started | 0/3 tasks | `installer.yaml` **multi-source** + `~/.config/agentic-ocean/` |
 | Installer Script | 🔴 Not Started | 0/5 tasks | `install.sh` — idempotent, reversible, Bats-tested; + core→personal lint |
 | Source Install & Multi-Machine (Tier 2) | 🔴 Not Started | 0/3 tasks | two-repo `clone → install` (private auth); retire proj-cli placeholder |

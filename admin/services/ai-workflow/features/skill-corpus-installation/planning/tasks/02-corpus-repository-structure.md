@@ -2,7 +2,7 @@
 
 **Feature:** Skill Corpus Installation (ADR-002)
 **Group:** Corpus Repository Structure
-**Status:** 🟠 In Progress (Task 4 ✅ — see `corpus-classification.md`)
+**Status:** 🟠 In Progress (Tasks 4–5 ✅ — see `corpus-classification.md`, `corpus-bootstrap-record.md`)
 **Last Updated:** 2026-06-09
 
 ---
@@ -138,7 +138,7 @@ per the Task 4 classification, making it tracked source.
 ## ✅ Completion Criteria
 
 - [x] Classification table produced; `update-pr-description` in core; no core→personal deps — `corpus-classification.md`
-- [ ] Both repos bootstrapped via proj-cli nightly; SHAs pinned/recorded
+- [x] Both repos bootstrapped via proj-cli nightly; SHAs pinned/recorded — `corpus-bootstrap-record.md` (dev-infra `88fc037` + proj-cli `bec1d54`)
 - [ ] Inventory migrated + split correctly; counts reconcile; `~/.cursor/` originals intact pending cutover
 - [ ] Per-repo README + versioning; personal repo private
 
