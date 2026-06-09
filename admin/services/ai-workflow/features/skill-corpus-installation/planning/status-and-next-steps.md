@@ -27,7 +27,7 @@
 3. ✅ Group 2 (Corpus Repository Structure) **complete** (2026-06-09) — both repos exist, populated, and pushed (core public / personal private).
 4. **Next: Group 3** (Installer Mapping & XDG Config) — expand, then build the multi-source `installer.yaml` + `~/.config/agentic-ocean/`. Group 3 onward authors files **in the corpus repo** (`agentic-ocean/install.sh`, etc.), not dev-infra.
 
-**Minor follow-up (Task 7 leftover):** the personal repo's `.dev-infra.yml` still lists the 13 *core* `expected_skills` (template default) and `[DEV_INFRA_VERSION]`/`[CREATED_DATE]` placeholders are unsubstituted in both — vestigial for a corpus repo; clean up opportunistically.
+**Cleanups done (2026-06-09):** `.dev-infra.yml` `version`/`created` placeholders filled in both repos (`0.11.0+nightly.88fc037`); `foobar` test command deleted from `~/.cursor/commands/` (now 21 = the migrated split). `expected_skills` kept as the core set — correct (those are the skills used when *working in* the repo). Remaining: `~/.cursor/` originals await the installer cutover (Groups 4–5).
 4. The symlink-vs-copy decision is settled (symlink primary) — Groups 3–4 assume symlink mode, copy-mode is the documented contingency.
 
 **Deferred (not v1):** `~/.claude/` symlink verification → `admin/planning/opportunities/internal/dev-infra/improvements/claude-path-symlink-verification.md`.
