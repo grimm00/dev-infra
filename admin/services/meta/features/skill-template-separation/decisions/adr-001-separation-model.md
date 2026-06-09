@@ -1,6 +1,8 @@
 # ADR-001: Skill-Template Separation Model
 
-**Status:** 🔴 Proposed
+**Status:** ✅ Accepted
+**Accepted:** 2026-06-09
+**Implementation:** PRs #106–#110 (Groups 1–5); Group 6 documentation PR pending
 **Decision topic:** `skill-template-separation`
 
 ---

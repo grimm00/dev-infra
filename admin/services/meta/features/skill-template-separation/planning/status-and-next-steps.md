@@ -1,13 +1,13 @@
 # Status & Next Steps — Skill-Template Separation (ADR-001)
 
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Last Updated:** 2026-06-09
 
 ---
 
 ## 📊 Progress Summary
 
-**Overall:** 22/25 tasks complete
+**Overall:** 25/25 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
@@ -16,13 +16,17 @@
 | Template-Sync-Manifest Retirement | ✅ Complete | 4/4 tasks | Merged PR #108 (2026-06-04); `develop` Run Tests confirmed green post-merge |
 | expected_skills Manifest in Templates | ✅ Complete | 4/4 tasks | Merged PR #109 (2026-06-09); `.dev-infra.yml` + `docs/DEV-INFRA-YML.md` |
 | proj-cli Validation | ✅ Complete | 4/4 tasks | Merged PR #110 (2026-06-09); proj-cli `skills.py` + dev-infra graceful-degradation Bats |
-| Documentation & Supersession | 🔴 Not Started | 0/3 tasks | global-command-distribution superseded; AGENTS.md updated |
+| Documentation & Supersession | ✅ Complete | 3/3 tasks | Group 6 PR — supersession, AGENTS.md, ADR-001 accepted |
 
 ---
 
 ## 🚀 Next Steps
 
-1. **Group 6:** Documentation & supersession (mark `global-command-distribution` superseded, update AGENTS.md, cross-link from four-arm-architecture, accept ADR-001).
+Feature complete. Follow-on work is out of scope for this plan:
+
+- **ADR-002** (installation architecture) — separate implementation plan
+- **ADR-003** (per-repo profile schema) — separate implementation plan
+- **Deferred:** `PR110-Overall-#1` Bats test-robustness pass; `PR109-Overall-#2` template README URL pattern (documented as intentional)
 
 ---
 
@@ -31,7 +35,7 @@
 - Plan generated from `decisions/adr-001-separation-model.md` on 2026-05-22.
 - **Doc surface intent:** ADR-001 + planning tree on `develop`; research on `docs/skill-template-separation-research`.
 - ADR-002 and ADR-003 out of scope for this plan.
-- **CI:** Green on `develop` as of PR #109 merge (2026-06-09).
+- **CI:** Green on `develop` as of PR #110 merge (2026-06-09).
 - **Group 4:** Bare skill identifiers chosen for `expected_skills` (matches `~/.cursor/skills/<name>/` layout); 13 entries mirror pre-#107 bundled corpus.
 
 ## 🧭 Decisions Made
@@ -43,6 +47,7 @@
 - **Group 4 identifier convention (Task 15):** Bare skill directory names (not namespaced) for `expected_skills` v1.
 - **Group 4 merge:** PR #109 landed `expected_skills` manifest in both templates, `docs/DEV-INFRA-YML.md`, and template README / `TEMPLATE-FILES` cross-links (2026-06-09).
 - **Group 5 merge:** PR #110 landed proj-cli `expected_skills` validation design, graceful-degradation Bats, and `docs/DEV-INFRA-YML.md` behavioral phrasing fix (2026-06-09). Sourcery `PR110-Overall-#1` (Bats string coupling) deferred; `PR110-Overall-#2` fixed inline.
+- **Group 6:** ADR-001 accepted (2026-06-09); `global-command-distribution` superseded; AGENTS.md reflects template minimalism; feature hub created on develop.
 
 ## 📋 Deferred
 
@@ -54,8 +59,11 @@
 - Task-doc `**Last Updated:**` deduplication — project-wide convention pattern across all 6 task docs (top metadata + trailing line). Tracked as `PR108-Overall-#2` in `admin/feedback/deferred-tasks.md` for a future convention-sweep PR.
 
 **From PR #109:**
-- **PR109-Overall-#2:** Template README absolute GitHub URL for `.dev-infra.yml` schema — deferred to Group 6 documentation sweep (generated projects lack in-repo `docs/` tree). Tracked in `admin/feedback/deferred-tasks.md`.
+- **PR109-Overall-#2:** Template README absolute GitHub URL for `.dev-infra.yml` schema — intentional for generated projects (no in-repo `docs/` tree); documented in Group 6 status.
 - **PR109-Overall-#1:** Fixed inline (YAML headers reference canonical `docs/DEV-INFRA-YML.md` inventory).
+
+**From PR #110:**
+- **PR110-Overall-#1:** Graceful-degradation Bats string coupling — deferred for deliberate test-robustness pass.
 
 ---
 

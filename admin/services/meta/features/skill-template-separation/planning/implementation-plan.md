@@ -29,7 +29,7 @@ tasks_files:
 ---
 # Implementation Plan — Skill-Template Separation (ADR-001)
 
-**Status:** 🟠 In Progress
+**Status:** ✅ Complete
 **Created:** 2026-05-22
 **Last Updated:** 2026-06-09
 **Source:** [decisions/adr-001-separation-model.md](../decisions/adr-001-separation-model.md)
@@ -98,20 +98,20 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 - [x] Task 22: Test graceful degradation (generated project works without skills installed) — PR #110 (2026-06-09)
 
 ### Documentation & Supersession
-- [ ] Task 23: Mark `global-command-distribution` feature README as superseded by ADR-001
-- [ ] Task 24: Update dev-infra AGENTS.md / docs to reflect template minimalism + manifest pattern
-- [ ] Task 25: Cross-link ADR-001 from four-arm-architecture and skill-template-separation hubs
+- [x] Task 23: Mark `global-command-distribution` feature README as superseded by ADR-001
+- [x] Task 24: Update dev-infra AGENTS.md / docs to reflect template minimalism + manifest pattern
+- [x] Task 25: Cross-link ADR-001 from four-arm-architecture and skill-template-separation hubs
 
 ---
 
 ## ✅ Definition of Done
 
-- [ ] All 25 tasks complete (22/25 done; Groups 1–5 ✅)
+- [x] All 25 tasks complete (25/25; Groups 1–6 ✅)
 - [x] CI passes on the new feature branch (demonstrated on PRs #106, #107, #108)
 - [x] Generated project (via `./scripts/new-project.sh`) contains no bundled skills/commands/agents — manifest in `.dev-infra.yml` (PR #109); Group 5 adds proj-cli warn-not-error validation
 - [x] `proj-cli` setup warns (not errors) when expected skills are missing — proj-cli `src/proj/skills.py` (Group 5)
 - [x] `template-sync-manifest.txt` and validator removed; CI green without them (PR #108, 2026-06-04)
-- [ ] ADR-001 status moved from 🔴 Proposed → ✅ Accepted (acceptance recorded in the ADR file) — pending Group 6
+- [x] ADR-001 status moved from 🔴 Proposed → ✅ Accepted (acceptance recorded in the ADR file)
 - [x] PR to `develop` carries only ADR-001 + planning tree (no research, no exploration, no other ADRs) — done by PR #106 (Group 1)
 
 ---
