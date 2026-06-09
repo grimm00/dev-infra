@@ -25,7 +25,8 @@
 1. ✅ Group 1 (Symlink Loading Spike) complete (2026-06-09) — C-INST-1 resolved GO; symlink mode is the primary installer mechanism.
 2. ✅ Plan re-partitioned (2026-06-09, 19→21 tasks) per `plan-review-2026-06-09.md` + ADR-001 — Groups 2–5 now reflect two repos, proj-cli-nightly bootstrap, multi-source mapping, the core→personal lint, and private-repo clone.
 3. ✅ Group 2 (Corpus Repository Structure) **complete** (2026-06-09) — both repos exist, populated, and pushed (core public / personal private).
-4. ✅ Group 3 (Installer Mapping & XDG Config) **complete** (2026-06-09) — schema (`installer.example.yaml` + `docs/installer-schema.md`), live `~/.config/agentic-ocean/installer.yaml`, config-vs-corpus doc (corpus PR #1). **Next: Group 4** (Installer Script) — `install.sh` is real **code** → goes `feat/* → PR → develop` in `agentic-ocean` (per the 2026-06-09 workflow correction). The mise entrypoint question (parked) attaches here.
+4. ✅ Group 3 (Installer Mapping & XDG Config) **complete** (2026-06-09) — schema (`installer.example.yaml` + `docs/installer-schema.md`), live `~/.config/agentic-ocean/installer.yaml`, config-vs-corpus doc (corpus PR #1).
+5. ✅ Group 4 (Installer Script) **expanded** (2026-06-09) — Tasks 11–15 detailed (Bats-first; `install.sh` install/uninstall/flags/core→personal lint + suite). **Execute next** in `agentic-ocean` via `feat/* → PR → develop`. Two decisions attached: YAML-parse strategy (recommend dependency-free `awk` parser) and mise (parked — self-contained `install.sh` is the entrypoint; mise optional later).
 
 **Workflow (2026-06-09 correction):** dev-infra planning docs → `docs/skill-corpus-installation` branch → [PR #112](https://github.com/grimm00/dev-infra/pull/112); corpus code → `feat/* → PR → develop` in `agentic-ocean` (now default branch).
 
