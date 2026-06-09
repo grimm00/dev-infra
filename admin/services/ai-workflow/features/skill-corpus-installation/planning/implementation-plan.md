@@ -118,6 +118,7 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 - **Source ADR:** [ADR-002: Installation & Distribution Architecture](../../../../meta/features/skill-template-separation/decisions/adr-002-installation-architecture.md)
 - **Predecessor:** [ADR-001: Skill-Template Separation Model](../../../../meta/features/skill-template-separation/decisions/adr-001-separation-model.md) — completed; this plan closes its deferred installation gap
 - **Downstream (separate plan):** [ADR-003: Per-Repo Profile Schema](../../../../meta/features/skill-template-separation/decisions/adr-003-per-repo-profile-schema.md) — its `~/.config/ai-workflow/repos/` symlink is installed by ADR-002's installer, but its schema/migration work gets its own implementation plan
+- **Corpus repo reference:** [corpus-repo-reference.md](corpus-repo-reference.md) — what the corpus repo is/contains/excludes (anchors Group 2)
 - **Related exploration:** [skill-package-controller](../../../explorations/skill-package-controller/exploration.md) — the controller consumes the XDG config this installer establishes
 
 ---
