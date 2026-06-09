@@ -2,7 +2,7 @@
 
 **Purpose:** Collection of medium and low priority tasks/opportunities identified in PR reviews that have been deferred for future work  
 **Status:** 📋 Active Backlog  
-**Last Updated:** 2026-06-08
+**Last Updated:** 2026-06-09
 
 ---
 
@@ -645,3 +645,13 @@ This document tracks all medium (🟡) and low (🟢) priority tasks identified 
 
 - ~~**PR109-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** The 13-skill `expected_skills` inventory is duplicated across `docs/DEV-INFRA-YML.md` and both template `.dev-infra.yml` files~~ — ✅ Fixed inline. Both template `.dev-infra.yml` headers now name `docs/DEV-INFRA-YML.md` as the canonical inventory with a sync reminder. Full single-source generation deferred until `new-project.sh` / proj-cli can inject the list (see Group 5).
 - **PR109-Overall-#2 (🟢 LOW, 🟡 MEDIUM effort):** Template README links to the `.dev-infra.yml` schema via an absolute GitHub URL pinned to `develop` rather than a relative/docs-hub link. **Deferred intentionally:** template READMEs ship into standalone generated projects that do *not* contain dev-infra's `docs/` tree, so a relative in-repo link would break post-generation. The external link is the correct default; the branch-pinned-URL tradeoff is flagged for the Group 6 documentation sweep, which may introduce a project-local docs-hub link pattern.
+
+---
+
+## PR #110 Additions
+
+**Date:** 2026-06-09
+**Status:** Sourcery triaged (0 inline + 2 overall; 1 fixed inline, 1 deferred)
+
+- ~~**PR110-Overall-#2 (🟢 LOW, 🟢 LOW effort):** `docs/DEV-INFRA-YML.md` hard-coded the implementation path `proj-cli src/proj/skills.py`~~ — ✅ Fixed inline. Replaced with behavioral phrasing ("proj-cli's setup flow") so the doc doesn't break when proj-cli internals move.
+- **PR110-Overall-#1 (🟡 MEDIUM, 🟢 LOW effort):** The graceful-degradation Bats suite (`tests/unit/expected-skills-graceful-degradation.bats`) asserts on specific strings — `grep 'explore'` against the manifest and `grep -i 'without skills'` against the generated README — which couples the tests to specific manifest entries and README wording. Sourcery suggests asserting more stable invariants (`expected_skills` present with ≥1 entry; an orientation section exists). **Deferred:** loosening the assertions is a test-design tradeoff — the specific-string checks also intentionally verify a known skill and the graceful-degradation guidance actually ship. Worth a deliberate test-robustness pass rather than a mid-validation rewrite.

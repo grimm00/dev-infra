@@ -43,7 +43,7 @@ Future fields (`last_sync`, `sync`, `customizations`) may be added when template
 
 ### Purpose
 
-Declares the skill corpus entries a generated project expects (FR-BNDL-2). Supports warn-not-error validation during `proj-cli` setup (FR-BNDL-3, implemented in proj-cli `src/proj/skills.py` — Group 5 of the skill-template-separation plan).
+Declares the skill corpus entries a generated project expects (FR-BNDL-2). Supports warn-not-error validation during `proj-cli` setup (FR-BNDL-3, implemented in proj-cli's setup flow — Group 5 of the skill-template-separation plan).
 
 ### Format
 
