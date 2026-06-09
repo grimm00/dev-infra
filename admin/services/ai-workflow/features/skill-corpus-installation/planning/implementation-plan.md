@@ -75,7 +75,7 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 - [x] Task 7: Per-repo README + versioning; mark the personal repo private
 
 ### Installer Mapping & XDG Config
-- [ ] Task 8: Define the `installer.yaml` **multi-source** mapping schema (two source repos → editor paths)
+- [x] Task 8: Define the `installer.yaml` **multi-source** mapping schema (two source repos → editor paths)
 - [ ] Task 9: Establish `~/.config/agentic-ocean/` config home + example mapping (core + personal blocks)
 - [ ] Task 10: Document XDG config vs corpus-project separation (Theme 10)
 
