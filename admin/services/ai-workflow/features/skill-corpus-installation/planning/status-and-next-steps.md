@@ -25,7 +25,7 @@
 1. ✅ Group 1 (Symlink Loading Spike) complete (2026-06-09) — C-INST-1 resolved GO; symlink mode is the primary installer mechanism.
 2. ✅ Plan re-partitioned (2026-06-09, 19→21 tasks) per `plan-review-2026-06-09.md` + ADR-001 — Groups 2–5 now reflect two repos, proj-cli-nightly bootstrap, multi-source mapping, the core→personal lint, and private-repo clone.
 3. ✅ Group 2 (Corpus Repository Structure) **complete** (2026-06-09) — both repos exist, populated, and pushed (core public / personal private).
-4. **Next: Group 3** (Installer Mapping & XDG Config) — expand, then build the multi-source `installer.yaml` + `~/.config/agentic-ocean/`. Group 3 onward authors files **in the corpus repo** (`agentic-ocean/install.sh`, etc.), not dev-infra.
+4. ✅ Group 3 (Installer Mapping & XDG Config) **expanded** (2026-06-09) — Tasks 8–10 carry Purpose/Steps/Files/Acceptance (multi-source schema mapping `corpus/`, per-item links, collision=error; `~/.config/agentic-ocean/installer.yaml`; config-vs-corpus doc). **Execute next.** Artifacts land in the **core repo** + `~/.config/agentic-ocean/`, not dev-infra.
 
 **Cleanups done (2026-06-09):** `.dev-infra.yml` `version`/`created` placeholders filled in both repos (`0.11.0+nightly.88fc037`); `foobar` test command deleted from `~/.cursor/commands/` (now 21 = the migrated split). `expected_skills` kept as the core set — correct (those are the skills used when *working in* the repo). Remaining: `~/.cursor/` originals await the installer cutover (Groups 4–5).
 4. The symlink-vs-copy decision is settled (symlink primary) — Groups 3–4 assume symlink mode, copy-mode is the documented contingency.
