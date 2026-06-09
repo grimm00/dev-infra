@@ -11,17 +11,20 @@
 
 ## 📝 Tasks
 
-- [ ] Task 10: Implement `install.sh`
-  - Read the mapping from config, create symlinks from editor paths → corpus; idempotent re-runs (FR-INST-1, FR-INST-6, NFR-INST). Honor the Group 1 go/no-go (symlink vs copy mode).
+- [ ] Task 11: Implement `install.sh`
+  - Read the **multi-source** mapping from config, create symlinks from editor paths → corpora; idempotent re-runs (FR-INST-1, FR-INST-6, NFR-INST). Symlink mode (Group 1 GO).
 
-- [ ] Task 11: Implement uninstall
-  - Remove symlinks without touching the corpus (FR-INST-3; `stow -D` equivalent / reversibility).
+- [ ] Task 12: Implement uninstall
+  - Remove symlinks without touching the corpora (FR-INST-3; `stow -D` equivalent / reversibility).
 
-- [ ] Task 12: Add standard flags
+- [ ] Task 13: Add standard flags
   - `--dry-run`, `--force`, `--verbose` per repo script standards.
 
-- [ ] Task 13: Bats tests
-  - Cover install, uninstall, idempotency, and the copy-mode fallback path.
+- [ ] Task 14: Implement the **"no core→personal references" check**
+  - At install, fail/warn if a core artifact references something living only in the personal repo (ADR-001 invariant). Prevents core-only clones from silently breaking.
+
+- [ ] Task 15: Bats tests
+  - Cover install, uninstall, idempotency, copy-mode fallback, and the core→personal lint.
 
 ---
 
@@ -34,10 +37,11 @@
 
 ## ✅ Completion Criteria
 
-- [ ] `install.sh` creates the mapped links idempotently
-- [ ] Uninstall removes links, leaves corpus intact
+- [ ] `install.sh` creates the multi-source mapped links idempotently
+- [ ] Uninstall removes links, leaves corpora intact
 - [ ] Standard flags implemented
-- [ ] Bats suite passes (install / uninstall / idempotency / fallback)
+- [ ] Core→personal reference check enforced at install (ADR-001 invariant)
+- [ ] Bats suite passes (install / uninstall / idempotency / fallback / core→personal lint)
 
 ---
 

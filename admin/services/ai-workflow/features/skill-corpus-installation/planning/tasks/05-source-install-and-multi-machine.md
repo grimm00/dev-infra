@@ -11,14 +11,14 @@
 
 ## 📝 Tasks
 
-- [ ] Task 14: One-command `git clone` + `./install.sh` flow
-  - The repo is self-contained: clone, run installer, working corpus (FR-INST-5, Tier 2).
+- [ ] Task 16: One-command `git clone` + `./install.sh` flow
+  - Clone **both** repos — core (public) + personal (private) — and run the installer (FR-INST-5, Tier 2). Handle private-repo auth (SSH/token) in the flow.
 
-- [ ] Task 15: Fresh-machine validation
-  - End-to-end test of the multi-machine scenario (the Linux-box case that motivated this) — ideally on a clean environment or container.
+- [ ] Task 17: Fresh-machine validation
+  - End-to-end test of the two-repo multi-machine scenario (the Linux-box case), including the private clone — ideally on a clean environment or container.
 
-- [ ] Task 16: Replace the proj-cli install-guidance placeholder
-  - ADR-001 Task 21 shipped placeholder text "until ADR-002 lands"; point it at the real corpus repo + installer instructions.
+- [ ] Task 18: Replace the proj-cli install-guidance placeholder
+  - skill-template-separation's Group 5 shipped placeholder install-guidance text "until ADR-002 lands"; point it at the real corpus repos + installer instructions.
 
 ---
 

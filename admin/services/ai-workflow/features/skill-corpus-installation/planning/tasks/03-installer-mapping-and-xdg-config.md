@@ -11,13 +11,13 @@
 
 ## 📝 Tasks
 
-- [ ] Task 7: Define the `installer.yaml` mapping schema
-  - Schema mapping editor paths (e.g. `~/.cursor/skills/`, `~/.claude/skills/`) → corpus subdirs (FR-INST-2, FR-INST-6).
+- [ ] Task 8: Define the `installer.yaml` **multi-source** mapping schema
+  - Schema mapping editor paths (`~/.cursor/skills/` etc.) → subdirs across **two** source repos (core + personal) per ADR-001 (FR-INST-2, FR-INST-6). One mapping block per repo.
 
-- [ ] Task 8: Establish the `~/.config/ai-workflow/` config home + example mapping
-  - XDG config location holding `installer.yaml` and (later) `repos/` profiles; ship a documented example mapping.
+- [ ] Task 9: Establish the `~/.config/ai-workflow/` config home + example mapping
+  - XDG config location holding `installer.yaml` (core + personal blocks) and (later) `repos/` profiles; ship a documented example mapping.
 
-- [ ] Task 9: Document XDG config vs corpus-project separation
+- [ ] Task 10: Document XDG config vs corpus-project separation
   - Explain Theme 10: config is config (`~/.config/`), corpus is a project — the installer bridges them.
 
 ---

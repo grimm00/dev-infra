@@ -11,14 +11,14 @@
 
 ## 📝 Tasks
 
-- [ ] Task 17: Author install/uninstall + multi-machine guide
-  - User-facing doc covering Tier 1 (author) and Tier 2 (source install) flows, plus uninstall.
+- [ ] Task 19: Author install/uninstall + multi-machine guide
+  - User-facing doc covering Tier 1 (author) and Tier 2 (two-repo source install, incl. private clone) flows, plus uninstall.
 
-- [ ] Task 18: Cross-link + scope notes
-  - Cross-link from skill-template-separation and four-arm-architecture hubs; explicitly note Tier 3 (plugin publish) deferred and ADR-003 as a separate downstream plan.
+- [ ] Task 20: Cross-link + scope notes
+  - Cross-link from skill-template-separation and four-arm-architecture hubs; note Tier 3 (plugin publish) deferred, ADR-003 a separate downstream plan, and the `~/.claude/` Claude-path int-opp.
 
-- [ ] Task 19: Move ADR-002 → ✅ Accepted
-  - Record acceptance in the ADR file (same closing pattern as ADR-001).
+- [ ] Task 21: Move ADR-002 → ✅ Accepted
+  - Record acceptance in the ADR file (same closing pattern as skill-template-separation ADR-001).
 
 ---
 

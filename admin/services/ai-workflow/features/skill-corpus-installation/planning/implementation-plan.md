@@ -1,24 +1,24 @@
 ---
-task_count: 19
+task_count: 21
 groups:
   - name: "Symlink Loading Spike"
     file: "tasks/01-symlink-loading-spike.md"
     tasks: [1, 2, 3]
   - name: "Corpus Repository Structure"
     file: "tasks/02-corpus-repository-structure.md"
-    tasks: [4, 5, 6]
+    tasks: [4, 5, 6, 7]
   - name: "Installer Mapping & XDG Config"
     file: "tasks/03-installer-mapping-and-xdg-config.md"
-    tasks: [7, 8, 9]
+    tasks: [8, 9, 10]
   - name: "Installer Script"
     file: "tasks/04-installer-script.md"
-    tasks: [10, 11, 12, 13]
+    tasks: [11, 12, 13, 14, 15]
   - name: "Source Install & Multi-Machine (Tier 2)"
     file: "tasks/05-source-install-and-multi-machine.md"
-    tasks: [14, 15, 16]
+    tasks: [16, 17, 18]
   - name: "Documentation & ADR Acceptance"
     file: "tasks/06-documentation-and-adr-acceptance.md"
-    tasks: [17, 18, 19]
+    tasks: [19, 20, 21]
 tasks_files:
   - "tasks/01-symlink-loading-spike.md"
   - "tasks/02-corpus-repository-structure.md"
@@ -41,10 +41,10 @@ tasks_files:
 Implements ADR-002 — gives the skill corpus (separated into its own product by ADR-001) a real installation mechanism so skills/commands/agents appear at editor paths (`~/.cursor/skills/`, `~/.claude/skills/`, etc.) without manual copying, and so a second machine can go from `git clone` → one command → working. Adopts a **symlink farm** (GNU Stow pattern): corpus lives at a project path, config lives at `~/.config/ai-workflow/`, an installer creates symlinks from editor paths into the corpus. This is the work that closes the gap ADR-001 left open — proj-cli currently warns about missing skills but ships only a placeholder install path (ADR-001 Task 21).
 
 **Key Changes:**
-- A 5-minute spike confirms Cursor loads skills through symlinks before any build (C-INST-1)
-- The corpus repository is established and the global corpus migrated into it
-- An `installer.yaml` mapping + `~/.config/ai-workflow/` config home are defined (XDG-correct)
-- A self-contained, idempotent, reversible `install.sh` ships in the corpus repo (Tier 2)
+- A 5-minute spike confirms Cursor loads skills through symlinks before any build (C-INST-1) ✅ GO
+- **Two** corpus repos are established per ADR-001 (core + personal), bootstrapped via `proj-cli` on develop/nightly, and the global corpus is migrated + split into them
+- An `installer.yaml` **multi-source** mapping + `~/.config/ai-workflow/` config home are defined (XDG-correct)
+- A self-contained, idempotent, reversible `install.sh` ships in the core repo (Tier 2), enforcing the no-core→personal-dependency invariant
 - The proj-cli install-guidance placeholder is replaced with real corpus + installer instructions
 - Tier 3 (plugin marketplace publish) stays explicitly deferred until an external audience exists
 
@@ -69,41 +69,44 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 - [x] Task 3: Define the copy-mode fallback if symlink discovery fails
 
 ### Corpus Repository Structure
-- [ ] Task 4: Define the corpus repo layout (`skills/`, `commands/`, `agents/`) and name
-- [ ] Task 5: Initialize the corpus repo and migrate the global corpus into it
-- [ ] Task 6: Add corpus README + independent versioning conventions
+- [ ] Task 4: Define layout + names for **both** core (`ai-workflow`) and personal (`ai-workflow-personal`) repos; classify the inventory via the ADR-001 boundary test
+- [ ] Task 5: Bootstrap both repos via `proj-cli` on **develop/nightly**; pin the dev-infra + proj-cli develop SHAs used
+- [ ] Task 6: Migrate + **split** the global corpus (core = general/durable or depended-on-by-core incl. `update-pr-description`; personal = `apprentice-*`, `ticket-*`, `capture-discussion`)
+- [ ] Task 7: Per-repo README + versioning; mark the personal repo private
 
 ### Installer Mapping & XDG Config
-- [ ] Task 7: Define the `installer.yaml` mapping schema (editor paths → corpus subdirs)
-- [ ] Task 8: Establish `~/.config/ai-workflow/` config home + example mapping
-- [ ] Task 9: Document XDG config vs corpus-project separation (Theme 10)
+- [ ] Task 8: Define the `installer.yaml` **multi-source** mapping schema (two source repos → editor paths)
+- [ ] Task 9: Establish `~/.config/ai-workflow/` config home + example mapping (core + personal blocks)
+- [ ] Task 10: Document XDG config vs corpus-project separation (Theme 10)
 
 ### Installer Script
-- [ ] Task 10: Implement `install.sh` (read mapping, create symlinks, idempotent)
-- [ ] Task 11: Implement uninstall (remove symlinks, leave corpus intact)
-- [ ] Task 12: Add standard flags (`--dry-run`, `--force`, `--verbose`)
-- [ ] Task 13: Bats tests (install, uninstall, idempotency, copy-fallback)
+- [ ] Task 11: Implement `install.sh` (read multi-source mapping, create symlinks, idempotent)
+- [ ] Task 12: Implement uninstall (remove symlinks, leave corpora intact)
+- [ ] Task 13: Add standard flags (`--dry-run`, `--force`, `--verbose`)
+- [ ] Task 14: Implement the **"no core→personal references" check** at install (ADR-001 invariant)
+- [ ] Task 15: Bats tests (install, uninstall, idempotency, copy-fallback, core→personal lint)
 
 ### Source Install & Multi-Machine (Tier 2)
-- [ ] Task 14: One-command `git clone` + `./install.sh` flow
-- [ ] Task 15: Fresh-machine validation (end-to-end Linux-box scenario)
-- [ ] Task 16: Replace the proj-cli install-guidance placeholder (ADR-001 Task 21) with real instructions
+- [ ] Task 16: One-command `git clone` + `./install.sh` flow — clones **both** repos (core public + personal private), handles private-repo auth
+- [ ] Task 17: Fresh-machine validation (two-repo, private clone — end-to-end Linux-box scenario)
+- [ ] Task 18: Replace the proj-cli install-guidance placeholder (ADR-001 Task 21) with real instructions
 
 ### Documentation & ADR Acceptance
-- [ ] Task 17: Author install/uninstall + multi-machine guide
-- [ ] Task 18: Cross-link from skill-template-separation + four-arm-architecture; note Tier 3 deferred
-- [ ] Task 19: Move ADR-002 status 🔴 Proposed → ✅ Accepted
+- [ ] Task 19: Author install/uninstall + multi-machine guide
+- [ ] Task 20: Cross-link from skill-template-separation + four-arm-architecture; note Tier 3 deferred + Claude int-opp
+- [ ] Task 21: Move ADR-002 status 🔴 Proposed → ✅ Accepted
 
 ---
 
 ## ✅ Definition of Done
 
-- [ ] All 19 tasks complete
-- [ ] Spike outcome recorded with a go/no-go on symlinks (Group 1)
-- [ ] Corpus repo exists with the migrated corpus and a versioning convention
-- [ ] `install.sh` is idempotent, reversible, and Bats-tested
-- [ ] A fresh-machine `clone → install` produces a working corpus (multi-machine story proven)
-- [ ] proj-cli install-guidance points at the real corpus + installer (ADR-001 Task 21 placeholder retired)
+- [ ] All 21 tasks complete
+- [ ] Spike outcome recorded with a go/no-go on symlinks (Group 1) ✅
+- [ ] **Two** corpus repos exist (core + personal) per ADR-001, bootstrapped via proj-cli nightly with the pinned SHAs recorded
+- [ ] Inventory split correctly (core incl. `update-pr-description`; personal incl. `apprentice-*`/`ticket-*`); no core→personal dependency
+- [ ] `install.sh` is idempotent, reversible, multi-source, Bats-tested, and enforces the core→personal check
+- [ ] A fresh-machine `clone → install` (both repos, private auth handled) produces a working corpus
+- [ ] proj-cli install-guidance points at the real corpus + installer (ADR-001/skill-template-separation Task 21 placeholder retired)
 - [ ] ADR-002 status moved 🔴 Proposed → ✅ Accepted
 - [ ] CI/CD passing
 
