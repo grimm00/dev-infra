@@ -24,7 +24,7 @@ dev-infra/
 │       └── meta/                  # Dev-infra about itself
 ```
 
-AI workflow tools (skills, commands, agents) are installed globally at `~/.cursor/` — not tracked in this repo. Authoritative template copies live in `templates/standard-project/`.
+AI workflow tools (skills, commands, agents) are installed globally at `~/.cursor/` and `~/.claude/` — not tracked in this repo. The skill corpus is a **separate product** per [ADR-001](admin/services/meta/features/skill-template-separation/decisions/adr-001-separation-model.md); dev-infra templates carry **no bundled copies**, only an `expected_skills` manifest in `.dev-infra.yml` (see [docs/DEV-INFRA-YML.md](docs/DEV-INFRA-YML.md)).
 
 Each service contains: `explorations/` (pre-formal thinking), `features/` (formal work with planning pipeline), and `maintenance/` (operational upkeep). Features follow the structure: `[feature]/planning/implementation-plan.md` + `tasks/` + `status-and-next-steps.md`.
 
@@ -58,15 +58,16 @@ Each service contains: `explorations/` (pre-formal thinking), `features/` (forma
 
 ## Template Standards
 
-**Two template types:** standard-project (application scaffold with backend/frontend separation, feature-based planning) and learning-project (stage-based progression with practice apps and reference materials). Both receive all workflow commands/skills.
+**Two template types:** standard-project (application scaffold with backend/frontend separation, feature-based planning) and learning-project (stage-based progression with practice apps and reference materials). Both declare workflow skill expectations via `expected_skills` in `.dev-infra.yml` — not bundled skill/command copies.
 
 **When modifying templates:**
 1. Test generation with `./scripts/new-project.sh`
 2. Verify generated structure, README files, and documentation links
 3. Update user docs in `docs/` and planning docs if feature-related
 4. Maintain consistency across template types and preserve proven patterns
+5. Keep `expected_skills` in sync with [docs/DEV-INFRA-YML.md](docs/DEV-INFRA-YML.md) when the assumed corpus changes
 
-**Template sync:** Shared files between templates are tracked in `scripts/template-sync-manifest.txt` and validated in CI via `scripts/validate-template-sync.sh`.
+**Skill expectations:** Templates ship `.dev-infra.yml` with an `expected_skills` list. `proj-cli` validates installed skills with warn-not-error semantics during project setup. Generated projects work without skills installed (graceful degradation via AGENTS.md and docs).
 
 **Placeholder patterns:** `[PROJECT_NAME]`, `[PROJECT_DESCRIPTION]`, `[TECH_STACK]`, `[AUTHOR]` — replaced during generation.
 
