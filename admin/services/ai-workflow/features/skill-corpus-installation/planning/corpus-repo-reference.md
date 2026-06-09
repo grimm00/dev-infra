@@ -90,12 +90,13 @@ the code ships in the corpus repo.
 
 ## Open questions for Group 2
 
-1. **Personal vs shared skills:** the 19 include personal ones (`apprentice-*`,
-   `ticket-*`, `capture-discussion`) alongside the 13 that were the dev-infra template's
-   `expected_skills`. Does the corpus repo hold **all** authored skills, or split
-   "shared/core" from "personal"? (ADR-001 Alternative B — a core/personal split — was
-   rejected for the *template*, but the corpus repo is a different boundary; worth a
-   conscious choice.)
+1. ~~**Personal vs shared skills:** all authored skills vs core/personal split?~~
+   **RESOLVED** by [ADR-001: Corpus Repository Split Model](../decisions/adr-001-corpus-repo-split-model.md)
+   — **two repos**: core (`ai-workflow`, shareable) + personal (`ai-workflow-personal`,
+   private). A skill is core if general-purpose/durable **or** depended-on by a core
+   artifact; otherwise personal. `update-pr-description` is **core** (dependency-forced
+   via `group-cycle.agent`); `apprentice-*` / `ticket-*` / `capture-discussion` are
+   personal. Invariant: no core→personal dependencies.
 2. **Repo name/location final call:** `ai-workflow` at `~/Projects/ai-workflow/` per
    ADR-002, or something else?
 3. **`research-orchestrator/`** is a directory under `agents/` (not a single `.agent.md`)
