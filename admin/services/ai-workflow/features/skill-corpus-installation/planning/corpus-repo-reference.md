@@ -56,12 +56,17 @@ This boundary matters: the installer maps **only** the authored corpus into edit
 - **Layout:**
   ```
   agentic-ocean/
-  ├── skills/        # the core skills (14)
-  ├── commands/      # the core commands (20)
-  ├── agents/        # the core agent definitions (2)
-  ├── install.sh     # self-contained installer (Group 4)
-  └── README.md      # corpus product doc + versioning
+  ├── corpus/             # installable payload — the SINGLE mapping root
+  │   ├── skills/         #   14 core skills
+  │   ├── commands/       #   20 core commands
+  │   └── agents/         #   2 core agents
+  ├── install.sh          # self-contained installer (Group 4)
+  ├── docs/ scripts/ .github/   # repo scaffolding (NOT installed)
+  └── README.md           # corpus product doc + versioning
   ```
+  **Payload nesting (2026-06-09 chore):** skills/commands/agents moved under
+  `corpus/` so the installer maps one payload root and the repo root cleanly
+  separates installable content from repo meta. Applied to both repos via `git mv`.
 - **Config (separate, XDG):** `~/.config/agentic-ocean/` holds `installer.yaml` (the
   editor-path → corpus-subdir mapping) and later `repos/` profiles (ADR-003). Config is
   config; corpus is a project (ADR-002 Theme 10). The config/family namespace was renamed

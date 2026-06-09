@@ -13,6 +13,7 @@
 
 - [ ] Task 8: Define the `installer.yaml` **multi-source** mapping schema
   - Schema mapping editor paths (`~/.cursor/skills/` etc.) → subdirs across **two** source repos (core + personal) per ADR-001 (FR-INST-2, FR-INST-6). One mapping block per repo.
+  - **Payload root (2026-06-09 chore):** in each repo the installable content lives under **`corpus/`** (`corpus/skills/`, `corpus/commands/`, `corpus/agents/`) — map from `<repo>/corpus/<kind>/`, not the repo root. The repo root holds non-installable scaffolding (`docs/`, `scripts/`, `.github/`).
 
 - [ ] Task 9: Establish the `~/.config/agentic-ocean/` config home + example mapping
   - XDG config location holding `installer.yaml` (core + personal blocks) and (later) `repos/` profiles; ship a documented example mapping.
