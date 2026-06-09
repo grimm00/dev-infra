@@ -7,7 +7,7 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 18/25 tasks complete
+**Overall:** 22/25 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
@@ -15,15 +15,15 @@
 | Template Cleanup | ✅ Complete | 5/5 tasks | Merged PR #107 (2026-06-03); 82 bundled files removed |
 | Template-Sync-Manifest Retirement | ✅ Complete | 4/4 tasks | Merged PR #108 (2026-06-04); `develop` Run Tests confirmed green post-merge |
 | expected_skills Manifest in Templates | ✅ Complete | 4/4 tasks | Merged PR #109 (2026-06-09); `.dev-infra.yml` + `docs/DEV-INFRA-YML.md` |
-| proj-cli Validation | 🟠 In Progress | 0/4 tasks | Warn-not-error behavior |
+| proj-cli Validation | ✅ Complete | 4/4 tasks | proj-cli `skills.py` + dev-infra graceful-degradation Bats |
 | Documentation & Supersession | 🔴 Not Started | 0/3 tasks | global-command-distribution superseded; AGENTS.md updated |
 
 ---
 
 ## 🚀 Next Steps
 
-1. **Group 5:** `proj-cli` validation (warn-not-error on missing expected skills).
-2. **Group 6:** Documentation & supersession (mark `global-command-distribution` superseded, update AGENTS.md, cross-link from four-arm-architecture).
+1. **Group 6:** Documentation & supersession (mark `global-command-distribution` superseded, update AGENTS.md, cross-link from four-arm-architecture).
+2. **Companion:** Merge proj-cli branch `feat/skill-template-separation-expected-skills-validation` (Tasks 20–21 code).
 
 ---
 

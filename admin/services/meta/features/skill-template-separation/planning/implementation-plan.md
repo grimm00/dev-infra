@@ -92,10 +92,10 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 - [x] Task 18: Document the field in template README and `.dev-infra.yml` reference docs
 
 ### proj-cli Validation
-- [ ] Task 19: Design `proj-cli` `expected_skills` validation step (warn-not-error)
-- [ ] Task 20: Implement validation logic in `proj-cli` setup flow
-- [ ] Task 21: Add install-guidance message text pointing to the corpus
-- [ ] Task 22: Test graceful degradation (generated project works without skills installed)
+- [x] Task 19: Design `proj-cli` `expected_skills` validation step (warn-not-error)
+- [x] Task 20: Implement validation logic in `proj-cli` setup flow
+- [x] Task 21: Add install-guidance message text pointing to the corpus
+- [x] Task 22: Test graceful degradation (generated project works without skills installed)
 
 ### Documentation & Supersession
 - [ ] Task 23: Mark `global-command-distribution` feature README as superseded by ADR-001
@@ -106,10 +106,10 @@ This plan covers ADR-001 only. ADR-002 (installation architecture / symlinks) an
 
 ## ✅ Definition of Done
 
-- [ ] All 25 tasks complete (18/25 done; Groups 1–4 ✅)
+- [ ] All 25 tasks complete (22/25 done; Groups 1–5 ✅)
 - [x] CI passes on the new feature branch (demonstrated on PRs #106, #107, #108)
 - [x] Generated project (via `./scripts/new-project.sh`) contains no bundled skills/commands/agents — manifest in `.dev-infra.yml` (PR #109); Group 5 adds proj-cli warn-not-error validation
-- [ ] `proj-cli` setup warns (not errors) when expected skills are missing — pending Group 5
+- [x] `proj-cli` setup warns (not errors) when expected skills are missing — proj-cli `src/proj/skills.py` (Group 5)
 - [x] `template-sync-manifest.txt` and validator removed; CI green without them (PR #108, 2026-06-04)
 - [ ] ADR-001 status moved from 🔴 Proposed → ✅ Accepted (acceptance recorded in the ADR file) — pending Group 6
 - [x] PR to `develop` carries only ADR-001 + planning tree (no research, no exploration, no other ADRs) — done by PR #106 (Group 1)
