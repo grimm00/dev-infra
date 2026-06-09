@@ -24,7 +24,7 @@
 
 1. ✅ Group 1 (Symlink Loading Spike) complete (2026-06-09) — C-INST-1 resolved GO; symlink mode is the primary installer mechanism.
 2. ✅ Plan re-partitioned (2026-06-09, 19→21 tasks) per `plan-review-2026-06-09.md` + ADR-001 — Groups 2–5 now reflect two repos, proj-cli-nightly bootstrap, multi-source mapping, the core→personal lint, and private-repo clone.
-3. **Expand Group 2** (Corpus Repository Structure) via write-plan **Expand**, then execute. Note: most of Groups 2–5 produce artifacts in the **external corpus repo(s)**, not dev-infra — so they won't follow the in-dev-infra `/task` + PR flow cleanly.
+3. ✅ Group 2 (Corpus Repository Structure) **expanded** (2026-06-09) — Tasks 4–7 carry Purpose/Steps/Files/Acceptance. **Execute next.** Note: Group 2 produces artifacts in the **external corpus repo(s)**, not dev-infra — execution drives both repos from this session; planning/record updates stay docs-direct here.
 4. The symlink-vs-copy decision is settled (symlink primary) — Groups 3–4 assume symlink mode, copy-mode is the documented contingency.
 
 **Deferred (not v1):** `~/.claude/` symlink verification → `admin/planning/opportunities/internal/dev-infra/improvements/claude-path-symlink-verification.md`.
