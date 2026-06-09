@@ -22,9 +22,9 @@
 
 ## 🚀 Next Steps
 
-1. Review scaffolding — verify the group/task breakdown against ADR-002.
-2. Expand Group 1 (Symlink Loading Spike) — run write-plan **Expand**. Because the whole approach hinges on C-INST-1, this group is intentionally first.
-3. Begin implementation once Group 1 is expanded.
+1. ✅ Group 1 (Symlink Loading Spike) expanded (2026-06-09) — tasks now carry Purpose/Steps/Files/Acceptance.
+2. Execute Group 1 — it's a spike (no PR-worthy code yet); run it interactively to get the C-INST-1 go/no-go, since it needs a live Cursor session + editor config the agent-dispatch flow can't drive headlessly.
+3. Expand remaining groups (2–6) via write-plan **Expand** once the spike outcome is known — the symlink-vs-copy decision shapes Groups 3–4.
 
 ---
 
