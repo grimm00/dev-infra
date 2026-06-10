@@ -80,7 +80,7 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 - [x] Task 10: Document XDG config vs corpus-project separation (Theme 10)
 
 ### Installer Script
-- [ ] Task 11: Implement `install.sh` (read multi-source mapping, create symlinks, idempotent)
+- [x] Task 11: Implement `install.sh` (read multi-source mapping, create symlinks, idempotent)
 - [ ] Task 12: Implement uninstall (remove symlinks, leave corpora intact)
 - [ ] Task 13: Add standard flags (`--dry-run`, `--force`, `--verbose`)
 - [ ] Task 14: Implement the **"no core→personal references" check** at install (ADR-001 invariant)

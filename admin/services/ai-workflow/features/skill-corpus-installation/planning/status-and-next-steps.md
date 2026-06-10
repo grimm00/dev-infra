@@ -7,14 +7,14 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 10/21 tasks complete
+**Overall:** 11/21 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Symlink Loading Spike | ✅ Complete | 3/3 tasks | C-INST-1 **GO** (Cursor 3.7.19: discovery + live-edit verified). `~/.claude/` deferred to int-opp. See `spike-c-inst-1-findings.md`. |
 | Corpus Repository Structure | ✅ Complete | 4/4 tasks | Two repos live: [agentic-ocean](https://github.com/grimm00/agentic-ocean) (public) + [agentic-ocean-personal](https://github.com/grimm00/agentic-ocean-personal) (private). Classified, bootstrapped (nightly), trimmed, migrated-split, READMEs, pushed. |
 | Installer Mapping & XDG Config | ✅ Complete | 3/3 tasks | Schema + live `~/.config/agentic-ocean/installer.yaml` + config-vs-corpus doc (corpus PR #1). |
-| Installer Script | 🔴 Not Started | 0/5 tasks | `install.sh` — idempotent, reversible, Bats-tested; + core→personal lint |
+| Installer Script | 🟠 In Progress | 1/5 tasks | Task 11 ✅ `install.sh` core + Bats (`agentic-ocean` feat/installer-script, yq-based). Next: Task 12 uninstall |
 | Source Install & Multi-Machine (Tier 2) | 🔴 Not Started | 0/3 tasks | two-repo `clone → install` (private auth); retire proj-cli placeholder |
 | Documentation & ADR Acceptance | 🔴 Not Started | 0/3 tasks | Guide + cross-links; ADR-002 → Accepted |
 
