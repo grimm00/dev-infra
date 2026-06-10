@@ -81,7 +81,7 @@ Implements ADR-002 — gives the skill corpus (separated into its own product by
 
 ### Installer Script
 - [x] Task 11: Implement `install.sh` (read multi-source mapping, create symlinks, idempotent)
-- [ ] Task 12: Implement uninstall (remove symlinks, leave corpora intact)
+- [x] Task 12: Implement uninstall (remove symlinks, leave corpora intact)
 - [ ] Task 13: Add standard flags (`--dry-run`, `--force`, `--verbose`)
 - [ ] Task 14: Implement the **"no core→personal references" check** at install (ADR-001 invariant)
 - [ ] Task 15: Bats tests (install, uninstall, idempotency, copy-fallback, core→personal lint)

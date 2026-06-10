@@ -2,7 +2,7 @@
 
 **Feature:** Skill Corpus Installation (ADR-002)
 **Group:** Installer Script
-**Status:** 🟠 In Progress (Task 11 ✅ — `install.sh` core + Bats in `agentic-ocean` `feat/installer-script`)
+**Status:** 🟠 In Progress (Tasks 11–12 ✅ — `install.sh` install + `--uninstall` in `agentic-ocean` `feat/installer-script`; 8 Bats pass)
 **Last Updated:** 2026-06-10
 
 ---
@@ -150,7 +150,7 @@ conditional on whether copy-mode ships in v1).
 ## ✅ Completion Criteria
 
 - [x] `install.sh` creates the multi-source mapped links idempotently — Bats: create/idempotency/collision/missing-config (4 pass); yq-based parse
-- [ ] Uninstall removes links, leaves corpora intact
+- [x] Uninstall removes links, leaves corpora intact — `--uninstall` removes only our symlinks (readlink match); unrelated/real files untouched; idempotent (Bats)
 - [ ] Standard flags implemented (`--dry-run` side-effect-free)
 - [ ] Core→personal reference check enforced at install (ADR-001 invariant), scope documented
 - [ ] Bats suite passes locally + in CI (install / uninstall / idempotency / collision / lint)
