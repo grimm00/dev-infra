@@ -51,11 +51,12 @@ This directory contains actionable improvement checklists based on learnings fro
 | Service/Feature/Phase Directory Structure | 🔴 Not Started | HIGH | HIGH |
 | PR Body Generation Primitive | 🔴 Not Started | MEDIUM | LOW / MEDIUM |
 | Artifact Emission Strategy (L0-L3 abstraction) | 🔴 Not Started | MEDIUM | HIGH |
+| [Installer Managed-Config Coexistence](installer-managed-config-coexistence.md) | 🔴 Not Started | MEDIUM | MEDIUM |
 
 **Total Improvement Documents:** 13  
 **Status:** ✅ Active
 
 ---
 
-**Last Updated:** 2026-04-24
+**Last Updated:** 2026-06-10
 
