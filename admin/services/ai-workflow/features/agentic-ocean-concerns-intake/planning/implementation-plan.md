@@ -56,10 +56,12 @@ Migrate the open agentic-workflow concerns currently held in `grimm00/dev-infra`
 right home now that the core corpus lives in `grimm00/agentic-ocean`. The triage
 table classifies every item as MIGRATE, STAY, BOTH, MOOT, or HISTORICAL using a
 "concern follows the artifact" rule. This plan executes that classification:
-**authoring ~25 fresh corpus-side concern docs** at flat-root markdown paths
-(`agentic-ocean/concerns/<subdir>/<slug>.md`), cross-linking ~5 BOTH cases,
-closing 2 MOOT cases in dev-infra, and resolving the prerequisite question of
-*where* concerns live in agentic-ocean (Group 1).
+**authoring ~30 fresh corpus-side concern docs** (25 pure MIGRATE + 5 BOTH
+corpus-halves) at flat-root markdown paths
+(`agentic-ocean/concerns/<subdir>/<slug>.md`), cross-linking the 5 BOTH cases
+back to their dev-infra records, closing 2 MOOT cases in dev-infra, and
+resolving the prerequisite question of *where* concerns live in agentic-ocean
+(Group 1).
 
 **Key Changes:**
 - New flat-root concerns channel scaffolded in `agentic-ocean/concerns/` (shape resolved 2026-07-02 per design-decisions.md D1; Group 1 authors the ADR)

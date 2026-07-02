@@ -21,7 +21,7 @@
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| 1. Concerns channel shape in agentic-ocean | 🔴 Scaffolding | 0/4 tasks | Gates Groups 5–8 (the int-opp migrations). Group 1 must finish before any BOTH/learnings work |
+| 1. Concerns channel shape in agentic-ocean | 🔴 Scaffolding | 0/4 tasks | **Gates Groups 3–8** — all six migration groups need the channel dir to exist before concern docs can land (per design-decisions.md D1 flat-root shape). |
 | 2. Dev-infra source-side prep | 🔴 Scaffolding | 0/3 tasks | Independent of Group 1; #78/#113 splits + MOOT closes |
 | 3. Migrate skill-bug concerns | 🔴 Scaffolding | 0/2 tasks | Smallest bug-shaped batch — 4 concern docs; lowest risk to exercise the subagent |
 | 4. Migrate skill-architecture concerns | 🔴 Scaffolding | 0/2 tasks | 4 concern docs (3 issues + 88f83db8 discuss); #102 requires rewriting its own "Recommended Approach" section |
