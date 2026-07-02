@@ -1,6 +1,6 @@
 # Status & Next Steps — agentic-ocean-concerns-intake
 
-**Status:** 🟡 Planned — Track α done; execution pending on Track β and γ
+**Status:** 🟡 Planned — Track α ✅ merged to develop via [PR #115](https://github.com/grimm00/dev-infra/pull/115); execution pending on Track β and γ
 **Last Updated:** 2026-07-02
 
 > **Design decisions:** see [`design-decisions.md`](design-decisions.md) for
@@ -8,10 +8,11 @@
 > `migrate-concern` subagent scope, and the 88f83db8 concern intake.
 >
 > **Track α complete (2026-07-02):** triage table updated with 88f83db8 row,
-> legend/totals reworded for flat-root; 6 task files rewritten from
+> legend/totals reworded for flat-root; 7 task files rewritten from
 > "file agentic-ocean issues" to "author concern docs under
 > `agentic-ocean/concerns/<subdir>/`"; implementation-plan overview and
-> Definition of Done aligned. D6 (branch strategy) still open.
+> Definition of Done aligned. **D6 resolved via PR #115** (Option B — cherry-pick
+> onto fresh `feat/agentic-ocean-concerns-intake` branch → PR to develop).
 
 ---
 
@@ -38,21 +39,20 @@
 Execution now splits into three tracks per [`design-decisions.md`](design-decisions.md).
 Tracks α, β, and γ-Group-1 can run in parallel; Groups 3–8 join on all three.
 
-### Track α — dev-infra plan hygiene ✅ mostly done (2026-07-02)
+### Track α — dev-infra plan hygiene ✅ complete (2026-07-02, merged via PR #115)
 
 - [x] Add 88f83db8 row to `planning/inputs/triage-table.md` (per D4)
 - [x] Rewrite Tasks 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20 across the six
       task files listed in D5 — replaced "file agentic-ocean issues" language
       with "author concern doc under `agentic-ocean/concerns/<subdir>/`"
+      (also caught Task 24 in `tasks/09-hubs-and-verification.md` during execution)
 - [x] Update `planning/implementation-plan.md` overview ("~29 fresh
-      corpus-side issues" → "~30 fresh corpus-side concern docs") and
-      Definition of Done
-- [ ] **Resolve D6** — move the scaffolding + design/track-α commits onto
-      `develop`. Options: docs PR from `docs/skill-corpus-installation-followup`
-      → develop, OR cherry-pick just the scaffolding + design + track-α
-      commits to a fresh `feat/agentic-ocean-concerns-intake` branch → PR to
-      develop. Pick per AGENTS.md Git Flow. Blocks any `group-cycle` dispatch
-      (Group 2 or 9).
+      corpus-side issues" → "~30 fresh corpus-side concern docs — 25 pure MIGRATE
+      + 5 BOTH corpus-halves") and Definition of Done
+- [x] **D6 resolved** — Option B chosen: fresh `feat/agentic-ocean-concerns-intake`
+      branch, cherry-picked commits, PR'd to develop. **Merged via
+      [PR #115](https://github.com/grimm00/dev-infra/pull/115) at `f8f68ce`.**
+      No longer blocks `group-cycle` dispatch.
 
 ### Track β — `migrate-concern` subagent (new feature/exploration)
 
@@ -72,6 +72,14 @@ artifact is `~/.cursor/agents/migrate-concern.agent.md`.
 - **Groups 3–8** — `migrate-concern` subagent, dispatched per group after
   Group 1, Track α, and Track β are all complete.
 - **Group 9** — `group-cycle` from dev-infra worktree after Groups 3–8 land.
+
+---
+
+## 🏁 Merged PRs (this feature)
+
+| PR | Merged | Squash SHA | Description | Deferred issues |
+|----|--------|------------|-------------|-----------------|
+| [#115](https://github.com/grimm00/dev-infra/pull/115) | 2026-07-02 | `f8f68ce` | Initial planning tree + design decisions D1–D6 + Track α plan hygiene for flat-root | 0 (2 Sourcery comments, both fixed inline in `d3bdebb`) |
 
 ---
 

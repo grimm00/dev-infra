@@ -41,11 +41,11 @@ tasks_files:
 ---
 # Implementation Plan — agentic-ocean-concerns-intake
 
-**Status:** 🟡 Planned (Track α done; execution pending on Tracks β and γ)
+**Status:** 🟡 Planned (Track α ✅ merged via [PR #115](https://github.com/grimm00/dev-infra/pull/115); execution pending on Tracks β and γ)
 **Created:** 2026-06-22
-**Last Updated:** 2026-07-02
+**Last Updated:** 2026-07-02 (post-PR #115 merge)
 **Source:** `planning/inputs/triage-table.md` (from `/discuss` session 2026-06-22, updated 2026-07-02)
-**Design decisions:** [`design-decisions.md`](design-decisions.md) — channel shape (flat-root markdown), 3-track execution split, `migrate-concern` subagent scope, 88f83db8 folded in as new triage row.
+**Design decisions:** [`design-decisions.md`](design-decisions.md) — channel shape (flat-root markdown), 3-track execution split, `migrate-concern` subagent scope, 88f83db8 folded in as new triage row. **All 6 decisions (D1–D6) resolved.**
 
 ---
 
@@ -152,7 +152,7 @@ resolving the prerequisite question of *where* concerns live in agentic-ocean
 ## 🔗 Related
 
 - Source artifact: [`planning/inputs/triage-table.md`](inputs/triage-table.md)
-- Design decisions (2026-07-02): [`planning/design-decisions.md`](design-decisions.md)
+- Design decisions (2026-07-02, all D1–D6 resolved): [`planning/design-decisions.md`](design-decisions.md)
 - Parent context: [`admin/services/ai-workflow/explorations/agentic-workflow-modernization/exploration.md`](../../../explorations/agentic-workflow-modernization/exploration.md) (esp. Themes 5, 7, 9, 10)
 - Corpus repo: `grimm00/agentic-ocean` (local at `~/Projects/agentic-ocean`)
 - Corpus split ADR: [`adr-001-corpus-repo-split-model.md`](../../skill-corpus-installation/decisions/adr-001-corpus-repo-split-model.md)
@@ -160,7 +160,8 @@ resolving the prerequisite question of *where* concerns live in agentic-ocean
   - `/discuss` session 2026-06-22 (original triage)
   - `/discuss` session 2026-07-02 (design decisions D1–D6; halted `/agent-dispatch` pre-flight)
   - Chat [88f83db8](88f83db8-f63e-4959-ad2f-50544fa87cce) (source of the 88f83db8 concern folded into Group 4)
+- **Merged PRs (this feature):** see [`status-and-next-steps.md`](status-and-next-steps.md#-merged-prs-this-feature) — currently [PR #115](https://github.com/grimm00/dev-infra/pull/115) (Track α landing).
 
 ---
 
-**Last Updated:** 2026-07-02
+**Last Updated:** 2026-07-02 (post-PR #115 merge)

@@ -128,19 +128,31 @@ concern docs" (and similar phrasing throughout).
 **These rewrites are Track α (dev-infra plan hygiene) — required before any
 Group 3–8 execution regardless of executor.**
 
-### D6 — Branch strategy for dispatch (TBD)
+### D6 — Branch strategy for dispatch — ✅ RESOLVED 2026-07-02
 
-The scaffolding + this decision doc live on
-`docs/skill-corpus-installation-followup`. `group-cycle` dispatch requires the
-plan tree on `develop` (or on the `base_branch` passed to it). **Path TBD:**
+**Chose Option B** — cherry-picked the scaffolding + design + Track α commits
+onto a fresh `feat/agentic-ocean-concerns-intake` branch, PR'd to develop
+(cleaner review, matches AGENTS.md Git Flow for feature-shaped work).
 
-- **Option A** — docs PR from followup branch → develop (simpler; carries
-  other in-progress work on that branch along for the ride)
-- **Option B** — cherry-pick just the scaffolding + decision commits to a
-  fresh `feat/agentic-ocean-concerns-intake` branch → PR to develop (cleaner;
-  matches AGENTS.md Git Flow — this is feature-shaped work)
+Executed via **[PR #115](https://github.com/grimm00/dev-infra/pull/115)**
+(merged 2026-07-02 at `f8f68ce`). Three cherry-picked commits landed:
 
-Deferred to next session.
+- `909fb33` — scaffold feature planning tree
+- `a5e1e1a` — capture design decisions (this doc's D1–D5 + open D6)
+- `993a1e1` — Track α plan hygiene for flat-root
+- Plus in-PR fix: `d3bdebb` — address Sourcery feedback (2 doc-consistency
+  issues, both MEDIUM/LOW, fixed inline)
+
+**Rejected alternative:** Option A (docs PR from
+`docs/skill-corpus-installation-followup` → develop) — would have bundled the
+intake work with unrelated corpus-installation-followup commits into a single
+review.
+
+**Downstream effect:** `feat/agentic-ocean-concerns-intake` was deleted after
+merge; `docs/skill-corpus-installation-followup` still carries the original
+copies of `ddb35bd`, `fbdf84a`, `75250fc` but those are now effectively
+duplicates (same content, different SHAs pre-cherry-pick). Handled when that
+branch PRs separately.
 
 ---
 
@@ -188,4 +200,4 @@ concurrently. Groups 3–8 are the join point.
 
 ---
 
-**Last Updated:** 2026-07-02
+**Last Updated:** 2026-07-02 (D6 resolved post-PR #115 merge)
