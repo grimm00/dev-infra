@@ -1,7 +1,11 @@
 # Status & Next Steps — agentic-ocean-concerns-intake
 
-**Status:** 🔴 Not Started (scaffolding only)
-**Last Updated:** 2026-06-22
+**Status:** 🟡 Planned — design decisions captured; execution pending on Tracks α, β
+**Last Updated:** 2026-07-02
+
+> **Design decisions:** see [`design-decisions.md`](design-decisions.md) for
+> channel shape (flat-root markdown), execution split (3 tracks), the
+> `migrate-concern` subagent scope, and the 88f83db8 concern intake.
 
 ---
 
@@ -23,13 +27,41 @@
 
 ---
 
-## 🚀 Next Steps
+## 🚀 Next Steps (three-track plan-of-plans)
 
-1. Review scaffolding — verify group/task breakdown against `planning/inputs/triage-table.md`.
-2. Decide branch strategy — currently scaffolded on `docs/skill-corpus-installation-followup`; this is feature-shaped work so a `feat/agentic-ocean-concerns-intake` branch + worktree is likely the right move per AGENTS.md Git Flow conventions.
-3. Expand Group 1 first — run `write-plan-expand` for `tasks/01-concerns-channel-shape.md`. It gates 5 of the other 8 groups.
-4. Consider expanding Group 2 in parallel — it's independent of Group 1 and can run on its own track (small, dev-infra-side housekeeping).
-5. After Group 1 lands the channel decision, expand groups in dependency order: 3 → 4 → 5 → 6 → 7 → 8 → 9.
+Execution now splits into three tracks per [`design-decisions.md`](design-decisions.md).
+Tracks α, β, and γ-Group-1 can run in parallel; Groups 3–8 join on all three.
+
+### Track α — dev-infra plan hygiene (small, do first)
+
+1. Add 88f83db8 row to `planning/inputs/triage-table.md` (per D4).
+2. Rewrite Tasks 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20 across the six
+   task files listed in D5 — replace "file agentic-ocean issues" language
+   with "author concern doc under `agentic-ocean/concerns/<subdir>/`".
+3. Update `planning/implementation-plan.md` overview ("~29 fresh corpus-side
+   issues" → "~29 fresh corpus-side concern docs").
+4. Resolve D6 — move the scaffolding + this decision doc onto `develop`
+   (docs PR from followup branch, or fresh `feat/agentic-ocean-concerns-intake`
+   branch — pick per AGENTS.md Git Flow).
+
+### Track β — `migrate-concern` subagent (new feature/exploration)
+
+Design + install the narrow subagent per D3. Probably starts as an
+exploration under
+`admin/services/ai-workflow/explorations/migrate-concern-subagent/`, promotes
+to a feature once inputs schema and behavior are pinned down. Terminal
+artifact is `~/.cursor/agents/migrate-concern.agent.md`.
+
+### Track γ — intake execution (waits on α + β for Groups 3–8)
+
+- **Group 1** — human, in `~/Projects/agentic-ocean`. Survey + `/decision` +
+  scaffold `concerns/` dir + hub README + commit + (optional draft) PR.
+  Judgment work; do not dispatch.
+- **Group 2** — `group-cycle` from dev-infra worktree. Independent of Group 1
+  and of Tracks α/β; safe to run in parallel.
+- **Groups 3–8** — `migrate-concern` subagent, dispatched per group after
+  Group 1, Track α, and Track β are all complete.
+- **Group 9** — `group-cycle` from dev-infra worktree after Groups 3–8 land.
 
 ---
 
@@ -41,8 +73,16 @@
 - **Cross-repo nature:** Plan lives in dev-infra (source of the migration). Execution writes to agentic-ocean (issue filing + channel scaffolding) and dev-infra (issue splits, MOOT closes, int-opp link-backs, hub updates). Each expanded group should be explicit about which repo its tasks touch.
 - **Dependency on `agentic-ocean` repo state:** The migration assumes agentic-ocean stays roughly in its current shape (flat corpus + `docs/`, no `admin/` tree). If a separate restructure lands first, Group 1's options need re-evaluation.
 - **HISTORICAL items not in scope:** Completed int-opps and feature-cycle retrospectives stay in dev-infra. The plan only acts on open concerns.
-- **Subagent opportunity:** Groups 5–7 are mechanical (read source artifact → draft issue body → `gh issue create`). A small migration subagent could batch each group; consider as a dogfooding tie-in to issue #102 (agent architecture).
+- **Subagent opportunity (now formalized):** Groups 3–8 are mechanical (read
+  source artifact → author concern doc → commit in agentic-ocean). The
+  `migrate-concern` subagent (Track β, per design-decisions.md D3) captures
+  this. Original note called it out as a dogfooding tie-in to issue #102
+  (agent architecture) — that tie-in stands.
+- **Cross-repo scope shifted:** original plan assumed Groups 3–8 could file
+  `gh` issues in agentic-ocean from a dev-infra worktree. D1 (flat-root
+  markdown) invalidates that shortcut; every Group 3–8 task now needs write
+  access to `~/Projects/agentic-ocean`, hence Track β.
 
 ---
 
-**Last Updated:** 2026-06-22
+**Last Updated:** 2026-07-02
