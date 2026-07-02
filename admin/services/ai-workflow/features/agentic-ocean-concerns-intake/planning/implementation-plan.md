@@ -41,29 +41,32 @@ tasks_files:
 ---
 # Implementation Plan — agentic-ocean-concerns-intake
 
-**Status:** 🔴 Not Started
+**Status:** 🟡 Planned (Track α done; execution pending on Tracks β and γ)
 **Created:** 2026-06-22
-**Last Updated:** 2026-06-22
-**Source:** `planning/inputs/triage-table.md` (from `/discuss` session 2026-06-22)
+**Last Updated:** 2026-07-02
+**Source:** `planning/inputs/triage-table.md` (from `/discuss` session 2026-06-22, updated 2026-07-02)
+**Design decisions:** [`design-decisions.md`](design-decisions.md) — channel shape (flat-root markdown), 3-track execution split, `migrate-concern` subagent scope, 88f83db8 folded in as new triage row.
 
 ---
 
 ## 📋 Overview
 
 Migrate the open agentic-workflow concerns currently held in `grimm00/dev-infra`
-(12 remote issues + ~40 int-opp documents) into the right home now that the core
-corpus lives in `grimm00/agentic-ocean`. The triage table classifies every item
-as MIGRATE, STAY, BOTH, MOOT, or HISTORICAL using a "concern follows the artifact"
-rule. This plan executes that classification: filing ~24 fresh corpus-side issues,
-cross-linking ~5 BOTH cases, closing 2 MOOT cases in dev-infra, and resolving the
-prerequisite question of *where* concerns live in agentic-ocean (Group 1).
+(12 remote issues + ~40 int-opp documents + 1 discuss-derived concern) into the
+right home now that the core corpus lives in `grimm00/agentic-ocean`. The triage
+table classifies every item as MIGRATE, STAY, BOTH, MOOT, or HISTORICAL using a
+"concern follows the artifact" rule. This plan executes that classification:
+**authoring ~25 fresh corpus-side concern docs** at flat-root markdown paths
+(`agentic-ocean/concerns/<subdir>/<slug>.md`), cross-linking ~5 BOTH cases,
+closing 2 MOOT cases in dev-infra, and resolving the prerequisite question of
+*where* concerns live in agentic-ocean (Group 1).
 
 **Key Changes:**
-- New concerns channel scaffolded in `agentic-ocean` (shape decided in Group 1)
-- ~29 new issues filed in `grimm00/agentic-ocean`
+- New flat-root concerns channel scaffolded in `agentic-ocean/concerns/` (shape resolved 2026-07-02 per design-decisions.md D1; Group 1 authors the ADR)
+- **~30 new concern docs authored + committed in `grimm00/agentic-ocean`** (25 MIGRATE + 5 BOTH corpus-halves)
 - 2 dev-infra issues closed as superseded by the corpus split
 - 2 dev-infra issues split into corpus / template halves before migrating
-- Source int-opps annotated with migrated-to markers; hub READMEs updated
+- Source int-opps annotated with migrated-to markers pointing at concern-doc paths; hub READMEs updated
 - `agentic-workflow-modernization` status doc records the migration as a milestone
 
 ---
@@ -98,36 +101,36 @@ prerequisite question of *where* concerns live in agentic-ocean (Group 1).
 - [ ] Task 6: Split dev-infra issue #113 into patterns-hub + thin-launchpad halves
 - [ ] Task 7: Close MOOT issues #73 and #76 with pointers to agentic-ocean
 
-### Migrate skill-bug issues
-- [ ] Task 8: File 4 agentic-ocean issues from dev-infra #74, #79, #101, #105
+### Migrate skill-bug concerns
+- [ ] Task 8: Author 4 concern docs in agentic-ocean from dev-infra #74, #79, #101, #105
 - [ ] Task 9: Cross-link and close dev-infra originals
 
-### Migrate skill-architecture issues
-- [ ] Task 10: File 3 agentic-ocean issues from dev-infra #71, #102, #114 (rewrite #102's "Recommended Approach" section)
-- [ ] Task 11: Cross-link and close dev-infra originals
+### Migrate skill-architecture concerns
+- [ ] Task 10: Author 4 concern docs in agentic-ocean — 3 from dev-infra #71, #102, #114 (rewrite #102's "Recommended Approach" section) + 1 from chat 88f83db8 ("skills describe shape, not location")
+- [ ] Task 11: Cross-link and close dev-infra originals (the 3 issue-sourced)
 
 ### Migrate corpus mechanics int-opps
-- [ ] Task 12: File 5 agentic-ocean issues for installer/corpus/skill-mechanics int-opps
-- [ ] Task 13: Add migrated-to markers + agentic-ocean issue links in source int-opps
+- [ ] Task 12: Author 5 concern docs in agentic-ocean for installer/corpus/skill-mechanics int-opps
+- [ ] Task 13: Add migrated-to markers + agentic-ocean concern-doc paths in source int-opps
 
 ### Migrate pipeline/design int-opps (batch A)
-- [ ] Task 14: File 4 agentic-ocean issues for pipeline/design int-opps (batch A — emission, design-step, phase-signals, QA catalog)
+- [ ] Task 14: Author 4 concern docs in agentic-ocean for pipeline/design int-opps (batch A — emission, design-step, phase-signals, QA catalog)
 - [ ] Task 15: Add migrated-to markers in source int-opps
 
 ### Migrate pipeline/design int-opps (batch B)
-- [ ] Task 16: File 4 agentic-ocean issues for pipeline/design int-opps (batch B — /decision, /research, /pr, /post-pr)
+- [ ] Task 16: Author 4 concern docs in agentic-ocean for pipeline/design int-opps (batch B — /decision, /research, /pr, /post-pr)
 - [ ] Task 17: Add migrated-to markers in source int-opps
 
 ### Learnings-as-concerns + BOTH cases
 - [ ] Task 18: Skim `worktree-feature-workflow/` learnings to confirm BOTH vs STAY
-- [ ] Task 19: File 3 agentic-ocean concerns from learnings docs
-- [ ] Task 20: File 2-3 agentic-ocean issues for BOTH int-opps (and worktree if BOTH)
+- [ ] Task 19: Author 3+ concern docs in agentic-ocean from learnings docs
+- [ ] Task 20: Author 2–3 BOTH corpus-side concern docs in agentic-ocean (and `worktree-feature-workflow/` if resolved BOTH)
 - [ ] Task 21: Add cross-link markers in all dev-infra-side BOTH records
 
 ### Hubs + verification + status doc
 - [ ] Task 22: Update int-opp hub READMEs in dev-infra (improvements + learnings) with migrated-to-agentic-ocean section
 - [ ] Task 23: Update `agentic-workflow-modernization` status doc to record the migration
-- [ ] Task 24: Enumerate filed agentic-ocean issues vs triage; confirm every MIGRATE has a destination
+- [ ] Task 24: Enumerate authored agentic-ocean concern docs vs triage; confirm every MIGRATE/BOTH/discuss-derived row has a destination path
 - [ ] Task 25: Final commit pass + cleanup orphaned references
 
 ---
@@ -135,9 +138,9 @@ prerequisite question of *where* concerns live in agentic-ocean (Group 1).
 ## ✅ Definition of Done
 
 - [ ] All 25 tasks complete
-- [ ] Concerns channel exists in agentic-ocean with at least one filed concern
-- [ ] All MIGRATE rows in `planning/inputs/triage-table.md` have a corresponding agentic-ocean issue URL recorded
-- [ ] All BOTH rows have both an agentic-ocean issue and a dev-infra-side cross-link
+- [ ] Concerns channel exists at `agentic-ocean/concerns/` with at least one committed concern doc
+- [ ] All MIGRATE rows in `planning/inputs/triage-table.md` have a corresponding agentic-ocean concern-doc path recorded
+- [ ] All BOTH rows have both an agentic-ocean concern doc and a dev-infra-side cross-link
 - [ ] MOOT closes (#73, #76) reference the agentic-ocean installer
 - [ ] Hub READMEs in dev-infra surface the migration so future readers route new concerns correctly
 - [ ] `agentic-workflow-modernization` status doc updated
@@ -147,11 +150,15 @@ prerequisite question of *where* concerns live in agentic-ocean (Group 1).
 ## 🔗 Related
 
 - Source artifact: [`planning/inputs/triage-table.md`](inputs/triage-table.md)
+- Design decisions (2026-07-02): [`planning/design-decisions.md`](design-decisions.md)
 - Parent context: [`admin/services/ai-workflow/explorations/agentic-workflow-modernization/exploration.md`](../../../explorations/agentic-workflow-modernization/exploration.md) (esp. Themes 5, 7, 9, 10)
 - Corpus repo: `grimm00/agentic-ocean` (local at `~/Projects/agentic-ocean`)
 - Corpus split ADR: [`adr-001-corpus-repo-split-model.md`](../../skill-corpus-installation/decisions/adr-001-corpus-repo-split-model.md)
-- Discussion that produced this plan: `/discuss` session 2026-06-22
+- Discussions that produced this plan:
+  - `/discuss` session 2026-06-22 (original triage)
+  - `/discuss` session 2026-07-02 (design decisions D1–D6; halted `/agent-dispatch` pre-flight)
+  - Chat [88f83db8](88f83db8-f63e-4959-ad2f-50544fa87cce) (source of the 88f83db8 concern folded into Group 4)
 
 ---
 
-**Last Updated:** 2026-06-22
+**Last Updated:** 2026-07-02

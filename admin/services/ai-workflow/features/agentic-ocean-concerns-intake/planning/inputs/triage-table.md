@@ -17,11 +17,15 @@ core corpus lives in `grimm00/agentic-ocean`.
 
 ## Recommendation legend
 
-- **MIGRATE** — file a new issue in `grimm00/agentic-ocean`
+- **MIGRATE** — author a new concern doc in `grimm00/agentic-ocean` under `concerns/<subdir>/<slug>.md`
 - **STAY** — keep in dev-infra (template / repo-process / non-corpus concern)
-- **BOTH** — corpus-side issue in agentic-ocean + dev-infra record kept and cross-linked
-- **MOOT** — corpus split is the architectural answer; close in dev-infra with a pointer
+- **BOTH** — corpus-side concern doc in agentic-ocean + dev-infra record kept and cross-linked
+- **MOOT** — corpus split is the architectural answer; close in dev-infra with a pointer to agentic-ocean
 - **HISTORICAL** — completed or retrospective; leave as record, not actionable
+
+> **Note (2026-07-02):** Original 2026-06-22 legend said "file a new issue".
+> Superseded by design-decisions.md D1 — concerns are now markdown docs at
+> flat-root, not `gh` issues.
 
 ---
 
@@ -75,6 +79,21 @@ core corpus lives in `grimm00/agentic-ocean`.
 
 ---
 
+## Discuss-derived concerns (chat-only, no int-opp doc)
+
+Concerns that surfaced in `/discuss` sessions but never had a dev-infra int-opp
+authored. Under flat-root (design-decisions.md D1), the concern doc in
+agentic-ocean IS the primary artifact — there's no source doc to link back to
+beyond the chat transcript ID.
+
+| Source | Recommendation | Reason |
+|--------|---------------|--------|
+| Chat [88f83db8](88f83db8-f63e-4959-ad2f-50544fa87cce) — "Skills describe shape, not location; base-dir configurable via `references/structure.yaml`" | **MIGRATE (discuss-derived)** | Skill-architecture concern. Sits next to migrated dev-infra [#102](https://github.com/grimm00/dev-infra/issues/102) (agent architecture); target subdir per Group 1's taxonomy (likely `skill-architecture/`). Filename lean: `skills-describe-shape-not-location.md`. Handled in Group 4 (skill-architecture) alongside #102 rather than its own group. |
+
+**Subtotals:** 1 MIGRATE (discuss-derived).
+
+---
+
 ## Int-opps — learnings (`admin/planning/opportunities/internal/dev-infra/learnings/`)
 
 | File / dir | Recommendation | Reason |
@@ -108,28 +127,34 @@ core corpus lives in `grimm00/agentic-ocean`.
 
 | Bucket | Count |
 |--------|-------|
-| MIGRATE (corpus issues to file) | 8 remote + 13 improvement + 3 learning = **24** |
-| BOTH (cross-linked corpus issues) | 2 split remote + 2 improvement + 1 probable learning = **5** |
+| MIGRATE (corpus concern docs to author) | 8 remote + 13 improvement + 3 learning + 1 discuss = **25** |
+| BOTH (cross-linked corpus concern docs) | 2 split remote + 2 improvement + 1 probable learning = **5** |
 | MOOT (close in dev-infra) | 2 remote |
 | STAY (leave in dev-infra) | 1 remote + 2 improvement + 8 learning = **11** |
 | HISTORICAL (record only) | 2 improvement + 8 learning = **10** |
 | Splits required before migrate | 2 remote (#78, #113) |
 
-**Total new agentic-ocean issues expected:** ~29 (24 MIGRATE + 5 BOTH).
+**Total new agentic-ocean concern docs expected:** ~30 (25 MIGRATE + 5 BOTH-corpus-halves).
 
 ---
 
-## Open decisions (resolved during execution)
+## Open decisions
 
-1. **Concerns channel shape in agentic-ocean** — three candidates (co-located
-   under each `corpus/<kind>/<name>/concerns/`, a dev-infra-mirroring
-   `admin/planning/opportunities/...` tree, or a flat top-level
-   `concerns/` directory). Resolved in Group 1 via `/decision`.
+1. ~~**Concerns channel shape in agentic-ocean**~~ — **RESOLVED 2026-07-02**
+   (design-decisions.md D1). Chose **flat-root markdown** at
+   `agentic-ocean/concerns/…`. Group 1's `/decision` in agentic-ocean is the
+   durable record; the two rejected alternatives (per-artifact colocation,
+   `admin/services/` mirror) remain in D1 for the ADR's history.
 
 2. **Are HISTORICAL learnings ported as record-only refs in agentic-ocean?**
    Not in this plan. Leave in dev-infra; revisit only if a follow-up concern
    surfaces from one of them.
 
+3. **Subdir taxonomy under `agentic-ocean/concerns/`** — Group 1's call.
+   Working lean per D1: `skill-architecture/`, `skill-bugs/`,
+   `corpus-mechanics/`, `pipeline-design/`, `learnings/`. Group 1 may split,
+   merge, or rename these when it authors the ADR.
+
 ---
 
-**Last Updated:** 2026-06-22
+**Last Updated:** 2026-07-02 (Track α — added 88f83db8 discuss-derived row; updated legend/totals for flat-root)

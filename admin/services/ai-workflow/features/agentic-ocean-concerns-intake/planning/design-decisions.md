@@ -119,9 +119,10 @@ framing that predates D1). Under flat-root they need "author concern doc under
 - [`tasks/06-migrate-pipeline-design-intopps-a.md`](tasks/06-migrate-pipeline-design-intopps-a.md) — Tasks 14, 15
 - [`tasks/07-migrate-pipeline-design-intopps-b.md`](tasks/07-migrate-pipeline-design-intopps-b.md) — Tasks 16, 17
 - [`tasks/08-learnings-and-both-cases.md`](tasks/08-learnings-and-both-cases.md) — Tasks 19, 20
+- [`tasks/09-hubs-and-verification.md`](tasks/09-hubs-and-verification.md) — Task 24 (verification wording; also caught during Track α execution)
 
 Also [`planning/implementation-plan.md`](implementation-plan.md)'s overview
-("~29 fresh corpus-side issues") needs to become "~29 fresh corpus-side
+("~29 fresh corpus-side issues") needs to become "~30 fresh corpus-side
 concern docs" (and similar phrasing throughout).
 
 **These rewrites are Track α (dev-infra plan hygiene) — required before any
